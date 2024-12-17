@@ -1,0 +1,32 @@
+.script-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  background-color: var(--background-color);
+  transition: background-color 0.2s;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.script-item:hover {
+  background-color: var(--hover-color-dark);
+}
+
+.script-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.script-name {
+  flex-grow: 1;
+  font-size: 14px;
+}
+.script-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}

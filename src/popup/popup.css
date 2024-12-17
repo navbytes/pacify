@@ -1,0 +1,8 @@
+/* popup.css */
+@import url('../styles/common.css');
+
+.container {
+  width: 300px;
+  min-height: 100px;
+  padding: var(--spacing-md);
+}
