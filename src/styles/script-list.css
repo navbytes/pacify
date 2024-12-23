@@ -1,9 +1,10 @@
 .scripts-list {
   display: grid;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm) var(--spacing-md);
   grid-template-columns: 1fr;
   width: 100%;
   padding: var(--spacing-sm) 0;
+  margin: var(--spacing-sm) 0;
 }
 .scripts-list.quick-script {
   display: flex;

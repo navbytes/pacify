@@ -1,15 +1,17 @@
 import { writable } from 'svelte/store'
-import type {
-  AppSettings,
-  BaseMessage,
-  PACScript,
-  QuickSwitchMessage,
-  SetProxyMessage,
+import {
+  ERROR_TYPES,
+  type AppSettings,
+  type BaseMessage,
+  type PACScript,
+  type QuickSwitchMessage,
+  type SetProxyMessage,
 } from '@/interfaces'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import { SettingsReader } from '@/services/SettingsReader'
 import { SettingsWriter } from '@/services/SettingsWriter'
 import { ChromeService } from '@/services/ChromeService'
+import { NotifyService } from '@/services/NotifyService'
 
 function createSettingsStore() {
   const { subscribe, set, update } = writable<AppSettings>(DEFAULT_SETTINGS)
@@ -23,7 +25,7 @@ function createSettingsStore() {
         const settings = await SettingsReader.getSettings()
         set(settings)
       } catch (error) {
-        console.error('Failed to load settings:', error)
+        NotifyService.error(ERROR_TYPES.LOAD_SETTINGS, error)
       }
     },
     async updateSettings(partialSettings: Partial<AppSettings>) {
@@ -44,8 +46,7 @@ function createSettingsStore() {
         }
         this.reloadSettings()
       } catch (error) {
-        console.error('Failed to save script:', error)
-        alert('Failed to save script. Please try again.')
+        NotifyService.error(ERROR_TYPES.SAVE_SCRIPT, error)
       }
     },
     async updateScriptQuickSwitch(scriptId: string, quickSwitch: boolean) {
@@ -59,7 +60,7 @@ function createSettingsStore() {
         await SettingsWriter.deletePACScript(scriptId)
         this.reloadSettings()
       } catch (error) {
-        console.error('Failed to delete script:', error)
+        NotifyService.error(ERROR_TYPES.DELETE_SCRIPT, error)
       }
     },
     async quickSwitchToggle(enabled: boolean) {

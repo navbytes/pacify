@@ -1,4 +1,4 @@
-import { LocaleManager } from '@/locales/Locale'
+import { mount } from 'svelte'
 import App from './Options.svelte'
 
 class OptionsManager {
@@ -7,8 +7,7 @@ class OptionsManager {
   }
 
   private async initialize() {
-    LocaleManager.initialize()
-    new App({ target: document.getElementById('app')! })
+    mount(App, { target: document.getElementById('app')! })
   }
 }
 

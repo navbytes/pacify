@@ -1,24 +1,16 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
-  import { t } from '@/i18n'
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import ScriptEditor from '@/components/ScriptEditor.svelte'
   import ScriptList from '@/components/ScriptList.svelte'
   import { settingsStore } from '@/stores/settingsStore'
   import { dragDelim } from '@/constants/app'
-  import type { PageType } from '@/interfaces'
+  import { ERROR_TYPES, type PageType } from '@/interfaces'
   import BackupRestore from '@/components/BackupRestore.svelte'
-
-  let mounted = false
-  const dispatch = createEventDispatcher()
+  import { NotifyService } from '@/services/NotifyService'
 
   onMount(async () => {
-    mounted = true
     settingsStore.init()
-  })
-
-  onDestroy(() => {
-    mounted = false
   })
 
   // Subscribe to settings store
@@ -78,7 +70,7 @@
         await settingsStore.updateScriptQuickSwitch(scriptId, true)
       }
     } catch (error) {
-      console.error('Error handling drop:', error)
+      NotifyService.error(ERROR_TYPES.DROP, error)
       dropError = 'drop_handling_error'
     }
   }
@@ -91,7 +83,7 @@
   aria-dropeffect="move"
 >
   <header class="header">
-    <h1 class="title">PACify {$t('settings')}</h1>
+    <h1 class="title">PACify Settings</h1>
     <BackupRestore on:restore={() => settingsStore.reloadSettings()} />
     <div class="header-actions">
       <button
@@ -99,7 +91,7 @@
         class="button primary"
         on:click={() => openEditor()}
       >
-        {$t('add_new_script')}
+        Add New Script
       </button>
     </div>
   </header>
@@ -107,7 +99,7 @@
   <section class="settings-section">
     <div class="setting-item flex">
       <label class="switch-label" for="quickSwitchToggle">
-        <span>{$t('quick_switch_mode')}</span>
+        <span>Quick Switch Mode</span>
       </label>
       <ToggleSwitch
         checked={settings.quickSwitchEnabled}
@@ -115,7 +107,8 @@
       />
     </div>
     <p class="setting-description">
-      {$t('quick_switch_description')}
+      When enabled, clicking the extension icon will cycle through quick-switch
+      enabled scripts.
     </p>
 
     <div

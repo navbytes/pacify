@@ -1,5 +1,6 @@
 import { DEFAULT_SETTINGS } from '@/constants/app'
-import type { AppSettings } from '@/interfaces'
+import { ERROR_TYPES, type AppSettings } from '@/interfaces'
+import { NotifyService } from './NotifyService'
 
 export class ChromeService {
   static async setProxy(data: string): Promise<void> {
@@ -52,7 +53,7 @@ export class ChromeService {
     try {
       await chrome.storage.sync.set({ settings })
     } catch (error) {
-      console.error('Error saving settings:', error)
+      NotifyService.error(ERROR_TYPES.SAVE_SETTINGS, error)
     }
   }
 
@@ -61,7 +62,7 @@ export class ChromeService {
       const data = await chrome.storage.sync.get('settings')
       return data.settings || DEFAULT_SETTINGS
     } catch (error) {
-      console.error('Error fetching settings:', error)
+      NotifyService.error(ERROR_TYPES.FETCH_SETTINGS, error)
       return DEFAULT_SETTINGS
     }
   }

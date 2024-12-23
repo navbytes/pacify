@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PACify",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A Chrome extension for managing and switching between PAC (Proxy Auto-Configuration) scripts",
   "permissions": ["proxy", "storage", "webRequest", "webRequestAuthProvider"],
   "background": {

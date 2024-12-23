@@ -31,11 +31,11 @@ button.icon-button {
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 button:active {
-  transform: scale(0.9);
+  transform: scale(0.95);
   transition: transform 0.1s;
 }
 

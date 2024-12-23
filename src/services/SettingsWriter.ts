@@ -4,7 +4,8 @@ import { ChromeService } from './ChromeService'
 
 export class SettingsWriter {
   static async saveSettings(settings: AppSettings): Promise<void> {
-    ChromeService.setSyncSettings(settings)
+    await ChromeService.setSyncSettings(settings)
+    SettingsReader.invalidateCache()
   }
 
   static async addPACScript(script: Omit<PACScript, 'id'>): Promise<void> {

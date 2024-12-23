@@ -7,7 +7,6 @@
 - **Script Editor**: Easily create and edit PAC scripts with live validation and syntax templates.
 - **Quick Switch Mode**: Toggle between PAC scripts with a single click.
 - **Import/Export Settings**: Backup and restore your scripts and settings effortlessly.
-- **Localization Support**: English language support, other language support will be added soon.
 - **Customizable Settings**: Set script colors, enable quick switch, and manage script activation seamlessly.
 
 ## Project Structure
@@ -19,7 +18,6 @@ The repository is organized as follows:
 - `constants/`: Application constants, including templates and default settings.
 - `icons/`: SVG icons used throughout the application.
 - `interfaces/`: TypeScript interfaces for data structures.
-- `locales/`: Localization files for multi-language support.
 - `options/`: Contains files for the options page.
 - `popup/`: Code for the browser popup interface.
 - `services/`: Application logic for managing settings and Chrome API interactions.
@@ -31,7 +29,7 @@ The repository is organized as follows:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/username/pacify.git
+   git clone https://github.com/navbytes/pacify.git
    cd pacify
    ```
 

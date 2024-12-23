@@ -4,15 +4,8 @@
   import ScriptItem from './ScriptItem.svelte'
   import type { PageType } from '@/interfaces'
 
-  let mounted = false
-
   onMount(async () => {
-    mounted = true
     settingsStore.init()
-  })
-
-  onDestroy(() => {
-    mounted = false
   })
 
   // Subscribe to scripts store
@@ -43,7 +36,7 @@
     <div
       class="scripts-list {pageType === 'QUICK_SWITCH' ? 'quick-script' : ''}"
     >
-      {#each pacScripts as script}
+      {#each pacScripts as script (script.id)}
         {#if pageType !== 'QUICK_SWITCH' || script.quickSwitch}
           <ScriptItem
             {script}

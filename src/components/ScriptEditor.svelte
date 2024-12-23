@@ -2,39 +2,25 @@
   import { createEventDispatcher, onDestroy } from 'svelte'
   import { ScriptTemplates } from '@/constants/templates'
   import CloseIcon from '@/icons/CloseIcon.svelte'
-  import type { PACScript } from '@/interfaces'
+  import type { FormState, PACScript, ValidationResult } from '@/interfaces'
+  import { ScriptService } from '@/services/ScriptService'
+  import type { DebounceTimeout } from '@/interfaces/misc'
 
   const dispatch = createEventDispatcher()
 
   export let script: PACScript | undefined = undefined
 
-  let name = script?.name || ''
-  let color = script?.color || '#2196f3'
-  let quickSwitch = script?.quickSwitch || false
-  let scriptContent = script?.script || ScriptTemplates.empty
+  let formState: FormState = {
+    name: script?.name || '',
+    color: script?.color || '#2196f3',
+    quickSwitch: script?.quickSwitch || false,
+    scriptContent: script?.script || ScriptTemplates.empty,
+  }
 
   // Variables for validation
   let errorMessage: string | null = null
   let isValid: boolean = false
-  let debounceTimeout: NodeJS.Timeout | null = null
-
-  // Validation function
-  function validateScript(script: string) {
-    if (!script.trim()) {
-      throw new Error('Script cannot be empty')
-    }
-    if (!script.includes('FindProxyForURL')) {
-      throw new Error('Script must contain FindProxyForURL function')
-    }
-    if (!/function\s+FindProxyForURL\s*\([^)]*\)/.test(script)) {
-      throw new Error('Invalid FindProxyForURL function declaration')
-    }
-    // Check for common proxy keywords
-    const proxyKeywords = ['DIRECT', 'PROXY', 'SOCKS', 'HTTP']
-    if (!proxyKeywords.some((keyword) => script.includes(keyword))) {
-      throw new Error('Script must contain at least one proxy directive')
-    }
-  }
+  let debounceTimeout: DebounceTimeout = null
 
   // Debounced validation
   $: {
@@ -44,14 +30,9 @@
     }
 
     debounceTimeout = setTimeout(() => {
-      try {
-        validateScript(scriptContent)
-        errorMessage = null
-        isValid = true
-      } catch (error) {
-        errorMessage = (error as Error).message
-        isValid = false
-      }
+      const result = ScriptService.validatePACScript(formState.scriptContent)
+      isValid = result.isValid
+      errorMessage = result.errorMessage
     }, 500) // 500ms debounce duration
   }
 
@@ -63,31 +44,33 @@
   })
 
   async function handleSubmit() {
-    try {
-      validateScript(scriptContent)
-      const scriptData: Omit<PACScript, 'id'> = {
-        name,
-        color,
-        quickSwitch,
-        script: scriptContent,
-        isActive: false,
-      }
-      dispatch('save', { script: scriptData })
-    } catch (error) {
-      // This catch is redundant now but kept for safety
-      errorMessage = (error as Error).message
-      isValid = false
+    const result = ScriptService.validatePACScript(formState.scriptContent)
+    isValid = result.isValid
+    errorMessage = result.errorMessage
+
+    if (!isValid) return
+
+    const scriptData: Omit<PACScript, 'id'> = {
+      name: formState.name,
+      color: formState.color,
+      quickSwitch: formState.quickSwitch,
+      script: formState.scriptContent,
+      isActive: false,
     }
+    dispatch('save', { script: scriptData })
   }
 
   function loadTemplate(template: keyof typeof ScriptTemplates) {
     if (
-      confirm(
-        'Loading a template will replace the current script content. Continue?'
-      )
+      formState.scriptContent.trim() &&
+      !confirm('Replace current content?')
     ) {
-      scriptContent = ScriptTemplates[template]
+      return
     }
+    const result = ScriptService.validatePACScript(ScriptTemplates[template])
+    formState.scriptContent = ScriptTemplates[template]
+    isValid = result.isValid
+    errorMessage = result.errorMessage
   }
 </script>
 
@@ -134,7 +117,7 @@
           <input
             id="name"
             type="text"
-            bind:value={name}
+            bind:value={formState.name}
             placeholder="Enter Script Name"
             required
           />
@@ -142,14 +125,19 @@
         <div class="row">
           <div class="form-group color-picker">
             <label for="color">Script Color</label>
-            <input id="color" type="color" bind:value={color} required />
+            <input
+              id="color"
+              type="color"
+              bind:value={formState.color}
+              required
+            />
           </div>
 
           <div class="form-group checkbox-group">
             <input
               type="checkbox"
               id="quickSwitch"
-              bind:checked={quickSwitch}
+              bind:checked={formState.quickSwitch}
             />
             <label for="quickSwitch">Enable Quick Switch</label>
           </div>
@@ -159,11 +147,10 @@
           <label for="script">PAC Script</label>
           <textarea
             id="script"
-            bind:value={scriptContent}
+            bind:value={formState.scriptContent}
             spellcheck="false"
-            wrap="off"
             required
-          />
+          ></textarea>
         </div>
 
         <div class="button-group">

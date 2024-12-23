@@ -4,9 +4,10 @@
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import EditIcon from '@/icons/EditIcon.svelte'
   import TrashIcon from '@/icons/TrashIcon.svelte'
-  import type { PACScript, PageType } from '@/interfaces'
+  import { ERROR_TYPES, type PACScript, type PageType } from '@/interfaces'
   import { settingsStore } from '@/stores/settingsStore'
   import { dragDelim } from '@/constants/app'
+  import { NotifyService } from '@/services/NotifyService'
 
   type ScriptEditEvent = {
     scriptId: string
@@ -68,7 +69,7 @@
       }
       ev.dataTransfer.setDragImage(dragIcon, 0, 0)
     } catch (error) {
-      console.error('Error during dragstart:', error)
+      NotifyService.error(ERROR_TYPES.DRAG_START, error)
     }
   }
 </script>

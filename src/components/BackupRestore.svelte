@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { ALERT_TYPES, ERROR_TYPES } from '@/interfaces'
+  import { NotifyService } from '@/services/NotifyService'
   import { SettingsWriter } from '@/services/SettingsWriter'
   import { createEventDispatcher } from 'svelte'
 
@@ -11,10 +13,9 @@
   async function handleBackup() {
     try {
       await SettingsWriter.backupSettings()
-      alert('Settings have been backed up successfully!')
+      NotifyService.alert(ALERT_TYPES.BACKUP_SUCCESS)
     } catch (error) {
-      console.error('Backup failed:', error)
-      alert('Failed to backup settings.')
+      NotifyService.error(ERROR_TYPES.BACKUP, error)
     }
   }
 
@@ -25,7 +26,7 @@
       try {
         await SettingsWriter.restoreSettings(input.files[0])
         dispatch('restore', {})
-        alert('Settings have been restored successfully!')
+        NotifyService.alert(ALERT_TYPES.RESTORE_SUCCESS)
       } catch (error) {
         alert((error as Error).message)
       }
@@ -64,7 +65,7 @@
   }
 
   label:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
   input[type='file'] {

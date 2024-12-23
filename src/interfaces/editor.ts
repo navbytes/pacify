@@ -7,3 +7,10 @@ export interface EditorOptions {
 }
 
 export type PageType = 'POPUP' | 'OPTIONS' | 'QUICK_SWITCH'
+
+export interface FormState {
+  name: string
+  color: string
+  quickSwitch: boolean
+  scriptContent: string
+}

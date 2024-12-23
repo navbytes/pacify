@@ -1,4 +1,4 @@
-import { LocaleManager } from '@/locales/Locale'
+import { mount } from 'svelte'
 import App from './Popup.svelte'
 
 // popup.ts
@@ -9,8 +9,7 @@ class PopupManager {
   }
 
   private async initialize() {
-    LocaleManager.initialize()
-    new App({ target: document.getElementById('app')! })
+    mount(App, { target: document.getElementById('app')! })
   }
 }
 
