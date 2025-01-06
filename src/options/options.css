@@ -40,6 +40,7 @@ header {
   color: var(--text-secondary);
   margin-top: var(--spacing-sm);
   margin-bottom: var(--spacing-lg);
+  text-align: center;
 }
 .script-card {
   background: var(--background-color);

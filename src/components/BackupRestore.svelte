@@ -36,7 +36,8 @@
 
 <div class="flex">
   <!-- Backup button -->
-  <button class="primary-button" on:click={handleBackup}>Backup Settings</button
+  <button class="secondary-button" on:click={handleBackup}
+    >Backup Settings</button
   >
 
   <!-- Restore button with file input -->
@@ -62,6 +63,10 @@
     cursor: pointer;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
+  }
+  label.secondary-button {
+    background-color: var(--button-secondary-bg);
+    color: var(--text-color);
   }
 
   label:hover {

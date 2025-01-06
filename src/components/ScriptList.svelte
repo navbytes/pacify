@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
   import { settingsStore } from '@/stores/settingsStore'
   import ScriptItem from './ScriptItem.svelte'
   import type { PageType } from '@/interfaces'
@@ -48,7 +48,7 @@
     </div>
   {:else}
     <!-- No Scripts Available -->
-    <div class="text-center py-10 text-gray-500 dark:text-gray-400 italic">
+    <div class={`no-scripts ${pageType}`}>
       No PAC scripts available. Add your first script to get started.
     </div>
   {/if}

@@ -10,6 +10,17 @@
   display: flex;
   flex-wrap: wrap;
 }
+.no-scripts {
+  text-align: center;
+  font-size: var(--font-lg);
+  color: var(--text-light);
+  margin: var(--spacing-md) 0;
+  font-style: italic;
+}
+.no-scripts.POPUP {
+  font-size: var(--font-sm);
+  text-align: left;
+}
 
 /* Mobile first approach */
 @media (min-width: 640px) {
