@@ -21,6 +21,7 @@
   max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
+  animation: slideIn 0.2s ease-out;
 }
 
 .modal-header {
@@ -41,12 +42,6 @@
   padding: var(--spacing-md);
 }
 
-.template-buttons {
-  display: flex;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-}
-
 .editor-form {
   display: flex;
   flex-direction: column;
@@ -62,6 +57,7 @@
 .form-group label {
   color: var(--text-secondary);
   font-size: 0.9rem;
+  padding: var(--spacing-sm) 0;
 }
 
 input[type='text'],
@@ -72,6 +68,8 @@ textarea {
   background-color: var(--input-bg);
   color: var(--input-text);
   transition: border-color 0.2s;
+  font-family: 'Monaco', 'Consolas', monospace;
+  line-height: 1.4;
 }
 
 input[type='text']:focus,
@@ -81,9 +79,9 @@ textarea:focus {
 }
 
 textarea {
-  font-family: monospace;
   min-height: 300px;
   resize: vertical;
+  tab-size: 2;
 }
 
 .color-picker {
@@ -99,6 +97,48 @@ textarea {
 }
 .error-message {
   color: var(--button-danger-bg);
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
   margin-top: 0.5rem;
+}
+
+.template-cards {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.template-card {
+  background: var(--card-bg);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-align: left;
+  background-color: var(--button-secondary-bg);
+}
+
+.template-card:hover {
+  transform: translateY(-2px);
+}
+
+.template-card-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.template-card-description {
+  font-size: var(--font-sm);
+  opacity: 0.8;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
