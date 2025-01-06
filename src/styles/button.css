@@ -30,13 +30,28 @@ button.icon-button {
   font-size: var(--font-md);
 }
 
-button:hover {
+/*button:hover {
   transform: scale(1.05);
 }
 
 button:active {
   transform: scale(0.95);
   transition: transform 0.1s;
+}*/
+button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+button:not(.icon-button):hover {
+  box-shadow: var(--shadow-md);
+}
+
+button:active {
+  filter: brightness(0.9);
+  transform: translateY(1px);
+}
+button:not(.icon-button):active {
+  box-shadow: var(--shadow-sm);
 }
 
 /* Danger Button Styles */

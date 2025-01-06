@@ -65,7 +65,14 @@
   }
 
   label:hover {
-    transform: scale(1.05);
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  label:active {
+    filter: brightness(0.9);
+    transform: translateY(1px);
+    box-shadow: var(--shadow-sm);
   }
 
   input[type='file'] {

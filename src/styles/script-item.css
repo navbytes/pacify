@@ -9,7 +9,13 @@
   box-sizing: border-box;
 }
 
-.script-item:hover {
+.script-item.QUICK_SWITCH,
+.script-item.OPTIONS {
+  cursor: grab;
+}
+
+.script-item.QUICK_SWITCH:hover,
+.script-item.OPTIONS:hover {
   background-color: var(--hover-color-dark);
 }
 

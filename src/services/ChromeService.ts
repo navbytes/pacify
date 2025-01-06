@@ -16,6 +16,7 @@ export class ChromeService {
         if (chrome.runtime.lastError) {
           return reject(chrome.runtime.lastError)
         }
+        this.reloadActiveTab() // reload page after setting proxy
         resolve()
       })
     })
@@ -26,9 +27,13 @@ export class ChromeService {
         if (chrome.runtime.lastError) {
           return reject(chrome.runtime.lastError)
         }
+        this.reloadActiveTab() // reload page after clearing proxy
         resolve()
       })
     })
+  }
+  static async reloadActiveTab(): Promise<void> {
+    chrome.tabs.reload()
   }
   static async getProxy(): Promise<chrome.types.ChromeSettingGetResultDetails> {
     return new Promise((resolve, reject) => {

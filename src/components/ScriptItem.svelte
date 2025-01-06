@@ -43,13 +43,14 @@
       : `border-left: 4px solid ${borderColor};`
 
   function handleDragLeave() {
+    if (pageType === 'POPUP') return
     document
       .getElementById('options-container')
       ?.setAttribute('data-page-type', '')
   }
 
   function dragStartHandler(ev: any) {
-    if (!ev.dataTransfer) return
+    if (!ev.dataTransfer || pageType === 'POPUP') return
 
     try {
       const id = `${pageType}${dragDelim}${script.id}`
@@ -75,9 +76,9 @@
 </script>
 
 <div
-  class="script-item"
+  class={`script-item ${pageType}`}
   style={borderStyle}
-  draggable="true"
+  draggable={pageType === 'POPUP' ? 'false' : 'true'}
   on:dragstart={dragStartHandler}
   on:dragexit={handleDragLeave}
   on:dragend={handleDragLeave}

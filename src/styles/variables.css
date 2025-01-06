@@ -29,6 +29,7 @@
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.1);
 
   /* Border Radius */
   --border-radius-sm: 4px;
@@ -97,6 +98,7 @@
 
     /* Shadows */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.5);
 
     /* Dropzone */
     --dropzone-bg: #1e1e1e;
