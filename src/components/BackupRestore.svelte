@@ -2,12 +2,12 @@
   import { ALERT_TYPES, ERROR_TYPES } from '@/interfaces'
   import { NotifyService } from '@/services/NotifyService'
   import { SettingsWriter } from '@/services/SettingsWriter'
-  import { createEventDispatcher } from 'svelte'
 
-  type RestoreEvent = {}
-  const dispatch = createEventDispatcher<{
-    restore: RestoreEvent
-  }>()
+  interface Props {
+    onRestore: () => void;
+  }
+
+  let { onRestore }: Props = $props();
 
   // Handle the backup action
   async function handleBackup() {
@@ -25,7 +25,7 @@
     if (input?.files?.[0]) {
       try {
         await SettingsWriter.restoreSettings(input.files[0])
-        dispatch('restore', {})
+        onRestore()
         NotifyService.alert(ALERT_TYPES.RESTORE_SUCCESS)
       } catch (error) {
         alert((error as Error).message)
@@ -36,14 +36,14 @@
 
 <div class="flex">
   <!-- Backup button -->
-  <button class="secondary-button" on:click={handleBackup}
+  <button class="secondary-button" onclick={handleBackup}
     >Backup Settings</button
   >
 
   <!-- Restore button with file input -->
   <label class="secondary-button">
     Restore Settings
-    <input type="file" accept=".json" on:change={handleRestore} hidden />
+    <input type="file" accept=".json" onchange={handleRestore} hidden />
   </label>
 </div>
 

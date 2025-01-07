@@ -1,26 +1,20 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-
-  type ToggleEvent = {
-    checked: boolean
+  interface Props {
+    isChecked?: boolean
+    label?: string
+    onToggle: (checked: boolean) => void
   }
 
-  const dispatch = createEventDispatcher<{
-    change: ToggleEvent
-    checked: ToggleEvent
-  }>()
+  let { isChecked = $bindable(false), label = '', onToggle }: Props = $props()
 
-  export let checked = false
-  export let label = ''
-
-  function handleChange() {
-    dispatch('change', { checked })
-    dispatch('checked', { checked })
+  function handleToggle(event: Event) {
+    const input = event.target as HTMLInputElement
+    onToggle(input.checked)
   }
 </script>
 
 <label class="switch">
-  <input type="checkbox" bind:checked on:change={handleChange} />
+  <input type="checkbox" bind:checked={isChecked} onchange={handleToggle} />
   <span class="slider"></span>
   {#if label}
     <span class="label">{label}</span>

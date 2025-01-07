@@ -3,7 +3,7 @@
   --primary-color: #2196f3;
   --primary-color-dark: #1976d2;
   --background-color: #ffffff;
-  --background-light: #f8f9fa;
+  --background-alt: #f8f8f8;
   --text-color: #333333;
   --text-secondary: #666666;
   --border-color: #e0e0e0;
@@ -14,7 +14,7 @@
 
   /* Button and Input Colors */
   --button-bg: #2196f3;
-  --button-secondary-bg: #66727c;
+  --button-secondary-bg: #e0e0e0;
   --button-text: #ffffff;
   --button-hover-bg: #1976d2;
   --button-active-bg: #1565c0;
@@ -37,8 +37,8 @@
   --border-radius-lg: 8px;
 
   /* Spacing */
-  --spacing-xs: 2px;
-  --spacing-sm: 8px;
+  --spacing-xs: 6px;
+  --spacing-sm: 12px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
 
@@ -72,7 +72,7 @@
     --primary-color: #90caf9;
     --primary-color-dark: #42a5f5;
     --background-color: #121212;
-    --background-light: #1e1e1e;
+    --background-alt: #1e1e1e;
     --text-color: #ffffff;
     --text-secondary: #b0b0b0;
     --border-color: #333333;

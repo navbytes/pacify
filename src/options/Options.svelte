@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import ScriptEditor from '@/components/ScriptEditor.svelte'
   import ScriptList from '@/components/ScriptList.svelte'
   import { settingsStore } from '@/stores/settingsStore'
   import { dragDelim } from '@/constants/app'
-  import { ERROR_TYPES, type PageType } from '@/interfaces'
+  import { ERROR_TYPES, type PACScript, type ListViewType } from '@/interfaces'
   import BackupRestore from '@/components/BackupRestore.svelte'
   import { NotifyService } from '@/services/NotifyService'
 
@@ -14,13 +14,14 @@
   })
 
   // Subscribe to settings store
-  $: settings = $settingsStore
+  let settings = $derived($settingsStore)
 
-  let showEditor = false
-  let editingScriptId: string | null = null
+  let showEditor = $state(false)
+  let editingScriptId: string | null = $state(null)
 
-  async function handleQuickSwitchToggle(e: CustomEvent) {
-    await settingsStore.quickSwitchToggle(e.detail.checked)
+  async function handleQuickSwitchToggle(checked: boolean) {
+    console.table({ checked })
+    await settingsStore.quickSwitchToggle(checked)
   }
 
   function openEditor(scriptId?: string) {
@@ -28,12 +29,12 @@
     showEditor = true
   }
 
-  async function handleScriptSave(e: CustomEvent) {
-    await settingsStore.updatePACScript(e.detail.script, editingScriptId)
+  async function handleScriptSave(script: Omit<PACScript, 'id'>) {
+    await settingsStore.updatePACScript(script, editingScriptId)
     showEditor = false
   }
 
-  let dropError: string | null = null
+  let dropError: string | null = $state(null)
 
   const getDragData = (ev: DragEvent) => {
     const id = ev.dataTransfer?.getData('text/plain')
@@ -45,7 +46,7 @@
     return { pageType, scriptId }
   }
 
-  const handleDragOver = (type: PageType) => (ev: DragEvent) => {
+  const handleDragOver = (ev: DragEvent) => {
     ev.preventDefault()
   }
 
@@ -55,7 +56,7 @@
   }
 
   // Handle drop
-  const handleDrop = (type: PageType) => async (ev: DragEvent) => {
+  const handleDrop = (type: ListViewType) => async (ev: DragEvent) => {
     ev.preventDefault()
     document
       .getElementById('options-container')
@@ -84,12 +85,12 @@
 >
   <header class="header">
     <h1 class="title">PACify Settings</h1>
-    <BackupRestore on:restore={() => settingsStore.reloadSettings()} />
+    <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
     <div class="header-actions">
       <button
         id="addScriptBtn"
         class="button primary"
-        on:click={() => openEditor()}
+        onclick={() => openEditor()}
       >
         Add New Script
       </button>
@@ -102,8 +103,8 @@
         <span>Quick Switch Mode</span>
       </label>
       <ToggleSwitch
-        checked={settings.quickSwitchEnabled}
-        on:change={handleQuickSwitchToggle}
+        isChecked={settings.quickSwitchEnabled}
+        onToggle={handleQuickSwitchToggle}
       />
     </div>
     <p class="setting-description">
@@ -115,18 +116,25 @@
       class="quick-scripts-section script-list dropzone"
       role="list"
       aria-dropeffect="move"
-      on:dragleave={handleDragLeave}
-      on:drop={handleDrop('QUICK_SWITCH')}
-      on:dragover={handleDragOver('QUICK_SWITCH')}
+      ondragleave={handleDragLeave}
+      ondrop={handleDrop('QUICK_SWITCH')}
+      ondragover={handleDragOver}
     >
       <div class="drop-overlay">
         <p>Drop here to add to quick scripts</p>
       </div>
-      <ScriptList pageType="QUICK_SWITCH" title="Quick Pac Scripts" />
+      <ScriptList
+        pageType="QUICK_SWITCH"
+        title="Quick Pac Scripts"
+        onScriptEdit={() => {}}
+      />
       <p class="small-description">
         Please drag an existing PAC script from below here to enable quick
-        switch. To remove a script please drag and drop it to the list below
-        this section.
+        switch.
+      </p>
+      <p class="small-description">
+        To remove a script please drag and drop it to the list below this
+        section.
       </p>
     </div>
   </section>
@@ -140,9 +148,9 @@
     class="all-scripts-section dropzone"
     role="region"
     aria-dropeffect="move"
-    on:dragleave={handleDragLeave}
-    on:drop={handleDrop('OPTIONS')}
-    on:dragover={handleDragOver('OPTIONS')}
+    ondragleave={handleDragLeave}
+    ondrop={handleDrop('OPTIONS')}
+    ondragover={handleDragOver}
   >
     <div class="drop-overlay">
       <p>Drop here to remove from quick scripts</p>
@@ -150,7 +158,7 @@
     <div class="script-list" role="list">
       <ScriptList
         pageType="OPTIONS"
-        on:handleScriptEdit={(event) => openEditor(event.detail.scriptId)}
+        onScriptEdit={(scriptId) => openEditor(scriptId)}
       />
     </div>
   </div>
@@ -160,8 +168,8 @@
       script={editingScriptId
         ? settings.pacScripts.find((s) => s.id === editingScriptId)
         : undefined}
-      on:save={handleScriptSave}
-      on:close={() => (showEditor = false)}
+      onSave={handleScriptSave}
+      onCancel={() => (showEditor = false)}
     />
   {/if}
 </div>

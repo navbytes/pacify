@@ -22,7 +22,6 @@
   text-align: left;
 }
 
-/* Mobile first approach */
 @media (min-width: 640px) {
   .scripts-list {
     grid-template-columns: repeat(2, 1fr);

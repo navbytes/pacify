@@ -34,7 +34,10 @@ function createSettingsStore() {
       await SettingsWriter.saveSettings(newSettings)
       set(newSettings)
     },
-    async updatePACScript(script: PACScript, scriptId: string | null) {
+    async updatePACScript(
+      script: Omit<PACScript, 'id'>,
+      scriptId: string | null
+    ) {
       try {
         if (scriptId) {
           await SettingsWriter.updatePACScript({

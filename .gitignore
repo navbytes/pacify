@@ -32,3 +32,6 @@ tmp
 
 *.crx
 *.pem
+
+# out files
+*out.txt

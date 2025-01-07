@@ -1,25 +1,20 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import EditIcon from '@/icons/EditIcon.svelte'
   import TrashIcon from '@/icons/TrashIcon.svelte'
-  import { ERROR_TYPES, type PACScript, type PageType } from '@/interfaces'
+  import { ERROR_TYPES, type PACScript, type ListViewType } from '@/interfaces'
   import { settingsStore } from '@/stores/settingsStore'
   import { dragDelim } from '@/constants/app'
   import { NotifyService } from '@/services/NotifyService'
+  import CheckIcon from '@/icons/CheckIcon.svelte'
 
-  type ScriptEditEvent = {
-    scriptId: string
+  interface Props {
+    script: PACScript
+    pageType?: ListViewType
+    onScriptEdit: (scriptId: string) => void
   }
 
-  // Create a typed dispatch
-  const dispatch = createEventDispatcher<{
-    handleScriptEdit: ScriptEditEvent
-  }>()
-
-  export let script: PACScript
-  export let pageType: PageType = 'POPUP'
+  let { script, pageType = 'POPUP', onScriptEdit }: Props = $props()
 
   async function handleScriptToggle(scriptId: string, isActive: boolean) {
     await settingsStore.proxyToggle(scriptId, isActive)
@@ -27,7 +22,7 @@
 
   function openEditor(scriptId?: string) {
     if (!scriptId) return
-    dispatch('handleScriptEdit', { scriptId })
+    onScriptEdit(scriptId)
   }
 
   async function handleScriptDelete(scriptId: string) {
@@ -35,12 +30,6 @@
       await settingsStore.deletePACScript(scriptId)
     }
   }
-
-  const borderColor = script.isActive ? script.color : 'transparent'
-  const borderStyle =
-    pageType === 'QUICK_SWITCH'
-      ? `border: 1px dashed ${script.color}`
-      : `border-left: 4px solid ${borderColor};`
 
   function handleDragLeave() {
     if (pageType === 'POPUP') return
@@ -77,34 +66,36 @@
 
 <div
   class={`script-item ${pageType}`}
-  style={borderStyle}
+  style={`border-color: ${script.color}`}
   draggable={pageType === 'POPUP' ? 'false' : 'true'}
-  on:dragstart={dragStartHandler}
-  on:dragexit={handleDragLeave}
-  on:dragend={handleDragLeave}
+  ondragstart={dragStartHandler}
+  ondragexit={handleDragLeave}
+  ondragend={handleDragLeave}
   role="button"
   tabindex="0"
 >
-  <div class="script-color" style="background-color: {script.color};"></div>
+  <div class="script-color">
+    <CheckIcon isActive={script.isActive} color={script.color} size="24" />
+  </div>
   <div class="script-name">
     {script.name}
   </div>
   <div class="script-actions">
     {#if pageType === 'POPUP'}
       <ToggleSwitch
-        checked={script.isActive}
-        on:change={(e) => handleScriptToggle(script.id, e.detail.checked)}
+        isChecked={script.isActive}
+        onToggle={(checked) => handleScriptToggle(script.id, checked)}
       />
     {:else if pageType === 'OPTIONS'}
       <button
         class="icon-button edit-script"
-        on:click={() => openEditor(script.id)}
+        onclick={() => openEditor(script.id)}
       >
         <EditIcon />
       </button>
       <button
         class="icon-button danger delete-script"
-        on:click={() => handleScriptDelete(script.id)}
+        onclick={() => handleScriptDelete(script.id)}
       >
         <TrashIcon />
       </button>

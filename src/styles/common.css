@@ -12,8 +12,10 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
-  background-color: var(--background-light);
+  background-color: var(--background-alt);
   color: var(--text-color);
+  height: 100vh;
+  overflow: hidden;
 }
 
 h1 {

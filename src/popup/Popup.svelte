@@ -20,7 +20,7 @@
         id="settingsButton"
         class="icon-button"
         title="Open Settings"
-        on:click={openSettings}
+        onclick={openSettings}
       >
         <SettingsIcon />
       </button>

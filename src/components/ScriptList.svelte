@@ -1,32 +1,31 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import { settingsStore } from '@/stores/settingsStore'
   import ScriptItem from './ScriptItem.svelte'
-  import type { PageType } from '@/interfaces'
+  import type { ListViewType } from '@/interfaces'
 
   onMount(async () => {
     settingsStore.init()
   })
 
   // Subscribe to scripts store
-  $: pacScripts = $settingsStore.pacScripts
+  let pacScripts = $derived($settingsStore.pacScripts)
 
-  type ScriptEditEvent = {
-    scriptId: string
+  interface Props {
+    pageType?: ListViewType
+    title?: string
+    onScriptEdit: (scriptId: string) => void
   }
 
-  // Create a typed dispatch
-  const dispatch = createEventDispatcher<{
-    handleScriptEdit: ScriptEditEvent
-  }>()
-
-  // export let scripts: PACScript[] = []
-  export let pageType: PageType = 'POPUP'
-  export let title = 'PAC Scripts'
+  let {
+    pageType = 'POPUP',
+    title = 'PAC Scripts',
+    onScriptEdit,
+  }: Props = $props()
 
   function openEditor(scriptId?: string) {
     if (!scriptId) return
-    dispatch('handleScriptEdit', { scriptId })
+    onScriptEdit(scriptId)
   }
 </script>
 
@@ -41,7 +40,7 @@
           <ScriptItem
             {script}
             {pageType}
-            on:handleScriptEdit={() => openEditor(script.id)}
+            onScriptEdit={() => openEditor(script.id)}
           />
         {/if}
       {/each}

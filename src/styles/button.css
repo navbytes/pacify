@@ -25,7 +25,7 @@ button.icon-button {
   background: none;
   color: var(--button-bg);
   border: none;
-  padding: var(--spacing-sm);
+  padding: 0;
   box-shadow: none;
   font-size: var(--font-md);
 }
@@ -74,7 +74,7 @@ button:not(.icon-button).primary-button {
 
 /* Secondary Button Styles */
 button.icon-button.secondary-button {
-  color: var(--background-light);
+  color: var(--text-color);
 }
 button:not(.icon-button).secondary-button {
   background-color: var(--button-secondary-bg);

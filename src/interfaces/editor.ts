@@ -6,8 +6,6 @@ export interface EditorOptions {
   onClose: () => void
 }
 
-export type PageType = 'POPUP' | 'OPTIONS' | 'QUICK_SWITCH'
-
 export interface FormState {
   name: string
   color: string

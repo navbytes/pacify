@@ -1,7 +1,11 @@
 <!-- CloseIcon.svelte -->
 <script lang="ts">
-  export let size = '24'
-  export let class_ = ''
+  interface Props {
+    size?: string;
+    class_?: string;
+  }
+
+  let { size = '24', class_ = '' }: Props = $props();
 </script>
 
 <svg

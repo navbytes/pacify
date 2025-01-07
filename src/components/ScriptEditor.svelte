@@ -1,40 +1,49 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy } from 'svelte'
+  import { onDestroy } from 'svelte'
   import { ScriptTemplates } from '@/constants/templates'
   import CloseIcon from '@/icons/CloseIcon.svelte'
-  import type { FormState, PACScript, ValidationResult } from '@/interfaces'
+  import type { FormState, PACScript } from '@/interfaces'
   import { ScriptService } from '@/services/ScriptService'
   import type { DebounceTimeout } from '@/interfaces/misc'
 
-  const dispatch = createEventDispatcher()
+  interface Props {
+    script?: PACScript | undefined
+    onSave: (script: Omit<PACScript, 'id'>) => void
+    onCancel: () => void
+  }
 
-  export let script: PACScript | undefined = undefined
+  let { script = undefined, onSave, onCancel }: Props = $props()
 
-  let formState: FormState = {
+  let formState: FormState = $state({
     name: script?.name || '',
     color: script?.color || '#2196f3',
     quickSwitch: script?.quickSwitch || false,
     scriptContent: script?.script || ScriptTemplates.empty,
-  }
+  })
 
   // Variables for validation
-  let errorMessage: string | null = null
-  let isValid: boolean = false
-  let debounceTimeout: DebounceTimeout = null
+  let errorMessage: string | null = $state(null)
+  let isValid: boolean = $state(false)
+  let debounceTimeout: DebounceTimeout = $state(null)
 
-  // Debounced validation
-  $: {
-    // Clear previous timeout if scriptContent changes before debounce duration
-    if (debounceTimeout) {
-      clearTimeout(debounceTimeout)
-    }
-
-    debounceTimeout = setTimeout(() => {
+  $effect(() => {
+    const validateScript = () => {
       const result = ScriptService.validatePACScript(formState.scriptContent)
       isValid = result.isValid
       errorMessage = result.errorMessage
-    }, 500) // 500ms debounce duration
-  }
+    }
+
+    // Initial validation
+    validateScript()
+
+    // Set up debounced validation for changes
+    const timeoutId = setTimeout(validateScript, 500)
+
+    // Cleanup
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  })
 
   // Cleanup timeout on component destroy to prevent memory leaks
   onDestroy(() => {
@@ -57,7 +66,7 @@
       script: formState.scriptContent,
       isActive: false,
     }
-    dispatch('save', { script: scriptData })
+    onSave(scriptData)
   }
 
   function loadTemplate(template: keyof typeof ScriptTemplates) {
@@ -72,23 +81,22 @@
     isValid = result.isValid
     errorMessage = result.errorMessage
   }
+  function cancelEdit() {
+    onCancel()
+  }
 </script>
 
 <div class="modal-overlay" role="dialog" aria-modal="true">
   <div class="modal-content">
     <div class="modal-header">
       <h2>PAC Script Editor</h2>
-      <button
-        class="icon-button"
-        type="reset"
-        on:click={() => dispatch('close')}
-      >
+      <button class="icon-button" type="reset" onclick={cancelEdit}>
         <CloseIcon />
       </button>
     </div>
 
     <div class="content-wrapper">
-      <form on:submit|preventDefault={handleSubmit} class="editor-form">
+      <div class="editor-form">
         <div class="form-group">
           <input
             id="name"
@@ -123,10 +131,7 @@
           <label for="pacScript">PAC Script</label>
 
           <div class="template-cards">
-            <button
-              class="template-card"
-              on:click={() => loadTemplate('basic')}
-            >
+            <button class="template-card" onclick={() => loadTemplate('basic')}>
               <div class="template-card-title">Basic Template</div>
               <div class="template-card-description">
                 A minimal PAC script that provides direct access to internal
@@ -136,7 +141,7 @@
             </button>
             <button
               class="template-card"
-              on:click={() => loadTemplate('advanced')}
+              onclick={() => loadTemplate('advanced')}
             >
               <div class="template-card-title">Advanced Template</div>
               <div class="template-card-description">
@@ -146,7 +151,7 @@
                 suitable for simple corporate network setups.
               </div>
             </button>
-            <button class="template-card" on:click={() => loadTemplate('pro')}>
+            <button class="template-card" onclick={() => loadTemplate('pro')}>
               <div class="template-card-title">Pro Template</div>
               <div class="template-card-description">
                 An enterprise-grade PAC script template that implements
@@ -168,18 +173,18 @@
         </div>
 
         <div class="button-group">
-          <button
-            class="secondary-button"
-            type="reset"
-            on:click={() => dispatch('close')}
-          >
+          <button class="secondary-button" onclick={cancelEdit}>
             Cancel
           </button>
-          <button class="primary-button" type="submit" disabled={!isValid}>
+          <button
+            class="primary-button"
+            disabled={!isValid}
+            onclick={handleSubmit}
+          >
             Save Script
           </button>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

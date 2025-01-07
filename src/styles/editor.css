@@ -82,6 +82,31 @@ textarea {
   min-height: 300px;
   resize: vertical;
   tab-size: 2;
+  max-width: 100%;
+  background-attachment: local;
+  font-size: var(--font-sm);
+  background-attachment: local;
+  border: 1px solid var(--border-color);
+  background-image: linear-gradient(
+      to right,
+      var(--background-color),
+      var(--background-color) 10px,
+      transparent 10px
+    ),
+    linear-gradient(
+      to left,
+      var(--background-color),
+      var(--background-color) 10px,
+      transparent 10px
+    ),
+    repeating-linear-gradient(
+      var(--background-color),
+      var(--background-color) 24.6px,
+      var(--border-color) 24.6px,
+      var(--border-color) 25.6px
+    );
+  line-height: 25.6px;
+  padding: 4.2666666667px 10px;
 }
 
 .color-picker {
@@ -115,6 +140,7 @@ textarea {
   transition: transform 0.2s;
   text-align: left;
   background-color: var(--button-secondary-bg);
+  color: var(--text-secondary);
 }
 
 .template-card:hover {
