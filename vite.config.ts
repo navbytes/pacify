@@ -1,23 +1,22 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { resolve } from 'path'
-import * as fs from 'fs'
+import { existsSync, readFileSync } from 'fs'
 
-// Custom plugin to copy manifest and icons
-function copyManifestAndIcons() {
+// Simplified copy manifest plugin
+function copyManifest() {
   return {
-    name: 'copy-manifest-and-icons',
-    generateBundle() {
-      // Copy manifest.json
+    name: 'copy-manifest',
+    buildEnd() {
       try {
-        const manifestContent = fs.readFileSync('manifest.json', 'utf-8')
+        const manifest = readFileSync('manifest.json', 'utf-8')
         this.emitFile({
           type: 'asset',
           fileName: 'manifest.json',
-          source: manifestContent,
+          source: manifest,
         })
       } catch (error) {
-        console.error('Error copying manifest.json:', error)
+        console.error('Error copying manifest:', error)
       }
 
       // Copy icons
@@ -25,8 +24,8 @@ function copyManifestAndIcons() {
       icons.forEach((icon) => {
         try {
           const iconPath = resolve(__dirname, 'icons', icon)
-          if (fs.existsSync(iconPath)) {
-            const source = fs.readFileSync(iconPath)
+          if (existsSync(iconPath)) {
+            const source = readFileSync(iconPath)
             this.emitFile({
               type: 'asset',
               fileName: `icons/${icon}`,
@@ -44,30 +43,27 @@ function copyManifestAndIcons() {
 }
 
 export default defineConfig({
-  plugins: [svelte(), copyManifestAndIcons()],
+  plugins: [svelte(), copyManifest()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'), // Maps "@" to the "src" directory
+      '@': resolve(__dirname, 'src'),
     },
   },
   build: {
+    target: 'esnext',
     rollupOptions: {
       input: {
         popup: resolve(__dirname, 'src/popup/popup.html'),
         options: resolve(__dirname, 'src/options/options.html'),
-        background: resolve(__dirname, 'src/background/background.ts'), // Add background script
+        background: resolve(__dirname, 'src/background/background.ts'),
       },
       output: {
+        dir: 'dist',
         entryFileNames: 'assets/[name].js',
         chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'popup.css') {
-            return 'assets/popup.css'
-          }
-          if (assetInfo.name === 'options.css') {
-            return 'assets/options.css'
-          }
-          return 'assets/[name].[ext]'
+        assetFileNames: 'assets/[name].[ext]',
+        manualChunks: {
+          'monaco-editor': ['monaco-editor'],
         },
       },
     },
@@ -78,5 +74,16 @@ export default defineConfig({
     assetsInlineLimit: 0,
     // Generate separate CSS files
     cssCodeSplit: true,
+  },
+  optimizeDeps: {
+    exclude: [
+      'monaco-editor/esm/vs/language/typescript/ts.worker',
+      'monaco-editor/esm/vs/language/html/html.worker',
+      'monaco-editor/esm/vs/language/css/css.worker',
+      'monaco-editor/esm/vs/language/json/json.worker',
+    ],
+  },
+  worker: {
+    format: 'es',
   },
 })

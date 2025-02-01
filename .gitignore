@@ -34,4 +34,4 @@ tmp
 *.pem
 
 # out files
-*out.txt
+*output.txt

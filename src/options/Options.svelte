@@ -8,19 +8,20 @@
   import { ERROR_TYPES, type PACScript, type ListViewType } from '@/interfaces'
   import BackupRestore from '@/components/BackupRestore.svelte'
   import { NotifyService } from '@/services/NotifyService'
+  import Button from '@/components/Button.svelte'
+  import FlexGroup from '@/components/FlexGroup.svelte'
 
-  onMount(async () => {
+  // State management using Svelte 5's $state
+  let showEditor = $state(false)
+  let editingScriptId = $state<string | null>(null)
+  let dropError = $state<string | null>(null)
+  let settings = $derived($settingsStore)
+
+  onMount(() => {
     settingsStore.init()
   })
 
-  // Subscribe to settings store
-  let settings = $derived($settingsStore)
-
-  let showEditor = $state(false)
-  let editingScriptId: string | null = $state(null)
-
   async function handleQuickSwitchToggle(checked: boolean) {
-    console.table({ checked })
     await settingsStore.quickSwitchToggle(checked)
   }
 
@@ -33,8 +34,6 @@
     await settingsStore.updatePACScript(script, editingScriptId)
     showEditor = false
   }
-
-  let dropError: string | null = $state(null)
 
   const getDragData = (ev: DragEvent) => {
     const id = ev.dataTransfer?.getData('text/plain')
@@ -55,7 +54,6 @@
     return false
   }
 
-  // Handle drop
   const handleDrop = (type: ListViewType) => async (ev: DragEvent) => {
     ev.preventDefault()
     document
@@ -79,83 +77,112 @@
 
 <div
   id="options-container"
-  class="container"
+  class="container mx-auto max-w-7xl px-4 py-8"
   role="region"
   aria-dropeffect="move"
+  data-page-type
 >
-  <header class="header">
-    <h1 class="title">PACify Settings</h1>
-    <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
-    <div class="header-actions">
-      <button
-        id="addScriptBtn"
-        class="button primary"
-        onclick={() => openEditor()}
+  <!-- Header Section -->
+  <header class="mb-8 flex items-center justify-between gap-4">
+    <h1 class="text-2xl font-bold text-primary">PACify Settings</h1>
+    <FlexGroup
+      direction="horizontal"
+      childrenGap="sm"
+      alignItems="center"
+      justifyContent="between"
+    >
+      <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
+      <Button color="primary" on:click={() => openEditor()}
+        >Add New Script</Button
       >
-        Add New Script
-      </button>
-    </div>
+    </FlexGroup>
   </header>
 
-  <section class="settings-section">
-    <div class="setting-item flex">
-      <label class="switch-label" for="quickSwitchToggle">
-        <span>Quick Switch Mode</span>
+  <!-- Settings Section -->
+  <section class="mb-8 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800">
+    <div class="flex items-center justify-between">
+      <label class="text-lg font-medium" for="quickSwitchToggle">
+        Quick Switch Mode
       </label>
       <ToggleSwitch
-        isChecked={settings.quickSwitchEnabled}
-        onToggle={handleQuickSwitchToggle}
+        checked={settings.quickSwitchEnabled}
+        onchange={handleQuickSwitchToggle}
       />
     </div>
-    <p class="setting-description">
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
       When enabled, clicking the extension icon will cycle through quick-switch
       enabled scripts.
     </p>
 
+    <!-- Quick Scripts Dropzone -->
     <div
-      class="quick-scripts-section script-list dropzone"
+      class="quick-scripts-section relative mt-6 rounded-lg border-2 border-dashed border-gray-300 p-6 transition-colors dark:border-gray-600"
       role="list"
       aria-dropeffect="move"
       ondragleave={handleDragLeave}
       ondrop={handleDrop('QUICK_SWITCH')}
       ondragover={handleDragOver}
     >
-      <div class="drop-overlay">
-        <p>Drop here to add to quick scripts</p>
+      <div
+        data-overlay
+        class="drop-overlay absolute inset-0 hidden items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none"
+        class:flex={document
+          .getElementById('options-container')
+          ?.getAttribute('data-page-type') === 'OPTIONS'}
+      >
+        <p class="text-lg font-medium">Drop here to add to quick scripts</p>
       </div>
+
       <ScriptList
         pageType="QUICK_SWITCH"
         title="Quick Pac Scripts"
         onScriptEdit={() => {}}
       />
-      <p class="small-description">
-        Please drag an existing PAC script from below here to enable quick
-        switch.
-      </p>
-      <p class="small-description">
-        To remove a script please drag and drop it to the list below this
-        section.
-      </p>
+
+      <div class="mt-4 space-y-2 text-center">
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Please drag an existing PAC script from below here to enable quick
+          switch.
+        </p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          To remove a script please drag and drop it to the list below this
+          section.
+        </p>
+      </div>
     </div>
   </section>
+
+  <!-- Error Message -->
   {#if dropError}
-    <div class="drop-error">
+    <div
+      class="mb-6 rounded-md bg-red-100 p-4 text-red-700 dark:bg-red-900/50 dark:text-red-200"
+    >
       <p>{dropError}</p>
     </div>
   {/if}
 
+  <!-- All Scripts Dropzone -->
   <div
-    class="all-scripts-section dropzone"
+    class="all-scripts-section relative rounded-lg border-2 border-dashed border-gray-300 p-6 transition-colors dark:border-gray-600"
     role="region"
     aria-dropeffect="move"
     ondragleave={handleDragLeave}
     ondrop={handleDrop('OPTIONS')}
     ondragover={handleDragOver}
   >
-    <div class="drop-overlay">
-      <p>Drop here to remove from quick scripts</p>
+    <div
+      data-overlay
+      class="drop-overlay absolute inset-0 hidden items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none"
+      class:flex={document
+        .getElementById('options-container')
+        ?.getAttribute('data-page-type') === 'QUICK_SWITCH'}
+    >
+      <p class="text-lg font-medium text-red-600 dark:text-red-400">
+        Drop here to remove from quick scripts
+      </p>
     </div>
-    <div class="script-list" role="list">
+
+    <div role="list">
       <ScriptList
         pageType="OPTIONS"
         onScriptEdit={(scriptId) => openEditor(scriptId)}
@@ -163,6 +190,7 @@
     </div>
   </div>
 
+  <!-- Script Editor Modal -->
   {#if showEditor}
     <ScriptEditor
       script={editingScriptId

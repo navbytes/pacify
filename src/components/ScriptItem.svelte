@@ -1,12 +1,11 @@
 <script lang="ts">
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
-  import EditIcon from '@/icons/EditIcon.svelte'
-  import TrashIcon from '@/icons/TrashIcon.svelte'
   import { ERROR_TYPES, type PACScript, type ListViewType } from '@/interfaces'
   import { settingsStore } from '@/stores/settingsStore'
   import { dragDelim } from '@/constants/app'
   import { NotifyService } from '@/services/NotifyService'
-  import CheckIcon from '@/icons/CheckIcon.svelte'
+  import { Check, Circle, Pencil, Trash } from 'lucide-svelte'
+  import Button from './Button.svelte'
 
   interface Props {
     script: PACScript
@@ -36,6 +35,13 @@
     document
       .getElementById('options-container')
       ?.setAttribute('data-page-type', '')
+
+    const dragIcon = document.getElementById('drag-image')
+    if (dragIcon) {
+      dragIcon.style.display = 'none'
+      dragIcon.style.backgroundColor = script.color
+      dragIcon.textContent = ''
+    }
   }
 
   function dragStartHandler(ev: any) {
@@ -56,6 +62,7 @@
       if (dragIcon) {
         dragIcon.style.backgroundColor = script.color
         dragIcon.textContent = script.name
+        dragIcon.style.display = 'block'
       }
       ev.dataTransfer.setDragImage(dragIcon, 0, 0)
     } catch (error) {
@@ -65,8 +72,14 @@
 </script>
 
 <div
-  class={`script-item ${pageType}`}
-  style={`border-color: ${script.color}`}
+  class={`
+    flex items-center justify-between p-3 
+    rounded-lg bg-white dark:bg-gray-800 
+    border border-gray-200 dark:border-gray-700
+    ${pageType === 'QUICK_SWITCH' ? 'border-dashed' : 'border-solid'}
+    ${pageType === 'POPUP' ? '' : 'cursor-grab hover:bg-gray-50 dark:hover:bg-gray-700'}
+  `}
+  style={`--script-color: ${script.color}`}
   draggable={pageType === 'POPUP' ? 'false' : 'true'}
   ondragstart={dragStartHandler}
   ondragexit={handleDragLeave}
@@ -74,35 +87,32 @@
   role="button"
   tabindex="0"
 >
-  <div class="script-color">
-    <CheckIcon isActive={script.isActive} color={script.color} size="24" />
+  <div class="flex items-center gap-2">
+    <div class="text-[var(--script-color)]">
+      {#if script.isActive}
+        <Check />
+      {:else}
+        <Circle />
+      {/if}
+    </div>
+    <span class="text-sm">{script.name}</span>
   </div>
-  <div class="script-name">
-    {script.name}
-  </div>
-  <div class="script-actions">
+
+  <div class="flex items-center gap-2">
     {#if pageType === 'POPUP'}
       <ToggleSwitch
-        isChecked={script.isActive}
-        onToggle={(checked) => handleScriptToggle(script.id, checked)}
+        checked={script.isActive}
+        onchange={(checked) => handleScriptToggle(script.id, checked)}
       />
     {:else if pageType === 'OPTIONS'}
-      <button
-        class="icon-button edit-script"
-        onclick={() => openEditor(script.id)}
+      <Button color="primary" minimal on:click={() => openEditor(script.id)}
+        ><Pencil /></Button
       >
-        <EditIcon />
-      </button>
-      <button
-        class="icon-button danger delete-script"
-        onclick={() => handleScriptDelete(script.id)}
+      <Button
+        color="error"
+        minimal
+        on:click={() => handleScriptDelete(script.id)}><Trash /></Button
       >
-        <TrashIcon />
-      </button>
     {/if}
   </div>
 </div>
-
-<style>
-  @import '../styles/script-item.css';
-</style>

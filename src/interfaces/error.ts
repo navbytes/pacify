@@ -1,4 +1,6 @@
 export enum ERROR_TYPES {
+  EDITOR = 'editor_error',
+  VALIDATION = 'validation_error',
   INITIALIZATION = 'Initialization failed',
   SET_PROXY = 'Error setting proxy',
   CLEAR_PROXY = 'Error clearing proxy',
