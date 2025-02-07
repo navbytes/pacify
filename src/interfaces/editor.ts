@@ -1,8 +1,8 @@
-import type { PACScript } from './settings'
+import type { ProxyConfig } from './settings'
 
 export interface EditorOptions {
   container: HTMLElement
-  onSave: (scriptData: PACScript) => void
+  onSave: (scriptData: ProxyConfig) => void
   onClose: () => void
 }
 

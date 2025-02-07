@@ -21,4 +21,6 @@ export enum ALERT_TYPES {
   BACKUP_SUCCESS = 'Settings have been backed up successfully!',
   BACKUP_FAILURE = 'Backup failed. Please try again.',
   RESTORE_SUCCESS = 'Settings have been restored successfully!',
+  SAVE_FAILURE = 'Error saving settings. Please try again.',
+  UNKNOWN_ERROR = 'An error occurred. Please try again.',
 }

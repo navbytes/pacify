@@ -1,5 +1,5 @@
 // src/editor/templates.ts
-export const ScriptTemplates: Record<
+export const scriptTemplates: Record<
   'empty' | 'basic' | 'advanced' | 'pro',
   string
 > = {

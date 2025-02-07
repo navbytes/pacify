@@ -1,10 +1,9 @@
-import * as monaco from 'monaco-editor'
+// MonacoService.ts
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 
 interface MonacoOptions {
   value: string
-  language?: string
-  theme?: string
   automaticLayout?: boolean
   minimap?: { enabled: boolean }
   scrollBeyondLastLine?: boolean
@@ -29,63 +28,6 @@ export class Monaco {
       getWorker() {
         return new editorWorker()
       },
-    }
-
-    // Register PAC script language
-    monaco.languages.register({ id: 'pac' })
-
-    // Disable TypeScript/JavaScript features if they exist
-    if (monaco.languages.typescript) {
-      const typescriptDefaults = monaco.languages.typescript.typescriptDefaults
-      const javascriptDefaults = monaco.languages.typescript.javascriptDefaults
-
-      // Set minimal compiler options
-      typescriptDefaults.setCompilerOptions({
-        noLib: true,
-        allowNonTsExtensions: true,
-      })
-      javascriptDefaults.setCompilerOptions({
-        noLib: true,
-        allowNonTsExtensions: true,
-      })
-
-      // Disable diagnostics
-      typescriptDefaults.setDiagnosticsOptions({
-        noSemanticValidation: true,
-        noSyntaxValidation: true,
-        noSuggestionDiagnostics: true,
-      })
-
-      javascriptDefaults.setDiagnosticsOptions({
-        noSemanticValidation: true,
-        noSyntaxValidation: true,
-        noSuggestionDiagnostics: true,
-      })
-
-      // Disable extra features
-      typescriptDefaults.setModeConfiguration({
-        completionItems: false,
-        hovers: false,
-        documentSymbols: false,
-        definitions: false,
-        references: false,
-        documentHighlights: false,
-        rename: false,
-        signatureHelp: false,
-        diagnostics: false,
-      })
-
-      javascriptDefaults.setModeConfiguration({
-        completionItems: false,
-        hovers: false,
-        documentSymbols: false,
-        definitions: false,
-        references: false,
-        documentHighlights: false,
-        rename: false,
-        signatureHelp: false,
-        diagnostics: false,
-      })
     }
 
     // Register PAC script language
@@ -237,7 +179,7 @@ export class Monaco {
       },
     })
 
-    // Setup theme
+    // Simple dark theme
     monaco.editor.defineTheme('pac-dark', {
       base: 'vs-dark',
       inherit: true,
@@ -305,22 +247,32 @@ export class Monaco {
       },
       links: false,
       contextmenu: false,
-      // Remove invalid properties
-      // javascriptDefaults: false,  // Remove this
-      // typescriptDefaults: false,  // Remove this
+      parameterHints: { enabled: false },
+      codeLens: false,
+      lightbulb: { enabled: undefined },
+      selectionHighlight: false,
+      occurrencesHighlight: 'off',
+      suggest: {
+        showKeywords: false,
+        showSnippets: true,
+        showClasses: false,
+        showFunctions: true,
+        showConstructors: false,
+        showFields: false,
+        showVariables: false,
+        showInterfaces: false,
+        showModules: false,
+      },
     }
 
     return monaco.editor.create(container, {
       ...defaultOptions,
       ...options,
-      language: 'pac', // Force PAC language
     })
   }
 
   static dispose(editor: monaco.editor.IStandaloneCodeEditor): void {
-    if (editor) {
-      editor.dispose()
-    }
+    editor?.dispose()
   }
 
   static getValue(editor: monaco.editor.IStandaloneCodeEditor): string {

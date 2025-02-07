@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { resolve } from 'path'
-import { existsSync, readFileSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs'
 
 // Simplified copy manifest plugin
 function copyManifest() {
@@ -42,48 +42,111 @@ function copyManifest() {
   }
 }
 
-export default defineConfig({
-  plugins: [svelte(), copyManifest()],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
+// Helper function to copy manifest and modify it for dev mode
+function copyManifestDev() {
+  return {
+    name: 'copy-manifest-dev',
+    buildStart() {
+      if (process.env.NODE_ENV === 'development') {
+        try {
+          // Read the original manifest
+          const manifest = JSON.parse(readFileSync('manifest.json', 'utf-8'))
+
+          // Modify manifest for development
+          const devManifest = {
+            ...manifest,
+            content_security_policy: {
+              extension_pages:
+                "script-src 'self' 'wasm-unsafe-eval' http://localhost:5173; object-src 'self'",
+            },
+          }
+
+          // Ensure dev directory exists
+          if (!existsSync('dev')) {
+            mkdirSync('dev')
+          }
+
+          // Write modified manifest to dev directory
+          writeFileSync(
+            'dev/manifest.json',
+            JSON.stringify(devManifest, null, 2)
+          )
+
+          // Copy icons to dev directory
+          const icons = ['icon16.png', 'icon48.png', 'icon128.png']
+          if (!existsSync('dev/icons')) {
+            mkdirSync('dev/icons')
+          }
+
+          icons.forEach((icon) => {
+            const iconPath = resolve(__dirname, 'icons', icon)
+            if (existsSync(iconPath)) {
+              const iconContent = readFileSync(iconPath)
+              writeFileSync(`dev/icons/${icon}`, iconContent)
+            }
+          })
+        } catch (error) {
+          console.error('Error setting up dev environment:', error)
+        }
+      }
     },
-  },
-  build: {
-    target: 'esnext',
-    rollupOptions: {
-      input: {
-        popup: resolve(__dirname, 'src/popup/popup.html'),
-        options: resolve(__dirname, 'src/options/options.html'),
-        background: resolve(__dirname, 'src/background/background.ts'),
+  }
+}
+
+export default defineConfig(({ command }) => {
+  const isProduction = command === 'build'
+
+  return {
+    plugins: [svelte(), isProduction ? copyManifest() : copyManifestDev()],
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
       },
-      output: {
-        dir: 'dist',
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[ext]',
-        manualChunks: {
-          'monaco-editor': ['monaco-editor'],
+    },
+    build: {
+      target: 'esnext',
+      rollupOptions: {
+        input: {
+          popup: resolve(__dirname, 'src/popup/popup.html'),
+          options: resolve(__dirname, 'src/options/options.html'),
+          background: resolve(__dirname, 'src/background/background.ts'),
+        },
+        output: {
+          dir: 'dist',
+          entryFileNames: 'assets/[name].js',
+          chunkFileNames: 'assets/[name].[hash].js',
+          assetFileNames: 'assets/[name].[ext]',
+          manualChunks: {
+            'monaco-editor': ['monaco-editor/esm/vs/editor/editor.api'],
+            // Include only the editor worker
+            'editor.worker': ['monaco-editor/esm/vs/editor/editor.worker'],
+          },
         },
       },
+      outDir: 'dist',
+      emptyOutDir: true,
+      sourcemap: !isProduction,
+      assetsInlineLimit: 0,
+      cssCodeSplit: true,
     },
-    outDir: 'dist',
-    emptyOutDir: true,
-    sourcemap: false,
-    // Ensure we don't inline assets as data URLs
-    assetsInlineLimit: 0,
-    // Generate separate CSS files
-    cssCodeSplit: true,
-  },
-  optimizeDeps: {
-    exclude: [
-      'monaco-editor/esm/vs/language/typescript/ts.worker',
-      'monaco-editor/esm/vs/language/html/html.worker',
-      'monaco-editor/esm/vs/language/css/css.worker',
-      'monaco-editor/esm/vs/language/json/json.worker',
-    ],
-  },
-  worker: {
-    format: 'es',
-  },
+    server: {
+      port: 5173,
+      strictPort: true,
+      hmr: {
+        port: 5173,
+      },
+    },
+    optimizeDeps: {
+      include: ['monaco-editor/esm/vs/editor/editor.api'],
+      exclude: [
+        'monaco-editor/esm/vs/language/typescript/ts.worker',
+        'monaco-editor/esm/vs/language/html/html.worker',
+        'monaco-editor/esm/vs/language/css/css.worker',
+        'monaco-editor/esm/vs/language/json/json.worker',
+      ],
+    },
+    worker: {
+      format: 'es',
+    },
+  }
 })

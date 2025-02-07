@@ -1,6 +1,6 @@
-import type { AppSettings, PACScript } from '@/interfaces'
+import type { AppSettings, ProxyConfig } from '@/interfaces'
 import { SettingsReader } from './SettingsReader'
-import { ChromeService } from './ChromeService'
+import { ChromeService } from '@/services/chrome'
 
 export class SettingsWriter {
   static async saveSettings(settings: AppSettings): Promise<void> {
@@ -8,25 +8,25 @@ export class SettingsWriter {
     SettingsReader.invalidateCache()
   }
 
-  static async addPACScript(script: Omit<PACScript, 'id'>): Promise<void> {
+  static async addPACScript(script: Omit<ProxyConfig, 'id'>): Promise<void> {
     const settings = await SettingsReader.getSettings()
-    const newScript: PACScript = { ...script, id: crypto.randomUUID() }
-    settings.pacScripts.push(newScript)
+    const newScript: ProxyConfig = { ...script, id: crypto.randomUUID() }
+    settings.proxyConfigs.push(newScript)
     await this.saveSettings(settings)
   }
 
-  static async updatePACScript(script: PACScript): Promise<void> {
+  static async updatePACScript(script: ProxyConfig): Promise<void> {
     const settings = await SettingsReader.getSettings()
-    const index = settings.pacScripts.findIndex((s) => s.id === script.id)
+    const index = settings.proxyConfigs.findIndex((s) => s.id === script.id)
     if (index !== -1) {
-      settings.pacScripts[index] = script
+      settings.proxyConfigs[index] = script
       await this.saveSettings(settings)
     }
   }
 
   static async deletePACScript(id: string): Promise<void> {
     const settings = await SettingsReader.getSettings()
-    settings.pacScripts = settings.pacScripts.filter((s) => s.id !== id)
+    settings.proxyConfigs = settings.proxyConfigs.filter((s) => s.id !== id)
     if (settings.activeScriptId === id) {
       settings.activeScriptId = null
     }
@@ -38,9 +38,9 @@ export class SettingsWriter {
     settings.quickSwitchEnabled = enabled
     await this.saveSettings(settings)
   }
-  public static async updateAllScripts(scripts: PACScript[]): Promise<void> {
+  public static async updateAllScripts(scripts: ProxyConfig[]): Promise<void> {
     const settings = await SettingsReader.getSettings()
-    settings.pacScripts = scripts
+    settings.proxyConfigs = scripts
     await this.saveSettings(settings)
   }
   public static async updateScriptQuickSwitch(
@@ -77,7 +77,7 @@ export class SettingsWriter {
 
       // Validate the settings structure
       if (
-        !settings.pacScripts ||
+        !settings.proxyConfigs ||
         typeof settings.quickSwitchEnabled !== 'boolean'
       ) {
         throw new Error('Invalid settings file.')

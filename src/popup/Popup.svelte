@@ -1,6 +1,6 @@
 <script lang="ts">
   import ScriptList from '@/components/ScriptList.svelte'
-  import { ChromeService } from '@/services/ChromeService'
+  import { ChromeService } from '@/services/chrome'
   import { onMount } from 'svelte'
   import { settingsStore } from '@/stores/settingsStore'
   import { Settings } from 'lucide-svelte'
@@ -16,12 +16,14 @@
   }
 </script>
 
-<div class="w-80 min-h-[400px] bg-white dark:bg-gray-800 p-4 flex flex-col">
+<div
+  class="w-80 min-h-[400px] bg-white dark:bg-gray-800 py-4 px-2 flex flex-col"
+>
   <header
     class="flex items-center justify-between mb-4 border-b border-gray-200 dark:border-gray-700 pb-3"
   >
-    <h1 class="text-xl font-bold text-primary dark:text-primary-light">
-      PACify
+    <h1 class="text-lg font-bold text-primary dark:text-primary-light">
+      PACify | The Proxy Manager
     </h1>
 
     <div class="flex items-center gap-2">
@@ -32,16 +34,14 @@
   </header>
 
   <main class="overflow-y-auto flex-1">
-    <ScriptList pageType="POPUP" />
+    <ScriptList pageType="POPUP" title="" />
   </main>
 
   <!-- Optional: Add a footer with quick actions or status -->
   <footer
     class="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400"
   >
-    <p class="text-center">
-      Click the extension icon to quick switch between enabled scripts
-    </p>
+    <p class="text-center">Toggle proxy by clicking on the switch.</p>
   </footer>
 </div>
 

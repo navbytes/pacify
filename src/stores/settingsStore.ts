@@ -3,14 +3,14 @@ import {
   ERROR_TYPES,
   type AppSettings,
   type BaseMessage,
-  type PACScript,
+  type ProxyConfig,
   type QuickSwitchMessage,
   type SetProxyMessage,
 } from '@/interfaces'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import { SettingsReader } from '@/services/SettingsReader'
 import { SettingsWriter } from '@/services/SettingsWriter'
-import { ChromeService } from '@/services/ChromeService'
+import { ChromeService } from '@/services/chrome'
 import { NotifyService } from '@/services/NotifyService'
 
 function createSettingsStore() {
@@ -35,7 +35,7 @@ function createSettingsStore() {
       set(newSettings)
     },
     async updatePACScript(
-      script: Omit<PACScript, 'id'>,
+      script: Omit<ProxyConfig, 'id'>,
       scriptId: string | null
     ) {
       try {
@@ -77,7 +77,7 @@ function createSettingsStore() {
     },
     async proxyToggle(scriptId: string, isActive: boolean) {
       const settings = await SettingsReader.getSettings()
-      const updatedScripts = settings.pacScripts.map((script) => ({
+      const updatedScripts = settings.proxyConfigs.map((script) => ({
         ...script,
         isActive: script.id === scriptId ? isActive : false,
       }))
@@ -91,9 +91,7 @@ function createSettingsStore() {
         if (activeScript) {
           await ChromeService.sendMessage<SetProxyMessage>({
             type: 'SET_PROXY',
-            name: activeScript.name,
-            script: activeScript.script,
-            color: activeScript.color,
+            proxy: activeScript,
           })
         }
       } else {

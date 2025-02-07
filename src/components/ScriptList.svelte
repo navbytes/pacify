@@ -2,13 +2,13 @@
   import { onMount } from 'svelte'
   import { settingsStore } from '@/stores/settingsStore'
   import ScriptItem from './ScriptItem.svelte'
-  import type { ListViewType, PACScript } from '@/interfaces'
+  import type { ListViewType, ProxyConfig } from '@/interfaces'
 
   onMount(() => {
     settingsStore.init()
   })
 
-  let pacScripts = $derived($settingsStore.pacScripts)
+  let proxyConfigs = $derived($settingsStore.proxyConfigs ?? [])
 
   interface Props {
     pageType?: ListViewType
@@ -28,33 +28,35 @@
   }
 
   // Fix: Use $derived to create a derived array instead of a function
-  let displayScripts = $derived<PACScript[]>(
+  let displayProxyConfigs = $derived<ProxyConfig[]>(
     pageType === 'QUICK_SWITCH'
-      ? pacScripts.filter((script) => script.quickSwitch)
-      : pacScripts
+      ? proxyConfigs.filter((script) => script.quickSwitch)
+      : proxyConfigs
   )
 </script>
 
 <section class="w-full">
-  <div class="mb-4 flex items-center justify-between">
-    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+  {#if title !== ''}
+    <h2 class="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
       {title}
     </h2>
+  {/if}
 
-    {#if pageType === 'QUICK_SWITCH'}
-      <span class="text-sm text-gray-500 dark:text-gray-400">
-        {displayScripts.length} scripts
-      </span>
-    {/if}
-  </div>
-
-  {#if displayScripts.length > 0}
+  {#if pageType === 'QUICK_SWITCH'}
+    <div class="space-y-1 mb-6">
+      <p class="text-xs text-gray-500 dark:text-gray-400">
+        Drag scripts here to enable quick switching. Quick switch allows you to
+        switch proxy by clicking the extension icon.
+      </p>
+    </div>
+  {/if}
+  {#if displayProxyConfigs.length > 0}
     <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      {#each displayScripts as script (script.id)}
+      {#each displayProxyConfigs as proxy (proxy.id)}
         <ScriptItem
-          {script}
+          {proxy}
           {pageType}
-          onScriptEdit={() => openEditor(script.id)}
+          onScriptEdit={() => openEditor(proxy.id)}
         />
       {/each}
     </div>
@@ -98,17 +100,6 @@
           </p>
         {/if}
       </div>
-    </div>
-  {/if}
-
-  {#if pageType === 'QUICK_SWITCH' && displayScripts.length > 0}
-    <div class="mt-4 space-y-1">
-      <p class="text-xs text-gray-500 dark:text-gray-400 text-center">
-        Drag scripts here to enable quick switching
-      </p>
-      <p class="text-xs text-gray-500 dark:text-gray-400 text-center">
-        Click the extension icon to cycle through these scripts
-      </p>
     </div>
   {/if}
 </section>

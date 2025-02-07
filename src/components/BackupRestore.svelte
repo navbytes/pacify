@@ -31,7 +31,7 @@
         onRestore()
         NotifyService.alert(ALERT_TYPES.RESTORE_SUCCESS)
       } catch (error) {
-        alert((error as Error).message)
+        NotifyService.alert((error as Error).message)
       }
     }
   }

@@ -1,10 +1,10 @@
 <script lang="ts">
   interface Props {
-    checked: boolean
-    onchange: (checked: boolean) => void
+    checked?: boolean
+    onchange?: (checked: boolean) => void
     id?: string
   }
-  let { checked, onchange, id = '' }: Props = $props()
+  let { checked = $bindable(), onchange, id = '' }: Props = $props()
 </script>
 
 <label class="relative inline-block w-11 h-6 cursor-pointer">
@@ -12,7 +12,7 @@
     {id}
     type="checkbox"
     bind:checked
-    onchange={() => onchange(checked)}
+    onchange={() => (onchange ? onchange(checked ?? false) : null)}
     class="sr-only peer"
   />
   <span

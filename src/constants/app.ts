@@ -3,7 +3,7 @@ import type { AppSettings } from '@/interfaces'
 export const DEFAULT_SETTINGS: AppSettings = {
   quickSwitchEnabled: false,
   activeScriptId: null,
-  pacScripts: [],
+  proxyConfigs: [],
 }
 
 // Constants for default values

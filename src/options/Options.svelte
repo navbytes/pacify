@@ -1,15 +1,19 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
-  import ScriptEditor from '@/components/ScriptEditor.svelte'
   import ScriptList from '@/components/ScriptList.svelte'
   import { settingsStore } from '@/stores/settingsStore'
   import { dragDelim } from '@/constants/app'
-  import { ERROR_TYPES, type PACScript, type ListViewType } from '@/interfaces'
+  import {
+    ERROR_TYPES,
+    type ListViewType,
+    type ProxyConfig,
+  } from '@/interfaces'
   import BackupRestore from '@/components/BackupRestore.svelte'
   import { NotifyService } from '@/services/NotifyService'
   import Button from '@/components/Button.svelte'
   import FlexGroup from '@/components/FlexGroup.svelte'
+  import ProxyConfigModal from '@/components/ProxyConfig/ProxyConfigModal.svelte'
 
   // State management using Svelte 5's $state
   let showEditor = $state(false)
@@ -29,8 +33,8 @@
     editingScriptId = scriptId || null
     showEditor = true
   }
-
-  async function handleScriptSave(script: Omit<PACScript, 'id'>) {
+  // @ts-ignore
+  async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
     await settingsStore.updatePACScript(script, editingScriptId)
     showEditor = false
   }
@@ -84,7 +88,7 @@
 >
   <!-- Header Section -->
   <header class="mb-8 flex items-center justify-between gap-4">
-    <h1 class="text-2xl font-bold text-primary">PACify Settings</h1>
+    <h1 class="text-2xl font-bold text-primary">PACify | The Proxy Manager</h1>
     <FlexGroup
       direction="horizontal"
       childrenGap="sm"
@@ -138,17 +142,6 @@
         title="Quick Pac Scripts"
         onScriptEdit={() => {}}
       />
-
-      <div class="mt-4 space-y-2 text-center">
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-          Please drag an existing PAC script from below here to enable quick
-          switch.
-        </p>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-          To remove a script please drag and drop it to the list below this
-          section.
-        </p>
-      </div>
     </div>
   </section>
 
@@ -192,9 +185,9 @@
 
   <!-- Script Editor Modal -->
   {#if showEditor}
-    <ScriptEditor
-      script={editingScriptId
-        ? settings.pacScripts.find((s) => s.id === editingScriptId)
+    <ProxyConfigModal
+      proxyConfig={editingScriptId
+        ? settings.proxyConfigs.find((s) => s.id === editingScriptId)
         : undefined}
       onSave={handleScriptSave}
       onCancel={() => (showEditor = false)}

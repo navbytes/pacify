@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Side by Side iFrames</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0px;
+        font-family: Arial, sans-serif;
+        background: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+      }
+      .container {
+        display: flex;
+        height: 100vh;
+      }
+      .frame {
+        min-width: 0;
+        border: none;
+      }
+      .popup {
+        width: 320px;
+        margin: 20px;
+      }
+      .options {
+        flex: 1;
+      }
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          height: auto;
+        }
+        .frame {
+          height: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <iframe class="frame popup" src="/src/popup/popup.html"></iframe>
+      <iframe class="frame options" src="/src/options/options.html"></iframe>
+    </div>
+  </body>
+</html>
