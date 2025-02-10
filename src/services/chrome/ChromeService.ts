@@ -1,16 +1,18 @@
 import { DEFAULT_SETTINGS } from '@/constants/app'
-import { ERROR_TYPES, type AppSettings } from '@/interfaces'
-import { NotifyService } from './NotifyService'
+import { ERROR_TYPES, type AppSettings, type ProxyConfig } from '@/interfaces'
+import { NotifyService } from '../NotifyService'
+import { convertAppSettingsToChromeConfig } from './util'
 
 export class ChromeService {
-  static async setProxy(data: string): Promise<void> {
+  static async setProxy(proxy: ProxyConfig): Promise<void> {
     const details: chrome.types.ChromeSettingSetDetails = {
-      value: {
-        mode: 'pac_script',
-        pacScript: { data },
-      },
+      value: convertAppSettingsToChromeConfig(proxy),
       scope: 'regular',
     }
+
+    // TODO: remove this log
+    // console.log('create details from proxy', proxy, details)
+
     return new Promise((resolve, reject) => {
       chrome.proxy.settings.set(details, () => {
         if (chrome.runtime.lastError) {

@@ -1,4 +1,4 @@
-# Privacy Policy for PACify - PAC Script Manager
+# Privacy Policy for PACify | The Proxy Manager
 
 Effective Date: [2024-12-22]
 

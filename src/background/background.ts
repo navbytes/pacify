@@ -3,8 +3,8 @@ import {
   ERROR_TYPES,
   type BackgroundMessage,
   type BackgroundMessageType,
+  type ProxyConfig,
   type SetProxyMessage,
-  type PACScript,
 } from '@/interfaces'
 import {
   DEFAULT_BADGE_TEXT,
@@ -12,7 +12,7 @@ import {
   POPUP_DISABLED,
   POPUP_ENABLED,
 } from '@/constants/app'
-import { ChromeService } from '@/services/ChromeService'
+import { ChromeService } from '@/services/chrome'
 import { NotifyService } from '@/services/NotifyService'
 
 /**
@@ -46,8 +46,8 @@ class BackgroundManager {
     QUICK_SWITCH: async () => await this.updateQuickAction(),
     SET_PROXY: async (message?: BackgroundMessage) => {
       if (!message) return
-      const { script, name, color } = message as SetProxyMessage
-      await this.setProxySettings(script, name, color)
+      const { type, proxy } = message as SetProxyMessage
+      await this.setProxySettings(proxy)
     },
     CLEAR_PROXY: async () => {
       await this.clearProxySettings()
@@ -123,9 +123,9 @@ class BackgroundManager {
    * Updates scripts' active status based on the next script
    */
   private updateScriptsActiveStatus(
-    scripts: PACScript[],
-    nextScript: PACScript | null
-  ): PACScript[] {
+    scripts: ProxyConfig[],
+    nextScript: ProxyConfig | null
+  ): ProxyConfig[] {
     return scripts.map((script) => ({
       ...script,
       isActive: nextScript?.id === script.id,
@@ -135,13 +135,13 @@ class BackgroundManager {
   /**
    * Handles proxy updates based on the next script
    */
-  private async handleProxyUpdate(nextScript: PACScript | null): Promise<void> {
+  private async handleProxyUpdate(
+    nextScript: ProxyConfig | null
+  ): Promise<void> {
     if (nextScript) {
       await this.messageHandlers.SET_PROXY({
         type: 'SET_PROXY',
-        name: nextScript.name,
-        script: nextScript.script,
-        color: nextScript.color,
+        proxy: nextScript,
       })
     } else {
       await this.messageHandlers.CLEAR_PROXY()
@@ -152,8 +152,8 @@ class BackgroundManager {
    * Gets the next quick switch script in rotation
    */
   private async getNextQuickScript(): Promise<{
-    scripts: PACScript[]
-    nextScript: PACScript | null
+    scripts: ProxyConfig[]
+    nextScript: ProxyConfig | null
   }> {
     const scripts = await SettingsReader.getScripts()
     const quickScripts = scripts.filter((script) => script.quickSwitch)
@@ -183,23 +183,16 @@ class BackgroundManager {
     const settings = await this.safeGetSettings()
     if (!settings) return
 
-    const activeScript = settings.pacScripts.find((script) => script.isActive)
+    const activeScript = settings.proxyConfigs.find((script) => script.isActive)
     await (activeScript
-      ? this.setProxySettings(
-          activeScript.script,
-          activeScript.name,
-          activeScript.color
-        )
+      ? this.setProxySettings(activeScript)
       : this.clearProxySettings())
   }
 
-  private async setProxySettings(
-    pacScript: string,
-    name: string,
-    color: string
-  ): Promise<void> {
+  private async setProxySettings(proxy: ProxyConfig): Promise<void> {
     try {
-      await ChromeService.setProxy(pacScript)
+      await ChromeService.setProxy(proxy)
+      const { name, color } = proxy
       await this.updateBadge(name, color)
     } catch (error) {
       NotifyService.error(ERROR_TYPES.SET_PROXY, error)

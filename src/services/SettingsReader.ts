@@ -1,6 +1,6 @@
 import { DEFAULT_SETTINGS } from '@/constants/app'
-import type { AppSettings, PACScript, Settings } from '@/interfaces'
-import { ChromeService } from './ChromeService'
+import type { AppSettings, ProxyConfig } from '@/interfaces'
+import { ChromeService } from './chrome'
 
 export class SettingsReader {
   // Cache for settings to reduce storage reads
@@ -8,22 +8,22 @@ export class SettingsReader {
   private static lastSettingsUpdate: number = 0
   private static readonly CACHE_TIMEOUT = 5000 // 5 seconds cache timeout
 
-  static async getScripts(): Promise<PACScript[]> {
+  static async getScripts(): Promise<ProxyConfig[]> {
     const settings = await this.getSettings()
-    return settings.pacScripts
+    return settings.proxyConfigs
   }
 
-  static async getActiveScript(): Promise<PACScript | null> {
+  static async getActiveScript(): Promise<ProxyConfig | null> {
     const settings = await this.getSettings()
     return (
-      settings.pacScripts.find(
+      settings.proxyConfigs.find(
         (script) => script.id === settings.activeScriptId
       ) || null
     )
   }
-  static async getPacScriptById(id: string): Promise<PACScript | null> {
+  static async getPacScriptById(id: string): Promise<ProxyConfig | null> {
     const settings = await this.getSettings()
-    return settings.pacScripts.find((s) => s.id === id) || null
+    return settings.proxyConfigs.find((s) => s.id === id) || null
   }
 
   /**

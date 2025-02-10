@@ -1,26 +1,26 @@
 <script lang="ts">
   interface Props {
-    isChecked?: boolean
-    label?: string
-    onToggle: (checked: boolean) => void
+    checked?: boolean
+    onchange?: (checked: boolean) => void
+    id?: string
   }
-
-  let { isChecked = $bindable(false), label = '', onToggle }: Props = $props()
-
-  function handleToggle(event: Event) {
-    const input = event.target as HTMLInputElement
-    onToggle(input.checked)
-  }
+  let { checked = $bindable(), onchange, id = '' }: Props = $props()
 </script>
 
-<label class="switch">
-  <input type="checkbox" bind:checked={isChecked} onchange={handleToggle} />
-  <span class="slider"></span>
-  {#if label}
-    <span class="label">{label}</span>
-  {/if}
+<label class="relative inline-block w-11 h-6 cursor-pointer">
+  <input
+    {id}
+    type="checkbox"
+    bind:checked
+    onchange={() => (onchange ? onchange(checked ?? false) : null)}
+    class="sr-only peer"
+  />
+  <span
+    class="absolute inset-0 rounded-full bg-gray-300 transition-colors duration-200 ease-in-out
+           peer-checked:bg-blue-600
+           before:absolute before:content-[''] before:h-5 before:w-5 before:left-[2px] before:bottom-[2px]
+           before:bg-white before:rounded-full before:transition-transform before:duration-200 before:ease-in-out
+           peer-checked:before:translate-x-5
+           peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300"
+  ></span>
 </label>
-
-<style>
-  @import '../styles/toggle.css';
-</style>

@@ -10,15 +10,15 @@ export class NotifyService {
         NotifyService.alert(ALERT_TYPES.BACKUP_FAILURE)
         break
       case ERROR_TYPES.SAVE_SCRIPT:
-        alert('Error saving script. Please try again.')
+        NotifyService.alert(ALERT_TYPES.SAVE_FAILURE)
         break
       default:
-        alert('An error occurred. Please try again.')
+        NotifyService.alert(ALERT_TYPES.UNKNOWN_ERROR)
         break
     }
   }
 
-  public static alert(message: ALERT_TYPES): void {
+  public static alert(message: ALERT_TYPES | string): void {
     alert(message)
   }
 }

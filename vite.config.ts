@@ -1,23 +1,22 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { resolve } from 'path'
-import * as fs from 'fs'
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs'
 
-// Custom plugin to copy manifest and icons
-function copyManifestAndIcons() {
+// Simplified copy manifest plugin
+function copyManifest() {
   return {
-    name: 'copy-manifest-and-icons',
-    generateBundle() {
-      // Copy manifest.json
+    name: 'copy-manifest',
+    buildEnd() {
       try {
-        const manifestContent = fs.readFileSync('manifest.json', 'utf-8')
+        const manifest = readFileSync('manifest.json', 'utf-8')
         this.emitFile({
           type: 'asset',
           fileName: 'manifest.json',
-          source: manifestContent,
+          source: manifest,
         })
       } catch (error) {
-        console.error('Error copying manifest.json:', error)
+        console.error('Error copying manifest:', error)
       }
 
       // Copy icons
@@ -25,8 +24,8 @@ function copyManifestAndIcons() {
       icons.forEach((icon) => {
         try {
           const iconPath = resolve(__dirname, 'icons', icon)
-          if (fs.existsSync(iconPath)) {
-            const source = fs.readFileSync(iconPath)
+          if (existsSync(iconPath)) {
+            const source = readFileSync(iconPath)
             this.emitFile({
               type: 'asset',
               fileName: `icons/${icon}`,
@@ -43,40 +42,111 @@ function copyManifestAndIcons() {
   }
 }
 
-export default defineConfig({
-  plugins: [svelte(), copyManifestAndIcons()],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'), // Maps "@" to the "src" directory
+// Helper function to copy manifest and modify it for dev mode
+function copyManifestDev() {
+  return {
+    name: 'copy-manifest-dev',
+    buildStart() {
+      if (process.env.NODE_ENV === 'development') {
+        try {
+          // Read the original manifest
+          const manifest = JSON.parse(readFileSync('manifest.json', 'utf-8'))
+
+          // Modify manifest for development
+          const devManifest = {
+            ...manifest,
+            content_security_policy: {
+              extension_pages:
+                "script-src 'self' 'wasm-unsafe-eval' http://localhost:5173; object-src 'self'",
+            },
+          }
+
+          // Ensure dev directory exists
+          if (!existsSync('dev')) {
+            mkdirSync('dev')
+          }
+
+          // Write modified manifest to dev directory
+          writeFileSync(
+            'dev/manifest.json',
+            JSON.stringify(devManifest, null, 2)
+          )
+
+          // Copy icons to dev directory
+          const icons = ['icon16.png', 'icon48.png', 'icon128.png']
+          if (!existsSync('dev/icons')) {
+            mkdirSync('dev/icons')
+          }
+
+          icons.forEach((icon) => {
+            const iconPath = resolve(__dirname, 'icons', icon)
+            if (existsSync(iconPath)) {
+              const iconContent = readFileSync(iconPath)
+              writeFileSync(`dev/icons/${icon}`, iconContent)
+            }
+          })
+        } catch (error) {
+          console.error('Error setting up dev environment:', error)
+        }
+      }
     },
-  },
-  build: {
-    rollupOptions: {
-      input: {
-        popup: resolve(__dirname, 'src/popup/popup.html'),
-        options: resolve(__dirname, 'src/options/options.html'),
-        background: resolve(__dirname, 'src/background/background.ts'), // Add background script
+  }
+}
+
+export default defineConfig(({ command }) => {
+  const isProduction = command === 'build'
+
+  return {
+    plugins: [svelte(), isProduction ? copyManifest() : copyManifestDev()],
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
       },
-      output: {
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'popup.css') {
-            return 'assets/popup.css'
-          }
-          if (assetInfo.name === 'options.css') {
-            return 'assets/options.css'
-          }
-          return 'assets/[name].[ext]'
+    },
+    build: {
+      target: 'esnext',
+      rollupOptions: {
+        input: {
+          popup: resolve(__dirname, 'src/popup/popup.html'),
+          options: resolve(__dirname, 'src/options/options.html'),
+          background: resolve(__dirname, 'src/background/background.ts'),
+        },
+        output: {
+          dir: 'dist',
+          entryFileNames: 'assets/[name].js',
+          chunkFileNames: 'assets/[name].[hash].js',
+          assetFileNames: 'assets/[name].[ext]',
+          manualChunks: {
+            'monaco-editor': ['monaco-editor/esm/vs/editor/editor.api'],
+            // Include only the editor worker
+            'editor.worker': ['monaco-editor/esm/vs/editor/editor.worker'],
+          },
         },
       },
+      outDir: 'dist',
+      emptyOutDir: true,
+      sourcemap: !isProduction,
+      assetsInlineLimit: 0,
+      cssCodeSplit: true,
     },
-    outDir: 'dist',
-    emptyOutDir: true,
-    sourcemap: false,
-    // Ensure we don't inline assets as data URLs
-    assetsInlineLimit: 0,
-    // Generate separate CSS files
-    cssCodeSplit: true,
-  },
+    server: {
+      port: 5173,
+      strictPort: true,
+      hmr: {
+        port: 5173,
+      },
+    },
+    optimizeDeps: {
+      include: ['monaco-editor/esm/vs/editor/editor.api'],
+      exclude: [
+        'monaco-editor/esm/vs/language/typescript/ts.worker',
+        'monaco-editor/esm/vs/language/html/html.worker',
+        'monaco-editor/esm/vs/language/css/css.worker',
+        'monaco-editor/esm/vs/language/json/json.worker',
+      ],
+    },
+    worker: {
+      format: 'es',
+    },
+  }
 })

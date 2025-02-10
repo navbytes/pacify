@@ -1,3 +1,5 @@
+import type { ProxyConfig } from './settings'
+
 export type StoreMessageType =
   | 'SCRIPTS_UPDATED'
   | 'SCRIPTS_ADDED'
@@ -23,9 +25,7 @@ export interface QuickSwitchMessage extends BaseMessage {
   enabled: boolean
 }
 export interface SetProxyMessage extends BaseMessage {
-  script: string
-  name: string
-  color: string
+  proxy: ProxyConfig
 }
 
 export interface SetProxyQuickSwitchMessage extends BaseMessage {
