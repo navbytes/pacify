@@ -20,6 +20,7 @@
   import type { SvelteComponent } from 'svelte'
 
   // Default props
+  export let classes: string = ''
   export let color: ButtonColor = 'primary'
   export let minimal: boolean = false
   export let icon: typeof SvelteComponent | null = null
@@ -77,10 +78,10 @@
   $: disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : ''
 
   // Final computed classes string.
-  $: classes = `${btnClasses} ${disabledClasses}`.trim()
+  $: combinedClasses = `${btnClasses} ${disabledClasses} ${classes}`.trim()
 </script>
 
-<button {type} class={classes} {disabled} on:click>
+<button {type} class={combinedClasses} {disabled} on:click>
   {#if icon}
     <!-- If both icon and text exist, add margin-right to the icon -->
     <svelte:component this={icon} class={$$slots.default ? 'mr-2' : ''} />

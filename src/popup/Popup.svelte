@@ -5,6 +5,7 @@
   import { settingsStore } from '@/stores/settingsStore'
   import { Settings } from 'lucide-svelte'
   import Button from '@/components/Button.svelte'
+  import FlexGroup from '@/components/FlexGroup.svelte'
 
   // Initialize settings on mount
   onMount(() => {
@@ -26,11 +27,11 @@
       PACify | The Proxy Manager
     </h1>
 
-    <div class="flex items-center gap-2">
+    <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
       <Button minimal color="secondary" on:click={openSettings}
         ><Settings /><span class="sr-only">Settings</span></Button
       >
-    </div>
+    </FlexGroup>
   </header>
 
   <main class="overflow-y-auto flex-1">

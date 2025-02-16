@@ -84,7 +84,6 @@
   class="container mx-auto max-w-7xl px-4 py-8"
   role="region"
   aria-dropeffect="move"
-  data-page-type
 >
   <!-- Header Section -->
   <header class="mb-8 flex items-center justify-between gap-4">
@@ -104,7 +103,12 @@
 
   <!-- Settings Section -->
   <section class="mb-8 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800">
-    <div class="flex items-center justify-between">
+    <FlexGroup
+      direction="horizontal"
+      childrenGap="lg"
+      alignItems="center"
+      justifyContent="between"
+    >
       <label class="text-lg font-medium" for="quickSwitchToggle">
         Quick Switch Mode
       </label>
@@ -112,7 +116,7 @@
         checked={settings.quickSwitchEnabled}
         onchange={handleQuickSwitchToggle}
       />
-    </div>
+    </FlexGroup>
     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
       When enabled, clicking the extension icon will cycle through quick-switch
       enabled scripts.
@@ -129,12 +133,9 @@
     >
       <div
         data-overlay
-        class="drop-overlay absolute inset-0 hidden items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none"
-        class:flex={document
-          .getElementById('options-container')
-          ?.getAttribute('data-page-type') === 'OPTIONS'}
+        class="drop-overlay absolute inset-0 items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none z-10"
       >
-        <p class="text-lg font-medium">Drop here to add to quick scripts</p>
+        <p class="text-xl font-medium">Drop here to add to quick scripts</p>
       </div>
 
       <ScriptList
@@ -156,7 +157,7 @@
 
   <!-- All Scripts Dropzone -->
   <div
-    class="all-scripts-section relative rounded-lg border-2 border-dashed border-gray-300 p-6 transition-colors dark:border-gray-600"
+    class="all-scripts-section relative rounded-lg border-2 border-dashed border-gray-300 p-6 transition-colors dark:border-gray-600 bg-white shadow-sm dark:bg-gray-800"
     role="region"
     aria-dropeffect="move"
     ondragleave={handleDragLeave}
@@ -165,12 +166,9 @@
   >
     <div
       data-overlay
-      class="drop-overlay absolute inset-0 hidden items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none"
-      class:flex={document
-        .getElementById('options-container')
-        ?.getAttribute('data-page-type') === 'QUICK_SWITCH'}
+      class="drop-overlay absolute inset-0 items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none z-10"
     >
-      <p class="text-lg font-medium text-red-600 dark:text-red-400">
+      <p class="text-xl font-medium text-red-600 dark:text-red-400">
         Drop here to remove from quick scripts
       </p>
     </div>

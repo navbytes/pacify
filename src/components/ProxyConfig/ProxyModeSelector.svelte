@@ -1,5 +1,7 @@
 <script lang="ts">
   import { Server } from 'lucide-svelte'
+  import Button from '../Button.svelte'
+  import FlexGroup from '../FlexGroup.svelte'
 
   export let proxyMode: string = 'system'
 
@@ -17,31 +19,32 @@
 </script>
 
 <div>
-  <div
-    class="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+  <FlexGroup
+    direction="horizontal"
+    childrenGap="sm"
+    alignItems="center"
+    justifyContent="start"
+    classes="mb-1"
   >
     <Server size={20} />
     Proxy Mode <span class="text-red-500">*</span>
-  </div>
-
-  <div
-    class="bg-slate-100 dark:bg-slate-700/50 p-1.5 rounded-xl flex flex-wrap gap-2"
+  </FlexGroup>
+  <FlexGroup
+    direction="horizontal"
+    childrenGap="sm"
+    alignItems="center"
+    justifyContent="between"
+    classes="bg-slate-100 dark:bg-slate-700/50 p-1.5 rounded-xl"
   >
     {#each options as option}
-      <button
+      <Button
         type="button"
+        classes="flex-grow"
         on:click={() => selectOption(option.value)}
-        on:keydown={(e) => e.key === 'Enter' && selectOption(option.value)}
-        class="flex-grow cursor-pointer border rounded-md p-3 text-center text-sm font-medium transition-colors duration-150 ease-in-out
-  
-  {proxyMode === option.value
-          ? 'bg-blue-500 text-white border-blue-500'
-          : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100'}"
-        role="option"
-        aria-selected={proxyMode === option.value}
+        color={proxyMode === option.value ? 'primary' : 'secondary'}
       >
         {option.label}
-      </button>
+      </Button>
     {/each}
-  </div>
+  </FlexGroup>
 </div>

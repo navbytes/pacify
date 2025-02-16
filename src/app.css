@@ -26,13 +26,20 @@
   }
 }
 
-#options-container[data-page-type='OPTIONS']
-  .quick-scripts-section
-  [data-overlay] {
-  display: flex;
+#options-container .all-scripts-section [data-overlay] {
+  display: none;
 }
 #options-container[data-page-type='QUICK_SWITCH']
   .all-scripts-section
+  [data-overlay] {
+  display: flex;
+}
+
+#options-container .quick-scripts-section [data-overlay] {
+  display: none;
+}
+#options-container[data-page-type='OPTIONS']
+  .quick-scripts-section
   [data-overlay] {
   display: flex;
 }

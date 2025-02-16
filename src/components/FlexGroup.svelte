@@ -14,6 +14,7 @@
 
 <script lang="ts">
   // Props
+  export let classes: string = ''
   // rowDirection: horizontal or vertical layout.
   export let direction: Direction = 'horizontal'
   // childrenGap: spacing between child elements.
@@ -59,7 +60,8 @@
   $: justifyClass = justifyMap[justifyContent]
   $: alignClass = alignMap[alignItems]
 
-  $: flexGroupClasses = `flex ${directionClass} ${gapClass} ${justifyClass} ${alignClass}`
+  $: flexGroupClasses =
+    `flex ${directionClass} ${gapClass} ${justifyClass} ${alignClass} ${classes}`.trim()
 </script>
 
 <div class={flexGroupClasses}>

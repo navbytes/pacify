@@ -1,28 +1,56 @@
-# PACify - PAC Script Management Chrome Extension
+# PACify - Comprehensive Proxy Configuration Manager for Chrome
 
-`PACify` is a browser extension designed to manage `PAC` (Proxy Auto-Configuration) scripts efficiently. It provides tools for creating, editing, and switching between PAC scripts. This extension is built using modern web technologies, such as Svelte and TypeScript, to ensure a clean and responsive user interface.
+`PACify` is a powerful Chrome extension designed to manage all types of proxy configurations supported by Chrome. It provides a user-friendly interface for creating, editing, and switching between different proxy configurations, including PAC scripts, manual proxy settings, and system configurations.
 
 ## 🚀 Features
 
-- **Script Editor**: Easily create and edit PAC scripts with live validation and syntax templates.
-- **Quick Switch Mode**: Toggle between PAC scripts with a single click.
-- **Import/Export Settings**: Backup and restore your scripts and settings effortlessly.
-- **Customizable Settings**: Set script colors, enable quick switch, and manage script activation seamlessly.
+### Proxy Configuration Support
+
+- **PAC Script Management**: Create and edit PAC scripts with advanced syntax highlighting and autocompletion
+- **Manual Proxy Configuration**: Set up individual proxy servers for different protocols (HTTP, HTTPS, FTP)
+- **System Proxy Integration**: Use system proxy settings seamlessly
+- **Auto-detect Mode**: Support for WPAD (Web Proxy Auto-Discovery) protocol
+- **Direct Connection**: Option for direct internet access without proxy
+
+### User Interface
+
+- **Advanced Script Editor**: Built with Monaco Editor, featuring:
+  - Syntax highlighting for PAC scripts
+  - Intelligent code completion
+  - Error detection and validation
+  - Multiple script templates (Empty, Basic, Pro, Advanced)
+- **Quick Switch Mode**: Toggle between enabled proxy configurations with a single click
+- **Visual Management**: Color-coded proxy configurations for easy identification
+- **Drag-and-Drop Interface**: Easily organize and manage quick switch configurations
+
+### Configuration Options
+
+- **Per-Protocol Proxy Settings**: Configure different proxies for HTTP, HTTPS, and FTP
+- **Bypass Rules**: Set up proxy bypass rules for specific domains
+- **Shared Proxy Option**: Use the same proxy server for all protocols
+- **SOCKS Proxy Support**: Configure SOCKS4/SOCKS5 proxy servers
+
+### Data Management
+
+- **Import/Export Settings**: Backup and restore your proxy configurations
+- **Local Storage**: All configurations stored securely in Chrome's sync storage
+- **Real-time Validation**: Immediate feedback on proxy configuration validity
 
 ## Project Structure
 
-The repository is organized as follows:
+The repository follows a modular architecture:
 
-- `background/`: Handles background operations and browser action events.
-- `components/`: Reusable UI components built with Svelte.
-- `constants/`: Application constants, including templates and default settings.
-- `icons/`: SVG icons used throughout the application.
-- `interfaces/`: TypeScript interfaces for data structures.
-- `options/`: Contains files for the options page.
-- `popup/`: Code for the browser popup interface.
-- `services/`: Application logic for managing settings and Chrome API interactions.
-- `stores/`: Svelte stores for state management.
-- `styles/`: CSS files for styling.
+```text
+src/
+├── background/     # Background service worker
+├── components/     # Reusable UI components (Svelte)
+├── constants/      # Application constants and templates
+├── interfaces/     # TypeScript type definitions
+├── options/        # Options page implementation
+├── popup/          # Extension popup interface
+├── services/       # Core business logic
+└── stores/         # State management (Svelte stores)
+```
 
 ## 🛠️ Installation
 
@@ -39,26 +67,49 @@ The repository is organized as follows:
    bun install
    ```
 
-3. Build the project:
+3. Build the project (or run in dev mode):
 
    ```bash
-   bun run build
+   bun run build # build the project
+   bun run dev:extension # dev mode
    ```
 
-4. Load the extension into Chrome:
-   - Open `chrome://extensions`.
-   - Enable "Developer mode".
-   - Click "Load unpacked" and select the `dist/` directory.
+4. Load in Chrome:
+   - Navigate to `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked"
+   - Select the `dist/` directory
 
 ## 💻 Usage
 
-- Add new PAC scripts via the options page.
-- Use the browser action (popup) to toggle between quick-switch enabled scripts.
-- Import/export settings from the options page for easy backup and restore.
+### Basic Configuration
+
+1. Click the PACify icon in Chrome's toolbar
+2. Select "Add New Script" to create a configuration
+3. Choose your preferred proxy mode:
+   - System
+   - Direct
+   - Auto-detect
+   - PAC Script
+   - Manual Configuration
+
+### Quick Switch Setup
+
+1. Open the extension options
+2. Enable "Quick Switch Mode"
+3. Drag desired configurations to the Quick Switch section
+4. Click the extension icon to cycle through enabled configurations
+
+### PAC Script Development
+
+- Use the built-in Monaco Editor for script creation
+- Choose from predefined templates
+- Access helper functions like `isInNet`, `dnsResolve`, etc.
+- Real-time syntax validation and error checking
 
 ## 📄 Documentation
 
-Supported Permissions
+### Chrome Permissions
 
 The extension requires the following permissions:
 
@@ -66,23 +117,28 @@ The extension requires the following permissions:
 - `storage`: To store PAC scripts and user preferences.
 - `webRequest` and `webRequestAuthProvider`: For testing and resolving proxy requests.
 
-## ⌨️ Development
+### Supported Proxy Modes
 
-To run the extension in development mode:
+- `system`: Use system's proxy settings
+- `direct`: Direct connection without proxy
+- `auto_detect`: Auto-detect proxy settings
+- `pac_script`: Use PAC script configuration
+- `fixed_servers`: Manual proxy configuration
 
-```bash
-bun run dev
-```
+### Required Permissions
 
-This will start a development server and watch for file changes.
+- `proxy`: Manage Chrome's proxy settings
+- `storage`: Store configurations
+- `webRequest`: Handle proxy requests
+- `webRequestAuthProvider`: Manage proxy authentication
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions welcome! Please:
 
-1. Fork the repository.
-2. Create a feature branch.
-3. Submit a pull request with a detailed description of your changes.
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request with detailed description
 
 ## 📜 License
 
@@ -100,5 +156,6 @@ Have a suggestion, feedback, or bug to report? [Open an issue](https://github.co
 
 ## 🌟 Acknowledgments
 
-- Built with [Svelte](https://svelte.dev/) and [TypeScript](https://www.typescriptlang.org/).
-- Special thanks to the open-source community for their valuable libraries and tools that made this project possible.
+- Built with [Svelte](https://svelte.dev/) and [TypeScript](https://www.typescriptlang.org/)
+- Uses [Monaco Editor](https://microsoft.github.io/monaco-editor/) for script editing
+- Thanks to the open-source community
