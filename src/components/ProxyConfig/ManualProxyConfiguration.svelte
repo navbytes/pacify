@@ -1,5 +1,6 @@
 <script lang="ts">
   import ProxyInput from './ProxyInput.svelte'
+  import FlexGroup from '../FlexGroup.svelte'
 
   export let useSharedProxy: boolean = true
   export let proxySettings: any
@@ -15,7 +16,7 @@
 </script>
 
 <div class="space-y-6">
-  <div class="flex items-center gap-2">
+  <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
     <input
       type="checkbox"
       id="useSharedProxy"
@@ -28,7 +29,7 @@
     >
       Use same proxy server for all protocols
     </label>
-  </div>
+  </FlexGroup>
 
   {#if useSharedProxy}
     <!-- Single Proxy Configuration -->

@@ -10,6 +10,7 @@
   import { NotifyService } from '@/services/NotifyService'
   import { ShieldCheck, Pencil, Trash } from 'lucide-svelte'
   import Button from './Button.svelte'
+  import FlexGroup from './FlexGroup.svelte'
 
   interface Props {
     proxy: ProxyConfig
@@ -38,7 +39,7 @@
     if (pageType === 'POPUP') return
     document
       .getElementById('options-container')
-      ?.setAttribute('data-page-type', '')
+      ?.removeAttribute('data-page-type')
 
     const dragIcon = document.getElementById('drag-image')
     if (dragIcon) {
@@ -100,7 +101,7 @@
     <span class="text-sm">{proxy.name}</span>
   </div>
 
-  <div class="flex items-center gap-2">
+  <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
     <ToggleSwitch
       checked={proxy.isActive}
       onchange={(checked) => handleScriptToggle(proxy.id ?? '', checked)}
@@ -120,5 +121,5 @@
         on:click={() => handleScriptDelete(proxy.id ?? '')}><Trash /></Button
       >
     {/if}
-  </div>
+  </FlexGroup>
 </div>

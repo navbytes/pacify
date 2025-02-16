@@ -5,6 +5,7 @@
   import { ERROR_TYPES } from '@/interfaces'
   import FlexGroup from '../FlexGroup.svelte'
   import { scriptTemplates } from '@/constants/templates'
+  import Button from '../Button.svelte'
 
   export let pacUrl: string = ''
   export let pacMandatory: boolean = false
@@ -79,37 +80,37 @@
         >
           PAC Script
         </label>
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
           Templates:
         </span>
-        <button
-          type="button"
-          class="text-sm text-primary hover:underline"
+        <Button
+          minimal
+          color="primary"
           on:click={() => setTemplate(scriptTemplates.empty)}
         >
           Empty
-        </button>
-        <button
-          type="button"
-          class="text-sm text-primary hover:underline"
+        </Button>
+        <Button
+          minimal
+          color="primary"
           on:click={() => setTemplate(scriptTemplates.basic)}
         >
           Basic
-        </button>
-        <button
-          type="button"
-          class="text-sm text-primary hover:underline"
+        </Button>
+        <Button
+          minimal
+          color="primary"
           on:click={() => setTemplate(scriptTemplates.pro)}
         >
           Pro
-        </button>
-        <button
-          type="button"
-          class="text-sm text-primary hover:underline"
+        </Button>
+        <Button
+          minimal
+          color="primary"
           on:click={() => setTemplate(scriptTemplates.advanced)}
         >
           Advanced
-        </button>
+        </Button>
       </FlexGroup>
       <div
         id="editorContainer"
@@ -120,7 +121,7 @@
     </div>
   {/if}
 
-  <div class="flex items-center gap-2">
+  <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
     <input
       type="checkbox"
       id="pacMandatory"
@@ -130,5 +131,5 @@
     <label for="pacMandatory" class="text-sm text-gray-700 dark:text-gray-300">
       Mandatory PAC script (prevent fallback to direct)
     </label>
-  </div>
+  </FlexGroup>
 </div>
