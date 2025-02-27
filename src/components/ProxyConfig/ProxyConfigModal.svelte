@@ -14,6 +14,7 @@
     ProxyServer,
   } from '@/interfaces'
   import { Globe, Radar, Settings, Zap } from 'lucide-svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   export let proxyConfig: ProxyConfig | undefined
   export let onSave: (config: Omit<ProxyConfig, 'id'>) => Promise<void>
@@ -73,7 +74,7 @@
     errorMessage = ''
 
     if (!name.trim()) {
-      errorMessage = 'Name is required'
+      errorMessage = I18nService.getMessage('nameRequired')
       return
     }
 
@@ -148,7 +149,7 @@
     <form class="flex flex-col flex-1" on:submit={handleSubmit}>
       <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
-          Proxy Configuration
+          {I18nService.getMessage('proxyConfiguration')}
         </h2>
       </div>
       <div class="px-6 py-4 space-y-6 flex-1">
@@ -156,7 +157,7 @@
           class="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
         >
           <Settings size={20} />
-          Basic Settings
+          {I18nService.getMessage('basicSettings')}
         </div>
         <!-- Basic settings -->
         <BasicSettings bind:name bind:color bind:isActive />
@@ -172,7 +173,7 @@
           >
             <p class="text-slate-600 dark:text-slate-400">
               <Globe size={20} class="inline-block" />
-              Use proxy settings from the operating system.
+              {I18nService.getMessage('systemProxy')}
             </p>
           </div>
         {:else if proxyMode === 'direct'}
@@ -182,8 +183,7 @@
           >
             <p class="text-slate-600 dark:text-slate-400">
               <Zap size={20} class="inline-block" />
-              In direct mode all connections are created directly, without any proxy
-              involved.
+              {I18nService.getMessage('directModeHelp')}
             </p>
           </div>
         {:else if proxyMode === 'auto_detect'}
@@ -193,8 +193,7 @@
           >
             <p class="text-slate-600 dark:text-slate-400">
               <Radar size={20} class="inline-block" />
-              In Auto-detect mode, Chrome will automatically search for and download
-              proxy settings using the WPAD (Web Proxy Auto-Discovery) protocol.
+              {I18nService.getMessage('autoDetectModeHelp')}
             </p>
           </div>
         {:else if proxyMode === 'pac_script'}

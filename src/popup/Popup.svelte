@@ -6,6 +6,7 @@
   import { Settings } from 'lucide-svelte'
   import Button from '@/components/Button.svelte'
   import FlexGroup from '@/components/FlexGroup.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   // Initialize settings on mount
   onMount(() => {
@@ -24,12 +25,14 @@
     class="flex items-center justify-between mb-4 border-b border-gray-200 dark:border-gray-700 pb-3"
   >
     <h1 class="text-lg font-bold text-primary dark:text-primary-light">
-      PACify | The Proxy Manager
+      {I18nService.getMessage('extName')}
     </h1>
 
     <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
       <Button minimal color="secondary" on:click={openSettings}
-        ><Settings /><span class="sr-only">Settings</span></Button
+        ><Settings /><span class="sr-only"
+          >{I18nService.getMessage('settings')}</span
+        ></Button
       >
     </FlexGroup>
   </header>
@@ -42,7 +45,7 @@
   <footer
     class="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400"
   >
-    <p class="text-center">Toggle proxy by clicking on the switch.</p>
+    <p class="text-center">{I18nService.getMessage('toggleProxyHint')}</p>
   </footer>
 </div>
 

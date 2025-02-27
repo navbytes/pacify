@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | The Proxy Manager"
+  },
+  "extDescription": {
+    "message": "Complete proxy manager for Chrome. Create, edit, and switch between PAC scripts, manual proxies, and system configurations easily."
+  },
+  "basicSettings": {
+    "message": "Basic Settings"
+  },
+  "proxyMode": {
+    "message": "Proxy Mode"
+  },
+  "systemProxy": {
+    "message": "Use proxy settings from the operating system."
+  },
+  "directMode": {
+    "message": "Direct"
+  },
+  "directModeHelp": {
+    "message": "In direct mode all connections are created directly, without any proxy involved."
+  },
+  "autoDetectMode": {
+    "message": "Auto‑config URL"
+  },
+  "autoDetectModeHelp": {
+    "message": "In Auto-detect mode, Chrome will automatically search for and download proxy settings using the WPAD protocol."
+  },
+  "deleteConfirm": {
+    "message": "Are you sure you want to delete this script?"
+  },
+  "toggleProxyHint": {
+    "message": "Toggle proxy by clicking on the switch."
+  },
+  "systemMode": {
+    "message": "System"
+  },
+  "pacScriptMode": {
+    "message": "PAC Script"
+  },
+  "manualMode": {
+    "message": "Manual Configuration"
+  },
+  "addNewScript": {
+    "message": "Add New Script"
+  },
+  "quickSwitchMode": {
+    "message": "Quick Switch Mode"
+  },
+  "quickSwitchDescription": {
+    "message": "Enable quick switching between proxy configurations from the popup"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "nameRequired": {
+    "message": "Name is required"
+  },
+  "proxyConfiguration": {
+    "message": "Proxy Configuration"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "saveConfiguration": {
+    "message": "Save Configuration"
+  },
+  "saving": {
+    "message": "Saving..."
+  },
+  "noScriptsAvailable": {
+    "message": "No PAC scripts available. Add your first script to get started."
+  },
+  "noQuickSwitchScripts": {
+    "message": "No quick switch scripts configured. Drag scripts here to enable quick switching."
+  },
+  "noScriptsAvailableOptions": {
+    "message": "No scripts available. Click \"Add New Script\" to create your first PAC script."
+  },
+  "backupSettings": {
+    "message": "Backup Settings"
+  },
+  "restoreSettings": {
+    "message": "Restore Settings"
+  },
+  "useSameProxy": {
+    "message": "Use same proxy server for all protocols"
+  },
+  "proxyServer": {
+    "message": "Proxy Server"
+  },
+  "httpProxy": {
+    "message": "HTTP Proxy"
+  },
+  "httpsProxy": {
+    "message": "HTTPS Proxy"
+  },
+  "ftpProxy": {
+    "message": "FTP Proxy"
+  },
+  "fallbackProxy": {
+    "message": "Fallback Proxy"
+  },
+  "bypassList": {
+    "message": "Bypass List"
+  },
+  "pacScriptUrl": {
+    "message": "PAC Script URL"
+  },
+  "pacScript": {
+    "message": "PAC Script"
+  },
+  "templates": {
+    "message": "Templates:"
+  },
+  "emptyTemplate": {
+    "message": "Empty"
+  },
+  "basicTemplate": {
+    "message": "Basic"
+  },
+  "proTemplate": {
+    "message": "Pro"
+  },
+  "advancedTemplate": {
+    "message": "Advanced"
+  },
+  "mandatoryPacScript": {
+    "message": "Mandatory PAC script (prevent fallback to direct)"
+  },
+  "dropToAddQuickScripts": {
+    "message": "Drop here to add to quick scripts"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "Drop here to remove from quick scripts"
+  },
+  "quickPacScripts": {
+    "message": "Quick PAC Scripts"
+  },
+  "dragScriptsHere": {
+    "message": "Drag scripts here to enable quick switching. Quick switch allows you to switch proxy by clicking the extension icon."
+  },
+  "colorRequired": {
+    "message": "Color is required"
+  },
+  "configurationName": {
+    "message": "Configuration Name"
+  },
+  "color": {
+    "message": "Color"
+  },
+  "active": {
+    "message": "Active"
+  },
+  "host": {
+    "message": "Host"
+  },
+  "port": {
+    "message": "Port"
+  }
+}

@@ -3,6 +3,7 @@
   import { settingsStore } from '@/stores/settingsStore'
   import ScriptItem from './ScriptItem.svelte'
   import type { ListViewType, ProxyConfig } from '@/interfaces'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   onMount(() => {
     settingsStore.init()
@@ -45,8 +46,7 @@
   {#if pageType === 'QUICK_SWITCH'}
     <div class="space-y-1 mb-6">
       <p class="text-xs text-gray-500 dark:text-gray-400">
-        Drag scripts here to enable quick switching. Quick switch allows you to
-        switch proxy by clicking the extension icon.
+        {I18nService.getMessage('dragScriptsHere')}
       </p>
     </div>
   {/if}
@@ -86,17 +86,15 @@
 
         {#if pageType === 'POPUP'}
           <p class="text-sm text-gray-600 dark:text-gray-400">
-            No PAC scripts available. Add your first script to get started.
+            {I18nService.getMessage('noScriptsAvailable')}
           </p>
         {:else if pageType === 'QUICK_SWITCH'}
           <p class="text-sm text-gray-600 dark:text-gray-400">
-            No quick switch scripts configured. Drag scripts here to enable
-            quick switching.
+            {I18nService.getMessage('noQuickSwitchScripts')}
           </p>
         {:else}
           <p class="text-sm text-gray-600 dark:text-gray-400">
-            No scripts available. Click "Add New Script" to create your first
-            PAC script.
+            {I18nService.getMessage('noScriptsAvailableOptions')}
           </p>
         {/if}
       </div>

@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | Le Gestionnaire de Proxy"
+  },
+  "extDescription": {
+    "message": "Gestionnaire de proxy complet pour Chrome. Créez, modifiez et basculez facilement entre les scripts PAC, les proxys manuels et les configurations système."
+  },
+  "basicSettings": {
+    "message": "Paramètres de base"
+  },
+  "proxyMode": {
+    "message": "Mode Proxy"
+  },
+  "systemProxy": {
+    "message": "Utiliser les paramètres de proxy du système d'exploitation."
+  },
+  "directMode": {
+    "message": "Direct"
+  },
+  "directModeHelp": {
+    "message": "En mode direct, toutes les connexions sont créées directement, sans aucun proxy."
+  },
+  "autoDetectMode": {
+    "message": "URL d'auto-configuration"
+  },
+  "autoDetectModeHelp": {
+    "message": "En mode de détection automatique, Chrome recherche et télécharge automatiquement les paramètres de proxy à l'aide du protocole WPAD."
+  },
+  "deleteConfirm": {
+    "message": "Êtes-vous sûr de vouloir supprimer ce script ?"
+  },
+  "toggleProxyHint": {
+    "message": "Activez/désactivez le proxy en cliquant sur l'interrupteur."
+  },
+  "systemMode": {
+    "message": "Système"
+  },
+  "pacScriptMode": {
+    "message": "Script PAC"
+  },
+  "manualMode": {
+    "message": "Configuration manuelle"
+  },
+  "addNewScript": {
+    "message": "Ajouter un nouveau script"
+  },
+  "quickSwitchMode": {
+    "message": "Mode de changement rapide"
+  },
+  "quickSwitchDescription": {
+    "message": "Permet de basculer rapidement entre les configurations de proxy depuis la fenêtre contextuelle"
+  },
+  "settings": {
+    "message": "Paramètres"
+  },
+  "nameRequired": {
+    "message": "Le nom est requis"
+  },
+  "proxyConfiguration": {
+    "message": "Configuration du proxy"
+  },
+  "cancel": {
+    "message": "Annuler"
+  },
+  "saveConfiguration": {
+    "message": "Enregistrer la configuration"
+  },
+  "saving": {
+    "message": "Enregistrement..."
+  },
+  "noScriptsAvailable": {
+    "message": "Aucun script PAC disponible. Ajoutez votre premier script pour commencer."
+  },
+  "noQuickSwitchScripts": {
+    "message": "Aucun script de changement rapide configuré. Faites glisser les scripts ici pour activer le changement rapide."
+  },
+  "noScriptsAvailableOptions": {
+    "message": "Aucun script disponible. Cliquez sur \"Ajouter un nouveau script\" pour créer votre premier script PAC."
+  },
+  "backupSettings": {
+    "message": "Sauvegarder les paramètres"
+  },
+  "restoreSettings": {
+    "message": "Restaurer les paramètres"
+  },
+  "useSameProxy": {
+    "message": "Utiliser le même serveur proxy pour tous les protocoles"
+  },
+  "proxyServer": {
+    "message": "Serveur proxy"
+  },
+  "httpProxy": {
+    "message": "Proxy HTTP"
+  },
+  "httpsProxy": {
+    "message": "Proxy HTTPS"
+  },
+  "ftpProxy": {
+    "message": "Proxy FTP"
+  },
+  "fallbackProxy": {
+    "message": "Proxy de secours"
+  },
+  "bypassList": {
+    "message": "Liste de contournement"
+  },
+  "pacScriptUrl": {
+    "message": "URL du script PAC"
+  },
+  "pacScript": {
+    "message": "Script PAC"
+  },
+  "templates": {
+    "message": "Modèles :"
+  },
+  "emptyTemplate": {
+    "message": "Vide"
+  },
+  "basicTemplate": {
+    "message": "Basique"
+  },
+  "proTemplate": {
+    "message": "Pro"
+  },
+  "advancedTemplate": {
+    "message": "Avancé"
+  },
+  "mandatoryPacScript": {
+    "message": "Script PAC obligatoire (empêche le repli en mode direct)"
+  },
+  "dropToAddQuickScripts": {
+    "message": "Déposez ici pour ajouter aux scripts rapides"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "Déposez ici pour retirer des scripts rapides"
+  },
+  "quickPacScripts": {
+    "message": "Scripts PAC rapides"
+  },
+  "dragScriptsHere": {
+    "message": "Faites glisser les scripts ici pour activer le changement rapide. Le changement rapide vous permet de changer de proxy en cliquant sur l'icône de l'extension."
+  },
+  "colorRequired": {
+    "message": "La couleur est requise"
+  },
+  "configurationName": {
+    "message": "Nom de la configuration"
+  },
+  "color": {
+    "message": "Couleur"
+  },
+  "active": {
+    "message": "Actif"
+  },
+  "host": {
+    "message": "Hôte"
+  },
+  "port": {
+    "message": "Port"
+  }
+}

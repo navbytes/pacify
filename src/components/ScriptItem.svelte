@@ -11,6 +11,7 @@
   import { ShieldCheck, Pencil, Trash } from 'lucide-svelte'
   import Button from './Button.svelte'
   import FlexGroup from './FlexGroup.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   interface Props {
     proxy: ProxyConfig
@@ -30,7 +31,7 @@
   }
 
   async function handleScriptDelete(scriptId: string) {
-    if (confirm('Are you sure you want to delete this script?')) {
+    if (confirm(I18nService.getMessage('deleteConfirm'))) {
       await settingsStore.deletePACScript(scriptId)
     }
   }

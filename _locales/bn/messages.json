@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | প্রক্সি ম্যানেজার"
+  },
+  "extDescription": {
+    "message": "Chrome এর জন্য সম্পূর্ণ প্রক্সি ম্যানেজার। PAC স্ক্রিপ্ট, ম্যানুয়াল প্রক্সি এবং সিস্টেম কনফিগারেশনগুলির মধ্যে সহজেই তৈরি, সম্পাদনা এবং পরিবর্তন করুন।"
+  },
+  "basicSettings": {
+    "message": "মৌলিক সেটিংস"
+  },
+  "proxyMode": {
+    "message": "প্রক্সি মোড"
+  },
+  "systemProxy": {
+    "message": "অপারেটিং সিস্টেমের প্রক্সি সেটিংস ব্যবহার করুন।"
+  },
+  "directMode": {
+    "message": "সরাসরি"
+  },
+  "directModeHelp": {
+    "message": "সরাসরি মোডে, সমস্ত সংযোগ কোনো প্রক্সি ছাড়াই সরাসরি তৈরি করা হয়।"
+  },
+  "autoDetectMode": {
+    "message": "অটো-কনফিগ URL"
+  },
+  "autoDetectModeHelp": {
+    "message": "অটো-ডিটেক্ট মোডে, Chrome স্বয়ংক্রিয়ভাবে WPAD প্রোটোকল ব্যবহার করে প্রক্সি সেটিংস খুঁজবে এবং ডাউনলোড করবে।"
+  },
+  "deleteConfirm": {
+    "message": "আপনি কি নিশ্চিত যে আপনি এই স্ক্রিপ্টটি মুছতে চান?"
+  },
+  "toggleProxyHint": {
+    "message": "সুইচে ক্লিক করে প্রক্সি টগল করুন।"
+  },
+  "systemMode": {
+    "message": "সিস্টেম"
+  },
+  "pacScriptMode": {
+    "message": "PAC স্ক্রিপ্ট"
+  },
+  "manualMode": {
+    "message": "ম্যানুয়াল কনফিগারেশন"
+  },
+  "addNewScript": {
+    "message": "নতুন স্ক্রিপ্ট যোগ করুন"
+  },
+  "quickSwitchMode": {
+    "message": "দ্রুত সুইচ মোড"
+  },
+  "quickSwitchDescription": {
+    "message": "পপআপ থেকে প্রক্সি কনফিগারেশনগুলির মধ্যে দ্রুত সুইচিং সক্ষম করুন"
+  },
+  "settings": {
+    "message": "সেটিংস"
+  },
+  "nameRequired": {
+    "message": "নাম প্রয়োজন"
+  },
+  "proxyConfiguration": {
+    "message": "প্রক্সি কনফিগারেশন"
+  },
+  "cancel": {
+    "message": "বাতিল করুন"
+  },
+  "saveConfiguration": {
+    "message": "কনফিগারেশন সংরক্ষণ করুন"
+  },
+  "saving": {
+    "message": "সংরক্ষণ করা হচ্ছে..."
+  },
+  "noScriptsAvailable": {
+    "message": "কোন PAC স্ক্রিপ্ট উপলব্ধ নেই। শুরু করতে আপনার প্রথম স্ক্রিপ্ট যোগ করুন।"
+  },
+  "noQuickSwitchScripts": {
+    "message": "কোন দ্রুত সুইচ স্ক্রিপ্ট কনফিগার করা হয়নি। দ্রুত সুইচিং সক্ষম করতে এখানে স্ক্রিপ্ট টেনে আনুন।"
+  },
+  "noScriptsAvailableOptions": {
+    "message": "কোন স্ক্রিপ্ট উপলব্ধ নেই। আপনার প্রথম PAC স্ক্রিপ্ট তৈরি করতে \"নতুন স্ক্রিপ্ট যোগ করুন\" ক্লিক করুন।"
+  },
+  "backupSettings": {
+    "message": "ব্যাকআপ সেটিংস"
+  },
+  "restoreSettings": {
+    "message": "সেটিংস পুনরুদ্ধার করুন"
+  },
+  "useSameProxy": {
+    "message": "সব প্রোটোকলের জন্য একই প্রক্সি সার্ভার ব্যবহার করুন"
+  },
+  "proxyServer": {
+    "message": "প্রক্সি সার্ভার"
+  },
+  "httpProxy": {
+    "message": "HTTP প্রক্সি"
+  },
+  "httpsProxy": {
+    "message": "HTTPS প্রক্সি"
+  },
+  "ftpProxy": {
+    "message": "FTP প্রক্সি"
+  },
+  "fallbackProxy": {
+    "message": "ফলব্যাক প্রক্সি"
+  },
+  "bypassList": {
+    "message": "বাইপাস তালিকা"
+  },
+  "pacScriptUrl": {
+    "message": "PAC স্ক্রিপ্ট URL"
+  },
+  "pacScript": {
+    "message": "PAC স্ক্রিপ্ট"
+  },
+  "templates": {
+    "message": "টেমপ্লেট:"
+  },
+  "emptyTemplate": {
+    "message": "খালি"
+  },
+  "basicTemplate": {
+    "message": "বেসিক"
+  },
+  "proTemplate": {
+    "message": "প্রো"
+  },
+  "advancedTemplate": {
+    "message": "অ্যাডভান্সড"
+  },
+  "mandatoryPacScript": {
+    "message": "বাধ্যতামূলক PAC স্ক্রিপ্ট (সরাসরি মোডে ফলব্যাক প্রতিরোধ করে)"
+  },
+  "dropToAddQuickScripts": {
+    "message": "দ্রুত স্ক্রিপ্টে যোগ করতে এখানে ড্রপ করুন"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "দ্রুত স্ক্রিপ্ট থেকে সরাতে এখানে ড্রপ করুন"
+  },
+  "quickPacScripts": {
+    "message": "দ্রুত PAC স্ক্রিপ্ট"
+  },
+  "dragScriptsHere": {
+    "message": "দ্রুত সুইচিং সক্ষম করতে এখানে স্ক্রিপ্ট টেনে আনুন। দ্রুত সুইচ আপনাকে এক্সটেনশন আইকনে ক্লিক করে প্রক্সি পরিবর্তন করতে দেয়।"
+  },
+  "colorRequired": {
+    "message": "রং প্রয়োজন"
+  },
+  "configurationName": {
+    "message": "কনফিগারেশন নাম"
+  },
+  "color": {
+    "message": "রং"
+  },
+  "active": {
+    "message": "সক্রিয়"
+  },
+  "host": {
+    "message": "হোস্ট"
+  },
+  "port": {
+    "message": "পোর্ট"
+  }
+}

@@ -6,6 +6,7 @@
   import FlexGroup from '../FlexGroup.svelte'
   import { scriptTemplates } from '@/constants/templates'
   import Button from '../Button.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   export let pacUrl: string = ''
   export let pacMandatory: boolean = false
@@ -59,7 +60,7 @@
       for="pacUrl"
       class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
     >
-      PAC Script URL
+      {I18nService.getMessage('pacScriptUrl')}
     </label>
     <input
       type="url"
@@ -78,38 +79,38 @@
           for="editorContainer"
           class="flex-grow text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
         >
-          PAC Script
+          {I18nService.getMessage('pacScript')}
         </label>
         <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Templates:
+          {I18nService.getMessage('templates')}
         </span>
         <Button
           minimal
           color="primary"
           on:click={() => setTemplate(scriptTemplates.empty)}
         >
-          Empty
+          {I18nService.getMessage('emptyTemplate')}
         </Button>
         <Button
           minimal
           color="primary"
           on:click={() => setTemplate(scriptTemplates.basic)}
         >
-          Basic
+          {I18nService.getMessage('basicTemplate')}
         </Button>
         <Button
           minimal
           color="primary"
           on:click={() => setTemplate(scriptTemplates.pro)}
         >
-          Pro
+          {I18nService.getMessage('proTemplate')}
         </Button>
         <Button
           minimal
           color="primary"
           on:click={() => setTemplate(scriptTemplates.advanced)}
         >
-          Advanced
+          {I18nService.getMessage('advancedTemplate')}
         </Button>
       </FlexGroup>
       <div
@@ -129,7 +130,7 @@
       class="rounded border-gray-300 text-primary focus:ring-primary"
     />
     <label for="pacMandatory" class="text-sm text-gray-700 dark:text-gray-300">
-      Mandatory PAC script (prevent fallback to direct)
+      {I18nService.getMessage('mandatoryPacScript')}
     </label>
   </FlexGroup>
 </div>

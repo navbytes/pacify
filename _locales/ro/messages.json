@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | Manager de Proxy"
+  },
+  "extDescription": {
+    "message": "Manager complet de proxy pentru Chrome. Creați, editați și comutați cu ușurință între scripturi PAC, proxy-uri manuale și configurații de sistem."
+  },
+  "basicSettings": {
+    "message": "Setări de bază"
+  },
+  "proxyMode": {
+    "message": "Mod Proxy"
+  },
+  "systemProxy": {
+    "message": "Utilizează setările proxy din sistemul de operare."
+  },
+  "directMode": {
+    "message": "Direct"
+  },
+  "directModeHelp": {
+    "message": "În modul direct, toate conexiunile sunt create direct, fără niciun proxy implicat."
+  },
+  "autoDetectMode": {
+    "message": "URL auto-configurare"
+  },
+  "autoDetectModeHelp": {
+    "message": "În modul de detectare automată, Chrome va căuta și va descărca automat setările proxy folosind protocolul WPAD."
+  },
+  "deleteConfirm": {
+    "message": "Sigur doriți să ștergeți acest script?"
+  },
+  "toggleProxyHint": {
+    "message": "Comutați proxy-ul făcând clic pe întrerupător."
+  },
+  "systemMode": {
+    "message": "Sistem"
+  },
+  "pacScriptMode": {
+    "message": "Script PAC"
+  },
+  "manualMode": {
+    "message": "Configurare manuală"
+  },
+  "addNewScript": {
+    "message": "Adăugare script nou"
+  },
+  "quickSwitchMode": {
+    "message": "Mod comutare rapidă"
+  },
+  "quickSwitchDescription": {
+    "message": "Activați comutarea rapidă între configurațiile proxy din popup"
+  },
+  "settings": {
+    "message": "Setări"
+  },
+  "nameRequired": {
+    "message": "Numele este obligatoriu"
+  },
+  "proxyConfiguration": {
+    "message": "Configurație proxy"
+  },
+  "cancel": {
+    "message": "Anulare"
+  },
+  "saveConfiguration": {
+    "message": "Salvare configurație"
+  },
+  "saving": {
+    "message": "Se salvează..."
+  },
+  "noScriptsAvailable": {
+    "message": "Nu există scripturi PAC disponibile. Adăugați primul script pentru a începe."
+  },
+  "noQuickSwitchScripts": {
+    "message": "Nu există scripturi de comutare rapidă configurate. Trageți scripturile aici pentru a activa comutarea rapidă."
+  },
+  "noScriptsAvailableOptions": {
+    "message": "Nu există scripturi disponibile. Faceți clic pe \"Adăugare script nou\" pentru a crea primul script PAC."
+  },
+  "backupSettings": {
+    "message": "Backup setări"
+  },
+  "restoreSettings": {
+    "message": "Restaurare setări"
+  },
+  "useSameProxy": {
+    "message": "Utilizați același server proxy pentru toate protocoalele"
+  },
+  "proxyServer": {
+    "message": "Server proxy"
+  },
+  "httpProxy": {
+    "message": "Proxy HTTP"
+  },
+  "httpsProxy": {
+    "message": "Proxy HTTPS"
+  },
+  "ftpProxy": {
+    "message": "Proxy FTP"
+  },
+  "fallbackProxy": {
+    "message": "Proxy de rezervă"
+  },
+  "bypassList": {
+    "message": "Listă de ocolire"
+  },
+  "pacScriptUrl": {
+    "message": "URL script PAC"
+  },
+  "pacScript": {
+    "message": "Script PAC"
+  },
+  "templates": {
+    "message": "Șabloane:"
+  },
+  "emptyTemplate": {
+    "message": "Gol"
+  },
+  "basicTemplate": {
+    "message": "De bază"
+  },
+  "proTemplate": {
+    "message": "Pro"
+  },
+  "advancedTemplate": {
+    "message": "Avansat"
+  },
+  "mandatoryPacScript": {
+    "message": "Script PAC obligatoriu (previne revenirea la direct)"
+  },
+  "dropToAddQuickScripts": {
+    "message": "Plasați aici pentru a adăuga la scripturile rapide"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "Plasați aici pentru a elimina din scripturile rapide"
+  },
+  "quickPacScripts": {
+    "message": "Scripturi PAC rapide"
+  },
+  "dragScriptsHere": {
+    "message": "Trageți scripturile aici pentru a activa comutarea rapidă. Comutarea rapidă vă permite să schimbați proxy-ul făcând clic pe pictograma extensiei."
+  },
+  "colorRequired": {
+    "message": "Culoarea este obligatorie"
+  },
+  "configurationName": {
+    "message": "Nume configurație"
+  },
+  "color": {
+    "message": "Culoare"
+  },
+  "active": {
+    "message": "Activ"
+  },
+  "host": {
+    "message": "Gazdă"
+  },
+  "port": {
+    "message": "Port"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | Der Proxy-Manager"
+  },
+  "extDescription": {
+    "message": "Kompletter Proxy-Manager für Chrome. Erstellen, bearbeiten und wechseln Sie einfach zwischen PAC-Skripten, manuellen Proxys und Systemkonfigurationen."
+  },
+  "basicSettings": {
+    "message": "Grundeinstellungen"
+  },
+  "proxyMode": {
+    "message": "Proxy-Modus"
+  },
+  "systemProxy": {
+    "message": "Proxy-Einstellungen vom Betriebssystem verwenden."
+  },
+  "directMode": {
+    "message": "Direkt"
+  },
+  "directModeHelp": {
+    "message": "Im direkten Modus werden alle Verbindungen direkt erstellt, ohne einen Proxy zu verwenden."
+  },
+  "autoDetectMode": {
+    "message": "Auto-Konfigurations-URL"
+  },
+  "autoDetectModeHelp": {
+    "message": "Im Auto-Erkennungsmodus sucht Chrome automatisch nach Proxy-Einstellungen und lädt diese über das WPAD-Protokoll herunter."
+  },
+  "deleteConfirm": {
+    "message": "Sind Sie sicher, dass Sie dieses Skript löschen möchten?"
+  },
+  "toggleProxyHint": {
+    "message": "Proxy durch Klicken auf den Schalter umschalten."
+  },
+  "systemMode": {
+    "message": "System"
+  },
+  "pacScriptMode": {
+    "message": "PAC-Skript"
+  },
+  "manualMode": {
+    "message": "Manuelle Konfiguration"
+  },
+  "addNewScript": {
+    "message": "Neues Skript hinzufügen"
+  },
+  "quickSwitchMode": {
+    "message": "Schnellwechsel-Modus"
+  },
+  "quickSwitchDescription": {
+    "message": "Schnelles Wechseln zwischen Proxy-Konfigurationen aus dem Popup aktivieren"
+  },
+  "settings": {
+    "message": "Einstellungen"
+  },
+  "nameRequired": {
+    "message": "Name ist erforderlich"
+  },
+  "proxyConfiguration": {
+    "message": "Proxy-Konfiguration"
+  },
+  "cancel": {
+    "message": "Abbrechen"
+  },
+  "saveConfiguration": {
+    "message": "Konfiguration speichern"
+  },
+  "saving": {
+    "message": "Speichern..."
+  },
+  "noScriptsAvailable": {
+    "message": "Keine PAC-Skripte verfügbar. Fügen Sie Ihr erstes Skript hinzu, um zu beginnen."
+  },
+  "noQuickSwitchScripts": {
+    "message": "Keine Schnellwechsel-Skripte konfiguriert. Ziehen Sie Skripte hierher, um den Schnellwechsel zu aktivieren."
+  },
+  "noScriptsAvailableOptions": {
+    "message": "Keine Skripte verfügbar. Klicken Sie auf \"Neues Skript hinzufügen\", um Ihr erstes PAC-Skript zu erstellen."
+  },
+  "backupSettings": {
+    "message": "Einstellungen sichern"
+  },
+  "restoreSettings": {
+    "message": "Einstellungen wiederherstellen"
+  },
+  "useSameProxy": {
+    "message": "Denselben Proxy-Server für alle Protokolle verwenden"
+  },
+  "proxyServer": {
+    "message": "Proxy-Server"
+  },
+  "httpProxy": {
+    "message": "HTTP-Proxy"
+  },
+  "httpsProxy": {
+    "message": "HTTPS-Proxy"
+  },
+  "ftpProxy": {
+    "message": "FTP-Proxy"
+  },
+  "fallbackProxy": {
+    "message": "Fallback-Proxy"
+  },
+  "bypassList": {
+    "message": "Bypass-Liste"
+  },
+  "pacScriptUrl": {
+    "message": "PAC-Skript-URL"
+  },
+  "pacScript": {
+    "message": "PAC-Skript"
+  },
+  "templates": {
+    "message": "Vorlagen:"
+  },
+  "emptyTemplate": {
+    "message": "Leer"
+  },
+  "basicTemplate": {
+    "message": "Grundlegend"
+  },
+  "proTemplate": {
+    "message": "Pro"
+  },
+  "advancedTemplate": {
+    "message": "Erweitert"
+  },
+  "mandatoryPacScript": {
+    "message": "Obligatorisches PAC-Skript (verhindert Fallback auf direkte Verbindung)"
+  },
+  "dropToAddQuickScripts": {
+    "message": "Hier ablegen, um zu Schnellskripten hinzuzufügen"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "Hier ablegen, um aus Schnellskripten zu entfernen"
+  },
+  "quickPacScripts": {
+    "message": "Schnell-PAC-Skripte"
+  },
+  "dragScriptsHere": {
+    "message": "Ziehen Sie Skripte hierher, um den Schnellwechsel zu aktivieren. Mit dem Schnellwechsel können Sie den Proxy durch Klicken auf das Erweiterungssymbol wechseln."
+  },
+  "colorRequired": {
+    "message": "Farbe ist erforderlich"
+  },
+  "configurationName": {
+    "message": "Konfigurationsname"
+  },
+  "color": {
+    "message": "Farbe"
+  },
+  "active": {
+    "message": "Aktiv"
+  },
+  "host": {
+    "message": "Host"
+  },
+  "port": {
+    "message": "Port"
+  }
+}

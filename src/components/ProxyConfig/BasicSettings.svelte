@@ -2,6 +2,7 @@
   import FlexGroup from '../FlexGroup.svelte'
   import LabelButton from '../LabelButton.svelte'
   import ToggleSwitch from '../ToggleSwitch.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   export let name: string = ''
   export let color: string = 'gray'
@@ -14,7 +15,8 @@
       for="scriptName"
       class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
     >
-      Configuration Name <span class="text-red-500">*</span>
+      {I18nService.getMessage('configurationName')}
+      <span class="text-red-500">*</span>
     </label>
     <input
       type="text"
@@ -29,7 +31,7 @@
     <span
       class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
     >
-      Color <span class="text-red-500">*</span>
+      {I18nService.getMessage('color')} <span class="text-red-500">*</span>
     </span>
     <div
       class="relative inline-flex items-center rounded shadow focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -45,7 +47,7 @@
     <span
       class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
     >
-      Active
+      {I18nService.getMessage('active')}
     </span>
     <ToggleSwitch bind:checked={isActive} />
   </div>

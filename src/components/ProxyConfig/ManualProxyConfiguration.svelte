@@ -1,6 +1,7 @@
 <script lang="ts">
   import ProxyInput from './ProxyInput.svelte'
   import FlexGroup from '../FlexGroup.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   export let useSharedProxy: boolean = true
   export let proxySettings: any
@@ -12,6 +13,13 @@
     HTTPS: 'proxyForHttps',
     FTP: 'proxyForFtp',
     Fallback: 'fallbackProxy',
+  }
+
+  const proxyLocalizedNames: Record<string, string> = {
+    HTTP: I18nService.getMessage('httpProxy'),
+    HTTPS: I18nService.getMessage('httpsProxy'),
+    FTP: I18nService.getMessage('ftpProxy'),
+    Fallback: I18nService.getMessage('fallbackProxy'),
   }
 </script>
 
@@ -27,7 +35,7 @@
       for="useSharedProxy"
       class="text-sm text-gray-700 dark:text-gray-300"
     >
-      Use same proxy server for all protocols
+      {I18nService.getMessage('useSameProxy')}
     </label>
   </FlexGroup>
 
@@ -35,7 +43,7 @@
     <!-- Single Proxy Configuration -->
     <div class="space-y-4">
       <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300">
-        Proxy Server
+        {I18nService.getMessage('proxyServer')}
       </h3>
       <ProxyInput
         bind:scheme={proxySettings.singleProxy.scheme}
@@ -48,7 +56,7 @@
     {#each Object.keys(proxyTypeMap) as proxyType}
       <div class="space-y-4">
         <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300">
-          {proxyType} Proxy
+          {proxyLocalizedNames[proxyType]}
         </h3>
         <ProxyInput
           bind:scheme={proxySettings[proxyTypeMap[proxyType]].scheme}
@@ -65,7 +73,7 @@
       for="bypassList"
       class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
     >
-      Bypass List
+      {I18nService.getMessage('bypassList')}
     </label>
     <textarea
       id="bypassList"

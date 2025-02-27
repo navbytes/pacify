@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | プロキシマネージャー"
+  },
+  "extDescription": {
+    "message": "Chrome用の完全なプロキシマネージャー。PACスクリプト、手動プロキシ、システム設定の作成、編集、切り替えが簡単に行えます。"
+  },
+  "basicSettings": {
+    "message": "基本設定"
+  },
+  "proxyMode": {
+    "message": "プロキシモード"
+  },
+  "systemProxy": {
+    "message": "オペレーティングシステムのプロキシ設定を使用します。"
+  },
+  "directMode": {
+    "message": "直接接続"
+  },
+  "directModeHelp": {
+    "message": "ダイレクトモードでは、すべての接続がプロキシを介さず直接作成されます。"
+  },
+  "autoDetectMode": {
+    "message": "自動設定URL"
+  },
+  "autoDetectModeHelp": {
+    "message": "自動検出モードでは、ChromeがWPADプロトコルを使用してプロキシ設定を自動的に検索してダウンロードします。"
+  },
+  "deleteConfirm": {
+    "message": "このスクリプトを削除してもよろしいですか？"
+  },
+  "toggleProxyHint": {
+    "message": "スイッチをクリックしてプロキシを切り替えます。"
+  },
+  "systemMode": {
+    "message": "システム"
+  },
+  "pacScriptMode": {
+    "message": "PACスクリプト"
+  },
+  "manualMode": {
+    "message": "手動設定"
+  },
+  "addNewScript": {
+    "message": "新規スクリプトを追加"
+  },
+  "quickSwitchMode": {
+    "message": "クイックスイッチモード"
+  },
+  "quickSwitchDescription": {
+    "message": "ポップアップからプロキシ設定を素早く切り替えることができます"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "nameRequired": {
+    "message": "名前は必須です"
+  },
+  "proxyConfiguration": {
+    "message": "プロキシ設定"
+  },
+  "cancel": {
+    "message": "キャンセル"
+  },
+  "saveConfiguration": {
+    "message": "設定を保存"
+  },
+  "saving": {
+    "message": "保存中..."
+  },
+  "noScriptsAvailable": {
+    "message": "利用可能なPACスクリプトがありません。最初のスクリプトを追加して始めましょう。"
+  },
+  "noQuickSwitchScripts": {
+    "message": "クイックスイッチスクリプトが設定されていません。クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。"
+  },
+  "noScriptsAvailableOptions": {
+    "message": "利用可能なスクリプトがありません。「新規スクリプトを追加」をクリックして最初のPACスクリプトを作成してください。"
+  },
+  "backupSettings": {
+    "message": "設定をバックアップ"
+  },
+  "restoreSettings": {
+    "message": "設定を復元"
+  },
+  "useSameProxy": {
+    "message": "すべてのプロトコルに同じプロキシサーバーを使用する"
+  },
+  "proxyServer": {
+    "message": "プロキシサーバー"
+  },
+  "httpProxy": {
+    "message": "HTTPプロキシ"
+  },
+  "httpsProxy": {
+    "message": "HTTPSプロキシ"
+  },
+  "ftpProxy": {
+    "message": "FTPプロキシ"
+  },
+  "fallbackProxy": {
+    "message": "フォールバックプロキシ"
+  },
+  "bypassList": {
+    "message": "バイパスリスト"
+  },
+  "pacScriptUrl": {
+    "message": "PACスクリプトURL"
+  },
+  "pacScript": {
+    "message": "PACスクリプト"
+  },
+  "templates": {
+    "message": "テンプレート:"
+  },
+  "emptyTemplate": {
+    "message": "空"
+  },
+  "basicTemplate": {
+    "message": "基本"
+  },
+  "proTemplate": {
+    "message": "プロ"
+  },
+  "advancedTemplate": {
+    "message": "高度"
+  },
+  "mandatoryPacScript": {
+    "message": "必須PACスクリプト（ダイレクトへのフォールバックを防止）"
+  },
+  "dropToAddQuickScripts": {
+    "message": "クイックスクリプトに追加するにはここにドロップ"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "クイックスクリプトから削除するにはここにドロップ"
+  },
+  "quickPacScripts": {
+    "message": "クイックPACスクリプト"
+  },
+  "dragScriptsHere": {
+    "message": "クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。クイックスイッチを使うと拡張機能アイコンをクリックするだけでプロキシを切り替えられます。"
+  },
+  "colorRequired": {
+    "message": "色は必須です"
+  },
+  "configurationName": {
+    "message": "設定名"
+  },
+  "color": {
+    "message": "色"
+  },
+  "active": {
+    "message": "アクティブ"
+  },
+  "host": {
+    "message": "ホスト"
+  },
+  "port": {
+    "message": "ポート"
+  }
+}

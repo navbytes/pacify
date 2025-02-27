@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | 代理管理器"
+  },
+  "extDescription": {
+    "message": "Chrome的完整代理管理器。轻松创建、编辑和切换PAC脚本、手动代理和系统配置。"
+  },
+  "basicSettings": {
+    "message": "基本设置"
+  },
+  "proxyMode": {
+    "message": "代理模式"
+  },
+  "systemProxy": {
+    "message": "使用操作系统的代理设置。"
+  },
+  "directMode": {
+    "message": "直接连接"
+  },
+  "directModeHelp": {
+    "message": "在直接模式下，所有连接都直接创建，不使用任何代理。"
+  },
+  "autoDetectMode": {
+    "message": "自动配置URL"
+  },
+  "autoDetectModeHelp": {
+    "message": "在自动检测模式下，Chrome将自动搜索并使用WPAD协议下载代理设置。"
+  },
+  "deleteConfirm": {
+    "message": "您确定要删除此脚本吗？"
+  },
+  "toggleProxyHint": {
+    "message": "点击开关切换代理。"
+  },
+  "systemMode": {
+    "message": "系统"
+  },
+  "pacScriptMode": {
+    "message": "PAC脚本"
+  },
+  "manualMode": {
+    "message": "手动配置"
+  },
+  "addNewScript": {
+    "message": "添加新脚本"
+  },
+  "quickSwitchMode": {
+    "message": "快速切换模式"
+  },
+  "quickSwitchDescription": {
+    "message": "从弹出窗口启用代理配置之间的快速切换"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "nameRequired": {
+    "message": "名称为必填项"
+  },
+  "proxyConfiguration": {
+    "message": "代理配置"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "saveConfiguration": {
+    "message": "保存配置"
+  },
+  "saving": {
+    "message": "保存中..."
+  },
+  "noScriptsAvailable": {
+    "message": "没有可用的PAC脚本。添加您的第一个脚本以开始使用。"
+  },
+  "noQuickSwitchScripts": {
+    "message": "没有配置快速切换脚本。将脚本拖到此处以启用快速切换。"
+  },
+  "noScriptsAvailableOptions": {
+    "message": "没有可用的脚本。点击\"添加新脚本\"创建您的第一个PAC脚本。"
+  },
+  "backupSettings": {
+    "message": "备份设置"
+  },
+  "restoreSettings": {
+    "message": "恢复设置"
+  },
+  "useSameProxy": {
+    "message": "对所有协议使用相同的代理服务器"
+  },
+  "proxyServer": {
+    "message": "代理服务器"
+  },
+  "httpProxy": {
+    "message": "HTTP代理"
+  },
+  "httpsProxy": {
+    "message": "HTTPS代理"
+  },
+  "ftpProxy": {
+    "message": "FTP代理"
+  },
+  "fallbackProxy": {
+    "message": "备用代理"
+  },
+  "bypassList": {
+    "message": "绕过列表"
+  },
+  "pacScriptUrl": {
+    "message": "PAC脚本URL"
+  },
+  "pacScript": {
+    "message": "PAC脚本"
+  },
+  "templates": {
+    "message": "模板:"
+  },
+  "emptyTemplate": {
+    "message": "空白"
+  },
+  "basicTemplate": {
+    "message": "基础"
+  },
+  "proTemplate": {
+    "message": "专业"
+  },
+  "advancedTemplate": {
+    "message": "高级"
+  },
+  "mandatoryPacScript": {
+    "message": "强制PAC脚本（防止回退到直接连接）"
+  },
+  "dropToAddQuickScripts": {
+    "message": "拖放到此处添加到快速脚本"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "拖放到此处从快速脚本中移除"
+  },
+  "quickPacScripts": {
+    "message": "快速PAC脚本"
+  },
+  "dragScriptsHere": {
+    "message": "将脚本拖到此处以启用快速切换。快速切换允许您通过点击扩展图标切换代理。"
+  },
+  "colorRequired": {
+    "message": "颜色为必填项"
+  },
+  "configurationName": {
+    "message": "配置名称"
+  },
+  "color": {
+    "message": "颜色"
+  },
+  "active": {
+    "message": "激活"
+  },
+  "host": {
+    "message": "主机"
+  },
+  "port": {
+    "message": "端口"
+  }
+}

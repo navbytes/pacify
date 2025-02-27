@@ -1,1 +1,10 @@
-export type Languages = 'en' | 'hi'
+export type Languages =
+  | 'en'
+  | 'ru'
+  | 'zh'
+  | 'hi'
+  | 'ja'
+  | 'ro'
+  | 'es'
+  | 'fr'
+  | 'bn'

@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | Менеджер прокси"
+  },
+  "extDescription": {
+    "message": "Полный менеджер прокси для Chrome. Создавайте, редактируйте и переключайтесь между PAC-скриптами, ручными прокси и системными конфигурациями."
+  },
+  "basicSettings": {
+    "message": "Основные настройки"
+  },
+  "proxyMode": {
+    "message": "Режим прокси"
+  },
+  "systemProxy": {
+    "message": "Использовать настройки прокси операционной системы."
+  },
+  "directMode": {
+    "message": "Прямое подключение"
+  },
+  "directModeHelp": {
+    "message": "В прямом режиме все соединения создаются напрямую, без использования прокси."
+  },
+  "autoDetectMode": {
+    "message": "URL автоконфигурации"
+  },
+  "autoDetectModeHelp": {
+    "message": "В режиме автоопределения Chrome автоматически ищет и загружает настройки прокси с помощью протокола WPAD."
+  },
+  "deleteConfirm": {
+    "message": "Вы уверены, что хотите удалить этот скрипт?"
+  },
+  "toggleProxyHint": {
+    "message": "Переключите прокси, нажав на переключатель."
+  },
+  "systemMode": {
+    "message": "Системный"
+  },
+  "pacScriptMode": {
+    "message": "PAC скрипт"
+  },
+  "manualMode": {
+    "message": "Ручная настройка"
+  },
+  "addNewScript": {
+    "message": "Добавить новый скрипт"
+  },
+  "quickSwitchMode": {
+    "message": "Режим быстрого переключения"
+  },
+  "quickSwitchDescription": {
+    "message": "Включить быстрое переключение между конфигурациями прокси из всплывающего окна"
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "nameRequired": {
+    "message": "Необходимо указать имя"
+  },
+  "proxyConfiguration": {
+    "message": "Конфигурация прокси"
+  },
+  "cancel": {
+    "message": "Отмена"
+  },
+  "saveConfiguration": {
+    "message": "Сохранить конфигурацию"
+  },
+  "saving": {
+    "message": "Сохранение..."
+  },
+  "noScriptsAvailable": {
+    "message": "Нет доступных PAC скриптов. Добавьте свой первый скрипт, чтобы начать."
+  },
+  "noQuickSwitchScripts": {
+    "message": "Нет настроенных скриптов быстрого переключения. Перетащите скрипты сюда, чтобы включить быстрое переключение."
+  },
+  "noScriptsAvailableOptions": {
+    "message": "Нет доступных скриптов. Нажмите \"Добавить новый скрипт\", чтобы создать свой первый PAC скрипт."
+  },
+  "backupSettings": {
+    "message": "Резервное копирование настроек"
+  },
+  "restoreSettings": {
+    "message": "Восстановить настройки"
+  },
+  "useSameProxy": {
+    "message": "Использовать один прокси-сервер для всех протоколов"
+  },
+  "proxyServer": {
+    "message": "Прокси-сервер"
+  },
+  "httpProxy": {
+    "message": "HTTP прокси"
+  },
+  "httpsProxy": {
+    "message": "HTTPS прокси"
+  },
+  "ftpProxy": {
+    "message": "FTP прокси"
+  },
+  "fallbackProxy": {
+    "message": "Резервный прокси"
+  },
+  "bypassList": {
+    "message": "Список исключений"
+  },
+  "pacScriptUrl": {
+    "message": "URL PAC скрипта"
+  },
+  "pacScript": {
+    "message": "PAC скрипт"
+  },
+  "templates": {
+    "message": "Шаблоны:"
+  },
+  "emptyTemplate": {
+    "message": "Пустой"
+  },
+  "basicTemplate": {
+    "message": "Базовый"
+  },
+  "proTemplate": {
+    "message": "Про"
+  },
+  "advancedTemplate": {
+    "message": "Расширенный"
+  },
+  "mandatoryPacScript": {
+    "message": "Обязательный PAC скрипт (предотвращает переход на прямое соединение)"
+  },
+  "dropToAddQuickScripts": {
+    "message": "Перетащите сюда, чтобы добавить в быстрые скрипты"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "Перетащите сюда, чтобы удалить из быстрых скриптов"
+  },
+  "quickPacScripts": {
+    "message": "Быстрые PAC скрипты"
+  },
+  "dragScriptsHere": {
+    "message": "Перетащите скрипты сюда, чтобы включить быстрое переключение. Быстрое переключение позволяет менять прокси, нажимая на значок расширения."
+  },
+  "colorRequired": {
+    "message": "Необходимо указать цвет"
+  },
+  "configurationName": {
+    "message": "Название конфигурации"
+  },
+  "color": {
+    "message": "Цвет"
+  },
+  "active": {
+    "message": "Активный"
+  },
+  "host": {
+    "message": "Хост"
+  },
+  "port": {
+    "message": "Порт"
+  }
+}

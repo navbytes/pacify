@@ -14,6 +14,7 @@
   import Button from '@/components/Button.svelte'
   import FlexGroup from '@/components/FlexGroup.svelte'
   import ProxyConfigModal from '@/components/ProxyConfig/ProxyConfigModal.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   // State management using Svelte 5's $state
   let showEditor = $state(false)
@@ -87,7 +88,9 @@
 >
   <!-- Header Section -->
   <header class="mb-8 flex items-center justify-between gap-4">
-    <h1 class="text-2xl font-bold text-primary">PACify | The Proxy Manager</h1>
+    <h1 class="text-2xl font-bold text-primary">
+      {I18nService.getMessage('extName')}
+    </h1>
     <FlexGroup
       direction="horizontal"
       childrenGap="sm"
@@ -96,7 +99,7 @@
     >
       <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
       <Button color="primary" on:click={() => openEditor()}
-        >Add New Script</Button
+        >{I18nService.getMessage('addNewScript')}</Button
       >
     </FlexGroup>
   </header>
@@ -110,7 +113,7 @@
       justifyContent="between"
     >
       <label class="text-lg font-medium" for="quickSwitchToggle">
-        Quick Switch Mode
+        {I18nService.getMessage('quickSwitchMode')}
       </label>
       <ToggleSwitch
         checked={settings.quickSwitchEnabled}
@@ -118,8 +121,7 @@
       />
     </FlexGroup>
     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-      When enabled, clicking the extension icon will cycle through quick-switch
-      enabled scripts.
+      {I18nService.getMessage('quickSwitchDescription')}
     </p>
 
     <!-- Quick Scripts Dropzone -->
@@ -135,12 +137,14 @@
         data-overlay
         class="drop-overlay absolute inset-0 items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none z-10"
       >
-        <p class="text-xl font-medium">Drop here to add to quick scripts</p>
+        <p class="text-xl font-medium">
+          {I18nService.getMessage('dropToAddQuickScripts')}
+        </p>
       </div>
 
       <ScriptList
         pageType="QUICK_SWITCH"
-        title="Quick Pac Scripts"
+        title={I18nService.getMessage('quickPacScripts')}
         onScriptEdit={() => {}}
       />
     </div>
@@ -169,7 +173,7 @@
       class="drop-overlay absolute inset-0 items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none z-10"
     >
       <p class="text-xl font-medium text-red-600 dark:text-red-400">
-        Drop here to remove from quick scripts
+        {I18nService.getMessage('dropToRemoveQuickScripts')}
       </p>
     </div>
 

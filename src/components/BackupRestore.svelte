@@ -5,6 +5,7 @@
   import Button from './Button.svelte'
   import LabelButton from './LabelButton.svelte'
   import FlexGroup from './FlexGroup.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   interface Props {
     onRestore: () => void
@@ -44,9 +45,11 @@
   justifyContent="between"
 >
   <!-- Backup button -->
-  <Button color="secondary" on:click={handleBackup}>Backup Settings</Button>
+  <Button color="secondary" on:click={handleBackup}
+    >{I18nService.getMessage('backupSettings')}</Button
+  >
   <LabelButton color="secondary">
-    Restore Settings
+    {I18nService.getMessage('restoreSettings')}
     <input slot="input" type="file" accept=".json" onchange={handleRestore} />
   </LabelButton>
 </FlexGroup>

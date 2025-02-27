@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | प्रॉक्सी प्रबंधक"
+  },
+  "extDescription": {
+    "message": "Chrome के लिए पूर्ण प्रॉक्सी प्रबंधक। PAC स्क्रिप्ट, मैनुअल प्रॉक्सी और सिस्टम कॉन्फिगरेशन के बीच आसानी से बनाएं, संपादित करें और स्विच करें।"
+  },
+  "basicSettings": {
+    "message": "मूल सेटिंग्स"
+  },
+  "proxyMode": {
+    "message": "प्रॉक्सी मोड"
+  },
+  "systemProxy": {
+    "message": "ऑपरेटिंग सिस्टम से प्रॉक्सी सेटिंग्स का उपयोग करें।"
+  },
+  "directMode": {
+    "message": "डायरेक्ट"
+  },
+  "directModeHelp": {
+    "message": "डायरेक्ट मोड में सभी कनेक्शन बिना किसी प्रॉक्सी के सीधे बनाए जाते हैं।"
+  },
+  "autoDetectMode": {
+    "message": "ऑटो-कॉन्फिग URL"
+  },
+  "autoDetectModeHelp": {
+    "message": "ऑटो-डिटेक्ट मोड में, Chrome स्वचालित रूप से WPAD प्रोटोकॉल का उपयोग करके प्रॉक्सी सेटिंग्स खोजेगा और डाउनलोड करेगा।"
+  },
+  "deleteConfirm": {
+    "message": "क्या आप वाकई इस स्क्रिप्ट को हटाना चाहते हैं?"
+  },
+  "toggleProxyHint": {
+    "message": "स्विच पर क्लिक करके प्रॉक्सी टॉगल करें।"
+  },
+  "systemMode": {
+    "message": "सिस्टम"
+  },
+  "pacScriptMode": {
+    "message": "PAC स्क्रिप्ट"
+  },
+  "manualMode": {
+    "message": "मैनुअल कॉन्फिगरेशन"
+  },
+  "addNewScript": {
+    "message": "नई स्क्रिप्ट जोड़ें"
+  },
+  "quickSwitchMode": {
+    "message": "क्विक स्विच मोड"
+  },
+  "quickSwitchDescription": {
+    "message": "पॉपअप से प्रॉक्सी कॉन्फ़िगरेशन के बीच त्वरित स्विचिंग सक्षम करें"
+  },
+  "settings": {
+    "message": "सेटिंग्स"
+  },
+  "nameRequired": {
+    "message": "नाम आवश्यक है"
+  },
+  "proxyConfiguration": {
+    "message": "प्रॉक्सी कॉन्फिगरेशन"
+  },
+  "cancel": {
+    "message": "रद्द करें"
+  },
+  "saveConfiguration": {
+    "message": "कॉन्फिगरेशन सहेजें"
+  },
+  "saving": {
+    "message": "सहेज रहा है..."
+  },
+  "noScriptsAvailable": {
+    "message": "कोई PAC स्क्रिप्ट उपलब्ध नहीं है। आरंभ करने के लिए अपनी पहली स्क्रिप्ट जोड़ें।"
+  },
+  "noQuickSwitchScripts": {
+    "message": "कोई क्विक स्विच स्क्रिप्ट कॉन्फ़िगर नहीं की गई है। क्विक स्विचिंग सक्षम करने के लिए स्क्रिप्ट यहां खींचें।"
+  },
+  "noScriptsAvailableOptions": {
+    "message": "कोई स्क्रिप्ट उपलब्ध नहीं है। अपनी पहली PAC स्क्रिप्ट बनाने के लिए \"नई स्क्रिप्ट जोड़ें\" पर क्लिक करें।"
+  },
+  "backupSettings": {
+    "message": "बैकअप सेटिंग्स"
+  },
+  "restoreSettings": {
+    "message": "सेटिंग्स रिस्टोर करें"
+  },
+  "useSameProxy": {
+    "message": "सभी प्रोटोकॉल के लिए एक ही प्रॉक्सी सर्वर का उपयोग करें"
+  },
+  "proxyServer": {
+    "message": "प्रॉक्सी सर्वर"
+  },
+  "httpProxy": {
+    "message": "HTTP प्रॉक्सी"
+  },
+  "httpsProxy": {
+    "message": "HTTPS प्रॉक्सी"
+  },
+  "ftpProxy": {
+    "message": "FTP प्रॉक्सी"
+  },
+  "fallbackProxy": {
+    "message": "फॉलबैक प्रॉक्सी"
+  },
+  "bypassList": {
+    "message": "बायपास सूची"
+  },
+  "pacScriptUrl": {
+    "message": "PAC स्क्रिप्ट URL"
+  },
+  "pacScript": {
+    "message": "PAC स्क्रिप्ट"
+  },
+  "templates": {
+    "message": "टेम्पलेट्स:"
+  },
+  "emptyTemplate": {
+    "message": "खाली"
+  },
+  "basicTemplate": {
+    "message": "बेसिक"
+  },
+  "proTemplate": {
+    "message": "प्रो"
+  },
+  "advancedTemplate": {
+    "message": "उन्नत"
+  },
+  "mandatoryPacScript": {
+    "message": "अनिवार्य PAC स्क्रिप्ट (डायरेक्ट पर फॉलबैक को रोकें)"
+  },
+  "dropToAddQuickScripts": {
+    "message": "क्विक स्क्रिप्ट में जोड़ने के लिए यहां ड्रॉप करें"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "क्विक स्क्रिप्ट से हटाने के लिए यहां ड्रॉप करें"
+  },
+  "quickPacScripts": {
+    "message": "क्विक PAC स्क्रिप्ट्स"
+  },
+  "dragScriptsHere": {
+    "message": "क्विक स्विचिंग सक्षम करने के लिए स्क्रिप्ट यहां खींचें। क्विक स्विच आपको एक्सटेंशन आइकन पर क्लिक करके प्रॉक्सी स्विच करने की अनुमति देता है।"
+  },
+  "colorRequired": {
+    "message": "रंग आवश्यक है"
+  },
+  "configurationName": {
+    "message": "कॉन्फिगरेशन नाम"
+  },
+  "color": {
+    "message": "रंग"
+  },
+  "active": {
+    "message": "सक्रिय"
+  },
+  "host": {
+    "message": "होस्ट"
+  },
+  "port": {
+    "message": "पोर्ट"
+  }
+}

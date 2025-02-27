@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { resolve } from 'path'
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs'
+import {
+  existsSync,
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+  readdirSync,
+} from 'fs'
 
-// Simplified copy manifest plugin
 function copyManifest() {
   return {
     name: 'copy-manifest',
@@ -38,6 +43,23 @@ function copyManifest() {
           console.warn(`Warning: Error copying icon ${icon}:`, error)
         }
       })
+
+      // Copy _locales directory
+      const localesDir = resolve(__dirname, '_locales')
+      if (existsSync(localesDir)) {
+        const locales = readdirSync(localesDir)
+        locales.forEach((locale) => {
+          const messagesPath = resolve(localesDir, locale, 'messages.json')
+          if (existsSync(messagesPath)) {
+            const source = readFileSync(messagesPath)
+            this.emitFile({
+              type: 'asset',
+              fileName: `_locales/${locale}/messages.json`,
+              source,
+            })
+          }
+        })
+      }
     },
   }
 }

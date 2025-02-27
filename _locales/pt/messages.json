@@ -1,0 +1,161 @@
+{
+  "extName": {
+    "message": "PACify | Gerenciador de Proxy"
+  },
+  "extDescription": {
+    "message": "Gerenciador completo de proxy para Chrome. Crie, edite e alterne facilmente entre scripts PAC, proxies manuais e configurações de sistema."
+  },
+  "basicSettings": {
+    "message": "Configurações Básicas"
+  },
+  "proxyMode": {
+    "message": "Modo de Proxy"
+  },
+  "systemProxy": {
+    "message": "Usar configurações de proxy do sistema operacional."
+  },
+  "directMode": {
+    "message": "Direto"
+  },
+  "directModeHelp": {
+    "message": "No modo direto, todas as conexões são criadas diretamente, sem qualquer proxy envolvido."
+  },
+  "autoDetectMode": {
+    "message": "URL de auto-configuração"
+  },
+  "autoDetectModeHelp": {
+    "message": "No modo de detecção automática, o Chrome procurará e baixará automaticamente as configurações de proxy usando o protocolo WPAD."
+  },
+  "deleteConfirm": {
+    "message": "Tem certeza de que deseja excluir este script?"
+  },
+  "toggleProxyHint": {
+    "message": "Alternar proxy clicando no interruptor."
+  },
+  "systemMode": {
+    "message": "Sistema"
+  },
+  "pacScriptMode": {
+    "message": "Script PAC"
+  },
+  "manualMode": {
+    "message": "Configuração Manual"
+  },
+  "addNewScript": {
+    "message": "Adicionar Novo Script"
+  },
+  "quickSwitchMode": {
+    "message": "Modo de Alternância Rápida"
+  },
+  "quickSwitchDescription": {
+    "message": "Ativar alternância rápida entre configurações de proxy a partir do popup"
+  },
+  "settings": {
+    "message": "Configurações"
+  },
+  "nameRequired": {
+    "message": "Nome é obrigatório"
+  },
+  "proxyConfiguration": {
+    "message": "Configuração de Proxy"
+  },
+  "cancel": {
+    "message": "Cancelar"
+  },
+  "saveConfiguration": {
+    "message": "Salvar Configuração"
+  },
+  "saving": {
+    "message": "Salvando..."
+  },
+  "noScriptsAvailable": {
+    "message": "Nenhum script PAC disponível. Adicione seu primeiro script para começar."
+  },
+  "noQuickSwitchScripts": {
+    "message": "Nenhum script de alternância rápida configurado. Arraste scripts aqui para ativar a alternância rápida."
+  },
+  "noScriptsAvailableOptions": {
+    "message": "Nenhum script disponível. Clique em \"Adicionar Novo Script\" para criar seu primeiro script PAC."
+  },
+  "backupSettings": {
+    "message": "Fazer Backup das Configurações"
+  },
+  "restoreSettings": {
+    "message": "Restaurar Configurações"
+  },
+  "useSameProxy": {
+    "message": "Usar o mesmo servidor de proxy para todos os protocolos"
+  },
+  "proxyServer": {
+    "message": "Servidor de Proxy"
+  },
+  "httpProxy": {
+    "message": "Proxy HTTP"
+  },
+  "httpsProxy": {
+    "message": "Proxy HTTPS"
+  },
+  "ftpProxy": {
+    "message": "Proxy FTP"
+  },
+  "fallbackProxy": {
+    "message": "Proxy de Fallback"
+  },
+  "bypassList": {
+    "message": "Lista de Bypass"
+  },
+  "pacScriptUrl": {
+    "message": "URL do Script PAC"
+  },
+  "pacScript": {
+    "message": "Script PAC"
+  },
+  "templates": {
+    "message": "Modelos:"
+  },
+  "emptyTemplate": {
+    "message": "Vazio"
+  },
+  "basicTemplate": {
+    "message": "Básico"
+  },
+  "proTemplate": {
+    "message": "Pro"
+  },
+  "advancedTemplate": {
+    "message": "Avançado"
+  },
+  "mandatoryPacScript": {
+    "message": "Script PAC obrigatório (impede o fallback para modo direto)"
+  },
+  "dropToAddQuickScripts": {
+    "message": "Solte aqui para adicionar aos scripts rápidos"
+  },
+  "dropToRemoveQuickScripts": {
+    "message": "Solte aqui para remover dos scripts rápidos"
+  },
+  "quickPacScripts": {
+    "message": "Scripts PAC Rápidos"
+  },
+  "dragScriptsHere": {
+    "message": "Arraste scripts aqui para ativar a alternância rápida. A alternância rápida permite alternar o proxy clicando no ícone da extensão."
+  },
+  "colorRequired": {
+    "message": "Cor é obrigatória"
+  },
+  "configurationName": {
+    "message": "Nome da Configuração"
+  },
+  "color": {
+    "message": "Cor"
+  },
+  "active": {
+    "message": "Ativo"
+  },
+  "host": {
+    "message": "Host"
+  },
+  "port": {
+    "message": "Porta"
+  }
+}
