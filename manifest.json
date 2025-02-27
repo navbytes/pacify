@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "PACify | The Proxy Manager",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Complete proxy manager for Chrome. Create, edit, and switch between PAC scripts, manual proxies, and system configurations easily.",
-  "permissions": ["proxy", "storage", "webRequest", "webRequestAuthProvider"],
+  "permissions": ["proxy", "storage"],
   "background": {
     "service_worker": "assets/background.js",
     "type": "module"

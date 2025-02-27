@@ -7,12 +7,23 @@
 
   import { NotifyService } from '@/services/NotifyService'
   import { ERROR_TYPES } from '@/interfaces'
-  import type { ProxyConfig, ProxyMode, ProxySettings } from '@/interfaces'
+  import type {
+    ProxyConfig,
+    ProxyMode,
+    ProxySettings,
+    ProxyServer,
+  } from '@/interfaces'
   import { Globe, Radar, Settings, Zap } from 'lucide-svelte'
 
   export let proxyConfig: ProxyConfig | undefined
   export let onSave: (config: Omit<ProxyConfig, 'id'>) => Promise<void>
   export let onCancel: () => void
+
+  const DEFAULT_PROXY_CONFIG: ProxyServer = {
+    scheme: 'http',
+    host: '',
+    port: '',
+  }
 
   // Basic Settings
   let name: string = proxyConfig?.name || ''
@@ -28,16 +39,29 @@
   let pacMandatory: boolean = false
 
   // Manual Proxy Settings
-  let useSharedProxy: boolean = true
   let proxySettings: ProxySettings = {
-    singleProxy: { scheme: 'http', host: '', port: '' },
-    proxyForHttp: { scheme: 'http', host: '', port: '' },
-    proxyForHttps: { scheme: 'http', host: '', port: '' },
-    proxyForFtp: { scheme: 'http', host: '', port: '' },
-    fallbackProxy: { scheme: 'http', host: '', port: '' },
-    bypassList: [],
+    singleProxy: proxyConfig?.rules?.singleProxy ?? { ...DEFAULT_PROXY_CONFIG },
+    proxyForHttp: proxyConfig?.rules?.proxyForHttp ?? {
+      ...DEFAULT_PROXY_CONFIG,
+    },
+    proxyForHttps: proxyConfig?.rules?.proxyForHttps ?? {
+      ...DEFAULT_PROXY_CONFIG,
+    },
+    proxyForFtp: proxyConfig?.rules?.proxyForFtp ?? { ...DEFAULT_PROXY_CONFIG },
+    fallbackProxy: proxyConfig?.rules?.fallbackProxy ?? {
+      ...DEFAULT_PROXY_CONFIG,
+    },
+    bypassList: proxyConfig?.rules?.bypassList || [],
   }
-  let bypassListContent: string = ''
+  let useSharedProxy: boolean = true
+  if (proxyConfig?.rules) {
+    if (proxyConfig?.rules.singleProxy) {
+      useSharedProxy = true
+    } else {
+      useSharedProxy = false
+    }
+  }
+  let bypassListContent: string = proxySettings.bypassList.join('\n')
 
   // Other state variables
   let errorMessage: string = ''

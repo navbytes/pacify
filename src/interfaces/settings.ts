@@ -10,7 +10,7 @@ export interface Settings {
 
 type ProxyScheme = 'http' | 'https' | 'quic' | 'socks4' | 'socks5'
 
-interface ProxyServer {
+export interface ProxyServer {
   scheme: ProxyScheme
   host: string
   port: string

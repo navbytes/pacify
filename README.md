@@ -115,7 +115,6 @@ The extension requires the following permissions:
 
 - `proxy`: To manage proxy settings through PAC scripts.
 - `storage`: To store PAC scripts and user preferences.
-- `webRequest` and `webRequestAuthProvider`: For testing and resolving proxy requests.
 
 ### Supported Proxy Modes
 
@@ -129,8 +128,6 @@ The extension requires the following permissions:
 
 - `proxy`: Manage Chrome's proxy settings
 - `storage`: Store configurations
-- `webRequest`: Handle proxy requests
-- `webRequestAuthProvider`: Manage proxy authentication
 
 ## 🤝 Contributing
 
