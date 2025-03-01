@@ -3,28 +3,39 @@
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import ScriptList from '@/components/ScriptList.svelte'
   import { settingsStore } from '@/stores/settingsStore'
-  import { dragDelim } from '@/constants/app'
-  import {
-    ERROR_TYPES,
-    type ListViewType,
-    type ProxyConfig,
-  } from '@/interfaces'
+  import { type DropItem, type ProxyConfig } from '@/interfaces'
   import BackupRestore from '@/components/BackupRestore.svelte'
-  import { NotifyService } from '@/services/NotifyService'
   import Button from '@/components/Button.svelte'
   import FlexGroup from '@/components/FlexGroup.svelte'
   import ProxyConfigModal from '@/components/ProxyConfig/ProxyConfigModal.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import DropTarget from '@/components/DragDrop/DropTarget.svelte'
+  import { StorageService } from '@/services/StorageService'
 
-  // State management using Svelte 5's $state
+  const showStorage = false
   let showEditor = $state(false)
   let editingScriptId = $state<string | null>(null)
   let dropError = $state<string | null>(null)
+  let storageStats = $state<{
+    syncUsed: number
+    syncQuota: number
+    localUsed: number
+    localQuota: number
+  } | null>(null)
   let settings = $derived($settingsStore)
 
-  onMount(() => {
-    settingsStore.init()
+  let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
+
+  onMount(async () => {
+    await settingsStore.init()
+    refreshStorageStats()
   })
+
+  async function refreshStorageStats() {
+    if (showStorage) {
+      storageStats = await StorageService.getStorageStats()
+    }
+  }
 
   async function handleQuickSwitchToggle(checked: boolean) {
     await settingsStore.quickSwitchToggle(checked)
@@ -34,48 +45,31 @@
     editingScriptId = scriptId || null
     showEditor = true
   }
-  // @ts-ignore
+
   async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
     await settingsStore.updatePACScript(script, editingScriptId)
     showEditor = false
+
+    // Refresh storage stats after saving
+    refreshStorageStats()
   }
 
-  const getDragData = (ev: DragEvent) => {
-    const id = ev.dataTransfer?.getData('text/plain')
-    const [pageType, scriptId] = id?.split(dragDelim) || []
+  async function handleDrop(
+    item: DropItem,
+    pageType: 'QUICK_SWITCH' | 'OPTIONS'
+  ) {
+    // Handle the drop action
+    const { dataType, dataId: scriptId } = item
 
-    if (!id || !scriptId || !pageType) {
-      throw new Error('Invalid data')
+    let isScriptQuickSwitch = null
+    if (dataType === 'QUICK_SWITCH' && pageType === 'OPTIONS') {
+      isScriptQuickSwitch = false
+    } else if (dataType === 'OPTIONS' && pageType === 'QUICK_SWITCH') {
+      isScriptQuickSwitch = true
     }
-    return { pageType, scriptId }
-  }
 
-  const handleDragOver = (ev: DragEvent) => {
-    ev.preventDefault()
-  }
-
-  function handleDragLeave(ev: DragEvent) {
-    ev.preventDefault()
-    return false
-  }
-
-  const handleDrop = (type: ListViewType) => async (ev: DragEvent) => {
-    ev.preventDefault()
-    document
-      .getElementById('options-container')
-      ?.setAttribute('data-page-type', '')
-    dropError = null
-
-    try {
-      const { pageType, scriptId } = getDragData(ev)
-      if (type === 'OPTIONS' && pageType === 'QUICK_SWITCH') {
-        await settingsStore.updateScriptQuickSwitch(scriptId, false)
-      } else if (type === 'QUICK_SWITCH' && pageType === 'OPTIONS') {
-        await settingsStore.updateScriptQuickSwitch(scriptId, true)
-      }
-    } catch (error) {
-      NotifyService.error(ERROR_TYPES.DROP, error)
-      dropError = 'drop_handling_error'
+    if (isScriptQuickSwitch !== null) {
+      await settingsStore.updateScriptQuickSwitch(scriptId, isScriptQuickSwitch)
     }
   }
 </script>
@@ -84,7 +78,6 @@
   id="options-container"
   class="container mx-auto max-w-7xl px-4 py-8"
   role="region"
-  aria-dropeffect="move"
 >
   <!-- Header Section -->
   <header class="mb-8 flex items-center justify-between gap-4">
@@ -98,14 +91,12 @@
       justifyContent="between"
     >
       <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
-      <Button color="primary" on:click={() => openEditor()}
+      <Button color="primary" onclick={() => openEditor()}
         >{I18nService.getMessage('addNewScript')}</Button
       >
     </FlexGroup>
   </header>
-
-  <!-- Settings Section -->
-  <section class="mb-8 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800">
+  <section class="mb-4 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800">
     <FlexGroup
       direction="horizontal"
       childrenGap="lg"
@@ -123,32 +114,58 @@
     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
       {I18nService.getMessage('quickSwitchDescription')}
     </p>
+  </section>
 
-    <!-- Quick Scripts Dropzone -->
-    <div
-      class="quick-scripts-section relative mt-6 rounded-lg border-2 border-dashed border-gray-300 p-6 transition-colors dark:border-gray-600"
-      role="list"
-      aria-dropeffect="move"
-      ondragleave={handleDragLeave}
-      ondrop={handleDrop('QUICK_SWITCH')}
-      ondragover={handleDragOver}
+  <DropTarget onDrop={(item) => handleDrop(item, 'QUICK_SWITCH')}>
+    <section
+      data-drag-type={dragType}
+      data-page-type="QUICK_SWITCH"
+      class="mb-8 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800"
+    >
+      <!-- Quick Scripts Dropzone -->
+      <div class="relative rounded-lg transition-colors">
+        <div
+          class="absolute inset-0 flex items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 z-10"
+          data-overlay
+        >
+          <p class="text-xl font-medium">
+            {I18nService.getMessage('dropToAddQuickScripts')}
+          </p>
+        </div>
+
+        <ScriptList
+          pageType="QUICK_SWITCH"
+          title={I18nService.getMessage('quickPacScripts')}
+          bind:dragType
+        />
+      </div>
+    </section>
+  </DropTarget>
+  <DropTarget onDrop={(item) => handleDrop(item, 'OPTIONS')}>
+    <section
+      data-drag-type={dragType}
+      data-page-type="OPTIONS"
+      class="relative mb-8 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800"
     >
       <div
+        class="absolute inset-0 flex items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 z-10"
         data-overlay
-        class="drop-overlay absolute inset-0 items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none z-10"
       >
-        <p class="text-xl font-medium">
-          {I18nService.getMessage('dropToAddQuickScripts')}
+        <p class="text-xl font-medium text-red-600 dark:text-red-400">
+          {I18nService.getMessage('dropToRemoveQuickScripts')}
         </p>
       </div>
 
-      <ScriptList
-        pageType="QUICK_SWITCH"
-        title={I18nService.getMessage('quickPacScripts')}
-        onScriptEdit={() => {}}
-      />
-    </div>
-  </section>
+      <div role="list">
+        <ScriptList
+          pageType="OPTIONS"
+          onScriptEdit={(scriptId) => openEditor(scriptId)}
+          bind:dragType
+          title={I18nService.getMessage('allProxyConfigs')}
+        />
+      </div>
+    </section>
+  </DropTarget>
 
   <!-- Error Message -->
   {#if dropError}
@@ -159,32 +176,6 @@
     </div>
   {/if}
 
-  <!-- All Scripts Dropzone -->
-  <div
-    class="all-scripts-section relative rounded-lg border-2 border-dashed border-gray-300 p-6 transition-colors dark:border-gray-600 bg-white shadow-sm dark:bg-gray-800"
-    role="region"
-    aria-dropeffect="move"
-    ondragleave={handleDragLeave}
-    ondrop={handleDrop('OPTIONS')}
-    ondragover={handleDragOver}
-  >
-    <div
-      data-overlay
-      class="drop-overlay absolute inset-0 items-center justify-center rounded-lg bg-gray-100/80 dark:bg-gray-800/80 pointer-events-none z-10"
-    >
-      <p class="text-xl font-medium text-red-600 dark:text-red-400">
-        {I18nService.getMessage('dropToRemoveQuickScripts')}
-      </p>
-    </div>
-
-    <div role="list">
-      <ScriptList
-        pageType="OPTIONS"
-        onScriptEdit={(scriptId) => openEditor(scriptId)}
-      />
-    </div>
-  </div>
-
   <!-- Script Editor Modal -->
   {#if showEditor}
     <ProxyConfigModal
@@ -194,5 +185,23 @@
       onSave={handleScriptSave}
       onCancel={() => (showEditor = false)}
     />
+  {/if}
+
+  <!-- Storage Stats -->
+  {#if storageStats}
+    <section
+      class="mb-8 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-400 flex flex-row justify-around gap-2"
+    >
+      <p>
+        Sync storage: {Math.round(storageStats.syncUsed / 1024)}KB / {Math.round(
+          storageStats.syncQuota / 1024
+        )}KB
+      </p>
+      <p>
+        Local storage: {Math.round(storageStats.localUsed / 1024)}KB / {Math.round(
+          storageStats.localQuota / 1024 / 1024
+        )}MB
+      </p>
+    </section>
   {/if}
 </div>

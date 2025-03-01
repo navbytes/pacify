@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  let { children } = $props()
 
-  let error: Error | null = null
-  let hasError = false
+  let error = $state<Error | null>(null)
+  let hasError = $state(false)
 
   function handleError(event: ErrorEvent) {
     hasError = true
@@ -24,7 +25,7 @@
     <p class="text-sm">{error.message}</p>
     <button
       class="mt-2 text-sm text-red-600 hover:text-red-800"
-      on:click={() => {
+      onclick={() => {
         hasError = false
         error = null
       }}
@@ -33,5 +34,5 @@
     </button>
   </div>
 {:else}
-  <slot />
+  {@render children?.()}
 {/if}

@@ -134,9 +134,8 @@
   "dropToRemoveQuickScripts": {
     "message": "クイックスクリプトから削除するにはここにドロップ"
   },
-  "quickPacScripts": {
-    "message": "クイックPACスクリプト"
-  },
+  "quickPacScripts": { "message": "クイックスイッチ設定" },
+  "allProxyConfigs": { "message": "すべてのプロキシ設定" },
   "dragScriptsHere": {
     "message": "クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。クイックスイッチを使うと拡張機能アイコンをクリックするだけでプロキシを切り替えられます。"
   },

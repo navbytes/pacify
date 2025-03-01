@@ -13,14 +13,16 @@
 
   interface Props {
     pageType?: ListViewType
-    title?: string
+    title: string
     onScriptEdit?: (scriptId: string) => void
+    dragType?: string
   }
 
   let {
     pageType = 'POPUP',
-    title = 'PAC Scripts',
+    title,
     onScriptEdit,
+    dragType = $bindable(),
   }: Props = $props()
 
   function openEditor(scriptId?: string) {
@@ -45,7 +47,7 @@
 
   {#if pageType === 'QUICK_SWITCH'}
     <div class="space-y-1 mb-6">
-      <p class="text-xs text-gray-500 dark:text-gray-400">
+      <p class="text-sm text-gray-600 dark:text-gray-400">
         {I18nService.getMessage('dragScriptsHere')}
       </p>
     </div>
@@ -56,6 +58,7 @@
         <ScriptItem
           {proxy}
           {pageType}
+          bind:dragType
           onScriptEdit={() => openEditor(proxy.id)}
         />
       {/each}

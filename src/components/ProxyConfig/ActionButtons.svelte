@@ -9,7 +9,7 @@
 <div
   class="p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-3 sticky bottom-0 bg-white dark:bg-gray-800"
 >
-  <Button color="secondary" on:click={onCancel} disabled={isSubmitting}>
+  <Button color="secondary" onclick={onCancel} disabled={isSubmitting}>
     {I18nService.getMessage('cancel')}
   </Button>
   <!-- Using type="submit" lets the enclosing form trigger the submit event -->

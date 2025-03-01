@@ -7,6 +7,7 @@
   import { scriptTemplates } from '@/constants/templates'
   import Button from '../Button.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { defaultOptions } from '@/utils/monaco'
 
   export let pacUrl: string = ''
   export let pacMandatory: boolean = false
@@ -27,14 +28,8 @@
     if (!pacUrl) {
       try {
         editor = await Monaco.create(editorContainer, {
+          ...defaultOptions,
           value: editorContent,
-          automaticLayout: true,
-          minimap: { enabled: false },
-          scrollBeyondLastLine: false,
-          fontSize: 14,
-          lineNumbers: 'on',
-          renderLineHighlight: 'all',
-          tabSize: 2,
         })
 
         // Set up content change listener
@@ -87,30 +82,30 @@
         <Button
           minimal
           color="primary"
-          on:click={() => setTemplate(scriptTemplates.empty)}
+          onclick={() => setTemplate(scriptTemplates.empty)}
         >
           {I18nService.getMessage('emptyTemplate')}
         </Button>
         <Button
           minimal
           color="primary"
-          on:click={() => setTemplate(scriptTemplates.basic)}
+          onclick={() => setTemplate(scriptTemplates.basic)}
         >
           {I18nService.getMessage('basicTemplate')}
         </Button>
         <Button
           minimal
           color="primary"
-          on:click={() => setTemplate(scriptTemplates.pro)}
+          onclick={() => setTemplate(scriptTemplates.advanced)}
         >
-          {I18nService.getMessage('proTemplate')}
+          {I18nService.getMessage('advancedTemplate')}
         </Button>
         <Button
           minimal
           color="primary"
-          on:click={() => setTemplate(scriptTemplates.advanced)}
+          onclick={() => setTemplate(scriptTemplates.pro)}
         >
-          {I18nService.getMessage('advancedTemplate')}
+          {I18nService.getMessage('proTemplate')}
         </Button>
       </FlexGroup>
       <div

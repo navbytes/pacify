@@ -134,9 +134,8 @@
   "dropToRemoveQuickScripts": {
     "message": "Suelte aquí para eliminar de scripts rápidos"
   },
-  "quickPacScripts": {
-    "message": "Scripts PAC rápidos"
-  },
+  "quickPacScripts": { "message": "Configuraciones de cambio rápido" },
+  "allProxyConfigs": { "message": "Todas las configuraciones de proxy" },
   "dragScriptsHere": {
     "message": "Arrastre scripts aquí para habilitar el cambio rápido. El cambio rápido le permite cambiar de proxy haciendo clic en el ícono de la extensión."
   },

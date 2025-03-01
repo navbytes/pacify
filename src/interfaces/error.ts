@@ -15,6 +15,7 @@ export enum ERROR_TYPES {
   SAVE_SCRIPT = 'Error saving script',
   DELETE_SCRIPT = 'Error deleting script',
   ACTION_CLICK = 'Error handling action click',
+  SEND_MESSAGE = 'SEND_MESSAGE',
 }
 
 export enum ALERT_TYPES {

@@ -134,9 +134,8 @@
   "dropToRemoveQuickScripts": {
     "message": "দ্রুত স্ক্রিপ্ট থেকে সরাতে এখানে ড্রপ করুন"
   },
-  "quickPacScripts": {
-    "message": "দ্রুত PAC স্ক্রিপ্ট"
-  },
+  "quickPacScripts": { "message": "দ্রুত স্যুইচ কনফিগারেশন" },
+  "allProxyConfigs": { "message": "সমস্ত প্রক্সি কনফিগারেশন" },
   "dragScriptsHere": {
     "message": "দ্রুত সুইচিং সক্ষম করতে এখানে স্ক্রিপ্ট টেনে আনুন। দ্রুত সুইচ আপনাকে এক্সটেনশন আইকনে ক্লিক করে প্রক্সি পরিবর্তন করতে দেয়।"
   },

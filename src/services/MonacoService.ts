@@ -1,288 +1,253 @@
-// MonacoService.ts
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
+import { ERROR_TYPES, type MonacoOptions } from '@/interfaces'
+import { withErrorHandling } from '@/utils/errorHandling'
+import { darkTheme, lightTheme, tokenizer } from '@/utils/monaco'
 
-interface MonacoOptions {
-  value: string
-  automaticLayout?: boolean
-  minimap?: { enabled: boolean }
-  scrollBeyondLastLine?: boolean
-  fontSize?: number
-  lineNumbers?: 'on' | 'off'
-  renderLineHighlight?: 'all' | 'none' | 'gutter' | 'line'
-  tabSize?: number
-  wordWrap?: 'on' | 'off'
-  folding?: boolean
-}
+// Detect if we're in a browser context
+const isBrowserContext = typeof window !== 'undefined'
 
 export class Monaco {
   private static hasInitialized = false
-  static KeyCode = monaco.KeyCode
+  private static editorPromise: Promise<
+    typeof import('monaco-editor/esm/vs/editor/editor.api')
+  > | null = null
+  // We'll define KeyCode once monaco is loaded
+  static KeyCode: any
 
-  private static initializeMonaco(): void {
-    if (this.hasInitialized) return
-
-    // Configure worker
-    // @ts-ignore
-    self.MonacoEnvironment = {
-      getWorker() {
-        return new editorWorker()
-      },
+  /**
+   * Dynamically imports Monaco editor
+   */
+  private static async loadMonaco() {
+    if (!isBrowserContext) {
+      throw new Error('Monaco editor can only be used in a browser context')
     }
 
-    // Register PAC script language
-    monaco.languages.register({ id: 'pac' })
+    if (!this.editorPromise) {
+      this.editorPromise = import(
+        'monaco-editor/esm/vs/editor/editor.api'
+      ).then((monaco) => {
+        // Cache KeyCode on the class for external use
+        this.KeyCode = monaco.KeyCode
 
-    // Define PAC script syntax highlighting
-    monaco.languages.setMonarchTokensProvider('pac', {
-      tokenizer: {
-        root: [
-          // PAC Functions
-          [
-            /[a-zA-Z][\w$]*/,
-            {
-              cases: {
-                'FindProxyForURL|dnsResolve|isInNet|isPlainHostName|dnsDomainIs|localHostOrDomainIs|isResolvable|isInResolvableHostList|myIpAddress|dnsDomainLevels|shExpMatch|weekdayRange|dateRange|timeRange|alert':
-                  'keyword',
-                'DIRECT|PROXY|SOCKS|SOCKS4|SOCKS5|HTTP|HTTPS': 'type',
-                '@default': 'identifier',
-              },
-            },
-          ],
-          // Strings
-          [/"[^"]*"/, 'string'],
-          [/'[^']*'/, 'string'],
-          // Comments
-          [/\/\/.*$/, 'comment'],
-          [/\/\*/, 'comment', '@comment'],
-          // Brackets
-          [/[(){}\[\]]/, '@brackets'],
-          [/[<>](?!@)/, '@brackets'],
-          // Operators
-          [/[=!<>]=?|[+\-*/%]|\|\||&&|\?|\:/, 'operator'],
-          // Whitespace
-          [/[ \t\r\n]+/, 'white'],
-          // Delimiters
-          [/[;,.]/, 'delimiter'],
-          // Numbers
-          [/\d*\.\d+([eE][\-+]?\d+)?/, 'number.float'],
-          [/0[xX][0-9a-fA-F]+/, 'number.hex'],
-          [/\d+/, 'number'],
-        ],
-        comment: [
-          [/[^/*]+/, 'comment'],
-          [/\*\//, 'comment', '@pop'],
-          [/[/*]/, 'comment'],
-        ],
-      },
-    })
-
-    // Register PAC script completions
-    monaco.languages.registerCompletionItemProvider('pac', {
-      provideCompletionItems: (model, position) => {
-        const suggestions = [
-          {
-            label: 'FindProxyForURL',
-            kind: monaco.languages.CompletionItemKind.Function,
-            insertText: [
-              'function FindProxyForURL(url, host) {',
-              '\t$0',
-              '\treturn "DIRECT";',
-              '}',
-            ].join('\n'),
-            insertTextRules:
-              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: 'Main PAC function that determines proxy settings',
-            detail: '(url: string, host: string) => string',
+        // Configure worker
+        self.MonacoEnvironment = {
+          getWorker() {
+            return import(
+              'monaco-editor/esm/vs/editor/editor.worker?worker'
+            ).then((module) => new module.default())
           },
-          {
-            label: 'dnsResolve',
-            kind: monaco.languages.CompletionItemKind.Function,
-            insertText: 'dnsResolve(${1:host})',
-            insertTextRules:
-              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: 'Resolves hostname to IP address',
-            detail: '(host: string) => string',
-          },
-          {
-            label: 'isInNet',
-            kind: monaco.languages.CompletionItemKind.Function,
-            insertText: 'isInNet(${1:host}, ${2:pattern}, ${3:mask})',
-            insertTextRules:
-              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: 'Checks if IP address is in subnet',
-            detail: '(host: string, pattern: string, mask: string) => boolean',
-          },
-          {
-            label: 'isPlainHostName',
-            kind: monaco.languages.CompletionItemKind.Function,
-            insertText: 'isPlainHostName(${1:host})',
-            insertTextRules:
-              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: 'Checks if the hostname has any dots',
-            detail: '(host: string) => boolean',
-          },
-          {
-            label: 'dnsDomainIs',
-            kind: monaco.languages.CompletionItemKind.Function,
-            insertText: 'dnsDomainIs(${1:host}, ${2:domain})',
-            insertTextRules:
-              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: 'Checks if hostname belongs to domain',
-            detail: '(host: string, domain: string) => boolean',
-          },
-          {
-            label: 'shExpMatch',
-            kind: monaco.languages.CompletionItemKind.Function,
-            insertText: 'shExpMatch(${1:str}, ${2:pattern})',
-            insertTextRules:
-              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: 'Shell-expression pattern matching',
-            detail: '(str: string, pattern: string) => boolean',
-          },
-          // Proxy return values
-          {
-            label: 'DIRECT',
-            kind: monaco.languages.CompletionItemKind.Constant,
-            insertText: '"DIRECT"',
-            documentation: 'Direct connection without proxy',
-          },
-          {
-            label: 'PROXY',
-            kind: monaco.languages.CompletionItemKind.Snippet,
-            insertText: '"PROXY ${1:host}:${2:port}"',
-            insertTextRules:
-              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: 'Use specified proxy server',
-          },
-          {
-            label: 'SOCKS',
-            kind: monaco.languages.CompletionItemKind.Snippet,
-            insertText: '"SOCKS ${1:host}:${2:port}"',
-            insertTextRules:
-              monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-            documentation: 'Use specified SOCKS proxy server',
-          },
-        ]
-
-        return {
-          suggestions: suggestions.map((s) => ({
-            ...s,
-            range: {
-              startLineNumber: position.lineNumber,
-              endLineNumber: position.lineNumber,
-              startColumn: position.column,
-              endColumn: position.column,
-            },
-          })),
         }
-      },
-    })
-
-    // Simple dark theme
-    monaco.editor.defineTheme('pac-dark', {
-      base: 'vs-dark',
-      inherit: true,
-      rules: [
-        { token: 'comment', foreground: '6A9955' },
-        { token: 'string', foreground: 'CE9178' },
-        { token: 'keyword', foreground: '569CD6' },
-        { token: 'type', foreground: '4EC9B0' },
-        { token: 'operator', foreground: 'D4D4D4' },
-        { token: 'delimiter', foreground: 'D4D4D4' },
-        { token: 'number', foreground: 'B5CEA8' },
-        { token: 'identifier', foreground: '9CDCFE' },
-      ],
-      colors: {
-        'editor.background': '#1E1E1E',
-        'editor.foreground': '#D4D4D4',
-        'editor.lineHighlightBackground': '#2D2D2D',
-        'editorLineNumber.foreground': '#858585',
-        'editorLineNumber.activeForeground': '#C6C6C6',
-        'editor.selectionBackground': '#264F78',
-        'editor.inactiveSelectionBackground': '#3A3D41',
-        'editorIndentGuide.background': '#404040',
-        'editorIndentGuide.activeBackground': '#707070',
-      },
-    })
-
-    this.hasInitialized = true
-  }
-
-  static create(
-    container: HTMLElement,
-    options: MonacoOptions
-  ): monaco.editor.IStandaloneCodeEditor {
-    this.initializeMonaco()
-
-    const defaultOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
-      value: options.value || '',
-      language: 'pac',
-      theme: 'pac-dark',
-      automaticLayout: true,
-      minimap: { enabled: false },
-      scrollBeyondLastLine: false,
-      fontSize: 14,
-      lineNumbers: 'on',
-      renderLineHighlight: 'all',
-      tabSize: 2,
-      wordWrap: 'on',
-      folding: true,
-      scrollbar: {
-        vertical: 'visible',
-        horizontal: 'visible',
-        useShadows: false,
-        verticalScrollbarSize: 10,
-        horizontalScrollbarSize: 10,
-      },
-      formatOnPaste: true,
-      formatOnType: true,
-      suggestOnTriggerCharacters: true,
-      quickSuggestions: true,
-      fixedOverflowWidgets: true,
-      // Disable features using valid properties
-      hover: {
-        enabled: false,
-        delay: 100000, // Long delay as another way to effectively disable
-      },
-      links: false,
-      contextmenu: false,
-      parameterHints: { enabled: false },
-      codeLens: false,
-      lightbulb: { enabled: undefined },
-      selectionHighlight: false,
-      occurrencesHighlight: 'off',
-      suggest: {
-        showKeywords: false,
-        showSnippets: true,
-        showClasses: false,
-        showFunctions: true,
-        showConstructors: false,
-        showFields: false,
-        showVariables: false,
-        showInterfaces: false,
-        showModules: false,
-      },
+        return monaco
+      })
     }
-
-    return monaco.editor.create(container, {
-      ...defaultOptions,
-      ...options,
-    })
+    return this.editorPromise
   }
 
-  static dispose(editor: monaco.editor.IStandaloneCodeEditor): void {
-    editor?.dispose()
-  }
+  /**
+   * Initializes Monaco with custom languages and themes
+   */
+  private static initializeMonaco = withErrorHandling(
+    async (): Promise<void> => {
+      if (this.hasInitialized) return
+      if (!isBrowserContext) return
 
-  static getValue(editor: monaco.editor.IStandaloneCodeEditor): string {
+      const monaco = await this.loadMonaco()
+
+      // Register PAC script language
+      monaco.languages.register({ id: 'pac' })
+
+      // Define PAC script syntax highlighting
+      monaco.languages.setMonarchTokensProvider('pac', { tokenizer })
+
+      // Register PAC script completions
+      monaco.languages.registerCompletionItemProvider('pac', {
+        triggerCharacters: ['.', '(', '"', "'", 'function '],
+        provideCompletionItems: (_, position) => {
+          const suggestions = [
+            {
+              label: 'FindProxyForURL',
+              kind: monaco.languages.CompletionItemKind.Function,
+              insertText: [
+                'function FindProxyForURL(url, host) {',
+                '\t$0',
+                '\treturn "DIRECT";',
+                '}',
+              ].join('\n'),
+              insertTextRules:
+                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: 'Main PAC function that determines proxy settings',
+              detail: '(url: string, host: string) => string',
+            },
+            {
+              label: 'dnsResolve',
+              kind: monaco.languages.CompletionItemKind.Function,
+              insertText: 'dnsResolve(${1:host})',
+              insertTextRules:
+                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: 'Resolves hostname to IP address',
+              detail: '(host: string) => string',
+            },
+            {
+              label: 'isInNet',
+              kind: monaco.languages.CompletionItemKind.Function,
+              insertText: 'isInNet(${1:host}, ${2:pattern}, ${3:mask})',
+              insertTextRules:
+                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: 'Checks if IP address is in subnet',
+              detail:
+                '(host: string, pattern: string, mask: string) => boolean',
+            },
+            {
+              label: 'isPlainHostName',
+              kind: monaco.languages.CompletionItemKind.Function,
+              insertText: 'isPlainHostName(${1:host})',
+              insertTextRules:
+                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: 'Checks if the hostname has any dots',
+              detail: '(host: string) => boolean',
+            },
+            {
+              label: 'dnsDomainIs',
+              kind: monaco.languages.CompletionItemKind.Function,
+              insertText: 'dnsDomainIs(${1:host}, ${2:domain})',
+              insertTextRules:
+                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: 'Checks if hostname belongs to domain',
+              detail: '(host: string, domain: string) => boolean',
+            },
+            {
+              label: 'shExpMatch',
+              kind: monaco.languages.CompletionItemKind.Function,
+              insertText: 'shExpMatch(${1:str}, ${2:pattern})',
+              insertTextRules:
+                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: 'Shell-expression pattern matching',
+              detail: '(str: string, pattern: string) => boolean',
+            },
+            // Proxy return values
+            {
+              label: 'DIRECT',
+              kind: monaco.languages.CompletionItemKind.Constant,
+              insertText: '"DIRECT"',
+              documentation: 'Direct connection without proxy',
+            },
+            {
+              label: 'PROXY',
+              kind: monaco.languages.CompletionItemKind.Snippet,
+              insertText: '"PROXY ${1:host}:${2:port}"',
+              insertTextRules:
+                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: 'Use specified proxy server',
+            },
+            {
+              label: 'SOCKS',
+              kind: monaco.languages.CompletionItemKind.Snippet,
+              insertText: '"SOCKS ${1:host}:${2:port}"',
+              insertTextRules:
+                monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+              documentation: 'Use specified SOCKS proxy server',
+            },
+          ]
+
+          return {
+            suggestions: suggestions.map((s) => ({
+              ...s,
+              range: {
+                startLineNumber: position.lineNumber,
+                endLineNumber: position.lineNumber,
+                startColumn: position.column,
+                endColumn: position.column,
+              },
+            })),
+          }
+        },
+      })
+
+      // Define themes
+      monaco.editor.defineTheme('pac-dark', lightTheme)
+
+      // Define light theme
+      monaco.editor.defineTheme('pac-light', darkTheme)
+
+      this.hasInitialized = true
+    },
+    ERROR_TYPES.EDITOR
+  )
+
+  /**
+   * Creates a Monaco editor instance with lazy loading
+   */
+  static create = withErrorHandling(
+    async (container: HTMLElement, options: MonacoOptions): Promise<any> => {
+      if (!isBrowserContext) {
+        throw new Error('Monaco editor can only be used in a browser context')
+      }
+
+      await this.initializeMonaco()
+
+      const monaco = await this.loadMonaco()
+
+      // Detect dark/light mode preference
+      const darkMode =
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+
+      // Listen for theme changes
+      if (window.matchMedia) {
+        window
+          .matchMedia('(prefers-color-scheme: dark)')
+          .addEventListener('change', (event) => {
+            const editor = monaco.editor.getEditors()[0]
+            if (editor) {
+              monaco.editor.setTheme(event.matches ? 'pac-dark' : 'pac-light')
+            }
+          })
+      }
+      const theme = darkMode ? 'pac-dark' : 'pac-light'
+      return monaco.editor.create(container, { ...options, theme })
+    },
+    ERROR_TYPES.EDITOR
+  )
+
+  /**
+   * Disposes a Monaco editor instance
+   */
+  static dispose = withErrorHandling(async (editor: any): Promise<void> => {
+    if (!isBrowserContext || !editor) return
+    editor.dispose()
+  }, ERROR_TYPES.EDITOR)
+
+  /**
+   * Gets the value from a Monaco editor instance
+   */
+  static getValue = withErrorHandling(async (editor: any): Promise<string> => {
+    if (!isBrowserContext || !editor) return ''
     return editor.getValue()
-  }
+  }, ERROR_TYPES.EDITOR)
 
-  static setValue(
-    editor: monaco.editor.IStandaloneCodeEditor,
-    value: string
-  ): void {
-    editor.setValue(value)
+  /**
+   * Sets the value of a Monaco editor instance
+   */
+  static setValue = withErrorHandling(
+    async (editor: any, value: string): Promise<void> => {
+      if (!isBrowserContext || !editor) return
+      editor.setValue(value)
+    },
+    ERROR_TYPES.EDITOR
+  )
+
+  /**
+   * Checks if we're in a browser context where Monaco can be used
+   */
+  static canUseMonaco(): boolean {
+    return isBrowserContext
+  }
+}
+
+// If we're not in a browser context, provide stub methods for type safety
+if (!isBrowserContext) {
+  Monaco.KeyCode = {
+    // Stub KeyCode values
+    Enter: 13,
+    Escape: 27,
   }
 }

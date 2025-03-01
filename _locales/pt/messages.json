@@ -134,9 +134,8 @@
   "dropToRemoveQuickScripts": {
     "message": "Solte aqui para remover dos scripts rápidos"
   },
-  "quickPacScripts": {
-    "message": "Scripts PAC Rápidos"
-  },
+  "quickPacScripts": { "message": "Configurações de troca rápida" },
+  "allProxyConfigs": { "message": "Todas as configurações de proxy" },
   "dragScriptsHere": {
     "message": "Arraste scripts aqui para ativar a alternância rápida. A alternância rápida permite alternar o proxy clicando no ícone da extensão."
   },

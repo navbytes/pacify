@@ -134,9 +134,8 @@
   "dropToRemoveQuickScripts": {
     "message": "拖放到此处从快速脚本中移除"
   },
-  "quickPacScripts": {
-    "message": "快速PAC脚本"
-  },
+  "quickPacScripts": { "message": "快速切換配置" },
+  "allProxyConfigs": { "message": "所有代理程式設定" },
   "dragScriptsHere": {
     "message": "将脚本拖到此处以启用快速切换。快速切换允许您通过点击扩展图标切换代理。"
   },

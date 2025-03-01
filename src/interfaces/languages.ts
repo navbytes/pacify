@@ -8,3 +8,6 @@ export type Languages =
   | 'es'
   | 'fr'
   | 'bn'
+  | 'ko'
+  | 'de'
+  | 'pt'

@@ -1,41 +1,30 @@
-<script context="module" lang="ts">
-  // Define the supported colors.
-  export type ButtonColor =
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'error'
-    | 'info'
-  // Define an interface for the props.
-  export interface ButtonProps {
+<script lang="ts">
+  // Define types within the component
+  type ButtonColor = 'primary' | 'secondary' | 'success' | 'error' | 'info'
+
+  interface Props {
+    classes?: string
     color?: ButtonColor
     minimal?: boolean
-    icon?: typeof SvelteComponent
+    icon?: () => any
     disabled?: boolean
     type?: 'button' | 'submit' | 'reset'
+    onclick?: (event: MouseEvent) => void
+    children?: () => any
   }
-</script>
 
-<script lang="ts">
-  import type { SvelteComponent } from 'svelte'
+  const {
+    classes = '',
+    color = 'primary',
+    minimal = false,
+    icon = undefined,
+    disabled = false,
+    type = 'button',
+    onclick = undefined,
+    children = undefined,
+  }: Props = $props()
 
-  // Default props
-  export let classes: string = ''
-  export let color: ButtonColor = 'primary'
-  export let minimal: boolean = false
-  export let icon: typeof SvelteComponent | null = null
-  export let disabled: boolean = false
-  export let type: 'button' | 'submit' | 'reset' = 'button'
-
-  /*
-   Mapping of each color to its Tailwind class definitions.
-   For each color there are two sets of classes:
-   - "base": when the button is using the regular (filled) style
-   - "minimal": when the button is in minimal mode (only text/icon)
-  
-   The dark: variants allow the color scheme to flip automatically when
-   dark mode is activated (e.g. with a "dark" class on your root HTML element).
-  */
+  // Color mapping remains the same
   const colors: Record<ButtonColor, { base: string; minimal: string }> = {
     primary: {
       base: 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800',
@@ -64,29 +53,28 @@
     },
   }
 
-  /*
-    Compute the button classes:
-    - In regular (non-minimal) mode, the button uses padding, rounded corners,
-      a shadow, and focus ring styling.
-    - In minimal mode, only the text color (and hover text change) is applied.
-  */
-  $: btnClasses = minimal
-    ? `inline-flex items-center focus:outline-none ${colors[color].minimal}`
-    : `inline-flex items-center py-2 px-4 rounded shadow focus:outline-none focus:ring-2 focus:ring-offset-2 ${colors[color].base}`
+  // Use $derived instead of $: for computed values
+  const btnClasses = $derived(
+    minimal
+      ? `inline-flex items-center focus:outline-none ${colors[color].minimal}`
+      : `inline-flex items-center py-2 px-4 rounded shadow focus:outline-none focus:ring-2 focus:ring-offset-2 ${colors[color].base}`
+  )
 
-  // If disabled, we add opacity and a not-allowed cursor.
-  $: disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : ''
+  const disabledClasses = $derived(
+    disabled ? 'opacity-50 cursor-not-allowed' : ''
+  )
 
-  // Final computed classes string.
-  $: combinedClasses = `${btnClasses} ${disabledClasses} ${classes}`.trim()
+  const combinedClasses = $derived(
+    `${btnClasses} ${disabledClasses} ${classes}`.trim()
+  )
 </script>
 
-<button {type} class={combinedClasses} {disabled} on:click>
+<button {type} class={combinedClasses} {disabled} {onclick}>
   {#if icon}
-    <!-- If both icon and text exist, add margin-right to the icon -->
-    <svelte:component this={icon} class={$$slots.default ? 'mr-2' : ''} />
+    <!-- Use the @render tag to render the icon component -->
+    <span class={children ? 'mr-2' : ''}>
+      {@render icon()}
+    </span>
   {/if}
-  {#if $$slots.default}
-    <slot />
-  {/if}
+  {@render children?.()}
 </button>

@@ -26,20 +26,15 @@
   }
 }
 
-#options-container .all-scripts-section [data-overlay] {
+[data-overlay] {
   display: none;
-}
-#options-container[data-page-type='QUICK_SWITCH']
-  .all-scripts-section
-  [data-overlay] {
-  display: flex;
 }
 
-#options-container .quick-scripts-section [data-overlay] {
-  display: none;
+[data-drag-type='QUICK_SWITCH'][data-page-type='QUICK_SWITCH'],
+[data-drag-type='OPTIONS'][data-page-type='OPTIONS'] {
+  cursor: no-drop;
 }
-#options-container[data-page-type='OPTIONS']
-  .quick-scripts-section
-  [data-overlay] {
+[data-drag-type='QUICK_SWITCH'][data-page-type='OPTIONS'] [data-overlay],
+[data-drag-type='OPTIONS'][data-page-type='QUICK_SWITCH'] [data-overlay] {
   display: flex;
 }

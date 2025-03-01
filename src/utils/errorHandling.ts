@@ -1,0 +1,104 @@
+// src/utils/errorHandling.ts
+import { NotifyService } from '@/services/NotifyService'
+import { ERROR_TYPES } from '@/interfaces'
+
+export type ErrorHandler = (error: unknown) => void
+
+/**
+ * Creates a function that wraps an async operation with error handling
+ *
+ * @param operation - The async operation to execute
+ * @param errorType - The type of error for logging
+ * @param customHandler - Optional custom error handler
+ */
+export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
+  operation: T,
+  errorType: ERROR_TYPES,
+  customHandler?: ErrorHandler
+): (...args: Parameters<T>) => Promise<ReturnType<T>> {
+  return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
+    try {
+      return await operation(...args)
+    } catch (error) {
+      // Default error handling
+      NotifyService.error(errorType, error)
+
+      // Custom error handling if provided
+      if (customHandler) {
+        customHandler(error)
+      }
+
+      // Rethrow the error for the caller to handle
+      throw error
+    }
+  }
+}
+
+/**
+ * Creates a function that wraps an async operation with error handling and provides a fallback
+ *
+ * @param operation - The async operation to execute
+ * @param errorType - The type of error for logging
+ * @param fallbackValue - The value to return if the operation fails
+ */
+export function withErrorHandlingAndFallback<
+  T extends (...args: any[]) => Promise<any>,
+  R = ReturnType<T>,
+>(
+  operation: T,
+  errorType: ERROR_TYPES,
+  fallbackValue: R
+): (...args: Parameters<T>) => Promise<R> {
+  return async (...args: Parameters<T>): Promise<R> => {
+    try {
+      return (await operation(...args)) as R
+    } catch (error) {
+      NotifyService.error(errorType, error)
+      return fallbackValue
+    }
+  }
+}
+
+/**
+ * Creates a function that retries a failed operation
+ *
+ * @param operation - The async operation to execute
+ * @param errorType - The type of error for logging
+ * @param maxRetries - Maximum number of retry attempts
+ * @param delayMs - Base delay between retries (will increase exponentially)
+ */
+export function withRetry<T extends (...args: any[]) => Promise<any>>(
+  operation: T,
+  errorType: ERROR_TYPES,
+  maxRetries: number = 3,
+  delayMs: number = 1000
+): (...args: Parameters<T>) => Promise<ReturnType<T>> {
+  return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
+    let lastError: unknown
+
+    for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
+      try {
+        return await operation(...args)
+      } catch (error) {
+        lastError = error
+
+        if (attempt <= maxRetries) {
+          // Log error but continue with retry
+          console.warn(
+            `Operation failed (attempt ${attempt}/${maxRetries + 1}). Retrying...`,
+            error
+          )
+
+          // Exponential backoff
+          await new Promise((resolve) =>
+            setTimeout(resolve, delayMs * Math.pow(2, attempt - 1))
+          )
+        }
+      }
+    }
+
+    // If we reach here, all retries failed
+    NotifyService.error(errorType, lastError)
+    throw lastError
+  }
+}

@@ -1,30 +1,35 @@
-<script context="module" lang="ts">
-  // Define types for spacing sizes and alignment options.
-  export type SpacingSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-  export type AlignItems = 'start' | 'center' | 'end' | 'stretch' | 'baseline'
-  export type JustifyContent =
+<script lang="ts">
+  // Type definitions - moved from module context to regular script
+  type SpacingSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+  type AlignItems = 'start' | 'center' | 'end' | 'stretch' | 'baseline'
+  type JustifyContent =
     | 'start'
     | 'center'
     | 'end'
     | 'between'
     | 'around'
     | 'evenly'
-  export type Direction = 'horizontal' | 'vertical'
-</script>
+  type Direction = 'horizontal' | 'vertical'
 
-<script lang="ts">
-  // Props
-  export let classes: string = ''
-  // rowDirection: horizontal or vertical layout.
-  export let direction: Direction = 'horizontal'
-  // childrenGap: spacing between child elements.
-  export let childrenGap: SpacingSize = 'md'
-  // alignItems: controls the cross-axis alignment.
-  export let alignItems: AlignItems = 'center'
-  // justifyContent: controls the main-axis alignment.
-  export let justifyContent: JustifyContent = 'start'
+  interface Props {
+    classes?: string
+    direction?: Direction
+    childrenGap?: SpacingSize
+    alignItems?: AlignItems
+    justifyContent?: JustifyContent
+    children?: () => any
+  }
 
-  // Map the spacing size to Tailwind gap classes.
+  const {
+    classes = '',
+    direction = 'horizontal',
+    childrenGap = 'md',
+    alignItems = 'center',
+    justifyContent = 'start',
+    children,
+  }: Props = $props()
+
+  // Map constants remain the same
   const spacingMap: Record<SpacingSize, string> = {
     xxs: 'gap-1',
     xs: 'gap-2',
@@ -35,7 +40,6 @@
     xxl: 'gap-10',
   }
 
-  // Map justifyContent options to Tailwind classes.
   const justifyMap: Record<JustifyContent, string> = {
     start: 'justify-start',
     center: 'justify-center',
@@ -45,7 +49,6 @@
     evenly: 'justify-evenly',
   }
 
-  // Map alignItems options to Tailwind classes.
   const alignMap: Record<AlignItems, string> = {
     start: 'items-start',
     center: 'items-center',
@@ -54,16 +57,19 @@
     baseline: 'items-baseline',
   }
 
-  // Compute the Tailwind classes based on the provided props.
-  $: directionClass = direction === 'horizontal' ? 'flex-row' : 'flex-col'
-  $: gapClass = spacingMap[childrenGap]
-  $: justifyClass = justifyMap[justifyContent]
-  $: alignClass = alignMap[alignItems]
+  // Computed classes using $derived
+  const directionClass = $derived(
+    direction === 'horizontal' ? 'flex-row' : 'flex-col'
+  )
+  const gapClass = $derived(spacingMap[childrenGap])
+  const justifyClass = $derived(justifyMap[justifyContent])
+  const alignClass = $derived(alignMap[alignItems])
 
-  $: flexGroupClasses =
+  const flexGroupClasses = $derived(
     `flex ${directionClass} ${gapClass} ${justifyClass} ${alignClass} ${classes}`.trim()
+  )
 </script>
 
 <div class={flexGroupClasses}>
-  <slot />
+  {@render children?.()}
 </div>

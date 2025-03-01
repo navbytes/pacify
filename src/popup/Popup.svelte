@@ -29,9 +29,9 @@
     </h1>
 
     <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
-      <Button minimal color="secondary" on:click={openSettings}
-        ><Settings /><span class="sr-only"
-          >{I18nService.getMessage('settings')}</span
+      <Button minimal color="secondary" onclick={openSettings}>
+        {#snippet icon()}<Settings />{/snippet}
+        <span class="sr-only">{I18nService.getMessage('settings')}</span
         ></Button
       >
     </FlexGroup>

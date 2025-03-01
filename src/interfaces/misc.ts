@@ -8,3 +8,8 @@ export type DebounceTimeout = ReturnType<typeof setTimeout> | null
  * - `QUICK_SWITCH`: The list view is rendered in the quick switch list in popup page.
  */
 export type ListViewType = 'POPUP' | 'OPTIONS' | 'QUICK_SWITCH'
+
+export interface DropItem {
+  dataType: string
+  dataId: string
+}

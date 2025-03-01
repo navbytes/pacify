@@ -134,9 +134,8 @@
   "dropToRemoveQuickScripts": {
     "message": "Plasați aici pentru a elimina din scripturile rapide"
   },
-  "quickPacScripts": {
-    "message": "Scripturi PAC rapide"
-  },
+  "quickPacScripts": { "message": "Configurații de comutare rapidă" },
+  "allProxyConfigs": { "message": "Toate configurațiile proxy" },
   "dragScriptsHere": {
     "message": "Trageți scripturile aici pentru a activa comutarea rapidă. Comutarea rapidă vă permite să schimbați proxy-ul făcând clic pe pictograma extensiei."
   },

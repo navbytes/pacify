@@ -41,7 +41,7 @@
       <Button
         type="button"
         classes="flex-grow"
-        on:click={() => selectOption(option.value)}
+        onclick={() => selectOption(option.value)}
         color={proxyMode === option.value ? 'primary' : 'secondary'}
       >
         {option.label}

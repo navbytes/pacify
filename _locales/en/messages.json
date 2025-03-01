@@ -134,9 +134,8 @@
   "dropToRemoveQuickScripts": {
     "message": "Drop here to remove from quick scripts"
   },
-  "quickPacScripts": {
-    "message": "Quick PAC Scripts"
-  },
+  "quickPacScripts": { "message": "Quick Switch Configs" },
+  "allProxyConfigs": { "message": "All Proxy Configs" },
   "dragScriptsHere": {
     "message": "Drag scripts here to enable quick switching. Quick switch allows you to switch proxy by clicking the extension icon."
   },

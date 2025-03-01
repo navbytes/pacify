@@ -45,7 +45,7 @@
   justifyContent="between"
 >
   <!-- Backup button -->
-  <Button color="secondary" on:click={handleBackup}
+  <Button color="secondary" onclick={handleBackup}
     >{I18nService.getMessage('backupSettings')}</Button
   >
   <LabelButton color="secondary">
