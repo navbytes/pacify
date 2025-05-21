@@ -1,10 +1,11 @@
 // src/services/StorageService.ts
-import { ERROR_TYPES, type AppSettings, type ProxyConfig } from '@/interfaces'
+import { ERROR_TYPES, type AppSettings } from '@/interfaces'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import {
   withErrorHandling,
   withErrorHandlingAndFallback,
 } from '@/utils/errorHandling'
+import { browserService } from './chrome/BrowserService'
 
 // Size limit for storing in sync storage (Chrome limit is 8KB per item)
 const SYNC_SIZE_LIMIT = 8000 // 8KB
@@ -50,7 +51,7 @@ export class StorageService {
       }
 
       // Save base settings to sync storage
-      await chrome.storage.sync.set({ settings: baseSettings })
+      await browserService.storage.sync.set({ settings: baseSettings })
 
       // Update cache
       this.settingsCache = settings
@@ -75,7 +76,7 @@ export class StorageService {
       }
 
       // Get base settings from sync storage
-      const data = await chrome.storage.sync.get('settings')
+      const data = await browserService.storage.sync.get('settings')
       const baseSettings: AppSettings = data.settings || DEFAULT_SETTINGS
 
       // Resolve any script references
@@ -117,7 +118,7 @@ export class StorageService {
    */
   private static storeScriptData = withErrorHandling(
     async (scriptId: string, data: string): Promise<void> => {
-      await chrome.storage.local.set({ [`script_${scriptId}`]: data })
+      await browserService.storage.local.set({ [`script_${scriptId}`]: data })
     },
     ERROR_TYPES.SAVE_SCRIPT
   )
@@ -127,7 +128,7 @@ export class StorageService {
    */
   private static getScriptData = withErrorHandlingAndFallback(
     async (scriptId: string): Promise<string | null> => {
-      const data = await chrome.storage.local.get(`script_${scriptId}`)
+      const data = await browserService.storage.local.get(`script_${scriptId}`)
       return data[`script_${scriptId}`] || null
     },
     ERROR_TYPES.FETCH_SETTINGS,
@@ -153,15 +154,15 @@ export class StorageService {
       localQuota: number
     }> => {
       const [syncInfo, localInfo] = await Promise.all([
-        chrome.storage.sync.getBytesInUse(null),
-        chrome.storage.local.getBytesInUse(null),
+        browserService.storage.sync.getBytesInUse(null),
+        browserService.storage.local.getBytesInUse(null),
       ])
 
       return {
         syncUsed: syncInfo,
-        syncQuota: chrome.storage.sync.QUOTA_BYTES,
+        syncQuota: browserService.storage.sync.QUOTA_BYTES,
         localUsed: localInfo,
-        localQuota: chrome.storage.local.QUOTA_BYTES,
+        localQuota: browserService.storage.local.QUOTA_BYTES,
       }
     },
     ERROR_TYPES.FETCH_SETTINGS,
@@ -173,7 +174,7 @@ export class StorageService {
    */
   static migrateStorage = withErrorHandling(async (): Promise<void> => {
     // Get settings from sync storage
-    const data = await chrome.storage.sync.get('settings')
+    const data = await browserService.storage.sync.get('settings')
 
     if (data.settings) {
       // Save using the new hybrid approach
