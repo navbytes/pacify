@@ -12,6 +12,7 @@ import {
   POPUP_ENABLED,
 } from '@/constants/app'
 import { ChromeService } from '@/services/chrome'
+import { browserService } from '@/services/chrome/BrowserService'
 
 /**
  * Message handler map for processing different types of background messages
@@ -39,11 +40,25 @@ const messageHandlers: Record<
  */
 async function initialize(): Promise<void> {
   try {
-    // Set up chrome action click listeners
-    chrome.action.onClicked.addListener(handleActionClick)
+    // Set up browser action click listeners
+    browserService.action.onClicked.addListener(handleActionClick)
 
     // Set up runtime message listeners
-    chrome.runtime.onMessage.addListener(handleRuntimeMessage)
+    browserService.runtime.onMessage.addListener(handleRuntimeMessage)
+
+    // Listen for browser startup events
+    browserService.runtime.onStartup.addListener(async () => {
+      console.log('Browser started - reinitializing proxy settings and badge')
+      await initializeProxySettings()
+    })
+
+    // Listen for extension installation or update events
+    browserService.runtime.onInstalled.addListener(async () => {
+      console.log(
+        'Extension installed/updated - initializing proxy settings and badge'
+      )
+      await initializeProxySettings()
+    })
 
     // Initialize proxy settings
     await initializeProxySettings()
@@ -60,11 +75,11 @@ async function initialize(): Promise<void> {
 /**
  * Handles incoming runtime messages
  */
-async function handleRuntimeMessage(
+function handleRuntimeMessage(
   message: BackgroundMessage,
   sender: chrome.runtime.MessageSender,
   sendResponse: (response?: any) => void
-): Promise<boolean> {
+): boolean {
   const handler = messageHandlers[message.type]
   if (handler) {
     handler(message)
@@ -158,8 +173,30 @@ async function initializeProxySettings(): Promise<void> {
   const settings = await safeGetSettings()
   if (!settings) return
 
-  const activeScript = settings.proxyConfigs.find((script) => script.isActive)
-  await (activeScript ? setProxySettings(activeScript) : clearProxySettings())
+  // Find active script either by isActive flag or by matching activeScriptId
+  const activeScript = settings.proxyConfigs.find(
+    (script) =>
+      script.isActive ||
+      (settings.activeScriptId && script.id === settings.activeScriptId)
+  )
+
+  if (activeScript) {
+    await setProxySettings(activeScript)
+  } else {
+    await clearProxySettings()
+  }
+
+  // Ensure the badge is updated on Chrome restart by checking the current proxy settings
+  const proxyConfig = await ChromeService.getProxy()
+  if (proxyConfig.value.mode !== 'direct') {
+    // If proxy is active but badge might not be set, update it from the active script
+    if (activeScript) {
+      await updateBadge(activeScript.name, activeScript.color)
+    }
+  } else {
+    // If no proxy is active, ensure the badge shows the default state
+    await updateBadge(DEFAULT_BADGE_TEXT, DEFAULT_BADGE_COLOR)
+  }
 }
 
 async function setProxySettings(proxy: ProxyConfig): Promise<void> {
@@ -186,8 +223,10 @@ async function updateBadge(
   color = DEFAULT_BADGE_COLOR
 ): Promise<void> {
   try {
-    await chrome.action.setBadgeBackgroundColor({ color })
-    await chrome.action.setBadgeText({ text: text.slice(0, 3).toUpperCase() })
+    await browserService.action.setBadgeBackgroundColor({ color })
+    await browserService.action.setBadgeText({
+      text: text.slice(0, 3).toUpperCase(),
+    })
   } catch (error) {
     console.error('Error updating badge:', error)
   }
@@ -204,7 +243,7 @@ async function safeGetSettings() {
 
 async function safeSetPopup(popup: string): Promise<void> {
   try {
-    await chrome.action.setPopup({ popup })
+    await browserService.action.setPopup({ popup })
   } catch (error) {
     console.error('Error setting popup:', error)
   }
