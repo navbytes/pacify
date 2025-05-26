@@ -1,0 +1,70 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write # This is required for creating releases
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run build
+
+      - name: Get version from manifest.json
+        id: manifest-version
+        run: |
+          VERSION=$(grep -o '"version": *"[^"]*"' manifest.json | cut -d'"' -f4)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Extract release notes from CHANGELOG.md
+        id: extract-release-notes
+        run: |
+          VERSION=${{ steps.manifest-version.outputs.VERSION }}
+          # Extract the section for the current version from CHANGELOG.md
+          # This awk script extracts content between ## [$VERSION] and the next ## or end of file
+          RELEASE_NOTES=$(awk -v version="$VERSION" '
+            BEGIN { found=0; }
+            /^## \['"$VERSION"'\]/ { found=1; next; }
+            /^## \[/ { if (found) exit; }
+            { if (found) print; }
+          ' CHANGELOG.md)
+          # Store the release notes in an output variable, handling multiline strings
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_OUTPUT
+          echo "$RELEASE_NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create ZIP archive
+        run: |
+          cd dist
+          zip -r ../Pacify_${{ steps.manifest-version.outputs.VERSION }}.zip .
+          cd ..
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.manifest-version.outputs.VERSION }}
+          name: Release v${{ steps.manifest-version.outputs.VERSION }}
+          body: ${{ steps.extract-release-notes.outputs.RELEASE_NOTES }}
+          files: Pacify_${{ steps.manifest-version.outputs.VERSION }}.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
