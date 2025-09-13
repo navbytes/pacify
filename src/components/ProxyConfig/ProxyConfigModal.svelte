@@ -118,7 +118,9 @@
       await onSave(config)
     } catch (error) {
       errorMessage =
-        error instanceof Error ? error.message : I18nService.getMessage('invalidConfiguration')
+        error instanceof Error
+          ? error.message
+          : I18nService.getMessage('invalidConfiguration')
       NotifyService.error(ERROR_TYPES.VALIDATION, error)
     } finally {
       isSubmitting = false
