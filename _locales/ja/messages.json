@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "ポート"
+  },
+  "enterConfigurationName": {
+    "message": "設定名を入力してください"
+  },
+  "disableProxyOnStartup": {
+    "message": "起動時にプロキシを無効にする"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "有効にすると、ブラウザの起動時にアクティブなプロキシ設定が自動的に無効になり、「オフ」モードで開始することが保証されます。"
+  },
+  "invalidConfiguration": {
+    "message": "無効な設定"
+  },
+  "syncStorage": {
+    "message": "同期ストレージ"
+  },
+  "localStorage": {
+    "message": "ローカルストレージ"
+  },
+  "dropTarget": {
+    "message": "ドロップ対象"
   }
 }

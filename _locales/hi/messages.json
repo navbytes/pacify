@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "पोर्ट"
+  },
+  "enterConfigurationName": {
+    "message": "कॉन्फिगरेशन नाम दर्ज करें"
+  },
+  "disableProxyOnStartup": {
+    "message": "स्टार्टअप पर प्रॉक्सी अक्षम करें"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "सक्षम होने पर, ब्राउज़र शुरू होने पर कोई भी सक्रिय प्रॉक्सी कॉन्फ़िगरेशन स्वचालित रूप से अक्षम हो जाएगी, यह सुनिश्चित करते हुए कि आप \"बंद\" मोड में शुरू करें।"
+  },
+  "invalidConfiguration": {
+    "message": "अमान्य कॉन्फिगरेशन"
+  },
+  "syncStorage": {
+    "message": "सिंक स्टोरेज"
+  },
+  "localStorage": {
+    "message": "स्थानीय स्टोरेज"
+  },
+  "dropTarget": {
+    "message": "ड्रॉप लक्ष्य"
   }
 }

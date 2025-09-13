@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "Port"
+  },
+  "enterConfigurationName": {
+    "message": "Enter configuration name"
+  },
+  "disableProxyOnStartup": {
+    "message": "Disable Proxy on Startup"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "When enabled, any active proxy configuration will be automatically disabled when the browser starts, ensuring you start in \"OFF\" mode."
+  },
+  "invalidConfiguration": {
+    "message": "Invalid configuration"
+  },
+  "syncStorage": {
+    "message": "Sync storage"
+  },
+  "localStorage": {
+    "message": "Local storage"
+  },
+  "dropTarget": {
+    "message": "Drop target"
   }
 }
