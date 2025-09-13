@@ -1,6 +1,6 @@
 {
   "name": "pacify-proxy-manager",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +11,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "caniuse-lite": "^1.0.30001741",
     "lucide-svelte": "^0.474.0",
     "monaco-editor": "^0.52.2",
     "svelte": "^5.15.0"

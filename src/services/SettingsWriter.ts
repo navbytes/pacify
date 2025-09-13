@@ -8,7 +8,9 @@ export class SettingsWriter {
     SettingsReader.invalidateCache()
   }
 
-  static async updateSettings(partialSettings: Partial<AppSettings>): Promise<void> {
+  static async updateSettings(
+    partialSettings: Partial<AppSettings>
+  ): Promise<void> {
     const currentSettings = await SettingsReader.getSettings()
     const updatedSettings = { ...currentSettings, ...partialSettings }
     await this.saveSettings(updatedSettings)
@@ -85,7 +87,8 @@ export class SettingsWriter {
       if (
         !settings.proxyConfigs ||
         typeof settings.quickSwitchEnabled !== 'boolean' ||
-        (settings.disableProxyOnStartup !== undefined && typeof settings.disableProxyOnStartup !== 'boolean')
+        (settings.disableProxyOnStartup !== undefined &&
+          typeof settings.disableProxyOnStartup !== 'boolean')
       ) {
         throw new Error('Invalid settings file.')
       }

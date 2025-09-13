@@ -217,14 +217,14 @@
       class="mb-8 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-400 flex flex-row justify-around gap-2"
     >
       <p>
-        {I18nService.getMessage('syncStorage')}: {Math.round(storageStats.syncUsed / 1024)}KB / {Math.round(
-          storageStats.syncQuota / 1024
-        )}KB
+        {I18nService.getMessage('syncStorage')}: {Math.round(
+          storageStats.syncUsed / 1024
+        )}KB / {Math.round(storageStats.syncQuota / 1024)}KB
       </p>
       <p>
-        {I18nService.getMessage('localStorage')}: {Math.round(storageStats.localUsed / 1024)}KB / {Math.round(
-          storageStats.localQuota / 1024 / 1024
-        )}MB
+        {I18nService.getMessage('localStorage')}: {Math.round(
+          storageStats.localUsed / 1024
+        )}KB / {Math.round(storageStats.localQuota / 1024 / 1024)}MB
       </p>
     </section>
   {/if}
