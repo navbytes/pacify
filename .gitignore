@@ -33,9 +33,6 @@ tmp
 *.crx
 *.pem
 
-# out files
-*output.txt
-
 dev/*
 *.zip
 

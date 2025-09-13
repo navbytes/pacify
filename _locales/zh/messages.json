@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "端口"
+  },
+  "enterConfigurationName": {
+    "message": "输入配置名称"
+  },
+  "disableProxyOnStartup": {
+    "message": "启动时禁用代理"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "启用后，浏览器启动时将自动禁用任何活动的代理配置，确保以\"关闭\"模式启动。"
+  },
+  "invalidConfiguration": {
+    "message": "无效配置"
+  },
+  "syncStorage": {
+    "message": "同步存储"
+  },
+  "localStorage": {
+    "message": "本地存储"
+  },
+  "dropTarget": {
+    "message": "拖放目标"
   }
 }
