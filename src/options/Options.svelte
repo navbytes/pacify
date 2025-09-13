@@ -128,7 +128,7 @@
       justifyContent="between"
     >
       <label class="text-lg font-medium" for="disableProxyOnStartupToggle">
-        Disable Proxy on Startup
+        {I18nService.getMessage('disableProxyOnStartup')}
       </label>
       <ToggleSwitch
         checked={settings.disableProxyOnStartup}
@@ -136,7 +136,7 @@
       />
     </FlexGroup>
     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-      When enabled, any active proxy configuration will be automatically disabled when the browser starts, ensuring you start in "OFF" mode.
+      {I18nService.getMessage('disableProxyOnStartupDescription')}
     </p>
   </section>
 
@@ -217,12 +217,12 @@
       class="mb-8 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-400 flex flex-row justify-around gap-2"
     >
       <p>
-        Sync storage: {Math.round(storageStats.syncUsed / 1024)}KB / {Math.round(
+        {I18nService.getMessage('syncStorage')}: {Math.round(storageStats.syncUsed / 1024)}KB / {Math.round(
           storageStats.syncQuota / 1024
         )}KB
       </p>
       <p>
-        Local storage: {Math.round(storageStats.localUsed / 1024)}KB / {Math.round(
+        {I18nService.getMessage('localStorage')}: {Math.round(storageStats.localUsed / 1024)}KB / {Math.round(
           storageStats.localQuota / 1024 / 1024
         )}MB
       </p>

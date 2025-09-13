@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "পোর্ট"
+  },
+  "enterConfigurationName": {
+    "message": "কনফিগারেশনের নাম লিখুন"
+  },
+  "disableProxyOnStartup": {
+    "message": "স্টার্টআপে প্রক্সি নিষ্ক্রিয় করুন"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "সক্রিয় করা হলে, ব্রাউজার শুরু হওয়ার সময় যেকোনো সক্রিয় প্রক্সি কনফিগারেশন স্বয়ংক্রিয়ভাবে নিষ্ক্রিয় হয়ে যাবে, নিশ্চিত করে যে আপনি \"বন্ধ\" মোডে শুরু করেন।"
+  },
+  "invalidConfiguration": {
+    "message": "অবৈধ কনফিগারেশন"
+  },
+  "syncStorage": {
+    "message": "সিঙ্ক স্টোরেজ"
+  },
+  "localStorage": {
+    "message": "স্থানীয় স্টোরেজ"
+  },
+  "dropTarget": {
+    "message": "ড্রপ টার্গেট"
   }
 }

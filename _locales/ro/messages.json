@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "Port"
+  },
+  "enterConfigurationName": {
+    "message": "Introduceți numele configurației"
+  },
+  "disableProxyOnStartup": {
+    "message": "Dezactivează proxy-ul la pornire"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "Când este activată, orice configurație de proxy activă va fi dezactivată automat la pornirea browserului, asigurând pornirea în modul \"OPRIT\"."
+  },
+  "invalidConfiguration": {
+    "message": "Configurație nevalidă"
+  },
+  "syncStorage": {
+    "message": "Stocare sincronizată"
+  },
+  "localStorage": {
+    "message": "Stocare locală"
+  },
+  "dropTarget": {
+    "message": "Țintă de tragere"
   }
 }

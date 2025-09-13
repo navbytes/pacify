@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "Порт"
+  },
+  "enterConfigurationName": {
+    "message": "Введите название конфигурации"
+  },
+  "disableProxyOnStartup": {
+    "message": "Отключить прокси при запуске"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "При включении любая активная конфигурация прокси будет автоматически отключена при запуске браузера, обеспечивая запуск в режиме \"ВЫКЛЮЧЕН\"."
+  },
+  "invalidConfiguration": {
+    "message": "Недопустимая конфигурация"
+  },
+  "syncStorage": {
+    "message": "Синхронизированное хранилище"
+  },
+  "localStorage": {
+    "message": "Локальное хранилище"
+  },
+  "dropTarget": {
+    "message": "Цель перетаскивания"
   }
 }

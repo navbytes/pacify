@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "Port"
+  },
+  "enterConfigurationName": {
+    "message": "Konfigurationsname eingeben"
+  },
+  "disableProxyOnStartup": {
+    "message": "Proxy beim Start deaktivieren"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "Wenn aktiviert, wird jede aktive Proxy-Konfiguration automatisch deaktiviert, wenn der Browser startet, um sicherzustellen, dass Sie im \"AUS\"-Modus beginnen."
+  },
+  "invalidConfiguration": {
+    "message": "Ungültige Konfiguration"
+  },
+  "syncStorage": {
+    "message": "Sync-Speicher"
+  },
+  "localStorage": {
+    "message": "Lokaler Speicher"
+  },
+  "dropTarget": {
+    "message": "Ablagebereich"
   }
 }

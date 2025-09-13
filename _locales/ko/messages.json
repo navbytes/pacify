@@ -156,5 +156,26 @@
   },
   "port": {
     "message": "포트"
+  },
+  "enterConfigurationName": {
+    "message": "구성 이름을 입력하세요"
+  },
+  "disableProxyOnStartup": {
+    "message": "시작 시 프록시 비활성화"
+  },
+  "disableProxyOnStartupDescription": {
+    "message": "활성화되면 브라우저가 시작될 때 활성화된 프록시 구성이 자동으로 비활성화되어 \"꺼짐\" 모드로 시작됩니다."
+  },
+  "invalidConfiguration": {
+    "message": "잘못된 구성"
+  },
+  "syncStorage": {
+    "message": "동기화 저장소"
+  },
+  "localStorage": {
+    "message": "로컬 저장소"
+  },
+  "dropTarget": {
+    "message": "놓기 대상"
   }
 }
