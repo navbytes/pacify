@@ -173,6 +173,32 @@ async function initializeProxySettings(): Promise<void> {
   const settings = await safeGetSettings()
   if (!settings) return
 
+  // Check if proxy should be disabled on startup
+  if (settings.disableProxyOnStartup) {
+    // Clear any active proxy and reset all scripts to inactive
+    await clearProxySettings()
+    
+    // Update all scripts to inactive state if any were active
+    const hasActiveScript = settings.proxyConfigs.some(script => script.isActive)
+    if (hasActiveScript) {
+      const updatedConfigs = settings.proxyConfigs.map(script => ({
+        ...script,
+        isActive: false
+      }))
+      
+      const updatedSettings = {
+        ...settings,
+        proxyConfigs: updatedConfigs,
+        activeScriptId: null
+      }
+      
+      await SettingsWriter.updateSettings(updatedSettings)
+    }
+    
+    await updateBadge(DEFAULT_BADGE_TEXT, DEFAULT_BADGE_COLOR)
+    return
+  }
+
   // Find active script either by isActive flag or by matching activeScriptId
   const activeScript = settings.proxyConfigs.find(
     (script) =>

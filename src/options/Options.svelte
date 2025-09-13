@@ -41,6 +41,10 @@
     await settingsStore.quickSwitchToggle(checked)
   }
 
+  async function handleDisableProxyOnStartupToggle(checked: boolean) {
+    await settingsStore.updateSettings({ disableProxyOnStartup: checked })
+  }
+
   function openEditor(scriptId?: string) {
     editingScriptId = scriptId || null
     showEditor = true
@@ -113,6 +117,26 @@
     </FlexGroup>
     <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
       {I18nService.getMessage('quickSwitchDescription')}
+    </p>
+  </section>
+
+  <section class="mb-4 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800">
+    <FlexGroup
+      direction="horizontal"
+      childrenGap="lg"
+      alignItems="center"
+      justifyContent="between"
+    >
+      <label class="text-lg font-medium" for="disableProxyOnStartupToggle">
+        Disable Proxy on Startup
+      </label>
+      <ToggleSwitch
+        checked={settings.disableProxyOnStartup}
+        onchange={handleDisableProxyOnStartupToggle}
+      />
+    </FlexGroup>
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+      When enabled, any active proxy configuration will be automatically disabled when the browser starts, ensuring you start in "OFF" mode.
     </p>
   </section>
 

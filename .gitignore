@@ -38,3 +38,9 @@ tmp
 
 dev/*
 *.zip
+
+# AI generated
+.claude
+
+# docs
+docs/
