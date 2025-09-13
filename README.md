@@ -29,6 +29,7 @@
 - **Bypass Rules**: Set up proxy bypass rules for specific domains
 - **Shared Proxy Option**: Use the same proxy server for all protocols
 - **SOCKS Proxy Support**: Configure SOCKS4/SOCKS5 proxy servers
+- **Startup Behavior Control**: Setting to disable any active proxy when browser starts
 
 ### Data Management
 
@@ -99,6 +100,13 @@ src/
 2. Enable "Quick Switch Mode"
 3. Drag desired configurations to the Quick Switch section
 4. Click the extension icon to cycle through enabled configurations
+
+### Extension Settings
+
+Access advanced settings through the Options page:
+
+1. **Quick Switch Mode**: Enable browser action click cycling between configurations
+2. **Disable Proxy on Startup**: When enabled, ensures the extension starts in "OFF" mode after browser restart, automatically disabling any previously active proxy configuration
 
 ### PAC Script Development
 

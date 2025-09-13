@@ -8,6 +8,12 @@ export class SettingsWriter {
     SettingsReader.invalidateCache()
   }
 
+  static async updateSettings(partialSettings: Partial<AppSettings>): Promise<void> {
+    const currentSettings = await SettingsReader.getSettings()
+    const updatedSettings = { ...currentSettings, ...partialSettings }
+    await this.saveSettings(updatedSettings)
+  }
+
   static async addPACScript(script: Omit<ProxyConfig, 'id'>): Promise<void> {
     const settings = await SettingsReader.getSettings()
     const newScript: ProxyConfig = { ...script, id: crypto.randomUUID() }
@@ -78,10 +84,14 @@ export class SettingsWriter {
       // Validate the settings structure
       if (
         !settings.proxyConfigs ||
-        typeof settings.quickSwitchEnabled !== 'boolean'
+        typeof settings.quickSwitchEnabled !== 'boolean' ||
+        (settings.disableProxyOnStartup !== undefined && typeof settings.disableProxyOnStartup !== 'boolean')
       ) {
         throw new Error('Invalid settings file.')
       }
+
+      // Ensure new fields have default values if missing
+      settings.disableProxyOnStartup = settings.disableProxyOnStartup ?? false
 
       // Update the settings in storage
       await this.saveSettings(settings)
