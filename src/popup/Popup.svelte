@@ -42,7 +42,7 @@
       {#if activeProxy}
         <Button size="sm" color="secondary" onclick={disableAllProxies}>
           {#snippet icon()}<Power size={14} />{/snippet}
-          OFF
+          {I18nService.getMessage('offButton')}
         </Button>
       {/if}
       <Button minimal color="secondary" onclick={openSettings}>

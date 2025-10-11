@@ -37,6 +37,7 @@
     ExternalLink,
     Activity,
     Clock,
+    Lightbulb,
   } from 'lucide-svelte'
 
   const showStorage = true
@@ -92,8 +93,8 @@
     await settingsStore.quickSwitchToggle(checked)
     toastStore.show(
       checked
-        ? I18nService.getMessage('quickSwitchEnabled') || 'Quick Switch Mode enabled'
-        : I18nService.getMessage('quickSwitchDisabled') || 'Quick Switch Mode disabled',
+        ? I18nService.getMessage('quickSwitchEnabled')
+        : I18nService.getMessage('quickSwitchDisabled'),
       'success'
     )
   }
@@ -102,8 +103,8 @@
     await settingsStore.updateSettings({ disableProxyOnStartup: checked })
     toastStore.show(
       checked
-        ? 'Proxy will be disabled on browser startup'
-        : 'Proxy state will persist on browser startup',
+        ? I18nService.getMessage('proxyDisabledOnStartup')
+        : I18nService.getMessage('proxyPersistOnStartup'),
       'success'
     )
   }
@@ -120,8 +121,8 @@
     // Show success toast
     toastStore.show(
       editingScriptId
-        ? `Proxy "${script.name}" updated successfully`
-        : `Proxy "${script.name}" created successfully`,
+        ? I18nService.getMessage('proxyUpdated').replace('$1', script.name)
+        : I18nService.getMessage('proxyCreated').replace('$1', script.name),
       'success'
     )
 
@@ -200,7 +201,7 @@
                   weight="medium"
                   classes="mt-2 text-blue-600 dark:text-blue-400"
                 >
-                  ✓ Enabled – Click the extension icon to switch quickly
+                  {I18nService.getMessage('quickSwitchEnabledStatus')}
                 </Text>
               {/if}
             </div>
@@ -217,10 +218,10 @@
         <div>
           <div class="mb-4">
             <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
-              Quick Switch Configs
+              {I18nService.getMessage('quickSwitchConfigsTitle')}
             </h3>
             <Text as="p" size="sm" color="muted" classes="mt-1">
-              Drag proxies here for fast toggling from the extension popup
+              {I18nService.getMessage('quickSwitchConfigsDescription')}
             </Text>
           </div>
 
@@ -251,10 +252,10 @@
         <div>
           <div class="mb-4">
             <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
-              All Proxy Configs
+              {I18nService.getMessage('allProxyConfigsTitle')}
             </h3>
             <Text as="p" size="sm" color="muted" classes="mt-1">
-              Complete list of available proxy configurations
+              {I18nService.getMessage('allProxyConfigsDescription')}
             </Text>
           </div>
 
@@ -362,19 +363,31 @@
       <div class="py-6 space-y-6">
         <!-- Quick Stats Dashboard -->
         <div>
-          <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">Quick Stats</h2>
+          <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">
+            {I18nService.getMessage('quickStatsTitle')}
+          </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <StatsCard title="Total Proxies" value={totalProxies} icon={Cable} color="blue" />
-            <StatsCard title="Quick Switch" value={quickSwitchProxies} icon={Zap} color="purple" />
             <StatsCard
-              title="Active Proxy"
-              value={activeProxy?.name || 'None'}
+              title={I18nService.getMessage('totalProxies')}
+              value={totalProxies}
+              icon={Cable}
+              color="blue"
+            />
+            <StatsCard
+              title={I18nService.getMessage('quickSwitch')}
+              value={quickSwitchProxies}
+              icon={Zap}
+              color="purple"
+            />
+            <StatsCard
+              title={I18nService.getMessage('activeProxy')}
+              value={activeProxy?.name || I18nService.getMessage('none')}
               icon={Activity}
               color="green"
             />
             <StatsCard
-              title="Last Used"
-              value={lastUsedProxy?.name || 'None'}
+              title={I18nService.getMessage('lastUsed')}
+              value={lastUsedProxy?.name || I18nService.getMessage('none')}
               icon={Clock}
               color="orange"
             />
@@ -393,11 +406,13 @@
           </FlexGroup>
           <div class="space-y-3">
             <FlexGroup alignItems="baseline" childrenGap="xs">
-              <Text size="sm" weight="medium" color="muted">Version:</Text>
-              <Text size="2xl" weight="bold">1.9.1</Text>
+              <Text size="sm" weight="medium" color="muted"
+                >{I18nService.getMessage('versionLabel')}</Text
+              >
+              <Text size="2xl" weight="bold">1.9.2</Text>
             </FlexGroup>
             <Text as="p" size="sm" color="muted">
-              Chrome Extension for managing PAC (Proxy Auto-Config) scripts
+              {I18nService.getMessage('extensionDescription')}
             </Text>
           </div>
         </section>
@@ -429,6 +444,18 @@
               <FlexGroup alignItems="center" childrenGap="xs">
                 <Bug size={20} />
                 <Text>{I18nService.getMessage('aboutReportIssue')}</Text>
+                <ExternalLink size={16} class="ml-auto" />
+              </FlexGroup>
+            </a>
+            <a
+              href="https://github.com/navbytes/pacify/issues/new?labels=enhancement&template=feature_request.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-blue-600 dark:text-blue-400 hover:underline transition-colors block"
+            >
+              <FlexGroup alignItems="center" childrenGap="xs">
+                <Lightbulb size={20} />
+                <Text>{I18nService.getMessage('aboutFeatureRequest')}</Text>
                 <ExternalLink size={16} class="ml-auto" />
               </FlexGroup>
             </a>

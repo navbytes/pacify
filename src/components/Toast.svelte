@@ -3,6 +3,7 @@
   import { toastStore, type ToastType } from '@/stores/toastStore'
   import Text from './Text.svelte'
   import FlexGroup from './FlexGroup.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   let toasts = $derived($toastStore)
 
@@ -50,7 +51,7 @@
       <button
         onclick={() => toastStore.dismiss(toast.id)}
         class="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity"
-        aria-label="Close notification"
+        aria-label={I18nService.getMessage('closeNotification')}
       >
         <X size={16} />
       </button>

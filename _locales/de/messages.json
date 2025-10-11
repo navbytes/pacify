@@ -214,6 +214,9 @@
   "aboutDocumentation": {
     "message": "Dokumentation"
   },
+  "aboutFeatureRequest": {
+    "message": "Feature anfordern"
+  },
   "statusConnected": {
     "message": "Verbunden"
   },
@@ -255,5 +258,116 @@
   },
   "delete": {
     "message": "Löschen"
+  },
+  "backupSuccess": {
+    "message": "Einstellungen erfolgreich gesichert"
+  },
+  "backupFailed": {
+    "message": "Sicherung der Einstellungen fehlgeschlagen"
+  },
+  "restoreSuccess": {
+    "message": "Einstellungen erfolgreich wiederhergestellt"
+  },
+  "restoreFailed": {
+    "message": "Wiederherstellung der Einstellungen fehlgeschlagen"
+  },
+  "backupDescription": {
+    "message": "Alle Proxy-Konfigurationen und Einstellungen als JSON-Datei herunterladen"
+  },
+  "restoreDescription": {
+    "message": "Eine Sicherungsdatei hochladen, um Konfigurationen wiederherzustellen"
+  },
+  "errorBoundaryTitle": {
+    "message": "Etwas ist schiefgelaufen"
+  },
+  "errorBoundaryRetry": {
+    "message": "Erneut versuchen"
+  },
+  "closeNotification": {
+    "message": "Benachrichtigung schließen"
+  },
+  "closeDialog": {
+    "message": "Dialog schließen"
+  },
+  "confirm": {
+    "message": "Bestätigen"
+  },
+  "quickSwitchEnabled": {
+    "message": "Schnellwechsel-Modus aktiviert"
+  },
+  "quickSwitchDisabled": {
+    "message": "Schnellwechsel-Modus deaktiviert"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "Proxy wird beim Browserstart deaktiviert"
+  },
+  "proxyPersistOnStartup": {
+    "message": "Proxy-Status bleibt beim Browserstart erhalten"
+  },
+  "proxyUpdated": {
+    "message": "Proxy \"$1\" erfolgreich aktualisiert"
+  },
+  "proxyCreated": {
+    "message": "Proxy \"$1\" erfolgreich erstellt"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ Aktiviert – Klicken Sie auf das Erweiterungssymbol zum schnellen Wechseln"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "Schnellwechsel-Konfigurationen"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "Ziehen Sie Proxys hierher für schnelles Umschalten aus dem Erweiterungs-Popup"
+  },
+  "allProxyConfigsTitle": {
+    "message": "Alle Proxy-Konfigurationen"
+  },
+  "allProxyConfigsDescription": {
+    "message": "Vollständige Liste verfügbarer Proxy-Konfigurationen"
+  },
+  "quickStatsTitle": {
+    "message": "Schnellstatistiken"
+  },
+  "totalProxies": {
+    "message": "Proxys gesamt"
+  },
+  "quickSwitch": {
+    "message": "Schnellwechsel"
+  },
+  "activeProxy": {
+    "message": "Aktiver Proxy"
+  },
+  "lastUsed": {
+    "message": "Zuletzt verwendet"
+  },
+  "none": {
+    "message": "Keine"
+  },
+  "versionLabel": {
+    "message": "Version:"
+  },
+  "extensionDescription": {
+    "message": "Chrome-Erweiterung zur Verwaltung von PAC (Proxy Auto-Config) Skripten"
+  },
+  "bypassListPlaceholder": {
+    "message": "Ein Muster pro Zeile eingeben:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "Keine Proxys verfügbar"
+  },
+  "noQuickSwitchTitle": {
+    "message": "Keine Schnellwechsel-Proxys"
+  },
+  "noProxyConfigsTitle": {
+    "message": "Keine Proxy-Konfigurationen"
+  },
+  "addFirstProxyAction": {
+    "message": "Ersten Proxy hinzufügen"
+  },
+  "offButton": {
+    "message": "AUS"
   }
 }

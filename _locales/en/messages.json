@@ -214,6 +214,9 @@
   "aboutDocumentation": {
     "message": "Documentation"
   },
+  "aboutFeatureRequest": {
+    "message": "Request a Feature"
+  },
   "statusConnected": {
     "message": "Connected"
   },
@@ -255,5 +258,116 @@
   },
   "delete": {
     "message": "Delete"
+  },
+  "backupSuccess": {
+    "message": "Settings backed up successfully"
+  },
+  "backupFailed": {
+    "message": "Failed to backup settings"
+  },
+  "restoreSuccess": {
+    "message": "Settings restored successfully"
+  },
+  "restoreFailed": {
+    "message": "Failed to restore settings"
+  },
+  "backupDescription": {
+    "message": "Download all proxy configurations and preferences as a JSON file"
+  },
+  "restoreDescription": {
+    "message": "Upload a backup file to restore configurations"
+  },
+  "errorBoundaryTitle": {
+    "message": "Something went wrong"
+  },
+  "errorBoundaryRetry": {
+    "message": "Try Again"
+  },
+  "closeNotification": {
+    "message": "Close notification"
+  },
+  "closeDialog": {
+    "message": "Close dialog"
+  },
+  "confirm": {
+    "message": "Confirm"
+  },
+  "quickSwitchEnabled": {
+    "message": "Quick Switch Mode enabled"
+  },
+  "quickSwitchDisabled": {
+    "message": "Quick Switch Mode disabled"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "Proxy will be disabled on browser startup"
+  },
+  "proxyPersistOnStartup": {
+    "message": "Proxy state will persist on browser startup"
+  },
+  "proxyUpdated": {
+    "message": "Proxy \"$1\" updated successfully"
+  },
+  "proxyCreated": {
+    "message": "Proxy \"$1\" created successfully"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ Enabled – Click the extension icon to switch quickly"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "Quick Switch Configs"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "Drag proxies here for fast toggling from the extension popup"
+  },
+  "allProxyConfigsTitle": {
+    "message": "All Proxy Configs"
+  },
+  "allProxyConfigsDescription": {
+    "message": "Complete list of available proxy configurations"
+  },
+  "quickStatsTitle": {
+    "message": "Quick Stats"
+  },
+  "totalProxies": {
+    "message": "Total Proxies"
+  },
+  "quickSwitch": {
+    "message": "Quick Switch"
+  },
+  "activeProxy": {
+    "message": "Active Proxy"
+  },
+  "lastUsed": {
+    "message": "Last Used"
+  },
+  "none": {
+    "message": "None"
+  },
+  "versionLabel": {
+    "message": "Version:"
+  },
+  "extensionDescription": {
+    "message": "Chrome Extension for managing PAC (Proxy Auto-Config) scripts"
+  },
+  "bypassListPlaceholder": {
+    "message": "Enter one pattern per line:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "No Proxies Available"
+  },
+  "noQuickSwitchTitle": {
+    "message": "No Quick Switch Proxies"
+  },
+  "noProxyConfigsTitle": {
+    "message": "No Proxy Configurations"
+  },
+  "addFirstProxyAction": {
+    "message": "Add Your First Proxy"
+  },
+  "offButton": {
+    "message": "OFF"
   }
 }

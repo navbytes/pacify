@@ -101,11 +101,7 @@
       rows="4"
       class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md
              bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 font-mono text-sm"
-      placeholder="Enter one pattern per line:
-*.example.com
-localhost
-127.0.0.1
-[::1]"
+      placeholder={I18nService.getMessage('bypassListPlaceholder')}
     ></textarea>
   </div>
 </div>

@@ -214,6 +214,9 @@
   "aboutDocumentation": {
     "message": "दस्तावेज़ीकरण"
   },
+  "aboutFeatureRequest": {
+    "message": "सुविधा का अनुरोध करें"
+  },
   "statusConnected": {
     "message": "कनेक्ट किया गया"
   },
@@ -255,5 +258,116 @@
   },
   "delete": {
     "message": "हटाएं"
+  },
+  "backupSuccess": {
+    "message": "सेटिंग्स सफलतापूर्वक बैकअप की गईं"
+  },
+  "backupFailed": {
+    "message": "सेटिंग्स बैकअप करने में विफल"
+  },
+  "restoreSuccess": {
+    "message": "सेटिंग्स सफलतापूर्वक रिस्टोर की गईं"
+  },
+  "restoreFailed": {
+    "message": "सेटिंग्स रिस्टोर करने में विफल"
+  },
+  "backupDescription": {
+    "message": "सभी प्रॉक्सी कॉन्फ़िगरेशन और प्राथमिकताओं को JSON फ़ाइल के रूप में डाउनलोड करें"
+  },
+  "restoreDescription": {
+    "message": "कॉन्फ़िगरेशन को रिस्टोर करने के लिए बैकअप फ़ाइल अपलोड करें"
+  },
+  "errorBoundaryTitle": {
+    "message": "कुछ गलत हो गया"
+  },
+  "errorBoundaryRetry": {
+    "message": "पुनः प्रयास करें"
+  },
+  "closeNotification": {
+    "message": "सूचना बंद करें"
+  },
+  "closeDialog": {
+    "message": "डायलॉग बंद करें"
+  },
+  "confirm": {
+    "message": "पुष्टि करें"
+  },
+  "quickSwitchEnabled": {
+    "message": "त्वरित स्विच मोड सक्षम किया गया"
+  },
+  "quickSwitchDisabled": {
+    "message": "त्वरित स्विच मोड अक्षम किया गया"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "ब्राउज़र स्टार्टअप पर प्रॉक्सी अक्षम कर दी जाएगी"
+  },
+  "proxyPersistOnStartup": {
+    "message": "ब्राउज़र स्टार्टअप पर प्रॉक्सी स्थिति बनी रहेगी"
+  },
+  "proxyUpdated": {
+    "message": "प्रॉक्सी \"$1\" सफलतापूर्वक अपडेट की गई"
+  },
+  "proxyCreated": {
+    "message": "प्रॉक्सी \"$1\" सफलतापूर्वक बनाई गई"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ सक्षम – तेजी से स्विच करने के लिए एक्सटेंशन आइकन पर क्लिक करें"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "त्वरित स्विच कॉन्फ़िगरेशन"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "एक्सटेंशन पॉपअप से तेज टॉगलिंग के लिए प्रॉक्सी यहां खींचें"
+  },
+  "allProxyConfigsTitle": {
+    "message": "सभी प्रॉक्सी कॉन्फ़िगरेशन"
+  },
+  "allProxyConfigsDescription": {
+    "message": "उपलब्ध प्रॉक्सी कॉन्फ़िगरेशन की पूरी सूची"
+  },
+  "quickStatsTitle": {
+    "message": "त्वरित आंकड़े"
+  },
+  "totalProxies": {
+    "message": "कुल प्रॉक्सी"
+  },
+  "quickSwitch": {
+    "message": "त्वरित स्विच"
+  },
+  "activeProxy": {
+    "message": "सक्रिय प्रॉक्सी"
+  },
+  "lastUsed": {
+    "message": "अंतिम उपयोग"
+  },
+  "none": {
+    "message": "कोई नहीं"
+  },
+  "versionLabel": {
+    "message": "संस्करण:"
+  },
+  "extensionDescription": {
+    "message": "PAC (Proxy Auto-Config) स्क्रिप्ट प्रबंधित करने के लिए Chrome एक्सटेंशन"
+  },
+  "bypassListPlaceholder": {
+    "message": "प्रति लाइन एक पैटर्न दर्ज करें:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "कोई प्रॉक्सी उपलब्ध नहीं"
+  },
+  "noQuickSwitchTitle": {
+    "message": "कोई त्वरित स्विच प्रॉक्सी नहीं"
+  },
+  "noProxyConfigsTitle": {
+    "message": "कोई प्रॉक्सी कॉन्फ़िगरेशन नहीं"
+  },
+  "addFirstProxyAction": {
+    "message": "अपनी पहली प्रॉक्सी जोड़ें"
+  },
+  "offButton": {
+    "message": "बंद"
   }
 }

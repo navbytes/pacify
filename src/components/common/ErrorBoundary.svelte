@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import Text from '../Text.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
   let { children } = $props()
 
   let error = $state<Error | null>(null)
@@ -22,7 +23,7 @@
 
 {#if hasError && error}
   <div class="bg-red-50 border border-red-200 rounded p-4 text-red-700">
-    <Text as="h3" weight="bold">Something went wrong</Text>
+    <Text as="h3" weight="bold">{I18nService.getMessage('errorBoundaryTitle')}</Text>
     <Text as="p" size="sm">{error.message}</Text>
     <button
       class="mt-2 text-sm text-red-600 hover:text-red-800"
@@ -31,7 +32,7 @@
         error = null
       }}
     >
-      Try Again
+      {I18nService.getMessage('errorBoundaryRetry')}
     </button>
   </div>
 {:else}

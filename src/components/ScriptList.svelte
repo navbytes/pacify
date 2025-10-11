@@ -49,24 +49,21 @@
     </div>
   {:else if pageType === 'POPUP'}
     <EmptyState
-      title="No Proxies Available"
-      description={I18nService.getMessage('noScriptsAvailable') ||
-        'No proxy configurations found. Add one from the options page.'}
+      title={I18nService.getMessage('noProxiesTitle')}
+      description={I18nService.getMessage('noScriptsAvailable')}
       icon={Globe}
     />
   {:else if pageType === 'QUICK_SWITCH'}
     <EmptyState
-      title="No Quick Switch Proxies"
-      description={I18nService.getMessage('noQuickSwitchScripts') ||
-        'Drag and drop proxies here to enable quick switching from the extension icon.'}
+      title={I18nService.getMessage('noQuickSwitchTitle')}
+      description={I18nService.getMessage('noQuickSwitchScripts')}
       icon={Zap}
     />
   {:else}
     <EmptyState
-      title="No Proxy Configurations"
-      description={I18nService.getMessage('noScriptsAvailableOptions') ||
-        'Get started by creating your first proxy configuration.'}
-      actionLabel="Add Your First Proxy"
+      title={I18nService.getMessage('noProxyConfigsTitle')}
+      description={I18nService.getMessage('noScriptsAvailableOptions')}
+      actionLabel={I18nService.getMessage('addFirstProxyAction')}
       onAction={() => onScriptEdit?.('')}
       icon={Globe}
     />

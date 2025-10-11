@@ -70,7 +70,7 @@
       bind:value={pacUrl}
       class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
              focus:ring-2 focus:ring-primary focus:border-primary"
-      placeholder="https://example.com/proxy.pac"
+      placeholder={I18nService.getMessage('pacUrlPlaceholder')}
     />
   </div>
 

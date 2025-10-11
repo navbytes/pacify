@@ -20,10 +20,10 @@
   async function handleBackup() {
     try {
       await SettingsWriter.backupSettings()
-      toastStore.show('Settings backed up successfully', 'success')
+      toastStore.show(I18nService.getMessage('backupSuccess'), 'success')
       NotifyService.alert(ALERT_TYPES.BACKUP_SUCCESS)
     } catch (error) {
-      toastStore.show('Failed to backup settings', 'error')
+      toastStore.show(I18nService.getMessage('backupFailed'), 'error')
       NotifyService.error(ERROR_TYPES.BACKUP, error)
     }
   }
@@ -34,7 +34,7 @@
     if (input?.files?.[0]) {
       try {
         await SettingsWriter.restoreSettings(input.files[0])
-        toastStore.show('Settings restored successfully', 'success')
+        toastStore.show(I18nService.getMessage('restoreSuccess'), 'success')
 
         // Call onRestore to refresh the UI
         await onRestore()
@@ -46,7 +46,7 @@
 
         NotifyService.alert(ALERT_TYPES.RESTORE_SUCCESS)
       } catch (error) {
-        const errorMessage = (error as Error).message || 'Failed to restore settings'
+        const errorMessage = (error as Error).message || I18nService.getMessage('restoreFailed')
         toastStore.show(errorMessage, 'error')
         NotifyService.alert(errorMessage)
 
@@ -72,7 +72,7 @@
         {I18nService.getMessage('backupSettings')}
       </Button>
       <Text as="p" size="xs" color="muted" classes="px-1">
-        Download all proxy configurations and preferences as a JSON file
+        {I18nService.getMessage('backupDescription')}
       </Text>
     </FlexGroup>
 
@@ -90,7 +90,7 @@
         {/snippet}
       </LabelButton>
       <Text as="p" size="xs" color="muted" classes="px-1">
-        Upload a backup file to restore configurations
+        {I18nService.getMessage('restoreDescription')}
       </Text>
     </FlexGroup>
   </div>

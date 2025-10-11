@@ -2,6 +2,7 @@
   import { AlertTriangle, X } from 'lucide-svelte'
   import Button from './Button.svelte'
   import Text from './Text.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   interface Props {
     open?: boolean
@@ -18,8 +19,8 @@
     open = $bindable(false),
     title,
     message,
-    confirmLabel = 'Confirm',
-    cancelLabel = 'Cancel',
+    confirmLabel = I18nService.getMessage('confirm'),
+    cancelLabel = I18nService.getMessage('cancel'),
     variant = 'danger',
     onConfirm,
     onCancel,
@@ -89,7 +90,7 @@
         <button
           onclick={handleCancel}
           class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
-          aria-label="Close dialog"
+          aria-label={I18nService.getMessage('closeDialog')}
         >
           <X size={20} />
         </button>
