@@ -41,3 +41,17 @@ dev/*
 
 # docs
 docs/
+
+playwright-report/
+test-results/
+
+# Playwright artifacts
+*.webm
+videos/
+screenshots/
+trace-*.ziptest-results/
+playwright-report/
+*.webm
+videos/
+screenshots/
+trace-*.zip

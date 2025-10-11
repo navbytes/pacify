@@ -2,7 +2,7 @@ import { ALERT_TYPES } from '../interfaces/error'
 import { ERROR_TYPES } from '@/interfaces'
 
 export class NotifyService {
-  public static error(type: ERROR_TYPES, error: any, context = ''): void {
+  public static error(type: ERROR_TYPES, error: unknown, context = ''): void {
     console.error(context, type, error)
 
     // In a service worker, we can't show UI alerts directly
@@ -22,7 +22,7 @@ export class NotifyService {
     }
   }
 
-  private static showUIAlert(type: ERROR_TYPES, error: any): void {
+  private static showUIAlert(type: ERROR_TYPES, _error: unknown): void {
     // Determine the message based on error type
     let message: string
 

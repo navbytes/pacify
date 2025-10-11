@@ -24,16 +24,16 @@ export const tokenizer: {
     [/\/\/.*$/, 'comment'],
     [/\/\*/, 'comment', '@comment'],
     // Brackets
-    [/[(){}\[\]]/, '@brackets'],
+    [/[(){}[\]]/, '@brackets'],
     [/[<>](?!@)/, '@brackets'],
     // Operators
-    [/[=!<>]=?|[+\-*/%]|\|\||&&|\?|\:/, 'operator'],
+    [/[=!<>]=?|[+\-*/%]|\|\||&&|[?:]/, 'operator'],
     // Whitespace
     [/[ \t\r\n]+/, 'white'],
     // Delimiters
     [/[;,.]/, 'delimiter'],
     // Numbers
-    [/\d*\.\d+([eE][\-+]?\d+)?/, 'number.float'],
+    [/\d*\.\d+([eE][-+]?\d+)?/, 'number.float'],
     [/0[xX][0-9a-fA-F]+/, 'number.hex'],
     [/\d+/, 'number'],
   ],

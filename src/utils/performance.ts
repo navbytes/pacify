@@ -2,7 +2,7 @@ interface PerformanceEvent {
   name: string
   startTime: number
   endTime?: number
-  data?: Record<string, any>
+  data?: Record<string, unknown>
 }
 
 export class PerformanceMonitor {
@@ -13,7 +13,7 @@ export class PerformanceMonitor {
   /**
    * Start measuring a performance event
    */
-  static startMeasure(name: string, data?: Record<string, any>): void {
+  static startMeasure(name: string, data?: Record<string, unknown>): void {
     if (!this.enabled) return
 
     this.events.set(name, {
@@ -31,10 +31,7 @@ export class PerformanceMonitor {
   /**
    * End measuring a performance event
    */
-  static endMeasure(
-    name: string,
-    additionalData?: Record<string, any>
-  ): number | undefined {
+  static endMeasure(name: string, additionalData?: Record<string, unknown>): number | undefined {
     if (!this.enabled) return
 
     const event = this.events.get(name)
@@ -60,17 +57,14 @@ export class PerformanceMonitor {
     if (typeof performance !== 'undefined' && performance.measure) {
       try {
         performance.measure(name, `${name}-start`)
-      } catch (e) {
+      } catch {
         // Ignore errors from performance API
       }
     }
 
     // Log the measure
     if (duration > 100) {
-      console.warn(
-        `Slow operation detected: ${name} took ${duration.toFixed(2)}ms`,
-        event.data
-      )
+      console.warn(`Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, event.data)
     }
 
     return duration
@@ -79,10 +73,10 @@ export class PerformanceMonitor {
   /**
    * Create a wrapper function that measures performance
    */
-  static measureFunction<T extends (...args: any[]) => any>(
+  static measureFunction<T extends (...args: never[]) => unknown>(
     name: string,
     fn: T,
-    threshold: number = 100
+    _threshold: number = 100
   ): (...args: Parameters<T>) => ReturnType<T> {
     return (...args: Parameters<T>): ReturnType<T> => {
       this.startMeasure(name, { args: args.length > 0 ? args : undefined })
@@ -102,7 +96,7 @@ export class PerformanceMonitor {
       }
 
       this.endMeasure(name)
-      return result
+      return result as ReturnType<T>
     }
   }
 
@@ -143,6 +137,7 @@ export class PerformanceMonitor {
 }
 
 // HOC for measuring component render performance
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function measureComponent(component: any, name?: string): any {
   const componentName = name || component.name || 'UnnamedComponent'
 
@@ -151,14 +146,14 @@ export function measureComponent(component: any, name?: string): any {
   const originalOnDestroy = component.prototype.onDestroy
 
   // Wrap the component's lifecycle hooks with performance measurement
-  component.prototype.onMount = function (...args: any[]) {
+  component.prototype.onMount = function (...args: unknown[]) {
     PerformanceMonitor.startMeasure(`render:${componentName}`)
     if (originalOnMount) {
       return originalOnMount.apply(this, args)
     }
   }
 
-  component.prototype.onDestroy = function (...args: any[]) {
+  component.prototype.onDestroy = function (...args: unknown[]) {
     PerformanceMonitor.endMeasure(`render:${componentName}`)
     if (originalOnDestroy) {
       return originalOnDestroy.apply(this, args)

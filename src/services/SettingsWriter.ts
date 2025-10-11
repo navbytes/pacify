@@ -1,16 +1,14 @@
 import type { AppSettings, ProxyConfig } from '@/interfaces'
 import { SettingsReader } from './SettingsReader'
-import { ChromeService } from '@/services/chrome'
+import { StorageService } from './StorageService'
 
 export class SettingsWriter {
   static async saveSettings(settings: AppSettings): Promise<void> {
-    await ChromeService.setSyncSettings(settings)
-    SettingsReader.invalidateCache()
+    await StorageService.saveSettings(settings)
+    // No need to invalidate cache - StorageService handles this internally
   }
 
-  static async updateSettings(
-    partialSettings: Partial<AppSettings>
-  ): Promise<void> {
+  static async updateSettings(partialSettings: Partial<AppSettings>): Promise<void> {
     const currentSettings = await SettingsReader.getSettings()
     const updatedSettings = { ...currentSettings, ...partialSettings }
     await this.saveSettings(updatedSettings)
@@ -51,10 +49,7 @@ export class SettingsWriter {
     settings.proxyConfigs = scripts
     await this.saveSettings(settings)
   }
-  public static async updateScriptQuickSwitch(
-    id: string,
-    enabled: boolean
-  ): Promise<void> {
+  public static async updateScriptQuickSwitch(id: string, enabled: boolean): Promise<void> {
     const script = await SettingsReader.getPacScriptById(id)
     if (script) {
       await this.updatePACScript({ ...script, quickSwitch: enabled })
@@ -98,10 +93,8 @@ export class SettingsWriter {
 
       // Update the settings in storage
       await this.saveSettings(settings)
-    } catch (error) {
-      throw new Error(
-        'Failed to restore settings. Please check the file format.'
-      )
+    } catch {
+      throw new Error('Failed to restore settings. Please check the file format.')
     }
   }
 }

@@ -177,5 +177,197 @@
   },
   "dropTarget": {
     "message": "Objetivo de arrastre"
+  },
+  "tabProxyConfigs": {
+    "message": "Configuraciones de proxy"
+  },
+  "tabSettings": {
+    "message": "Configuración"
+  },
+  "tabAbout": {
+    "message": "Acerca de"
+  },
+  "settingsProxyBehavior": {
+    "message": "Comportamiento del proxy"
+  },
+  "settingsDataManagement": {
+    "message": "Gestión de datos"
+  },
+  "aboutVersion": {
+    "message": "Versión"
+  },
+  "aboutHelpResources": {
+    "message": "Ayuda y recursos"
+  },
+  "aboutExtensionInfo": {
+    "message": "Información de la extensión"
+  },
+  "aboutDiagnostics": {
+    "message": "Diagnósticos"
+  },
+  "aboutViewOnGithub": {
+    "message": "Ver en GitHub"
+  },
+  "aboutReportIssue": {
+    "message": "Reportar un problema"
+  },
+  "aboutDocumentation": {
+    "message": "Documentación"
+  },
+  "aboutFeatureRequest": {
+    "message": "Solicitar una función"
+  },
+  "statusConnected": {
+    "message": "Conectado"
+  },
+  "statusDisconnected": {
+    "message": "Sin proxy activo"
+  },
+  "footerActiveProxy": {
+    "message": "Haga clic en el interruptor para desactivar el proxy"
+  },
+  "footerSelectProxy": {
+    "message": "Seleccione un proxy para conectar"
+  },
+  "proxyEnabled": {
+    "message": "Proxy \"$1\" activado"
+  },
+  "proxyDisabled": {
+    "message": "Proxy \"$1\" desactivado"
+  },
+  "proxyDeleted": {
+    "message": "Proxy \"$1\" eliminado exitosamente"
+  },
+  "toggleProxyOn": {
+    "message": "Activar proxy $1"
+  },
+  "toggleProxyOff": {
+    "message": "Desactivar proxy $1"
+  },
+  "editConfiguration": {
+    "message": "Editar configuración $1"
+  },
+  "deleteConfiguration": {
+    "message": "Eliminar configuración $1"
+  },
+  "deleteProxyTitle": {
+    "message": "Eliminar configuración de proxy"
+  },
+  "deleteProxyMessage": {
+    "message": "¿Está seguro de que desea eliminar \"$1\"? Esta acción no se puede deshacer."
+  },
+  "delete": {
+    "message": "Eliminar"
+  },
+  "backupSuccess": {
+    "message": "Configuración respaldada exitosamente"
+  },
+  "backupFailed": {
+    "message": "Error al respaldar la configuración"
+  },
+  "restoreSuccess": {
+    "message": "Configuración restaurada exitosamente"
+  },
+  "restoreFailed": {
+    "message": "Error al restaurar la configuración"
+  },
+  "backupDescription": {
+    "message": "Descargar todas las configuraciones de proxy y preferencias como archivo JSON"
+  },
+  "restoreDescription": {
+    "message": "Cargar un archivo de respaldo para restaurar configuraciones"
+  },
+  "errorBoundaryTitle": {
+    "message": "Algo salió mal"
+  },
+  "errorBoundaryRetry": {
+    "message": "Intentar de nuevo"
+  },
+  "closeNotification": {
+    "message": "Cerrar notificación"
+  },
+  "closeDialog": {
+    "message": "Cerrar diálogo"
+  },
+  "confirm": {
+    "message": "Confirmar"
+  },
+  "quickSwitchEnabled": {
+    "message": "Modo de cambio rápido activado"
+  },
+  "quickSwitchDisabled": {
+    "message": "Modo de cambio rápido desactivado"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "El proxy se desactivará al iniciar el navegador"
+  },
+  "proxyPersistOnStartup": {
+    "message": "El estado del proxy persistirá al iniciar el navegador"
+  },
+  "proxyUpdated": {
+    "message": "Proxy \"$1\" actualizado exitosamente"
+  },
+  "proxyCreated": {
+    "message": "Proxy \"$1\" creado exitosamente"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ Activado – Haga clic en el ícono de la extensión para cambiar rápidamente"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "Configuraciones de cambio rápido"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "Arrastre proxies aquí para alternar rápidamente desde la ventana emergente de la extensión"
+  },
+  "allProxyConfigsTitle": {
+    "message": "Todas las configuraciones de proxy"
+  },
+  "allProxyConfigsDescription": {
+    "message": "Lista completa de configuraciones de proxy disponibles"
+  },
+  "quickStatsTitle": {
+    "message": "Estadísticas rápidas"
+  },
+  "totalProxies": {
+    "message": "Total de proxies"
+  },
+  "quickSwitch": {
+    "message": "Cambio rápido"
+  },
+  "activeProxy": {
+    "message": "Proxy activo"
+  },
+  "lastUsed": {
+    "message": "Último uso"
+  },
+  "none": {
+    "message": "Ninguno"
+  },
+  "versionLabel": {
+    "message": "Versión:"
+  },
+  "extensionDescription": {
+    "message": "Extensión de Chrome para administrar scripts PAC (Proxy Auto-Config)"
+  },
+  "bypassListPlaceholder": {
+    "message": "Ingrese un patrón por línea:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "No hay proxies disponibles"
+  },
+  "noQuickSwitchTitle": {
+    "message": "No hay proxies de cambio rápido"
+  },
+  "noProxyConfigsTitle": {
+    "message": "No hay configuraciones de proxy"
+  },
+  "addFirstProxyAction": {
+    "message": "Agregar su primer proxy"
+  },
+  "offButton": {
+    "message": "APAGADO"
   }
 }

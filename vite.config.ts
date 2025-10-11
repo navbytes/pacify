@@ -1,14 +1,7 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { resolve } from 'path'
-import {
-  existsSync,
-  readFileSync,
-  writeFileSync,
-  mkdirSync,
-  readdirSync,
-  copyFileSync,
-} from 'fs'
+import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync } from 'fs'
 
 // Helper to copy manifest and assets
 function copyAssets() {
@@ -89,10 +82,7 @@ function setupDevEnvironment() {
                 "script-src 'self' 'wasm-unsafe-eval' http://localhost:*; object-src 'self'",
             },
           }
-          writeFileSync(
-            'dev/manifest.json',
-            JSON.stringify(devManifest, null, 2)
-          )
+          writeFileSync('dev/manifest.json', JSON.stringify(devManifest, null, 2))
 
           // Copy icons with dev overlay
           if (!existsSync('dev/icons')) {
@@ -124,10 +114,7 @@ function setupDevEnvironment() {
 
               const messagesPath = resolve(localesDir, locale, 'messages.json')
               if (existsSync(messagesPath)) {
-                copyFileSync(
-                  messagesPath,
-                  `dev/_locales/${locale}/messages.json`
-                )
+                copyFileSync(messagesPath, `dev/_locales/${locale}/messages.json`)
               }
             })
           }
@@ -175,13 +162,19 @@ export default defineConfig(({ command, mode }) => {
             }
             return 'assets/[name].[hash].[ext]'
           },
-          manualChunks: {
-            monaco: ['monaco-editor'],
-            vendor: [
-              'svelte',
-              'lucide-svelte',
-              // other third-party libraries
-            ],
+          manualChunks: (id) => {
+            // Monaco editor gets its own chunk
+            if (id.includes('monaco-editor')) {
+              return 'monaco'
+            }
+            // Svelte and UI libraries
+            if (id.includes('svelte') || id.includes('lucide-svelte')) {
+              return 'vendor'
+            }
+            // Node modules get their own chunk
+            if (id.includes('node_modules')) {
+              return 'vendor'
+            }
           },
         },
       },

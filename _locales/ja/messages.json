@@ -177,5 +177,197 @@
   },
   "dropTarget": {
     "message": "ドロップ対象"
+  },
+  "tabProxyConfigs": {
+    "message": "プロキシ設定"
+  },
+  "tabSettings": {
+    "message": "設定"
+  },
+  "tabAbout": {
+    "message": "について"
+  },
+  "settingsProxyBehavior": {
+    "message": "プロキシの動作"
+  },
+  "settingsDataManagement": {
+    "message": "データ管理"
+  },
+  "aboutVersion": {
+    "message": "バージョン"
+  },
+  "aboutHelpResources": {
+    "message": "ヘルプとリソース"
+  },
+  "aboutExtensionInfo": {
+    "message": "拡張機能情報"
+  },
+  "aboutDiagnostics": {
+    "message": "診断"
+  },
+  "aboutViewOnGithub": {
+    "message": "GitHubで表示"
+  },
+  "aboutReportIssue": {
+    "message": "問題を報告"
+  },
+  "aboutDocumentation": {
+    "message": "ドキュメント"
+  },
+  "aboutFeatureRequest": {
+    "message": "機能をリクエスト"
+  },
+  "statusConnected": {
+    "message": "接続済み"
+  },
+  "statusDisconnected": {
+    "message": "アクティブなプロキシなし"
+  },
+  "footerActiveProxy": {
+    "message": "トグルをクリックしてプロキシを無効にします"
+  },
+  "footerSelectProxy": {
+    "message": "接続するプロキシを選択してください"
+  },
+  "proxyEnabled": {
+    "message": "プロキシ \"$1\" が有効になりました"
+  },
+  "proxyDisabled": {
+    "message": "プロキシ \"$1\" が無効になりました"
+  },
+  "proxyDeleted": {
+    "message": "プロキシ \"$1\" を正常に削除しました"
+  },
+  "toggleProxyOn": {
+    "message": "プロキシ $1 を有効にする"
+  },
+  "toggleProxyOff": {
+    "message": "プロキシ $1 を無効にする"
+  },
+  "editConfiguration": {
+    "message": "$1 設定を編集"
+  },
+  "deleteConfiguration": {
+    "message": "$1 設定を削除"
+  },
+  "deleteProxyTitle": {
+    "message": "プロキシ設定を削除"
+  },
+  "deleteProxyMessage": {
+    "message": "\"$1\" を削除してもよろしいですか？この操作は元に戻せません。"
+  },
+  "delete": {
+    "message": "削除"
+  },
+  "backupSuccess": {
+    "message": "設定のバックアップが完了しました"
+  },
+  "backupFailed": {
+    "message": "設定のバックアップに失敗しました"
+  },
+  "restoreSuccess": {
+    "message": "設定の復元が完了しました"
+  },
+  "restoreFailed": {
+    "message": "設定の復元に失敗しました"
+  },
+  "backupDescription": {
+    "message": "すべてのプロキシ設定と環境設定をJSONファイルとしてダウンロード"
+  },
+  "restoreDescription": {
+    "message": "バックアップファイルをアップロードして設定を復元"
+  },
+  "errorBoundaryTitle": {
+    "message": "問題が発生しました"
+  },
+  "errorBoundaryRetry": {
+    "message": "再試行"
+  },
+  "closeNotification": {
+    "message": "通知を閉じる"
+  },
+  "closeDialog": {
+    "message": "ダイアログを閉じる"
+  },
+  "confirm": {
+    "message": "確認"
+  },
+  "quickSwitchEnabled": {
+    "message": "クイックスイッチモードが有効になりました"
+  },
+  "quickSwitchDisabled": {
+    "message": "クイックスイッチモードが無効になりました"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "ブラウザ起動時にプロキシが無効になります"
+  },
+  "proxyPersistOnStartup": {
+    "message": "ブラウザ起動時にプロキシの状態が保持されます"
+  },
+  "proxyUpdated": {
+    "message": "プロキシ \"$1\" の更新が完了しました"
+  },
+  "proxyCreated": {
+    "message": "プロキシ \"$1\" の作成が完了しました"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ 有効 – 拡張機能アイコンをクリックして素早く切り替え"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "クイックスイッチ設定"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "拡張機能ポップアップから素早く切り替えるには、プロキシをここにドラッグ"
+  },
+  "allProxyConfigsTitle": {
+    "message": "すべてのプロキシ設定"
+  },
+  "allProxyConfigsDescription": {
+    "message": "利用可能なプロキシ設定の完全なリスト"
+  },
+  "quickStatsTitle": {
+    "message": "クイック統計"
+  },
+  "totalProxies": {
+    "message": "プロキシ総数"
+  },
+  "quickSwitch": {
+    "message": "クイックスイッチ"
+  },
+  "activeProxy": {
+    "message": "アクティブなプロキシ"
+  },
+  "lastUsed": {
+    "message": "最終使用"
+  },
+  "none": {
+    "message": "なし"
+  },
+  "versionLabel": {
+    "message": "バージョン:"
+  },
+  "extensionDescription": {
+    "message": "PAC（Proxy Auto-Config）スクリプトを管理するChrome拡張機能"
+  },
+  "bypassListPlaceholder": {
+    "message": "1行に1つのパターンを入力:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "利用可能なプロキシがありません"
+  },
+  "noQuickSwitchTitle": {
+    "message": "クイックスイッチプロキシがありません"
+  },
+  "noProxyConfigsTitle": {
+    "message": "プロキシ設定がありません"
+  },
+  "addFirstProxyAction": {
+    "message": "最初のプロキシを追加"
+  },
+  "offButton": {
+    "message": "オフ"
   }
 }

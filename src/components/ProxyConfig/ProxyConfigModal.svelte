@@ -7,18 +7,18 @@
 
   import { NotifyService } from '@/services/NotifyService'
   import { ERROR_TYPES } from '@/interfaces'
-  import type {
-    ProxyConfig,
-    ProxyMode,
-    ProxySettings,
-    ProxyServer,
-  } from '@/interfaces'
+  import type { ProxyConfig, ProxyMode, ProxySettings, ProxyServer } from '@/interfaces'
   import { Globe, Radar, Settings, Zap } from 'lucide-svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import Text from '../Text.svelte'
 
-  export let proxyConfig: ProxyConfig | undefined
-  export let onSave: (config: Omit<ProxyConfig, 'id'>) => Promise<void>
-  export let onCancel: () => void
+  interface Props {
+    proxyConfig?: ProxyConfig
+    onSave: (config: Omit<ProxyConfig, 'id'>) => Promise<void>
+    onCancel: () => void
+  }
+
+  let { proxyConfig = undefined, onSave, onCancel }: Props = $props()
 
   const DEFAULT_PROXY_CONFIG: ProxyServer = {
     scheme: 'http',
@@ -27,20 +27,20 @@
   }
 
   // Basic Settings
-  let name: string = proxyConfig?.name || ''
-  let color: string = proxyConfig?.color || 'gray'
-  let isActive: boolean = proxyConfig?.isActive || false
+  let name = $state<string>(proxyConfig?.name || '')
+  let color = $state<string>(proxyConfig?.color || 'gray')
+  let isActive = $state<boolean>(proxyConfig?.isActive || false)
 
   // Proxy Mode
-  let proxyMode: ProxyMode = proxyConfig?.mode || 'system'
+  let proxyMode = $state<ProxyMode>(proxyConfig?.mode || 'system')
 
   // PAC Script Settings
-  let editorContent: string = proxyConfig?.pacScript?.data || ''
-  let pacUrl: string = ''
-  let pacMandatory: boolean = false
+  let editorContent = $state<string>(proxyConfig?.pacScript?.data || '')
+  let pacUrl = $state<string>('')
+  let pacMandatory = $state<boolean>(false)
 
   // Manual Proxy Settings
-  let proxySettings: ProxySettings = {
+  let proxySettings = $state<ProxySettings>({
     singleProxy: proxyConfig?.rules?.singleProxy ?? { ...DEFAULT_PROXY_CONFIG },
     proxyForHttp: proxyConfig?.rules?.proxyForHttp ?? {
       ...DEFAULT_PROXY_CONFIG,
@@ -53,20 +53,15 @@
       ...DEFAULT_PROXY_CONFIG,
     },
     bypassList: proxyConfig?.rules?.bypassList || [],
-  }
-  let useSharedProxy: boolean = true
-  if (proxyConfig?.rules) {
-    if (proxyConfig?.rules.singleProxy) {
-      useSharedProxy = true
-    } else {
-      useSharedProxy = false
-    }
-  }
-  let bypassListContent: string = proxySettings.bypassList.join('\n')
+  })
+  let useSharedProxy = $state<boolean>(
+    proxyConfig?.rules?.singleProxy !== undefined ? true : proxyConfig?.rules ? false : true
+  )
+  let bypassListContent = $derived(proxySettings.bypassList.join('\n'))
 
   // Other state variables
-  let errorMessage: string = ''
-  let isSubmitting: boolean = false
+  let errorMessage = $state<string>('')
+  let isSubmitting = $state<boolean>(false)
 
   async function handleSubmit(event: Event) {
     event.preventDefault()
@@ -96,9 +91,7 @@
         }
       } else if (proxyMode === 'fixed_servers') {
         config.rules = {
-          bypassList: bypassListContent
-            .split('\n')
-            .filter((line) => line.trim()),
+          bypassList: bypassListContent.split('\n').filter((line) => line.trim()),
         }
 
         if (useSharedProxy) {
@@ -108,8 +101,7 @@
             config.rules.proxyForHttp = proxySettings.proxyForHttp
           if (proxySettings.proxyForHttps.host)
             config.rules.proxyForHttps = proxySettings.proxyForHttps
-          if (proxySettings.proxyForFtp.host)
-            config.rules.proxyForFtp = proxySettings.proxyForFtp
+          if (proxySettings.proxyForFtp.host) config.rules.proxyForFtp = proxySettings.proxyForFtp
           if (proxySettings.fallbackProxy.host)
             config.rules.fallbackProxy = proxySettings.fallbackProxy
         }
@@ -118,9 +110,7 @@
       await onSave(config)
     } catch (error) {
       errorMessage =
-        error instanceof Error
-          ? error.message
-          : I18nService.getMessage('invalidConfiguration')
+        error instanceof Error ? error.message : I18nService.getMessage('invalidConfiguration')
       NotifyService.error(ERROR_TYPES.VALIDATION, error)
     } finally {
       isSubmitting = false
@@ -136,27 +126,25 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div
-  class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
->
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
   <div
     class={`
-      bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col
+      bg-white dark:bg-slate-800 rounded-lg shadow-xl flex flex-col
       transition-all duration-300 ease-in-out overflow-y-auto
       w-full max-w-4xl min-h-[50vh] max-h-[90vh]
     `}
     role="dialog"
     aria-labelledby="editor-title"
   >
-    <form class="flex flex-col flex-1" on:submit={handleSubmit}>
-      <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
+    <form class="flex flex-col flex-1" onsubmit={handleSubmit}>
+      <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+        <h2 class="text-xl font-semibold text-slate-900 dark:text-white" data-testid="modal-title">
           {I18nService.getMessage('proxyConfiguration')}
         </h2>
       </div>
       <div class="px-6 py-4 space-y-6 flex-1">
         <div
-          class="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          class="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
         >
           <Settings size={20} />
           {I18nService.getMessage('basicSettings')}
@@ -173,39 +161,35 @@
             id="systemProxy"
             class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
           >
-            <p class="text-slate-600 dark:text-slate-400">
+            <Text as="p" color="muted">
               <Globe size={20} class="inline-block" />
               {I18nService.getMessage('systemProxy')}
-            </p>
+            </Text>
           </div>
         {:else if proxyMode === 'direct'}
           <div
             id="systemProxy"
             class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
           >
-            <p class="text-slate-600 dark:text-slate-400">
+            <Text as="p" color="muted">
               <Zap size={20} class="inline-block" />
               {I18nService.getMessage('directModeHelp')}
-            </p>
+            </Text>
           </div>
         {:else if proxyMode === 'auto_detect'}
           <div
             id="systemProxy"
             class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
           >
-            <p class="text-slate-600 dark:text-slate-400">
+            <Text as="p" color="muted">
               <Radar size={20} class="inline-block" />
               {I18nService.getMessage('autoDetectModeHelp')}
-            </p>
+            </Text>
           </div>
         {:else if proxyMode === 'pac_script'}
           <PACScriptSettings bind:pacUrl bind:pacMandatory bind:editorContent />
         {:else if proxyMode === 'fixed_servers'}
-          <ManualProxyConfiguration
-            bind:useSharedProxy
-            bind:proxySettings
-            bind:bypassListContent
-          />
+          <ManualProxyConfiguration bind:useSharedProxy bind:proxySettings bind:bypassListContent />
         {/if}
 
         <!-- Error Message -->
@@ -223,6 +207,8 @@
 </div>
 
 <style lang="postcss">
+  @import 'tailwindcss' reference;
+
   :global(body.modal-open) {
     @apply overflow-hidden;
   }
@@ -232,6 +218,6 @@
   }
 
   :global(.monaco-editor .margin) {
-    @apply bg-gray-100 dark:bg-gray-800;
+    @apply bg-slate-100 dark:bg-slate-800;
   }
 </style>

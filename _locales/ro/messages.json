@@ -177,5 +177,197 @@
   },
   "dropTarget": {
     "message": "Țintă de tragere"
+  },
+  "tabProxyConfigs": {
+    "message": "Configurații proxy"
+  },
+  "tabSettings": {
+    "message": "Setări"
+  },
+  "tabAbout": {
+    "message": "Despre"
+  },
+  "settingsProxyBehavior": {
+    "message": "Comportament proxy"
+  },
+  "settingsDataManagement": {
+    "message": "Gestionarea datelor"
+  },
+  "aboutVersion": {
+    "message": "Versiune"
+  },
+  "aboutHelpResources": {
+    "message": "Ajutor și resurse"
+  },
+  "aboutExtensionInfo": {
+    "message": "Informații despre extensie"
+  },
+  "aboutDiagnostics": {
+    "message": "Diagnostice"
+  },
+  "aboutViewOnGithub": {
+    "message": "Vizualizare pe GitHub"
+  },
+  "aboutReportIssue": {
+    "message": "Raportează o problemă"
+  },
+  "aboutDocumentation": {
+    "message": "Documentație"
+  },
+  "aboutFeatureRequest": {
+    "message": "Solicitare funcționalitate"
+  },
+  "statusConnected": {
+    "message": "Conectat"
+  },
+  "statusDisconnected": {
+    "message": "Niciun proxy activ"
+  },
+  "footerActiveProxy": {
+    "message": "Faceți clic pe comutator pentru a dezactiva proxy-ul"
+  },
+  "footerSelectProxy": {
+    "message": "Selectați un proxy pentru a vă conecta"
+  },
+  "proxyEnabled": {
+    "message": "Proxy \"$1\" activat"
+  },
+  "proxyDisabled": {
+    "message": "Proxy \"$1\" dezactivat"
+  },
+  "proxyDeleted": {
+    "message": "Proxy \"$1\" șters cu succes"
+  },
+  "toggleProxyOn": {
+    "message": "Activează proxy-ul $1"
+  },
+  "toggleProxyOff": {
+    "message": "Dezactivează proxy-ul $1"
+  },
+  "editConfiguration": {
+    "message": "Editează configurația $1"
+  },
+  "deleteConfiguration": {
+    "message": "Șterge configurația $1"
+  },
+  "deleteProxyTitle": {
+    "message": "Șterge configurația proxy"
+  },
+  "deleteProxyMessage": {
+    "message": "Sigur doriți să ștergeți \"$1\"? Această acțiune nu poate fi anulată."
+  },
+  "delete": {
+    "message": "Șterge"
+  },
+  "backupSuccess": {
+    "message": "Setări salvate cu succes"
+  },
+  "backupFailed": {
+    "message": "Eșec la salvarea setărilor"
+  },
+  "restoreSuccess": {
+    "message": "Setări restaurate cu succes"
+  },
+  "restoreFailed": {
+    "message": "Eșec la restaurarea setărilor"
+  },
+  "backupDescription": {
+    "message": "Descărcați toate configurațiile proxy și preferințele ca fișier JSON"
+  },
+  "restoreDescription": {
+    "message": "Încărcați un fișier de backup pentru a restaura configurațiile"
+  },
+  "errorBoundaryTitle": {
+    "message": "Ceva nu a mers bine"
+  },
+  "errorBoundaryRetry": {
+    "message": "Încercați din nou"
+  },
+  "closeNotification": {
+    "message": "Închide notificarea"
+  },
+  "closeDialog": {
+    "message": "Închide dialogul"
+  },
+  "confirm": {
+    "message": "Confirmă"
+  },
+  "quickSwitchEnabled": {
+    "message": "Modul de comutare rapidă activat"
+  },
+  "quickSwitchDisabled": {
+    "message": "Modul de comutare rapidă dezactivat"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "Proxy-ul va fi dezactivat la pornirea browserului"
+  },
+  "proxyPersistOnStartup": {
+    "message": "Starea proxy-ului va persista la pornirea browserului"
+  },
+  "proxyUpdated": {
+    "message": "Proxy \"$1\" actualizat cu succes"
+  },
+  "proxyCreated": {
+    "message": "Proxy \"$1\" creat cu succes"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ Activat – Faceți clic pe pictograma extensiei pentru a comuta rapid"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "Configurații de comutare rapidă"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "Trageți proxy-uri aici pentru comutare rapidă din popup-ul extensiei"
+  },
+  "allProxyConfigsTitle": {
+    "message": "Toate configurațiile proxy"
+  },
+  "allProxyConfigsDescription": {
+    "message": "Lista completă a configurațiilor proxy disponibile"
+  },
+  "quickStatsTitle": {
+    "message": "Statistici rapide"
+  },
+  "totalProxies": {
+    "message": "Total proxy-uri"
+  },
+  "quickSwitch": {
+    "message": "Comutare rapidă"
+  },
+  "activeProxy": {
+    "message": "Proxy activ"
+  },
+  "lastUsed": {
+    "message": "Ultima utilizare"
+  },
+  "none": {
+    "message": "Niciuna"
+  },
+  "versionLabel": {
+    "message": "Versiune:"
+  },
+  "extensionDescription": {
+    "message": "Extensie Chrome pentru gestionarea scripturilor PAC (Proxy Auto-Config)"
+  },
+  "bypassListPlaceholder": {
+    "message": "Introduceți un model pe linie:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "Nu există proxy-uri disponibile"
+  },
+  "noQuickSwitchTitle": {
+    "message": "Nu există proxy-uri de comutare rapidă"
+  },
+  "noProxyConfigsTitle": {
+    "message": "Nu există configurații proxy"
+  },
+  "addFirstProxyAction": {
+    "message": "Adăugați primul proxy"
+  },
+  "offButton": {
+    "message": "OPRIT"
   }
 }

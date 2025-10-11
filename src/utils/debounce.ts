@@ -6,19 +6,17 @@
  * @param wait - The number of milliseconds to delay
  * @param immediate - Whether to invoke the function on the leading edge instead of the trailing edge
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: never[]) => unknown>(
   func: T,
   wait: number = 300,
   immediate: boolean = false
-): (...args: Parameters<T>) => void {
+): ((...args: Parameters<T>) => void) & { cancel: () => void } {
   let timeout: ReturnType<typeof setTimeout> | null = null
 
-  return function (this: any, ...args: Parameters<T>): void {
-    const context = this
-
-    const later = function () {
+  const debounced = function (this: unknown, ...args: Parameters<T>): void {
+    const later = () => {
       timeout = null
-      if (!immediate) func.apply(context, args)
+      if (!immediate) func.apply(this, args)
     }
 
     const callNow = immediate && !timeout
@@ -26,8 +24,17 @@ export function debounce<T extends (...args: any[]) => any>(
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(later, wait)
 
-    if (callNow) func.apply(context, args)
+    if (callNow) func.apply(this, args)
   }
+
+  debounced.cancel = function () {
+    if (timeout) {
+      clearTimeout(timeout)
+      timeout = null
+    }
+  }
+
+  return debounced
 }
 
 /**
@@ -37,15 +44,14 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param func - The function to throttle
  * @param wait - The number of milliseconds to throttle invocations to
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: never[]) => unknown>(
   func: T,
   wait: number = 300
 ): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout> | null = null
   let previous = 0
 
-  return function (this: any, ...args: Parameters<T>): void {
-    const context = this
+  return function (this: unknown, ...args: Parameters<T>): void {
     const now = Date.now()
 
     if (!previous) previous = now
@@ -59,12 +65,12 @@ export function throttle<T extends (...args: any[]) => any>(
       }
 
       previous = now
-      func.apply(context, args)
+      func.apply(this, args)
     } else if (!timeout) {
-      timeout = setTimeout(function () {
+      timeout = setTimeout(() => {
         previous = Date.now()
         timeout = null
-        func.apply(context, args)
+        func.apply(this, args)
       }, remaining)
     }
   }

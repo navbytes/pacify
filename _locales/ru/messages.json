@@ -177,5 +177,197 @@
   },
   "dropTarget": {
     "message": "Цель перетаскивания"
+  },
+  "tabProxyConfigs": {
+    "message": "Конфигурации прокси"
+  },
+  "tabSettings": {
+    "message": "Настройки"
+  },
+  "tabAbout": {
+    "message": "О программе"
+  },
+  "settingsProxyBehavior": {
+    "message": "Поведение прокси"
+  },
+  "settingsDataManagement": {
+    "message": "Управление данными"
+  },
+  "aboutVersion": {
+    "message": "Версия"
+  },
+  "aboutHelpResources": {
+    "message": "Справка и ресурсы"
+  },
+  "aboutExtensionInfo": {
+    "message": "Информация о расширении"
+  },
+  "aboutDiagnostics": {
+    "message": "Диагностика"
+  },
+  "aboutViewOnGithub": {
+    "message": "Посмотреть на GitHub"
+  },
+  "aboutReportIssue": {
+    "message": "Сообщить о проблеме"
+  },
+  "aboutDocumentation": {
+    "message": "Документация"
+  },
+  "aboutFeatureRequest": {
+    "message": "Запросить функцию"
+  },
+  "statusConnected": {
+    "message": "Подключено"
+  },
+  "statusDisconnected": {
+    "message": "Нет активного прокси"
+  },
+  "footerActiveProxy": {
+    "message": "Нажмите переключатель, чтобы отключить прокси"
+  },
+  "footerSelectProxy": {
+    "message": "Выберите прокси для подключения"
+  },
+  "proxyEnabled": {
+    "message": "Прокси \"$1\" включен"
+  },
+  "proxyDisabled": {
+    "message": "Прокси \"$1\" отключен"
+  },
+  "proxyDeleted": {
+    "message": "Прокси \"$1\" успешно удален"
+  },
+  "toggleProxyOn": {
+    "message": "Включить прокси $1"
+  },
+  "toggleProxyOff": {
+    "message": "Отключить прокси $1"
+  },
+  "editConfiguration": {
+    "message": "Редактировать конфигурацию $1"
+  },
+  "deleteConfiguration": {
+    "message": "Удалить конфигурацию $1"
+  },
+  "deleteProxyTitle": {
+    "message": "Удалить конфигурацию прокси"
+  },
+  "deleteProxyMessage": {
+    "message": "Вы уверены, что хотите удалить \"$1\"? Это действие нельзя отменить."
+  },
+  "delete": {
+    "message": "Удалить"
+  },
+  "backupSuccess": {
+    "message": "Настройки успешно сохранены"
+  },
+  "backupFailed": {
+    "message": "Не удалось сохранить настройки"
+  },
+  "restoreSuccess": {
+    "message": "Настройки успешно восстановлены"
+  },
+  "restoreFailed": {
+    "message": "Не удалось восстановить настройки"
+  },
+  "backupDescription": {
+    "message": "Скачать все конфигурации прокси и настройки в виде JSON-файла"
+  },
+  "restoreDescription": {
+    "message": "Загрузите файл резервной копии для восстановления конфигураций"
+  },
+  "errorBoundaryTitle": {
+    "message": "Что-то пошло не так"
+  },
+  "errorBoundaryRetry": {
+    "message": "Попробовать снова"
+  },
+  "closeNotification": {
+    "message": "Закрыть уведомление"
+  },
+  "closeDialog": {
+    "message": "Закрыть диалог"
+  },
+  "confirm": {
+    "message": "Подтвердить"
+  },
+  "quickSwitchEnabled": {
+    "message": "Режим быстрого переключения включен"
+  },
+  "quickSwitchDisabled": {
+    "message": "Режим быстрого переключения отключен"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "Прокси будет отключен при запуске браузера"
+  },
+  "proxyPersistOnStartup": {
+    "message": "Состояние прокси сохранится при запуске браузера"
+  },
+  "proxyUpdated": {
+    "message": "Прокси \"$1\" успешно обновлен"
+  },
+  "proxyCreated": {
+    "message": "Прокси \"$1\" успешно создан"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ Включено – Нажмите на значок расширения для быстрого переключения"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "Конфигурации быстрого переключения"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "Перетащите прокси сюда для быстрого переключения из всплывающего окна расширения"
+  },
+  "allProxyConfigsTitle": {
+    "message": "Все конфигурации прокси"
+  },
+  "allProxyConfigsDescription": {
+    "message": "Полный список доступных конфигураций прокси"
+  },
+  "quickStatsTitle": {
+    "message": "Быстрая статистика"
+  },
+  "totalProxies": {
+    "message": "Всего прокси"
+  },
+  "quickSwitch": {
+    "message": "Быстрое переключение"
+  },
+  "activeProxy": {
+    "message": "Активный прокси"
+  },
+  "lastUsed": {
+    "message": "Последнее использование"
+  },
+  "none": {
+    "message": "Нет"
+  },
+  "versionLabel": {
+    "message": "Версия:"
+  },
+  "extensionDescription": {
+    "message": "Расширение Chrome для управления скриптами PAC (Proxy Auto-Config)"
+  },
+  "bypassListPlaceholder": {
+    "message": "Введите один шаблон в строке:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "Нет доступных прокси"
+  },
+  "noQuickSwitchTitle": {
+    "message": "Нет прокси быстрого переключения"
+  },
+  "noProxyConfigsTitle": {
+    "message": "Нет конфигураций прокси"
+  },
+  "addFirstProxyAction": {
+    "message": "Добавить первый прокси"
+  },
+  "offButton": {
+    "message": "ВЫКЛ"
   }
 }
