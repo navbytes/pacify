@@ -6,10 +6,7 @@ import {
   type ProxyConfig,
 } from '@/interfaces'
 import { convertAppSettingsToChromeConfig } from '../../utils/chrome'
-import {
-  withErrorHandling,
-  withErrorHandlingAndFallback,
-} from '@/utils/errorHandling'
+import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
 import { browserService } from './BrowserService'
 
 export class ChromeService {
@@ -24,36 +21,49 @@ export class ChromeService {
   /**
    * Sets Chrome proxy settings based on proxy configuration
    */
-  static setProxy = withErrorHandling(
-    async (proxy: ProxyConfig): Promise<void> => {
-      const details: chrome.types.ChromeSettingSetDetails = {
-        value: convertAppSettingsToChromeConfig(proxy),
-        scope: 'regular',
-      }
+  static setProxy = withErrorHandling(async (proxy: ProxyConfig): Promise<void> => {
+    const details: chrome.types.ChromeSettingSetDetails = {
+      value: convertAppSettingsToChromeConfig(proxy),
+      scope: 'regular',
+    }
 
-      return new Promise((resolve, reject) => {
-        this.browser.proxy.settings.set(details, () => {
-          if (this.browser.runtime.lastError) {
-            return reject(this.browser.runtime.lastError)
-          }
-          this.reloadActiveTab() // reload page after setting proxy
-          resolve()
-        })
+    return new Promise((resolve, reject) => {
+      this.browser.proxy.settings.set(details, async () => {
+        if (this.browser.runtime.lastError) {
+          return reject(this.browser.runtime.lastError)
+        }
+
+        // Await tab reload and handle errors gracefully
+        try {
+          await this.reloadActiveTab()
+        } catch (error) {
+          console.warn('Failed to reload tab (proxy still set):', error)
+          // Don't reject - proxy was set successfully
+        }
+
+        resolve()
       })
-    },
-    ERROR_TYPES.SET_PROXY
-  )
+    })
+  }, ERROR_TYPES.SET_PROXY)
 
   /**
    * Clears all proxy settings
    */
   static clearProxy = withErrorHandling(async (): Promise<void> => {
     return new Promise((resolve, reject) => {
-      this.browser.proxy.settings.clear({}, () => {
+      this.browser.proxy.settings.clear({}, async () => {
         if (this.browser.runtime.lastError) {
           return reject(this.browser.runtime.lastError)
         }
-        this.reloadActiveTab() // reload page after clearing proxy
+
+        // Await tab reload and handle errors gracefully
+        try {
+          await this.reloadActiveTab()
+        } catch (error) {
+          console.warn('Failed to reload tab (proxy still cleared):', error)
+          // Don't reject - proxy was cleared successfully
+        }
+
         resolve()
       })
     })
@@ -69,7 +79,19 @@ export class ChromeService {
           active: true,
           currentWindow: true,
         })
+
         if (activeTab?.id) {
+          // Skip reloading for special Chrome pages that can't be reloaded
+          if (
+            activeTab.url?.startsWith('chrome://') ||
+            activeTab.url?.startsWith('chrome-extension://') ||
+            activeTab.url?.startsWith('edge://') ||
+            activeTab.url?.startsWith('about:')
+          ) {
+            console.log('Skipping reload for special page:', activeTab.url)
+            return
+          }
+
           await this.browser.tabs.reload(activeTab.id)
         }
       } else {
@@ -100,11 +122,20 @@ export class ChromeService {
   )
 
   /**
-   * Sends a message to the background script
+   * Sends a message to the background script with response validation
    */
   static sendMessage = withErrorHandling(
     async <T extends BackgroundMessage>(message: T): Promise<void> => {
-      await this.browser.runtime.sendMessage<T>(message)
+      const response = await this.browser.runtime.sendMessage<T>(message)
+
+      // Validate response from background script
+      if (response && !response.success) {
+        const errorMessage = response.error || 'Unknown error from background script'
+        console.error(`Background script returned error for ${message.type}:`, errorMessage)
+        throw new Error(errorMessage)
+      }
+
+      console.log(`Message ${message.type} processed successfully`)
     },
     ERROR_TYPES.SEND_MESSAGE
   )
@@ -119,12 +150,9 @@ export class ChromeService {
   /**
    * Saves settings to sync storage
    */
-  static setSyncSettings = withErrorHandling(
-    async (settings: AppSettings): Promise<void> => {
-      await this.browser.storage.sync.set({ settings })
-    },
-    ERROR_TYPES.SAVE_SETTINGS
-  )
+  static setSyncSettings = withErrorHandling(async (settings: AppSettings): Promise<void> => {
+    await this.browser.storage.sync.set({ settings })
+  }, ERROR_TYPES.SAVE_SETTINGS)
 
   /**
    * Gets settings from sync storage

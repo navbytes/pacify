@@ -177,5 +177,83 @@
   },
   "dropTarget": {
     "message": "놓기 대상"
+  },
+  "tabProxyConfigs": {
+    "message": "프록시 구성"
+  },
+  "tabSettings": {
+    "message": "설정"
+  },
+  "tabAbout": {
+    "message": "정보"
+  },
+  "settingsProxyBehavior": {
+    "message": "프록시 동작"
+  },
+  "settingsDataManagement": {
+    "message": "데이터 관리"
+  },
+  "aboutVersion": {
+    "message": "버전"
+  },
+  "aboutHelpResources": {
+    "message": "도움말 및 리소스"
+  },
+  "aboutExtensionInfo": {
+    "message": "확장 프로그램 정보"
+  },
+  "aboutDiagnostics": {
+    "message": "진단"
+  },
+  "aboutViewOnGithub": {
+    "message": "GitHub에서 보기"
+  },
+  "aboutReportIssue": {
+    "message": "문제 보고"
+  },
+  "aboutDocumentation": {
+    "message": "문서"
+  },
+  "statusConnected": {
+    "message": "연결됨"
+  },
+  "statusDisconnected": {
+    "message": "활성 프록시 없음"
+  },
+  "footerActiveProxy": {
+    "message": "프록시를 비활성화하려면 토글을 클릭하세요"
+  },
+  "footerSelectProxy": {
+    "message": "연결할 프록시를 선택하세요"
+  },
+  "proxyEnabled": {
+    "message": "프록시 \"$1\" 활성화됨"
+  },
+  "proxyDisabled": {
+    "message": "프록시 \"$1\" 비활성화됨"
+  },
+  "proxyDeleted": {
+    "message": "프록시 \"$1\" 삭제 완료"
+  },
+  "toggleProxyOn": {
+    "message": "프록시 $1 활성화"
+  },
+  "toggleProxyOff": {
+    "message": "프록시 $1 비활성화"
+  },
+  "editConfiguration": {
+    "message": "$1 구성 편집"
+  },
+  "deleteConfiguration": {
+    "message": "$1 구성 삭제"
+  },
+  "deleteProxyTitle": {
+    "message": "프록시 구성 삭제"
+  },
+  "deleteProxyMessage": {
+    "message": "\"$1\"을(를) 삭제하시겠습니까? 이 작업은 취소할 수 없습니다."
+  },
+  "delete": {
+    "message": "삭제"
   }
 }

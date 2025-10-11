@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import Text from '../Text.svelte'
   let { children } = $props()
 
   let error = $state<Error | null>(null)
@@ -21,8 +22,8 @@
 
 {#if hasError && error}
   <div class="bg-red-50 border border-red-200 rounded p-4 text-red-700">
-    <h3 class="font-bold">Something went wrong</h3>
-    <p class="text-sm">{error.message}</p>
+    <Text as="h3" weight="bold">Something went wrong</Text>
+    <Text as="p" size="sm">{error.message}</Text>
     <button
       class="mt-2 text-sm text-red-600 hover:text-red-800"
       onclick={() => {

@@ -164,7 +164,7 @@
     "message": "Disable Proxy on Startup"
   },
   "disableProxyOnStartupDescription": {
-    "message": "When enabled, any active proxy configuration will be automatically disabled when the browser starts, ensuring you start in \"OFF\" mode."
+    "message": "When turned on, PACify disables any active proxy each time the browser starts, ensuring you begin in OFF mode."
   },
   "invalidConfiguration": {
     "message": "Invalid configuration"
@@ -177,5 +177,83 @@
   },
   "dropTarget": {
     "message": "Drop target"
+  },
+  "tabProxyConfigs": {
+    "message": "Proxy Configs"
+  },
+  "tabSettings": {
+    "message": "Settings"
+  },
+  "tabAbout": {
+    "message": "About"
+  },
+  "settingsProxyBehavior": {
+    "message": "Proxy Behavior"
+  },
+  "settingsDataManagement": {
+    "message": "Data Management"
+  },
+  "aboutVersion": {
+    "message": "Version"
+  },
+  "aboutHelpResources": {
+    "message": "Help & Resources"
+  },
+  "aboutExtensionInfo": {
+    "message": "Extension Information"
+  },
+  "aboutDiagnostics": {
+    "message": "Diagnostics"
+  },
+  "aboutViewOnGithub": {
+    "message": "View on GitHub"
+  },
+  "aboutReportIssue": {
+    "message": "Report an Issue"
+  },
+  "aboutDocumentation": {
+    "message": "Documentation"
+  },
+  "statusConnected": {
+    "message": "Connected"
+  },
+  "statusDisconnected": {
+    "message": "No proxy active"
+  },
+  "footerActiveProxy": {
+    "message": "Click toggle to disable proxy"
+  },
+  "footerSelectProxy": {
+    "message": "Select a proxy to connect"
+  },
+  "proxyEnabled": {
+    "message": "Proxy \"$1\" enabled"
+  },
+  "proxyDisabled": {
+    "message": "Proxy \"$1\" disabled"
+  },
+  "proxyDeleted": {
+    "message": "Proxy \"$1\" deleted successfully"
+  },
+  "toggleProxyOn": {
+    "message": "Toggle $1 proxy on"
+  },
+  "toggleProxyOff": {
+    "message": "Toggle $1 proxy off"
+  },
+  "editConfiguration": {
+    "message": "Edit $1 configuration"
+  },
+  "deleteConfiguration": {
+    "message": "Delete $1 configuration"
+  },
+  "deleteProxyTitle": {
+    "message": "Delete Proxy Configuration"
+  },
+  "deleteProxyMessage": {
+    "message": "Are you sure you want to delete \"$1\"? This action cannot be undone."
+  },
+  "delete": {
+    "message": "Delete"
   }
 }

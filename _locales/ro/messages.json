@@ -177,5 +177,83 @@
   },
   "dropTarget": {
     "message": "Țintă de tragere"
+  },
+  "tabProxyConfigs": {
+    "message": "Configurații proxy"
+  },
+  "tabSettings": {
+    "message": "Setări"
+  },
+  "tabAbout": {
+    "message": "Despre"
+  },
+  "settingsProxyBehavior": {
+    "message": "Comportament proxy"
+  },
+  "settingsDataManagement": {
+    "message": "Gestionarea datelor"
+  },
+  "aboutVersion": {
+    "message": "Versiune"
+  },
+  "aboutHelpResources": {
+    "message": "Ajutor și resurse"
+  },
+  "aboutExtensionInfo": {
+    "message": "Informații despre extensie"
+  },
+  "aboutDiagnostics": {
+    "message": "Diagnostice"
+  },
+  "aboutViewOnGithub": {
+    "message": "Vizualizare pe GitHub"
+  },
+  "aboutReportIssue": {
+    "message": "Raportează o problemă"
+  },
+  "aboutDocumentation": {
+    "message": "Documentație"
+  },
+  "statusConnected": {
+    "message": "Conectat"
+  },
+  "statusDisconnected": {
+    "message": "Niciun proxy activ"
+  },
+  "footerActiveProxy": {
+    "message": "Faceți clic pe comutator pentru a dezactiva proxy-ul"
+  },
+  "footerSelectProxy": {
+    "message": "Selectați un proxy pentru a vă conecta"
+  },
+  "proxyEnabled": {
+    "message": "Proxy \"$1\" activat"
+  },
+  "proxyDisabled": {
+    "message": "Proxy \"$1\" dezactivat"
+  },
+  "proxyDeleted": {
+    "message": "Proxy \"$1\" șters cu succes"
+  },
+  "toggleProxyOn": {
+    "message": "Activează proxy-ul $1"
+  },
+  "toggleProxyOff": {
+    "message": "Dezactivează proxy-ul $1"
+  },
+  "editConfiguration": {
+    "message": "Editează configurația $1"
+  },
+  "deleteConfiguration": {
+    "message": "Șterge configurația $1"
+  },
+  "deleteProxyTitle": {
+    "message": "Șterge configurația proxy"
+  },
+  "deleteProxyMessage": {
+    "message": "Sigur doriți să ștergeți \"$1\"? Această acțiune nu poate fi anulată."
+  },
+  "delete": {
+    "message": "Șterge"
   }
 }

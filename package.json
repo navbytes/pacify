@@ -1,6 +1,6 @@
 {
   "name": "pacify-proxy-manager",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -8,26 +8,62 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "format": "prettier --write ."
+    "lint": "eslint . --ext .ts,.svelte",
+    "lint:fix": "eslint . --ext .ts,.svelte --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint-staged": "lint-staged",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:smoke": "playwright test tests/e2e/extension-smoke.spec.ts",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,svelte}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,postcss}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "caniuse-lite": "^1.0.30001741",
-    "lucide-svelte": "^0.474.0",
-    "monaco-editor": "^0.52.2",
+    "lucide-svelte": "^0.545.0",
+    "monaco-editor": "^0.54.0",
     "svelte": "^5.15.0"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@playwright/test": "^1.56.0",
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
+    "@tailwindcss/postcss": "^4.1.14",
+    "@testing-library/svelte": "^5.2.8",
     "@tsconfig/svelte": "^5.0.4",
-    "@types/chrome": "^0.0.287",
-    "@types/node": "^22.10.2",
+    "@types/chrome": "^0.1.22",
+    "@types/node": "^24.7.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.0",
+    "@typescript-eslint/parser": "^8.46.0",
+    "@vitest/ui": "^3.2.4",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.37.0",
+    "eslint-plugin-svelte": "^3.12.4",
+    "globals": "^16.4.0",
+    "happy-dom": "^20.0.0",
+    "husky": "^9.1.7",
+    "jsdom": "^27.0.0",
+    "lint-staged": "^16.2.3",
+    "playwright": "^1.56.0",
     "postcss": "^8.4.49",
-    "prettier-plugin-svelte": "^3.3.2",
-    "prettier": "^3.4.2",
+    "prettier": "^3.6.2",
+    "prettier-plugin-svelte": "^3.4.0",
     "svelte-check": "^4.1.1",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^4.1.14",
     "typescript": "^5.7.2",
-    "vite": "^6.0.5"
+    "vite": "^7.1.9",
+    "vitest": "^3.2.4"
   }
 }

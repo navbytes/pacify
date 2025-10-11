@@ -1,11 +1,6 @@
-<script context="module" lang="ts">
+<script lang="ts" module>
   // Define supported colors.
-  export type ButtonColor =
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'error'
-    | 'info'
+  export type ButtonColor = 'primary' | 'secondary' | 'success' | 'error' | 'info'
 
   // Define props interface (if you want to extend later)
   export interface LabelButtonProps {
@@ -17,13 +12,27 @@
 </script>
 
 <script lang="ts">
-  import type { SvelteComponent } from 'svelte'
+  import type { SvelteComponent, Snippet } from 'svelte'
+  import Text from './Text.svelte'
 
-  // Props with default values.
-  export let color: ButtonColor = 'primary'
-  export let minimal: boolean = false
-  export let hideType: HideType = 'hidden'
-  export let icon: typeof SvelteComponent | null = null
+  interface Props {
+    color?: ButtonColor
+    minimal?: boolean
+    hideType?: HideType
+    icon?: typeof SvelteComponent | null
+    children?: Snippet
+    input?: Snippet
+  }
+
+  // Props with default values using Svelte 5 $props()
+  let {
+    color = 'primary',
+    minimal = false,
+    hideType = 'hidden',
+    icon = null,
+    children,
+    input,
+  }: Props = $props()
 
   /*
     Define Tailwind CSS classes for each state:
@@ -34,23 +43,19 @@
   const colors: Record<ButtonColor, { base: string; minimal: string }> = {
     primary: {
       base: 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800',
-      minimal:
-        'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500',
+      minimal: 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500',
     },
     secondary: {
-      base: 'bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-800',
-      minimal:
-        'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-500',
+      base: 'bg-slate-200 text-black hover:bg-slate-300 focus:ring-slate-300 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800',
+      minimal: 'text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-500',
     },
     success: {
       base: 'bg-green-500 text-white hover:bg-green-600 focus:ring-green-300 dark:bg-green-700 dark:hover:bg-green-800',
-      minimal:
-        'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-500',
+      minimal: 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-500',
     },
     error: {
       base: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800',
-      minimal:
-        'text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500',
+      minimal: 'text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500',
     },
     info: {
       base: 'bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-300 dark:bg-indigo-700 dark:hover:bg-indigo-800',
@@ -59,25 +64,30 @@
     },
   }
 
-  // Compute the classes based on the minimal flag and selected color.
-  $: labelClasses = minimal
-    ? `inline-flex items-center focus:outline-none ${colors[color].minimal}`
-    : `inline-flex items-center py-2 px-4 rounded shadow focus:outline-none focus:ring-2 focus:ring-offset-2 ${colors[color].base}`
+  // Compute the classes based on the minimal flag and selected color using Svelte 5 $derived
+  const labelClasses = $derived(
+    minimal
+      ? `inline-flex items-center focus:outline-none ${colors[color].minimal}`
+      : `inline-flex items-center py-2 px-4 rounded shadow focus:outline-none focus:ring-2 focus:ring-offset-2 ${colors[color].base}`
+  )
 </script>
 
 <label class={labelClasses}>
   {#if icon}
+    {@const Icon = icon}
     <!-- If both an icon and text exist, add margin to the icon -->
-    <svelte:component this={icon} class={$$slots.default ? 'mr-2' : ''} />
+    <Text classes={children ? 'mr-2' : ''}>
+      <Icon size={18} />
+    </Text>
   {/if}
-  {#if $$slots.default}
-    <slot />
+  {#if children}
+    {@render children()}
   {/if}
-  {#if $$slots.input}
-    <!-- Wrap the input slot in a hidden span so that it is still part of the DOM,
+  {#if input}
+    <!-- Wrap the input snippet in a hidden span so that it is still part of the DOM,
          but not visible. -->
-    <span class={hideType}>
-      <slot name="input" />
-    </span>
+    <Text classes={hideType}>
+      {@render input()}
+    </Text>
   {/if}
 </label>

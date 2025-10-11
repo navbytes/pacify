@@ -177,5 +177,83 @@
   },
   "dropTarget": {
     "message": "拖放目标"
+  },
+  "tabProxyConfigs": {
+    "message": "代理配置"
+  },
+  "tabSettings": {
+    "message": "设置"
+  },
+  "tabAbout": {
+    "message": "关于"
+  },
+  "settingsProxyBehavior": {
+    "message": "代理行为"
+  },
+  "settingsDataManagement": {
+    "message": "数据管理"
+  },
+  "aboutVersion": {
+    "message": "版本"
+  },
+  "aboutHelpResources": {
+    "message": "帮助和资源"
+  },
+  "aboutExtensionInfo": {
+    "message": "扩展信息"
+  },
+  "aboutDiagnostics": {
+    "message": "诊断"
+  },
+  "aboutViewOnGithub": {
+    "message": "在 GitHub 上查看"
+  },
+  "aboutReportIssue": {
+    "message": "报告问题"
+  },
+  "aboutDocumentation": {
+    "message": "文档"
+  },
+  "statusConnected": {
+    "message": "已连接"
+  },
+  "statusDisconnected": {
+    "message": "没有活动的代理"
+  },
+  "footerActiveProxy": {
+    "message": "点击切换以禁用代理"
+  },
+  "footerSelectProxy": {
+    "message": "选择要连接的代理"
+  },
+  "proxyEnabled": {
+    "message": "代理 \"$1\" 已启用"
+  },
+  "proxyDisabled": {
+    "message": "代理 \"$1\" 已禁用"
+  },
+  "proxyDeleted": {
+    "message": "代理 \"$1\" 删除成功"
+  },
+  "toggleProxyOn": {
+    "message": "启用代理 $1"
+  },
+  "toggleProxyOff": {
+    "message": "禁用代理 $1"
+  },
+  "editConfiguration": {
+    "message": "编辑配置 $1"
+  },
+  "deleteConfiguration": {
+    "message": "删除配置 $1"
+  },
+  "deleteProxyTitle": {
+    "message": "删除代理配置"
+  },
+  "deleteProxyMessage": {
+    "message": "确定要删除 \"$1\" 吗？此操作无法撤消。"
+  },
+  "delete": {
+    "message": "删除"
   }
 }

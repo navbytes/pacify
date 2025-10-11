@@ -177,5 +177,83 @@
   },
   "dropTarget": {
     "message": "ड्रॉप लक्ष्य"
+  },
+  "tabProxyConfigs": {
+    "message": "प्रॉक्सी कॉन्फ़िगरेशन"
+  },
+  "tabSettings": {
+    "message": "सेटिंग्स"
+  },
+  "tabAbout": {
+    "message": "के बारे में"
+  },
+  "settingsProxyBehavior": {
+    "message": "प्रॉक्सी व्यवहार"
+  },
+  "settingsDataManagement": {
+    "message": "डेटा प्रबंधन"
+  },
+  "aboutVersion": {
+    "message": "संस्करण"
+  },
+  "aboutHelpResources": {
+    "message": "सहायता और संसाधन"
+  },
+  "aboutExtensionInfo": {
+    "message": "एक्सटेंशन जानकारी"
+  },
+  "aboutDiagnostics": {
+    "message": "निदान"
+  },
+  "aboutViewOnGithub": {
+    "message": "GitHub पर देखें"
+  },
+  "aboutReportIssue": {
+    "message": "समस्या रिपोर्ट करें"
+  },
+  "aboutDocumentation": {
+    "message": "दस्तावेज़ीकरण"
+  },
+  "statusConnected": {
+    "message": "कनेक्ट किया गया"
+  },
+  "statusDisconnected": {
+    "message": "कोई सक्रिय प्रॉक्सी नहीं"
+  },
+  "footerActiveProxy": {
+    "message": "प्रॉक्सी अक्षम करने के लिए टॉगल पर क्लिक करें"
+  },
+  "footerSelectProxy": {
+    "message": "कनेक्ट करने के लिए प्रॉक्सी चुनें"
+  },
+  "proxyEnabled": {
+    "message": "प्रॉक्सी \"$1\" सक्षम की गई"
+  },
+  "proxyDisabled": {
+    "message": "प्रॉक्सी \"$1\" अक्षम की गई"
+  },
+  "proxyDeleted": {
+    "message": "प्रॉक्सी \"$1\" सफलतापूर्वक हटाई गई"
+  },
+  "toggleProxyOn": {
+    "message": "प्रॉक्सी $1 को सक्षम करें"
+  },
+  "toggleProxyOff": {
+    "message": "प्रॉक्सी $1 को अक्षम करें"
+  },
+  "editConfiguration": {
+    "message": "कॉन्फ़िगरेशन $1 संपादित करें"
+  },
+  "deleteConfiguration": {
+    "message": "कॉन्फ़िगरेशन $1 हटाएं"
+  },
+  "deleteProxyTitle": {
+    "message": "प्रॉक्सी कॉन्फ़िगरेशन हटाएं"
+  },
+  "deleteProxyMessage": {
+    "message": "क्या आप वाकई \"$1\" को हटाना चाहते हैं? इस कार्य को पूर्ववत नहीं किया जा सकता।"
+  },
+  "delete": {
+    "message": "हटाएं"
   }
 }

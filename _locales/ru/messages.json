@@ -177,5 +177,83 @@
   },
   "dropTarget": {
     "message": "Цель перетаскивания"
+  },
+  "tabProxyConfigs": {
+    "message": "Конфигурации прокси"
+  },
+  "tabSettings": {
+    "message": "Настройки"
+  },
+  "tabAbout": {
+    "message": "О программе"
+  },
+  "settingsProxyBehavior": {
+    "message": "Поведение прокси"
+  },
+  "settingsDataManagement": {
+    "message": "Управление данными"
+  },
+  "aboutVersion": {
+    "message": "Версия"
+  },
+  "aboutHelpResources": {
+    "message": "Справка и ресурсы"
+  },
+  "aboutExtensionInfo": {
+    "message": "Информация о расширении"
+  },
+  "aboutDiagnostics": {
+    "message": "Диагностика"
+  },
+  "aboutViewOnGithub": {
+    "message": "Посмотреть на GitHub"
+  },
+  "aboutReportIssue": {
+    "message": "Сообщить о проблеме"
+  },
+  "aboutDocumentation": {
+    "message": "Документация"
+  },
+  "statusConnected": {
+    "message": "Подключено"
+  },
+  "statusDisconnected": {
+    "message": "Нет активного прокси"
+  },
+  "footerActiveProxy": {
+    "message": "Нажмите переключатель, чтобы отключить прокси"
+  },
+  "footerSelectProxy": {
+    "message": "Выберите прокси для подключения"
+  },
+  "proxyEnabled": {
+    "message": "Прокси \"$1\" включен"
+  },
+  "proxyDisabled": {
+    "message": "Прокси \"$1\" отключен"
+  },
+  "proxyDeleted": {
+    "message": "Прокси \"$1\" успешно удален"
+  },
+  "toggleProxyOn": {
+    "message": "Включить прокси $1"
+  },
+  "toggleProxyOff": {
+    "message": "Отключить прокси $1"
+  },
+  "editConfiguration": {
+    "message": "Редактировать конфигурацию $1"
+  },
+  "deleteConfiguration": {
+    "message": "Удалить конфигурацию $1"
+  },
+  "deleteProxyTitle": {
+    "message": "Удалить конфигурацию прокси"
+  },
+  "deleteProxyMessage": {
+    "message": "Вы уверены, что хотите удалить \"$1\"? Это действие нельзя отменить."
+  },
+  "delete": {
+    "message": "Удалить"
   }
 }

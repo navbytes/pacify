@@ -177,5 +177,83 @@
   },
   "dropTarget": {
     "message": "ドロップ対象"
+  },
+  "tabProxyConfigs": {
+    "message": "プロキシ設定"
+  },
+  "tabSettings": {
+    "message": "設定"
+  },
+  "tabAbout": {
+    "message": "について"
+  },
+  "settingsProxyBehavior": {
+    "message": "プロキシの動作"
+  },
+  "settingsDataManagement": {
+    "message": "データ管理"
+  },
+  "aboutVersion": {
+    "message": "バージョン"
+  },
+  "aboutHelpResources": {
+    "message": "ヘルプとリソース"
+  },
+  "aboutExtensionInfo": {
+    "message": "拡張機能情報"
+  },
+  "aboutDiagnostics": {
+    "message": "診断"
+  },
+  "aboutViewOnGithub": {
+    "message": "GitHubで表示"
+  },
+  "aboutReportIssue": {
+    "message": "問題を報告"
+  },
+  "aboutDocumentation": {
+    "message": "ドキュメント"
+  },
+  "statusConnected": {
+    "message": "接続済み"
+  },
+  "statusDisconnected": {
+    "message": "アクティブなプロキシなし"
+  },
+  "footerActiveProxy": {
+    "message": "トグルをクリックしてプロキシを無効にします"
+  },
+  "footerSelectProxy": {
+    "message": "接続するプロキシを選択してください"
+  },
+  "proxyEnabled": {
+    "message": "プロキシ \"$1\" が有効になりました"
+  },
+  "proxyDisabled": {
+    "message": "プロキシ \"$1\" が無効になりました"
+  },
+  "proxyDeleted": {
+    "message": "プロキシ \"$1\" を正常に削除しました"
+  },
+  "toggleProxyOn": {
+    "message": "プロキシ $1 を有効にする"
+  },
+  "toggleProxyOff": {
+    "message": "プロキシ $1 を無効にする"
+  },
+  "editConfiguration": {
+    "message": "$1 設定を編集"
+  },
+  "deleteConfiguration": {
+    "message": "$1 設定を削除"
+  },
+  "deleteProxyTitle": {
+    "message": "プロキシ設定を削除"
+  },
+  "deleteProxyMessage": {
+    "message": "\"$1\" を削除してもよろしいですか？この操作は元に戻せません。"
+  },
+  "delete": {
+    "message": "削除"
   }
 }

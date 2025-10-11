@@ -4,6 +4,11 @@
  */
 
 // Notification API
+export interface NotificationButton {
+  title: string
+  iconUrl?: string
+}
+
 export interface NotificationOptions {
   type: string
   iconUrl: string
@@ -11,7 +16,7 @@ export interface NotificationOptions {
   message: string
   priority?: number
   requireInteraction?: boolean
-  buttons?: any[]
+  buttons?: NotificationButton[]
 }
 
 export interface NotificationAPI {
@@ -22,8 +27,8 @@ export interface NotificationAPI {
 
 // Storage API
 export interface StorageArea {
-  get(keys: string | string[] | null): Promise<Record<string, any>>
-  set(items: Record<string, any>): Promise<void>
+  get(keys: string | string[] | null): Promise<Record<string, unknown>>
+  set(items: Record<string, unknown>): Promise<void>
   getBytesInUse?(keys: string | string[] | null): Promise<number>
   QUOTA_BYTES?: number
 }
@@ -33,28 +38,61 @@ export interface StorageAPI {
   local: StorageArea
 }
 
+export interface Tab {
+  id?: number
+  index: number
+  windowId: number
+  highlighted: boolean
+  active: boolean
+  pinned: boolean
+  url?: string
+  title?: string
+  [key: string]: unknown
+}
+
 // Action/Browser Action API
 export interface ActionAPI {
   setBadgeText(details: { text: string }): Promise<void>
   setBadgeBackgroundColor(details: { color: string }): Promise<void>
   setPopup(details: { popup: string }): Promise<void>
   onClicked: {
-    addListener(callback: (tab: any) => void): void
-    removeListener(callback: (tab: any) => void): void
+    addListener(callback: (tab: Tab) => void): void
+    removeListener(callback: (tab: Tab) => void): void
   }
+}
+
+export interface MessageSender {
+  tab?: Tab
+  frameId?: number
+  id?: string
+  url?: string
+  tlsChannelId?: string
+  [key: string]: unknown
+}
+
+export interface SendResponse {
+  (response?: unknown): void
 }
 
 // Runtime API
 export interface RuntimeAPI {
   getURL(path: string): string
-  sendMessage<T>(message: T): Promise<any>
+  sendMessage<T>(message: T): Promise<unknown>
   openOptionsPage(): void
   onMessage: {
     addListener(
-      callback: (message: any, sender: any, sendResponse: any) => boolean | void
+      callback: (
+        message: unknown,
+        sender: MessageSender,
+        sendResponse: SendResponse
+      ) => boolean | void
     ): void
     removeListener(
-      callback: (message: any, sender: any, sendResponse: any) => boolean | void
+      callback: (
+        message: unknown,
+        sender: MessageSender,
+        sendResponse: SendResponse
+      ) => boolean | void
     ): void
   }
   onStartup: {
@@ -72,16 +110,25 @@ export interface RuntimeAPI {
 
 // Tabs API
 export interface TabsAPI {
-  query(queryInfo: { active: boolean; currentWindow: boolean }): Promise<any[]>
+  query(queryInfo: { active: boolean; currentWindow: boolean }): Promise<Tab[]>
   reload(tabId?: number): Promise<void>
+}
+
+export interface ProxySettings {
+  value: {
+    mode: string
+    [key: string]: unknown
+  }
+  levelOfControl: string
+  [key: string]: unknown
 }
 
 // Proxy API
 export interface ProxyAPI {
   settings: {
-    set(details: any, callback?: () => void): void
-    clear(details: any, callback?: () => void): void
-    get(details: any, callback?: (config: any) => void): void
+    set(details: unknown, callback?: () => void): void
+    clear(details: unknown, callback?: () => void): void
+    get(details: unknown, callback?: (config: ProxySettings) => void): void
   }
 }
 

@@ -11,7 +11,7 @@ export type ErrorHandler = (error: unknown) => void
  * @param errorType - The type of error for logging
  * @param customHandler - Optional custom error handler
  */
-export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
+export function withErrorHandling<T extends (...args: never[]) => Promise<unknown>>(
   operation: T,
   errorType: ERROR_TYPES,
   customHandler?: ErrorHandler
@@ -42,13 +42,9 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
  * @param fallbackValue - The value to return if the operation fails
  */
 export function withErrorHandlingAndFallback<
-  T extends (...args: any[]) => Promise<any>,
+  T extends (...args: never[]) => Promise<unknown>,
   R = ReturnType<T>,
->(
-  operation: T,
-  errorType: ERROR_TYPES,
-  fallbackValue: R
-): (...args: Parameters<T>) => Promise<R> {
+>(operation: T, errorType: ERROR_TYPES, fallbackValue: R): (...args: Parameters<T>) => Promise<R> {
   return async (...args: Parameters<T>): Promise<R> => {
     try {
       return (await operation(...args)) as R
@@ -67,7 +63,7 @@ export function withErrorHandlingAndFallback<
  * @param maxRetries - Maximum number of retry attempts
  * @param delayMs - Base delay between retries (will increase exponentially)
  */
-export function withRetry<T extends (...args: any[]) => Promise<any>>(
+export function withRetry<T extends (...args: never[]) => Promise<unknown>>(
   operation: T,
   errorType: ERROR_TYPES,
   maxRetries: number = 3,
@@ -90,9 +86,7 @@ export function withRetry<T extends (...args: any[]) => Promise<any>>(
           )
 
           // Exponential backoff
-          await new Promise((resolve) =>
-            setTimeout(resolve, delayMs * Math.pow(2, attempt - 1))
-          )
+          await new Promise((resolve) => setTimeout(resolve, delayMs * Math.pow(2, attempt - 1)))
         }
       }
     }

@@ -1,3 +1,18 @@
+// Type for Monaco Editor instance
+export interface IMonacoEditor {
+  getValue(): string
+  setValue(value: string): void
+  dispose(): void
+  // Add other methods as needed
+}
+
+// Type for Monaco KeyCode
+export interface IMonacoKeyCode {
+  Enter: number
+  Escape: number
+  [key: string]: number
+}
+
 export interface MonacoOptions {
   value: string
   automaticLayout?: boolean
@@ -30,7 +45,7 @@ export interface MonacoOptions {
   codeLens?: boolean
 
   // lightbulb: { enabled?: boolean }
-  selectionHighlight: boolean
+  selectionHighlight?: boolean
   occurrencesHighlight?: 'off' | 'singleFile' | 'multiFile'
 
   suggest?: {

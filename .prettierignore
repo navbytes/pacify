@@ -1,3 +1,10 @@
-node_modules/
-dist/
-*.min.js
+node_modules
+dist
+build
+.svelte-kit
+coverage
+*.log
+*.lock
+package-lock.json
+public/build
+.DS_Store

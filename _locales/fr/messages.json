@@ -177,5 +177,83 @@
   },
   "dropTarget": {
     "message": "Cible de dépôt"
+  },
+  "tabProxyConfigs": {
+    "message": "Configurations de proxy"
+  },
+  "tabSettings": {
+    "message": "Paramètres"
+  },
+  "tabAbout": {
+    "message": "À propos"
+  },
+  "settingsProxyBehavior": {
+    "message": "Comportement du proxy"
+  },
+  "settingsDataManagement": {
+    "message": "Gestion des données"
+  },
+  "aboutVersion": {
+    "message": "Version"
+  },
+  "aboutHelpResources": {
+    "message": "Aide et ressources"
+  },
+  "aboutExtensionInfo": {
+    "message": "Informations sur l'extension"
+  },
+  "aboutDiagnostics": {
+    "message": "Diagnostics"
+  },
+  "aboutViewOnGithub": {
+    "message": "Voir sur GitHub"
+  },
+  "aboutReportIssue": {
+    "message": "Signaler un problème"
+  },
+  "aboutDocumentation": {
+    "message": "Documentation"
+  },
+  "statusConnected": {
+    "message": "Connecté"
+  },
+  "statusDisconnected": {
+    "message": "Aucun proxy actif"
+  },
+  "footerActiveProxy": {
+    "message": "Cliquez sur l'interrupteur pour désactiver le proxy"
+  },
+  "footerSelectProxy": {
+    "message": "Sélectionnez un proxy pour vous connecter"
+  },
+  "proxyEnabled": {
+    "message": "Proxy \"$1\" activé"
+  },
+  "proxyDisabled": {
+    "message": "Proxy \"$1\" désactivé"
+  },
+  "proxyDeleted": {
+    "message": "Proxy \"$1\" supprimé avec succès"
+  },
+  "toggleProxyOn": {
+    "message": "Activer le proxy $1"
+  },
+  "toggleProxyOff": {
+    "message": "Désactiver le proxy $1"
+  },
+  "editConfiguration": {
+    "message": "Modifier la configuration $1"
+  },
+  "deleteConfiguration": {
+    "message": "Supprimer la configuration $1"
+  },
+  "deleteProxyTitle": {
+    "message": "Supprimer la configuration du proxy"
+  },
+  "deleteProxyMessage": {
+    "message": "Êtes-vous sûr de vouloir supprimer \"$1\" ? Cette action ne peut pas être annulée."
+  },
+  "delete": {
+    "message": "Supprimer"
   }
 }
