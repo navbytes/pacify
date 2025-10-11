@@ -177,5 +177,197 @@
   },
   "dropTarget": {
     "message": "拖放目标"
+  },
+  "tabProxyConfigs": {
+    "message": "代理配置"
+  },
+  "tabSettings": {
+    "message": "设置"
+  },
+  "tabAbout": {
+    "message": "关于"
+  },
+  "settingsProxyBehavior": {
+    "message": "代理行为"
+  },
+  "settingsDataManagement": {
+    "message": "数据管理"
+  },
+  "aboutVersion": {
+    "message": "版本"
+  },
+  "aboutHelpResources": {
+    "message": "帮助和资源"
+  },
+  "aboutExtensionInfo": {
+    "message": "扩展信息"
+  },
+  "aboutDiagnostics": {
+    "message": "诊断"
+  },
+  "aboutViewOnGithub": {
+    "message": "在 GitHub 上查看"
+  },
+  "aboutReportIssue": {
+    "message": "报告问题"
+  },
+  "aboutDocumentation": {
+    "message": "文档"
+  },
+  "aboutFeatureRequest": {
+    "message": "请求功能"
+  },
+  "statusConnected": {
+    "message": "已连接"
+  },
+  "statusDisconnected": {
+    "message": "没有活动的代理"
+  },
+  "footerActiveProxy": {
+    "message": "点击切换以禁用代理"
+  },
+  "footerSelectProxy": {
+    "message": "选择要连接的代理"
+  },
+  "proxyEnabled": {
+    "message": "代理 \"$1\" 已启用"
+  },
+  "proxyDisabled": {
+    "message": "代理 \"$1\" 已禁用"
+  },
+  "proxyDeleted": {
+    "message": "代理 \"$1\" 删除成功"
+  },
+  "toggleProxyOn": {
+    "message": "启用代理 $1"
+  },
+  "toggleProxyOff": {
+    "message": "禁用代理 $1"
+  },
+  "editConfiguration": {
+    "message": "编辑配置 $1"
+  },
+  "deleteConfiguration": {
+    "message": "删除配置 $1"
+  },
+  "deleteProxyTitle": {
+    "message": "删除代理配置"
+  },
+  "deleteProxyMessage": {
+    "message": "确定要删除 \"$1\" 吗？此操作无法撤消。"
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "backupSuccess": {
+    "message": "设置备份成功"
+  },
+  "backupFailed": {
+    "message": "设置备份失败"
+  },
+  "restoreSuccess": {
+    "message": "设置恢复成功"
+  },
+  "restoreFailed": {
+    "message": "设置恢复失败"
+  },
+  "backupDescription": {
+    "message": "将所有代理配置和首选项下载为 JSON 文件"
+  },
+  "restoreDescription": {
+    "message": "上传备份文件以恢复配置"
+  },
+  "errorBoundaryTitle": {
+    "message": "出错了"
+  },
+  "errorBoundaryRetry": {
+    "message": "重试"
+  },
+  "closeNotification": {
+    "message": "关闭通知"
+  },
+  "closeDialog": {
+    "message": "关闭对话框"
+  },
+  "confirm": {
+    "message": "确认"
+  },
+  "quickSwitchEnabled": {
+    "message": "快速切换模式已启用"
+  },
+  "quickSwitchDisabled": {
+    "message": "快速切换模式已禁用"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "浏览器启动时将禁用代理"
+  },
+  "proxyPersistOnStartup": {
+    "message": "浏览器启动时代理状态将保持"
+  },
+  "proxyUpdated": {
+    "message": "代理 \"$1\" 更新成功"
+  },
+  "proxyCreated": {
+    "message": "代理 \"$1\" 创建成功"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ 已启用 – 点击扩展图标快速切换"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "快速切换配置"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "将代理拖到此处以从扩展弹出窗口快速切换"
+  },
+  "allProxyConfigsTitle": {
+    "message": "所有代理配置"
+  },
+  "allProxyConfigsDescription": {
+    "message": "可用代理配置的完整列表"
+  },
+  "quickStatsTitle": {
+    "message": "快速统计"
+  },
+  "totalProxies": {
+    "message": "代理总数"
+  },
+  "quickSwitch": {
+    "message": "快速切换"
+  },
+  "activeProxy": {
+    "message": "活动代理"
+  },
+  "lastUsed": {
+    "message": "最后使用"
+  },
+  "none": {
+    "message": "无"
+  },
+  "versionLabel": {
+    "message": "版本："
+  },
+  "extensionDescription": {
+    "message": "用于管理 PAC (代理自动配置) 脚本的 Chrome 扩展"
+  },
+  "bypassListPlaceholder": {
+    "message": "每行输入一个模式：\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "没有可用的代理"
+  },
+  "noQuickSwitchTitle": {
+    "message": "没有快速切换代理"
+  },
+  "noProxyConfigsTitle": {
+    "message": "没有代理配置"
+  },
+  "addFirstProxyAction": {
+    "message": "添加您的第一个代理"
+  },
+  "offButton": {
+    "message": "关闭"
   }
 }

@@ -177,5 +177,197 @@
   },
   "dropTarget": {
     "message": "ড্রপ টার্গেট"
+  },
+  "tabProxyConfigs": {
+    "message": "প্রক্সি কনফিগারেশন"
+  },
+  "tabSettings": {
+    "message": "সেটিংস"
+  },
+  "tabAbout": {
+    "message": "সম্পর্কে"
+  },
+  "settingsProxyBehavior": {
+    "message": "প্রক্সি আচরণ"
+  },
+  "settingsDataManagement": {
+    "message": "ডেটা ব্যবস্থাপনা"
+  },
+  "aboutVersion": {
+    "message": "সংস্করণ"
+  },
+  "aboutHelpResources": {
+    "message": "সাহায্য এবং সংস্থান"
+  },
+  "aboutExtensionInfo": {
+    "message": "এক্সটেনশন তথ্য"
+  },
+  "aboutDiagnostics": {
+    "message": "ডায়াগনস্টিকস"
+  },
+  "aboutViewOnGithub": {
+    "message": "GitHub এ দেখুন"
+  },
+  "aboutReportIssue": {
+    "message": "সমস্যা রিপোর্ট করুন"
+  },
+  "aboutDocumentation": {
+    "message": "ডকুমেন্টেশন"
+  },
+  "aboutFeatureRequest": {
+    "message": "একটি বৈশিষ্ট্য অনুরোধ করুন"
+  },
+  "statusConnected": {
+    "message": "সংযুক্ত"
+  },
+  "statusDisconnected": {
+    "message": "কোন সক্রিয় প্রক্সি নেই"
+  },
+  "footerActiveProxy": {
+    "message": "প্রক্সি নিষ্ক্রিয় করতে টগল ক্লিক করুন"
+  },
+  "footerSelectProxy": {
+    "message": "সংযোগ করতে একটি প্রক্সি নির্বাচন করুন"
+  },
+  "proxyEnabled": {
+    "message": "প্রক্সি \"$1\" সক্রিয় করা হয়েছে"
+  },
+  "proxyDisabled": {
+    "message": "প্রক্সি \"$1\" নিষ্ক্রিয় করা হয়েছে"
+  },
+  "proxyDeleted": {
+    "message": "প্রক্সি \"$1\" সফলভাবে মুছে ফেলা হয়েছে"
+  },
+  "toggleProxyOn": {
+    "message": "প্রক্সি $1 সক্রিয় করুন"
+  },
+  "toggleProxyOff": {
+    "message": "প্রক্সি $1 নিষ্ক্রিয় করুন"
+  },
+  "editConfiguration": {
+    "message": "$1 কনফিগারেশন সম্পাদনা করুন"
+  },
+  "deleteConfiguration": {
+    "message": "$1 কনফিগারেশন মুছুন"
+  },
+  "deleteProxyTitle": {
+    "message": "প্রক্সি কনফিগারেশন মুছুন"
+  },
+  "deleteProxyMessage": {
+    "message": "আপনি কি নিশ্চিত যে \"$1\" মুছে ফেলতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।"
+  },
+  "delete": {
+    "message": "মুছুন"
+  },
+  "backupSuccess": {
+    "message": "সেটিংস সফলভাবে ব্যাকআপ করা হয়েছে"
+  },
+  "backupFailed": {
+    "message": "সেটিংস ব্যাকআপ করতে ব্যর্থ"
+  },
+  "restoreSuccess": {
+    "message": "সেটিংস সফলভাবে পুনরুদ্ধার করা হয়েছে"
+  },
+  "restoreFailed": {
+    "message": "সেটিংস পুনরুদ্ধার করতে ব্যর্থ"
+  },
+  "backupDescription": {
+    "message": "সমস্ত প্রক্সি কনফিগারেশন এবং পছন্দগুলি JSON ফাইল হিসাবে ডাউনলোড করুন"
+  },
+  "restoreDescription": {
+    "message": "কনফিগারেশন পুনরুদ্ধার করতে একটি ব্যাকআপ ফাইল আপলোড করুন"
+  },
+  "errorBoundaryTitle": {
+    "message": "কিছু ভুল হয়েছে"
+  },
+  "errorBoundaryRetry": {
+    "message": "আবার চেষ্টা করুন"
+  },
+  "closeNotification": {
+    "message": "বিজ্ঞপ্তি বন্ধ করুন"
+  },
+  "closeDialog": {
+    "message": "ডায়ালগ বন্ধ করুন"
+  },
+  "confirm": {
+    "message": "নিশ্চিত করুন"
+  },
+  "quickSwitchEnabled": {
+    "message": "দ্রুত স্যুইচ মোড সক্রিয় করা হয়েছে"
+  },
+  "quickSwitchDisabled": {
+    "message": "দ্রুত স্যুইচ মোড নিষ্ক্রিয় করা হয়েছে"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "ব্রাউজার শুরু হওয়ার সময় প্রক্সি নিষ্ক্রিয় করা হবে"
+  },
+  "proxyPersistOnStartup": {
+    "message": "ব্রাউজার শুরু হওয়ার সময় প্রক্সি অবস্থা বজায় থাকবে"
+  },
+  "proxyUpdated": {
+    "message": "প্রক্সি \"$1\" সফলভাবে আপডেট করা হয়েছে"
+  },
+  "proxyCreated": {
+    "message": "প্রক্সি \"$1\" সফলভাবে তৈরি করা হয়েছে"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ সক্রিয় – দ্রুত স্যুইচ করতে এক্সটেনশন আইকনে ক্লিক করুন"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "দ্রুত স্যুইচ কনফিগারেশন"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "এক্সটেনশন পপআপ থেকে দ্রুত টগল করার জন্য প্রক্সিগুলি এখানে টেনে আনুন"
+  },
+  "allProxyConfigsTitle": {
+    "message": "সমস্ত প্রক্সি কনফিগারেশন"
+  },
+  "allProxyConfigsDescription": {
+    "message": "উপলব্ধ প্রক্সি কনফিগারেশনের সম্পূর্ণ তালিকা"
+  },
+  "quickStatsTitle": {
+    "message": "দ্রুত পরিসংখ্যান"
+  },
+  "totalProxies": {
+    "message": "মোট প্রক্সি"
+  },
+  "quickSwitch": {
+    "message": "দ্রুত স্যুইচ"
+  },
+  "activeProxy": {
+    "message": "সক্রিয় প্রক্সি"
+  },
+  "lastUsed": {
+    "message": "শেষ ব্যবহৃত"
+  },
+  "none": {
+    "message": "কোনোটি নয়"
+  },
+  "versionLabel": {
+    "message": "সংস্করণ:"
+  },
+  "extensionDescription": {
+    "message": "PAC (Proxy Auto-Config) স্ক্রিপ্ট পরিচালনার জন্য Chrome এক্সটেনশন"
+  },
+  "bypassListPlaceholder": {
+    "message": "প্রতি লাইনে একটি প্যাটার্ন লিখুন:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "কোনো প্রক্সি উপলব্ধ নেই"
+  },
+  "noQuickSwitchTitle": {
+    "message": "কোনো দ্রুত স্যুইচ প্রক্সি নেই"
+  },
+  "noProxyConfigsTitle": {
+    "message": "কোনো প্রক্সি কনফিগারেশন নেই"
+  },
+  "addFirstProxyAction": {
+    "message": "আপনার প্রথম প্রক্সি যোগ করুন"
+  },
+  "offButton": {
+    "message": "বন্ধ"
   }
 }

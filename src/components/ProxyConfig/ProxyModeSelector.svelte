@@ -3,8 +3,13 @@
   import Button from '../Button.svelte'
   import FlexGroup from '../FlexGroup.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import Text from '../Text.svelte'
 
-  export let proxyMode: string = 'system'
+  interface Props {
+    proxyMode?: string
+  }
+
+  let { proxyMode = $bindable('system') }: Props = $props()
 
   const options = [
     { value: 'system', label: I18nService.getMessage('systemMode') },
@@ -13,10 +18,6 @@
     { value: 'pac_script', label: I18nService.getMessage('pacScriptMode') },
     { value: 'fixed_servers', label: I18nService.getMessage('manualMode') },
   ]
-
-  function selectOption(value: string) {
-    proxyMode = value
-  }
 </script>
 
 <div>
@@ -28,7 +29,8 @@
     classes="mb-1"
   >
     <Server size={20} />
-    {I18nService.getMessage('proxyMode')} <span class="text-red-500">*</span>
+    {I18nService.getMessage('proxyMode')}
+    <Text classes="text-red-500">*</Text>
   </FlexGroup>
   <FlexGroup
     direction="horizontal"
@@ -41,7 +43,7 @@
       <Button
         type="button"
         classes="flex-grow"
-        onclick={() => selectOption(option.value)}
+        onclick={() => (proxyMode = option.value)}
         color={proxyMode === option.value ? 'primary' : 'secondary'}
       >
         {option.label}

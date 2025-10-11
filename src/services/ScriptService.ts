@@ -1,14 +1,8 @@
 import type { ValidationResult } from '@/interfaces'
 
 export class ScriptService {
-  private static readonly PROXY_KEYWORDS = [
-    'DIRECT',
-    'PROXY',
-    'SOCKS',
-    'SOCKS5',
-    'HTTP',
-  ]
-  private static readonly COMMON_HELPER_FUNCTIONS = [
+  private static readonly PROXY_KEYWORDS = ['DIRECT', 'PROXY', 'SOCKS', 'SOCKS5', 'HTTP']
+  private static readonly _COMMON_HELPER_FUNCTIONS = [
     'isPlainHostName',
     'dnsDomainIs',
     'localHostOrDomainIs',
@@ -40,9 +34,7 @@ export class ScriptService {
       }
 
       // Validate function declaration and parameters
-      const functionDeclaration = script.match(
-        /function\s+FindProxyForURL\s*\(([^)]*)\)/
-      )
+      const functionDeclaration = script.match(/function\s+FindProxyForURL\s*\(([^)]*)\)/)
       if (!functionDeclaration) {
         return {
           isValid: false,
@@ -51,14 +43,11 @@ export class ScriptService {
       }
 
       // Validate required parameters
-      const parameters = functionDeclaration[1]
-        .split(',')
-        .map((param) => param.trim())
+      const parameters = functionDeclaration[1].split(',').map((param) => param.trim())
       if (parameters.length < 2) {
         return {
           isValid: false,
-          errorMessage:
-            'FindProxyForURL must have at least two parameters (url, host)',
+          errorMessage: 'FindProxyForURL must have at least two parameters (url, host)',
         }
       }
 
@@ -125,15 +114,11 @@ export class ScriptService {
 
     // Check for potentially problematic patterns
     if (script.includes('alert(')) {
-      warnings.push(
-        'Script contains alert() calls which might interfere with execution'
-      )
+      warnings.push('Script contains alert() calls which might interfere with execution')
     }
 
     if (script.includes('console.log(')) {
-      warnings.push(
-        'Script contains console.log() calls which might affect performance'
-      )
+      warnings.push('Script contains console.log() calls which might affect performance')
     }
 
     // Check for potential infinite loops
@@ -144,9 +129,7 @@ export class ScriptService {
     // Check script size
     if (script.length > 1024 * 100) {
       // 100KB
-      warnings.push(
-        'Script is unusually large and might cause performance issues'
-      )
+      warnings.push('Script is unusually large and might cause performance issues')
     }
 
     if (warnings.length === 0) return null

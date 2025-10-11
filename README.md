@@ -1,166 +1,419 @@
-# PACify - Comprehensive Proxy Configuration Manager for Chrome
+# PACify - Advanced Proxy Configuration Manager for Chrome
 
-`PACify` is a powerful Chrome extension designed to manage all types of proxy configurations supported by Chrome. It provides a user-friendly interface for creating, editing, and switching between different proxy configurations, including PAC scripts, manual proxy settings, and system configurations.
+**PACify** is a powerful, modern Chrome extension for managing all types of proxy configurations. Built with Svelte 5 and TypeScript, it provides a professional-grade interface for creating, editing, and switching between different proxy configurations with ease.
 
-## 🚀 Features
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-blue.svg)](https://chrome.google.com/webstore)
 
-### Proxy Configuration Support
+## ✨ Key Features
 
-- **PAC Script Management**: Create and edit PAC scripts with advanced syntax highlighting and autocompletion
-- **Manual Proxy Configuration**: Set up individual proxy servers for different protocols (HTTP, HTTPS, FTP)
-- **System Proxy Integration**: Use system proxy settings seamlessly
-- **Auto-detect Mode**: Support for WPAD (Web Proxy Auto-Discovery) protocol
-- **Direct Connection**: Option for direct internet access without proxy
+### 🔄 Quick Switch Mode
 
-### User Interface
+- **One-Click Proxy Switching**: Click the extension icon to cycle through enabled proxy configurations
+- **Drag-and-Drop Management**: Easily organize which proxies are in the quick switch rotation
+- **Visual Feedback**: Color-coded badges show active proxy at a glance
+- **Smart Toggle**: Enable/disable quick switch mode from the options page
 
-- **Advanced Script Editor**: Built with Monaco Editor, featuring:
-  - Syntax highlighting for PAC scripts
-  - Intelligent code completion
-  - Error detection and validation
-  - Multiple script templates (Empty, Basic, Pro, Advanced)
-- **Quick Switch Mode**: Toggle between enabled proxy configurations with a single click
-- **Visual Management**: Color-coded proxy configurations for easy identification
-- **Drag-and-Drop Interface**: Easily organize and manage quick switch configurations
+### 🎯 Comprehensive Proxy Support
 
-### Configuration Options
+**All Chrome Proxy Modes:**
 
-- **Per-Protocol Proxy Settings**: Configure different proxies for HTTP, HTTPS, and FTP
-- **Bypass Rules**: Set up proxy bypass rules for specific domains
-- **Shared Proxy Option**: Use the same proxy server for all protocols
-- **SOCKS Proxy Support**: Configure SOCKS4/SOCKS5 proxy servers
-- **Startup Behavior Control**: Setting to disable any active proxy when browser starts
+- **System Proxy**: Inherit proxy settings from your operating system
+- **Direct Connection**: Bypass all proxies for direct internet access
+- **Auto-detect (WPAD)**: Automatically discover proxy settings using Web Proxy Auto-Discovery Protocol
+- **PAC Script**: Create and run custom Proxy Auto-Config scripts with full JavaScript support
+- **Manual Configuration**: Set up individual proxy servers for different protocols
 
-### Data Management
+### 📝 Professional PAC Script Editor
 
-- **Import/Export Settings**: Backup and restore your proxy configurations
-- **Local Storage**: All configurations stored securely in Chrome's sync storage
-- **Real-time Validation**: Immediate feedback on proxy configuration validity
+Powered by Monaco Editor (the same editor as VS Code):
 
-## Project Structure
+- **Syntax Highlighting**: Full JavaScript syntax highlighting for PAC scripts
+- **IntelliSense**: Smart autocompletion for PAC functions (`FindProxyForURL`, `isInNet`, `dnsResolve`, etc.)
+- **Error Detection**: Real-time validation and error checking
+- **Multiple Templates**: Choose from 4 built-in templates:
+  - **Empty**: Start from scratch
+  - **Basic**: Simple proxy routing with internal domain bypass
+  - **Advanced**: Complex routing with subnet detection and URL pattern matching
+  - **Pro**: Enterprise-grade template with failover chains, time-based routing, geo-location handling, and security policies
+- **Full-Screen Editing**: Maximize editor for comfortable script development
 
-The repository follows a modular architecture:
+### ⚙️ Manual Proxy Configuration
+
+- **Per-Protocol Proxies**: Configure separate proxies for:
+  - HTTP
+  - HTTPS (Secure)
+  - FTP
+  - SOCKS (SOCKS4/SOCKS5)
+- **Shared Proxy Mode**: Use a single proxy for all protocols
+- **Fallback Proxy**: Define backup proxy for failover scenarios
+- **Bypass Rules**: Set up domain/IP bypass list (one per line)
+- **Multiple Proxy Schemes**: Support for HTTP, HTTPS, QUIC, SOCKS4, and SOCKS5
+
+### 🎨 User Interface & Experience
+
+- **Modern Design**: Clean, intuitive interface built with Tailwind CSS
+- **Dark Mode Support**: Automatic dark theme based on system preferences
+- **Color-Coded Proxies**: Assign colors to proxies for quick visual identification (8 color options)
+- **Real-Time Status**: Connection status banner shows active proxy
+- **Responsive Layout**: Optimized for different screen sizes
+- **Accessibility**: ARIA labels, keyboard navigation, and screen reader support
+
+### 💾 Data Management
+
+- **Backup & Restore**: Export/import all configurations as JSON
+- **Cloud Sync**: Settings sync across Chrome browsers via Chrome Sync Storage
+- **Storage Diagnostics**: Monitor storage usage with visual progress bars
+- **Import Validation**: Automatic validation when restoring from backup
+- **Cache Management**: Intelligent caching with invalidation support
+
+### 🚀 Startup & Performance
+
+- **Startup Behavior Control**: Choose to disable proxy on browser launch
+- **Smart Initialization**: Message queuing system prevents race conditions during startup
+- **Debounced Saves**: Optimized storage writes reduce unnecessary operations
+- **Mutex Locking**: Prevents concurrent proxy changes
+- **Active Tab Reload**: Automatically reload tabs when proxy changes (skips special Chrome pages)
+
+### 🔒 Privacy & Security
+
+- **Local-Only Storage**: All data stored in Chrome's local/sync storage
+- **No External Requests**: Extension doesn't transmit data to external servers
+- **No Tracking**: Zero analytics or user tracking
+- **Secure Script Execution**: PAC scripts run in isolated environment
+- **Manifest V3**: Built with latest Chrome extension security standards
+
+### 🌍 Internationalization
+
+- **Multi-Language Support**: i18n framework with locale-based messages
+- **Currently Available**: English (more languages can be added)
+- **Dynamic Loading**: Messages loaded based on browser locale
+
+### 📊 Dashboard & Statistics
+
+- **Quick Stats**: View total proxies, quick switch count, active proxy, and last used
+- **Storage Metrics**: Real-time sync and local storage usage with visual indicators
+- **Proxy Status**: At-a-glance view of all proxy configurations
+- **Activity Tracking**: Track which proxies are used most
+
+## 🏗️ Technical Architecture
+
+### Technology Stack
+
+- **Frontend**: Svelte 5 (with latest runes API)
+- **Language**: TypeScript 5.7+ (strict mode)
+- **Build Tool**: Vite 7 with code splitting
+- **Styling**: Tailwind CSS 4 with PostCSS
+- **Code Editor**: Monaco Editor 0.54+
+- **Icons**: Lucide Svelte
+- **Testing**: Vitest + Playwright
+- **Code Quality**: ESLint, Prettier, Husky
+
+### Project Structure
 
 ```text
-src/
-├── background/     # Background service worker
-├── components/     # Reusable UI components (Svelte)
-├── constants/      # Application constants and templates
-├── interfaces/     # TypeScript type definitions
-├── options/        # Options page implementation
-├── popup/          # Extension popup interface
-├── services/       # Core business logic
-└── stores/         # State management (Svelte stores)
+pacify/
+├── src/
+│   ├── background/          # Manifest V3 service worker
+│   │   └── background.ts    # Message handling, proxy management
+│   ├── popup/               # Extension popup UI
+│   │   ├── Popup.svelte     # Quick proxy switcher
+│   │   └── popup.html
+│   ├── options/             # Options page (full settings)
+│   │   ├── Options.svelte   # Tabbed interface with drag-and-drop
+│   │   └── options.html
+│   ├── components/          # Reusable Svelte components
+│   │   ├── ProxyConfig/     # Configuration modal & forms
+│   │   ├── DragDrop/        # Drag-and-drop system
+│   │   ├── Tabs/            # Tab navigation
+│   │   └── common/          # Shared UI primitives
+│   ├── services/            # Business logic layer
+│   │   ├── chrome/          # Chrome API abstractions
+│   │   ├── i18n/            # Internationalization
+│   │   ├── MonacoService.ts # Monaco editor integration
+│   │   ├── StorageService.ts # Settings persistence
+│   │   └── ScriptService.ts  # PAC script validation
+│   ├── stores/              # Svelte stores (state management)
+│   │   ├── settingsStore.ts # Central app state
+│   │   ├── proxyStore.ts
+│   │   └── toastStore.ts
+│   ├── interfaces/          # TypeScript type definitions
+│   ├── constants/           # App constants & templates
+│   └── utils/               # Utility functions
+├── tests/
+│   ├── e2e/                 # Playwright E2E tests
+│   ├── unit/                # Vitest unit tests
+│   └── integration/         # Integration tests
+├── _locales/                # i18n message files
+│   └── en/messages.json
+└── icons/                   # Extension icons
 ```
 
-## 🛠️ Installation
+### Chrome Extension Architecture
 
-1. Clone the repository:
+- **Manifest Version**: 3 (latest)
+- **Service Worker**: Event-driven background script with message queue
+- **Popup**: Lightweight proxy switcher (384px width)
+- **Options Page**: Full-featured settings with tabbed interface
+- **Permissions**: `proxy`, `storage` only
+
+## 🚀 Getting Started
+
+### Installation from Source
+
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/navbytes/pacify.git
    cd pacify
    ```
 
-2. Install dependencies:
+2. **Install dependencies:**
 
    ```bash
    bun install
+   # or: npm install / pnpm install / yarn install
    ```
 
-3. Build the project (or run in dev mode):
+3. **Build the extension:**
 
    ```bash
-   bun run build # build the project
-   bun run dev:extension # dev mode
+   # Production build
+   bun run build
+
+   # Development build with watch mode
+   bun run dev:extension
    ```
 
-4. Load in Chrome:
+4. **Load in Chrome:**
    - Navigate to `chrome://extensions/`
-   - Enable "Developer mode"
+   - Enable "Developer mode" (top-right toggle)
    - Click "Load unpacked"
-   - Select the `dist/` directory
+   - Select the `dist/` directory (or `dev/` for development builds)
 
-## 💻 Usage
+### Development Scripts
 
-### Basic Configuration
+```bash
+# Development server (for component development)
+bun run dev
 
-1. Click the PACify icon in Chrome's toolbar
-2. Select "Add New Script" to create a configuration
-3. Choose your preferred proxy mode:
-   - System
-   - Direct
-   - Auto-detect
-   - PAC Script
-   - Manual Configuration
+# Build extension in watch mode
+bun run dev:extension
 
-### Quick Switch Setup
+# Production build
+bun run build
 
-1. Open the extension options
-2. Enable "Quick Switch Mode"
-3. Drag desired configurations to the Quick Switch section
-4. Click the extension icon to cycle through enabled configurations
+# Run unit tests
+bun run test
 
-### Extension Settings
+# Run E2E tests
+bun run test:e2e
 
-Access advanced settings through the Options page:
+# Lint code
+bun run lint
 
-1. **Quick Switch Mode**: Enable browser action click cycling between configurations
-2. **Disable Proxy on Startup**: When enabled, ensures the extension starts in "OFF" mode after browser restart, automatically disabling any previously active proxy configuration
+# Format code
+bun run format
 
-### PAC Script Development
+# Type checking
+bun run check
+```
 
-- Use the built-in Monaco Editor for script creation
-- Choose from predefined templates
-- Access helper functions like `isInNet`, `dnsResolve`, etc.
-- Real-time syntax validation and error checking
+## 💻 Usage Guide
 
-## 📄 Documentation
+### Creating Your First Proxy
 
-### Chrome Permissions
+1. Click the **PACify** icon in Chrome's toolbar
+2. Click **"Settings"** (gear icon) to open the options page
+3. Click **"Add New Script"** button
+4. Fill in basic information:
+   - **Name**: Give your proxy a descriptive name
+   - **Color**: Choose a color for visual identification
+5. Select **Proxy Mode**:
+   - **System**: Use OS proxy settings
+   - **Direct**: No proxy (direct connection)
+   - **Auto-detect**: WPAD auto-discovery
+   - **PAC Script**: Write custom routing logic
+   - **Manual**: Configure specific proxy servers
+6. Click **"Save"** to create the configuration
 
-The extension requires the following permissions:
+### Using Quick Switch
 
-- `proxy`: To manage proxy settings through PAC scripts.
-- `storage`: To store PAC scripts and user preferences.
+1. Open **Options** → **Proxy Configs** tab
+2. Enable **"Quick Switch Mode"** toggle
+3. **Drag** proxy configurations to the "Quick Switch Configs" section
+4. Click the **extension icon** to cycle through enabled proxies
+5. Badge shows active proxy name (first 3 letters)
 
-### Supported Proxy Modes
+### Writing PAC Scripts
 
-- `system`: Use system's proxy settings
-- `direct`: Direct connection without proxy
-- `auto_detect`: Auto-detect proxy settings
-- `pac_script`: Use PAC script configuration
-- `fixed_servers`: Manual proxy configuration
+1. Create a new proxy configuration
+2. Select **"PAC Script"** mode
+3. Choose a template:
+   - **Basic**: For simple internal/external routing
+   - **Advanced**: For subnet detection and pattern matching
+   - **Pro**: For enterprise scenarios with failover
+4. Edit the script in Monaco Editor:
+   - Use **Ctrl+Space** for autocompletion
+   - Available PAC functions: `isInNet`, `dnsResolve`, `shExpMatch`, etc.
+   - Test with different URLs before saving
+5. Save and activate the proxy
 
-### Required Permissions
+### Manual Proxy Setup
 
-- `proxy`: Manage Chrome's proxy settings
-- `storage`: Store configurations
+1. Select **"Manual Configuration"** mode
+2. Choose between:
+   - **Shared Proxy**: Same proxy for all protocols
+   - **Per-Protocol**: Different proxies for HTTP, HTTPS, FTP
+3. Enter proxy details:
+   - **Scheme**: http, https, socks4, socks5, quic
+   - **Host**: Proxy server address
+   - **Port**: Proxy server port
+4. Add bypass rules (optional):
+   - Enter domains/IPs to bypass proxy (one per line)
+   - Example: `*.local`, `192.168.*.*`, `localhost`
+
+### Backup & Restore
+
+**To Backup:**
+
+1. Go to **Options** → **Settings** tab
+2. Click **"Backup Settings"**
+3. JSON file downloads with all configurations
+
+**To Restore:**
+
+1. Go to **Options** → **Settings** tab
+2. Click **"Restore Settings"**
+3. Select your backup JSON file
+4. All configurations are restored and validated
+
+## 📋 Chrome Permissions
+
+PACify requires minimal permissions:
+
+- **`proxy`**: To manage Chrome's proxy settings
+- **`storage`**: To save configurations locally and sync across devices
+
+**No additional permissions** for network access, browsing history, or tabs data.
+
+## 🔧 Configuration Options
+
+### App Settings
+
+| Setting                  | Description                     | Default |
+| ------------------------ | ------------------------------- | ------- |
+| Quick Switch Mode        | Enable one-click proxy cycling  | `false` |
+| Disable Proxy on Startup | Clear proxy when browser starts | `false` |
+
+### Proxy Configuration Fields
+
+| Field        | Type     | Description                                |
+| ------------ | -------- | ------------------------------------------ |
+| Name         | Text     | Proxy configuration name (required)        |
+| Color        | Choice   | Visual color identifier (8 options)        |
+| Mode         | Dropdown | Proxy type (system/direct/auto/PAC/manual) |
+| Quick Switch | Toggle   | Include in quick switch rotation           |
+| Active       | Auto     | Currently active proxy (one at a time)     |
+
+### PAC Script Fields
+
+| Field       | Description                                     |
+| ----------- | ----------------------------------------------- |
+| Script Data | JavaScript PAC script content                   |
+| Script URL  | External PAC script URL (alternative to inline) |
+| Mandatory   | Fail closed if PAC script fails                 |
+
+### Manual Proxy Fields
+
+| Field       | Description                                    |
+| ----------- | ---------------------------------------------- |
+| Scheme      | Proxy protocol (http/https/socks4/socks5/quic) |
+| Host        | Proxy server hostname or IP                    |
+| Port        | Proxy server port number                       |
+| Bypass List | Domains/IPs to bypass proxy                    |
+
+## 🧪 Testing
+
+### Unit Tests
+
+```bash
+# Run all unit tests
+bun run test
+
+# Run with UI
+bun run test:ui
+
+# Run with coverage
+bun run test:coverage
+```
+
+### E2E Tests
+
+```bash
+# Run all E2E tests
+bun run test:e2e
+
+# Run with UI
+bun run test:e2e:ui
+
+# Run smoke tests only
+bun run test:e2e:smoke
+```
 
 ## 🤝 Contributing
 
-Contributions welcome! Please:
+Contributions are welcome! Please follow these steps:
 
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request with detailed description
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Guidelines
+
+- Follow TypeScript strict mode
+- Use Svelte 5 runes (avoid legacy stores in components)
+- Write tests for new features
+- Run `bun run lint` and `bun run format` before committing
+- Update documentation for significant changes
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-## 🛡️ Security and Privacy
+## 🛡️ Security & Privacy
 
-- All PAC script configurations and user preferences are stored locally using Chrome’s storage.sync API.
-- The extension does not collect or transmit user data externally.
-- For more details, please review our [Privacy Policy](PRIVACY_POLICY.md).
+- **Local Storage Only**: All configurations stored in Chrome's local/sync storage
+- **No External Servers**: Extension operates entirely offline
+- **No Analytics**: Zero telemetry or usage tracking
+- **No Third-Party Services**: No external dependencies at runtime
+- **Open Source**: Full source code available for audit
 
-## 💬 Feedback
+For more details, see our [Privacy Policy](PRIVACY_POLICY.md).
 
-Have a suggestion, feedback, or bug to report? [Open an issue](https://github.com/navbytes/pacify/issues) or start a [discussion](https://github.com/navbytes/pacify/discussions).
+## 💬 Support & Feedback
+
+- **Issues**: [GitHub Issues](https://github.com/navbytes/pacify/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/navbytes/pacify/discussions)
+- **Feature Requests**: Open an issue with the "enhancement" label
 
 ## 🌟 Acknowledgments
 
-- Built with [Svelte](https://svelte.dev/) and [TypeScript](https://www.typescriptlang.org/)
-- Uses [Monaco Editor](https://microsoft.github.io/monaco-editor/) for script editing
-- Thanks to the open-source community
+Built with these amazing open-source projects:
+
+- [Svelte](https://svelte.dev/) - Reactive UI framework
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/) - VS Code's editor
+- [Vite](https://vitejs.dev/) - Next-generation build tool
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- [Lucide Icons](https://lucide.dev/) - Beautiful icon set
+- [Vitest](https://vitest.dev/) - Blazing fast unit testing
+- [Playwright](https://playwright.dev/) - Reliable E2E testing
+
+Special thanks to all contributors and the open-source community! 🙏
+
+---
+
+**Made with ❤️ by the PACify team**

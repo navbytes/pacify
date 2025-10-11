@@ -164,7 +164,7 @@
     "message": "Disable Proxy on Startup"
   },
   "disableProxyOnStartupDescription": {
-    "message": "When enabled, any active proxy configuration will be automatically disabled when the browser starts, ensuring you start in \"OFF\" mode."
+    "message": "When turned on, PACify disables any active proxy each time the browser starts, ensuring you begin in OFF mode."
   },
   "invalidConfiguration": {
     "message": "Invalid configuration"
@@ -177,5 +177,197 @@
   },
   "dropTarget": {
     "message": "Drop target"
+  },
+  "tabProxyConfigs": {
+    "message": "Proxy Configs"
+  },
+  "tabSettings": {
+    "message": "Settings"
+  },
+  "tabAbout": {
+    "message": "About"
+  },
+  "settingsProxyBehavior": {
+    "message": "Proxy Behavior"
+  },
+  "settingsDataManagement": {
+    "message": "Data Management"
+  },
+  "aboutVersion": {
+    "message": "Version"
+  },
+  "aboutHelpResources": {
+    "message": "Help & Resources"
+  },
+  "aboutExtensionInfo": {
+    "message": "Extension Information"
+  },
+  "aboutDiagnostics": {
+    "message": "Diagnostics"
+  },
+  "aboutViewOnGithub": {
+    "message": "View on GitHub"
+  },
+  "aboutReportIssue": {
+    "message": "Report an Issue"
+  },
+  "aboutDocumentation": {
+    "message": "Documentation"
+  },
+  "aboutFeatureRequest": {
+    "message": "Request a Feature"
+  },
+  "statusConnected": {
+    "message": "Connected"
+  },
+  "statusDisconnected": {
+    "message": "No proxy active"
+  },
+  "footerActiveProxy": {
+    "message": "Click toggle to disable proxy"
+  },
+  "footerSelectProxy": {
+    "message": "Select a proxy to connect"
+  },
+  "proxyEnabled": {
+    "message": "Proxy \"$1\" enabled"
+  },
+  "proxyDisabled": {
+    "message": "Proxy \"$1\" disabled"
+  },
+  "proxyDeleted": {
+    "message": "Proxy \"$1\" deleted successfully"
+  },
+  "toggleProxyOn": {
+    "message": "Toggle $1 proxy on"
+  },
+  "toggleProxyOff": {
+    "message": "Toggle $1 proxy off"
+  },
+  "editConfiguration": {
+    "message": "Edit $1 configuration"
+  },
+  "deleteConfiguration": {
+    "message": "Delete $1 configuration"
+  },
+  "deleteProxyTitle": {
+    "message": "Delete Proxy Configuration"
+  },
+  "deleteProxyMessage": {
+    "message": "Are you sure you want to delete \"$1\"? This action cannot be undone."
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "backupSuccess": {
+    "message": "Settings backed up successfully"
+  },
+  "backupFailed": {
+    "message": "Failed to backup settings"
+  },
+  "restoreSuccess": {
+    "message": "Settings restored successfully"
+  },
+  "restoreFailed": {
+    "message": "Failed to restore settings"
+  },
+  "backupDescription": {
+    "message": "Download all proxy configurations and preferences as a JSON file"
+  },
+  "restoreDescription": {
+    "message": "Upload a backup file to restore configurations"
+  },
+  "errorBoundaryTitle": {
+    "message": "Something went wrong"
+  },
+  "errorBoundaryRetry": {
+    "message": "Try Again"
+  },
+  "closeNotification": {
+    "message": "Close notification"
+  },
+  "closeDialog": {
+    "message": "Close dialog"
+  },
+  "confirm": {
+    "message": "Confirm"
+  },
+  "quickSwitchEnabled": {
+    "message": "Quick Switch Mode enabled"
+  },
+  "quickSwitchDisabled": {
+    "message": "Quick Switch Mode disabled"
+  },
+  "proxyDisabledOnStartup": {
+    "message": "Proxy will be disabled on browser startup"
+  },
+  "proxyPersistOnStartup": {
+    "message": "Proxy state will persist on browser startup"
+  },
+  "proxyUpdated": {
+    "message": "Proxy \"$1\" updated successfully"
+  },
+  "proxyCreated": {
+    "message": "Proxy \"$1\" created successfully"
+  },
+  "quickSwitchEnabledStatus": {
+    "message": "✓ Enabled – Click the extension icon to switch quickly"
+  },
+  "quickSwitchConfigsTitle": {
+    "message": "Quick Switch Configs"
+  },
+  "quickSwitchConfigsDescription": {
+    "message": "Drag proxies here for fast toggling from the extension popup"
+  },
+  "allProxyConfigsTitle": {
+    "message": "All Proxy Configs"
+  },
+  "allProxyConfigsDescription": {
+    "message": "Complete list of available proxy configurations"
+  },
+  "quickStatsTitle": {
+    "message": "Quick Stats"
+  },
+  "totalProxies": {
+    "message": "Total Proxies"
+  },
+  "quickSwitch": {
+    "message": "Quick Switch"
+  },
+  "activeProxy": {
+    "message": "Active Proxy"
+  },
+  "lastUsed": {
+    "message": "Last Used"
+  },
+  "none": {
+    "message": "None"
+  },
+  "versionLabel": {
+    "message": "Version:"
+  },
+  "extensionDescription": {
+    "message": "Chrome Extension for managing PAC (Proxy Auto-Config) scripts"
+  },
+  "bypassListPlaceholder": {
+    "message": "Enter one pattern per line:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
+  },
+  "pacUrlPlaceholder": {
+    "message": "https://example.com/proxy.pac"
+  },
+  "noProxiesTitle": {
+    "message": "No Proxies Available"
+  },
+  "noQuickSwitchTitle": {
+    "message": "No Quick Switch Proxies"
+  },
+  "noProxyConfigsTitle": {
+    "message": "No Proxy Configurations"
+  },
+  "addFirstProxyAction": {
+    "message": "Add Your First Proxy"
+  },
+  "offButton": {
+    "message": "OFF"
   }
 }
