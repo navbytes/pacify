@@ -52,12 +52,32 @@ Powered by Monaco Editor (the same editor as VS Code):
 
 ### 🎨 User Interface & Experience
 
+**Enhanced UX (v1.10.0):**
+
+- **ACTIVE Badge**: Prominent green badge with ShieldCheck icon on enabled proxies for instant identification
+- **Tooltips**: Context-sensitive help tooltips on Quick Switch Mode, Disable on Startup, and keyboard shortcuts
+- **Keyboard Shortcuts**:
+  - `Ctrl+N` / `Cmd+N` - Add new proxy configuration
+  - `Escape` - Close modal dialogs
+- **Drag-and-Drop Animations**:
+  - Custom styled drag ghost with proxy color and shadow
+  - Drop zone highlighting with blue border and background tint
+  - Source item visual feedback (fade, scale, blue ring)
+- **Visual Hierarchy**:
+  - Color-coded section headers with icons (Zap, Cable, Database)
+  - Larger Total Proxies stat card for emphasis
+  - Green/Gray color coding on stats (active vs none)
+- **Micro-Animations**: Subtle scale effects on cards (hover, active states)
 - **Modern Design**: Clean, intuitive interface built with Tailwind CSS
 - **Dark Mode Support**: Automatic dark theme based on system preferences
 - **Color-Coded Proxies**: Assign colors to proxies for quick visual identification (8 color options)
 - **Real-Time Status**: Connection status banner shows active proxy
 - **Responsive Layout**: Optimized for different screen sizes
-- **Accessibility**: ARIA labels, keyboard navigation, and screen reader support
+- **WCAG Compliance**:
+  - Level AA: Keyboard navigation with focus-visible states
+  - Level AAA: 44x44px minimum touch targets
+  - Proper ARIA labels and roles
+  - Screen reader friendly
 
 ### 💾 Data Management
 

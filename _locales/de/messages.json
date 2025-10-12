@@ -164,7 +164,7 @@
     "message": "Proxy beim Start deaktivieren"
   },
   "disableProxyOnStartupDescription": {
-    "message": "Wenn aktiviert, wird jede aktive Proxy-Konfiguration automatisch deaktiviert, wenn der Browser startet, um sicherzustellen, dass Sie im \"AUS\"-Modus beginnen."
+    "message": "Bei jedem Browser-Start mit deaktiviertem Proxy beginnen"
   },
   "invalidConfiguration": {
     "message": "Ungültige Konfiguration"
@@ -317,13 +317,13 @@
     "message": "Schnellwechsel-Konfigurationen"
   },
   "quickSwitchConfigsDescription": {
-    "message": "Ziehen Sie Proxys hierher für schnelles Umschalten aus dem Erweiterungs-Popup"
+    "message": "Proxys hierher ziehen für Ein-Klick-Zugriff im Popup"
   },
   "allProxyConfigsTitle": {
     "message": "Alle Proxy-Konfigurationen"
   },
   "allProxyConfigsDescription": {
-    "message": "Vollständige Liste verfügbarer Proxy-Konfigurationen"
+    "message": "Verwalten Sie alle Ihre Proxy-Konfigurationen"
   },
   "quickStatsTitle": {
     "message": "Schnellstatistiken"
@@ -369,5 +369,20 @@
   },
   "offButton": {
     "message": "AUS"
+  },
+  "tooltipQuickSwitchMode": {
+    "message": "Greifen Sie sofort auf bevorzugte Proxys aus dem Popup zu, ohne die Einstellungen zu öffnen"
+  },
+  "tooltipDisableOnStartup": {
+    "message": "Dass Proxys beim Chrome-Start nicht automatisch aktiviert werden"
+  },
+  "tooltipDragToQuickSwitch": {
+    "message": "Ziehen Sie Proxy-Karten hierher, um sie zum Schnellwechsel für schnelleren Zugriff hinzuzufügen"
+  },
+  "tooltipDragToRemove": {
+    "message": "Ziehen Sie Schnellwechsel-Proxys hierher, um sie aus dem Popup zu entfernen"
+  },
+  "tooltipKeyboardShortcut": {
+    "message": "Drücken Sie Strg+N (Cmd+N auf Mac), um schnell einen neuen Proxy hinzuzufügen"
   }
 }

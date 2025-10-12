@@ -21,6 +21,7 @@
   }: Props = $props()
 
   let dropArea = $state<HTMLElement | null>(null)
+  let isDragOver = $state(false)
 
   function handleDragOver(event: DragEvent) {
     if (disabled) return
@@ -37,10 +38,12 @@
     try {
       if (!event.dataTransfer?.types.includes('text/plain')) return
 
+      isDragOver = true
       if (onDragEnter) {
         onDragEnter(event)
       }
     } catch (error) {
+      isDragOver = true
       if (onDragEnter) {
         onDragEnter(event)
       }
@@ -53,6 +56,7 @@
     // Only count it as a leave if we're leaving the entire drop target
     // not just moving within it
     if (event.target === dropArea) {
+      isDragOver = false
       if (onDragLeave) {
         onDragLeave(event)
       }
@@ -63,6 +67,7 @@
     if (disabled) return
 
     event.preventDefault()
+    isDragOver = false
 
     try {
       const data = event.dataTransfer?.getData('text/plain')
@@ -83,7 +88,7 @@
 
 <div
   bind:this={dropArea}
-  class="drop-target{disabled ? ' disabled' : ''}"
+  class="drop-target{disabled ? ' disabled' : ''}{isDragOver ? ' drag-over' : ''}"
   role="region"
   aria-label={I18nService.getMessage('dropTarget')}
   ondragover={handleDragOver}
@@ -98,7 +103,16 @@
   .drop-target {
     position: relative;
     border: 2px dashed transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .drop-target.drag-over {
+    border-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+    transform: scale(1.01);
+    box-shadow:
+      0 0 0 3px rgba(59, 130, 246, 0.1),
+      0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
 
   .drop-target.disabled {

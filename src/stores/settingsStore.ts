@@ -89,7 +89,8 @@ function createSettingsStore() {
 
     updatePACScript: withErrorHandling(
       async (script: Omit<ProxyConfig, 'id'>, scriptId: string | null) => {
-        handleSettingsChange((settings) => {
+        // Use immediate save without debounce for critical proxy operations
+        const updatedSettings = await handleSettingsChangeAndWait((settings) => {
           if (scriptId) {
             // Update existing script
             return {
@@ -107,6 +108,7 @@ function createSettingsStore() {
             }
           }
         })
+        return updatedSettings
       },
       ERROR_TYPES.SAVE_SCRIPT
     ),

@@ -164,7 +164,7 @@
     "message": "Dezactivează proxy-ul la pornire"
   },
   "disableProxyOnStartupDescription": {
-    "message": "Când este activată, orice configurație de proxy activă va fi dezactivată automat la pornirea browserului, asigurând pornirea în modul \"OPRIT\"."
+    "message": "Pornește cu proxy-ul dezactivat de fiecare dată când se lansează browserul"
   },
   "invalidConfiguration": {
     "message": "Configurație nevalidă"
@@ -317,13 +317,13 @@
     "message": "Configurații de comutare rapidă"
   },
   "quickSwitchConfigsDescription": {
-    "message": "Trageți proxy-uri aici pentru comutare rapidă din popup-ul extensiei"
+    "message": "Trageți proxy-uri aici pentru acces dintr-un clic în popup"
   },
   "allProxyConfigsTitle": {
     "message": "Toate configurațiile proxy"
   },
   "allProxyConfigsDescription": {
-    "message": "Lista completă a configurațiilor proxy disponibile"
+    "message": "Gestionați toate configurațiile proxy"
   },
   "quickStatsTitle": {
     "message": "Statistici rapide"
@@ -369,5 +369,20 @@
   },
   "offButton": {
     "message": "OPRIT"
+  },
+  "tooltipQuickSwitchMode": {
+    "message": "Accesați instantaneu proxy-uri favorite din popup fără a deschide setările"
+  },
+  "tooltipDisableOnStartup": {
+    "message": "Acest lucru asigură că proxy-urile nu se activează automat când Chrome pornește"
+  },
+  "tooltipDragToQuickSwitch": {
+    "message": "Trageți carduri de proxy aici pentru a le adăuga la Comutare rapidă pentru acces mai rapid"
+  },
+  "tooltipDragToRemove": {
+    "message": "Trageți proxy-uri de comutare rapidă aici pentru a le elimina din popup"
+  },
+  "tooltipKeyboardShortcut": {
+    "message": "Apăsați Ctrl+N (Cmd+N pe Mac) pentru a adăuga rapid un proxy nou"
   }
 }

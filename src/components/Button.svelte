@@ -16,7 +16,9 @@
     onclick?: (event: MouseEvent) => void
     children?: () => any
     'aria-label'?: string
+    'aria-selected'?: 'true' | 'false'
     'data-testid'?: string
+    role?: string
   }
 
   const {
@@ -30,7 +32,9 @@
     onclick = undefined,
     children = undefined,
     'aria-label': ariaLabel,
+    'aria-selected': ariaSelected,
     'data-testid': dataTestId,
+    role,
   }: Props = $props()
 
   // Size mapping
@@ -72,8 +76,8 @@
   // Use $derived instead of $: for computed values
   const btnClasses = $derived(
     minimal
-      ? `inline-flex items-center focus:outline-none transition-colors cursor-pointer ${colors[color].minimal}`
-      : `inline-flex items-center ${sizes[size]} rounded shadow focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors cursor-pointer ${colors[color].base}`
+      ? `inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors cursor-pointer ${colors[color].minimal} ${!children ? 'min-w-[44px] min-h-[44px]' : ''}`
+      : `inline-flex items-center ${sizes[size]} rounded shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors cursor-pointer ${colors[color].base}`
   )
 
   const disabledClasses = $derived(disabled ? 'opacity-50 cursor-not-allowed' : '')
@@ -87,7 +91,9 @@
   {disabled}
   {onclick}
   aria-label={ariaLabel}
+  aria-selected={ariaSelected}
   data-testid={dataTestId}
+  {role}
 >
   {#if icon}
     <!-- Use the @render tag to render the icon component -->

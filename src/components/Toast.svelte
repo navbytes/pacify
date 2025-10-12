@@ -40,11 +40,9 @@
     <FlexGroup
       alignItems="start"
       childrenGap="sm"
-      classes={`
-        p-4 rounded-lg border-l-4 shadow-lg
-        animate-slide-in backdrop-blur-sm
-        ${getColors(toast.type)}
-      `}
+      classes="p-4 rounded-lg border-l-4 shadow-lg animate-slide-in backdrop-blur-sm {getColors(
+        toast.type
+      )}"
     >
       <Icon size={20} class="flex-shrink-0 mt-0.5" />
       <Text as="p" size="sm" weight="medium" classes="flex-1">{toast.message}</Text>

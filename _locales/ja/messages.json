@@ -164,7 +164,7 @@
     "message": "起動時にプロキシを無効にする"
   },
   "disableProxyOnStartupDescription": {
-    "message": "有効にすると、ブラウザの起動時にアクティブなプロキシ設定が自動的に無効になり、「オフ」モードで開始することが保証されます。"
+    "message": "ブラウザ起動時に毎回プロキシを無効にして開始"
   },
   "invalidConfiguration": {
     "message": "無効な設定"
@@ -317,13 +317,13 @@
     "message": "クイックスイッチ設定"
   },
   "quickSwitchConfigsDescription": {
-    "message": "拡張機能ポップアップから素早く切り替えるには、プロキシをここにドラッグ"
+    "message": "ポップアップでワンクリックアクセスするにはプロキシをここにドラッグ"
   },
   "allProxyConfigsTitle": {
     "message": "すべてのプロキシ設定"
   },
   "allProxyConfigsDescription": {
-    "message": "利用可能なプロキシ設定の完全なリスト"
+    "message": "すべてのプロキシ設定を管理"
   },
   "quickStatsTitle": {
     "message": "クイック統計"
@@ -369,5 +369,20 @@
   },
   "offButton": {
     "message": "オフ"
+  },
+  "tooltipQuickSwitchMode": {
+    "message": "設定を開かずにポップアップからお気に入りのプロキシに即座にアクセス"
+  },
+  "tooltipDisableOnStartup": {
+    "message": "Chrome起動時にプロキシが自動的に有効にならないようにします"
+  },
+  "tooltipDragToQuickSwitch": {
+    "message": "プロキシカードをここにドラッグしてクイックスイッチに追加し、素早くアクセス"
+  },
+  "tooltipDragToRemove": {
+    "message": "クイックスイッチプロキシをここにドラッグしてポップアップから削除"
+  },
+  "tooltipKeyboardShortcut": {
+    "message": "Ctrl+N（MacではCmd+N）を押して新しいプロキシを素早く追加"
   }
 }

@@ -164,7 +164,7 @@
     "message": "시작 시 프록시 비활성화"
   },
   "disableProxyOnStartupDescription": {
-    "message": "활성화되면 브라우저가 시작될 때 활성화된 프록시 구성이 자동으로 비활성화되어 \"꺼짐\" 모드로 시작됩니다."
+    "message": "브라우저를 시작할 때마다 프록시를 비활성화한 상태로 시작"
   },
   "invalidConfiguration": {
     "message": "잘못된 구성"
@@ -317,13 +317,13 @@
     "message": "빠른 전환 구성"
   },
   "quickSwitchConfigsDescription": {
-    "message": "확장 프로그램 팝업에서 빠르게 전환하려면 프록시를 여기로 드래그하세요"
+    "message": "팝업에서 원클릭 액세스를 위해 프록시를 여기로 드래그하세요"
   },
   "allProxyConfigsTitle": {
     "message": "모든 프록시 구성"
   },
   "allProxyConfigsDescription": {
-    "message": "사용 가능한 프록시 구성의 전체 목록"
+    "message": "모든 프록시 구성 관리"
   },
   "quickStatsTitle": {
     "message": "빠른 통계"
@@ -369,5 +369,20 @@
   },
   "offButton": {
     "message": "꺼짐"
+  },
+  "tooltipQuickSwitchMode": {
+    "message": "설정을 열지 않고 팝업에서 즐겨찾는 프록시에 즉시 액세스"
+  },
+  "tooltipDisableOnStartup": {
+    "message": "Chrome이 시작될 때 프록시가 자동으로 활성화되는 것을 방지합니다."
+  },
+  "tooltipDragToQuickSwitch": {
+    "message": "빠른 액세스를 위해 프록시 카드를 여기로 드래그하여 빠른 전환에 추가"
+  },
+  "tooltipDragToRemove": {
+    "message": "팝업에서 제거하려면 빠른 전환 프록시를 여기로 드래그"
+  },
+  "tooltipKeyboardShortcut": {
+    "message": "새 프록시를 빠르게 추가하려면 Ctrl+N (Mac에서 Cmd+N)을 누르세요"
   }
 }

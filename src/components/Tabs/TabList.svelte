@@ -15,8 +15,9 @@
   }
 
   function handleKeydown(event: KeyboardEvent) {
+    const target = event.currentTarget as HTMLElement
     const tabButtons = Array.from(
-      event.currentTarget?.querySelectorAll('[role="tab"]:not([disabled])') || []
+      target?.querySelectorAll('[role="tab"]:not([disabled])') || []
     ) as HTMLElement[]
 
     if (tabButtons.length === 0) return

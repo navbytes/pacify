@@ -2,13 +2,7 @@
   // Type definitions - moved from module context to regular script
   type SpacingSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
   type AlignItems = 'start' | 'center' | 'end' | 'stretch' | 'baseline'
-  type JustifyContent =
-    | 'start'
-    | 'center'
-    | 'end'
-    | 'between'
-    | 'around'
-    | 'evenly'
+  type JustifyContent = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
   type Direction = 'horizontal' | 'vertical'
 
   interface Props {
@@ -18,6 +12,7 @@
     alignItems?: AlignItems
     justifyContent?: JustifyContent
     children?: () => any
+    role?: string
   }
 
   const {
@@ -27,6 +22,7 @@
     alignItems = 'center',
     justifyContent = 'start',
     children,
+    role,
   }: Props = $props()
 
   // Map constants remain the same
@@ -58,9 +54,7 @@
   }
 
   // Computed classes using $derived
-  const directionClass = $derived(
-    direction === 'horizontal' ? 'flex-row' : 'flex-col'
-  )
+  const directionClass = $derived(direction === 'horizontal' ? 'flex-row' : 'flex-col')
   const gapClass = $derived(spacingMap[childrenGap])
   const justifyClass = $derived(justifyMap[justifyContent])
   const alignClass = $derived(alignMap[alignItems])
@@ -70,6 +64,6 @@
   )
 </script>
 
-<div class={flexGroupClasses}>
+<div class={flexGroupClasses} {role}>
   {@render children?.()}
 </div>

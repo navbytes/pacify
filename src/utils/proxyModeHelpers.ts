@@ -1,5 +1,5 @@
 import { I18nService } from '@/services/i18n/i18nService'
-import type { ProxyMode } from '@/interfaces'
+import type { ProxyConfig, ProxyMode } from '@/interfaces'
 import type { ComponentType } from 'svelte'
 import { Monitor, Zap, Radar, FileText, Wrench, Globe } from 'lucide-svelte'
 
@@ -64,22 +64,6 @@ export function getProxyModeColor(mode: ProxyMode): {
       border: 'border-slate-300 dark:border-slate-600',
     }
   )
-}
-
-interface ProxyConfig {
-  pacScript?: {
-    url?: string
-  }
-  rules?: {
-    singleProxy?: {
-      host: string
-      port: number
-    }
-    proxyForHttp?: {
-      host: string
-      port: number
-    }
-  }
 }
 
 export function getProxyDescription(mode: ProxyMode, config: ProxyConfig): string {

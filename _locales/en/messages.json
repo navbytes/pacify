@@ -164,7 +164,7 @@
     "message": "Disable Proxy on Startup"
   },
   "disableProxyOnStartupDescription": {
-    "message": "When turned on, PACify disables any active proxy each time the browser starts, ensuring you begin in OFF mode."
+    "message": "Start with proxy disabled each time the browser launches"
   },
   "invalidConfiguration": {
     "message": "Invalid configuration"
@@ -317,13 +317,13 @@
     "message": "Quick Switch Configs"
   },
   "quickSwitchConfigsDescription": {
-    "message": "Drag proxies here for fast toggling from the extension popup"
+    "message": "Drag proxies here for one-click access in the popup"
   },
   "allProxyConfigsTitle": {
     "message": "All Proxy Configs"
   },
   "allProxyConfigsDescription": {
-    "message": "Complete list of available proxy configurations"
+    "message": "Manage all your proxy configurations"
   },
   "quickStatsTitle": {
     "message": "Quick Stats"
@@ -369,5 +369,20 @@
   },
   "offButton": {
     "message": "OFF"
+  },
+  "tooltipQuickSwitchMode": {
+    "message": "Access favorite proxies instantly from the popup without opening settings"
+  },
+  "tooltipDisableOnStartup": {
+    "message": "This ensures proxies don't auto-enable when Chrome starts"
+  },
+  "tooltipDragToQuickSwitch": {
+    "message": "Drag proxy cards here to add them to Quick Switch for faster access"
+  },
+  "tooltipDragToRemove": {
+    "message": "Drag Quick Switch proxies here to remove them from the popup"
+  },
+  "tooltipKeyboardShortcut": {
+    "message": "Press Ctrl+N (Cmd+N on Mac) to quickly add a new proxy"
   }
 }

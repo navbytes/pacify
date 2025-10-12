@@ -164,7 +164,7 @@
     "message": "Désactiver le proxy au démarrage"
   },
   "disableProxyOnStartupDescription": {
-    "message": "Lorsqu'activé, toute configuration de proxy active sera automatiquement désactivée au démarrage du navigateur, garantissant que vous commencez en mode \"ARRÊT\"."
+    "message": "Démarrer avec le proxy désactivé à chaque lancement du navigateur"
   },
   "invalidConfiguration": {
     "message": "Configuration invalide"
@@ -317,13 +317,13 @@
     "message": "Configurations de changement rapide"
   },
   "quickSwitchConfigsDescription": {
-    "message": "Faites glisser les proxys ici pour une bascule rapide depuis la fenêtre contextuelle de l'extension"
+    "message": "Glissez les proxys ici pour un accès en un clic dans la fenêtre contextuelle"
   },
   "allProxyConfigsTitle": {
     "message": "Toutes les configurations de proxy"
   },
   "allProxyConfigsDescription": {
-    "message": "Liste complète des configurations de proxy disponibles"
+    "message": "Gérez toutes vos configurations de proxy"
   },
   "quickStatsTitle": {
     "message": "Statistiques rapides"
@@ -369,5 +369,20 @@
   },
   "offButton": {
     "message": "ARRÊT"
+  },
+  "tooltipQuickSwitchMode": {
+    "message": "Accédez instantanément aux proxys favoris depuis la fenêtre contextuelle sans ouvrir les paramètres"
+  },
+  "tooltipDisableOnStartup": {
+    "message": "Cela garantit que les proxys ne s'activent pas automatiquement au démarrage de Chrome"
+  },
+  "tooltipDragToQuickSwitch": {
+    "message": "Faites glisser les cartes de proxy ici pour les ajouter au changement rapide pour un accès plus rapide"
+  },
+  "tooltipDragToRemove": {
+    "message": "Faites glisser les proxys de changement rapide ici pour les retirer de la fenêtre contextuelle"
+  },
+  "tooltipKeyboardShortcut": {
+    "message": "Appuyez sur Ctrl+N (Cmd+N sur Mac) pour ajouter rapidement un nouveau proxy"
   }
 }

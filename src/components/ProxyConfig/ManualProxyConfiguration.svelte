@@ -6,7 +6,7 @@
   interface ProxyServerSettings {
     scheme?: string
     host?: string
-    port?: number
+    port?: string
   }
 
   interface ProxySettings {
@@ -30,15 +30,17 @@
     bypassListContent = $bindable(''),
   }: Props = $props()
 
-  // Map for individual proxies
-  const proxyTypeMap: Record<string, string> = {
+  // Map for individual proxies with proper typing
+  const proxyTypeMap = {
     HTTP: 'proxyForHttp',
     HTTPS: 'proxyForHttps',
     FTP: 'proxyForFtp',
     Fallback: 'fallbackProxy',
-  }
+  } as const
 
-  const proxyLocalizedNames: Record<string, string> = {
+  type ProxyType = keyof typeof proxyTypeMap
+
+  const proxyLocalizedNames: Record<ProxyType, string> = {
     HTTP: I18nService.getMessage('httpProxy'),
     HTTPS: I18nService.getMessage('httpsProxy'),
     FTP: I18nService.getMessage('ftpProxy'),
@@ -69,19 +71,23 @@
         bind:scheme={proxySettings.singleProxy.scheme}
         bind:host={proxySettings.singleProxy.host}
         bind:port={proxySettings.singleProxy.port}
+        testIdPrefix="single-proxy"
       />
     </div>
   {:else}
     <!-- Individual Proxy Configurations -->
     {#each Object.keys(proxyTypeMap) as proxyType}
+      {@const proxyKey = proxyTypeMap[proxyType as ProxyType]}
+      {@const proxy = proxySettings[proxyKey as keyof ProxySettings]}
       <div class="space-y-4">
         <h3 class="text-sm font-medium text-slate-700 dark:text-slate-300">
-          {proxyLocalizedNames[proxyType]}
+          {proxyLocalizedNames[proxyType as ProxyType]}
         </h3>
         <ProxyInput
-          bind:scheme={proxySettings[proxyTypeMap[proxyType]].scheme}
-          bind:host={proxySettings[proxyTypeMap[proxyType]].host}
-          bind:port={proxySettings[proxyTypeMap[proxyType]].port}
+          bind:scheme={proxy.scheme}
+          bind:host={proxy.host}
+          bind:port={proxy.port}
+          testIdPrefix={proxyType.toLowerCase()}
         />
       </div>
     {/each}

@@ -164,7 +164,7 @@
     "message": "Desactivar proxy al iniciar"
   },
   "disableProxyOnStartupDescription": {
-    "message": "Cuando está habilitado, cualquier configuración de proxy activa será desactivada automáticamente cuando el navegador se inicie, asegurando que comience en modo \"APAGADO\"."
+    "message": "Iniciar con el proxy desactivado cada vez que se lance el navegador"
   },
   "invalidConfiguration": {
     "message": "Configuración inválida"
@@ -317,13 +317,13 @@
     "message": "Configuraciones de cambio rápido"
   },
   "quickSwitchConfigsDescription": {
-    "message": "Arrastre proxies aquí para alternar rápidamente desde la ventana emergente de la extensión"
+    "message": "Arrastre proxies aquí para acceso de un clic en la ventana emergente"
   },
   "allProxyConfigsTitle": {
     "message": "Todas las configuraciones de proxy"
   },
   "allProxyConfigsDescription": {
-    "message": "Lista completa de configuraciones de proxy disponibles"
+    "message": "Administre todas sus configuraciones de proxy"
   },
   "quickStatsTitle": {
     "message": "Estadísticas rápidas"
@@ -369,5 +369,20 @@
   },
   "offButton": {
     "message": "APAGADO"
+  },
+  "tooltipQuickSwitchMode": {
+    "message": "Acceda a proxies favoritos instantáneamente desde la ventana emergente sin abrir la configuración"
+  },
+  "tooltipDisableOnStartup": {
+    "message": "Esto asegura que los proxies no se activen automáticamente cuando Chrome inicia"
+  },
+  "tooltipDragToQuickSwitch": {
+    "message": "Arrastre tarjetas de proxy aquí para agregarlas a Cambio Rápido para un acceso más rápido"
+  },
+  "tooltipDragToRemove": {
+    "message": "Arrastre proxies de Cambio Rápido aquí para eliminarlos de la ventana emergente"
+  },
+  "tooltipKeyboardShortcut": {
+    "message": "Presione Ctrl+N (Cmd+N en Mac) para agregar rápidamente un nuevo proxy"
   }
 }

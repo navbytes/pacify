@@ -255,6 +255,6 @@
   )
 </script>
 
-<svelte:element this={as} class={computedClasses} {role} {tabindex} {style} {...$$restProps}>
+<svelte:element this={as} class={computedClasses} {role} {tabindex} {style}>
   {@render children?.()}
 </svelte:element>

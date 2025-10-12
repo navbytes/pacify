@@ -11,12 +11,12 @@ export type ErrorHandler = (error: unknown) => void
  * @param errorType - The type of error for logging
  * @param customHandler - Optional custom error handler
  */
-export function withErrorHandling<T extends (...args: never[]) => Promise<unknown>>(
+export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
   operation: T,
   errorType: ERROR_TYPES,
   customHandler?: ErrorHandler
-): (...args: Parameters<T>) => Promise<ReturnType<T>> {
-  return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
+): T {
+  return (async (...args: Parameters<T>) => {
     try {
       return await operation(...args)
     } catch (error) {
@@ -31,7 +31,7 @@ export function withErrorHandling<T extends (...args: never[]) => Promise<unknow
       // Rethrow the error for the caller to handle
       throw error
     }
-  }
+  }) as T
 }
 
 /**
@@ -42,8 +42,8 @@ export function withErrorHandling<T extends (...args: never[]) => Promise<unknow
  * @param fallbackValue - The value to return if the operation fails
  */
 export function withErrorHandlingAndFallback<
-  T extends (...args: never[]) => Promise<unknown>,
-  R = ReturnType<T>,
+  T extends (...args: any[]) => Promise<any>,
+  R = Awaited<ReturnType<T>>,
 >(operation: T, errorType: ERROR_TYPES, fallbackValue: R): (...args: Parameters<T>) => Promise<R> {
   return async (...args: Parameters<T>): Promise<R> => {
     try {
@@ -63,13 +63,13 @@ export function withErrorHandlingAndFallback<
  * @param maxRetries - Maximum number of retry attempts
  * @param delayMs - Base delay between retries (will increase exponentially)
  */
-export function withRetry<T extends (...args: never[]) => Promise<unknown>>(
+export function withRetry<T extends (...args: any[]) => Promise<any>>(
   operation: T,
   errorType: ERROR_TYPES,
   maxRetries: number = 3,
   delayMs: number = 1000
-): (...args: Parameters<T>) => Promise<ReturnType<T>> {
-  return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
+): T {
+  return (async (...args: Parameters<T>) => {
     let lastError: unknown
 
     for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
@@ -94,5 +94,5 @@ export function withRetry<T extends (...args: never[]) => Promise<unknown>>(
     // If we reach here, all retries failed
     NotifyService.error(errorType, lastError)
     throw lastError
-  }
+  }) as T
 }

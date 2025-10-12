@@ -95,20 +95,32 @@
         }
 
         if (useSharedProxy) {
-          config.rules.singleProxy = proxySettings.singleProxy
+          // For single proxy, we need to ensure the proxy has at least a host
+          if (proxySettings.singleProxy?.host?.trim()) {
+            config.rules.singleProxy = proxySettings.singleProxy
+          } else {
+            // If no host is provided, but we're in fixed_servers mode with useSharedProxy,
+            // we still need to save the configuration (it might be intentionally empty)
+            config.rules.singleProxy = proxySettings.singleProxy
+          }
         } else {
-          if (proxySettings.proxyForHttp.host)
+          // For individual proxies, add only those with hosts
+          if (proxySettings.proxyForHttp?.host?.trim())
             config.rules.proxyForHttp = proxySettings.proxyForHttp
-          if (proxySettings.proxyForHttps.host)
+          if (proxySettings.proxyForHttps?.host?.trim())
             config.rules.proxyForHttps = proxySettings.proxyForHttps
-          if (proxySettings.proxyForFtp.host) config.rules.proxyForFtp = proxySettings.proxyForFtp
-          if (proxySettings.fallbackProxy.host)
+          if (proxySettings.proxyForFtp?.host?.trim())
+            config.rules.proxyForFtp = proxySettings.proxyForFtp
+          if (proxySettings.fallbackProxy?.host?.trim())
             config.rules.fallbackProxy = proxySettings.fallbackProxy
         }
       }
 
+      console.log('Saving config:', JSON.stringify(config, null, 2))
       await onSave(config)
+      console.log('onSave completed successfully')
     } catch (error) {
+      console.error('Error saving proxy configuration:', error)
       errorMessage =
         error instanceof Error ? error.message : I18nService.getMessage('invalidConfiguration')
       NotifyService.error(ERROR_TYPES.VALIDATION, error)

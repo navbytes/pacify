@@ -3,7 +3,7 @@
   import { type ProxyConfig, type ListViewType } from '@/interfaces'
   import { settingsStore } from '@/stores/settingsStore'
   import { toastStore } from '@/stores/toastStore'
-  import { ShieldCheck, Pencil, Trash } from 'lucide-svelte'
+  import { ShieldCheck, Pencil, Trash, GripVertical } from 'lucide-svelte'
   import Button from './Button.svelte'
   import FlexGroup from './FlexGroup.svelte'
   import ConfirmDialog from './ConfirmDialog.svelte'
@@ -67,12 +67,12 @@
 >
   <div
     class={`
-      relative p-4 rounded-lg transition-all duration-200 border-l-4
+      group relative p-4 rounded-lg transition-all duration-300 border-l-4
       ${pageType === 'QUICK_SWITCH' ? 'border-y-2 border-r-2 border-dashed' : 'border-y-2 border-r-2 border-solid'}
       ${
         proxy.isActive
-          ? 'bg-blue-50 dark:bg-blue-900/20 border-y-blue-500 border-r-blue-500 shadow-lg ring-2 ring-blue-500/20'
-          : 'bg-white dark:bg-slate-800 border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700 hover:shadow-md'
+          ? 'bg-blue-50 dark:bg-blue-900/20 border-y-blue-500 border-r-blue-500 shadow-lg ring-2 ring-green-500/30 scale-[1.01]'
+          : 'bg-white dark:bg-slate-800 border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700 hover:shadow-md hover:scale-[1.005]'
       }
       ${pageType !== 'POPUP' ? 'hover:bg-slate-50 dark:hover:bg-slate-700' : ''}
     `}
@@ -85,35 +85,50 @@
       }
     }}
   >
-    <!-- Active indicator badge -->
-    {#if proxy.isActive}
-      <div
-        class="absolute -top-2 -right-2 bg-green-500 rounded-full p-1.5 shadow-lg z-10 animate-pulse"
-      >
-        <ShieldCheck size={16} class="text-white" />
-      </div>
-    {/if}
-
     <!-- Main content -->
     <div class="flex flex-col gap-3">
       <!-- Top row: Name and Toggle -->
-      <div class="flex items-start justify-between gap-3">
+      <div class="flex items-center justify-between gap-3">
         <div class="flex-1 min-w-0">
           <!-- Proxy name with inline icon for POPUP -->
           {#if pageType === 'POPUP'}
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
               <Text color="muted">
                 <ModeIcon size={18} />
               </Text>
               <Text weight="semibold" truncate>
                 {proxy.name}
               </Text>
+              {#if proxy.isActive}
+                <span
+                  class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold text-white bg-green-500 rounded-md shadow-sm"
+                >
+                  <ShieldCheck size={12} />
+                  ACTIVE
+                </span>
+              {/if}
             </div>
           {:else}
-            <div class="flex items-center gap-2 mb-1">
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <!-- Drag handle (only for OPTIONS and QUICK_SWITCH) -->
+              <div
+                class="hidden group-hover:block cursor-grab active:cursor-grabbing text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-110"
+                aria-label="Drag to reorder"
+                title="Drag to Quick Switch"
+              >
+                <GripVertical size={20} strokeWidth={2.5} />
+              </div>
               <Text weight="semibold" truncate>
                 {proxy.name}
               </Text>
+              {#if proxy.isActive}
+                <span
+                  class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold text-white bg-green-500 rounded-md shadow-sm"
+                >
+                  <ShieldCheck size={12} />
+                  ACTIVE
+                </span>
+              {/if}
             </div>
           {/if}
         </div>

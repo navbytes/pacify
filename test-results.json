@@ -1,0 +1,2139 @@
+{
+  "config": {
+    "configFile": "/Users/naveen/workspace/pacify/playwright.config.ts",
+    "rootDir": "/Users/naveen/workspace/pacify/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        {
+          "printSteps": true
+        }
+      ],
+      ["html", null],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/naveen/workspace/pacify/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/naveen/workspace/pacify/tests/e2e",
+        "testIgnore": ["**/inspect-selectors.spec.ts"],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "capture-ui.spec.ts",
+      "file": "capture-ui.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Capture Options Page UI",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3015,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "\n=== INTERACTIVE ELEMENTS ===\n\n"
+                    },
+                    {
+                      "text": "[\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"PACify | The Proxy Manager  Proxy Configs   Settin\",\n    \"ariaLabel\": null,\n    \"role\": \"region\",\n    \"type\": null,\n    \"id\": \"options-container\",\n    \"dataTestId\": null,\n    \"className\": \"container mx-auto max-w-7xl px-4 py-8\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Proxy Configs   Settings   About\",\n    \"ariaLabel\": \"Options tabs\",\n    \"role\": \"tablist\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"tab-list svelte-zu4dnk\"\n  },\n  {\n    \"tag\": \"BUTTON\",\n    \"text\": \"Proxy Configs\",\n    \"ariaLabel\": null,\n    \"role\": \"tab\",\n    \"type\": \"button\",\n    \"id\": \"tab-proxy-configs\",\n    \"dataTestId\": null,\n    \"className\": \"\\n    tab-button\\n    active\\n    \\n   svelte-15hriv8\"\n  },\n  {\n    \"tag\": \"BUTTON\",\n    \"text\": \"Settings\",\n    \"ariaLabel\": null,\n    \"role\": \"tab\",\n    \"type\": \"button\",\n    \"id\": \"tab-settings\",\n    \"dataTestId\": null,\n    \"className\": \"\\n    tab-button\\n    \\n    \\n   svelte-15hriv8\"\n  },\n  {\n    \"tag\": \"BUTTON\",\n    \"text\": \"About\",\n    \"ariaLabel\": null,\n    \"role\": \"tab\",\n    \"type\": \"button\",\n    \"id\": \"tab-about\",\n    \"dataTestId\": null,\n    \"className\": \"\\n    tab-button\\n    \\n    \\n   svelte-15hriv8\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Quick Switch Mode   Enable quick switching between\",\n    \"ariaLabel\": null,\n    \"role\": \"tabpanel\",\n    \"type\": null,\n    \"id\": \"tabpanel-proxy-configs\",\n    \"dataTestId\": null,\n    \"className\": \"tab-panel active svelte-db8pqm\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"\",\n    \"ariaLabel\": null,\n    \"role\": \"presentation\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"relative inline-block\"\n  },\n  {\n    \"tag\": \"INPUT\",\n    \"text\": \"\",\n    \"ariaLabel\": \"Toggle quick switch mode\",\n    \"role\": null,\n    \"type\": \"checkbox\",\n    \"id\": \"quickSwitchToggle\",\n    \"dataTestId\": null,\n    \"className\": \"sr-only peer\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Drop here to add to quick scripts   No Quick Switc\",\n    \"ariaLabel\": \"Drop target\",\n    \"role\": \"region\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"drop-target svelte-1hwfl28\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Add New Script\",\n    \"ariaLabel\": null,\n    \"role\": \"presentation\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"relative inline-block\"\n  },\n  {\n    \"tag\": \"BUTTON\",\n    \"text\": \"Add New Script\",\n    \"ariaLabel\": null,\n    \"role\": null,\n    \"type\": \"button\",\n    \"id\": null,\n    \"dataTestId\": \"add-new-script-btn\",\n    \"className\": \"inline-flex items-center py-2 px-4 rounded shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors cursor-pointer bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Drop here to remove from quick scripts   Test Prox\",\n    \"ariaLabel\": \"Drop target\",\n    \"role\": \"region\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"drop-target svelte-1hwfl28\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Test Proxy         System Use proxy settings from \",\n    \"ariaLabel\": null,\n    \"role\": \"list\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Test Proxy         System Use proxy settings from \",\n    \"ariaLabel\": null,\n    \"role\": \"button\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"draggable-item   svelte-4jiqr8\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Test Proxy         System Use proxy settings from \",\n    \"ariaLabel\": null,\n    \"role\": \"button\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"\\n      group relative p-4 rounded-lg transition-all duration-300 border-l-4\\n      border-y-2 border-r-2 border-solid\\n      bg-white dark:bg-slate-800 border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700 hover:shadow-md hover:scale-[1.005]\\n      hover:bg-slate-50 dark:hover:bg-slate-700\\n    \"\n  },\n  {\n    \"tag\": \"INPUT\",\n    \"text\": \"\",\n    \"ariaLabel\": \"Toggle Test Proxy proxy on\",\n    \"role\": null,\n    \"type\": \"checkbox\",\n    \"id\": \"\",\n    \"dataTestId\": null,\n    \"className\": \"sr-only peer\"\n  },\n  {\n    \"tag\": \"BUTTON\",\n    \"text\": \"\",\n    \"ariaLabel\": \"Edit Test Proxy configuration\",\n    \"role\": null,\n    \"type\": \"button\",\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors cursor-pointer text-blue-600 hover:text-blue-700 hover:bg-blue-100 border border-transparent hover:border-blue-200 dark:text-blue-400 dark:hover:text-blue-300 dark:hover:bg-blue-950/20 dark:hover:border-blue-800 rounded px-2 py-1 min-w-[44px] min-h-[44px]\"\n  },\n  {\n    \"tag\": \"BUTTON\",\n    \"text\": \"\",\n    \"ariaLabel\": \"Delete Test Proxy configuration\",\n    \"role\": null,\n    \"type\": \"button\",\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-100 border border-transparent hover:border-red-200 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-950/20 dark:hover:border-red-800 rounded px-2 py-1 min-w-[44px] min-h-[44px]  hover:bg-red-50 dark:hover:bg-red-950/20\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Proxy Behavior  Disable Proxy on Startup   Start w\",\n    \"ariaLabel\": null,\n    \"role\": \"tabpanel\",\n    \"type\": null,\n    \"id\": \"tabpanel-settings\",\n    \"dataTestId\": null,\n    \"className\": \"tab-panel inactive svelte-db8pqm\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"\",\n    \"ariaLabel\": null,\n    \"role\": \"presentation\",\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"relative inline-block\"\n  },\n  {\n    \"tag\": \"INPUT\",\n    \"text\": \"\",\n    \"ariaLabel\": \"Toggle disable proxy on startup\",\n    \"role\": null,\n    \"type\": \"checkbox\",\n    \"id\": \"disableProxyOnStartupToggle\",\n    \"dataTestId\": null,\n    \"className\": \"sr-only peer\"\n  },\n  {\n    \"tag\": \"BUTTON\",\n    \"text\": \"Backup Settings\",\n    \"ariaLabel\": \"Backup all proxy configurations and settings\",\n    \"role\": null,\n    \"type\": \"button\",\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"inline-flex items-center py-2 px-4 rounded shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors cursor-pointer bg-slate-200 text-black hover:bg-slate-300 focus:ring-slate-300 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800\"\n  },\n  {\n    \"tag\": \"INPUT\",\n    \"text\": \"\",\n    \"ariaLabel\": \"Upload backup file to restore configurations\",\n    \"role\": null,\n    \"type\": \"file\",\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"\"\n  },\n  {\n    \"tag\": \"DIV\",\n    \"text\": \"Quick Stats Total Proxies 1   Quick Switch 0   Act\",\n    \"ariaLabel\": null,\n    \"role\": \"tabpanel\",\n    \"type\": null,\n    \"id\": \"tabpanel-about\",\n    \"dataTestId\": null,\n    \"className\": \"tab-panel inactive svelte-db8pqm\"\n  },\n  {\n    \"tag\": \"BUTTON\",\n    \"text\": \"\",\n    \"ariaLabel\": \"Close notification\",\n    \"role\": null,\n    \"type\": null,\n    \"id\": null,\n    \"dataTestId\": null,\n    \"className\": \"flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity\"\n  }\n]\n"
+                    },
+                    {
+                      "text": "\n✅ Snapshot saved to: /Users/naveen/workspace/pacify/test-results/ui-snapshot.json\n"
+                    },
+                    {
+                      "text": "✅ Screenshot saved\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2025-10-12T07:49:18.043Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/naveen/workspace/pacify/test-results/capture-ui-Capture-Options-Page-UI-chromium/test-finished-1.png"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/naveen/workspace/pacify/test-results/capture-ui-Capture-Options-Page-UI-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5d9c38b89bed856e8fc8-6f940bd4bda8c59b0a71",
+          "file": "capture-ui.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "comprehensive-flows.spec.ts",
+      "file": "comprehensive-flows.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "1. Page Loading & Navigation",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 100,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should load options page successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 710,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "✓ Extension loaded with ID: ambgpkdlpbbfeahocalghfilomlemeje\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:21.099Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-1-Page-3e35c-d-options-page-successfully-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-1-Page-3e35c-d-options-page-successfully-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-099fc162a644dd54f3a1",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 101,
+              "column": 3
+            },
+            {
+              "title": "should navigate between tabs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 902,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:22.616Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-1-Page-0a70d-hould-navigate-between-tabs-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-1-Page-0a70d-hould-navigate-between-tabs-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-4d58312fad5d5d3b2cb2",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 109,
+              "column": 3
+            },
+            {
+              "title": "should load popup page successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 607,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:23.559Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-1-Page-959ce-oad-popup-page-successfully-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-1-Page-959ce-oad-popup-page-successfully-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-c9a9a5b58b2e4e911007",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 125,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "2. PAC Script Configuration - Full CRUD",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 134,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should create a PAC script with all fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 685,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:24.188Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-2-PAC--0dc82--PAC-script-with-all-fields-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-2-PAC--0dc82--PAC-script-with-all-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-3ca485c82b4b0743d530",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 135,
+              "column": 3
+            },
+            {
+              "title": "should edit PAC script configuration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 780,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:24.901Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-2-PAC--bfd2b-it-PAC-script-configuration-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-2-PAC--bfd2b-it-PAC-script-configuration-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-f26c62ec59e1603b822d",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 161,
+              "column": 3
+            },
+            {
+              "title": "should delete PAC script configuration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5182,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:25.737Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-2-PAC--80748-te-PAC-script-configuration-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-2-PAC--80748-te-PAC-script-configuration-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-9eb802baff327ac72e52",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 188,
+              "column": 3
+            },
+            {
+              "title": "should create multiple PAC scripts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4095,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:30.999Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-2-PAC--5c664-create-multiple-PAC-scripts-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-2-PAC--5c664-create-multiple-PAC-scripts-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-bd147a1d971e97ae5e40",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 212,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "3. Manual Proxy Configuration",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 238,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should create manual proxy with single server",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1138,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:35.255Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-3-Manu-1fcab-al-proxy-with-single-server-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-3-Manu-1fcab-al-proxy-with-single-server-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-d3e99df8800fda751005",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 239,
+              "column": 3
+            },
+            {
+              "title": "should create manual proxy with different protocols",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1106,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:36.449Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-3-Manu-0edc0-xy-with-different-protocols-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-3-Manu-0edc0-xy-with-different-protocols-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-caa763baf7075d4acb3b",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 275,
+              "column": 3
+            },
+            {
+              "title": "should create manual proxy with bypass list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1097,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:37.601Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-3-Manu-2a645-nual-proxy-with-bypass-list-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-3-Manu-2a645-nual-proxy-with-bypass-list-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-202f79b7892e74ccf516",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 311,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "4. Proxy Activation & Deactivation",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 353,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should activate and deactivate a proxy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1239,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:38.752Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-4-Prox-08367-vate-and-deactivate-a-proxy-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-4-Prox-08367-vate-and-deactivate-a-proxy-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-bc67133caa0f68f318c1",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 354,
+              "column": 3
+            },
+            {
+              "title": "should only allow one proxy active at a time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2294,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:40.044Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-4-Prox-22414--one-proxy-active-at-a-time-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-4-Prox-22414--one-proxy-active-at-a-time-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-a8b6cb24537b376cd12b",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 394,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "5. Quick Switch Mode",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 433,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should toggle quick switch mode globally",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1371,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:42.439Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-5-Quic-17170--quick-switch-mode-globally-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-5-Quic-17170--quick-switch-mode-globally-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-8dbc074863306ef1d3b8",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 434,
+              "column": 3
+            },
+            {
+              "title": "should show quick switch area when enabled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1349,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:43.867Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-5-Quic-d9e23-ck-switch-area-when-enabled-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-5-Quic-d9e23-ck-switch-area-when-enabled-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-6d97aeec42c3d4ae3bc9",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 476,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "6. Settings Management",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 509,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should toggle \"Disable Proxy on Startup\" setting",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 685,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:45.271Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-6-Sett-628bf-le-Proxy-on-Startup-setting-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-6-Sett-628bf-le-Proxy-on-Startup-setting-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-f5fc73906866d3213139",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 510,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "7. Backup & Restore",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 545,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should export (backup) configurations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1548,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:45.988Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-7-Back-079e6-xport-backup-configurations-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-7-Back-079e6-xport-backup-configurations-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-8932c88c9747fc3d8090",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 546,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "8. Form Validation",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 583,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should prevent saving proxy without name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 699,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:47.600Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-8-Form-ca12c-t-saving-proxy-without-name-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-8-Form-ca12c-t-saving-proxy-without-name-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-8616f027c79e21830d39",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 584,
+              "column": 3
+            },
+            {
+              "title": "should show validation for required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 672,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:48.323Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-8-Form-1af0c-idation-for-required-fields-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-8-Form-1af0c-idation-for-required-fields-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-4afbd7708125fff4698f",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 603,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "9. Color Selection",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 631,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should allow selecting different colors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1005,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:49.019Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-9-Colo-6ba86--selecting-different-colors-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-9-Colo-6ba86--selecting-different-colors-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-ff9eb56f27620eb7c8cb",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 632,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "10. About Tab Information",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 667,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should display version information",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 639,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:50.059Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-10-Abo-27dd9-display-version-information-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-10-Abo-27dd9-display-version-information-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-95e8a4a97123e87db723",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 668,
+              "column": 3
+            },
+            {
+              "title": "should display statistics",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 639,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:50.724Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-10-Abo-b5ad7-n-should-display-statistics-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-10-Abo-b5ad7-n-should-display-statistics-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-069622f6c75cadf41c13",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 678,
+              "column": 3
+            },
+            {
+              "title": "should have working external links",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 632,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:51.406Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-10-Abo-d185a-have-working-external-links-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-10-Abo-d185a-have-working-external-links-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-19d47004c97e82bb5ac8",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 691,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "11. Modal Interactions",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 707,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should open and close configuration modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 667,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:52.071Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-11-Mod-09c98-d-close-configuration-modal-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-11-Mod-09c98-d-close-configuration-modal-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-b2c3f68743a6e5fa2055",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 708,
+              "column": 3
+            },
+            {
+              "title": "should close modal with Escape key",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 629,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:52.775Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-11-Mod-961a8-close-modal-with-Escape-key-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-11-Mod-961a8-close-modal-with-Escape-key-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-57bc34fbc51ce6634722",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 722,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "12. Configuration Mode Switching",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 746,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should switch between PAC Script and Manual Configuration modes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 889,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:53.428Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-12-Con-1ce65--Manual-Configuration-modes-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-12-Con-1ce65--Manual-Configuration-modes-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-ce9ff5af0f607b406a38",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 747,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "13. Data Persistence",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 781,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should persist proxy configurations after page reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1564,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:54.381Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-13-Dat-22bd4-gurations-after-page-reload-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-13-Dat-22bd4-gurations-after-page-reload-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-4102207c332f80f3f796",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 782,
+              "column": 3
+            },
+            {
+              "title": "should remember active tab after reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1264,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:55.998Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-13-Dat-1bd8e-ber-active-tab-after-reload-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-13-Dat-1bd8e-ber-active-tab-after-reload-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-feddd652709948273a63",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 812,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "14. Popup Quick Switch Flow",
+          "file": "comprehensive-flows.spec.ts",
+          "line": 838,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should show proxy list in popup when quick switch enabled",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1228,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:57.305Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/comprehensive-flows-14-Pop-0831b-p-when-quick-switch-enabled-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28cc6f5bf0cbb34f7a71-4725a69c7940b925c292",
+              "file": "comprehensive-flows.spec.ts",
+              "line": 839,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "extension-smoke.spec.ts",
+      "file": "extension-smoke.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Extension Build Verification",
+          "file": "extension-smoke.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should have dist folder with manifest",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:58.736Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/extension-smoke-Extension--3a5cd-e-dist-folder-with-manifest-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2870957e956f29664bb6-c3b36626b73cd131e3b4",
+              "file": "extension-smoke.spec.ts",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "should have options page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:58.741Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/extension-smoke-Extension--c0a08-on-should-have-options-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2870957e956f29664bb6-854af797ef923117c87e",
+              "file": "extension-smoke.spec.ts",
+              "line": 24,
+              "column": 3
+            },
+            {
+              "title": "should have popup page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:58.746Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/extension-smoke-Extension--e2282-tion-should-have-popup-page-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2870957e956f29664bb6-7704e70a3f434771c332",
+              "file": "extension-smoke.spec.ts",
+              "line": 29,
+              "column": 3
+            },
+            {
+              "title": "should have background script",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:58.751Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/extension-smoke-Extension--f428b-ould-have-background-script-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2870957e956f29664bb6-4e19e8ef9cd5990c57d6",
+              "file": "extension-smoke.spec.ts",
+              "line": 34,
+              "column": 3
+            },
+            {
+              "title": "should have icons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:58.755Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/extension-smoke-Extension--7fa86-ification-should-have-icons-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2870957e956f29664bb6-784d677ab9899a82459e",
+              "file": "extension-smoke.spec.ts",
+              "line": 39,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "proxy-management.spec.ts",
+      "file": "proxy-management.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Proxy Configuration Management",
+          "file": "proxy-management.spec.ts",
+          "line": 58,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should display empty state when no proxies configured",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 20000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 698,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Extension loaded with ID: ambgpkdlpbbfeahocalghfilomlemeje\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:49:58.764Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-9f58b--when-no-proxies-configured-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-9f58b--when-no-proxies-configured-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8ee63d5b568bbe70eee1-5e45c05844bc3a1093cb",
+              "file": "proxy-management.spec.ts",
+              "line": 59,
+              "column": 3
+            },
+            {
+              "title": "should load options page successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 20000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 618,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:50:00.419Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-95aef-d-options-page-successfully-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-95aef-d-options-page-successfully-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8ee63d5b568bbe70eee1-b81b32660127e98dd781",
+              "file": "proxy-management.spec.ts",
+              "line": 71,
+              "column": 3
+            },
+            {
+              "title": "should create a PAC script configuration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 20000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 717,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:50:01.056Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-06ca4--a-PAC-script-configuration-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-06ca4--a-PAC-script-configuration-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8ee63d5b568bbe70eee1-1e1172e7a362ba7a5988",
+              "file": "proxy-management.spec.ts",
+              "line": 84,
+              "column": 3
+            },
+            {
+              "title": "should delete a proxy configuration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 20000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4881,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:50:01.803Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-442c4-elete-a-proxy-configuration-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-442c4-elete-a-proxy-configuration-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8ee63d5b568bbe70eee1-66d8c02a6f10b4d9269a",
+              "file": "proxy-management.spec.ts",
+              "line": 105,
+              "column": 3
+            },
+            {
+              "title": "should edit an existing proxy configuration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 20000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 790,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:50:06.744Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-b5fa6-xisting-proxy-configuration-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Proxy-Con-b5fa6-xisting-proxy-configuration-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8ee63d5b568bbe70eee1-041785a2a375b7eb6e46",
+              "file": "proxy-management.spec.ts",
+              "line": 130,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Quick Switch Functionality",
+          "file": "proxy-management.spec.ts",
+          "line": 161,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should toggle quick switch mode globally",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 20000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 801,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:50:07.578Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Quick-Swi-20059--quick-switch-mode-globally-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Quick-Swi-20059--quick-switch-mode-globally-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8ee63d5b568bbe70eee1-d461370c1f780bd99791",
+              "file": "proxy-management.spec.ts",
+              "line": 162,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Backup and Restore",
+          "file": "proxy-management.spec.ts",
+          "line": 206,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should export proxy configurations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 20000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 801,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:50:08.442Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Backup-an-d12b5-export-proxy-configurations-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Backup-an-d12b5-export-proxy-configurations-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8ee63d5b568bbe70eee1-fcedf883f773558e8783",
+              "file": "proxy-management.spec.ts",
+              "line": 207,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Error Handling",
+          "file": "proxy-management.spec.ts",
+          "line": 237,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should show error for invalid proxy configuration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 20000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 692,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-12T07:50:09.295Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Error-Han-7b0cb-invalid-proxy-configuration-chromium/test-finished-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/naveen/workspace/pacify/test-results/proxy-management-Error-Han-7b0cb-invalid-proxy-configuration-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8ee63d5b568bbe70eee1-48c82e1a89f66169f011",
+              "file": "proxy-management.spec.ts",
+              "line": 238,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-10-12T07:49:17.650Z",
+    "duration": 52617.441,
+    "expected": 42,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -5,9 +5,15 @@
     scheme?: string
     host?: string
     port?: string
+    testIdPrefix?: string
   }
 
-  let { scheme = $bindable('http'), host = $bindable(''), port = $bindable('') }: Props = $props()
+  let {
+    scheme = $bindable('http'),
+    host = $bindable(''),
+    port = $bindable(''),
+    testIdPrefix = 'proxy',
+  }: Props = $props()
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -27,6 +33,7 @@
     type="text"
     placeholder={I18nService.getMessage('host')}
     bind:value={host}
+    data-testid="{testIdPrefix}-host-input"
     class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md
            bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
   />
@@ -35,6 +42,7 @@
     type="number"
     placeholder={I18nService.getMessage('port')}
     bind:value={port}
+    data-testid="{testIdPrefix}-port-input"
     class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md
            bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
   />

@@ -6,20 +6,17 @@
   export interface LabelButtonProps {
     color?: ButtonColor
     minimal?: boolean
-    icon?: typeof SvelteComponent
+    icon?: any
   }
   export type HideType = 'hidden' | 'invisible'
 </script>
 
 <script lang="ts">
-  import type { SvelteComponent, Snippet } from 'svelte'
+  import type { Snippet } from 'svelte'
   import Text from './Text.svelte'
 
-  interface Props {
-    color?: ButtonColor
-    minimal?: boolean
+  interface Props extends LabelButtonProps {
     hideType?: HideType
-    icon?: typeof SvelteComponent | null
     children?: Snippet
     input?: Snippet
   }

@@ -38,13 +38,16 @@
     alignItems="center"
     justifyContent="between"
     classes="bg-slate-100 dark:bg-slate-700/50 p-1.5 rounded-xl"
+    role="tablist"
   >
     {#each options as option}
       <Button
         type="button"
+        role="tab"
         classes="flex-grow"
         onclick={() => (proxyMode = option.value)}
         color={proxyMode === option.value ? 'primary' : 'secondary'}
+        aria-selected={proxyMode === option.value ? 'true' : 'false'}
       >
         {option.label}
       </Button>

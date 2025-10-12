@@ -57,6 +57,7 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="dialog-title"
+    tabindex="-1"
   >
     <div
       class="relative bg-white dark:bg-slate-800 rounded-lg shadow-xl max-w-md w-full mx-4 animate-scale-in"

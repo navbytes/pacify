@@ -164,7 +164,7 @@
     "message": "启动时禁用代理"
   },
   "disableProxyOnStartupDescription": {
-    "message": "启用后，浏览器启动时将自动禁用任何活动的代理配置，确保以\"关闭\"模式启动。"
+    "message": "每次启动浏览器时以禁用代理的状态开始"
   },
   "invalidConfiguration": {
     "message": "无效配置"
@@ -317,13 +317,13 @@
     "message": "快速切换配置"
   },
   "quickSwitchConfigsDescription": {
-    "message": "将代理拖到此处以从扩展弹出窗口快速切换"
+    "message": "将代理拖到此处以在弹出窗口中一键访问"
   },
   "allProxyConfigsTitle": {
     "message": "所有代理配置"
   },
   "allProxyConfigsDescription": {
-    "message": "可用代理配置的完整列表"
+    "message": "管理所有代理配置"
   },
   "quickStatsTitle": {
     "message": "快速统计"
@@ -369,5 +369,20 @@
   },
   "offButton": {
     "message": "关闭"
+  },
+  "tooltipQuickSwitchMode": {
+    "message": "无需打开设置即可从弹出窗口即时访问收藏的代理"
+  },
+  "tooltipDisableOnStartup": {
+    "message": "这可确保Chrome启动时代理不会自动启用"
+  },
+  "tooltipDragToQuickSwitch": {
+    "message": "将代理卡拖到此处以将其添加到快速切换以便更快访问"
+  },
+  "tooltipDragToRemove": {
+    "message": "将快速切换代理拖到此处以从弹出窗口中删除它们"
+  },
+  "tooltipKeyboardShortcut": {
+    "message": "按Ctrl+N（Mac上为Cmd+N）快速添加新代理"
   }
 }

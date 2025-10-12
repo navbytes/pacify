@@ -62,7 +62,11 @@
 <div class="space-y-4">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <!-- Backup Settings -->
-    <FlexGroup direction="vertical" childrenGap="xs">
+    <FlexGroup
+      classes="rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800"
+      direction="vertical"
+      childrenGap="xs"
+    >
       <Button
         color="secondary"
         onclick={handleBackup}
@@ -77,7 +81,11 @@
     </FlexGroup>
 
     <!-- Restore Settings -->
-    <FlexGroup direction="vertical" childrenGap="xs">
+    <FlexGroup
+      classes="rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800"
+      direction="vertical"
+      childrenGap="xs"
+    >
       <LabelButton color="secondary" icon={Upload}>
         {I18nService.getMessage('restoreSettings')}
         {#snippet input()}
