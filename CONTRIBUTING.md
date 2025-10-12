@@ -22,23 +22,23 @@ Thank you for your interest in contributing to PACify! This document provides gu
 2. **Install Dependencies**
 
    ```bash
-   npm install
+   bun install
+   # or: npm install (if needed)
    ```
 
 3. **Run Development Server**
 
    ```bash
-   npm run dev              # Start Vite dev server
-   npm run dev:extension    # Build extension in watch mode
+   bun run dev              # Start Vite dev server
+   bun run dev:extension    # Build extension in watch mode
    ```
 
 4. **Run Tests**
 
    ```bash
-   npm run test            # Unit tests (watch mode)
-   npm run test:run        # Unit tests (single run)
-   npm run test:e2e        # E2E tests
-   npm run test:coverage   # Coverage report
+   bun test                # Unit tests (Bun native runner)
+   bun run test:e2e        # E2E tests
+   bun run test:coverage   # Coverage report
    ```
 
 5. **Code Quality Checks**
@@ -186,7 +186,7 @@ function processConfig(config: any): void {
 - Use descriptive test names
 
 ```typescript
-import { describe, it, expect, vi } from 'vitest'
+import { describe, test, expect, mock } from 'bun:test'
 
 describe('validateProxyServer', () => {
   it('should return true for valid proxy server format', () => {
@@ -219,10 +219,10 @@ test('should create new proxy configuration', async ({ page }) => {
 
 Before submitting a PR, ensure:
 
-- [ ] All tests pass (`npm run test:run` and `npm run test:e2e`)
-- [ ] Type checking passes (`npm run check`)
-- [ ] Linting passes (`npm run lint`)
-- [ ] Code is formatted (`npm run format`)
+- [ ] All tests pass (`bun test` and `bun run test:e2e`)
+- [ ] Type checking passes (`bun run check`)
+- [ ] Linting passes (`bun run lint`)
+- [ ] Code is formatted (`bun run format`)
 - [ ] New features have tests
 - [ ] Documentation is updated
 - [ ] Commit messages follow conventions
@@ -264,7 +264,7 @@ For feature requests:
 - [Svelte 5](https://svelte.dev/docs/svelte/overview)
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [Vite](https://vitejs.dev/guide/)
-- [Vitest](https://vitest.dev/guide/)
+- [Bun Test](https://bun.sh/docs/cli/test)
 - [Playwright](https://playwright.dev/docs/intro)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Monaco Editor](https://microsoft.github.io/monaco-editor/)

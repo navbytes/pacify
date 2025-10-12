@@ -89,7 +89,9 @@
   {type}
   class={combinedClasses}
   {disabled}
-  {onclick}
+  onclick={(e) => {
+    if (onclick) onclick(e)
+  }}
   aria-label={ariaLabel}
   aria-selected={ariaSelected}
   data-testid={dataTestId}

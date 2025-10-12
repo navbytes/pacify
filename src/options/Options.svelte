@@ -96,27 +96,54 @@
   }
 </script>
 
-<div id="options-container" class="container mx-auto max-w-7xl px-4 py-8" role="region">
-  <!-- Header Section -->
-  <header class="mb-6">
-    <h1 class="text-2xl font-bold text-primary" data-testid="page-title">
-      {I18nService.getMessage('extName')}
-    </h1>
-  </header>
+<div id="options-container" class="container mx-auto max-w-7xl px-4" role="region">
+  <!-- Integrated Header with Tabs -->
+  <Tabs bind:activeTab variant="buttons">
+    <header class="mb-8 -mx-4">
+      <!-- Single Row: Branding, Tab Navigation, and Status -->
+      <div
+        class="flex items-center justify-between px-6 py-5 gap-6 border-b border-slate-100 dark:border-slate-800"
+      >
+        <!-- Left: App Branding -->
+        <div class="flex items-center gap-4 flex-shrink-0 min-w-0">
+          <img src="/icons/icon48.png" alt="PACify" class="w-12 h-12 flex-shrink-0" />
+          <div class="min-w-0">
+            <h1
+              class="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight"
+              data-testid="page-title"
+            >
+              PACify
+            </h1>
+            <p class="text-xs text-slate-500 dark:text-slate-500 mt-0.5">Proxy Manager</p>
+          </div>
+        </div>
 
-  <!-- Tabs Container -->
-  <Tabs bind:activeTab variant="underline">
-    <TabList>
-      <Tab id="proxy-configs" icon={Cable}>
-        {I18nService.getMessage('tabProxyConfigs')}
-      </Tab>
-      <Tab id="settings" icon={Settings}>
-        {I18nService.getMessage('tabSettings')}
-      </Tab>
-      <Tab id="about" icon={Info}>
-        {I18nService.getMessage('tabAbout')}
-      </Tab>
-    </TabList>
+        <!-- Right: Tab Navigation + Status -->
+        <div class="flex items-center gap-4 flex-shrink-0">
+          <!-- Status Indicator (if active) -->
+          {#if settings.proxyConfigs.find((p) => p.isActive)}
+            <div
+              class="flex items-center gap-2 px-3 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold flex-shrink-0 shadow-sm"
+            >
+              <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              ACTIVE
+            </div>
+          {/if}
+
+          <TabList>
+            <Tab id="proxy-configs" icon={Cable}>
+              {I18nService.getMessage('tabProxyConfigs')}
+            </Tab>
+            <Tab id="settings" icon={Settings}>
+              {I18nService.getMessage('tabSettings')}
+            </Tab>
+            <Tab id="about" icon={Info}>
+              {I18nService.getMessage('tabAbout')}
+            </Tab>
+          </TabList>
+        </div>
+      </div>
+    </header>
 
     <!-- Tab 1: Proxy Configs -->
     <TabPanel id="proxy-configs">

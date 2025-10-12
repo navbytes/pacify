@@ -1,5 +1,7 @@
-# Dependency directories
+# Bun artifacts
+bun.lockb
 node_modules/
+.bun/
 
 # IDE related
 .idea

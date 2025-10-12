@@ -13,7 +13,7 @@ test('Capture Options Page UI', async () => {
   await page.click('button:has-text("Add New Script")')
   await page.waitForSelector('text=Proxy Configuration')
   await page.fill('input#scriptName', 'Test Proxy')
-  await page.click('button:has-text("Save Configuration")')
+  await page.getByTestId('save-config-btn').click()
   await page.waitForTimeout(1000)
 
   // Take a snapshot of the page

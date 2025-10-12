@@ -5,19 +5,21 @@
   import { I18nService } from '@/services/i18n/i18nService'
   import { StorageService } from '@/services/StorageService'
   import StatsCard from '@/components/StatsCard.svelte'
-  import Text from '@/components/Text.svelte'
-  import Card from '@/components/Card.svelte'
-  import ProgressBar from '@/components/ProgressBar.svelte'
+  import AppHeader from '@/components/AppHeader.svelte'
+  import LinkCard from '@/components/LinkCard.svelte'
+  import StorageCard from '@/components/StorageCard.svelte'
   import {
-    Cable,
     Zap,
     Bug,
     BookOpen,
-    ExternalLink,
     Activity,
     Clock,
     Lightbulb,
     Github,
+    BarChart3,
+    HelpCircle,
+    Stethoscope,
+    Cable,
   } from 'lucide-svelte'
 
   const showStorage = true
@@ -52,12 +54,22 @@
   }
 </script>
 
-<div class="py-6 space-y-6">
+<div class="py-6 space-y-8">
+  <!-- Extension Info Header -->
+  <AppHeader
+    appName="PACify"
+    version="1.20.0"
+    description={I18nService.getMessage('extensionDescription')}
+  />
+
   <!-- Quick Stats Dashboard -->
-  <div>
-    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">
-      {I18nService.getMessage('quickStatsTitle')}
-    </h2>
+  <section>
+    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
+      <BarChart3 size={20} class="text-blue-600 dark:text-blue-400" />
+      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+        {I18nService.getMessage('quickStatsTitle')}
+      </h2>
+    </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <StatsCard
         title={I18nService.getMessage('totalProxies')}
@@ -89,140 +101,75 @@
         valueColor={lastUsedProxy ? 'default' : 'muted'}
       />
     </div>
-  </div>
-
-  <!-- Extension Info -->
-  <div>
-    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">
-      {I18nService.getMessage('aboutExtensionInfo')}
-    </h2>
-  </div>
-  <Card>
-    <div class="space-y-2">
-      <div class="flex items-baseline gap-2">
-        <Text size="sm" weight="medium" color="muted">{I18nService.getMessage('versionLabel')}</Text
-        >
-        <Text size="2xl" weight="bold">1.10.0</Text>
-      </div>
-      <Text as="p" size="sm" color="muted">
-        {I18nService.getMessage('extensionDescription')}
-      </Text>
-    </div>
-  </Card>
+  </section>
 
   <!-- Help & Resources -->
-  <div>
-    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">
-      {I18nService.getMessage('aboutHelpResources')}
-    </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <Card
-        ><a
-          href="https://github.com/navbytes/pacify"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex p-2 gap-3"
-        >
-          <div class="flex flex-1 items-center gap-3">
-            <Github size={20} class="text-blue-600 dark:text-blue-400" />
-            <span>{I18nService.getMessage('aboutViewOnGithub')}</span>
-          </div>
-          <ExternalLink size={16} class="text-blue-600 dark:text-blue-400" />
-        </a></Card
-      >
-      <Card
-        ><a
-          href="https://github.com/navbytes/pacify/issues"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex p-2 gap-3"
-        >
-          <div class="flex flex-1 items-center gap-3">
-            <Bug size={20} class="text-blue-600 dark:text-blue-400" />
-            <span>{I18nService.getMessage('aboutReportIssue')}</span>
-          </div>
-          <ExternalLink size={16} class="text-blue-600 dark:text-blue-400" />
-        </a></Card
-      >
-      <Card
-        ><a
-          href="https://github.com/navbytes/pacify/issues/new?labels=enhancement&template=feature_request.md"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex p-2 gap-3"
-        >
-          <div class="flex flex-1 items-center gap-3">
-            <Lightbulb size={20} class="text-blue-600 dark:text-blue-400" />
-            <span>{I18nService.getMessage('aboutFeatureRequest')}</span>
-          </div>
-          <ExternalLink size={16} class="text-blue-600 dark:text-blue-400" />
-        </a></Card
-      >
-      <Card
-        ><a
-          href="https://github.com/navbytes/pacify#readme"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex p-2 gap-3"
-        >
-          <div class="flex flex-1 items-center gap-3">
-            <BookOpen size={20} class="text-blue-600 dark:text-blue-400" />
-            <span>{I18nService.getMessage('aboutDocumentation')}</span>
-          </div>
-          <ExternalLink size={16} class="text-blue-600 dark:text-blue-400" />
-        </a></Card
-      >
+  <section>
+    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
+      <HelpCircle size={20} class="text-green-600 dark:text-green-400" />
+      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+        {I18nService.getMessage('aboutHelpResources')}
+      </h2>
     </div>
-  </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <LinkCard
+        href="https://github.com/navbytes/pacify"
+        icon={Github}
+        label={I18nService.getMessage('aboutViewOnGithub')}
+        color="blue"
+      />
+      <LinkCard
+        href="https://github.com/navbytes/pacify/issues"
+        icon={Bug}
+        label={I18nService.getMessage('aboutReportIssue')}
+        color="red"
+      />
+      <LinkCard
+        href="https://github.com/navbytes/pacify/issues/new?labels=enhancement&template=feature_request.md"
+        icon={Lightbulb}
+        label={I18nService.getMessage('aboutFeatureRequest')}
+        color="yellow"
+      />
+      <LinkCard
+        href="https://github.com/navbytes/pacify#readme"
+        icon={BookOpen}
+        label={I18nService.getMessage('aboutDocumentation')}
+        color="green"
+      />
+    </div>
+  </section>
 
   <!-- Diagnostics -->
   {#if storageStats}
-    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">
-      {I18nService.getMessage('aboutDiagnostics')}
-    </h2>
-    <div class="grid grid-cols-2 gap-4">
-      <Card>
-        <!-- Sync Storage -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between text-sm">
-            <span class="font-medium text-slate-700 dark:text-slate-300">
-              {I18nService.getMessage('syncStorage')}
-            </span>
-            <span class="text-slate-500 dark:text-slate-400">
-              {Math.round(storageStats.syncUsed / 1024)}KB / {Math.round(
-                storageStats.syncQuota / 1024
-              )}KB
-            </span>
-          </div>
-          <ProgressBar
-            value={storageStats.syncUsed}
-            max={storageStats.syncQuota}
-            size="md"
-            showPercentage={false}
-          />
-        </div>
-      </Card>
-      <Card>
-        <!-- Local Storage -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between text-sm">
-            <span class="font-medium text-slate-700 dark:text-slate-300">
-              {I18nService.getMessage('localStorage')}
-            </span>
-            <span class="text-slate-500 dark:text-slate-400">
-              {Math.round(storageStats.localUsed / 1024)}KB / {Math.round(
-                storageStats.localQuota / 1024 / 1024
-              )}MB
-            </span>
-          </div>
-          <ProgressBar
-            value={storageStats.localUsed}
-            max={storageStats.localQuota}
-            size="md"
-            showPercentage={false}
-          />
-        </div>
-      </Card>
-    </div>
+    <section>
+      <div
+        class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2"
+      >
+        <Stethoscope size={20} class="text-purple-600 dark:text-purple-400" />
+        <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+          {I18nService.getMessage('aboutDiagnostics')}
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <StorageCard
+          title={I18nService.getMessage('syncStorage')}
+          icon={Activity}
+          used={storageStats.syncUsed}
+          quota={storageStats.syncQuota}
+          usedLabel="{Math.round(storageStats.syncUsed / 1024)}KB"
+          quotaLabel="{Math.round(storageStats.syncQuota / 1024)}KB"
+          color="blue"
+        />
+        <StorageCard
+          title={I18nService.getMessage('localStorage')}
+          icon={Activity}
+          used={storageStats.localUsed}
+          quota={storageStats.localQuota}
+          usedLabel="{Math.round(storageStats.localUsed / 1024)}KB"
+          quotaLabel="{Math.round(storageStats.localQuota / 1024 / 1024)}MB"
+          color="green"
+        />
+      </div>
+    </section>
   {/if}
 </div>

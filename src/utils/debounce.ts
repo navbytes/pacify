@@ -54,7 +54,12 @@ export function throttle<T extends (...args: never[]) => unknown>(
   return function (this: unknown, ...args: Parameters<T>): void {
     const now = Date.now()
 
-    if (!previous) previous = now
+    // If this is the first call, execute immediately
+    if (previous === 0) {
+      previous = now
+      func.apply(this, args)
+      return
+    }
 
     const remaining = wait - (now - previous)
 

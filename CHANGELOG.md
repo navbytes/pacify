@@ -5,6 +5,45 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.20.0] - 2025-10-24
+
+### Added
+
+- **Modern Navigation System**
+  - Button group navigation style replacing underline tabs (iOS/macOS-inspired segmented control)
+  - Inline toggle switches in Quick Switch Configs for faster proxy switching
+
+### Changed
+
+- **Optimized Popup Layout**
+  - Reduced height from 480px to 400px for more compact display
+  - Moved OFF button to footer with status indicator
+  - Eliminated footer height flickering with consistent sizing
+
+- **Enhanced Proxy Cards**
+  - Three-section layout: Header, Content, Footer
+  - Dedicated footer for action buttons in Options view
+  - Added text labels to Edit and Delete buttons
+  - Single-line description with truncation for cleaner cards
+  - Refined shadows, borders, and hover effects
+
+- **Improved Options Page**
+  - Navigation moved to header alongside title
+  - Better visual hierarchy and spacing
+  - Enhanced card styling with reduced border radius
+
+### Fixed
+
+- QuickSwitch property now properly preserved when editing proxy configurations
+- Automatic tab reload when proxy settings change to ensure changes take effect immediately
+
+### Technical
+
+- Cleaned up unnecessary event propagation code
+- Simplified component event handling
+- Improved accessibility with conditional role/tabindex attributes
+- Better code maintainability with reduced complexity
+
 ## [1.10.0] - 2025-10-12
 
 ### Fixed

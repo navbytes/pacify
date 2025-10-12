@@ -1,0 +1,64 @@
+# Bun Configuration File
+# https://bun.sh/docs/runtime/bunfig
+
+[install]
+# Use exact versions for reproducible builds
+exact = true
+
+# Enable global cache for faster installs
+cache = "~/.bun/install/cache"
+
+# Parallel downloads for faster dependency installation
+parallel = true
+
+# Default registry
+registry = "https://registry.npmjs.org/"
+
+# Auto-install peer dependencies
+auto = true
+
+# Frozen lockfile in CI
+frozen = false
+
+[install.scopes]
+# Optimize specific scopes
+"@types" = "https://registry.npmjs.org/"
+"@sveltejs" = "https://registry.npmjs.org/"
+
+[test]
+# Enable coverage by default
+coverage = true
+
+# Preload test setup files - ensure chrome mocking is available
+preload = ["./tests/setup.ts"]
+
+# Root directory for test discovery
+root = "."
+
+# Set test timeout (in milliseconds)
+timeout = 5000
+
+# Bail on first test failure (useful for CI)
+bail = false
+
+# Note: Unit tests are run using explicit patterns in package.json scripts
+# E2E tests should be run separately with Playwright: npm run test:e2e
+# This avoids conflicts between Bun test and Playwright test APIs
+
+[run]
+# Set default shell for cross-platform compatibility
+# Options: "bun" or "system"
+shell = "bun"
+
+[build]
+# Default build target
+target = "browser"
+
+# Enable minification by default
+minify = true
+
+# Enable source maps in development
+sourcemap = "external"
+
+# Code splitting
+splitting = true

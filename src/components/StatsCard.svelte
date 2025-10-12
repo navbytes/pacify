@@ -42,7 +42,7 @@
 </script>
 
 <div
-  class="bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-200 dark:border-slate-700"
+  class="group bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-200"
 >
   <FlexGroup alignItems="start" justifyContent="between">
     <div class="flex-1">
@@ -59,7 +59,11 @@
       {/if}
     </div>
     {#if Icon}
-      <div class="rounded-lg p-2 {colors[color]}">
+      <div
+        class="rounded-lg p-2 {colors[
+          color
+        ]} group-hover:scale-110 transition-transform duration-200"
+      >
         <Icon size={24} strokeWidth={2} />
       </div>
     {/if}

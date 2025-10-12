@@ -3,6 +3,8 @@ import {
   ERROR_TYPES,
   type AppSettings,
   type BackgroundMessage,
+  type BackgroundMessageResponse,
+  type ChromeProxyConfig,
   type ProxyConfig,
 } from '@/interfaces'
 import { convertAppSettingsToChromeConfig } from '../../utils/chrome'
@@ -10,19 +12,13 @@ import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHa
 import { browserService } from './BrowserService'
 
 export class ChromeService {
-  // Detect if we're in a service worker context
-  private static isServiceWorkerContext =
-    typeof self !== 'undefined' &&
-    typeof window === 'undefined' &&
-    self.constructor.name === 'ServiceWorkerGlobalScope'
-
   // Reference to the browser service
   private static browser = browserService
   /**
    * Sets Chrome proxy settings based on proxy configuration
    */
   static setProxy = withErrorHandling(async (proxy: ProxyConfig): Promise<void> => {
-    const details: chrome.types.ChromeSettingSetDetails = {
+    const details: chrome.types.ChromeSettingSetDetails<ChromeProxyConfig> = {
       value: convertAppSettingsToChromeConfig(proxy),
       scope: 'regular',
     }
@@ -33,12 +29,11 @@ export class ChromeService {
           return reject(this.browser.runtime.lastError)
         }
 
-        // Await tab reload and handle errors gracefully
+        // Reload active tab to apply proxy changes
         try {
           await this.reloadActiveTab()
         } catch (error) {
           console.warn('Failed to reload tab (proxy still set):', error)
-          // Don't reject - proxy was set successfully
         }
 
         resolve()
@@ -56,12 +51,11 @@ export class ChromeService {
           return reject(this.browser.runtime.lastError)
         }
 
-        // Await tab reload and handle errors gracefully
+        // Reload active tab to apply proxy changes
         try {
           await this.reloadActiveTab()
         } catch (error) {
           console.warn('Failed to reload tab (proxy still cleared):', error)
-          // Don't reject - proxy was cleared successfully
         }
 
         resolve()
@@ -70,36 +64,18 @@ export class ChromeService {
   }, ERROR_TYPES.CLEAR_PROXY)
 
   /**
-   * Reloads the current active tab
+   * Reloads the active tab
    */
   static async reloadActiveTab(): Promise<void> {
     try {
-      if (this.isServiceWorkerContext) {
-        const [activeTab] = await this.browser.tabs.query({
-          active: true,
-          currentWindow: true,
-        })
+      const activeTabs = await this.browser.tabs.query({ active: true, currentWindow: true })
+      const tabToReload = activeTabs.find((tab) => tab.id && tab.id > 0)
 
-        if (activeTab?.id) {
-          // Skip reloading for special Chrome pages that can't be reloaded
-          if (
-            activeTab.url?.startsWith('chrome://') ||
-            activeTab.url?.startsWith('chrome-extension://') ||
-            activeTab.url?.startsWith('edge://') ||
-            activeTab.url?.startsWith('about:')
-          ) {
-            console.log('Skipping reload for special page:', activeTab.url)
-            return
-          }
-
-          await this.browser.tabs.reload(activeTab.id)
-        }
-      } else {
-        // In a window context, we can use a simpler approach
-        await this.browser.tabs.reload()
+      if (tabToReload?.id) {
+        await this.browser.tabs.reload(tabToReload.id)
       }
     } catch (error) {
-      console.error('Error reloading tab:', error)
+      console.debug('Could not reload tab:', error)
     }
   }
 
@@ -107,7 +83,7 @@ export class ChromeService {
    * Gets current proxy settings
    */
   static getProxy = withErrorHandlingAndFallback(
-    async (): Promise<chrome.types.ChromeSettingGetResultDetails> => {
+    async (): Promise<chrome.types.ChromeSettingGetDetails> => {
       return new Promise((resolve, reject) => {
         this.browser.proxy.settings.get({}, (config) => {
           if (this.browser.runtime.lastError) {
@@ -126,7 +102,9 @@ export class ChromeService {
    */
   static sendMessage = withErrorHandling(
     async <T extends BackgroundMessage>(message: T): Promise<void> => {
-      const response = await this.browser.runtime.sendMessage<T>(message)
+      const response = (await this.browser.runtime.sendMessage<T>(
+        message
+      )) as BackgroundMessageResponse
 
       // Validate response from background script
       if (response && !response.success) {

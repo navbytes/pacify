@@ -8,7 +8,6 @@
   import Text from '@/components/Text.svelte'
   import Tooltip from '@/components/Tooltip.svelte'
   import Card from '@/components/Card.svelte'
-  import SectionTitle from '@/components/SectionTitle.svelte'
   import { Shield, Database, CircleQuestionMark } from 'lucide-svelte'
 
   let settings = $derived($settingsStore)
@@ -27,11 +26,16 @@
 <div class="py-6 space-y-8">
   <!-- Proxy Behavior Section (Primary) -->
   <div>
-    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">
-      {I18nService.getMessage('settingsProxyBehavior')}
-    </h2>
+    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
+      <Shield size={20} class="text-blue-600 dark:text-blue-400" />
+      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+        {I18nService.getMessage('settingsProxyBehavior')}
+      </h2>
+    </div>
 
-    <Card classes="ring-2 ring-blue-500/10 dark:ring-blue-400/10">
+    <Card
+      classes="ring-2 ring-blue-500/10 dark:ring-blue-400/10 hover:ring-blue-500/20 dark:hover:ring-blue-400/20 hover:shadow-lg transition-all duration-200"
+    >
       <FlexGroup
         direction="horizontal"
         childrenGap="lg"
@@ -39,12 +43,10 @@
         justifyContent="between"
       >
         <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
-          <div class="flex-shrink-0 mt-1">
-            <div
-              class="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
-            >
-              <Shield size={24} />
-            </div>
+          <div
+            class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
+          >
+            <svelte:component this={Shield} size={20} class="text-white" />
           </div>
           <div class="flex-1">
             <div class="flex items-center gap-2">
@@ -75,13 +77,12 @@
 
   <!-- Data Management Section -->
   <div>
-    <SectionTitle
-      icon={Database}
-      iconSize={20}
-      iconColor="text-slate-600 dark:text-slate-400"
-      title={I18nService.getMessage('settingsDataManagement')}
-      classes="mb-4"
-    />
+    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
+      <Database size={20} class="text-slate-600 dark:text-slate-400" />
+      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+        {I18nService.getMessage('settingsDataManagement')}
+      </h2>
+    </div>
 
     <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
   </div>

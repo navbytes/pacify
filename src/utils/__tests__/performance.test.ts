@@ -1,15 +1,15 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { PerformanceMonitor } from '../performance'
+import { describe, test, expect, beforeEach, mock } from 'bun:test'
+import { PerformanceMonitor, measureComponent } from '../performance'
 
 describe('PerformanceMonitor', () => {
   beforeEach(() => {
     PerformanceMonitor.clearMeasures()
     PerformanceMonitor.setEnabled(true)
-    vi.clearAllMocks()
+    mock.restore()
   })
 
   describe('startMeasure and endMeasure', () => {
-    it('should measure performance of an operation', () => {
+    test('should measure performance of an operation', () => {
       PerformanceMonitor.startMeasure('test-operation')
 
       // Simulate work
@@ -22,13 +22,13 @@ describe('PerformanceMonitor', () => {
       expect(typeof result).toBe('number')
     })
 
-    it('should return undefined for non-existent measure', () => {
+    test('should return undefined for non-existent measure', () => {
       const result = PerformanceMonitor.endMeasure('non-existent')
 
       expect(result).toBeUndefined()
     })
 
-    it('should track metadata', () => {
+    test('should track metadata', () => {
       PerformanceMonitor.startMeasure('test', { action: 'save', count: 5 })
       PerformanceMonitor.endMeasure('test')
 
@@ -37,7 +37,7 @@ describe('PerformanceMonitor', () => {
       expect(measures[measures.length - 1].data).toEqual({ action: 'save', count: 5 })
     })
 
-    it('should handle multiple concurrent measures', () => {
+    test('should handle multiple concurrent measures', () => {
       PerformanceMonitor.startMeasure('operation1')
       PerformanceMonitor.startMeasure('operation2')
 
@@ -50,8 +50,8 @@ describe('PerformanceMonitor', () => {
   })
 
   describe('measureFunction', () => {
-    it('should wrap function and measure performance', () => {
-      const testFn = vi.fn(() => 'result')
+    test('should wrap function and measure performance', () => {
+      const testFn = mock(() => 'result')
       const wrapped = PerformanceMonitor.measureFunction('test-fn', testFn)
 
       const result = wrapped()
@@ -63,8 +63,8 @@ describe('PerformanceMonitor', () => {
       expect(measures.some((m) => m.name === 'test-fn')).toBe(true)
     })
 
-    it('should handle async functions', async () => {
-      const asyncFn = vi.fn(async () => {
+    test('should handle async functions', async () => {
+      const asyncFn = mock(async () => {
         await new Promise((resolve) => setTimeout(resolve, 10))
         return 'async-result'
       })
@@ -80,8 +80,8 @@ describe('PerformanceMonitor', () => {
       expect(measure?.endTime).toBeGreaterThan(0)
     })
 
-    it('should handle async function errors and still measure', async () => {
-      const errorFn = vi.fn(async () => {
+    test('should handle async function errors and still measure', async () => {
+      const errorFn = mock(async () => {
         throw new Error('Test error')
       })
 
@@ -95,8 +95,8 @@ describe('PerformanceMonitor', () => {
       expect(measure?.data?.error).toBeDefined()
     })
 
-    it('should pass arguments to wrapped function', () => {
-      const testFn = vi.fn((a: number, b: number) => a + b)
+    test('should pass arguments to wrapped function', () => {
+      const testFn = mock((a: number, b: number) => a + b)
       const wrapped = PerformanceMonitor.measureFunction('add', testFn)
 
       const result = wrapped(5, 3)
@@ -107,7 +107,7 @@ describe('PerformanceMonitor', () => {
   })
 
   describe('getMeasures', () => {
-    it('should return all completed measures', () => {
+    test('should return all completed measures', () => {
       PerformanceMonitor.startMeasure('measure1')
       PerformanceMonitor.endMeasure('measure1')
 
@@ -120,7 +120,7 @@ describe('PerformanceMonitor', () => {
       expect(measures.every((m) => m.endTime && m.endTime > 0)).toBe(true)
     })
 
-    it('should not include incomplete measures', () => {
+    test('should not include incomplete measures', () => {
       PerformanceMonitor.startMeasure('incomplete')
 
       const measures = PerformanceMonitor.getMeasures()
@@ -128,7 +128,7 @@ describe('PerformanceMonitor', () => {
       expect(measures.find((m) => m.name === 'incomplete')).toBeUndefined()
     })
 
-    it('should include start and end times', () => {
+    test('should include start and end times', () => {
       PerformanceMonitor.startMeasure('timed')
       PerformanceMonitor.endMeasure('timed')
 
@@ -141,7 +141,7 @@ describe('PerformanceMonitor', () => {
   })
 
   describe('clearMeasures', () => {
-    it('should clear all measures', () => {
+    test('should clear all measures', () => {
       PerformanceMonitor.startMeasure('test')
       PerformanceMonitor.endMeasure('test')
 
@@ -152,7 +152,7 @@ describe('PerformanceMonitor', () => {
       expect(PerformanceMonitor.getMeasures().length).toBe(0)
     })
 
-    it('should clear active measures', () => {
+    test('should clear active measures', () => {
       PerformanceMonitor.startMeasure('active')
       PerformanceMonitor.clearMeasures()
 
@@ -163,18 +163,18 @@ describe('PerformanceMonitor', () => {
   })
 
   describe('enabled/disabled state', () => {
-    it('should be enabled by default', () => {
+    test('should be enabled by default', () => {
       expect(PerformanceMonitor.isEnabled()).toBe(true)
     })
 
-    it('should allow disabling monitoring', () => {
+    test('should allow disabling monitoring', () => {
       PerformanceMonitor.setEnabled(false)
       expect(PerformanceMonitor.isEnabled()).toBe(false)
 
       PerformanceMonitor.setEnabled(true) // Reset
     })
 
-    it('should not measure when disabled', () => {
+    test('should not measure when disabled', () => {
       PerformanceMonitor.setEnabled(false)
       PerformanceMonitor.startMeasure('disabled-test')
       const result = PerformanceMonitor.endMeasure('disabled-test')
@@ -183,5 +183,218 @@ describe('PerformanceMonitor', () => {
 
       PerformanceMonitor.setEnabled(true) // Reset
     })
+  })
+
+  describe('performance API integration', () => {
+    test('should handle missing performance.mark gracefully', () => {
+      const originalMark = global.performance?.mark
+      if (global.performance) {
+        delete (global.performance as any).mark
+      }
+
+      expect(() => {
+        PerformanceMonitor.startMeasure('no-mark-test')
+        PerformanceMonitor.endMeasure('no-mark-test')
+      }).not.toThrow()
+
+      // Restore
+      if (global.performance && originalMark) {
+        global.performance.mark = originalMark
+      }
+    })
+
+    test('should handle performance.measure errors gracefully', () => {
+      const originalMeasure = global.performance?.measure
+      if (global.performance) {
+        global.performance.measure = () => {
+          throw new Error('Measure failed')
+        }
+      }
+
+      expect(() => {
+        PerformanceMonitor.startMeasure('error-measure-test')
+        PerformanceMonitor.endMeasure('error-measure-test')
+      }).not.toThrow()
+
+      // Restore
+      if (global.performance && originalMeasure) {
+        global.performance.measure = originalMeasure
+      }
+    })
+
+    test('should log slow operations', () => {
+      const originalWarn = console.warn
+      const mockWarn = mock()
+      console.warn = mockWarn
+
+      // Mock performance.now to return predictable values
+      const originalNow = performance.now
+      let callCount = 0
+      performance.now = () => {
+        callCount++
+        return callCount === 1 ? 0 : 150 // 150ms duration
+      }
+
+      PerformanceMonitor.startMeasure('slow-op')
+      PerformanceMonitor.endMeasure('slow-op')
+
+      expect(mockWarn).toHaveBeenCalledWith(
+        'Slow operation detected: slow-op took 150.00ms',
+        undefined
+      )
+
+      // Restore
+      console.warn = originalWarn
+      performance.now = originalNow
+    })
+  })
+
+  describe('edge cases', () => {
+    test('should handle endMeasure with additional data', () => {
+      PerformanceMonitor.startMeasure('with-data', { initial: 'data' })
+      PerformanceMonitor.endMeasure('with-data', { final: 'data' })
+
+      const measures = PerformanceMonitor.getMeasures()
+      const measure = measures.find((m) => m.name === 'with-data')
+
+      expect(measure?.data).toEqual({ initial: 'data', final: 'data' })
+    })
+
+    test('should handle measureFunction with no arguments', () => {
+      const testFn = mock(() => 'no-args')
+      const wrapped = PerformanceMonitor.measureFunction('no-args-fn', testFn)
+
+      const result = wrapped()
+      expect(result).toBe('no-args')
+
+      const measures = PerformanceMonitor.getMeasures()
+      const measure = measures.find((m) => m.name === 'no-args-fn')
+      expect(measure?.data?.args).toBeUndefined()
+    })
+  })
+})
+
+describe('measureComponent', () => {
+  test('should wrap component lifecycle hooks', () => {
+    const mockComponent = {
+      name: 'TestComponent',
+      prototype: {
+        onMount: mock(),
+        onDestroy: mock(),
+      },
+    }
+
+    const wrappedComponent = measureComponent(mockComponent)
+
+    expect(wrappedComponent).toBe(mockComponent)
+    expect(typeof mockComponent.prototype.onMount).toBe('function')
+    expect(typeof mockComponent.prototype.onDestroy).toBe('function')
+  })
+
+  test('should measure component render performance', () => {
+    const originalOnMount = mock()
+    const originalOnDestroy = mock()
+
+    const mockComponent = {
+      name: 'MeasuredComponent',
+      prototype: {
+        onMount: originalOnMount,
+        onDestroy: originalOnDestroy,
+      },
+    }
+
+    measureComponent(mockComponent)
+
+    // Simulate component lifecycle
+    const componentInstance = {}
+    mockComponent.prototype.onMount.call(componentInstance)
+    mockComponent.prototype.onDestroy.call(componentInstance)
+
+    expect(originalOnMount).toHaveBeenCalled()
+    expect(originalOnDestroy).toHaveBeenCalled()
+
+    const measures = PerformanceMonitor.getMeasures()
+    const renderMeasure = measures.find((m) => m.name === 'render:MeasuredComponent')
+    expect(renderMeasure).toBeDefined()
+  })
+
+  test('should use custom name when provided', () => {
+    const mockComponent = {
+      prototype: {
+        onMount: mock(),
+        onDestroy: mock(),
+      },
+    }
+
+    measureComponent(mockComponent, 'CustomName')
+
+    const componentInstance = {}
+    mockComponent.prototype.onMount.call(componentInstance)
+    mockComponent.prototype.onDestroy.call(componentInstance)
+
+    const measures = PerformanceMonitor.getMeasures()
+    const renderMeasure = measures.find((m) => m.name === 'render:CustomName')
+    expect(renderMeasure).toBeDefined()
+  })
+
+  test('should handle component without lifecycle hooks', () => {
+    const mockComponent = {
+      name: 'NoLifecycle',
+      prototype: {},
+    }
+
+    expect(() => measureComponent(mockComponent)).not.toThrow()
+
+    const componentInstance = {}
+
+    // Should be able to call the wrapped methods
+    expect(() => {
+      mockComponent.prototype.onMount?.call(componentInstance)
+      mockComponent.prototype.onDestroy?.call(componentInstance)
+    }).not.toThrow()
+  })
+
+  test('should handle unnamed component', () => {
+    const mockComponent = {
+      prototype: {
+        onMount: mock(),
+        onDestroy: mock(),
+      },
+    }
+
+    measureComponent(mockComponent)
+
+    const componentInstance = {}
+    mockComponent.prototype.onMount.call(componentInstance)
+    mockComponent.prototype.onDestroy.call(componentInstance)
+
+    const measures = PerformanceMonitor.getMeasures()
+    const renderMeasure = measures.find((m) => m.name === 'render:UnnamedComponent')
+    expect(renderMeasure).toBeDefined()
+  })
+
+  test('should pass arguments to original lifecycle hooks', () => {
+    const originalOnMount = mock()
+    const originalOnDestroy = mock()
+
+    const mockComponent = {
+      name: 'ArgsComponent',
+      prototype: {
+        onMount: originalOnMount,
+        onDestroy: originalOnDestroy,
+      },
+    }
+
+    measureComponent(mockComponent)
+
+    const componentInstance = {}
+    const mountArgs = ['arg1', 'arg2']
+    const destroyArgs = ['destroyArg']
+
+    mockComponent.prototype.onMount.call(componentInstance, ...mountArgs)
+    mockComponent.prototype.onDestroy.call(componentInstance, ...destroyArgs)
+
+    expect(originalOnMount).toHaveBeenCalledWith(...mountArgs)
+    expect(originalOnDestroy).toHaveBeenCalledWith(...destroyArgs)
   })
 })

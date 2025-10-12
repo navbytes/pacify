@@ -3,14 +3,19 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { resolve } from 'path'
 import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync } from 'fs'
 
+// Check if running with Bun for optimized file operations
+const isBun = typeof Bun !== 'undefined'
+
 // Helper to copy manifest and assets
 function copyAssets() {
   return {
     name: 'copy-assets',
-    buildEnd() {
+    async buildEnd() {
       try {
-        // Copy manifest
-        const manifest = readFileSync('manifest.json', 'utf-8')
+        // Copy manifest - use Bun's faster file API if available
+        const manifest = isBun
+          ? await Bun.file('manifest.json').text()
+          : readFileSync('manifest.json', 'utf-8')
         this.emitFile({
           type: 'asset',
           fileName: 'manifest.json',
@@ -19,11 +24,12 @@ function copyAssets() {
 
         // Copy icons
         const icons = ['icon16.png', 'icon48.png', 'icon128.png']
-        icons.forEach((icon) => {
+        for (const icon of icons) {
           try {
             const iconPath = resolve(__dirname, 'icons', icon)
             if (existsSync(iconPath)) {
-              const source = readFileSync(iconPath)
+              // Use Bun's optimized file reading if available
+              const source = isBun ? await Bun.file(iconPath).arrayBuffer() : readFileSync(iconPath)
               this.emitFile({
                 type: 'asset',
                 fileName: `icons/${icon}`,
@@ -35,23 +41,26 @@ function copyAssets() {
           } catch (error) {
             console.warn(`Warning: Error copying icon ${icon}:`, error)
           }
-        })
+        }
 
         // Copy _locales directory
         const localesDir = resolve(__dirname, '_locales')
         if (existsSync(localesDir)) {
           const locales = readdirSync(localesDir)
-          locales.forEach((locale) => {
+          for (const locale of locales) {
             const messagesPath = resolve(localesDir, locale, 'messages.json')
             if (existsSync(messagesPath)) {
-              const source = readFileSync(messagesPath)
+              // Use Bun's optimized file reading if available
+              const source = isBun
+                ? await Bun.file(messagesPath).arrayBuffer()
+                : readFileSync(messagesPath)
               this.emitFile({
                 type: 'asset',
                 fileName: `_locales/${locale}/messages.json`,
                 source,
               })
             }
-          })
+          }
         }
       } catch (error) {
         console.error('Error copying assets:', error)
@@ -64,16 +73,22 @@ function copyAssets() {
 function setupDevEnvironment() {
   return {
     name: 'setup-dev-environment',
-    buildStart() {
+    async buildStart() {
       if (process.env.NODE_ENV === 'development') {
         try {
+          console.log(
+            isBun ? '⚡ Using Bun optimized file operations' : '📁 Using Node.js file operations'
+          )
           // Create dev directory if it doesn't exist
           if (!existsSync('dev')) {
             mkdirSync('dev')
           }
 
           // Copy manifest with development modifications
-          const manifest = JSON.parse(readFileSync('manifest.json', 'utf-8'))
+          const manifestText = isBun
+            ? await Bun.file('manifest.json').text()
+            : readFileSync('manifest.json', 'utf-8')
+          const manifest = JSON.parse(manifestText)
           const devManifest = {
             ...manifest,
             name: `[DEV] ${manifest.name}`,
@@ -82,7 +97,12 @@ function setupDevEnvironment() {
                 "script-src 'self' 'wasm-unsafe-eval' http://localhost:*; object-src 'self'",
             },
           }
-          writeFileSync('dev/manifest.json', JSON.stringify(devManifest, null, 2))
+          const devManifestJson = JSON.stringify(devManifest, null, 2)
+          if (isBun) {
+            await Bun.write('dev/manifest.json', devManifestJson)
+          } else {
+            writeFileSync('dev/manifest.json', devManifestJson)
+          }
 
           // Copy icons with dev overlay
           if (!existsSync('dev/icons')) {
@@ -90,14 +110,14 @@ function setupDevEnvironment() {
           }
 
           const icons = ['icon16.png', 'icon48.png', 'icon128.png']
-          icons.forEach((icon) => {
+          for (const icon of icons) {
             const iconPath = resolve(__dirname, 'icons', icon)
             if (existsSync(iconPath)) {
               copyFileSync(iconPath, `dev/icons/${icon}`)
               // Here you could also modify the icon to show it's a dev version
               // e.g., add a colored overlay
             }
-          })
+          }
 
           // Copy _locales
           if (!existsSync('dev/_locales')) {
@@ -107,7 +127,7 @@ function setupDevEnvironment() {
           const localesDir = resolve(__dirname, '_locales')
           if (existsSync(localesDir)) {
             const locales = readdirSync(localesDir)
-            locales.forEach((locale) => {
+            for (const locale of locales) {
               if (!existsSync(`dev/_locales/${locale}`)) {
                 mkdirSync(`dev/_locales/${locale}`, { recursive: true })
               }
@@ -116,7 +136,7 @@ function setupDevEnvironment() {
               if (existsSync(messagesPath)) {
                 copyFileSync(messagesPath, `dev/_locales/${locale}/messages.json`)
               }
-            })
+            }
           }
 
           console.log('✅ Development environment set up successfully')
@@ -140,7 +160,7 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     define: {
-      __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+      __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '1.20.0'),
       __DEV_MODE__: JSON.stringify(!isProduction),
     },
     build: {
@@ -180,6 +200,8 @@ export default defineConfig(({ command, mode }) => {
       },
       outDir: isProduction ? 'dist' : 'dev',
       emptyOutDir: true,
+      // Sourcemaps are disabled in production for smaller build sizes.
+      // Enable in development for better debugging experience.
       sourcemap: !isProduction,
       minify: isProduction,
       assetsInlineLimit: 0,

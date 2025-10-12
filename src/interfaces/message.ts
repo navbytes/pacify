@@ -1,10 +1,6 @@
 import type { ProxyConfig } from './settings'
 
-export type BackgroundMessageType =
-  | 'SET_PROXY'
-  | 'CLEAR_PROXY'
-  | 'SCRIPT_UPDATE'
-  | 'QUICK_SWITCH'
+export type BackgroundMessageType = 'SET_PROXY' | 'CLEAR_PROXY' | 'SCRIPT_UPDATE' | 'QUICK_SWITCH'
 
 export interface BaseMessage {
   type: BackgroundMessageType
@@ -35,12 +31,9 @@ export type BackgroundMessage =
   | SetProxyQuickSwitchMessage
   | ClearProxyMessage
 
-export type MessageResponseHandler<T = unknown> = (response: T) => void
-
-// For improved type safety in message handling
-export function isMessageType<T extends BackgroundMessage>(
-  message: BackgroundMessage,
-  type: T['type']
-): message is Extract<BackgroundMessage, { type: typeof type }> {
-  return message.type === type
+export interface BackgroundMessageResponse {
+  success: boolean
+  error?: string
 }
+
+export type MessageResponseHandler<T = unknown> = (response: T) => void

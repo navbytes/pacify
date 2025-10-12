@@ -72,7 +72,6 @@
 
   .tab-list {
     @apply flex items-center gap-0;
-    @apply bg-white dark:bg-slate-800;
     @apply overflow-x-auto;
     @apply mb-0;
   }
@@ -91,9 +90,14 @@
   }
 
   /* Remove border for pill and button variants */
-  :global([data-variant='pills']) .tab-list,
+  :global([data-variant='pills']) .tab-list {
+    @apply border-b-0 gap-2;
+  }
+
+  /* Button variant specific styling */
   :global([data-variant='buttons']) .tab-list {
-    @apply border-b-0 mb-4 gap-2;
+    @apply border-b-0 gap-1;
+    @apply bg-slate-100 dark:bg-slate-800/50 p-1 rounded-lg inline-flex;
   }
 
   /* Mobile: Make tabs scrollable */

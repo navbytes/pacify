@@ -70,6 +70,8 @@ export default [
       '*.config.js',
       '*.config.ts',
       '.husky/**',
+      '~/**',
+      'playwright-report/**',
     ],
   },
 ]

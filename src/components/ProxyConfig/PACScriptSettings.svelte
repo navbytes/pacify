@@ -1,15 +1,17 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte'
-  import { Monaco } from '@/services/MonacoService'
-  import type { IMonacoEditor } from '@/interfaces'
+  import { CodeMirror } from '@/services/CodeMirrorService'
+  import type { ICodeMirrorEditor } from '@/interfaces'
   import { NotifyService } from '@/services/NotifyService'
   import { ERROR_TYPES } from '@/interfaces'
   import FlexGroup from '../FlexGroup.svelte'
   import { scriptTemplates } from '@/constants/templates'
   import Button from '../Button.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
-  import { defaultOptions } from '@/utils/monaco'
+  import { defaultCodeMirrorOptions } from '@/utils/codemirror'
   import Text from '../Text.svelte'
+
+  let themeCleanup: (() => void) | null = null
 
   interface Props {
     pacUrl?: string
@@ -23,28 +25,57 @@
     editorContent = $bindable(scriptTemplates.empty),
   }: Props = $props()
 
-  let editor: IMonacoEditor | null = null
+  let editor: ICodeMirrorEditor | null = null
   let editorContainer = $state<HTMLElement>()
   let editorHeight: string = '400px'
 
-  function setTemplate(template: string) {
+  async function setTemplate(template: string) {
     editorContent = template
     if (editor) {
-      editor.setValue(template)
+      await CodeMirror.setValue(editor, template)
     }
   }
 
   onMount(async () => {
     if (!pacUrl) {
       try {
-        editor = await Monaco.create(editorContainer, {
-          ...defaultOptions,
+        // Detect initial system theme
+        const initialTheme = CodeMirror.getCurrentTheme()
+
+        editor = await CodeMirror.create(editorContainer!, {
+          ...defaultCodeMirrorOptions,
           value: editorContent,
+          language: 'pac',
+          theme: initialTheme,
         })
 
-        // Set up content change listener
-        editor.onDidChangeModelContent(() => {
-          editorContent = editor.getValue()
+        // Set up content change listener using MutationObserver for CodeMirror
+        const observer = new MutationObserver(async () => {
+          if (editor) {
+            const newContent = await CodeMirror.getValue(editor)
+            if (newContent !== editorContent) {
+              editorContent = newContent
+            }
+          }
+        })
+
+        // Observe changes to the editor content
+        if (editor.dom) {
+          observer.observe(editor.dom, {
+            childList: true,
+            subtree: true,
+            characterData: true,
+          })
+        }
+
+        // Store observer for cleanup
+        ;(editor as any).__observer = observer
+
+        // Listen for theme changes and update editor
+        themeCleanup = CodeMirror.onThemeChange(async (newTheme) => {
+          if (editor) {
+            await CodeMirror.updateTheme(editor, newTheme)
+          }
         })
       } catch (error) {
         NotifyService.error(ERROR_TYPES.EDITOR, error)
@@ -52,9 +83,19 @@
     }
   })
 
-  onDestroy(() => {
+  onDestroy(async () => {
+    // Clean up theme listener
+    if (themeCleanup) {
+      themeCleanup()
+      themeCleanup = null
+    }
+
     if (editor) {
-      editor.dispose()
+      // Clean up observer
+      if ((editor as any).__observer) {
+        ;((editor as any).__observer as MutationObserver).disconnect()
+      }
+      await CodeMirror.dispose(editor)
     }
   })
 </script>

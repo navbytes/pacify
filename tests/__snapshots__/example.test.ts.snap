@@ -1,0 +1,12 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Testing snapshot example 1`] = `
+{
+  "features": [
+    "proxy",
+    "pac-script",
+    "quick-switch",
+  ],
+  "version": "1.20.0",
+}
+`;

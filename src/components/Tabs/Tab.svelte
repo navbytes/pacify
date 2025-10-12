@@ -48,6 +48,7 @@
   role="tab"
   aria-selected={isActive}
   aria-controls={`tabpanel-${id}`}
+  data-testid={`tabpanel-${id}`}
   id={`tab-${id}`}
   tabindex={isActive ? 0 : -1}
   {disabled}
@@ -77,20 +78,23 @@
   @import 'tailwindcss' reference;
 
   .tab-button {
-    @apply relative flex items-center gap-2 px-6 py-3;
-    @apply text-sm font-medium text-slate-500 dark:text-slate-400;
+    @apply relative flex items-center gap-2.5 px-6 py-3.5;
+    @apply text-sm font-medium text-slate-600 dark:text-slate-400;
     @apply transition-all duration-200;
     @apply border-b-2 border-transparent;
     @apply hover:text-slate-900 dark:hover:text-slate-200;
+    @apply hover:bg-slate-50 dark:hover:bg-slate-800/50;
     @apply hover:border-slate-300 dark:hover:border-slate-600;
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
     @apply whitespace-nowrap;
     @apply bg-transparent;
     @apply cursor-pointer;
+    @apply rounded-t-lg;
   }
 
   .tab-button.active {
     @apply text-blue-600 dark:text-blue-400;
+    @apply bg-blue-50/50 dark:bg-blue-950/20;
     @apply border-blue-600 dark:border-blue-400;
     @apply border-b-4;
   }
@@ -104,6 +108,19 @@
   .tab-icon {
     @apply flex items-center justify-center;
     @apply shrink-0;
+    @apply transition-colors duration-200;
+  }
+
+  .tab-button.active .tab-icon {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  .tab-button:not(.active) .tab-icon {
+    @apply text-slate-500 dark:text-slate-500;
+  }
+
+  .tab-button:hover:not(.active) .tab-icon {
+    @apply text-slate-700 dark:text-slate-300;
   }
 
   .tab-label {
@@ -128,13 +145,21 @@
 
   /* Variant: Buttons */
   :global([data-variant='buttons']) .tab-button {
-    @apply border border-slate-300 dark:border-slate-600;
-    @apply rounded-md mx-1;
+    @apply border-0 rounded-md mx-0;
+    @apply px-4 py-2;
+    @apply bg-transparent;
+    @apply text-slate-700 dark:text-slate-300;
+    @apply hover:bg-slate-200/50 dark:hover:bg-slate-700/50;
+    @apply transition-all duration-150;
   }
 
   :global([data-variant='buttons']) .tab-button.active {
-    @apply bg-blue-600 dark:bg-blue-500;
-    @apply text-white;
-    @apply border-blue-600 dark:border-blue-500;
+    @apply bg-white dark:bg-slate-700;
+    @apply text-blue-600 dark:text-blue-400;
+    @apply shadow-sm;
+  }
+
+  :global([data-variant='buttons']) .tab-button.active .tab-icon {
+    @apply text-blue-600 dark:text-blue-400;
   }
 </style>

@@ -85,12 +85,7 @@ async function cleanupTestProxies(page: Page) {
       await button.click()
 
       // Handle confirmation dialog
-      const confirmButton = page.locator('button:has-text("Delete")')
-      if (await confirmButton.isVisible({ timeout: 1000 }).catch(() => false)) {
-        await confirmButton.click()
-        // Wait for the proxy item to be removed from the list
-        await page.waitForTimeout(300)
-      }
+      await page.getByTestId('confirm-dialog-confirm-button').click()
     }
 
     // Recount after deletion
@@ -111,11 +106,11 @@ test.describe('1. Page Loading & Navigation', () => {
     const page = await getOptionsPage()
 
     // Go to Settings tab
-    await page.click('button[id="tab-settings"]')
+    await page.getByTestId('tabpanel-settings').click()
     await expect(page.locator('h2:has-text("Proxy Behavior")').first()).toBeVisible()
 
     // Go to About tab
-    await page.click('button[id="tab-about"]')
+    await page.getByTestId('tabpanel-about').click()
     await expect(page.locator('text=Total Proxies')).toBeVisible()
 
     // Back to Proxy Configs
@@ -150,7 +145,7 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
     }
 
     // Save
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Wait for modal to close first
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -165,7 +160,7 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
     // Create a proxy first
     await page.getByTestId('add-new-script-btn').click()
     await page.fill('input#scriptName', 'Edit PAC Test')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Edit PAC Test').first()).toBeVisible()
@@ -176,7 +171,7 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
 
     // Change name
     await page.fill('input#scriptName', 'PAC Edited Successfully')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -192,7 +187,7 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
     // Create a proxy
     await page.getByTestId('add-new-script-btn').click()
     await page.fill('input#scriptName', 'Delete PAC Test')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Delete PAC Test').first()).toBeVisible()
@@ -201,10 +196,7 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
     await page.click('button[aria-label="Delete Delete PAC Test configuration"]')
 
     // Confirm deletion
-    const confirmButton = page.locator('button:has-text("Delete")')
-    if (await confirmButton.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await confirmButton.click()
-    }
+    await page.getByTestId('confirm-dialog-confirm-button').click()
 
     // Verify deletion
     await expect(page.locator('text=Delete PAC Test').first()).not.toBeVisible()
@@ -219,7 +211,7 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
       await page.getByTestId('add-new-script-btn').click()
       await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
       await page.fill('input#scriptName', name)
-      await page.click('button:has-text("Save Configuration")')
+      await page.getByTestId('save-config-btn').click()
       // Wait for modal to close before verifying proxy was created
       await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
       // Then verify proxy was created
@@ -258,7 +250,7 @@ test.describe('3. Manual Proxy Configuration', () => {
     await page.fill('[data-testid="single-proxy-host-input"]', 'proxy.example.com')
     await page.fill('[data-testid="single-proxy-port-input"]', '8080')
 
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -267,10 +259,7 @@ test.describe('3. Manual Proxy Configuration', () => {
 
     // Cleanup
     await page.click('button[aria-label="Delete Manual Single Proxy configuration"]')
-    const confirmButton = page.locator('button:has-text("Delete")')
-    if (await confirmButton.isVisible({ timeout: 1000 }).catch(() => false)) {
-      await confirmButton.click()
-    }
+    await page.getByTestId('confirm-dialog-confirm-button').click()
   })
 
   test('should create manual proxy with different protocols', async () => {
@@ -294,7 +283,7 @@ test.describe('3. Manual Proxy Configuration', () => {
     await page.fill('[data-testid="http-host-input"]', 'http.proxy.com')
     await page.fill('[data-testid="http-port-input"]', '8080')
 
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Wait for modal to close before verifying
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -303,10 +292,7 @@ test.describe('3. Manual Proxy Configuration', () => {
 
     // Cleanup
     await page.click('button[aria-label="Delete Manual Multi Proxy configuration"]')
-    const confirmButton = page.locator('button:has-text("Delete")')
-    if (await confirmButton.isVisible({ timeout: 1000 }).catch(() => false)) {
-      await confirmButton.click()
-    }
+    await page.getByTestId('confirm-dialog-confirm-button').click()
   })
 
   test('should create manual proxy with bypass list', async () => {
@@ -335,7 +321,7 @@ test.describe('3. Manual Proxy Configuration', () => {
       await bypassInput.fill('localhost,127.0.0.1,*.local')
     }
 
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -344,10 +330,7 @@ test.describe('3. Manual Proxy Configuration', () => {
 
     // Cleanup
     await page.click('button[aria-label="Delete Manual Bypass Proxy configuration"]')
-    const confirmButton = page.locator('button:has-text("Delete")')
-    if (await confirmButton.isVisible({ timeout: 1000 }).catch(() => false)) {
-      await confirmButton.click()
-    }
+    await page.getByTestId('confirm-dialog-confirm-button').click()
   })
 })
 
@@ -359,37 +342,43 @@ test.describe('4. Proxy Activation & Deactivation', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
     await page.fill('input#scriptName', 'Activation Test')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Activation Test').first()).toBeVisible()
 
-    // Find the toggle switch - it's initially off
-    const toggleOff = page.locator(
-      'input[type="checkbox"][aria-label="Toggle Activation Test proxy on"]'
-    )
+    // Find the toggle switch - look for any toggle input associated with this proxy
+    console.log('Looking for activation toggle for "Activation Test" proxy...')
+
+    // Try to find the toggle by looking for the parent container first
+    const proxyItem = page.getByTestId(`proxy-item-Activation Test`)
+    const toggle = proxyItem.locator('input[type="checkbox"]').first()
+
+    console.log('Toggle found, checking initial state...')
+    const initialState = await toggle.isChecked()
+    console.log(`Initial toggle state: ${initialState}`)
 
     // Activate - click the parent label since checkbox is hidden
-    await toggleOff.locator('..').click()
+    console.log('Activating proxy...')
+    await toggle.locator('..').click()
+    await page.waitForTimeout(500) // Wait for state change
 
-    // After activation, the aria-label changes to "Toggle Activation Test proxy off"
-    const toggleOn = page.locator(
-      'input[type="checkbox"][aria-label="Toggle Activation Test proxy off"]'
-    )
-    await expect(toggleOn).toBeChecked()
+    console.log('Verifying activation...')
+    await expect(toggle).toBeChecked()
+    console.log('Proxy activated successfully')
 
     // Deactivate - click the parent label again
-    await toggleOn.locator('..').click()
+    console.log('Deactivating proxy...')
+    await toggle.locator('..').click()
+    await page.waitForTimeout(500) // Wait for state change
 
-    // After deactivation, check using the new locator
-    await expect(toggleOff).not.toBeChecked()
+    console.log('Verifying deactivation...')
+    await expect(toggle).not.toBeChecked()
+    console.log('Proxy deactivated successfully')
 
     // Cleanup
     await page.click('button[aria-label="Delete Activation Test configuration"]')
-    const confirmButton = page.locator('button:has-text("Delete")')
-    if (await confirmButton.isVisible({ timeout: 1000 }).catch(() => false)) {
-      await confirmButton.click()
-    }
+    await page.getByTestId('confirm-dialog-confirm-button').click()
   })
 
   test('should only allow one proxy active at a time', async () => {
@@ -399,7 +388,7 @@ test.describe('4. Proxy Activation & Deactivation', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
     await page.fill('input#scriptName', 'Proxy One')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Proxy One').first()).toBeVisible()
@@ -407,7 +396,7 @@ test.describe('4. Proxy Activation & Deactivation', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
     await page.fill('input#scriptName', 'Proxy Two')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Proxy Two').first()).toBeVisible()
@@ -439,7 +428,7 @@ test.describe('5. Quick Switch Mode', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
     await page.fill('input#scriptName', 'Quick Switch Test')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Quick Switch Test').first()).toBeVisible()
@@ -481,7 +470,7 @@ test.describe('5. Quick Switch Mode', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
     await page.fill('input#scriptName', 'Quick Switch Area Test')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Quick Switch Area Test').first()).toBeVisible()
@@ -512,7 +501,7 @@ test.describe('6. Settings Management', () => {
     const page = await getOptionsPage()
 
     // Navigate to Settings tab
-    await page.click('button[id="tab-settings"]')
+    await page.getByTestId('tabpanel-settings').click()
     await expect(page.locator('button[id="tab-settings"][aria-selected="true"]')).toBeVisible()
 
     // Find the disable on startup toggle
@@ -552,13 +541,13 @@ test.describe('7. Backup & Restore', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
     await page.fill('input#scriptName', 'Backup Test Proxy')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Backup Test Proxy').first()).toBeVisible()
 
     // Navigate to Settings
-    await page.click('button[id="tab-settings"]')
+    await page.getByTestId('tabpanel-settings').click()
     await expect(page.locator('button[id="tab-settings"][aria-selected="true"]')).toBeVisible()
 
     // Set up download listener
@@ -589,7 +578,7 @@ test.describe('8. Form Validation', () => {
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
 
     // Try to save without entering name
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Modal should still be open (save failed)
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
@@ -612,7 +601,7 @@ test.describe('8. Form Validation', () => {
     await nameInput.clear()
 
     // Try to save
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Should show validation message or prevent save
     const isModalStillOpen = await page
@@ -649,7 +638,7 @@ test.describe('9. Color Selection', () => {
       await expect(selectedButton).toHaveAttribute('aria-checked', 'true')
     }
 
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -658,10 +647,7 @@ test.describe('9. Color Selection', () => {
 
     // Cleanup
     await page.click('button[aria-label="Delete Color Test configuration"]')
-    const confirmButton = page.locator('button:has-text("Delete")')
-    if (await confirmButton.isVisible({ timeout: 1000 }).catch(() => false)) {
-      await confirmButton.click()
-    }
+    await page.getByTestId('confirm-dialog-confirm-button').click()
   })
 })
 
@@ -669,7 +655,7 @@ test.describe('10. About Tab Information', () => {
   test('should display version information', async () => {
     const page = await getOptionsPage()
 
-    await page.click('button[id="tab-about"]')
+    await page.getByTestId('tabpanel-about').click()
     await expect(page.locator('button[id="tab-about"][aria-selected="true"]')).toBeVisible()
 
     // Check for version number (use .first() since there are multiple matches)
@@ -679,7 +665,7 @@ test.describe('10. About Tab Information', () => {
   test('should display statistics', async () => {
     const page = await getOptionsPage()
 
-    await page.click('button[id="tab-about"]')
+    await page.getByTestId('tabpanel-about').click()
     await expect(page.locator('button[id="tab-about"][aria-selected="true"]')).toBeVisible()
 
     // Check for stats - look for text that should only appear in About tab
@@ -692,7 +678,7 @@ test.describe('10. About Tab Information', () => {
   test('should have working external links', async () => {
     const page = await getOptionsPage()
 
-    await page.click('button[id="tab-about"]')
+    await page.getByTestId('tabpanel-about').click()
     await expect(page.locator('button[id="tab-about"][aria-selected="true"]')).toBeVisible()
 
     // Check for GitHub link (use .first() since there are multiple)
@@ -787,7 +773,7 @@ test.describe('13. Data Persistence', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
     await page.fill('input#scriptName', 'Persistence Test')
-    await page.click('button:has-text("Save Configuration")')
+    await page.getByTestId('save-config-btn').click()
 
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -804,17 +790,14 @@ test.describe('13. Data Persistence', () => {
 
     // Cleanup
     await page.click('button[aria-label="Delete Persistence Test configuration"]')
-    const confirmButton = page.locator('button:has-text("Delete")')
-    if (await confirmButton.isVisible({ timeout: 1000 }).catch(() => false)) {
-      await confirmButton.click()
-    }
+    await page.getByTestId('confirm-dialog-confirm-button').click()
   })
 
   test('should remember active tab after reload', async () => {
     const page = await getOptionsPage()
 
     // Go to Settings tab
-    await page.click('button[id="tab-settings"]')
+    await page.getByTestId('tabpanel-settings').click()
     await expect(page.locator('button[id="tab-settings"][aria-selected="true"]')).toBeVisible()
 
     // Reload
@@ -827,7 +810,7 @@ test.describe('13. Data Persistence', () => {
     await expect(proxyConfigsTab).toBeVisible()
 
     // Verify we can switch back to Settings
-    await page.click('button[id="tab-settings"]')
+    await page.getByTestId('tabpanel-settings').click()
     const settingsTab = page.locator('button[id="tab-settings"][aria-selected="true"]')
     await expect(settingsTab).toBeVisible()
 
@@ -844,7 +827,7 @@ test.describe('14. Popup Quick Switch Flow', () => {
     await optionsPage.getByTestId('add-new-script-btn').click()
     await expect(optionsPage.locator('h2:has-text("Proxy Configuration")').first()).toBeVisible()
     await optionsPage.fill('input#scriptName', 'Popup Test Proxy')
-    await optionsPage.click('button:has-text("Save Configuration")')
+    await optionsPage.getByTestId('save-config-btn').click()
     // Wait for modal to close
     await expect(
       optionsPage.locator('h2:has-text("Proxy Configuration")').first()

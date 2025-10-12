@@ -25,12 +25,7 @@ export interface ProxyRules {
   fallbackProxy?: ProxyServer
   bypassList?: string[]
 }
-export type ProxyMode =
-  | 'direct'
-  | 'auto_detect'
-  | 'pac_script'
-  | 'fixed_servers'
-  | 'system'
+export type ProxyMode = 'direct' | 'auto_detect' | 'pac_script' | 'fixed_servers' | 'system'
 export interface ProxyConfig {
   id?: string
   name: string

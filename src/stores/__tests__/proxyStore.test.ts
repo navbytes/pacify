@@ -1,12 +1,12 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, test, expect, beforeEach, mock } from 'bun:test'
 import { proxyStore } from '../proxyStore'
 import type { ProxyConfig } from '@/interfaces'
 import { get } from 'svelte/store'
 
 // Mock ChromeService
-vi.mock('@/services/chrome', () => ({
+mock.module('@/services/chrome', () => ({
   ChromeService: {
-    sendMessage: vi.fn().mockResolvedValue({}),
+    sendMessage: mock().mockResolvedValue({}),
   },
 }))
 
@@ -14,17 +14,17 @@ describe('ProxyStore', () => {
   beforeEach(() => {
     // Reset store before each test
     proxyStore.init([], null)
-    vi.clearAllMocks()
+    mock.restore()
   })
 
   describe('initialization', () => {
-    it('should initialize with empty configs', () => {
+    test('should initialize with empty configs', () => {
       const state = proxyStore.getState()
       expect(state.configs).toEqual([])
       expect(state.activeScriptId).toBeNull()
     })
 
-    it('should initialize with provided configs', () => {
+    test('should initialize with provided configs', () => {
       const mockConfigs: ProxyConfig[] = [
         {
           id: '1',
@@ -45,7 +45,7 @@ describe('ProxyStore', () => {
   })
 
   describe('upsertConfig', () => {
-    it('should add new config when scriptId is null', () => {
+    test('should add new config when scriptId is null', () => {
       const newConfig: Omit<ProxyConfig, 'id'> = {
         name: 'New Proxy',
         color: '#00FF00',
@@ -62,7 +62,7 @@ describe('ProxyStore', () => {
       expect(state.configs[0].name).toBe('New Proxy')
     })
 
-    it('should update existing config when scriptId is provided', () => {
+    test('should update existing config when scriptId is provided', () => {
       // First add a config
       const initialConfig: Omit<ProxyConfig, 'id'> = {
         name: 'Initial',
@@ -86,7 +86,7 @@ describe('ProxyStore', () => {
   })
 
   describe('deleteConfig', () => {
-    it('should remove config by id', () => {
+    test('should remove config by id', () => {
       const config: Omit<ProxyConfig, 'id'> = {
         name: 'Test',
         color: '#FF0000',
@@ -102,7 +102,7 @@ describe('ProxyStore', () => {
       expect(state.configs).toHaveLength(0)
     })
 
-    it('should return true if deleted config was active', () => {
+    test('should return true if deleted config was active', () => {
       const config: Omit<ProxyConfig, 'id'> = {
         name: 'Test',
         color: '#FF0000',
@@ -120,7 +120,7 @@ describe('ProxyStore', () => {
   })
 
   describe('updateQuickSwitch', () => {
-    it('should update quick switch status', () => {
+    test('should update quick switch status', () => {
       const config: Omit<ProxyConfig, 'id'> = {
         name: 'Test',
         color: '#FF0000',
@@ -138,7 +138,7 @@ describe('ProxyStore', () => {
   })
 
   describe('derived stores', () => {
-    it('should filter quick switch scripts', () => {
+    test('should filter quick switch scripts', () => {
       const configs: Omit<ProxyConfig, 'id'>[] = [
         {
           name: 'Quick 1',
@@ -169,7 +169,7 @@ describe('ProxyStore', () => {
       expect(quickScripts).toHaveLength(2)
     })
 
-    it('should return active script', () => {
+    test('should return active script', () => {
       const config: Omit<ProxyConfig, 'id'> = {
         name: 'Active',
         color: '#FF0000',

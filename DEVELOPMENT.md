@@ -12,10 +12,11 @@ git clone https://github.com/navbytes/pacify.git
 cd pacify
 
 # Install dependencies
-npm install
+bun install
+# or: npm install (if needed)
 
 # Start development
-npm run dev
+bun run dev
 ```
 
 ### Loading Extension in Chrome
@@ -23,7 +24,7 @@ npm run dev
 1. Build the extension:
 
    ```bash
-   npm run build
+   bun run build
    ```
 
 2. Open Chrome and navigate to `chrome://extensions/`
@@ -39,7 +40,7 @@ npm run dev
 For extension development with auto-rebuild:
 
 ```bash
-npm run dev:extension
+bun run dev:extension
 ```
 
 This watches for changes and rebuilds automatically. You'll still need to click "Reload" in `chrome://extensions/` after changes.
@@ -81,7 +82,7 @@ npx playwright test tests/e2e/proxy-management.spec.ts
 
 ```typescript
 // src/utils/__tests__/myUtil.test.ts
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'bun:test'
 import { myUtil } from '../myUtil'
 
 describe('myUtil', () => {
@@ -388,7 +389,7 @@ npm run test:run -- --clearCache
 - [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
 - [Svelte Documentation](https://svelte.dev/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Vitest Documentation](https://vitest.dev/)
+- [Bun Test Documentation](https://bun.sh/docs/cli/test)
 - [Playwright Documentation](https://playwright.dev/)
 
 ---

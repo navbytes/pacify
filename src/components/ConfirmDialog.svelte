@@ -111,7 +111,11 @@
         <Button color="secondary" onclick={handleCancel}>
           {cancelLabel}
         </Button>
-        <Button color={variant === 'danger' ? 'error' : 'primary'} onclick={handleConfirm}>
+        <Button
+          color={variant === 'danger' ? 'error' : 'primary'}
+          onclick={handleConfirm}
+          data-testid="confirm-dialog-confirm-button"
+        >
           {confirmLabel}
         </Button>
       </div>

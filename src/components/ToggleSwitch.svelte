@@ -15,9 +15,12 @@
     {id}
     type="checkbox"
     bind:checked
-    onchange={() => (onchange ? onchange(checked ?? false) : null)}
+    onchange={() => {
+      if (onchange) onchange(checked ?? false)
+    }}
     class="sr-only peer"
     aria-label={ariaLabel}
+    data-testid="proxy-checkbox"
   />
   <Text
     classes="absolute inset-0 rounded-full bg-slate-400 dark:bg-slate-600 transition-colors duration-200 ease-in-out

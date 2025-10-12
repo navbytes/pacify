@@ -1,9 +1,4 @@
-import type {
-  ProxyConfig,
-  ProxyMode,
-  ProxyServer,
-  ProxySettings,
-} from '@/interfaces'
+import type { ProxyConfig, ProxyMode, ProxyServer, ProxySettings } from '@/interfaces'
 
 /**
  * Creates a default proxy server configuration
@@ -33,12 +28,14 @@ export function createDefaultProxySettings(): ProxySettings {
 /**
  * Creates a new proxy configuration with default values
  */
-export function createEmptyProxyConfig(
-  mode: ProxyMode = 'system'
-): Omit<ProxyConfig, 'id'> {
+export function createEmptyProxyConfig(mode: ProxyMode = 'system'): Omit<ProxyConfig, 'id'> {
   return {
     name: '',
-    color: '#' + Math.floor(Math.random() * 16777215).toString(16), // Random color
+    color:
+      '#' +
+      Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, '0'), // Random color
     isActive: false,
     mode,
     quickSwitch: false,
@@ -48,9 +45,7 @@ export function createEmptyProxyConfig(
 /**
  * Format bypass list from string to array and back
  */
-export function formatBypassList(
-  bypassList: string[] | string
-): string | string[] {
+export function formatBypassList(bypassList: string[] | string): string | string[] {
   if (typeof bypassList === 'string') {
     return bypassList
       .split('\n')
@@ -92,9 +87,7 @@ export function validateProxyServer(server: ProxyServer): {
  * e.g. "PROXY host:port" => { scheme: "http", host: "host", port: "port" }
  */
 export function parseProxyString(proxyString: string): ProxyServer | null {
-  const match = proxyString.match(
-    /^(PROXY|SOCKS|SOCKS4|SOCKS5|HTTP|HTTPS|QUIC)\s+([^:]+):(\d+)$/
-  )
+  const match = proxyString.match(/^(PROXY|SOCKS|SOCKS4|SOCKS5|HTTP|HTTPS|QUIC)\s+([^:]+):(\d+)$/)
   if (!match) return null
 
   const [, type, host, port] = match

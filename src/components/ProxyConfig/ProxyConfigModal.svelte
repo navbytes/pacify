@@ -30,6 +30,7 @@
   let name = $state<string>(proxyConfig?.name || '')
   let color = $state<string>(proxyConfig?.color || 'gray')
   let isActive = $state<boolean>(proxyConfig?.isActive || false)
+  let quickSwitch = $state<boolean>(proxyConfig?.quickSwitch || false)
 
   // Proxy Mode
   let proxyMode = $state<ProxyMode>(proxyConfig?.mode || 'system')
@@ -81,6 +82,7 @@
         name: name.trim(),
         color,
         isActive,
+        quickSwitch,
       }
 
       if (proxyMode === 'pac_script') {
@@ -138,7 +140,10 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<div
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+  data-testid="proxy-config-modal"
+>
   <div
     class={`
       bg-white dark:bg-slate-800 rounded-lg shadow-xl flex flex-col
@@ -225,11 +230,44 @@
     @apply overflow-hidden;
   }
 
-  :global(.monaco-editor) {
+  :global(.cm-editor) {
     @apply rounded-md overflow-hidden;
   }
 
-  :global(.monaco-editor .margin) {
-    @apply bg-slate-100 dark:bg-slate-800;
+  :global(.cm-editor.cm-focused) {
+    @apply outline-none ring-2 ring-blue-500;
+  }
+
+  :global(.cm-scroller) {
+    @apply font-mono;
+  }
+
+  /* Autocomplete styling */
+  :global(.cm-tooltip-autocomplete) {
+    @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg;
+  }
+
+  :global(.cm-tooltip-autocomplete > ul) {
+    @apply max-h-64 overflow-auto p-1;
+  }
+
+  :global(.cm-tooltip-autocomplete > ul > li) {
+    @apply px-2 py-1 cursor-pointer text-sm;
+  }
+
+  :global(.cm-tooltip-autocomplete > ul > li[aria-selected]) {
+    @apply bg-blue-500 text-white;
+  }
+
+  :global(.cm-completionLabel) {
+    @apply font-medium;
+  }
+
+  :global(.cm-completionDetail) {
+    @apply text-xs text-gray-500 dark:text-gray-400;
+  }
+
+  :global(.cm-completionInfo) {
+    @apply text-xs text-gray-600 dark:text-gray-300 mt-1;
   }
 </style>
