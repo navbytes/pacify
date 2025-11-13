@@ -8,7 +8,17 @@
   import Text from '@/components/Text.svelte'
   import Tooltip from '@/components/Tooltip.svelte'
   import Card from '@/components/Card.svelte'
-  import { Shield, Database, CircleQuestionMark } from 'lucide-svelte'
+  import LinkCard from '@/components/LinkCard.svelte'
+  import {
+    Shield,
+    Database,
+    CircleQuestionMark,
+    HelpCircle,
+    Github,
+    Bug,
+    Lightbulb,
+    BookOpen,
+  } from 'lucide-svelte'
 
   let settings = $derived($settingsStore)
 
@@ -133,5 +143,41 @@
     </div>
 
     <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
+  </div>
+
+  <!-- Help & Resources Section -->
+  <div>
+    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
+      <HelpCircle size={20} class="text-green-600 dark:text-green-400" />
+      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+        {I18nService.getMessage('aboutHelpResources')}
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <LinkCard
+        href="https://github.com/navbytes/pacify"
+        icon={Github}
+        label={I18nService.getMessage('aboutViewOnGithub')}
+        color="blue"
+      />
+      <LinkCard
+        href="https://github.com/navbytes/pacify/issues"
+        icon={Bug}
+        label={I18nService.getMessage('aboutReportIssue')}
+        color="red"
+      />
+      <LinkCard
+        href="https://github.com/navbytes/pacify/issues/new?labels=enhancement&template=feature_request.md"
+        icon={Lightbulb}
+        label={I18nService.getMessage('aboutFeatureRequest')}
+        color="yellow"
+      />
+      <LinkCard
+        href="https://github.com/navbytes/pacify#readme"
+        icon={BookOpen}
+        label={I18nService.getMessage('aboutDocumentation')}
+        color="green"
+      />
+    </div>
   </div>
 </div>

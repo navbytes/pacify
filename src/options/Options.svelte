@@ -12,8 +12,7 @@
   import Toast from '@/components/Toast.svelte'
   import ProxyConfigsTab from './ProxyConfigsTab.svelte'
   import SettingsTab from './SettingsTab.svelte'
-  import AboutTab from './AboutTab.svelte'
-  import { Cable, Settings, Info } from 'lucide-svelte'
+  import { Cable, Settings } from 'lucide-svelte'
 
   let showEditor = $state(false)
   let editingScriptId = $state<string | null>(null)
@@ -137,9 +136,6 @@
             <Tab id="settings" icon={Settings}>
               {I18nService.getMessage('tabSettings')}
             </Tab>
-            <Tab id="about" icon={Info}>
-              {I18nService.getMessage('tabAbout')}
-            </Tab>
           </TabList>
         </div>
       </div>
@@ -153,11 +149,6 @@
     <!-- Tab 2: Settings -->
     <TabPanel id="settings">
       <SettingsTab />
-    </TabPanel>
-
-    <!-- Tab 3: About -->
-    <TabPanel id="about">
-      <AboutTab />
     </TabPanel>
   </Tabs>
 

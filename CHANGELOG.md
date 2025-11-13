@@ -5,6 +5,26 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.22.0] - 2024-11-13
+
+### Changed
+
+- **Tab Consolidation**
+  - Moved Help & Resources section from About tab to Settings tab
+  - Reduced navigation from 3 tabs to 2 tabs for cleaner interface
+
+### Removed
+
+- **About Tab and Unused Components**
+  - Removed About tab from navigation entirely
+  - Deleted unused analytics/diagnostics components:
+    - `AboutTab.svelte` - Entire About tab component
+    - `StatsCard.svelte` - Statistics display component
+    - `AppHeader.svelte` - App header with version info
+    - `StorageCard.svelte` - Storage usage display
+  - Removed `getStorageStats()` method from StorageService
+  - Cleaned up unused diagnostics and telemetry code
+
 ## [1.21.0] - 2024-11-13
 
 ### Added

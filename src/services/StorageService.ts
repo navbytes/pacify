@@ -130,32 +130,6 @@ export class StorageService {
   }
 
   /**
-   * Returns storage usage statistics
-   */
-  static getStorageStats = withErrorHandlingAndFallback(
-    async (): Promise<{
-      syncUsed: number
-      syncQuota: number
-      localUsed: number
-      localQuota: number
-    }> => {
-      const [syncInfo, localInfo] = await Promise.all([
-        browserService.storage.sync.getBytesInUse(null),
-        browserService.storage.local.getBytesInUse(null),
-      ])
-
-      return {
-        syncUsed: syncInfo,
-        syncQuota: browserService.storage.sync.QUOTA_BYTES,
-        localUsed: localInfo,
-        localQuota: browserService.storage.local.QUOTA_BYTES,
-      }
-    },
-    ERROR_TYPES.FETCH_SETTINGS,
-    { syncUsed: 0, syncQuota: 0, localUsed: 0, localQuota: 0 }
-  )
-
-  /**
    * Migrates old storage format to new hybrid storage
    */
   static migrateStorage = withErrorHandling(async (): Promise<void> => {

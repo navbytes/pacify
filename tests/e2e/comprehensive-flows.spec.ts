@@ -109,10 +109,6 @@ test.describe('1. Page Loading & Navigation', () => {
     await page.getByTestId('tabpanel-settings').click()
     await expect(page.locator('h2:has-text("Proxy Behavior")').first()).toBeVisible()
 
-    // Go to About tab
-    await page.getByTestId('tabpanel-about').click()
-    await expect(page.locator('text=Total Proxies')).toBeVisible()
-
     // Back to Proxy Configs
     await page.click('button[id="tab-proxy-configs"]')
     await expect(page.getByTestId('add-new-script-btn')).toBeVisible()
@@ -651,35 +647,24 @@ test.describe('9. Color Selection', () => {
   })
 })
 
-test.describe('10. About Tab Information', () => {
-  test('should display version information', async () => {
+test.describe('10. Help & Resources in Settings Tab', () => {
+  test('should display Help & Resources section', async () => {
     const page = await getOptionsPage()
 
-    await page.getByTestId('tabpanel-about').click()
-    await expect(page.locator('button[id="tab-about"][aria-selected="true"]')).toBeVisible()
+    // Go to Settings tab
+    await page.getByTestId('tabpanel-settings').click()
+    await expect(page.locator('button[id="tab-settings"][aria-selected="true"]')).toBeVisible()
 
-    // Check for version number (use .first() since there are multiple matches)
-    await expect(page.locator('text=/Version|1\\.\\d+\\.\\d+/').first()).toBeVisible()
-  })
-
-  test('should display statistics', async () => {
-    const page = await getOptionsPage()
-
-    await page.getByTestId('tabpanel-about').click()
-    await expect(page.locator('button[id="tab-about"][aria-selected="true"]')).toBeVisible()
-
-    // Check for stats - look for text that should only appear in About tab
-    await expect(page.locator('text=Total Proxies')).toBeVisible()
-    // Instead of checking for generic "Quick Switch", just verify About tab content loaded
-    const aboutContent = page.locator('button[id="tab-about"][aria-selected="true"]')
-    await expect(aboutContent).toBeVisible()
+    // Check for Help & Resources section
+    await expect(page.locator('h2:has-text("Help & Resources")').first()).toBeVisible()
   })
 
   test('should have working external links', async () => {
     const page = await getOptionsPage()
 
-    await page.getByTestId('tabpanel-about').click()
-    await expect(page.locator('button[id="tab-about"][aria-selected="true"]')).toBeVisible()
+    // Go to Settings tab
+    await page.getByTestId('tabpanel-settings').click()
+    await expect(page.locator('button[id="tab-settings"][aria-selected="true"]')).toBeVisible()
 
     // Check for GitHub link (use .first() since there are multiple)
     const githubLink = page.locator('a[href*="github.com"]').first()
@@ -688,6 +673,16 @@ test.describe('10. About Tab Information', () => {
     // Verify link has target="_blank"
     const target = await githubLink.getAttribute('target')
     expect(target).toBe('_blank')
+
+    // Check for other Help & Resources links
+    const bugReportLink = page.locator('a:has-text("Report an Issue")').first()
+    await expect(bugReportLink).toBeVisible()
+
+    const featureRequestLink = page.locator('a:has-text("Request a Feature")').first()
+    await expect(featureRequestLink).toBeVisible()
+
+    const docsLink = page.locator('a:has-text("Documentation")').first()
+    await expect(docsLink).toBeVisible()
   })
 })
 
