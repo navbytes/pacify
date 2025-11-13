@@ -5,6 +5,29 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.21.0] - 2024-11-13
+
+### Added
+
+- **Auto-reload Toggle Setting**
+  - New option to disable automatic page reload when switching proxies
+  - Toggle available in Settings tab under Proxy Behavior section
+  - Defaults to enabled for backward compatibility
+  - Full i18n support for all 12 locales
+
+### Fixed
+
+- **Manual Proxy Configuration Save Error**
+  - Fixed DataCloneError when saving manual proxy configurations
+  - Replaced structuredClone with JSON.parse/stringify for better compatibility
+  - Added null safety checks in proxy configuration components
+
+### Changed
+
+- **Settings UI Layout**
+  - Proxy Behavior cards now display side-by-side on larger screens
+  - Improved responsive grid layout for better space utilization
+
 ## [1.20.0] - 2025-10-24
 
 ### Added

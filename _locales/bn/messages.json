@@ -166,6 +166,15 @@
   "disableProxyOnStartupDescription": {
     "message": "প্রতিবার ব্রাউজার চালু হলে প্রক্সি নিষ্ক্রিয় অবস্থায় শুরু করুন"
   },
+  "autoReloadOnProxySwitch": {
+    "message": "প্রক্সি পরিবর্তনের সময় পৃষ্ঠা স্বয়ংক্রিয়ভাবে পুনরায় লোড করুন"
+  },
+  "autoReloadOnProxySwitchDescription": {
+    "message": "প্রক্সি পরিবর্তন করার সময় সক্রিয় ট্যাব স্বয়ংক্রিয়ভাবে পুনরায় লোড করুন"
+  },
+  "tooltipAutoReload": {
+    "message": "সক্ষম হলে, পরিবর্তনগুলি তাৎক্ষণিকভাবে প্রয়োগ করতে প্রক্সি সেটিংস পরিবর্তনের পরে বর্তমান পৃষ্ঠা পুনরায় লোড হবে"
+  },
   "invalidConfiguration": {
     "message": "অবৈধ কনফিগারেশন"
   },

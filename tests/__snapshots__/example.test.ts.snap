@@ -7,6 +7,6 @@ exports[`Snapshot Testing snapshot example 1`] = `
     "pac-script",
     "quick-switch",
   ],
-  "version": "1.20.0",
+  "version": "1.21.0",
 }
 `;

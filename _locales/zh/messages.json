@@ -166,6 +166,15 @@
   "disableProxyOnStartupDescription": {
     "message": "每次启动浏览器时以禁用代理的状态开始"
   },
+  "autoReloadOnProxySwitch": {
+    "message": "切换代理时自动重新加载页面"
+  },
+  "autoReloadOnProxySwitchDescription": {
+    "message": "切换代理时自动重新加载活动标签页"
+  },
+  "tooltipAutoReload": {
+    "message": "启用后，更改代理设置后当前页面将重新加载以立即应用更改"
+  },
   "invalidConfiguration": {
     "message": "无效配置"
   },

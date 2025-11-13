@@ -348,7 +348,11 @@ async function initializeProxySettings(): Promise<void> {
 
 async function setProxySettings(proxy: ProxyConfig): Promise<void> {
   try {
-    await ChromeService.setProxy(proxy)
+    // Get the auto-reload setting
+    const settings = await safeGetSettings()
+    const autoReload = settings?.autoReloadOnProxySwitch ?? true
+
+    await ChromeService.setProxy(proxy, autoReload)
     const { name, color } = proxy
     await updateBadge(name, color)
   } catch (error) {
@@ -358,7 +362,11 @@ async function setProxySettings(proxy: ProxyConfig): Promise<void> {
 
 async function clearProxySettings(): Promise<void> {
   try {
-    await ChromeService.clearProxy()
+    // Get the auto-reload setting
+    const settings = await safeGetSettings()
+    const autoReload = settings?.autoReloadOnProxySwitch ?? true
+
+    await ChromeService.clearProxy(autoReload)
     await updateBadge(DEFAULT_BADGE_TEXT, DEFAULT_BADGE_COLOR)
   } catch (error) {
     console.error('Error clearing proxy:', error)

@@ -166,6 +166,15 @@
   "disableProxyOnStartupDescription": {
     "message": "ブラウザ起動時に毎回プロキシを無効にして開始"
   },
+  "autoReloadOnProxySwitch": {
+    "message": "プロキシ切り替え時に自動的にページを再読み込み"
+  },
+  "autoReloadOnProxySwitchDescription": {
+    "message": "プロキシを切り替える際にアクティブなタブを自動的に再読み込み"
+  },
+  "tooltipAutoReload": {
+    "message": "有効にすると、プロキシ設定の変更後に現在のページが再読み込みされ、変更が即座に適用されます"
+  },
   "invalidConfiguration": {
     "message": "無効な設定"
   },

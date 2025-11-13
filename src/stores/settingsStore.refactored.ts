@@ -36,6 +36,7 @@ function createSettingsCoordinator() {
       activeScriptId: proxyState.activeScriptId,
       quickSwitchEnabled: appSettings.quickSwitchEnabled,
       disableProxyOnStartup: appSettings.disableProxyOnStartup,
+      autoReloadOnProxySwitch: appSettings.autoReloadOnProxySwitch ?? true,
     }
   }
 
@@ -63,6 +64,7 @@ function createSettingsCoordinator() {
       appSettingsStore.init({
         quickSwitchEnabled: settings.quickSwitchEnabled,
         disableProxyOnStartup: settings.disableProxyOnStartup,
+        autoReloadOnProxySwitch: settings.autoReloadOnProxySwitch ?? true,
       })
     }, ERROR_TYPES.LOAD_SETTINGS),
 
@@ -75,6 +77,7 @@ function createSettingsCoordinator() {
       appSettingsStore.init({
         quickSwitchEnabled: settings.quickSwitchEnabled,
         disableProxyOnStartup: settings.disableProxyOnStartup,
+        autoReloadOnProxySwitch: settings.autoReloadOnProxySwitch ?? true,
       })
     }, ERROR_TYPES.INITIALIZATION),
 
@@ -86,6 +89,7 @@ function createSettingsCoordinator() {
       appSettingsStore.init({
         quickSwitchEnabled: settings.quickSwitchEnabled,
         disableProxyOnStartup: settings.disableProxyOnStartup,
+        autoReloadOnProxySwitch: settings.autoReloadOnProxySwitch ?? true,
       })
     }, ERROR_TYPES.LOAD_SETTINGS),
 

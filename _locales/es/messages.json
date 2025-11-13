@@ -166,6 +166,15 @@
   "disableProxyOnStartupDescription": {
     "message": "Iniciar con el proxy desactivado cada vez que se lance el navegador"
   },
+  "autoReloadOnProxySwitch": {
+    "message": "Recargar página automáticamente al cambiar proxy"
+  },
+  "autoReloadOnProxySwitchDescription": {
+    "message": "Recargar automáticamente la pestaña activa al cambiar de proxy"
+  },
+  "tooltipAutoReload": {
+    "message": "Cuando está activado, la página actual se recargará después de cambiar la configuración del proxy para aplicar los cambios inmediatamente"
+  },
   "invalidConfiguration": {
     "message": "Configuración inválida"
   },

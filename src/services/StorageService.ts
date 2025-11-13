@@ -1,10 +1,7 @@
 // src/services/StorageService.ts
 import { ERROR_TYPES, type AppSettings } from '@/interfaces'
 import { DEFAULT_SETTINGS } from '@/constants/app'
-import {
-  withErrorHandling,
-  withErrorHandlingAndFallback,
-} from '@/utils/errorHandling'
+import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
 import { browserService } from './chrome/BrowserService'
 
 // Size limit for storing in sync storage (Chrome limit is 8KB per item)
@@ -19,46 +16,40 @@ export class StorageService {
   /**
    * Saves settings to the appropriate storage area based on size
    */
-  static saveSettings = withErrorHandling(
-    async (settings: AppSettings): Promise<void> => {
-      // Clone settings to avoid modifying the original
-      const settingsCopy = structuredClone(settings)
+  static saveSettings = withErrorHandling(async (settings: AppSettings): Promise<void> => {
+    // Clone settings to avoid modifying the original - use JSON parse/stringify to handle undefined values
+    const settingsCopy = JSON.parse(JSON.stringify(settings))
 
-      // Store base settings in sync storage
-      const baseSettings: AppSettings = {
-        ...settingsCopy,
-        proxyConfigs: settingsCopy.proxyConfigs.map((config) => {
-          // If PAC script data is large, we'll store it separately
-          if (
-            config.pacScript?.data &&
-            config.pacScript.data.length > SYNC_SIZE_LIMIT
-          ) {
-            const scriptId = config.id || crypto.randomUUID()
-            // Store large PAC script in local storage
-            this.storeScriptData(scriptId, config.pacScript.data)
+    // Store base settings in sync storage
+    const baseSettings: AppSettings = {
+      ...settingsCopy,
+      proxyConfigs: settingsCopy.proxyConfigs.map((config) => {
+        // If PAC script data is large, we'll store it separately
+        if (config.pacScript?.data && config.pacScript.data.length > SYNC_SIZE_LIMIT) {
+          const scriptId = config.id || crypto.randomUUID()
+          // Store large PAC script in local storage
+          this.storeScriptData(scriptId, config.pacScript.data)
 
-            // Replace script data with a reference
-            return {
-              ...config,
-              pacScript: {
-                ...config.pacScript,
-                data: `__REF_${scriptId}__`,
-              },
-            }
+          // Replace script data with a reference
+          return {
+            ...config,
+            pacScript: {
+              ...config.pacScript,
+              data: `__REF_${scriptId}__`,
+            },
           }
-          return config
-        }),
-      }
+        }
+        return config
+      }),
+    }
 
-      // Save base settings to sync storage
-      await browserService.storage.sync.set({ settings: baseSettings })
+    // Save base settings to sync storage
+    await browserService.storage.sync.set({ settings: baseSettings })
 
-      // Update cache
-      this.settingsCache = settings
-      this.lastSettingsUpdate = Date.now()
-    },
-    ERROR_TYPES.SAVE_SETTINGS
-  )
+    // Update cache
+    this.settingsCache = settings
+    this.lastSettingsUpdate = Date.now()
+  }, ERROR_TYPES.SAVE_SETTINGS)
 
   /**
    * Retrieves settings from storage, resolving any large script references
@@ -68,10 +59,7 @@ export class StorageService {
       const now = Date.now()
 
       // Use cache if it's still fresh
-      if (
-        this.settingsCache &&
-        now - this.lastSettingsUpdate < this.CACHE_TIMEOUT
-      ) {
+      if (this.settingsCache && now - this.lastSettingsUpdate < this.CACHE_TIMEOUT) {
         return this.settingsCache
       }
 
@@ -85,9 +73,7 @@ export class StorageService {
         proxyConfigs: await Promise.all(
           baseSettings.proxyConfigs.map(async (config) => {
             if (config.pacScript?.data?.startsWith('__REF_')) {
-              const scriptId = config.pacScript.data
-                .replace('__REF_', '')
-                .replace('__', '')
+              const scriptId = config.pacScript.data.replace('__REF_', '').replace('__', '')
               const scriptData = await this.getScriptData(scriptId)
 
               return {

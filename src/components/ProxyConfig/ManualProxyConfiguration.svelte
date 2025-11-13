@@ -67,12 +67,14 @@
       <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300">
         {I18nService.getMessage('proxyServer')}
       </h3>
-      <ProxyInput
-        bind:scheme={proxySettings.singleProxy.scheme}
-        bind:host={proxySettings.singleProxy.host}
-        bind:port={proxySettings.singleProxy.port}
-        testIdPrefix="single-proxy"
-      />
+      {#if proxySettings.singleProxy}
+        <ProxyInput
+          bind:scheme={proxySettings.singleProxy.scheme}
+          bind:host={proxySettings.singleProxy.host}
+          bind:port={proxySettings.singleProxy.port}
+          testIdPrefix="single-proxy"
+        />
+      {/if}
     </div>
   {:else}
     <!-- Individual Proxy Configurations -->
@@ -83,12 +85,14 @@
         <h3 class="text-sm font-medium text-slate-700 dark:text-slate-300">
           {proxyLocalizedNames[proxyType as ProxyType]}
         </h3>
-        <ProxyInput
-          bind:scheme={proxy.scheme}
-          bind:host={proxy.host}
-          bind:port={proxy.port}
-          testIdPrefix={proxyType.toLowerCase()}
-        />
+        {#if proxy}
+          <ProxyInput
+            bind:scheme={proxy.scheme}
+            bind:host={proxy.host}
+            bind:port={proxy.port}
+            testIdPrefix={proxyType.toLowerCase()}
+          />
+        {/if}
       </div>
     {/each}
   {/if}
