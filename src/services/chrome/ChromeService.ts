@@ -17,45 +17,52 @@ export class ChromeService {
   /**
    * Sets Chrome proxy settings based on proxy configuration
    */
-  static setProxy = withErrorHandling(async (proxy: ProxyConfig): Promise<void> => {
-    const details: chrome.types.ChromeSettingSetDetails<ChromeProxyConfig> = {
-      value: convertAppSettingsToChromeConfig(proxy),
-      scope: 'regular',
-    }
+  static setProxy = withErrorHandling(
+    async (proxy: ProxyConfig, autoReload: boolean = true): Promise<void> => {
+      const details: chrome.types.ChromeSettingSetDetails<ChromeProxyConfig> = {
+        value: convertAppSettingsToChromeConfig(proxy),
+        scope: 'regular',
+      }
 
-    return new Promise((resolve, reject) => {
-      this.browser.proxy.settings.set(details, async () => {
-        if (this.browser.runtime.lastError) {
-          return reject(this.browser.runtime.lastError)
-        }
+      return new Promise((resolve, reject) => {
+        this.browser.proxy.settings.set(details, async () => {
+          if (this.browser.runtime.lastError) {
+            return reject(this.browser.runtime.lastError)
+          }
 
-        // Reload active tab to apply proxy changes
-        try {
-          await this.reloadActiveTab()
-        } catch (error) {
-          console.warn('Failed to reload tab (proxy still set):', error)
-        }
+          // Reload active tab to apply proxy changes if enabled
+          if (autoReload) {
+            try {
+              await this.reloadActiveTab()
+            } catch (error) {
+              console.warn('Failed to reload tab (proxy still set):', error)
+            }
+          }
 
-        resolve()
+          resolve()
+        })
       })
-    })
-  }, ERROR_TYPES.SET_PROXY)
+    },
+    ERROR_TYPES.SET_PROXY
+  )
 
   /**
    * Clears all proxy settings
    */
-  static clearProxy = withErrorHandling(async (): Promise<void> => {
+  static clearProxy = withErrorHandling(async (autoReload: boolean = true): Promise<void> => {
     return new Promise((resolve, reject) => {
       this.browser.proxy.settings.clear({}, async () => {
         if (this.browser.runtime.lastError) {
           return reject(this.browser.runtime.lastError)
         }
 
-        // Reload active tab to apply proxy changes
-        try {
-          await this.reloadActiveTab()
-        } catch (error) {
-          console.warn('Failed to reload tab (proxy still cleared):', error)
+        // Reload active tab to apply proxy changes if enabled
+        if (autoReload) {
+          try {
+            await this.reloadActiveTab()
+          } catch (error) {
+            console.warn('Failed to reload tab (proxy still cleared):', error)
+          }
         }
 
         resolve()

@@ -21,6 +21,11 @@
       'success'
     )
   }
+
+  async function handleAutoReloadToggle(checked: boolean) {
+    await settingsStore.updateSettings({ autoReloadOnProxySwitch: checked })
+    toastStore.show(checked ? 'Auto-reload enabled' : 'Auto-reload disabled', 'success')
+  }
 </script>
 
 <div class="py-6 space-y-8">
@@ -33,46 +38,89 @@
       </h2>
     </div>
 
-    <Card
-      classes="ring-2 ring-blue-500/10 dark:ring-blue-400/10 hover:ring-blue-500/20 dark:hover:ring-blue-400/20 hover:shadow-lg transition-all duration-200"
-    >
-      <FlexGroup
-        direction="horizontal"
-        childrenGap="lg"
-        alignItems="center"
-        justifyContent="between"
+    <!-- Grid layout for proxy behavior cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <!-- Disable Proxy on Startup Card -->
+      <Card
+        classes="ring-2 ring-blue-500/10 dark:ring-blue-400/10 hover:ring-blue-500/20 dark:hover:ring-blue-400/20 hover:shadow-lg transition-all duration-200"
       >
-        <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
-          <div
-            class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
-          >
-            <svelte:component this={Shield} size={20} class="text-white" />
-          </div>
-          <div class="flex-1">
-            <div class="flex items-center gap-2">
-              <label
-                class="text-base font-semibold cursor-pointer"
-                for="disableProxyOnStartupToggle"
-              >
-                {I18nService.getMessage('disableProxyOnStartup')}
-              </label>
-              <Tooltip text={I18nService.getMessage('tooltipDisableOnStartup')} position="top">
-                <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
-              </Tooltip>
+        <FlexGroup
+          direction="horizontal"
+          childrenGap="lg"
+          alignItems="center"
+          justifyContent="between"
+        >
+          <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
+            >
+              <svelte:component this={Shield} size={20} class="text-white" />
             </div>
-            <Text as="p" size="sm" color="muted" classes="mt-1">
-              {I18nService.getMessage('disableProxyOnStartupDescription')}
-            </Text>
-          </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <label
+                  class="text-base font-semibold cursor-pointer"
+                  for="disableProxyOnStartupToggle"
+                >
+                  {I18nService.getMessage('disableProxyOnStartup')}
+                </label>
+                <Tooltip text={I18nService.getMessage('tooltipDisableOnStartup')} position="top">
+                  <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+                </Tooltip>
+              </div>
+              <Text as="p" size="sm" color="muted" classes="mt-1">
+                {I18nService.getMessage('disableProxyOnStartupDescription')}
+              </Text>
+            </div>
+          </FlexGroup>
+          <ToggleSwitch
+            id="disableProxyOnStartupToggle"
+            checked={settings.disableProxyOnStartup}
+            onchange={handleDisableProxyOnStartupToggle}
+            aria-label="Toggle disable proxy on startup"
+          />
         </FlexGroup>
-        <ToggleSwitch
-          id="disableProxyOnStartupToggle"
-          checked={settings.disableProxyOnStartup}
-          onchange={handleDisableProxyOnStartupToggle}
-          aria-label="Toggle disable proxy on startup"
-        />
-      </FlexGroup>
-    </Card>
+      </Card>
+
+      <!-- Auto-reload toggle Card -->
+      <Card
+        classes="ring-2 ring-green-500/10 dark:ring-green-400/10 hover:ring-green-500/20 dark:hover:ring-green-400/20 hover:shadow-lg transition-all duration-200"
+      >
+        <FlexGroup
+          direction="horizontal"
+          childrenGap="lg"
+          alignItems="center"
+          justifyContent="between"
+        >
+          <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
+            >
+              <svelte:component this={Shield} size={20} class="text-white" />
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <label class="text-base font-semibold cursor-pointer" for="autoReloadToggle">
+                  {I18nService.getMessage('autoReloadOnProxySwitch')}
+                </label>
+                <Tooltip text={I18nService.getMessage('tooltipAutoReload')} position="top">
+                  <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+                </Tooltip>
+              </div>
+              <Text as="p" size="sm" color="muted" classes="mt-1">
+                {I18nService.getMessage('autoReloadOnProxySwitchDescription')}
+              </Text>
+            </div>
+          </FlexGroup>
+          <ToggleSwitch
+            id="autoReloadToggle"
+            checked={settings.autoReloadOnProxySwitch}
+            onchange={handleAutoReloadToggle}
+            aria-label="Toggle auto-reload on proxy switch"
+          />
+        </FlexGroup>
+      </Card>
+    </div>
   </div>
 
   <!-- Data Management Section -->

@@ -3,6 +3,7 @@ export interface AppSettings {
   activeScriptId: string | null
   proxyConfigs: ProxyConfig[]
   disableProxyOnStartup: boolean
+  autoReloadOnProxySwitch: boolean
 }
 
 export interface Settings {

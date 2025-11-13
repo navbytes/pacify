@@ -166,6 +166,15 @@
   "disableProxyOnStartupDescription": {
     "message": "브라우저를 시작할 때마다 프록시를 비활성화한 상태로 시작"
   },
+  "autoReloadOnProxySwitch": {
+    "message": "프록시 전환 시 페이지 자동 새로고침"
+  },
+  "autoReloadOnProxySwitchDescription": {
+    "message": "프록시 전환 시 활성 탭을 자동으로 새로고침"
+  },
+  "tooltipAutoReload": {
+    "message": "활성화하면 프록시 설정 변경 후 현재 페이지가 새로고침되어 변경 사항이 즉시 적용됩니다"
+  },
   "invalidConfiguration": {
     "message": "잘못된 구성"
   },

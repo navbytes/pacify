@@ -166,6 +166,15 @@
   "disableProxyOnStartupDescription": {
     "message": "Start with proxy disabled each time the browser launches"
   },
+  "autoReloadOnProxySwitch": {
+    "message": "Auto-reload page on proxy switch"
+  },
+  "autoReloadOnProxySwitchDescription": {
+    "message": "Automatically reload the active tab when switching proxies"
+  },
+  "tooltipAutoReload": {
+    "message": "When enabled, the current page will reload after changing proxy settings to apply the changes immediately"
+  },
   "invalidConfiguration": {
     "message": "Invalid configuration"
   },

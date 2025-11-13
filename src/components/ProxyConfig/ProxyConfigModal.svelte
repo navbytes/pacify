@@ -42,15 +42,15 @@
 
   // Manual Proxy Settings
   let proxySettings = $state<ProxySettings>({
-    singleProxy: proxyConfig?.rules?.singleProxy ?? { ...DEFAULT_PROXY_CONFIG },
-    proxyForHttp: proxyConfig?.rules?.proxyForHttp ?? {
+    singleProxy: proxyConfig?.rules?.singleProxy || { ...DEFAULT_PROXY_CONFIG },
+    proxyForHttp: proxyConfig?.rules?.proxyForHttp || {
       ...DEFAULT_PROXY_CONFIG,
     },
-    proxyForHttps: proxyConfig?.rules?.proxyForHttps ?? {
+    proxyForHttps: proxyConfig?.rules?.proxyForHttps || {
       ...DEFAULT_PROXY_CONFIG,
     },
-    proxyForFtp: proxyConfig?.rules?.proxyForFtp ?? { ...DEFAULT_PROXY_CONFIG },
-    fallbackProxy: proxyConfig?.rules?.fallbackProxy ?? {
+    proxyForFtp: proxyConfig?.rules?.proxyForFtp || { ...DEFAULT_PROXY_CONFIG },
+    fallbackProxy: proxyConfig?.rules?.fallbackProxy || {
       ...DEFAULT_PROXY_CONFIG,
     },
     bypassList: proxyConfig?.rules?.bypassList || [],

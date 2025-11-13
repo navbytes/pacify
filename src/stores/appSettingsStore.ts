@@ -8,6 +8,7 @@ import { writable } from 'svelte/store'
 interface AppSettingsState {
   quickSwitchEnabled: boolean
   disableProxyOnStartup: boolean
+  autoReloadOnProxySwitch?: boolean
   theme?: 'light' | 'dark' | 'auto'
   language?: string
 }
@@ -15,6 +16,7 @@ interface AppSettingsState {
 const DEFAULT_APP_SETTINGS: AppSettingsState = {
   quickSwitchEnabled: false,
   disableProxyOnStartup: false,
+  autoReloadOnProxySwitch: true,
   theme: 'auto',
   language: 'en',
 }

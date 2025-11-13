@@ -166,6 +166,15 @@
   "disableProxyOnStartupDescription": {
     "message": "Pornește cu proxy-ul dezactivat de fiecare dată când se lansează browserul"
   },
+  "autoReloadOnProxySwitch": {
+    "message": "Reîncarcă automat pagina la schimbarea proxy-ului"
+  },
+  "autoReloadOnProxySwitchDescription": {
+    "message": "Reîncarcă automat tab-ul activ la schimbarea proxy-ului"
+  },
+  "tooltipAutoReload": {
+    "message": "Când este activat, pagina curentă va fi reîncărcată după schimbarea setărilor proxy pentru a aplica modificările imediat"
+  },
   "invalidConfiguration": {
     "message": "Configurație nevalidă"
   },

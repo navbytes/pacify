@@ -166,6 +166,15 @@
   "disableProxyOnStartupDescription": {
     "message": "हर बार ब्राउज़र लॉन्च होने पर प्रॉक्सी अक्षम के साथ शुरू करें"
   },
+  "autoReloadOnProxySwitch": {
+    "message": "प्रॉक्सी बदलने पर पेज को स्वचालित रूप से रीलोड करें"
+  },
+  "autoReloadOnProxySwitchDescription": {
+    "message": "प्रॉक्सी बदलते समय सक्रिय टैब को स्वचालित रूप से रीलोड करें"
+  },
+  "tooltipAutoReload": {
+    "message": "सक्षम होने पर, परिवर्तनों को तुरंत लागू करने के लिए प्रॉक्सी सेटिंग्स बदलने के बाद वर्तमान पेज रीलोड हो जाएगा"
+  },
   "invalidConfiguration": {
     "message": "अमान्य कॉन्फिगरेशन"
   },

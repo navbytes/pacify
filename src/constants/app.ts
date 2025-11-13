@@ -5,6 +5,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   activeScriptId: null,
   proxyConfigs: [],
   disableProxyOnStartup: false,
+  autoReloadOnProxySwitch: true,
 }
 
 // Constants for default values
