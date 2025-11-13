@@ -160,7 +160,7 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     define: {
-      __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '1.20.0'),
+      __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '1.21.0'),
       __DEV_MODE__: JSON.stringify(!isProduction),
     },
     build: {
