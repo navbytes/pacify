@@ -6,6 +6,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   proxyConfigs: [],
   disableProxyOnStartup: false,
   autoReloadOnProxySwitch: true,
+  testUrl: 'https://www.google.com/generate_204', // Phase 1: Default test URL
 }
 
 // Constants for default values

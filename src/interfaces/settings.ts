@@ -4,6 +4,7 @@ export interface AppSettings {
   proxyConfigs: ProxyConfig[]
   disableProxyOnStartup: boolean
   autoReloadOnProxySwitch: boolean
+  testUrl: string // URL used for testing proxy connections
 }
 
 export interface Settings {
@@ -27,6 +28,42 @@ export interface ProxyRules {
   bypassList?: string[]
 }
 export type ProxyMode = 'direct' | 'auto_detect' | 'pac_script' | 'fixed_servers' | 'system'
+
+// Phase 1: Proxy Testing
+export interface ProxyTestResult {
+  success: boolean
+  responseTime?: number
+  statusCode?: number
+  error?: string
+  testedAt: Date
+  testUrl: string
+}
+
+// Phase 1: PAC Script Analysis
+export type SecuritySeverity = 'critical' | 'warning' | 'info'
+
+export interface SecurityIssue {
+  severity: SecuritySeverity
+  message: string
+  line?: number
+}
+
+export interface PACAnalysisResult {
+  syntax: {
+    valid: boolean
+    errors: string[]
+  }
+  security: SecurityIssue[]
+  warnings: string[]
+}
+
+// Phase 1: Validation
+export interface ValidationResult {
+  valid: boolean
+  errors: string[]
+  warnings: string[]
+}
+
 export interface ProxyConfig {
   id?: string
   name: string
@@ -40,6 +77,9 @@ export interface ProxyConfig {
     mandatory?: boolean
   }
   rules?: ProxyRules
+  // Phase 1: Testing support
+  lastTestResult?: ProxyTestResult
+  autoTest?: boolean
 }
 
 export interface ProxySettings {
