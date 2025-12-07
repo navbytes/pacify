@@ -3,11 +3,14 @@
   import { type ProxyConfig, type ListViewType } from '@/interfaces'
   import { settingsStore } from '@/stores/settingsStore'
   import { toastStore } from '@/stores/toastStore'
-  import { ShieldCheck, Pencil, Trash, GripVertical } from 'lucide-svelte'
+  import { ShieldCheck, Pencil, Trash, GripVertical, TestTube2 } from 'lucide-svelte'
   import Button from './Button.svelte'
   import ConfirmDialog from './ConfirmDialog.svelte'
+  import ProxyStatusBadge from './ProxyStatusBadge.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import DraggableItem from './DragDrop/DraggableItem.svelte'
+  import { ProxyTestService } from '@/services/ProxyTestService'
+  import { StorageService } from '@/services/StorageService'
   import {
     getProxyModeLabel,
     getProxyModeIcon,
@@ -29,6 +32,7 @@
   let modeLabel = $derived(getProxyModeLabel(proxy.mode))
   let proxyDesc = $derived(getProxyDescription(proxy.mode, proxy))
   let showDeleteDialog = $state(false)
+  let testing = $state(false)
 
   async function handleSetProxy(isActive: boolean, scriptId?: string) {
     if (!scriptId) return
@@ -53,6 +57,48 @@
     await settingsStore.deletePACScript(proxy.id)
     const message = I18nService.getMessage('proxyDeleted', proxy.name)
     toastStore.show(message, 'success')
+  }
+
+  async function handleTestProxy() {
+    if (!proxy.id || testing) return
+
+    testing = true
+
+    try {
+      // Get test URL from settings
+      const settings = await StorageService.getSettings()
+      const testUrl = settings.testUrl || 'https://www.google.com/generate_204'
+
+      // Test the proxy
+      const testResult = await ProxyTestService.testProxy(proxy, testUrl)
+
+      // Update proxy configuration with test result
+      await settingsStore.updatePACScript(
+        {
+          ...proxy,
+          lastTestResult: testResult
+        },
+        proxy.id
+      )
+
+      // Show toast with result
+      if (testResult.success) {
+        toastStore.show(
+          `✅ ${proxy.name}: ${ProxyTestService.formatTestResult(testResult)}`,
+          'success'
+        )
+      } else {
+        toastStore.show(
+          `❌ ${proxy.name}: ${testResult.error || 'Connection failed'}`,
+          'error'
+        )
+      }
+    } catch (error) {
+      console.error('Test failed:', error)
+      toastStore.show(`Failed to test ${proxy.name}`, 'error')
+    } finally {
+      testing = false
+    }
   }
 </script>
 
@@ -129,12 +175,17 @@
     <!-- Card Content (OPTIONS only) -->
     {#if pageType !== 'POPUP'}
       <div class="flex flex-col gap-2 mb-4 mt-3">
-        <!-- Mode badge -->
-        <div
-          class={`inline-flex self-start items-center gap-1.5 px-2 py-1 rounded-md border text-xs font-medium ${modeColors.bg} ${modeColors.text} ${modeColors.border}`}
-        >
-          <ModeIcon size={13} />
-          <span>{modeLabel}</span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Mode badge -->
+          <div
+            class={`inline-flex self-start items-center gap-1.5 px-2 py-1 rounded-md border text-xs font-medium ${modeColors.bg} ${modeColors.text} ${modeColors.border}`}
+          >
+            <ModeIcon size={13} />
+            <span>{modeLabel}</span>
+          </div>
+
+          <!-- Test status badge -->
+          <ProxyStatusBadge testResult={proxy.lastTestResult} isActive={proxy.isActive} />
         </div>
 
         <!-- Description -->
@@ -161,6 +212,18 @@
         />
 
         <div class="flex items-center gap-1">
+          <Button
+            color="secondary"
+            minimal
+            onclick={handleTestProxy}
+            disabled={testing}
+            aria-label={`Test ${proxy.name}`}
+            classes="hover:bg-purple-50 dark:hover:bg-purple-950/20"
+            data-testid={`test-proxy-button-${proxy.id}`}
+          >
+            {#snippet icon()}<TestTube2 size={16} class={testing ? 'animate-pulse' : ''} />{/snippet}
+            <span class="text-sm">{testing ? 'Testing...' : 'Test'}</span>
+          </Button>
           <Button
             color="primary"
             minimal
