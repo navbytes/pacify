@@ -166,6 +166,35 @@ function createSettingsStore() {
       }
     }, ERROR_TYPES.DELETE_SCRIPT),
 
+    // Phase 2: Duplicate proxy
+    duplicatePACScript: withErrorHandling(async (scriptId: string) => {
+      const settings = await StorageService.getSettings()
+      const original = settings.proxyConfigs.find((s) => s.id === scriptId)
+
+      if (!original) {
+        throw new Error('Proxy not found')
+      }
+
+      // Create duplicate with "(Copy)" suffix and new ID
+      const duplicate: ProxyConfig = {
+        ...original,
+        id: crypto.randomUUID(),
+        name: `${original.name} (Copy)`,
+        isActive: false, // Duplicates are never active
+        quickSwitch: false, // Duplicates don't inherit quick switch
+        lastTestResult: undefined, // Clear test results
+        autoTest: undefined
+      }
+
+      // Add duplicate to configs
+      const updatedSettings = await handleSettingsChangeAndWait((settings) => ({
+        ...settings,
+        proxyConfigs: [...settings.proxyConfigs, duplicate],
+      }))
+
+      return duplicate
+    }, ERROR_TYPES.SAVE_SCRIPT),
+
     quickSwitchToggle: withErrorHandling(async (enabled: boolean) => {
       // First save the changes and wait for them to complete
       const updatedSettings = await handleSettingsChangeAndWait((settings) => ({

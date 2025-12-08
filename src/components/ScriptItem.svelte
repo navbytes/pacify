@@ -13,6 +13,7 @@
   import { StorageService } from '@/services/StorageService'
   import { ProxyStatsService } from '@/services/ProxyStatsService'
   import type { ProxyStats } from '@/interfaces'
+  import { Copy } from 'lucide-svelte'
   import {
     getProxyModeLabel,
     getProxyModeIcon,
@@ -110,6 +111,19 @@
       toastStore.show(`Failed to test ${proxy.name}`, 'error')
     } finally {
       testing = false
+    }
+  }
+
+  // Phase 2: Duplicate proxy
+  async function handleDuplicate() {
+    if (!proxy.id) return
+
+    try {
+      const duplicate = await settingsStore.duplicatePACScript(proxy.id)
+      toastStore.show(`Duplicated "${proxy.name}" as "${duplicate.name}"`, 'success')
+    } catch (error) {
+      console.error('Duplicate failed:', error)
+      toastStore.show(`Failed to duplicate ${proxy.name}`, 'error')
     }
   }
 </script>
@@ -259,6 +273,17 @@
           >
             {#snippet icon()}<TestTube2 size={16} class={testing ? 'animate-pulse' : ''} />{/snippet}
             <span class="text-sm">{testing ? 'Testing...' : 'Test'}</span>
+          </Button>
+          <Button
+            color="secondary"
+            minimal
+            onclick={handleDuplicate}
+            aria-label={`Duplicate ${proxy.name}`}
+            classes="hover:bg-green-50 dark:hover:bg-green-950/20"
+            data-testid={`duplicate-proxy-button-${proxy.id}`}
+          >
+            {#snippet icon()}<Copy size={16} />{/snippet}
+            <span class="text-sm">Duplicate</span>
           </Button>
           <Button
             color="primary"
