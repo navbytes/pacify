@@ -32,16 +32,16 @@
   )
 
   // Phase 2: Filtered proxy configs (after search/filter)
-  let filteredProxyConfigs = $state<ProxyConfig[]>([])
+  let filteredProxyConfigs = $state<ProxyConfig[]>(baseProxyConfigs)
 
   // Display the filtered results if search is enabled, otherwise show base configs
   let displayProxyConfigs = $derived<ProxyConfig[]>(
-    showSearch && filteredProxyConfigs.length >= 0 ? filteredProxyConfigs : baseProxyConfigs
+    showSearch ? filteredProxyConfigs : baseProxyConfigs
   )
 
-  // Initialize filtered results to base configs
+  // Initialize filtered results to base configs when base configs change
   $effect(() => {
-    if (!showSearch) {
+    if (!showSearch || filteredProxyConfigs.length === 0) {
       filteredProxyConfigs = baseProxyConfigs
     }
   })
