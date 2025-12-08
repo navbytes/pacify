@@ -2,6 +2,7 @@
   import { settingsStore } from '@/stores/settingsStore'
   import ScriptItem from './ScriptItem.svelte'
   import EmptyState from './EmptyState.svelte'
+  import ProxySearch from './ProxySearch.svelte'
   import type { ListViewType, ProxyConfig } from '@/interfaces'
   import { I18nService } from '@/services/i18n/i18nService'
   import { Globe, Zap } from 'lucide-svelte'
@@ -15,19 +16,35 @@
     title: string
     onScriptEdit?: (scriptId: string) => void
     dragType?: string
+    showSearch?: boolean // Phase 2: Show search bar
   }
 
-  let { pageType = 'POPUP', title, onScriptEdit, dragType = $bindable() }: Props = $props()
+  let { pageType = 'POPUP', title, onScriptEdit, dragType = $bindable(), showSearch = false }: Props = $props()
 
   function openEditor(scriptId?: string) {
     if (!scriptId || !onScriptEdit) return
     onScriptEdit(scriptId)
   }
 
-  // Fix: Use $derived to create a derived array instead of a function
-  let displayProxyConfigs = $derived<ProxyConfig[]>(
+  // Base proxy configs (filtered by quick switch if needed)
+  let baseProxyConfigs = $derived<ProxyConfig[]>(
     pageType === 'QUICK_SWITCH' ? proxyConfigs.filter((script) => script.quickSwitch) : proxyConfigs
   )
+
+  // Phase 2: Filtered proxy configs (after search/filter)
+  let filteredProxyConfigs = $state<ProxyConfig[]>([])
+
+  // Display the filtered results if search is enabled, otherwise show base configs
+  let displayProxyConfigs = $derived<ProxyConfig[]>(
+    showSearch && filteredProxyConfigs.length >= 0 ? filteredProxyConfigs : baseProxyConfigs
+  )
+
+  // Initialize filtered results to base configs
+  $effect(() => {
+    if (!showSearch) {
+      filteredProxyConfigs = baseProxyConfigs
+    }
+  })
 </script>
 
 <section class="w-full">
@@ -35,6 +52,16 @@
     <h2 class="mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100">
       {title}
     </h2>
+  {/if}
+
+  <!-- Phase 2: Search bar (OPTIONS view only) -->
+  {#if showSearch && pageType === 'OPTIONS' && baseProxyConfigs.length > 0}
+    <div class="mb-6">
+      <ProxySearch
+        proxies={baseProxyConfigs}
+        onFiltered={(filtered) => filteredProxyConfigs = filtered}
+      />
+    </div>
   {/if}
 
   {#if displayProxyConfigs.length > 0}

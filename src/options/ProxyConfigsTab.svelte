@@ -183,6 +183,7 @@
             onScriptEdit={(scriptId) => onOpenEditor(scriptId)}
             bind:dragType
             title=""
+            showSearch={true}
           />
         </div>
       </section>
