@@ -7,9 +7,10 @@
 
   import { NotifyService } from '@/services/NotifyService'
   import { ERROR_TYPES } from '@/interfaces'
-  import type { ProxyConfig, ProxyMode, ProxySettings, ProxyServer } from '@/interfaces'
-  import { Globe, Radar, Settings, Zap } from 'lucide-svelte'
+  import type { ProxyConfig, ProxyMode, ProxySettings, ProxyServer, ValidationResult } from '@/interfaces'
+  import { Globe, Radar, Settings, Zap, AlertTriangle } from 'lucide-svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { ProxyValidator } from '@/utils/proxyValidation'
   import Text from '../Text.svelte'
 
   interface Props {
@@ -64,10 +65,15 @@
   let errorMessage = $state<string>('')
   let isSubmitting = $state<boolean>(false)
 
+  // Phase 1: Validation state
+  let validationResult = $state<ValidationResult | null>(null)
+  let showValidation = $state<boolean>(false)
+
   async function handleSubmit(event: Event) {
     event.preventDefault()
     if (isSubmitting) return
     errorMessage = ''
+    showValidation = true
 
     if (!name.trim()) {
       errorMessage = I18nService.getMessage('nameRequired')
@@ -116,6 +122,21 @@
           if (proxySettings.fallbackProxy?.host?.trim())
             config.rules.fallbackProxy = proxySettings.fallbackProxy
         }
+      }
+
+      // Phase 1: Validate configuration before saving
+      validationResult = ProxyValidator.validateProxyConfig(config)
+
+      if (!validationResult.valid) {
+        // Show validation errors
+        errorMessage = validationResult.errors.join('\n')
+        isSubmitting = false
+        return
+      }
+
+      // Show warning if there are any (but still allow save)
+      if (validationResult.warnings.length > 0) {
+        console.warn('Validation warnings:', validationResult.warnings)
       }
 
       console.log('Saving config:', JSON.stringify(config, null, 2))
@@ -209,8 +230,58 @@
           <ManualProxyConfiguration bind:useSharedProxy bind:proxySettings bind:bypassListContent />
         {/if}
 
-        <!-- Error Message -->
-        {#if errorMessage}
+        <!-- Validation Results (Phase 1) -->
+        {#if showValidation && validationResult}
+          {#if validationResult.errors.length > 0}
+            <div
+              class="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg p-4"
+              role="alert"
+            >
+              <div class="flex items-start gap-2">
+                <AlertTriangle class="text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" size={18} />
+                <div class="flex-1">
+                  <h3 class="text-sm font-semibold text-red-900 dark:text-red-100 mb-2">
+                    Validation Errors
+                  </h3>
+                  <ul class="text-sm text-red-800 dark:text-red-200 space-y-1">
+                    {#each validationResult.errors as error}
+                      <li class="flex items-start gap-2">
+                        <span class="text-red-600 dark:text-red-400">•</span>
+                        <span>{error}</span>
+                      </li>
+                    {/each}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          {/if}
+
+          {#if validationResult.warnings.length > 0}
+            <div
+              class="bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4"
+            >
+              <div class="flex items-start gap-2">
+                <AlertTriangle class="text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" size={18} />
+                <div class="flex-1">
+                  <h3 class="text-sm font-semibold text-yellow-900 dark:text-yellow-100 mb-2">
+                    Warnings
+                  </h3>
+                  <ul class="text-sm text-yellow-800 dark:text-yellow-200 space-y-1">
+                    {#each validationResult.warnings as warning}
+                      <li class="flex items-start gap-2">
+                        <span class="text-yellow-600 dark:text-yellow-400">⚠</span>
+                        <span>{warning}</span>
+                      </li>
+                    {/each}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          {/if}
+        {/if}
+
+        <!-- Error Message (fallback) -->
+        {#if errorMessage && !validationResult}
           <div class="text-sm text-red-600 dark:text-red-400">
             {errorMessage}
           </div>
