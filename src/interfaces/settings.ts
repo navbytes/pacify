@@ -64,6 +64,16 @@ export interface ValidationResult {
   warnings: string[]
 }
 
+// Phase 2: Usage Statistics
+export interface ProxyStats {
+  proxyId: string
+  activationCount: number // Total times activated
+  totalActiveTime: number // Total milliseconds active
+  lastActivated?: Date // Last activation timestamp
+  lastDeactivated?: Date // Last deactivation timestamp
+  createdAt: Date // When stats tracking started
+}
+
 export interface ProxyConfig {
   id?: string
   name: string

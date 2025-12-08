@@ -5,6 +5,7 @@ import { StorageService } from '@/services/StorageService'
 import { ChromeService } from '@/services/chrome'
 import { withErrorHandling } from '@/utils/errorHandling'
 import { debounce } from '@/utils/debounce'
+import { ProxyStatsService } from '@/services/ProxyStatsService'
 
 function createSettingsStore() {
   const { subscribe, set, update } = writable<AppSettings>(DEFAULT_SETTINGS)
@@ -138,6 +139,9 @@ function createSettingsStore() {
       const settings = await StorageService.getSettings()
       const wasActive = settings.activeScriptId === scriptId
 
+      // Phase 2: Clear stats for deleted proxy
+      await ProxyStatsService.clearStats(scriptId)
+
       // Save without debounce to make sure changes are persisted before UI updates
       handleSettingsChange((settings) => {
         const newSettings = {
@@ -187,6 +191,12 @@ function createSettingsStore() {
 
       // Create new proxy change promise and store it
       proxyChangePending = (async () => {
+        // Phase 2: Record deactivation of current proxy before switching
+        const currentSettings = await StorageService.getSettings()
+        if (currentSettings.activeScriptId && currentSettings.activeScriptId !== id) {
+          await ProxyStatsService.recordDeactivation()
+        }
+
         // First save the changes and wait for completion
         const savedSettings = await handleSettingsChangeAndWait((settings) => {
           const proxyConfigs = settings.proxyConfigs.map((script) => ({
@@ -208,11 +218,17 @@ function createSettingsStore() {
 
         // Send the appropriate message based on the active state
         if (isActive && activeScript) {
+          // Phase 2: Record activation of new proxy
+          await ProxyStatsService.recordActivation(id)
+
           await ChromeService.sendMessage({
             type: 'SET_PROXY',
             proxy: activeScript,
           })
         } else {
+          // Phase 2: Record deactivation when manually disabling
+          await ProxyStatsService.recordDeactivation()
+
           await ChromeService.sendMessage({
             type: 'CLEAR_PROXY',
           })

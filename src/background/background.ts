@@ -13,6 +13,7 @@ import {
 } from '@/constants/app'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
+import { ProxyStatsService } from '@/services/ProxyStatsService'
 
 /**
  * Flag to track if the background worker is fully initialized
@@ -124,6 +125,9 @@ async function initialize(): Promise<void> {
 
     // Initialize proxy settings
     await initializeProxySettings()
+
+    // Phase 2: Initialize stats tracking
+    await ProxyStatsService.initialize()
 
     // Update quick action
     await updateQuickAction()

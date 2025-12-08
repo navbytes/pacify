@@ -9,6 +9,7 @@
   import Tooltip from '@/components/Tooltip.svelte'
   import Card from '@/components/Card.svelte'
   import LinkCard from '@/components/LinkCard.svelte'
+  import ProxyStatsDashboard from '@/components/ProxyStatsDashboard.svelte'
   import {
     Shield,
     Database,
@@ -18,6 +19,7 @@
     Bug,
     Lightbulb,
     BookOpen,
+    BarChart3,
   } from 'lucide-svelte'
 
   let settings = $derived($settingsStore)
@@ -131,6 +133,18 @@
         </FlexGroup>
       </Card>
     </div>
+  </div>
+
+  <!-- Usage Statistics Section (Phase 2) -->
+  <div>
+    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
+      <BarChart3 size={20} class="text-purple-600 dark:text-purple-400" />
+      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+        Usage Statistics
+      </h2>
+    </div>
+
+    <ProxyStatsDashboard />
   </div>
 
   <!-- Data Management Section -->

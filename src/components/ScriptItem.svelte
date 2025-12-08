@@ -11,6 +11,8 @@
   import DraggableItem from './DragDrop/DraggableItem.svelte'
   import { ProxyTestService } from '@/services/ProxyTestService'
   import { StorageService } from '@/services/StorageService'
+  import { ProxyStatsService } from '@/services/ProxyStatsService'
+  import type { ProxyStats } from '@/interfaces'
   import {
     getProxyModeLabel,
     getProxyModeIcon,
@@ -33,6 +35,16 @@
   let proxyDesc = $derived(getProxyDescription(proxy.mode, proxy))
   let showDeleteDialog = $state(false)
   let testing = $state(false)
+  let proxyStats = $state<ProxyStats | null>(null)
+
+  // Load stats when component mounts or proxy changes
+  $effect(() => {
+    if (proxy.id) {
+      ProxyStatsService.getProxyStats(proxy.id).then(stats => {
+        proxyStats = stats
+      })
+    }
+  })
 
   async function handleSetProxy(isActive: boolean, scriptId?: string) {
     if (!scriptId) return
@@ -193,6 +205,30 @@
           <p class="text-sm text-slate-600 dark:text-slate-400 truncate">
             {proxyDesc}
           </p>
+        {/if}
+
+        <!-- Usage stats (Phase 2) -->
+        {#if proxyStats && pageType === 'OPTIONS'}
+          <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+            {#if proxyStats.activationCount > 0}
+              <span class="flex items-center gap-1">
+                <span class="font-medium">{proxyStats.activationCount}</span>
+                <span>{proxyStats.activationCount === 1 ? 'use' : 'uses'}</span>
+              </span>
+
+              {#if proxyStats.totalActiveTime > 0}
+                <span class="text-slate-300 dark:text-slate-600">•</span>
+                <span>{ProxyStatsService.formatDuration(proxyStats.totalActiveTime)} active</span>
+              {/if}
+
+              {#if proxyStats.lastActivated}
+                <span class="text-slate-300 dark:text-slate-600">•</span>
+                <span>Last used {ProxyStatsService.formatTimeAgo(proxyStats.lastActivated)}</span>
+              {/if}
+            {:else}
+              <span class="italic">Never used</span>
+            {/if}
+          </div>
         {/if}
       </div>
     {/if}
