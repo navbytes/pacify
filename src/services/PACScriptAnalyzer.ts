@@ -35,25 +35,12 @@ export class PACScriptAnalyzer {
 
   /**
    * Check JavaScript syntax without executing the script
+   *
+   * NOTE: We cannot use eval() or new Function() due to CSP restrictions in Chrome extensions.
+   * This performs basic static analysis only. Chrome will validate actual syntax when applying the PAC script.
    */
   private static checkSyntax(script: string): { valid: boolean; errors: string[] } {
     const errors: string[] = []
-
-    try {
-      // Use Function constructor for syntax check only
-      // The script is NOT executed - just parsed for syntax errors
-      // This is safe because:
-      // 1. We never call the function
-      // 2. No user input is interpolated
-      // 3. It's only for syntax validation
-      new Function(script)
-    } catch (error) {
-      if (error instanceof SyntaxError) {
-        errors.push(`Syntax error: ${error.message}`)
-      } else if (error instanceof Error) {
-        errors.push(`Error: ${error.message}`)
-      }
-    }
 
     // Check for required function
     if (!script.includes('function FindProxyForURL')) {
@@ -67,6 +54,20 @@ export class PACScriptAnalyzer {
       if (params.length !== 2) {
         errors.push('FindProxyForURL must have exactly 2 parameters: (url, host)')
       }
+    }
+
+    // Check for balanced braces
+    const openBraces = (script.match(/\{/g) || []).length
+    const closeBraces = (script.match(/\}/g) || []).length
+    if (openBraces !== closeBraces) {
+      errors.push(`Unbalanced braces: ${openBraces} opening, ${closeBraces} closing`)
+    }
+
+    // Check for balanced parentheses
+    const openParens = (script.match(/\(/g) || []).length
+    const closeParens = (script.match(/\)/g) || []).length
+    if (openParens !== closeParens) {
+      errors.push(`Unbalanced parentheses: ${openParens} opening, ${closeParens} closing`)
     }
 
     return {
