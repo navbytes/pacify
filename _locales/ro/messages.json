@@ -439,6 +439,9 @@
   "quickSwitchEmptyHint": {
     "message": "Trageți configurații proxy aici pentru acces rapid din popup"
   },
+  "quickSwitchEmptySubHint": {
+    "message": "Proxy-urile adăugate aici vor apărea în popup pentru comutare cu un singur clic"
+  },
   "pacUrlHelp": {
     "message": "Scriptul PAC va fi încărcat de la acest URL"
   }

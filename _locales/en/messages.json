@@ -438,5 +438,8 @@
   },
   "quickSwitchEmptyHint": {
     "message": "Drag proxy configurations here for quick access from the popup"
+  },
+  "quickSwitchEmptySubHint": {
+    "message": "Proxies added here will appear in the popup for one-click switching"
   }
 }

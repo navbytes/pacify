@@ -439,6 +439,9 @@
   "quickSwitchEmptyHint": {
     "message": "ポップアップから素早くアクセスするには、プロキシ設定をここにドラッグしてください"
   },
+  "quickSwitchEmptySubHint": {
+    "message": "ここに追加されたプロキシは、ワンクリック切り替えのためにポップアップに表示されます"
+  },
   "pacUrlHelp": {
     "message": "PACスクリプトはこのURLから読み込まれます"
   }

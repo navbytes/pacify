@@ -439,6 +439,9 @@
   "quickSwitchEmptyHint": {
     "message": "Ziehen Sie Proxy-Konfigurationen hierher für schnellen Zugriff aus dem Popup"
   },
+  "quickSwitchEmptySubHint": {
+    "message": "Proxies, die hier hinzugefügt werden, erscheinen im Popup für Ein-Klick-Wechsel"
+  },
   "pacUrlHelp": {
     "message": "PAC-Skript wird von dieser URL geladen"
   }

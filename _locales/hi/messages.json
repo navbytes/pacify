@@ -439,6 +439,9 @@
   "quickSwitchEmptyHint": {
     "message": "पॉपअप से त्वरित पहुंच के लिए प्रॉक्सी कॉन्फ़िगरेशन यहां खींचें"
   },
+  "quickSwitchEmptySubHint": {
+    "message": "यहां जोड़े गए प्रॉक्सी एक-क्लिक स्विचिंग के लिए पॉपअप में दिखाई देंगे"
+  },
   "pacUrlHelp": {
     "message": "PAC स्क्रिप्ट इस URL से लोड की जाएगी"
   }

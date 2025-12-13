@@ -439,6 +439,9 @@
   "quickSwitchEmptyHint": {
     "message": "将代理配置拖到此处以从弹出窗口快速访问"
   },
+  "quickSwitchEmptySubHint": {
+    "message": "在此处添加的代理将显示在弹出窗口中以实现一键切换"
+  },
   "pacUrlHelp": {
     "message": "PAC脚本将从此URL加载"
   }

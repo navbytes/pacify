@@ -439,6 +439,9 @@
   "quickSwitchEmptyHint": {
     "message": "팝업에서 빠른 액세스를 위해 프록시 구성을 여기로 드래그하세요"
   },
+  "quickSwitchEmptySubHint": {
+    "message": "여기에 추가된 프록시는 원클릭 전환을 위해 팝업에 표시됩니다"
+  },
   "pacUrlHelp": {
     "message": "PAC 스크립트가 이 URL에서 로드됩니다"
   }

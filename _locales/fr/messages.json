@@ -439,6 +439,9 @@
   "quickSwitchEmptyHint": {
     "message": "Glissez les configurations de proxy ici pour un accès rapide depuis la fenêtre contextuelle"
   },
+  "quickSwitchEmptySubHint": {
+    "message": "Les proxys ajoutés ici apparaîtront dans la fenêtre contextuelle pour un changement en un clic"
+  },
   "pacUrlHelp": {
     "message": "Le script PAC sera chargé depuis cette URL"
   }
