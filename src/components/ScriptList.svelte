@@ -52,20 +52,26 @@
       title={I18nService.getMessage('noProxiesTitle')}
       description={I18nService.getMessage('noScriptsAvailable')}
       icon={Globe}
+      compact
     />
   {:else if pageType === 'QUICK_SWITCH'}
     <EmptyState
-      title={I18nService.getMessage('noQuickSwitchTitle')}
-      description={I18nService.getMessage('noQuickSwitchScripts')}
+      title={I18nService.getMessage('noQuickSwitchTitle') || 'No Quick Switch proxies'}
+      description={I18nService.getMessage('noQuickSwitchScripts') ||
+        'Add proxies to Quick Switch for faster access'}
       icon={Zap}
+      iconSize={48}
+      compact
     />
   {:else}
     <EmptyState
-      title={I18nService.getMessage('noProxyConfigsTitle')}
-      description={I18nService.getMessage('noScriptsAvailableOptions')}
-      actionLabel={I18nService.getMessage('addFirstProxyAction')}
+      title={I18nService.getMessage('noProxyConfigsTitle') || 'No proxy configurations'}
+      description={I18nService.getMessage('noScriptsAvailableOptions') ||
+        'Create your first proxy configuration to get started'}
+      actionLabel={I18nService.getMessage('addFirstProxyAction') || 'Add Proxy'}
       onAction={() => onScriptEdit?.('')}
       icon={Globe}
+      iconSize={56}
     />
   {/if}
 </section>

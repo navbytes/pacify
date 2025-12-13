@@ -127,7 +127,21 @@
               </Text>
             </div>
 
-            <ScriptList pageType="QUICK_SWITCH" title="" bind:dragType />
+            {#if hasProxies && settings.proxyConfigs.filter((p) => p.quickSwitch).length === 0}
+              <!-- Hint when Quick Switch is empty but proxies exist -->
+              <div class="text-center py-8">
+                <Text as="p" size="sm" color="muted" classes="mb-2">
+                  {I18nService.getMessage('quickSwitchEmptyHint') ||
+                    'Drag proxy configurations here for quick access'}
+                </Text>
+                <Text as="p" size="xs" color="muted">
+                  {I18nService.getMessage('quickSwitchEmptySubHint') ||
+                    'Proxies added here will appear in Quick Switch mode'}
+                </Text>
+              </div>
+            {:else}
+              <ScriptList pageType="QUICK_SWITCH" title="" bind:dragType />
+            {/if}
           </div>
         </section>
       </DropTarget>

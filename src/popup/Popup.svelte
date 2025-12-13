@@ -1,9 +1,10 @@
 <script lang="ts">
   import ScriptList from '@/components/ScriptList.svelte'
+  import EmptyState from '@/components/EmptyState.svelte'
   import { ChromeService } from '@/services/chrome'
   import { onMount } from 'svelte'
   import { settingsStore } from '@/stores/settingsStore'
-  import { Settings, Power } from 'lucide-svelte'
+  import { Settings, Power, Cable } from 'lucide-svelte'
   import Button from '@/components/Button.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import Text from '@/components/Text.svelte'
@@ -45,7 +46,20 @@
 
   <!-- Main Content -->
   <main class="overflow-y-auto flex-1 px-5 pt-4 pb-4">
-    <ScriptList pageType="POPUP" title="" />
+    {#if hasProxies}
+      <ScriptList pageType="POPUP" title="" />
+    {:else}
+      <EmptyState
+        title={I18nService.getMessage('noProxiesYet') || 'No proxy configurations yet'}
+        description={I18nService.getMessage('noProxiesDescription') ||
+          'Get started by creating your first proxy configuration to control how your browser connects to the internet.'}
+        actionLabel={I18nService.getMessage('getStarted') || 'Get Started'}
+        onAction={openSettings}
+        icon={Cable}
+        iconSize={48}
+        compact
+      />
+    {/if}
   </main>
 
   <!-- Footer - Status & Actions -->
