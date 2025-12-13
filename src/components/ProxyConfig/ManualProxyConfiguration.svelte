@@ -1,6 +1,7 @@
 <script lang="ts">
   import ProxyInput from './ProxyInput.svelte'
   import FlexGroup from '../FlexGroup.svelte'
+  import Text from '../Text.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
 
   interface ProxyServerSettings {
