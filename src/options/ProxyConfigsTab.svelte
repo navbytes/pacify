@@ -11,7 +11,16 @@
   import Card from '@/components/Card.svelte'
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import ScriptList from '@/components/ScriptList.svelte'
-  import { Cable, Zap, CircleQuestionMark, Search, X } from 'lucide-svelte'
+  import {
+    Cable,
+    Zap,
+    CircleQuestionMark,
+    Search,
+    X,
+    Keyboard,
+    ChevronDown,
+    ChevronUp,
+  } from 'lucide-svelte'
 
   interface Props {
     onOpenEditor: (scriptId?: string) => void
@@ -39,6 +48,7 @@
   let quickSwitchProxies = $derived(filteredProxies.filter((p) => p.quickSwitch))
   let regularProxies = $derived(filteredProxies.filter((p) => !p.quickSwitch))
   let searchInputRef = $state<HTMLInputElement>()
+  let showKeyboardHints = $state(false)
 
   // Keyboard shortcuts handler
   function handleKeydown(event: KeyboardEvent) {
@@ -67,7 +77,14 @@
       if (index < quickSwitchProxies.length) {
         event.preventDefault()
         const proxy = quickSwitchProxies[index]
-        settingsStore.setProxy(!proxy.isActive, proxy.id)
+        const newState = !proxy.isActive
+        settingsStore.setProxy(newState, proxy.id)
+        toastStore.show(
+          newState
+            ? `${I18nService.getMessage('proxyActivated') || 'Activated'}: ${proxy.name}`
+            : `${I18nService.getMessage('proxyDeactivated') || 'Deactivated'}: ${proxy.name}`,
+          'success'
+        )
       }
     }
   }
@@ -129,6 +146,64 @@
       {/if}
     </div>
 
+    <!-- Keyboard Shortcuts Hints Card -->
+    <Card classes="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900">
+      <button
+        type="button"
+        onclick={() => (showKeyboardHints = !showKeyboardHints)}
+        class="w-full flex items-center justify-between text-left"
+      >
+        <div class="flex items-center gap-2">
+          <Keyboard size={18} class="text-blue-600 dark:text-blue-400" />
+          <Text weight="semibold" classes="text-blue-900 dark:text-blue-100">
+            Keyboard Shortcuts
+          </Text>
+        </div>
+        {#if showKeyboardHints}
+          <ChevronUp size={18} class="text-blue-600 dark:text-blue-400" />
+        {:else}
+          <ChevronDown size={18} class="text-blue-600 dark:text-blue-400" />
+        {/if}
+      </button>
+
+      {#if showKeyboardHints}
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="flex items-center justify-between py-1.5">
+            <Text size="sm" color="muted">Focus search</Text>
+            <kbd
+              class="px-2 py-1 text-xs font-mono bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-800 rounded shadow-sm"
+            >
+              Ctrl/Cmd+K
+            </kbd>
+          </div>
+          <div class="flex items-center justify-between py-1.5">
+            <Text size="sm" color="muted">New proxy</Text>
+            <kbd
+              class="px-2 py-1 text-xs font-mono bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-800 rounded shadow-sm"
+            >
+              Ctrl/Cmd+N
+            </kbd>
+          </div>
+          <div class="flex items-center justify-between py-1.5">
+            <Text size="sm" color="muted">Clear search</Text>
+            <kbd
+              class="px-2 py-1 text-xs font-mono bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-800 rounded shadow-sm"
+            >
+              Escape
+            </kbd>
+          </div>
+          <div class="flex items-center justify-between py-1.5">
+            <Text size="sm" color="muted">Toggle proxy 1-9</Text>
+            <kbd
+              class="px-2 py-1 text-xs font-mono bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-800 rounded shadow-sm"
+            >
+              1-9
+            </kbd>
+          </div>
+        </div>
+      {/if}
+    </Card>
+
     <!-- Quick Switch Mode Toggle Card -->
     <Card
       classes="hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-200"
@@ -176,10 +251,17 @@
         >
           <svelte:component this={Zap} size={16} class="text-white" />
         </div>
-        <div>
-          <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-            {I18nService.getMessage('quickSwitchConfigsTitle')}
-          </h2>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+              {I18nService.getMessage('quickSwitchConfigsTitle')}
+            </h2>
+            <span
+              class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800"
+            >
+              {quickSwitchProxies.length}
+            </span>
+          </div>
           <Text as="p" size="xs" color="muted" classes="mt-0.5">
             {I18nService.getMessage('quickSwitchConfigsDescription')}
           </Text>
@@ -241,9 +323,16 @@
           <svelte:component this={Cable} size={16} class="text-white" />
         </div>
         <div>
-          <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-            {I18nService.getMessage('allProxyConfigsTitle')}
-          </h2>
+          <div class="flex items-center gap-2">
+            <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+              {I18nService.getMessage('allProxyConfigsTitle')}
+            </h2>
+            <span
+              class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600"
+            >
+              {regularProxies.length}
+            </span>
+          </div>
           <Text as="p" size="xs" color="muted" classes="mt-0.5">
             {I18nService.getMessage('allProxyConfigsDescription')}
           </Text>
