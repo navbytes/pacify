@@ -16,25 +16,80 @@
     color = $bindable('gray'),
     isActive = $bindable(false),
   }: Props = $props()
+
+  const MAX_NAME_LENGTH = 50
+  const MIN_NAME_LENGTH = 1
+
+  let nameError = $state('')
+  let nameTouched = $state(false)
+  let charCount = $derived(name.length)
+  let isNameValid = $derived(charCount >= MIN_NAME_LENGTH && charCount <= MAX_NAME_LENGTH)
+
+  function validateName(value: string): string {
+    const trimmed = value.trim()
+
+    if (trimmed.length === 0) {
+      return I18nService.getMessage('nameRequired') || 'Name is required'
+    }
+
+    if (trimmed.length < MIN_NAME_LENGTH) {
+      return I18nService.getMessage('nameTooShort') || `Name must be at least ${MIN_NAME_LENGTH} character`
+    }
+
+    if (trimmed.length > MAX_NAME_LENGTH) {
+      return I18nService.getMessage('nameTooLong') || `Name must be ${MAX_NAME_LENGTH} characters or less`
+    }
+
+    return ''
+  }
+
+  function handleNameBlur() {
+    nameTouched = true
+    nameError = validateName(name)
+  }
+
+  function handleNameInput() {
+    if (nameTouched) {
+      nameError = validateName(name)
+    }
+  }
 </script>
 
 <FlexGroup childrenGap="lg" alignItems="center" justifyContent="between">
   <div class="flex-1">
-    <label
-      for="scriptName"
-      class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
-    >
-      {I18nService.getMessage('configurationName')}
-      <Text classes="text-red-500">*</Text>
-    </label>
+    <div class="flex items-center justify-between mb-1">
+      <label
+        for="scriptName"
+        class="block text-sm font-medium text-slate-700 dark:text-slate-300"
+      >
+        {I18nService.getMessage('configurationName')}
+        <Text classes="text-red-500">*</Text>
+      </label>
+      <Text
+        size="xs"
+        color={charCount > MAX_NAME_LENGTH ? 'error' : 'muted'}
+        classes="font-medium"
+      >
+        {charCount}/{MAX_NAME_LENGTH}
+      </Text>
+    </div>
     <input
       type="text"
       id="scriptName"
       bind:value={name}
-      class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
-             focus:ring-2 focus:ring-primary focus:border-primary"
+      oninput={handleNameInput}
+      onblur={handleNameBlur}
+      maxlength={MAX_NAME_LENGTH}
+      class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
+             focus:ring-2 focus:ring-primary focus:border-primary
+             {nameError && nameTouched ? 'border-red-500 dark:border-red-400' : 'border-slate-300 dark:border-slate-600'}"
       placeholder={I18nService.getMessage('enterConfigurationName')}
     />
+    {#if nameError && nameTouched}
+      <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">
+        {nameError}
+      </Text>
+    {/if}
   </div>
   <div>
     <Text size="sm" weight="medium" classes="block text-slate-700 dark:text-slate-300 mb-1">
