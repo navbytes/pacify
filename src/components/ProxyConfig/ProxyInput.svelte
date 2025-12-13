@@ -105,13 +105,15 @@
         oninput={handleHostInput}
         onblur={handleHostBlur}
         data-testid="{testIdPrefix}-host-input"
+        aria-invalid={hostError && hostTouched ? 'true' : 'false'}
+        aria-describedby={hostError && hostTouched ? `{testIdPrefix}-host-error` : undefined}
         class="w-full px-3 py-2 border rounded-md
                bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
                focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
                {hostError ? 'border-red-500 dark:border-red-400' : 'border-slate-300 dark:border-slate-600'}"
       />
       {#if hostError && hostTouched}
-        <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">
+        <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400" id="{testIdPrefix}-host-error">
           {hostError}
         </Text>
       {/if}
@@ -131,13 +133,15 @@
         oninput={handlePortInput}
         onblur={handlePortBlur}
         data-testid="{testIdPrefix}-port-input"
+        aria-invalid={portError && portTouched ? 'true' : 'false'}
+        aria-describedby={portError && portTouched ? `{testIdPrefix}-port-error` : undefined}
         class="w-full px-3 py-2 border rounded-md
                bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
                focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
                {portError ? 'border-red-500 dark:border-red-400' : 'border-slate-300 dark:border-slate-600'}"
       />
       {#if portError && portTouched}
-        <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">
+        <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400" id="{testIdPrefix}-port-error">
           {portError}
         </Text>
       {/if}

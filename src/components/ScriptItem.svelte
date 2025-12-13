@@ -101,6 +101,13 @@
           </div>
         {/if}
 
+        <!-- Color indicator badge (for colorblind accessibility) -->
+        <div
+          class="w-3 h-3 rounded-full flex-shrink-0 ring-2 ring-white dark:ring-slate-800"
+          style="background-color: {proxy.color}"
+          aria-label="Proxy color: {proxy.color}"
+        ></div>
+
         <h3 class="text-base font-semibold text-slate-900 dark:text-slate-100 truncate">
           {proxy.name}
         </h3>
@@ -108,8 +115,10 @@
         {#if proxy.isActive}
           <span
             class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/30 rounded-md border border-green-200 dark:border-green-800"
+            role="status"
+            aria-label="This proxy is currently active"
           >
-            <ShieldCheck size={12} />
+            <ShieldCheck size={12} aria-hidden="true" />
             Active
           </span>
         {/if}

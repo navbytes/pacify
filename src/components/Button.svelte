@@ -37,11 +37,11 @@
     role,
   }: Props = $props()
 
-  // Size mapping
+  // Size mapping - ensuring all meet 44x44px minimum touch target
   const sizes: Record<ButtonSize, string> = {
-    sm: 'py-1 px-2 text-sm',
-    md: 'py-2 px-4',
-    lg: 'py-3 px-6 text-lg',
+    sm: 'py-2 px-3 text-sm min-h-[44px]',
+    md: 'py-2.5 px-4 min-h-[44px]',
+    lg: 'py-3 px-6 text-lg min-h-[44px]',
   }
 
   // Color mapping with improved light theme contrast
@@ -76,8 +76,8 @@
   // Use $derived instead of $: for computed values
   const btnClasses = $derived(
     minimal
-      ? `inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-colors cursor-pointer ${colors[color].minimal} ${!children ? 'min-w-[44px] min-h-[44px]' : ''}`
-      : `inline-flex items-center ${sizes[size]} rounded shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 transition-colors cursor-pointer ${colors[color].base}`
+      ? `inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 dark:focus-visible:ring-blue-400/50 focus-visible:ring-offset-2 transition-all cursor-pointer ${colors[color].minimal} ${!children ? 'min-w-[44px] min-h-[44px]' : 'min-h-[44px]'}`
+      : `inline-flex items-center gap-2 ${sizes[size]} rounded shadow focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 dark:focus-visible:ring-blue-400/50 focus-visible:ring-offset-2 transition-all cursor-pointer ${colors[color].base}`
   )
 
   const disabledClasses = $derived(disabled ? 'opacity-50 cursor-not-allowed' : '')
@@ -99,9 +99,9 @@
 >
   {#if icon}
     <!-- Use the @render tag to render the icon component -->
-    <Text classes={children ? 'mr-2' : ''}>
+    <span class="flex-shrink-0">
       {@render icon()}
-    </Text>
+    </span>
   {/if}
   {@render children?.()}
 </button>

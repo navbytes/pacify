@@ -129,9 +129,45 @@
     }
   }
 
+  let modalRef = $state<HTMLDivElement>()
+  let previouslyFocusedElement: HTMLElement | null = null
+
+  $effect(() => {
+    // Store the previously focused element
+    previouslyFocusedElement = document.activeElement as HTMLElement
+
+    // Focus the modal content when it opens
+    if (modalRef) {
+      const firstInput = modalRef.querySelector('input, textarea, select, button') as HTMLElement
+      firstInput?.focus()
+    }
+
+    // Return focus when modal closes
+    return () => {
+      previouslyFocusedElement?.focus()
+    }
+  })
+
   function handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       onCancel()
+    }
+
+    // Trap focus within modal
+    if (event.key === 'Tab' && modalRef) {
+      const focusableElements = modalRef.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const firstElement = focusableElements[0] as HTMLElement
+      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault()
+        lastElement?.focus()
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault()
+        firstElement?.focus()
+      }
     }
   }
 </script>
@@ -141,8 +177,10 @@
 <div
   class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
   data-testid="proxy-config-modal"
+  role="presentation"
 >
   <div
+    bind:this={modalRef}
     class={`
       bg-white dark:bg-slate-800 rounded-lg shadow-xl flex flex-col
       transition-all duration-300 ease-in-out overflow-y-auto
@@ -150,6 +188,7 @@
     `}
     role="dialog"
     aria-labelledby="editor-title"
+    aria-modal="true"
   >
     <form class="flex flex-col flex-1" onsubmit={handleSubmit}>
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700">

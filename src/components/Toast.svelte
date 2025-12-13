@@ -34,28 +34,34 @@
   }
 </script>
 
-<FlexGroup direction="vertical" childrenGap="xs" classes="fixed top-4 right-4 z-50 max-w-md">
+<div
+  class="fixed top-4 right-4 z-50 max-w-md flex flex-col gap-2"
+  role="region"
+  aria-label="Notifications"
+  aria-live="polite"
+  aria-atomic="false"
+>
   {#each toasts as toast (toast.id)}
     {@const Icon = getIcon(toast.type)}
-    <FlexGroup
-      alignItems="start"
-      childrenGap="sm"
-      classes="p-4 rounded-lg border-l-4 shadow-lg animate-slide-in backdrop-blur-sm {getColors(
+    <div
+      class="flex items-start gap-2 p-4 rounded-lg border-l-4 shadow-lg animate-slide-in backdrop-blur-sm {getColors(
         toast.type
       )}"
+      role={toast.type === 'error' ? 'alert' : 'status'}
+      aria-live={toast.type === 'error' ? 'assertive' : 'polite'}
     >
-      <Icon size={20} class="flex-shrink-0 mt-0.5" />
+      <Icon size={20} class="flex-shrink-0 mt-0.5" aria-hidden="true" />
       <Text as="p" size="sm" weight="medium" classes="flex-1">{toast.message}</Text>
       <button
         onclick={() => toastStore.dismiss(toast.id)}
-        class="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity"
-        aria-label={I18nService.getMessage('closeNotification')}
+        class="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity min-h-[44px] min-w-[44px] flex items-center justify-center rounded focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50"
+        aria-label={I18nService.getMessage('closeNotification') || 'Close notification'}
       >
-        <X size={16} />
+        <X size={16} aria-hidden="true" />
       </button>
-    </FlexGroup>
+    </div>
   {/each}
-</FlexGroup>
+</div>
 
 <style>
   @keyframes slide-in {
