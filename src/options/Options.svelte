@@ -66,19 +66,13 @@
   }
 
   async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
-    console.log('handleScriptSave called with:', script)
-    console.log('showEditor before save:', showEditor)
-
     // Close modal immediately
     showEditor = false
-    console.log('Modal closed immediately')
 
     // Save in background
     settingsStore
       .updatePACScript(script, editingScriptId)
-      .then((result) => {
-        console.log('updatePACScript result:', result)
-
+      .then(() => {
         // Show success toast
         toastStore.show(
           editingScriptId
@@ -125,7 +119,7 @@
               class="flex items-center gap-2 px-3 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold flex-shrink-0 shadow-sm"
             >
               <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              ACTIVE
+              Active
             </div>
           {/if}
 

@@ -118,9 +118,7 @@
         }
       }
 
-      console.log('Saving config:', JSON.stringify(config, null, 2))
       await onSave(config)
-      console.log('onSave completed successfully')
     } catch (error) {
       console.error('Error saving proxy configuration:', error)
       errorMessage =
@@ -159,7 +157,7 @@
           {I18nService.getMessage('proxyConfiguration')}
         </h2>
       </div>
-      <div class="px-6 py-4 space-y-6 flex-1">
+      <div class="px-6 py-4 space-y-4 flex-1">
         <div
           class="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
         >

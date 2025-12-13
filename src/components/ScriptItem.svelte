@@ -92,7 +92,9 @@
           <!-- Drag handle (only for OPTIONS and QUICK_SWITCH) -->
           <div
             class="hidden group-hover:flex cursor-grab active:cursor-grabbing text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
-            aria-label="Drag to reorder"
+            role="button"
+            tabindex="0"
+            aria-label="Drag to move to Quick Switch"
             title="Drag to Quick Switch"
           >
             <GripVertical size={18} strokeWidth={2.5} />
