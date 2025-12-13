@@ -11,6 +11,8 @@
   import { Globe, Radar, Settings, Zap } from 'lucide-svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import Text from '../Text.svelte'
+  import { fade, scale, slide } from 'svelte/transition'
+  import { cubicOut } from 'svelte/easing'
 
   interface Props {
     proxyConfig?: ProxyConfig
@@ -178,17 +180,19 @@
   class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
   data-testid="proxy-config-modal"
   role="presentation"
+  transition:fade={{ duration: 200 }}
 >
   <div
     bind:this={modalRef}
     class={`
-      bg-white dark:bg-slate-800 rounded-lg shadow-xl flex flex-col
-      transition-all duration-300 ease-in-out overflow-y-auto
+      bg-white dark:bg-slate-800 rounded-lg shadow-2xl flex flex-col
+      overflow-y-auto
       w-full max-w-4xl min-h-[50vh] max-h-[90vh]
     `}
     role="dialog"
     aria-labelledby="editor-title"
     aria-modal="true"
+    transition:scale={{ duration: 200, start: 0.95, opacity: 0, easing: cubicOut }}
   >
     <form class="flex flex-col flex-1" onsubmit={handleSubmit}>
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700">
@@ -210,41 +214,49 @@
         <ProxyModeSelector bind:proxyMode />
 
         <!-- PAC Script Configuration -->
-        {#if proxyMode === 'system'}
-          <div
-            id="systemProxy"
-            class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
-          >
-            <Text as="p" color="muted">
-              <Globe size={20} class="inline-block" />
-              {I18nService.getMessage('systemProxy')}
-            </Text>
+        {#key proxyMode}
+          <div transition:slide={{ duration: 200, easing: cubicOut }}>
+            {#if proxyMode === 'system'}
+              <div
+                id="systemProxy"
+                class="bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-700/50 dark:to-slate-800/30 p-4 rounded-lg border border-slate-200 dark:border-slate-700 transition-all duration-200 shadow-sm"
+              >
+                <Text as="p" color="muted">
+                  <Globe size={20} class="inline-block mr-2" />
+                  {I18nService.getMessage('systemProxy')}
+                </Text>
+              </div>
+            {:else if proxyMode === 'direct'}
+              <div
+                id="systemProxy"
+                class="bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/30 dark:to-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800 transition-all duration-200 shadow-sm"
+              >
+                <Text as="p" color="muted">
+                  <Zap size={20} class="inline-block mr-2" />
+                  {I18nService.getMessage('directModeHelp')}
+                </Text>
+              </div>
+            {:else if proxyMode === 'auto_detect'}
+              <div
+                id="systemProxy"
+                class="bg-gradient-to-br from-purple-50 to-purple-100/50 dark:from-purple-950/30 dark:to-purple-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800 transition-all duration-200 shadow-sm"
+              >
+                <Text as="p" color="muted">
+                  <Radar size={20} class="inline-block mr-2" />
+                  {I18nService.getMessage('autoDetectModeHelp')}
+                </Text>
+              </div>
+            {:else if proxyMode === 'pac_script'}
+              <PACScriptSettings bind:pacUrl bind:pacMandatory bind:editorContent />
+            {:else if proxyMode === 'fixed_servers'}
+              <ManualProxyConfiguration
+                bind:useSharedProxy
+                bind:proxySettings
+                bind:bypassListContent
+              />
+            {/if}
           </div>
-        {:else if proxyMode === 'direct'}
-          <div
-            id="systemProxy"
-            class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
-          >
-            <Text as="p" color="muted">
-              <Zap size={20} class="inline-block" />
-              {I18nService.getMessage('directModeHelp')}
-            </Text>
-          </div>
-        {:else if proxyMode === 'auto_detect'}
-          <div
-            id="systemProxy"
-            class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700"
-          >
-            <Text as="p" color="muted">
-              <Radar size={20} class="inline-block" />
-              {I18nService.getMessage('autoDetectModeHelp')}
-            </Text>
-          </div>
-        {:else if proxyMode === 'pac_script'}
-          <PACScriptSettings bind:pacUrl bind:pacMandatory bind:editorContent />
-        {:else if proxyMode === 'fixed_servers'}
-          <ManualProxyConfiguration bind:useSharedProxy bind:proxySettings bind:bypassListContent />
-        {/if}
+        {/key}
       </div>
 
       <!-- Error Message -->
@@ -287,8 +299,9 @@
   }
 
   :global(.cm-editor) {
-    @apply rounded-md;
+    @apply rounded-md shadow-sm;
     overflow: hidden;
+    transition: all 150ms ease-in-out;
   }
 
   :global(.cm-editor .cm-scroller) {
@@ -297,16 +310,38 @@
   }
 
   :global(.cm-editor.cm-focused) {
-    @apply outline-none ring-2 ring-blue-500;
+    @apply outline-none ring-2 ring-blue-500 shadow-md;
+    transition: all 150ms ease-in-out;
   }
 
   :global(.cm-scroller) {
     @apply font-mono;
   }
 
+  /* Active line highlighting */
+  :global(.cm-activeLine) {
+    background-color: rgba(59, 130, 246, 0.05) !important;
+  }
+
+  :global(.dark .cm-activeLine) {
+    background-color: rgba(59, 130, 246, 0.08) !important;
+  }
+
   /* Autocomplete styling */
   :global(.cm-tooltip-autocomplete) {
-    @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg;
+    @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-xl;
+    animation: slideIn 150ms ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   :global(.cm-tooltip-autocomplete > ul) {
