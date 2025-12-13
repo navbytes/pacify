@@ -8,16 +8,20 @@
 
   // Note: settingsStore.init() is called by parent component (Popup.svelte)
   // No need to initialize again here to avoid duplicate storage reads
-  let proxyConfigs = $derived($settingsStore.proxyConfigs ?? [])
+  let proxyConfigsFromStore = $derived($settingsStore.proxyConfigs ?? [])
 
   interface Props {
     pageType?: ListViewType
     title: string
     onScriptEdit?: (scriptId: string) => void
     dragType?: string
+    proxies?: ProxyConfig[] // Optional filtered proxies list
   }
 
-  let { pageType = 'POPUP', title, onScriptEdit, dragType = $bindable() }: Props = $props()
+  let { pageType = 'POPUP', title, onScriptEdit, dragType = $bindable(), proxies }: Props = $props()
+
+  // Use provided proxies or fall back to store
+  let proxyConfigs = $derived(proxies ?? proxyConfigsFromStore)
 
   function openEditor(scriptId?: string) {
     if (!scriptId || !onScriptEdit) return

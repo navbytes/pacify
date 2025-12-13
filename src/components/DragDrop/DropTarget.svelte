@@ -103,16 +103,28 @@
   .drop-target {
     position: relative;
     border: 2px dashed transparent;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .drop-target.drag-over {
     border-color: #3b82f6;
-    background-color: rgba(59, 130, 246, 0.05);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.08) 100%);
     transform: scale(1.01);
     box-shadow:
-      0 0 0 3px rgba(59, 130, 246, 0.1),
-      0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      0 0 0 3px rgba(59, 130, 246, 0.15),
+      0 4px 12px -2px rgba(59, 130, 246, 0.2),
+      0 8px 20px -4px rgba(0, 0, 0, 0.1);
+    animation: pulseDropZone 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulseDropZone {
+    0%,
+    100% {
+      border-color: #3b82f6;
+    }
+    50% {
+      border-color: #60a5fa;
+    }
   }
 
   .drop-target.disabled {

@@ -11,7 +11,7 @@
   import Card from '@/components/Card.svelte'
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import ScriptList from '@/components/ScriptList.svelte'
-  import { Cable, Zap, CircleQuestionMark } from 'lucide-svelte'
+  import { Cable, Zap, CircleQuestionMark, Search, X } from 'lucide-svelte'
 
   interface Props {
     onOpenEditor: (scriptId?: string) => void
@@ -22,7 +22,55 @@
   let settings = $derived($settingsStore)
   let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
   let dropError = $state<string | null>(null)
+  let searchQuery = $state('')
   let hasProxies = $derived(settings.proxyConfigs.length > 0)
+
+  // Filter proxies based on search query
+  let filteredProxies = $derived(
+    settings.proxyConfigs.filter((p) => {
+      if (!searchQuery.trim()) return true
+      const query = searchQuery.toLowerCase()
+      return (
+        p.name.toLowerCase().includes(query) || (p.mode && p.mode.toLowerCase().includes(query))
+      )
+    })
+  )
+
+  let quickSwitchProxies = $derived(filteredProxies.filter((p) => p.quickSwitch))
+  let regularProxies = $derived(filteredProxies.filter((p) => !p.quickSwitch))
+  let searchInputRef = $state<HTMLInputElement>()
+
+  // Keyboard shortcuts handler
+  function handleKeydown(event: KeyboardEvent) {
+    // Ctrl/Cmd+K to focus search
+    if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+      event.preventDefault()
+      searchInputRef?.focus()
+    }
+
+    // Escape to clear search
+    if (event.key === 'Escape' && searchQuery) {
+      event.preventDefault()
+      searchQuery = ''
+      searchInputRef?.blur()
+    }
+
+    // Ctrl/Cmd+N to create new proxy
+    if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
+      event.preventDefault()
+      onOpenEditor()
+    }
+
+    // Number keys 1-9 to toggle quick switch proxies
+    if (event.key >= '1' && event.key <= '9') {
+      const index = parseInt(event.key) - 1
+      if (index < quickSwitchProxies.length) {
+        event.preventDefault()
+        const proxy = quickSwitchProxies[index]
+        settingsStore.setProxy(!proxy.isActive, proxy.id)
+      }
+    }
+  }
 
   async function handleQuickSwitchToggle(checked: boolean) {
     await settingsStore.quickSwitchToggle(checked)
@@ -51,8 +99,36 @@
   }
 </script>
 
+<svelte:window on:keydown={handleKeydown} />
+
 <div class="py-6 space-y-8">
   {#if hasProxies}
+    <!-- Search/Filter Input -->
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <Search size={18} class="text-slate-400 dark:text-slate-500" />
+      </div>
+      <input
+        bind:this={searchInputRef}
+        bind:value={searchQuery}
+        type="text"
+        placeholder="Search proxies... (Ctrl+K)"
+        class="block w-full pl-10 pr-10 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-150"
+      />
+      {#if searchQuery}
+        <button
+          type="button"
+          onclick={() => {
+            searchQuery = ''
+            searchInputRef?.focus()
+          }}
+          class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+        >
+          <X size={18} class="text-slate-400 dark:text-slate-500" />
+        </button>
+      {/if}
+    </div>
+
     <!-- Quick Switch Mode Toggle Card -->
     <Card
       classes="hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-200"
@@ -140,7 +216,12 @@
                 </Text>
               </div>
             {:else}
-              <ScriptList pageType="QUICK_SWITCH" title="" bind:dragType />
+              <ScriptList
+                pageType="QUICK_SWITCH"
+                title=""
+                proxies={quickSwitchProxies}
+                bind:dragType
+              />
             {/if}
           </div>
         </section>
@@ -194,6 +275,7 @@
         <div role="list">
           <ScriptList
             pageType="OPTIONS"
+            proxies={regularProxies}
             onScriptEdit={(scriptId) => onOpenEditor(scriptId)}
             bind:dragType
             title=""
