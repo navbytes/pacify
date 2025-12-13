@@ -78,7 +78,7 @@
         event.preventDefault()
         const proxy = quickSwitchProxies[index]
         const newState = !proxy.isActive
-        settingsStore.setProxy(newState, proxy.id)
+        settingsStore.setProxy(proxy.id, newState)
         toastStore.show(
           newState
             ? `${I18nService.getMessage('proxyActivated') || 'Activated'}: ${proxy.name}`
