@@ -393,5 +393,53 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "Нажмите Ctrl+N (Cmd+N на Mac), чтобы быстро добавить новый прокси"
+  },
+  "invalidHost": {
+    "message": "Недопустимое имя хоста или IP-адрес"
+  },
+  "invalidPort": {
+    "message": "Порт должен быть от 1 до 65535"
+  },
+  "invalidUrl": {
+    "message": "Пожалуйста, введите правильный URL"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "URL PAC должен использовать протокол http://, https:// или file://"
+  },
+  "pacUrlWarning": {
+    "message": "Файлы PAC обычно заканчиваются на .pac"
+  },
+  "bypassListHelp": {
+    "message": "Введите один адрес в строке. Вы можете использовать подстановочные знаки (*) и диапазоны IP (нотация CIDR)."
+  },
+  "nameTooLong": {
+    "message": "Имя должно содержать не более 50 символов"
+  },
+  "nameTooShort": {
+    "message": "Имя должно содержать хотя бы 1 символ"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "Схема"
+  },
+  "noProxiesYet": {
+    "message": "Пока нет конфигураций прокси"
+  },
+  "noProxiesDescription": {
+    "message": "Начните с создания первой конфигурации прокси, чтобы управлять подключением браузера к Интернету."
+  },
+  "getStarted": {
+    "message": "Начать"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "Перетащите конфигурации прокси сюда для быстрого доступа из всплывающего окна"
+  },
+  "pacUrlHelp": {
+    "message": "PAC-скрипт будет загружен с этого URL"
   }
 }

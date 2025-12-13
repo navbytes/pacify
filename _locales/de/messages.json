@@ -393,5 +393,53 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "Drücken Sie Strg+N (Cmd+N auf Mac), um schnell einen neuen Proxy hinzuzufügen"
+  },
+  "invalidHost": {
+    "message": "Ungültiger Hostname oder IP-Adresse"
+  },
+  "invalidPort": {
+    "message": "Port muss zwischen 1 und 65535 liegen"
+  },
+  "invalidUrl": {
+    "message": "Bitte geben Sie eine gültige URL ein"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "PAC-URL muss http://, https:// oder file:// Protokoll verwenden"
+  },
+  "pacUrlWarning": {
+    "message": "PAC-Dateien enden normalerweise mit .pac"
+  },
+  "bypassListHelp": {
+    "message": "Geben Sie eine Adresse pro Zeile ein. Sie können Platzhalter (*) und IP-Bereiche (CIDR-Notation) verwenden."
+  },
+  "nameTooLong": {
+    "message": "Name darf höchstens 50 Zeichen lang sein"
+  },
+  "nameTooShort": {
+    "message": "Name muss mindestens 1 Zeichen lang sein"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "Schema"
+  },
+  "noProxiesYet": {
+    "message": "Noch keine Proxy-Konfigurationen"
+  },
+  "noProxiesDescription": {
+    "message": "Beginnen Sie, indem Sie Ihre erste Proxy-Konfiguration erstellen, um zu steuern, wie Ihr Browser sich mit dem Internet verbindet."
+  },
+  "getStarted": {
+    "message": "Jetzt starten"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "Ziehen Sie Proxy-Konfigurationen hierher für schnellen Zugriff aus dem Popup"
+  },
+  "pacUrlHelp": {
+    "message": "PAC-Skript wird von dieser URL geladen"
   }
 }

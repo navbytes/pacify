@@ -393,5 +393,53 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "按Ctrl+N（Mac上为Cmd+N）快速添加新代理"
+  },
+  "invalidHost": {
+    "message": "无效的主机名或IP地址"
+  },
+  "invalidPort": {
+    "message": "端口必须在1到65535之间"
+  },
+  "invalidUrl": {
+    "message": "请输入有效的URL"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "PAC URL必须使用http://、https://或file://协议"
+  },
+  "pacUrlWarning": {
+    "message": "PAC文件通常以.pac结尾"
+  },
+  "bypassListHelp": {
+    "message": "每行输入一个地址。您可以使用通配符(*)和IP范围(CIDR表示法)。"
+  },
+  "nameTooLong": {
+    "message": "名称不得超过50个字符"
+  },
+  "nameTooShort": {
+    "message": "名称至少需要1个字符"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "方案"
+  },
+  "noProxiesYet": {
+    "message": "还没有代理配置"
+  },
+  "noProxiesDescription": {
+    "message": "开始创建您的第一个代理配置，以控制浏览器如何连接到互联网。"
+  },
+  "getStarted": {
+    "message": "开始使用"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "将代理配置拖到此处以从弹出窗口快速访问"
+  },
+  "pacUrlHelp": {
+    "message": "PAC脚本将从此URL加载"
   }
 }

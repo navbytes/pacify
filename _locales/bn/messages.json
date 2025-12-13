@@ -393,5 +393,53 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "দ্রুত একটি নতুন প্রক্সি যোগ করতে Ctrl+N (Mac-এ Cmd+N) চাপুন"
+  },
+  "invalidHost": {
+    "message": "অবৈধ হোস্টনাম বা IP ঠিকানা"
+  },
+  "invalidPort": {
+    "message": "পোর্ট 1 থেকে 65535 এর মধ্যে হতে হবে"
+  },
+  "invalidUrl": {
+    "message": "অনুগ্রহ করে একটি বৈধ URL লিখুন"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "PAC URL অবশ্যই http://, https://, বা file:// প্রোটোকল ব্যবহার করতে হবে"
+  },
+  "pacUrlWarning": {
+    "message": "PAC ফাইল সাধারণত .pac দিয়ে শেষ হয়"
+  },
+  "bypassListHelp": {
+    "message": "প্রতি লাইনে একটি ঠিকানা লিখুন। আপনি ওয়াইল্ডকার্ড (*) এবং IP রেঞ্জ (CIDR নোটেশন) ব্যবহার করতে পারেন।"
+  },
+  "nameTooLong": {
+    "message": "নাম 50টি অক্ষর বা তার কম হতে হবে"
+  },
+  "nameTooShort": {
+    "message": "নাম কমপক্ষে 1টি অক্ষর হতে হবে"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "স্কিম"
+  },
+  "noProxiesYet": {
+    "message": "এখনও কোনও প্রক্সি কনফিগারেশন নেই"
+  },
+  "noProxiesDescription": {
+    "message": "আপনার ব্রাউজার কীভাবে ইন্টারনেটে সংযুক্ত হয় তা নিয়ন্ত্রণ করতে আপনার প্রথম প্রক্সি কনফিগারেশন তৈরি করে শুরু করুন।"
+  },
+  "getStarted": {
+    "message": "শুরু করুন"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "পপআপ থেকে দ্রুত অ্যাক্সেসের জন্য প্রক্সি কনফিগারেশন এখানে টেনে আনুন"
+  },
+  "pacUrlHelp": {
+    "message": "PAC স্ক্রিপ্ট এই URL থেকে লোড হবে"
   }
 }
