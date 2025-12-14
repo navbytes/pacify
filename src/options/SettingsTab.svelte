@@ -18,7 +18,7 @@
     Bug,
     Lightbulb,
     BookOpen,
-  } from 'lucide-svelte'
+  } from '@/utils/icons'
 
   let settings = $derived($settingsStore)
 

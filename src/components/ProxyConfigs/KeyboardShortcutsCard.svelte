@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Keyboard, ChevronDown, ChevronUp } from 'lucide-svelte'
+  import { Keyboard, ChevronDown, ChevronUp } from '@/utils/icons'
   import Card from '@/components/Card.svelte'
   import Text from '@/components/Text.svelte'
   import { I18nService } from '@/services/i18n/i18nService'

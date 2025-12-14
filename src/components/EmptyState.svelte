@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Globe, Plus } from 'lucide-svelte'
+  import { Globe, Plus } from '@/utils/icons'
   import type { ComponentType } from 'svelte'
   import Button from './Button.svelte'
   import Text from './Text.svelte'

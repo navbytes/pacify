@@ -3,7 +3,7 @@
   import Text from '@/components/Text.svelte'
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import Tooltip from '@/components/Tooltip.svelte'
-  import { CircleQuestionMark } from 'lucide-svelte'
+  import { CircleQuestionMark } from '@/utils/icons'
 
   interface Props {
     icon: ComponentType

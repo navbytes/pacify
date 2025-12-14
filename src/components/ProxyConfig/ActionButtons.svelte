@@ -1,7 +1,7 @@
 <script lang="ts">
   import Button from '../Button.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
-  import { Loader2 } from 'lucide-svelte'
+  import { Loader2 } from '@/utils/icons'
 
   interface Props {
     isSubmitting?: boolean

@@ -3,7 +3,7 @@
   import Card from './Card.svelte'
   import FlexGroup from './FlexGroup.svelte'
   import IconBadge from './IconBadge.svelte'
-  import { ExternalLink } from 'lucide-svelte'
+  import { ExternalLink } from '@/utils/icons'
 
   type BadgeColor = 'blue' | 'red' | 'yellow' | 'green' | 'purple' | 'orange'
 

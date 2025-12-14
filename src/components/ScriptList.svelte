@@ -4,7 +4,7 @@
   import EmptyState from './EmptyState.svelte'
   import type { ListViewType, ProxyConfig } from '@/interfaces'
   import { I18nService } from '@/services/i18n/i18nService'
-  import { Globe, Zap } from 'lucide-svelte'
+  import { Globe, Zap } from '@/utils/icons'
 
   // Note: settingsStore.init() is called by parent component (Popup.svelte)
   // No need to initialize again here to avoid duplicate storage reads

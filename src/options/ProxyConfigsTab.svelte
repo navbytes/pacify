@@ -11,7 +11,7 @@
   import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
   import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
   import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
-  import { Cable, Zap } from 'lucide-svelte'
+  import { Cable, Zap } from '@/utils/icons'
 
   interface Props {
     onOpenEditor: (scriptId?: string) => void

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { AlertTriangle, X } from 'lucide-svelte'
+  import { AlertTriangle, X } from '@/utils/icons'
   import Button from './Button.svelte'
   import Text from './Text.svelte'
   import { I18nService } from '@/services/i18n/i18nService'

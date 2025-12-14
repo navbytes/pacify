@@ -8,7 +8,7 @@
   import { NotifyService } from '@/services/NotifyService'
   import { ERROR_TYPES } from '@/interfaces'
   import type { ProxyConfig, ProxyMode, ProxySettings, ProxyServer } from '@/interfaces'
-  import { Globe, Radar, Settings, Zap } from 'lucide-svelte'
+  import { Globe, Radar, Settings, Zap } from '@/utils/icons'
   import { I18nService } from '@/services/i18n/i18nService'
   import Text from '../Text.svelte'
   import { fade, scale, slide } from 'svelte/transition'

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CheckCircle, XCircle, AlertCircle, Info, X } from 'lucide-svelte'
+  import { CheckCircle, XCircle, AlertCircle, Info, X } from '@/utils/icons'
   import { toastStore, type ToastType } from '@/stores/toastStore'
   import Text from './Text.svelte'
   import FlexGroup from './FlexGroup.svelte'

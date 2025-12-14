@@ -3,7 +3,7 @@
   import { type ProxyConfig, type ListViewType } from '@/interfaces'
   import { settingsStore } from '@/stores/settingsStore'
   import { toastStore } from '@/stores/toastStore'
-  import { ShieldCheck, Pencil, Trash, GripVertical } from 'lucide-svelte'
+  import { ShieldCheck, Pencil, Trash, GripVertical } from '@/utils/icons'
   import Button from './Button.svelte'
   import ConfirmDialog from './ConfirmDialog.svelte'
   import { I18nService } from '@/services/i18n/i18nService'

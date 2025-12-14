@@ -4,7 +4,7 @@
   import { ChromeService } from '@/services/chrome'
   import { onMount } from 'svelte'
   import { settingsStore } from '@/stores/settingsStore'
-  import { Settings, Power, Cable } from 'lucide-svelte'
+  import { Settings, Power, Cable } from '@/utils/icons'
   import Button from '@/components/Button.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import Text from '@/components/Text.svelte'

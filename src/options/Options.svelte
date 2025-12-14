@@ -12,7 +12,7 @@
   import Toast from '@/components/Toast.svelte'
   import ProxyConfigsTab from './ProxyConfigsTab.svelte'
   import SettingsTab from './SettingsTab.svelte'
-  import { Cable, Settings } from 'lucide-svelte'
+  import { Cable, Settings } from '@/utils/icons'
   import { logger } from '@/services/LoggerService'
 
   let showEditor = $state(false)
