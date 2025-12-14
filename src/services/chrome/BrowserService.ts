@@ -362,6 +362,22 @@ export class BrowserService implements BrowserAPI {
         }
       })
     },
+
+    create: async (createProperties: { url: string }): Promise<any> => {
+      return new Promise((resolve, reject) => {
+        try {
+          chrome.tabs.create(createProperties, (tab) => {
+            if (chrome.runtime.lastError) {
+              reject(chrome.runtime.lastError)
+            } else {
+              resolve(tab)
+            }
+          })
+        } catch (error) {
+          reject(error)
+        }
+      })
+    },
   }
 
   // Proxy API
