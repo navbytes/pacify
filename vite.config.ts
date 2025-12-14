@@ -221,15 +221,21 @@ export default defineConfig(({ command, mode }) => {
               return 'vendor'
             }
 
-            // App code - split by feature
+            // Keep core app code together (interfaces, constants, utils, stores, services)
+            // This prevents circular dependency issues and ensures shared code loads first
+            if (
+              id.includes('/interfaces/') ||
+              id.includes('/constants/') ||
+              id.includes('/utils/') ||
+              id.includes('/stores/') ||
+              id.includes('/services/')
+            ) {
+              return 'app'
+            }
+
+            // UI components can be separate
             if (id.includes('/components/')) {
               return 'components'
-            }
-            if (id.includes('/services/')) {
-              return 'services'
-            }
-            if (id.includes('/stores/')) {
-              return 'stores'
             }
           },
         },
