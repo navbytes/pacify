@@ -33,6 +33,15 @@
       if (saved['options.activeTab']) {
         activeTab = saved['options.activeTab']
       }
+
+      // Check if we should auto-open the editor (from popup quick add)
+      const params = new URLSearchParams(window.location.search)
+      if (params.get('action') === 'create') {
+        activeTab = 'proxy-configs' // Ensure we're on the right tab
+        openEditor() // Auto-open the editor for new proxy
+        // Clean up URL parameter
+        window.history.replaceState({}, '', window.location.pathname)
+      }
     }
 
     init()

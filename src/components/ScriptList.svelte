@@ -30,7 +30,16 @@
 
   // Fix: Use $derived to create a derived array instead of a function
   let displayProxyConfigs = $derived<ProxyConfig[]>(
-    pageType === 'QUICK_SWITCH' ? proxyConfigs.filter((script) => script.quickSwitch) : proxyConfigs
+    pageType === 'QUICK_SWITCH'
+      ? proxyConfigs.filter((script) => script.quickSwitch)
+      : pageType === 'POPUP'
+        ? [...proxyConfigs].sort((a, b) => {
+            // Sort Quick Switch proxies to the top
+            if (a.quickSwitch && !b.quickSwitch) return -1
+            if (!a.quickSwitch && b.quickSwitch) return 1
+            return 0
+          })
+        : proxyConfigs
   )
 </script>
 

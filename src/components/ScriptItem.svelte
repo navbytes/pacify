@@ -137,8 +137,19 @@
       {/if}
     </div>
 
-    <!-- Card Content (OPTIONS only) -->
-    {#if pageType !== 'POPUP'}
+    <!-- Card Content -->
+    {#if pageType === 'POPUP'}
+      <!-- Compact mode badge for POPUP -->
+      <div class="mt-2">
+        <div
+          class={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md border text-xs font-medium ${modeColors.bg} ${modeColors.text} ${modeColors.border}`}
+        >
+          <ModeIcon size={11} />
+          <span>{modeLabel}</span>
+        </div>
+      </div>
+    {:else}
+      <!-- Full content for OPTIONS/QUICK_SWITCH -->
       <div class="flex flex-col gap-2 mb-4 mt-3">
         <!-- Mode badge -->
         <div
