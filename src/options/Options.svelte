@@ -3,7 +3,7 @@
   import { settingsStore } from '@/stores/settingsStore'
   import { toastStore } from '@/stores/toastStore'
   import { type ProxyConfig } from '@/interfaces'
-  import ProxyConfigModal from '@/components/ProxyConfig/ProxyConfigModal.svelte'
+  import type { ComponentType } from 'svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import Tabs from '@/components/Tabs/Tabs.svelte'
   import TabList from '@/components/Tabs/TabList.svelte'
@@ -19,6 +19,10 @@
   let editingScriptId = $state<string | null>(null)
   let settings = $derived($settingsStore)
   let activeTab = $state('proxy-configs')
+
+  // Dynamic import for ProxyConfigModal - only load when needed
+  let ProxyConfigModal = $state<ComponentType | null>(null)
+  let isLoadingModal = $state(false)
 
   onMount(() => {
     const init = async () => {
@@ -61,9 +65,24 @@
     }
   })
 
-  function openEditor(scriptId?: string) {
+  async function openEditor(scriptId?: string) {
     editingScriptId = scriptId || null
     showEditor = true
+
+    // Lazy load the modal component if not already loaded
+    if (!ProxyConfigModal && !isLoadingModal) {
+      isLoadingModal = true
+      try {
+        const module = await import('@/components/ProxyConfig/ProxyConfigModal.svelte')
+        ProxyConfigModal = module.default
+      } catch (error) {
+        logger.error('Failed to load ProxyConfigModal:', error)
+        toastStore.show('Failed to load editor', 'error')
+        showEditor = false
+      } finally {
+        isLoadingModal = false
+      }
+    }
   }
 
   async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
@@ -147,15 +166,29 @@
     </TabPanel>
   </Tabs>
 
-  <!-- Script Editor Modal -->
+  <!-- Script Editor Modal (Lazy Loaded) -->
   {#if showEditor}
-    <ProxyConfigModal
-      proxyConfig={editingScriptId
-        ? settings.proxyConfigs.find((s) => s.id === editingScriptId)
-        : undefined}
-      onSave={handleScriptSave}
-      onCancel={() => (showEditor = false)}
-    />
+    {#if ProxyConfigModal}
+      <svelte:component
+        this={ProxyConfigModal}
+        proxyConfig={editingScriptId
+          ? settings.proxyConfigs.find((s) => s.id === editingScriptId)
+          : undefined}
+        onSave={handleScriptSave}
+        onCancel={() => (showEditor = false)}
+      />
+    {:else if isLoadingModal}
+      <!-- Loading placeholder -->
+      <div
+        class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-xl">
+          <p class="text-slate-900 dark:text-slate-100">Loading editor...</p>
+        </div>
+      </div>
+    {/if}
   {/if}
 
   <!-- Toast Notifications -->

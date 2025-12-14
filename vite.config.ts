@@ -187,13 +187,49 @@ export default defineConfig(({ command, mode }) => {
             if (id.includes('monaco-editor')) {
               return 'monaco'
             }
-            // Svelte and UI libraries
-            if (id.includes('svelte') || id.includes('lucide-svelte')) {
-              return 'vendor'
+
+            // ProxyConfigModal and its heavy dependencies get their own chunk
+            if (
+              id.includes('ProxyConfigModal') ||
+              id.includes('PACScriptSettings') ||
+              id.includes('ManualProxyConfiguration') ||
+              id.includes('BasicSettings') ||
+              id.includes('ProxyModeSelector') ||
+              id.includes('ActionButtons') ||
+              id.includes('ProxyInput')
+            ) {
+              return 'modal'
             }
-            // Node modules get their own chunk
+
+            // CodeMirror (PAC editor) gets its own chunk
+            if (id.includes('codemirror') || id.includes('CodeMirrorService')) {
+              return 'codemirror'
+            }
+
+            // Svelte runtime
+            if (id.includes('svelte/internal') || id.includes('@sveltejs/')) {
+              return 'svelte-runtime'
+            }
+
+            // Icons
+            if (id.includes('lucide-svelte')) {
+              return 'icons'
+            }
+
+            // Other node modules
             if (id.includes('node_modules')) {
               return 'vendor'
+            }
+
+            // App code - split by feature
+            if (id.includes('/components/')) {
+              return 'components'
+            }
+            if (id.includes('/services/')) {
+              return 'services'
+            }
+            if (id.includes('/stores/')) {
+              return 'stores'
             }
           },
         },
