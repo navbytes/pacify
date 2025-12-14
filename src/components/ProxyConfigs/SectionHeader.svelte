@@ -16,6 +16,8 @@
     toggleChecked?: boolean
     toggleTooltip?: string
     ontoggle?: (checked: boolean) => void
+    // Optional border control
+    hideBorder?: boolean
   }
 
   let {
@@ -28,6 +30,7 @@
     toggleChecked = false,
     toggleTooltip,
     ontoggle,
+    hideBorder = false,
   }: Props = $props()
 
   const iconColorClasses = {
@@ -50,7 +53,9 @@
 </script>
 
 <div
-  class="mb-6 pb-2 border-b {borderColorClasses[iconColor]} flex items-center justify-between gap-4"
+  class="mb-6 pb-2 {hideBorder
+    ? ''
+    : `border-b ${borderColorClasses[iconColor]}`} flex items-center justify-between gap-4"
 >
   <div class="flex items-center gap-2 flex-1 min-w-0">
     <div

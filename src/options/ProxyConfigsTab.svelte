@@ -188,7 +188,9 @@
 
   <!-- All Proxy Configs Section -->
   <div>
-    <div class="mb-6 pb-2 flex justify-between items-center">
+    <div
+      class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center"
+    >
       <div class="flex-1">
         <SectionHeader
           icon={Cable}
@@ -196,6 +198,7 @@
           description={I18nService.getMessage('allProxyConfigsDescription')}
           count={regularProxies.length}
           iconColor="slate"
+          hideBorder={true}
         />
       </div>
       <div class="flex gap-2 items-center">
