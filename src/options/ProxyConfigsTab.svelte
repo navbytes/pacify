@@ -27,19 +27,20 @@
   let showSearch = $state(false)
   let hasProxies = $derived(settings.proxyConfigs.length > 0)
 
-  // Filter proxies based on search query
-  let filteredProxies = $derived(
+  // Quick Switch proxies are never filtered by search
+  let quickSwitchProxies = $derived(settings.proxyConfigs.filter((p) => p.quickSwitch))
+
+  // Only filter regular proxies based on search query
+  let regularProxies = $derived(
     settings.proxyConfigs.filter((p) => {
-      if (!searchQuery.trim()) return true
+      if (p.quickSwitch) return false // Exclude quick switch proxies
+      if (!searchQuery.trim()) return true // No search, show all
       const query = searchQuery.toLowerCase()
       return (
         p.name.toLowerCase().includes(query) || (p.mode && p.mode.toLowerCase().includes(query))
       )
     })
   )
-
-  let quickSwitchProxies = $derived(filteredProxies.filter((p) => p.quickSwitch))
-  let regularProxies = $derived(filteredProxies.filter((p) => !p.quickSwitch))
 
   let searchBarRef = $state<SearchBar>()
 
@@ -128,13 +129,6 @@
 
 <div class="py-6 space-y-8">
   {#if hasProxies}
-    <!-- Toggleable Search Bar with slide animation -->
-    {#if showSearch}
-      <div transition:slide={{ duration: 200 }}>
-        <SearchBar bind:this={searchBarRef} bind:searchQuery onsearch={handleSearch} />
-      </div>
-    {/if}
-
     <KeyboardShortcutsCard />
 
     <!-- Quick Switch Configs Section -->
@@ -227,6 +221,13 @@
         </Tooltip>
       </div>
     </div>
+
+    <!-- Search Bar (only for All Proxy Configs) -->
+    {#if showSearch}
+      <div transition:slide={{ duration: 200 }} class="mb-4">
+        <SearchBar bind:this={searchBarRef} bind:searchQuery onsearch={handleSearch} />
+      </div>
+    {/if}
 
     <DropTarget onDrop={(item) => handleDrop(item, 'OPTIONS')}>
       <section
