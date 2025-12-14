@@ -308,8 +308,8 @@ test.describe('3. Manual Proxy Configuration', () => {
     await sameProxyCheckbox.check()
 
     // Fill proxy
-    await page.fill('input[placeholder*="Host"]', 'proxy.example.com')
-    await page.fill('input[placeholder*="Port"]', '8080')
+    await page.getByTestId('single-proxy-host-input').fill('proxy.example.com')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
 
     // Fill bypass list
     const bypassInput = page.locator('textarea[placeholder*="Bypass"]')
