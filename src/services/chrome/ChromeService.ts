@@ -127,10 +127,17 @@ export class ChromeService {
   )
 
   /**
-   * Opens the options page
+   * Opens the options page with optional query parameters
    */
-  static openOptionsPage(): void {
-    this.browser.runtime.openOptionsPage()
+  static openOptionsPage(params?: Record<string, string>): void {
+    if (params && Object.keys(params).length > 0) {
+      // Build URL with query parameters
+      const queryString = new URLSearchParams(params).toString()
+      const optionsUrl = `${this.browser.runtime.getURL('src/options/options.html')}?${queryString}`
+      this.browser.tabs.create({ url: optionsUrl })
+    } else {
+      this.browser.runtime.openOptionsPage()
+    }
   }
 
   /**

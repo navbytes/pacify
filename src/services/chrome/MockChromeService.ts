@@ -60,8 +60,11 @@ export class MockChromeService {
     return Promise.resolve()
   }
 
-  static openOptionsPage(): void {
-    console.log('Mock: Opening options page')
+  static openOptionsPage(params?: Record<string, string>): void {
+    console.log(
+      'Mock: Opening options page',
+      params ? `with params: ${JSON.stringify(params)}` : ''
+    )
   }
 
   static async setSyncSettings(settings: AppSettings): Promise<void> {
