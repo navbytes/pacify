@@ -444,5 +444,35 @@
   },
   "pacUrlHelp": {
     "message": "PACスクリプトはこのURLから読み込まれます"
+  },
+  "keyboardShortcuts": {
+    "message": "キーボードショートカット"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "検索にフォーカス"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "新しいプロキシ"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "検索をクリア"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "プロキシを切り替え 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "プロキシを検索... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

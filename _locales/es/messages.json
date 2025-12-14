@@ -444,5 +444,35 @@
   },
   "pacUrlHelp": {
     "message": "El script PAC se cargará desde esta URL"
+  },
+  "keyboardShortcuts": {
+    "message": "Atajos de teclado"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "Enfocar búsqueda"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "Nuevo proxy"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "Limpiar búsqueda"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "Alternar proxy 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "Buscar proxies... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

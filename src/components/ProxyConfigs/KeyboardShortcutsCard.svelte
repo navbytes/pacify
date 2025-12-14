@@ -2,15 +2,28 @@
   import { Keyboard, ChevronDown, ChevronUp } from 'lucide-svelte'
   import Card from '@/components/Card.svelte'
   import Text from '@/components/Text.svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   let showKeyboardHints = $state(false)
 
-  const shortcuts = [
-    { label: 'Focus search', keys: 'Ctrl/Cmd+K' },
-    { label: 'New proxy', keys: 'Ctrl/Cmd+N' },
-    { label: 'Clear search', keys: 'Escape' },
-    { label: 'Toggle proxy 1-9', keys: '1-9' },
-  ]
+  const shortcuts = $derived([
+    {
+      label: I18nService.getMessage('keyboardShortcutFocusSearch'),
+      keys: I18nService.getMessage('keyboardShortcutCtrlCmdK'),
+    },
+    {
+      label: I18nService.getMessage('keyboardShortcutNewProxy'),
+      keys: I18nService.getMessage('keyboardShortcutCtrlCmdN'),
+    },
+    {
+      label: I18nService.getMessage('keyboardShortcutClearSearch'),
+      keys: I18nService.getMessage('keyboardShortcutEscape'),
+    },
+    {
+      label: I18nService.getMessage('keyboardShortcutToggleProxy'),
+      keys: I18nService.getMessage('keyboardShortcutNumbers'),
+    },
+  ])
 </script>
 
 <Card classes="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900">
@@ -21,7 +34,9 @@
   >
     <div class="flex items-center gap-2">
       <Keyboard size={18} class="text-blue-600 dark:text-blue-400" />
-      <Text weight="semibold" classes="text-blue-900 dark:text-blue-100">Keyboard Shortcuts</Text>
+      <Text weight="semibold" classes="text-blue-900 dark:text-blue-100">
+        {I18nService.getMessage('keyboardShortcuts')}
+      </Text>
     </div>
     {#if showKeyboardHints}
       <ChevronUp size={18} class="text-blue-600 dark:text-blue-400" />

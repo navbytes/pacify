@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Search, X } from 'lucide-svelte'
+  import { I18nService } from '@/services/i18n/i18nService'
 
   interface Props {
     searchQuery: string
@@ -40,7 +41,7 @@
     bind:this={searchInputRef}
     bind:value={searchQuery}
     type="text"
-    placeholder="Search proxies... (Ctrl+K)"
+    placeholder={I18nService.getMessage('searchProxiesPlaceholder')}
     oninput={handleInput}
     {onfocus}
     class="block w-full pl-10 pr-10 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-150"

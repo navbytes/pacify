@@ -444,5 +444,35 @@
   },
   "pacUrlHelp": {
     "message": "PAC 스크립트가 이 URL에서 로드됩니다"
+  },
+  "keyboardShortcuts": {
+    "message": "키보드 단축키"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "검색 포커스"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "새 프록시"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "검색 지우기"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "프록시 전환 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "프록시 검색... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

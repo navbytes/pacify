@@ -444,5 +444,35 @@
   },
   "pacUrlHelp": {
     "message": "PAC स्क्रिप्ट इस URL से लोड की जाएगी"
+  },
+  "keyboardShortcuts": {
+    "message": "कीबोर्ड शॉर्टकट"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "खोज पर फ़ोकस करें"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "नया प्रॉक्सी"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "खोज साफ़ करें"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "प्रॉक्सी टॉगल करें 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "प्रॉक्सी खोजें... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

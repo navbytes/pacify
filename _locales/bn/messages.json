@@ -444,5 +444,35 @@
   },
   "pacUrlHelp": {
     "message": "PAC স্ক্রিপ্ট এই URL থেকে লোড হবে"
+  },
+  "keyboardShortcuts": {
+    "message": "কীবোর্ড শর্টকাট"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "অনুসন্ধানে ফোকাস করুন"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "নতুন প্রক্সি"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "অনুসন্ধান সাফ করুন"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "প্রক্সি টগল করুন 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "প্রক্সি অনুসন্ধান করুন... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

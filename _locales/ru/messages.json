@@ -444,5 +444,35 @@
   },
   "pacUrlHelp": {
     "message": "PAC-скрипт будет загружен с этого URL"
+  },
+  "keyboardShortcuts": {
+    "message": "Горячие клавиши"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "Фокус на поиске"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "Новый прокси"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "Очистить поиск"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "Переключить прокси 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "Поиск прокси... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

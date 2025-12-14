@@ -444,5 +444,35 @@
   },
   "pacUrlHelp": {
     "message": "PAC脚本将从此URL加载"
+  },
+  "keyboardShortcuts": {
+    "message": "键盘快捷键"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "聚焦搜索"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "新建代理"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "清除搜索"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "切换代理 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "搜索代理... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

@@ -444,5 +444,35 @@
   },
   "pacUrlHelp": {
     "message": "Scriptul PAC va fi încărcat de la acest URL"
+  },
+  "keyboardShortcuts": {
+    "message": "Comenzi rapide de la tastatură"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "Focalizare căutare"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "Proxy nou"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "Șterge căutarea"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "Comutare proxy 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "Căutare proxy-uri... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }
