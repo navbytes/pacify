@@ -68,6 +68,7 @@
       if (index < quickSwitchProxies.length) {
         event.preventDefault()
         const proxy = quickSwitchProxies[index]
+        if (!proxy.id) return // Skip if no ID
         const newState = !proxy.isActive
         settingsStore.setProxy(proxy.id, newState)
         toastStore.show(
