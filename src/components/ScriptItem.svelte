@@ -108,6 +108,11 @@
           aria-label="Proxy color: {proxy.color}"
         ></div>
 
+        <!-- Mode icon inline (POPUP only) -->
+        {#if pageType === 'POPUP'}
+          <ModeIcon size={14} class="flex-shrink-0 {modeColors.text}" />
+        {/if}
+
         <h3 class="text-base font-semibold text-slate-900 dark:text-slate-100 truncate">
           {proxy.name}
         </h3>
@@ -138,17 +143,7 @@
     </div>
 
     <!-- Card Content -->
-    {#if pageType === 'POPUP'}
-      <!-- Compact mode badge for POPUP -->
-      <div class="mt-2">
-        <div
-          class={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md border text-xs font-medium ${modeColors.bg} ${modeColors.text} ${modeColors.border}`}
-        >
-          <ModeIcon size={11} />
-          <span>{modeLabel}</span>
-        </div>
-      </div>
-    {:else}
+    {#if pageType !== 'POPUP'}
       <!-- Full content for OPTIONS/QUICK_SWITCH -->
       <div class="flex flex-col gap-2 mb-4 mt-3">
         <!-- Mode badge -->
