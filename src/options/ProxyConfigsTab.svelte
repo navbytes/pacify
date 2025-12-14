@@ -249,7 +249,7 @@
         <div
           class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 rounded-lg flex items-center justify-center shadow-md"
         >
-          <svelte:component this={Zap} size={16} class="text-white" />
+          <Zap size={16} class="text-white" />
         </div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
@@ -320,7 +320,7 @@
         <div
           class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-700 dark:from-slate-500 dark:to-slate-600 rounded-lg flex items-center justify-center shadow-md"
         >
-          <svelte:component this={Cable} size={16} class="text-white" />
+          <Cable size={16} class="text-white" />
         </div>
         <div>
           <div class="flex items-center gap-2">

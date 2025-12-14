@@ -10,6 +10,7 @@ import {
 import { convertAppSettingsToChromeConfig } from '../../utils/chrome'
 import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
 import { browserService } from './BrowserService'
+import { logger } from '@/services/LoggerService'
 
 export class ChromeService {
   // Reference to the browser service
@@ -35,7 +36,7 @@ export class ChromeService {
             try {
               await this.reloadActiveTab()
             } catch (error) {
-              console.warn('Failed to reload tab (proxy still set):', error)
+              logger.warn('Failed to reload tab (proxy still set):', error)
             }
           }
 
@@ -61,7 +62,7 @@ export class ChromeService {
           try {
             await this.reloadActiveTab()
           } catch (error) {
-            console.warn('Failed to reload tab (proxy still cleared):', error)
+            logger.warn('Failed to reload tab (proxy still cleared):', error)
           }
         }
 
@@ -82,7 +83,7 @@ export class ChromeService {
         await this.browser.tabs.reload(tabToReload.id)
       }
     } catch (error) {
-      console.debug('Could not reload tab:', error)
+      logger.debug('Could not reload tab:', error)
     }
   }
 
@@ -116,11 +117,11 @@ export class ChromeService {
       // Validate response from background script
       if (response && !response.success) {
         const errorMessage = response.error || 'Unknown error from background script'
-        console.error(`Background script returned error for ${message.type}:`, errorMessage)
+        logger.error(`Background script returned error for ${message.type}:`, errorMessage)
         throw new Error(errorMessage)
       }
 
-      console.log(`Message ${message.type} processed successfully`)
+      logger.info(`Message ${message.type} processed successfully`)
     },
     ERROR_TYPES.SEND_MESSAGE
   )

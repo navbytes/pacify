@@ -49,6 +49,7 @@
     "@codemirror/view": "6.38.6",
     "caniuse-lite": "1.0.30001750",
     "codemirror": "6.0.2",
+    "loglevel": "^1.9.2",
     "lucide-svelte": "0.545.0",
     "svelte": "5.39.11"
   },

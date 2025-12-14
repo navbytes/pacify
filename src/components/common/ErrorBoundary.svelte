@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import Text from '../Text.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { logger } from '@/services/LoggerService'
   let { children } = $props()
 
   let error = $state<Error | null>(null)
@@ -10,7 +11,7 @@
   function handleError(event: ErrorEvent) {
     hasError = true
     error = event.error
-    console.error('Component Error:', event.error)
+    logger.error('Component Error:', event.error)
   }
 
   onMount(() => {

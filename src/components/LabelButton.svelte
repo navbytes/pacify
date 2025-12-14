@@ -1,4 +1,6 @@
 <script lang="ts" module>
+  import type { ComponentType } from 'svelte'
+
   // Define supported colors.
   export type ButtonColor = 'primary' | 'secondary' | 'success' | 'error' | 'info'
 
@@ -6,7 +8,7 @@
   export interface LabelButtonProps {
     color?: ButtonColor
     minimal?: boolean
-    icon?: any
+    icon?: ComponentType
   }
   export type HideType = 'hidden' | 'invisible'
 </script>

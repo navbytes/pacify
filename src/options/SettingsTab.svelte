@@ -64,7 +64,7 @@
             <div
               class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
             >
-              <svelte:component this={Shield} size={20} class="text-white" />
+              <Shield size={20} class="text-white" />
             </div>
             <div class="flex-1">
               <div class="flex items-center gap-2">
@@ -106,7 +106,7 @@
             <div
               class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
             >
-              <svelte:component this={Shield} size={20} class="text-white" />
+              <Shield size={20} class="text-white" />
             </div>
             <div class="flex-1">
               <div class="flex items-center gap-2">

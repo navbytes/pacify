@@ -1,9 +1,11 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte'
+
   interface Props {
     text: string
     position?: 'top' | 'bottom' | 'left' | 'right'
     delay?: number
-    children?: any
+    children?: Snippet
   }
 
   let { text, position = 'top', delay = 300, children }: Props = $props()

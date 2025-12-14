@@ -13,6 +13,7 @@
   import ProxyConfigsTab from './ProxyConfigsTab.svelte'
   import SettingsTab from './SettingsTab.svelte'
   import { Cable, Settings } from 'lucide-svelte'
+  import { logger } from '@/services/LoggerService'
 
   let showEditor = $state(false)
   let editingScriptId = $state<string | null>(null)
@@ -82,7 +83,7 @@
         )
       })
       .catch((error) => {
-        console.error('Error in handleScriptSave:', error)
+        logger.error('Error in handleScriptSave:', error)
         // Show error toast
         toastStore.show(I18nService.getMessage('failedToSaveProxy'), 'error')
       })

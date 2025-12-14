@@ -2,6 +2,7 @@ import { writable, derived, type Readable } from 'svelte/store'
 import { ERROR_TYPES, type ProxyConfig } from '@/interfaces'
 import { ChromeService } from '@/services/chrome'
 import { withErrorHandling } from '@/utils/errorHandling'
+import { logger } from '@/services/LoggerService'
 
 /**
  * Proxy Store - Manages proxy configurations and operations
@@ -109,7 +110,7 @@ function createProxyStore() {
 
       // Wait for any pending proxy change
       if (pendingPromise) {
-        console.log('Waiting for pending proxy change to complete...')
+        logger.info('Waiting for pending proxy change to complete...')
         await pendingPromise
       }
 

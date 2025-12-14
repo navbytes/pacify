@@ -13,6 +13,7 @@
   import Text from '../Text.svelte'
   import { fade, scale, slide } from 'svelte/transition'
   import { cubicOut } from 'svelte/easing'
+  import { logger } from '@/services/LoggerService'
 
   interface Props {
     proxyConfig?: ProxyConfig
@@ -122,7 +123,7 @@
 
       await onSave(config)
     } catch (error) {
-      console.error('Error saving proxy configuration:', error)
+      logger.error('Error saving proxy configuration:', error)
       errorMessage =
         error instanceof Error ? error.message : I18nService.getMessage('invalidConfiguration')
       NotifyService.error(ERROR_TYPES.VALIDATION, error)
