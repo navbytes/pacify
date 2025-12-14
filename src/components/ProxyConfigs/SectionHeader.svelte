@@ -84,9 +84,11 @@
   {#if showToggle}
     <div class="flex items-center gap-2 flex-shrink-0">
       {#if toggleTooltip}
-        <Tooltip text={toggleTooltip} position="left">
-          <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
-        </Tooltip>
+        <div class="flex items-center min-h-[44px]">
+          <Tooltip text={toggleTooltip} position="left">
+            <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+          </Tooltip>
+        </div>
       {/if}
       <ToggleSwitch
         id="sectionToggle-{title.replace(/\s+/g, '-').toLowerCase()}"
