@@ -8,7 +8,7 @@
 
   const shortcuts = $derived([
     {
-      label: I18nService.getMessage('keyboardShortcutFocusSearch'),
+      label: 'Toggle search',
       keys: I18nService.getMessage('keyboardShortcutCtrlCmdK'),
     },
     {
@@ -16,7 +16,7 @@
       keys: I18nService.getMessage('keyboardShortcutCtrlCmdN'),
     },
     {
-      label: I18nService.getMessage('keyboardShortcutClearSearch'),
+      label: 'Hide search',
       keys: I18nService.getMessage('keyboardShortcutEscape'),
     },
     {

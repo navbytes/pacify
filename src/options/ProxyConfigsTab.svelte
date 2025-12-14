@@ -11,7 +11,8 @@
   import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
   import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
   import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
-  import { Cable, Zap } from '@/utils/icons'
+  import { Cable, Zap, Search } from '@/utils/icons'
+  import { slide } from 'svelte/transition'
 
   interface Props {
     onOpenEditor: (scriptId?: string) => void
@@ -23,6 +24,7 @@
   let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
   let dropError = $state<string | null>(null)
   let searchQuery = $state('')
+  let showSearch = $state(false)
   let hasProxies = $derived(settings.proxyConfigs.length > 0)
 
   // Filter proxies based on search query
@@ -41,19 +43,30 @@
 
   let searchBarRef = $state<SearchBar>()
 
+  // Toggle search visibility
+  function toggleSearch() {
+    showSearch = !showSearch
+    if (showSearch) {
+      // Auto-focus when showing
+      setTimeout(() => searchBarRef?.focus(), 100)
+    } else {
+      // Clear search when hiding
+      searchQuery = ''
+    }
+  }
+
   // Keyboard shortcuts handler
   function handleKeydown(event: KeyboardEvent) {
-    // Ctrl/Cmd+K to focus search
+    // Ctrl/Cmd+K to toggle search
     if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
       event.preventDefault()
-      searchBarRef?.focus()
+      toggleSearch()
     }
 
-    // Escape to clear search
-    if (event.key === 'Escape' && searchQuery) {
+    // Escape to hide search and clear
+    if (event.key === 'Escape' && showSearch) {
       event.preventDefault()
-      searchQuery = ''
-      searchBarRef?.blur()
+      toggleSearch()
     }
 
     // Ctrl/Cmd+N to create new proxy
@@ -115,7 +128,12 @@
 
 <div class="py-6 space-y-8">
   {#if hasProxies}
-    <SearchBar bind:this={searchBarRef} bind:searchQuery onsearch={handleSearch} />
+    <!-- Toggleable Search Bar with slide animation -->
+    {#if showSearch}
+      <div transition:slide={{ duration: 200 }}>
+        <SearchBar bind:this={searchBarRef} bind:searchQuery onsearch={handleSearch} />
+      </div>
+    {/if}
 
     <KeyboardShortcutsCard />
 
@@ -186,11 +204,28 @@
           iconColor="slate"
         />
       </div>
-      <Tooltip text={I18nService.getMessage('tooltipKeyboardShortcut')} position="bottom">
-        <Button data-testid="add-new-script-btn" color="primary" onclick={() => onOpenEditor()}
-          >{I18nService.getMessage('addNewScript')}</Button
-        >
-      </Tooltip>
+      <div class="flex gap-2 items-center">
+        <!-- Search Toggle Button -->
+        <Tooltip text={showSearch ? 'Hide search' : 'Show search (Ctrl+K)'} position="bottom">
+          <button
+            type="button"
+            onclick={toggleSearch}
+            class="p-2.5 rounded-lg transition-all duration-150 {showSearch
+              ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
+              : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600'}"
+            aria-label={showSearch ? 'Hide search' : 'Show search'}
+          >
+            <Search size={18} />
+          </button>
+        </Tooltip>
+
+        <!-- Add New Script Button -->
+        <Tooltip text={I18nService.getMessage('tooltipKeyboardShortcut')} position="bottom">
+          <Button data-testid="add-new-script-btn" color="primary" onclick={() => onOpenEditor()}
+            >{I18nService.getMessage('addNewScript')}</Button
+          >
+        </Tooltip>
+      </div>
     </div>
 
     <DropTarget onDrop={(item) => handleDrop(item, 'OPTIONS')}>
