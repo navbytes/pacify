@@ -1,6 +1,9 @@
 <script lang="ts">
   import type { ComponentType } from 'svelte'
   import Text from '@/components/Text.svelte'
+  import ToggleSwitch from '@/components/ToggleSwitch.svelte'
+  import Tooltip from '@/components/Tooltip.svelte'
+  import { CircleQuestionMark } from 'lucide-svelte'
 
   interface Props {
     icon: ComponentType
@@ -8,9 +11,24 @@
     description?: string
     count: number
     iconColor: 'purple' | 'slate'
+    // Optional toggle functionality
+    showToggle?: boolean
+    toggleChecked?: boolean
+    toggleTooltip?: string
+    ontoggle?: (checked: boolean) => void
   }
 
-  let { icon: Icon, title, description, count, iconColor }: Props = $props()
+  let {
+    icon: Icon,
+    title,
+    description,
+    count,
+    iconColor,
+    showToggle = false,
+    toggleChecked = false,
+    toggleTooltip,
+    ontoggle,
+  }: Props = $props()
 
   const iconColorClasses = {
     purple:
@@ -31,31 +49,51 @@
   }
 </script>
 
-<div class="mb-6 pb-2 border-b {borderColorClasses[iconColor]} flex items-center gap-2">
-  <div
-    class="flex-shrink-0 w-8 h-8 {iconColorClasses[
-      iconColor
-    ]} rounded-lg flex items-center justify-center shadow-md"
-  >
-    <Icon size={16} class="text-white" />
-  </div>
-  <div class="flex-1">
-    <div class="flex items-center gap-2">
-      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-        {title}
-      </h2>
-      <span
-        class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full border {badgeColorClasses[
-          iconColor
-        ]}"
-      >
-        {count}
-      </span>
+<div
+  class="mb-6 pb-2 border-b {borderColorClasses[iconColor]} flex items-center justify-between gap-4"
+>
+  <div class="flex items-center gap-2 flex-1 min-w-0">
+    <div
+      class="flex-shrink-0 w-8 h-8 {iconColorClasses[
+        iconColor
+      ]} rounded-lg flex items-center justify-center shadow-md"
+    >
+      <Icon size={16} class="text-white" />
     </div>
-    {#if description}
-      <Text as="p" size="xs" color="muted" classes="mt-0.5">
-        {description}
-      </Text>
-    {/if}
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 flex-wrap">
+        <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+          {title}
+        </h2>
+        <span
+          class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full border {badgeColorClasses[
+            iconColor
+          ]}"
+        >
+          {count}
+        </span>
+      </div>
+      {#if description}
+        <Text as="p" size="xs" color="muted" classes="mt-0.5">
+          {description}
+        </Text>
+      {/if}
+    </div>
   </div>
+
+  {#if showToggle}
+    <div class="flex items-center gap-2 flex-shrink-0">
+      {#if toggleTooltip}
+        <Tooltip text={toggleTooltip} position="left">
+          <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+        </Tooltip>
+      {/if}
+      <ToggleSwitch
+        id="sectionToggle-{title.replace(/\s+/g, '-').toLowerCase()}"
+        checked={toggleChecked}
+        onchange={ontoggle}
+        aria-label="Toggle {title}"
+      />
+    </div>
+  {/if}
 </div>

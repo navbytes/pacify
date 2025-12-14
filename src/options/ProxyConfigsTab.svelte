@@ -10,7 +10,6 @@
   import ScriptList from '@/components/ScriptList.svelte'
   import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
   import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
-  import QuickSwitchToggleCard from '@/components/ProxyConfigs/QuickSwitchToggleCard.svelte'
   import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
   import { Cable, Zap } from 'lucide-svelte'
 
@@ -119,11 +118,6 @@
 
     <KeyboardShortcutsCard />
 
-    <QuickSwitchToggleCard
-      enabled={settings.quickSwitchEnabled}
-      onchange={handleQuickSwitchToggle}
-    />
-
     <!-- Quick Switch Configs Section -->
     <div>
       <SectionHeader
@@ -132,6 +126,10 @@
         description={I18nService.getMessage('quickSwitchConfigsDescription')}
         count={quickSwitchProxies.length}
         iconColor="purple"
+        showToggle={true}
+        toggleChecked={settings.quickSwitchEnabled}
+        toggleTooltip={I18nService.getMessage('tooltipQuickSwitchMode')}
+        ontoggle={handleQuickSwitchToggle}
       />
 
       <DropTarget onDrop={(item) => handleDrop(item, 'QUICK_SWITCH')}>
