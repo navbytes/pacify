@@ -65,7 +65,8 @@
 >
   <div
     class={`
-      group relative p-5 rounded-lg transition-all duration-200 border-l-4
+      group relative rounded-lg transition-all duration-200 border-l-4
+      ${pageType === 'POPUP' ? 'p-2' : 'p-5'}
       ${pageType === 'QUICK_SWITCH' ? 'border-y border-r border-dashed' : 'border-y border-r'}
       ${
         proxy.isActive
