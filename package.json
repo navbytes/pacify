@@ -67,6 +67,7 @@
     "@typescript-eslint/eslint-plugin": "8.46.0",
     "@typescript-eslint/parser": "8.46.0",
     "autoprefixer": "10.4.21",
+    "baseline-browser-mapping": "2.9.7",
     "eslint": "9.37.0",
     "eslint-plugin-svelte": "3.12.4",
     "globals": "16.4.0",

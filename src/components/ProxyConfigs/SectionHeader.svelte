@@ -9,7 +9,7 @@
     icon: ComponentType
     title: string
     description?: string
-    count: number
+    count?: number
     iconColor: 'purple' | 'slate'
     hideBorder?: boolean
     rightContent?: Snippet
@@ -68,9 +68,12 @@
         <h2 class={cn('text-lg font-semibold tracking-tight', colors.text.default)}>
           {title}
         </h2>
-        <span class={cn(badgePatterns.base, 'font-semibold border', badgeColorClasses[iconColor])}>
-          {count}
-        </span>
+        {#if count}<span
+            class={cn(badgePatterns.base, 'font-semibold border', badgeColorClasses[iconColor])}
+          >
+            {count}
+          </span>
+        {/if}
       </div>
       {#if description}
         <Text as="p" size="xs" color="muted" classes="mt-0.5">

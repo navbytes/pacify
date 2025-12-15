@@ -174,7 +174,7 @@ test.describe('Quick Switch Functionality', () => {
     await expect(page.locator('text=Quick Switch Test').first()).toBeVisible()
 
     // Find the quick switch toggle checkbox (it's hidden with sr-only)
-    const quickSwitchToggle = page.locator('input#quickSwitchToggle')
+    const quickSwitchToggle = page.locator('input#sectionToggle-quick-switch')
 
     // Get initial state
     const initialState = await quickSwitchToggle.isChecked()

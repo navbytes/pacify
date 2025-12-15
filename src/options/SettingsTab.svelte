@@ -45,7 +45,6 @@
     <SectionHeader
       icon={Shield}
       title={I18nService.getMessage('settingsProxyBehavior')}
-      count={2}
       iconColor="purple"
     />
 
@@ -139,10 +138,8 @@
     <SectionHeader
       icon={Database}
       title={I18nService.getMessage('settingsDataManagement')}
-      count={1}
       iconColor="slate"
     />
-
     <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
   </div>
 
@@ -151,7 +148,6 @@
     <SectionHeader
       icon={HelpCircle}
       title={I18nService.getMessage('aboutHelpResources')}
-      count={4}
       iconColor="slate"
     />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
