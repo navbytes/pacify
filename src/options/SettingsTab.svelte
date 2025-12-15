@@ -9,6 +9,7 @@
   import Tooltip from '@/components/Tooltip.svelte'
   import Card from '@/components/Card.svelte'
   import LinkCard from '@/components/LinkCard.svelte'
+  import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
   import {
     Shield,
     Database,
@@ -41,12 +42,12 @@
 <div class="py-6 space-y-8">
   <!-- Proxy Behavior Section (Primary) -->
   <div>
-    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
-      <Shield size={20} class="text-blue-600 dark:text-blue-400" />
-      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-        {I18nService.getMessage('settingsProxyBehavior')}
-      </h2>
-    </div>
+    <SectionHeader
+      icon={Shield}
+      title={I18nService.getMessage('settingsProxyBehavior')}
+      count={2}
+      iconColor="purple"
+    />
 
     <!-- Grid layout for proxy behavior cards -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -135,24 +136,24 @@
 
   <!-- Data Management Section -->
   <div>
-    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
-      <Database size={20} class="text-slate-600 dark:text-slate-400" />
-      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-        {I18nService.getMessage('settingsDataManagement')}
-      </h2>
-    </div>
+    <SectionHeader
+      icon={Database}
+      title={I18nService.getMessage('settingsDataManagement')}
+      count={1}
+      iconColor="slate"
+    />
 
     <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
   </div>
 
   <!-- Help & Resources Section -->
   <div>
-    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
-      <HelpCircle size={20} class="text-green-600 dark:text-green-400" />
-      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-        {I18nService.getMessage('aboutHelpResources')}
-      </h2>
-    </div>
+    <SectionHeader
+      icon={HelpCircle}
+      title={I18nService.getMessage('aboutHelpResources')}
+      count={4}
+      iconColor="slate"
+    />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <LinkCard
         href="https://github.com/navbytes/pacify"
