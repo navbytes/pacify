@@ -1117,3 +1117,122 @@ export const progressBarFillVariants = cva(
     },
   }
 )
+
+/**
+ * LabelButton variants with type-safe props
+ * Label-styled button with color and minimal/base variants
+ */
+export const labelButtonVariants = cva('inline-flex items-center', {
+  variants: {
+    intent: {
+      primary: '',
+      secondary: '',
+      success: '',
+      error: '',
+      info: '',
+    },
+    variant: {
+      base: cn('py-2 px-4 rounded shadow', 'focus:outline-none focus:ring-2 focus:ring-offset-2'),
+      minimal: 'focus:outline-none',
+    },
+  },
+  compoundVariants: [
+    // Base Primary
+    {
+      intent: 'primary',
+      variant: 'base',
+      class: cn(
+        'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300',
+        'dark:bg-blue-700 dark:hover:bg-blue-800'
+      ),
+    },
+    // Minimal Primary
+    {
+      intent: 'primary',
+      variant: 'minimal',
+      class: 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500',
+    },
+    // Base Secondary
+    {
+      intent: 'secondary',
+      variant: 'base',
+      class: cn(
+        'bg-slate-200 text-black hover:bg-slate-300 focus:ring-slate-300',
+        'dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800'
+      ),
+    },
+    // Minimal Secondary
+    {
+      intent: 'secondary',
+      variant: 'minimal',
+      class: 'text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-500',
+    },
+    // Base Success
+    {
+      intent: 'success',
+      variant: 'base',
+      class: cn(
+        'bg-green-500 text-white hover:bg-green-600 focus:ring-green-300',
+        'dark:bg-green-700 dark:hover:bg-green-800'
+      ),
+    },
+    // Minimal Success
+    {
+      intent: 'success',
+      variant: 'minimal',
+      class: 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-500',
+    },
+    // Base Error
+    {
+      intent: 'error',
+      variant: 'base',
+      class: cn(
+        'bg-red-500 text-white hover:bg-red-600 focus:ring-red-300',
+        'dark:bg-red-700 dark:hover:bg-red-800'
+      ),
+    },
+    // Minimal Error
+    {
+      intent: 'error',
+      variant: 'minimal',
+      class: 'text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500',
+    },
+    // Base Info
+    {
+      intent: 'info',
+      variant: 'base',
+      class: cn(
+        'bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-300',
+        'dark:bg-indigo-700 dark:hover:bg-indigo-800'
+      ),
+    },
+    // Minimal Info
+    {
+      intent: 'info',
+      variant: 'minimal',
+      class:
+        'text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-500',
+    },
+  ],
+  defaultVariants: {
+    intent: 'primary',
+    variant: 'base',
+  },
+})
+
+/**
+ * LoadingSpinner variants with type-safe props
+ * Animated spinner with size variants
+ */
+export const loadingSpinnerVariants = cva(cn(loadingPatterns.spinner), {
+  variants: {
+    size: {
+      sm: 'w-4 h-4',
+      md: 'w-6 h-6',
+      lg: 'w-8 h-8',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+})
