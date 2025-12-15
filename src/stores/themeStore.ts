@@ -4,11 +4,21 @@ export type Theme = 'light' | 'dark' | 'system'
 
 const STORAGE_KEY = 'theme-preference'
 
+// Check if running in a browser context (not service worker)
+const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined'
+
 function getSystemTheme(): 'light' | 'dark' {
+  if (!isBrowser || !window.matchMedia) {
+    return 'light'
+  }
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 function applyTheme(theme: Theme) {
+  if (!isBrowser) {
+    return
+  }
+
   const effectiveTheme = theme === 'system' ? getSystemTheme() : theme
 
   if (effectiveTheme === 'dark') {
@@ -36,16 +46,18 @@ function createThemeStore() {
     }
   }
 
-  // Listen for system theme changes
-  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-  mediaQuery.addEventListener('change', () => {
-    // Re-apply theme when system preference changes
-    subscribe((currentTheme) => {
-      if (currentTheme === 'system') {
-        applyTheme('system')
-      }
-    })()
-  })
+  // Listen for system theme changes (only in browser contexts)
+  if (isBrowser && window.matchMedia) {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    mediaQuery.addEventListener('change', () => {
+      // Re-apply theme when system preference changes
+      subscribe((currentTheme) => {
+        if (currentTheme === 'system') {
+          applyTheme('system')
+        }
+      })()
+    })
+  }
 
   return {
     subscribe,

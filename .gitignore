@@ -57,3 +57,4 @@ playwright-report/
 videos/
 screenshots/
 trace-*.zip
+dist-test
