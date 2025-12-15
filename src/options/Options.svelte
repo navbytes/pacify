@@ -3,7 +3,7 @@
   import { settingsStore } from '@/stores/settingsStore'
   import { toastStore } from '@/stores/toastStore'
   import { type ProxyConfig } from '@/interfaces'
-  import type { ComponentType } from 'svelte'
+  import type { Component } from 'svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import Tabs from '@/components/Tabs/Tabs.svelte'
   import TabList from '@/components/Tabs/TabList.svelte'
@@ -22,7 +22,7 @@
   let activeTab = $state('proxy-configs')
 
   // Dynamic import for ProxyConfigModal - only load when needed
-  let ProxyConfigModal = $state<ComponentType | null>(null)
+  let ProxyConfigModal = $state<Component | null>(null)
   let isLoadingModal = $state(false)
 
   onMount(() => {
