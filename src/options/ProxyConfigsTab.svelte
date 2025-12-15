@@ -200,20 +200,14 @@
 
   <!-- All Proxy Configs Section -->
   <div>
-    <div
-      class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center"
+    <SectionHeader
+      icon={Cable}
+      title={I18nService.getMessage('allProxyConfigsTitle')}
+      description={I18nService.getMessage('allProxyConfigsDescription')}
+      count={regularProxies.length}
+      iconColor="slate"
     >
-      <div class="flex-1">
-        <SectionHeader
-          icon={Cable}
-          title={I18nService.getMessage('allProxyConfigsTitle')}
-          description={I18nService.getMessage('allProxyConfigsDescription')}
-          count={regularProxies.length}
-          iconColor="slate"
-          hideBorder={true}
-        />
-      </div>
-      <div class="flex gap-2 items-center">
+      {#snippet rightContent()}
         <!-- Search Toggle Button -->
         <Tooltip text={showSearch ? 'Hide search' : 'Show search (Ctrl+K)'} position="bottom">
           <button
@@ -234,8 +228,8 @@
             >{I18nService.getMessage('addNewScript')}</Button
           >
         </Tooltip>
-      </div>
-    </div>
+      {/snippet}
+    </SectionHeader>
 
     <!-- Search Bar (only for All Proxy Configs) -->
     {#if showSearch}
