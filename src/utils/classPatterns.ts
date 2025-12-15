@@ -728,3 +728,70 @@ export const modalVariants = {
     cn('flex items-center justify-end gap-3', 'p-6 pt-4', 'border-t', colors.border.default)
   ),
 }
+
+/**
+ * Tab component variants with type-safe props
+ * Supports active/disabled states and different tab styles
+ */
+export const tabVariants = cva(
+  cn(
+    'group relative flex items-center gap-2.5 px-6 py-3.5',
+    'text-sm font-medium transition-all duration-200',
+    'border-b-2 whitespace-nowrap bg-transparent cursor-pointer rounded-t-lg',
+    'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+  ),
+  {
+    variants: {
+      active: {
+        true: cn(
+          'text-blue-600 bg-blue-50/50 border-blue-600 border-b-4',
+          'dark:text-blue-400 dark:bg-blue-950/20 dark:border-blue-400'
+        ),
+        false: cn(
+          'text-slate-600 border-transparent',
+          'hover:text-slate-900 hover:bg-slate-50 hover:border-slate-300',
+          'dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800/50 dark:hover:border-slate-600'
+        ),
+      },
+      disabled: {
+        true: cn(
+          'opacity-50 cursor-not-allowed',
+          'hover:!text-slate-500 hover:!border-transparent',
+          'dark:hover:!text-slate-400'
+        ),
+        false: '',
+      },
+    },
+    defaultVariants: {
+      active: false,
+      disabled: false,
+    },
+  }
+)
+
+export const tabIconVariants = cva(
+  'flex items-center justify-center shrink-0 transition-colors duration-200',
+  {
+    variants: {
+      active: {
+        true: 'text-blue-600 dark:text-blue-400',
+        false: cn('text-slate-500', 'group-hover:text-slate-700 dark:group-hover:text-slate-300'),
+      },
+    },
+    defaultVariants: {
+      active: false,
+    },
+  }
+)
+
+export const tabBadgeVariants = cva('ml-2 px-2 py-0.5 rounded-full text-xs font-semibold', {
+  variants: {
+    active: {
+      true: 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300',
+      false: 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300',
+    },
+  },
+  defaultVariants: {
+    active: false,
+  },
+})

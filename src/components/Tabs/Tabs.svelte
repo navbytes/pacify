@@ -63,14 +63,6 @@
   setContext<TabsContext>('tabs', context)
 </script>
 
-<div class="tabs-container" data-variant={variant}>
+<div class="flex flex-col w-full" data-variant={variant}>
   {@render children()}
 </div>
-
-<style lang="postcss">
-  @import 'tailwindcss' reference;
-
-  .tabs-container {
-    @apply flex flex-col w-full;
-  }
-</style>
