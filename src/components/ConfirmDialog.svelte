@@ -3,6 +3,7 @@
   import Button from './Button.svelte'
   import Text from './Text.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     open?: boolean
@@ -68,20 +69,20 @@
       >
         <div class="flex items-start gap-3">
           <div
-            class={`
-              flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center
-              ${variant === 'danger' ? 'bg-red-100 dark:bg-red-900/30' : ''}
-              ${variant === 'warning' ? 'bg-yellow-100 dark:bg-yellow-900/30' : ''}
-              ${variant === 'info' ? 'bg-blue-100 dark:bg-blue-900/30' : ''}
-            `}
+            class={cn(
+              'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center',
+              variant === 'danger' && 'bg-red-100 dark:bg-red-900/30',
+              variant === 'warning' && 'bg-yellow-100 dark:bg-yellow-900/30',
+              variant === 'info' && 'bg-blue-100 dark:bg-blue-900/30'
+            )}
           >
             <AlertTriangle
               size={20}
-              class={`
-                ${variant === 'danger' ? 'text-red-600 dark:text-red-400' : ''}
-                ${variant === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : ''}
-                ${variant === 'info' ? 'text-blue-600 dark:text-blue-400' : ''}
-              `}
+              class={cn(
+                variant === 'danger' && 'text-red-600 dark:text-red-400',
+                variant === 'warning' && 'text-yellow-600 dark:text-yellow-400',
+                variant === 'info' && 'text-blue-600 dark:text-blue-400'
+              )}
             />
           </div>
           <h3 id="dialog-title" class="text-lg font-semibold text-slate-900 dark:text-slate-100">

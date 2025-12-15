@@ -13,6 +13,7 @@
     | 'inherit'
 
   import type { Snippet } from 'svelte'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     as?: TextElement
@@ -69,18 +70,15 @@
   }
 
   const combinedClasses = $derived(
-    [
+    cn(
       sizeClasses[size],
       weightClasses[weight],
       colorClasses[color],
-      truncate ? 'truncate' : '',
-      italic ? 'italic' : '',
-      underline ? 'underline' : '',
-      classes,
-    ]
-      .filter(Boolean)
-      .join(' ')
-      .trim()
+      truncate && 'truncate',
+      italic && 'italic',
+      underline && 'underline',
+      classes
+    )
   )
 </script>
 

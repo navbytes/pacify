@@ -2,6 +2,7 @@
   import { ERROR_TYPES, type DropItem } from '@/interfaces'
   import { NotifyService } from '@/services/NotifyService'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     dropEffect?: 'copy' | 'move' | 'link' | 'none'
@@ -88,7 +89,7 @@
 
 <div
   bind:this={dropArea}
-  class="drop-target{disabled ? ' disabled' : ''}{isDragOver ? ' drag-over' : ''}"
+  class={cn('drop-target', disabled && 'disabled', isDragOver && 'drag-over')}
   role="region"
   aria-label={I18nService.getMessage('dropTarget')}
   ondragover={handleDragOver}

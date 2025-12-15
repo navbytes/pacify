@@ -2,6 +2,7 @@
   import { getContext } from 'svelte'
   import type { TabsContext } from './types'
   import type { Snippet } from 'svelte'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     id: string
@@ -40,7 +41,7 @@
     role="tabpanel"
     id={`tabpanel-${id}`}
     aria-labelledby={`tab-${id}`}
-    class={`tab-panel ${isActive ? 'active' : 'inactive'}`}
+    class={cn('tab-panel', isActive ? 'active' : 'inactive')}
     hidden={!isActive}
   >
     {@render children()}

@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { ListViewType } from '@/interfaces'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     dragstart?: (event: DragEvent) => void
@@ -87,10 +88,11 @@
 </script>
 
 <div
-  class="draggable-item {!dragType || dragType === '' ? '' : 'dragging'} {disabled &&
-  dataType !== 'POPUP'
-    ? 'disabled'
-    : ''}"
+  class={cn(
+    'draggable-item',
+    dragType && dragType !== '' && 'dragging',
+    disabled && dataType !== 'POPUP' && 'disabled'
+  )}
   draggable={!disabled}
   ondragstart={handleDragStart}
   ondragend={handleDragEnd}

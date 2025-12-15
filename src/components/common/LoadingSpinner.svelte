@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { cn } from '@/utils/cn'
+
   interface Props {
     size?: 'sm' | 'md' | 'lg'
     color?: string
@@ -15,6 +17,6 @@
 
 <div class="flex justify-center items-center">
   <div
-    class={`animate-spin rounded-full border-2 border-t-transparent ${sizeClasses[size]} ${color}`}
+    class={cn('animate-spin rounded-full border-2 border-t-transparent', sizeClasses[size], color)}
   ></div>
 </div>

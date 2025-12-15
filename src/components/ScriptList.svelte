@@ -5,6 +5,7 @@
   import type { ListViewType, ProxyConfig } from '@/interfaces'
   import { I18nService } from '@/services/i18n/i18nService'
   import { Globe, Zap } from '@/utils/icons'
+  import { cn } from '@/utils/cn'
 
   // Note: settingsStore.init() is called by parent component (Popup.svelte)
   // No need to initialize again here to avoid duplicate storage reads
@@ -52,9 +53,10 @@
 
   {#if displayProxyConfigs.length > 0}
     <div
-      class={`
-      ${pageType === 'POPUP' ? 'flex flex-col gap-4' : 'grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}
-    `}
+      class={cn(
+        'gap-4',
+        pageType === 'POPUP' ? 'flex flex-col' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+      )}
     >
       {#each displayProxyConfigs as proxy (proxy.id)}
         <ScriptItem {proxy} {pageType} bind:dragType onScriptEdit={() => openEditor(proxy.id)} />

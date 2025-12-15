@@ -3,6 +3,7 @@
   import type { TabsContext } from './types'
   import type { ComponentType, Snippet } from 'svelte'
   import Text from '../Text.svelte'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     id: string
@@ -52,11 +53,7 @@
   id={`tab-${id}`}
   tabindex={isActive ? 0 : -1}
   {disabled}
-  class={`
-    tab-button
-    ${isActive ? 'active' : ''}
-    ${disabled ? 'disabled' : ''}
-  `}
+  class={cn('tab-button', isActive && 'active', disabled && 'disabled')}
   onclick={handleClick}
   onkeydown={handleKeydown}
 >

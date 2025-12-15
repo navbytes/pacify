@@ -14,6 +14,7 @@
   import { fade, scale, slide } from 'svelte/transition'
   import { cubicOut } from 'svelte/easing'
   import { logger } from '@/services/LoggerService'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     proxyConfig?: ProxyConfig
@@ -185,11 +186,11 @@
 >
   <div
     bind:this={modalRef}
-    class={`
-      bg-white dark:bg-slate-800 rounded-lg shadow-2xl flex flex-col
-      overflow-y-auto
-      w-full max-w-4xl min-h-[50vh] max-h-[90vh]
-    `}
+    class={cn(
+      'bg-white dark:bg-slate-800 rounded-lg shadow-2xl flex flex-col',
+      'overflow-y-auto',
+      'w-full max-w-4xl min-h-[50vh] max-h-[90vh]'
+    )}
     role="dialog"
     aria-labelledby="editor-title"
     aria-modal="true"

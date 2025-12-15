@@ -4,6 +4,7 @@
   import Button from './Button.svelte'
   import Text from './Text.svelte'
   import FlexGroup from './FlexGroup.svelte'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     title: string
@@ -36,9 +37,9 @@
   direction="vertical"
   alignItems="center"
   justifyContent="center"
-  classes={compact ? 'py-8 px-4 text-center' : 'py-12 px-4 text-center'}
+  classes={cn('px-4 text-center', compact ? 'py-8' : 'py-12')}
 >
-  <div class={compact ? 'mb-4 opacity-50' : 'mb-6 opacity-50'}>
+  <div class={cn('opacity-50', compact ? 'mb-4' : 'mb-6')}>
     <Icon size={iconSize} class="text-slate-400 dark:text-slate-600" strokeWidth={1.5} />
   </div>
 
@@ -46,7 +47,7 @@
     {title}
   </Text>
 
-  <Text as="p" color="muted" classes={compact ? 'mb-4 max-w-md' : 'mb-6 max-w-md'}>
+  <Text as="p" color="muted" classes={cn('max-w-md', compact ? 'mb-4' : 'mb-6')}>
     {description}
   </Text>
 
