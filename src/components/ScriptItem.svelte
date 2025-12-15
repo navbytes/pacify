@@ -15,7 +15,7 @@
     getProxyDescription,
   } from '@/utils/proxyModeHelpers'
   import { cn } from '@/utils/cn'
-  import { cardPatterns, flexPatterns, badgePatterns } from '@/utils/classPatterns'
+  import { flexPatterns, badgePatterns } from '@/utils/classPatterns'
   import { colors, transitions } from '@/utils/theme'
 
   interface Props {
