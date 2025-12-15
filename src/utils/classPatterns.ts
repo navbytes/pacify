@@ -1020,3 +1020,100 @@ export const sectionHeaderBadgeVariants = cva(
     },
   }
 )
+
+/**
+ * ToggleSwitch track classes with organized peer states
+ * Combined classes for toggle switch with automatic checked state handling via peer selector
+ */
+export const toggleSwitchTrackClasses = cn(
+  'block w-12 h-7 rounded-full transition-all duration-200 ease-in-out relative',
+  // Unchecked state colors
+  'bg-slate-400 dark:bg-slate-600',
+  'hover:bg-slate-500 dark:hover:bg-slate-500',
+  // Checked state colors (via peer selector)
+  'peer-checked:bg-green-500 dark:peer-checked:bg-green-600',
+  'peer-checked:hover:bg-green-600 dark:peer-checked:hover:bg-green-500',
+  // Toggle circle (using before pseudo-element)
+  'before:absolute before:content-[""] before:h-5 before:w-5 before:left-[4px] before:top-[4px]',
+  'before:bg-white before:rounded-full before:transition-transform before:duration-200 before:ease-in-out before:shadow-md',
+  'peer-checked:before:translate-x-5',
+  // Focus states
+  'peer-focus:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-green-500/50 dark:peer-focus-visible:ring-green-400/50 peer-focus-visible:ring-offset-2'
+)
+
+/**
+ * Tooltip variants with type-safe props
+ * Tooltip positioning and arrow direction
+ */
+export const tooltipVariants = cva(
+  'absolute z-50 px-3 py-2 text-sm font-medium text-white bg-slate-800 dark:bg-slate-700 rounded-lg shadow-lg whitespace-nowrap animate-fade-in',
+  {
+    variants: {
+      position: {
+        top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
+        bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',
+        left: 'right-full top-1/2 -translate-y-1/2 mr-2',
+        right: 'left-full top-1/2 -translate-y-1/2 ml-2',
+      },
+    },
+    defaultVariants: {
+      position: 'top',
+    },
+  }
+)
+
+/**
+ * Tooltip arrow variants
+ */
+export const tooltipArrowVariants = cva('absolute w-0 h-0 border-4 border-transparent', {
+  variants: {
+    position: {
+      top: 'top-full left-1/2 -translate-x-1/2 border-t-slate-800 dark:border-t-slate-700',
+      bottom: 'bottom-full left-1/2 -translate-x-1/2 border-b-slate-800 dark:border-b-slate-700',
+      left: 'left-full top-1/2 -translate-y-1/2 border-l-slate-800 dark:border-l-slate-700',
+      right: 'right-full top-1/2 -translate-y-1/2 border-r-slate-800 dark:border-r-slate-700',
+    },
+  },
+  defaultVariants: {
+    position: 'top',
+  },
+})
+
+/**
+ * ProgressBar variants with type-safe props
+ * Progress bar with size and color variants
+ */
+export const progressBarVariants = cva(
+  'w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden',
+  {
+    variants: {
+      size: {
+        sm: 'h-1',
+        md: 'h-2',
+        lg: 'h-3',
+      },
+    },
+    defaultVariants: {
+      size: 'md',
+    },
+  }
+)
+
+/**
+ * ProgressBar fill variants with dynamic color based on percentage
+ */
+export const progressBarFillVariants = cva(
+  'h-full rounded-full transition-all duration-500 ease-out',
+  {
+    variants: {
+      percentage: {
+        low: 'bg-green-500 dark:bg-green-400',
+        medium: 'bg-yellow-500 dark:bg-yellow-400',
+        high: 'bg-red-500 dark:bg-red-400',
+      },
+    },
+    defaultVariants: {
+      percentage: 'low',
+    },
+  }
+)
