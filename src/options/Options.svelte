@@ -182,8 +182,7 @@
   <!-- Script Editor Modal (Lazy Loaded) -->
   {#if showEditor}
     {#if ProxyConfigModal}
-      <svelte:component
-        this={ProxyConfigModal}
+      <ProxyConfigModal
         proxyConfig={editingScriptId
           ? settings.proxyConfigs.find((s) => s.id === editingScriptId)
           : undefined}
