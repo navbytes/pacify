@@ -141,43 +141,6 @@
     @apply bg-blue-900 text-blue-300;
   }
 
-  /* Variant: Pills */
-  :global([data-variant='pills']) .tab-button {
-    @apply border-0 rounded-lg mx-1;
-  }
-
-  :global([data-variant='pills']) .tab-button.active {
-    @apply bg-blue-100;
-  }
-
-  :global(.dark [data-variant='pills']) .tab-button.active {
-    @apply bg-blue-900;
-  }
-
-  /* Variant: Buttons */
-  :global([data-variant='buttons']) .tab-button {
-    @apply border-0 rounded-md mx-0 px-4 py-2;
-    @apply bg-transparent text-slate-700;
-    @apply hover:bg-slate-200/50 transition-all duration-150;
-  }
-
-  :global(.dark [data-variant='buttons']) .tab-button {
-    @apply text-slate-300 hover:bg-slate-700/50;
-  }
-
-  :global([data-variant='buttons']) .tab-button.active {
-    @apply bg-white text-blue-600 shadow-sm;
-  }
-
-  :global(.dark [data-variant='buttons']) .tab-button.active {
-    @apply bg-slate-700 text-blue-400;
-  }
-
-  :global([data-variant='buttons']) .tab-button.active .tab-icon {
-    @apply text-blue-600;
-  }
-
-  :global(.dark [data-variant='buttons']) .tab-button.active .tab-icon {
-    @apply text-blue-400;
-  }
+  /* Note: Tab variant styles (pills, buttons) are defined globally in app.css
+     to avoid Lightning CSS warnings about :global() syntax */
 </style>

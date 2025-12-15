@@ -228,3 +228,137 @@
 [data-drag-type='OPTIONS'][data-page-type='QUICK_SWITCH'] [data-overlay] {
   display: flex;
 }
+
+/* Tab Component Variant Styles (Pills) */
+[data-variant='pills'] .tab-button {
+  @apply border-0 rounded-lg mx-1;
+}
+
+[data-variant='pills'] .tab-button.active {
+  @apply bg-blue-100;
+}
+
+.dark [data-variant='pills'] .tab-button.active {
+  @apply bg-blue-900;
+}
+
+[data-variant='pills'] .tab-list {
+  @apply border-b-0 gap-2;
+}
+
+/* Tab Component Variant Styles (Buttons) */
+[data-variant='buttons'] .tab-button {
+  @apply border-0 rounded-md mx-0 px-4 py-2;
+  @apply bg-transparent text-slate-700;
+  @apply hover:bg-slate-200/50 transition-all duration-150;
+}
+
+.dark [data-variant='buttons'] .tab-button {
+  @apply text-slate-300 hover:bg-slate-700/50;
+}
+
+[data-variant='buttons'] .tab-button.active {
+  @apply bg-white text-blue-600 shadow-sm;
+}
+
+.dark [data-variant='buttons'] .tab-button.active {
+  @apply bg-slate-700 text-blue-400;
+}
+
+[data-variant='buttons'] .tab-button.active .tab-icon {
+  @apply text-blue-600;
+}
+
+.dark [data-variant='buttons'] .tab-button.active .tab-icon {
+  @apply text-blue-400;
+}
+
+[data-variant='buttons'] .tab-list {
+  @apply border-b-0 gap-1;
+  @apply bg-slate-100 p-1 rounded-lg inline-flex;
+}
+
+.dark [data-variant='buttons'] .tab-list {
+  @apply bg-slate-800/50;
+}
+
+/* Modal Body Scroll Lock */
+body.modal-open {
+  @apply overflow-hidden;
+}
+
+/* CodeMirror Editor Styling */
+.cm-editor {
+  @apply rounded-md shadow-sm;
+  overflow: hidden;
+  transition: all 150ms ease-in-out;
+}
+
+.cm-editor .cm-scroller {
+  overflow: auto !important;
+  max-height: 400px;
+}
+
+.cm-editor.cm-focused {
+  @apply outline-none ring-2 ring-blue-500 shadow-md;
+  transition: all 150ms ease-in-out;
+}
+
+.cm-scroller {
+  @apply font-mono;
+}
+
+/* Active line highlighting */
+.cm-activeLine {
+  background-color: rgba(59, 130, 246, 0.05) !important;
+}
+
+.dark .cm-activeLine {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+}
+
+/* Autocomplete styling */
+.cm-tooltip-autocomplete {
+  @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-xl;
+  animation: slideIn 150ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cm-tooltip-autocomplete > ul {
+  @apply max-h-64 overflow-auto p-1;
+}
+
+.cm-tooltip-autocomplete > ul > li {
+  @apply px-2 py-1 cursor-pointer text-sm;
+}
+
+.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  @apply bg-blue-500 text-white;
+}
+
+.cm-completionLabel {
+  @apply font-medium;
+}
+
+.cm-completionDetail {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
+.cm-completionInfo {
+  @apply text-xs text-gray-600 dark:text-gray-300 mt-1;
+}
+
+/* Grid Children Transitions (used in ScriptList) */
+.grid > * {
+  @apply transition-all duration-200;
+}

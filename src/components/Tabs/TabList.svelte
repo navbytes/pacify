@@ -94,21 +94,8 @@
     @apply bg-slate-600;
   }
 
-  /* Remove border for pill and button variants */
-  :global([data-variant='pills']) .tab-list {
-    @apply border-b-0 gap-2;
-  }
-
-  /* Button variant specific styling */
-  :global([data-variant='buttons']) .tab-list {
-    @apply border-b-0 gap-1;
-    @apply bg-slate-100 p-1 rounded-lg inline-flex;
-  }
-
-  /* Dark mode for button variant */
-  :global(.dark [data-variant='buttons']) .tab-list {
-    @apply bg-slate-800/50;
-  }
+  /* Note: Tab list variant styles (pills, buttons) are defined globally in app.css
+     to avoid Lightning CSS warnings about :global() syntax */
 
   /* Mobile: Make tabs scrollable */
   @media (max-width: 640px) {

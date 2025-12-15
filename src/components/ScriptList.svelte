@@ -96,7 +96,6 @@
 <style lang="postcss">
   @import 'tailwindcss' reference;
 
-  .grid > :global(*) {
-    @apply transition-all duration-200;
-  }
+  /* Note: Grid children transitions are defined globally in app.css
+     to avoid Lightning CSS warnings about :global() syntax */
 </style>
