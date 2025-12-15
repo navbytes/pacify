@@ -1,6 +1,8 @@
 <script lang="ts">
   import { I18nService } from '@/services/i18n/i18nService'
   import Text from '../Text.svelte'
+  import { cn } from '@/utils/cn'
+  import { inputVariants } from '@/utils/classPatterns'
 
   interface Props {
     scheme?: string
@@ -26,9 +28,11 @@
     if (!value.trim()) return ''
 
     // Basic hostname/IP validation
-    const hostnameRegex = /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    const hostnameRegex =
+      /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
     const ipv4Regex = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/
-    const ipv6Regex = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/
+    const ipv6Regex =
+      /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/
 
     if (!hostnameRegex.test(value) && !ipv4Regex.test(value) && !ipv6Regex.test(value)) {
       return I18nService.getMessage('invalidHost') || 'Invalid hostname or IP address'
@@ -75,15 +79,16 @@
 <div class="space-y-4">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <div>
-      <label for="{testIdPrefix}-scheme" class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+      <label
+        for="{testIdPrefix}-scheme"
+        class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1"
+      >
         {I18nService.getMessage('scheme') || 'Scheme'}
       </label>
       <select
         id="{testIdPrefix}-scheme"
         bind:value={scheme}
-        class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md
-               bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
-               focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
+        class={inputVariants({ state: 'default', size: 'md' })}
       >
         <option value="http">HTTP</option>
         <option value="https">HTTPS</option>
@@ -94,7 +99,10 @@
     </div>
 
     <div>
-      <label for="{testIdPrefix}-host" class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+      <label
+        for="{testIdPrefix}-host"
+        class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1"
+      >
         {I18nService.getMessage('host') || 'Host'} <span class="text-red-500">*</span>
       </label>
       <input
@@ -107,20 +115,25 @@
         data-testid="{testIdPrefix}-host-input"
         aria-invalid={hostError && hostTouched ? 'true' : 'false'}
         aria-describedby={hostError && hostTouched ? `{testIdPrefix}-host-error` : undefined}
-        class="w-full px-3 py-2 border rounded-md
-               bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
-               focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
-               {hostError ? 'border-red-500 dark:border-red-400' : 'border-slate-300 dark:border-slate-600'}"
+        class={inputVariants({ state: hostError && hostTouched ? 'error' : 'default', size: 'md' })}
       />
       {#if hostError && hostTouched}
-        <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400" id="{testIdPrefix}-host-error">
+        <Text
+          as="p"
+          size="xs"
+          classes="mt-1 text-red-600 dark:text-red-400"
+          id="{testIdPrefix}-host-error"
+        >
           {hostError}
         </Text>
       {/if}
     </div>
 
     <div>
-      <label for="{testIdPrefix}-port" class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+      <label
+        for="{testIdPrefix}-port"
+        class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1"
+      >
         {I18nService.getMessage('port') || 'Port'} <span class="text-red-500">*</span>
       </label>
       <input
@@ -135,13 +148,15 @@
         data-testid="{testIdPrefix}-port-input"
         aria-invalid={portError && portTouched ? 'true' : 'false'}
         aria-describedby={portError && portTouched ? `{testIdPrefix}-port-error` : undefined}
-        class="w-full px-3 py-2 border rounded-md
-               bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
-               focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
-               {portError ? 'border-red-500 dark:border-red-400' : 'border-slate-300 dark:border-slate-600'}"
+        class={inputVariants({ state: portError && portTouched ? 'error' : 'default', size: 'md' })}
       />
       {#if portError && portTouched}
-        <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400" id="{testIdPrefix}-port-error">
+        <Text
+          as="p"
+          size="xs"
+          classes="mt-1 text-red-600 dark:text-red-400"
+          id="{testIdPrefix}-port-error"
+        >
           {portError}
         </Text>
       {/if}

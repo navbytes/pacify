@@ -1,15 +1,16 @@
 <script lang="ts">
   import { cn } from '@/utils/cn'
+  import { buttonVariants, type VariantProps } from '@/utils/classPatterns'
 
-  // Define types within the component
-  type ButtonColor = 'primary' | 'secondary' | 'success' | 'error' | 'info'
-  type ButtonSize = 'sm' | 'md' | 'lg'
+  type ButtonVariant = VariantProps<typeof buttonVariants>
 
   interface Props {
     classes?: string
-    color?: ButtonColor
+    color?: ButtonVariant['intent']
+    variant?: ButtonVariant['variant']
     minimal?: boolean
-    size?: ButtonSize
+    size?: ButtonVariant['size']
+    fullWidth?: ButtonVariant['fullWidth']
     icon?: () => any
     disabled?: boolean
     type?: 'button' | 'submit' | 'reset'
@@ -24,8 +25,10 @@
   const {
     classes = '',
     color = 'primary',
+    variant = undefined,
     minimal = false,
     size = 'md',
+    fullWidth = false,
     icon = undefined,
     disabled = false,
     type = 'button',
@@ -37,55 +40,25 @@
     role,
   }: Props = $props()
 
-  // Size mapping - ensuring all meet 44x44px minimum touch target
-  const sizes: Record<ButtonSize, string> = {
-    sm: 'py-2 px-3 text-sm min-h-[44px]',
-    md: 'py-2.5 px-4 min-h-[44px]',
-    lg: 'py-3 px-6 text-lg min-h-[44px]',
-  }
+  // Support both `minimal` prop and `variant` prop for backwards compatibility
+  const computedVariant = $derived(variant ?? (minimal ? 'minimal' : 'solid'))
 
-  // Color mapping with improved light theme contrast
-  const colors: Record<ButtonColor, { base: string; minimal: string }> = {
-    primary: {
-      base: 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800',
-      minimal:
-        'text-blue-600 hover:text-blue-700 hover:bg-blue-100 border border-transparent hover:border-blue-200 dark:text-blue-400 dark:hover:text-blue-300 dark:hover:bg-blue-950/20 dark:hover:border-blue-800 rounded px-2 py-1',
-    },
-    secondary: {
-      base: 'bg-slate-200 text-black hover:bg-slate-300 focus:ring-slate-300 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800',
-      minimal:
-        'text-slate-700 hover:text-slate-900 hover:bg-slate-200 border border-transparent hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:bg-slate-800 dark:hover:border-slate-700 rounded px-2 py-1',
-    },
-    success: {
-      base: 'bg-green-500 text-white hover:bg-green-600 focus:ring-green-300 dark:bg-green-700 dark:hover:bg-green-800',
-      minimal:
-        'text-green-600 hover:text-green-700 hover:bg-green-100 border border-transparent hover:border-green-200 dark:text-green-400 dark:hover:text-green-300 dark:hover:bg-green-950/20 dark:hover:border-green-800 rounded px-2 py-1',
-    },
-    error: {
-      base: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800',
-      minimal:
-        'text-red-600 hover:text-red-700 hover:bg-red-100 border border-transparent hover:border-red-200 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-950/20 dark:hover:border-red-800 rounded px-2 py-1',
-    },
-    info: {
-      base: 'bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-300 dark:bg-indigo-700 dark:hover:bg-indigo-800',
-      minimal:
-        'text-indigo-600 hover:text-indigo-700 hover:bg-indigo-100 border border-transparent hover:border-indigo-200 dark:text-indigo-400 dark:hover:text-indigo-300 dark:hover:bg-indigo-950/20 dark:hover:border-indigo-800 rounded px-2 py-1',
-    },
-  }
+  // Use buttonVariants with CVA
+  const buttonClasses = $derived(
+    buttonVariants({
+      intent: color,
+      variant: computedVariant,
+      size: size,
+      fullWidth: fullWidth,
+    })
+  )
 
-  // Use $derived with cn utility for computed values
+  // Combine with custom classes
   const combinedClasses = $derived(
     cn(
-      'inline-flex items-center gap-2',
-      'focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 dark:focus-visible:ring-blue-400/50 focus-visible:ring-offset-2',
-      'transition-all duration-150 cursor-pointer active:scale-95',
-      minimal && 'justify-center',
-      minimal && (children ? 'min-h-[44px]' : 'min-w-[44px] min-h-[44px]'),
-      minimal && colors[color].minimal,
-      !minimal && sizes[size],
-      !minimal && 'rounded shadow hover:shadow-md',
-      !minimal && colors[color].base,
-      disabled && 'opacity-50 cursor-not-allowed',
+      buttonClasses,
+      // Add icon-only button sizing for minimal buttons without children
+      minimal && !children && 'min-w-[44px]',
       classes
     )
   )
@@ -104,7 +77,6 @@
   {role}
 >
   {#if icon}
-    <!-- Use the @render tag to render the icon component -->
     <span class="flex-shrink-0">
       {@render icon()}
     </span>

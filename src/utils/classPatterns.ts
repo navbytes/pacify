@@ -328,58 +328,167 @@ export type { VariantProps } from 'class-variance-authority'
  */
 export const buttonVariants = cva(
   cn(
-    'inline-flex items-center justify-center gap-2',
+    'inline-flex items-center gap-2',
     'font-medium',
-    transitions.colors,
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-    'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
+    'transition-all duration-150 cursor-pointer active:scale-95',
+    'focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2',
+    'disabled:opacity-50 disabled:cursor-not-allowed'
   ),
   {
     variants: {
       intent: {
-        primary: cn(
-          colors.primary.base,
-          colors.primary.hover,
-          colors.text.inverse,
-          'focus-visible:ring-blue-500'
-        ),
-        secondary: cn(
-          'bg-slate-200 dark:bg-slate-700',
-          'hover:bg-slate-300 dark:hover:bg-slate-600',
-          colors.text.default,
-          'focus-visible:ring-slate-500'
-        ),
-        danger: cn(
-          colors.danger.base,
-          colors.danger.hover,
-          colors.text.inverse,
-          'focus-visible:ring-red-500'
-        ),
-        success: cn(
-          colors.success.base,
-          colors.success.hover,
-          colors.text.inverse,
-          'focus-visible:ring-green-500'
-        ),
-        ghost: cn(
-          'bg-transparent',
-          colors.interactive.hover,
-          colors.text.default,
-          'focus-visible:ring-blue-500'
-        ),
+        primary: '',
+        secondary: '',
+        success: '',
+        error: '',
+        info: '',
+        ghost: '',
+      },
+      variant: {
+        solid: '',
+        minimal: '',
       },
       size: {
-        sm: cn('px-3 py-1.5', 'text-xs', radius.md),
-        md: cn('px-4 py-2', 'text-sm', radius.md),
-        lg: cn('px-6 py-3', 'text-base', radius.lg),
+        sm: cn('py-2 px-3 text-sm min-h-[44px]', radius.md),
+        md: cn('py-2.5 px-4 min-h-[44px]', radius.md),
+        lg: cn('py-3 px-6 text-lg min-h-[44px]', radius.lg),
       },
       fullWidth: {
         true: 'w-full',
         false: '',
       },
     },
+    compoundVariants: [
+      // Solid Primary
+      {
+        intent: 'primary',
+        variant: 'solid',
+        class: cn(
+          'bg-blue-500 text-white hover:bg-blue-600',
+          'dark:bg-blue-700 dark:hover:bg-blue-800',
+          'focus-visible:ring-blue-300 dark:focus-visible:ring-blue-400/50',
+          'rounded shadow hover:shadow-md'
+        ),
+      },
+      // Minimal Primary
+      {
+        intent: 'primary',
+        variant: 'minimal',
+        class: cn(
+          'justify-center text-blue-600 hover:text-blue-700',
+          'hover:bg-blue-100 border border-transparent hover:border-blue-200',
+          'dark:text-blue-400 dark:hover:text-blue-300',
+          'dark:hover:bg-blue-950/20 dark:hover:border-blue-800',
+          'rounded px-2 py-1 min-h-[44px]'
+        ),
+      },
+      // Solid Secondary
+      {
+        intent: 'secondary',
+        variant: 'solid',
+        class: cn(
+          'bg-slate-200 text-black hover:bg-slate-300',
+          'dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800',
+          'focus-visible:ring-slate-300',
+          'rounded shadow hover:shadow-md'
+        ),
+      },
+      // Minimal Secondary
+      {
+        intent: 'secondary',
+        variant: 'minimal',
+        class: cn(
+          'justify-center text-slate-700 hover:text-slate-900',
+          'hover:bg-slate-200 border border-transparent hover:border-slate-300',
+          'dark:text-slate-400 dark:hover:text-slate-300',
+          'dark:hover:bg-slate-800 dark:hover:border-slate-700',
+          'rounded px-2 py-1 min-h-[44px]'
+        ),
+      },
+      // Solid Success
+      {
+        intent: 'success',
+        variant: 'solid',
+        class: cn(
+          'bg-green-500 text-white hover:bg-green-600',
+          'dark:bg-green-700 dark:hover:bg-green-800',
+          'focus-visible:ring-green-300',
+          'rounded shadow hover:shadow-md'
+        ),
+      },
+      // Minimal Success
+      {
+        intent: 'success',
+        variant: 'minimal',
+        class: cn(
+          'justify-center text-green-600 hover:text-green-700',
+          'hover:bg-green-100 border border-transparent hover:border-green-200',
+          'dark:text-green-400 dark:hover:text-green-300',
+          'dark:hover:bg-green-950/20 dark:hover:border-green-800',
+          'rounded px-2 py-1 min-h-[44px]'
+        ),
+      },
+      // Solid Error
+      {
+        intent: 'error',
+        variant: 'solid',
+        class: cn(
+          'bg-red-500 text-white hover:bg-red-600',
+          'dark:bg-red-700 dark:hover:bg-red-800',
+          'focus-visible:ring-red-300',
+          'rounded shadow hover:shadow-md'
+        ),
+      },
+      // Minimal Error
+      {
+        intent: 'error',
+        variant: 'minimal',
+        class: cn(
+          'justify-center text-red-600 hover:text-red-700',
+          'hover:bg-red-100 border border-transparent hover:border-red-200',
+          'dark:text-red-400 dark:hover:text-red-300',
+          'dark:hover:bg-red-950/20 dark:hover:border-red-800',
+          'rounded px-2 py-1 min-h-[44px]'
+        ),
+      },
+      // Solid Info
+      {
+        intent: 'info',
+        variant: 'solid',
+        class: cn(
+          'bg-indigo-500 text-white hover:bg-indigo-600',
+          'dark:bg-indigo-700 dark:hover:bg-indigo-800',
+          'focus-visible:ring-indigo-300',
+          'rounded shadow hover:shadow-md'
+        ),
+      },
+      // Minimal Info
+      {
+        intent: 'info',
+        variant: 'minimal',
+        class: cn(
+          'justify-center text-indigo-600 hover:text-indigo-700',
+          'hover:bg-indigo-100 border border-transparent hover:border-indigo-200',
+          'dark:text-indigo-400 dark:hover:text-indigo-300',
+          'dark:hover:bg-indigo-950/20 dark:hover:border-indigo-800',
+          'rounded px-2 py-1 min-h-[44px]'
+        ),
+      },
+      // Ghost (transparent background)
+      {
+        intent: 'ghost',
+        class: cn(
+          'bg-transparent justify-center',
+          colors.interactive.hover,
+          colors.text.default,
+          'focus-visible:ring-blue-500',
+          'rounded px-2 py-1 min-h-[44px]'
+        ),
+      },
+    ],
     defaultVariants: {
       intent: 'primary',
+      variant: 'solid',
       size: 'md',
       fullWidth: false,
     },
@@ -435,3 +544,56 @@ export const alertVariants = cva(cn('p-4', radius.lg, 'border', transitions.norm
     size: 'md',
   },
 })
+
+/**
+ * Input variants with type-safe props
+ * Supports text inputs, textareas, and select elements
+ */
+export const inputVariants = cva(
+  cn(
+    'w-full',
+    'border',
+    transitions.colors,
+    'placeholder:text-slate-400 dark:placeholder:text-slate-500',
+    'focus:outline-none focus:ring-2 focus:ring-offset-2',
+    'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-slate-50 dark:disabled:bg-slate-900'
+  ),
+  {
+    variants: {
+      state: {
+        default: cn(
+          colors.background.default,
+          colors.border.default,
+          colors.text.default,
+          'focus:ring-blue-500 focus:border-blue-500'
+        ),
+        error: cn(
+          colors.background.default,
+          colors.danger.border,
+          colors.text.default,
+          'focus:ring-red-500 focus:border-red-500'
+        ),
+        success: cn(
+          colors.background.default,
+          colors.success.border,
+          colors.text.default,
+          'focus:ring-green-500 focus:border-green-500'
+        ),
+      },
+      size: {
+        sm: cn('px-2 py-1.5 text-sm', radius.md),
+        md: cn('px-3 py-2 text-base', radius.md),
+        lg: cn('px-4 py-3 text-lg', radius.lg),
+      },
+      fullWidth: {
+        true: 'w-full',
+        false: 'w-auto',
+      },
+    },
+    defaultVariants: {
+      state: 'default',
+      size: 'md',
+      fullWidth: true,
+    },
+  }
+)
