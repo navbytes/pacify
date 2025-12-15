@@ -15,6 +15,8 @@
     getProxyDescription,
   } from '@/utils/proxyModeHelpers'
   import { cn } from '@/utils/cn'
+  import { cardPatterns, flexPatterns, badgePatterns } from '@/utils/classPatterns'
+  import { colors, transitions } from '@/utils/theme'
 
   interface Props {
     proxy: ProxyConfig
@@ -66,12 +68,23 @@
 >
   <div
     class={cn(
-      'group relative rounded-lg transition-all duration-200 border-l-4 border-y border-r',
+      'group relative rounded-lg border-l-4 border-y border-r',
+      transitions.normal,
       pageType === 'POPUP' ? 'p-2' : 'p-5',
       pageType === 'QUICK_SWITCH' && 'border-dashed',
       proxy.isActive
-        ? 'bg-gradient-to-br from-blue-50 to-white dark:from-blue-950/20 dark:to-slate-800 border-y-blue-200 border-r-blue-200 dark:border-y-blue-800 dark:border-r-blue-800 shadow-md hover:shadow-lg ring-1 ring-blue-200/50 dark:ring-blue-800/30'
-        : 'bg-white dark:bg-slate-800 border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700 hover:shadow-md hover:border-y-slate-300 hover:border-r-slate-300 dark:hover:border-y-slate-600 dark:hover:border-r-slate-600 dark:hover:bg-slate-750 hover:scale-[1.005]'
+        ? [
+            colors.background.active,
+            'border-y-blue-200 border-r-blue-200 dark:border-y-blue-800 dark:border-r-blue-800',
+            'shadow-md hover:shadow-lg',
+            'ring-1 ring-blue-200/50 dark:ring-blue-800/30',
+          ]
+        : [
+            colors.background.default,
+            'border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700',
+            'hover:shadow-md hover:scale-[1.005]',
+            'hover:border-y-slate-300 hover:border-r-slate-300 dark:hover:border-y-slate-600 dark:hover:border-r-slate-600',
+          ]
     )}
     style={`border-left-color: ${proxy.color}`}
     role="button"
@@ -86,12 +99,17 @@
       : undefined}
   >
     <!-- Card Header -->
-    <div class="flex items-center justify-between gap-2.5 min-w-0 flex-1">
-      <div class="flex items-center gap-2.5 min-w-0 flex-1">
+    <div class={cn(flexPatterns.between, 'gap-2.5 min-w-0 flex-1')}>
+      <div class={cn(flexPatterns.centerVertical, 'gap-2.5 min-w-0 flex-1')}>
         {#if pageType !== 'POPUP'}
           <!-- Drag handle (only for OPTIONS and QUICK_SWITCH) -->
           <div
-            class="hidden group-hover:flex cursor-grab active:cursor-grabbing text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+            class={cn(
+              'hidden group-hover:flex cursor-grab active:cursor-grabbing',
+              colors.icon.muted,
+              'hover:text-blue-600 dark:hover:text-blue-400',
+              transitions.fast
+            )}
             role="button"
             tabindex="0"
             aria-label="Drag to move to Quick Switch"
@@ -113,13 +131,20 @@
           <ModeIcon size={14} class={cn('flex-shrink-0', modeColors.text)} />
         {/if}
 
-        <h3 class="text-base font-semibold text-slate-900 dark:text-slate-100 truncate">
+        <h3 class={cn('text-base font-semibold truncate', colors.text.default)}>
           {proxy.name}
         </h3>
 
         {#if proxy.isActive}
           <span
-            class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/30 rounded-md border border-green-200 dark:border-green-800"
+            class={cn(
+              badgePatterns.base,
+              'font-semibold border',
+              colors.success.light,
+              colors.success.text,
+              colors.success.border,
+              'rounded-md'
+            )}
             role="status"
             aria-label="This proxy is currently active"
           >
@@ -145,11 +170,12 @@
     <!-- Card Content -->
     {#if pageType !== 'POPUP'}
       <!-- Full content for OPTIONS/QUICK_SWITCH -->
-      <div class="flex flex-col gap-2 mb-4 mt-3">
+      <div class={cn(flexPatterns.col, 'gap-2 mb-4 mt-3')}>
         <!-- Mode badge -->
         <div
           class={cn(
-            'inline-flex self-start items-center gap-1.5 px-2 py-1 rounded-md border text-xs font-medium',
+            badgePatterns.base,
+            'self-start font-medium border rounded-md',
             modeColors.bg,
             modeColors.text,
             modeColors.border
@@ -161,7 +187,7 @@
 
         <!-- Description -->
         {#if proxyDesc}
-          <p class="text-sm text-slate-600 dark:text-slate-400 truncate">
+          <p class={cn('text-sm truncate', colors.text.muted)}>
             {proxyDesc}
           </p>
         {/if}
@@ -170,9 +196,7 @@
 
     <!-- Card Footer (OPTIONS only) -->
     {#if pageType === 'OPTIONS'}
-      <div
-        class="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-700"
-      >
+      <div class={cn(flexPatterns.between, 'pt-3 border-t', colors.border.default)}>
         <ToggleSwitch
           checked={proxy.isActive}
           onchange={(checked) => handleSetProxy(checked, proxy.id)}
@@ -182,7 +206,7 @@
           )}
         />
 
-        <div class="flex items-center gap-1">
+        <div class={cn(flexPatterns.centerVertical, 'gap-1')}>
           <Button
             color="primary"
             minimal
@@ -201,7 +225,7 @@
             classes="hover:bg-red-50 dark:hover:bg-red-950/20"
             data-testid={`delete-proxy-button-${proxy.id}`}
           >
-            {#snippet icon()}<Trash size={16} class="text-red-600 dark:text-red-400" />{/snippet}
+            {#snippet icon()}<Trash size={16} class={cn(colors.danger.text)} />{/snippet}
             <span class="text-sm">Delete</span>
           </Button>
         </div>

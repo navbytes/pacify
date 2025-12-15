@@ -14,6 +14,7 @@
 
   import type { Snippet } from 'svelte'
   import { cn } from '@/utils/cn'
+  import { colors as themeColors } from '@/utils/theme'
 
   interface Props {
     as?: TextElement
@@ -59,12 +60,12 @@
   }
 
   const colorClasses: Record<TextColor, string> = {
-    primary: 'text-slate-900 dark:text-slate-100',
+    primary: themeColors.text.default,
     secondary: 'text-slate-700 dark:text-slate-300',
-    muted: 'text-slate-600 dark:text-slate-400',
-    success: 'text-green-600 dark:text-green-400',
-    error: 'text-red-600 dark:text-red-400',
-    info: 'text-blue-600 dark:text-blue-400',
+    muted: themeColors.text.muted,
+    success: themeColors.success.text,
+    error: themeColors.danger.text,
+    info: themeColors.info.text,
     white: 'text-white',
     inherit: 'text-inherit',
   }

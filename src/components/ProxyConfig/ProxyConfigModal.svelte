@@ -15,6 +15,8 @@
   import { cubicOut } from 'svelte/easing'
   import { logger } from '@/services/LoggerService'
   import { cn } from '@/utils/cn'
+  import { modalPatterns, flexPatterns } from '@/utils/classPatterns'
+  import { colors } from '@/utils/theme'
 
   interface Props {
     proxyConfig?: ProxyConfig
@@ -179,7 +181,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <div
-  class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+  class={cn(modalPatterns.overlay, flexPatterns.center, 'p-4')}
   data-testid="proxy-config-modal"
   role="presentation"
   transition:fade={{ duration: 200 }}
@@ -187,18 +189,20 @@
   <div
     bind:this={modalRef}
     class={cn(
-      'bg-white dark:bg-slate-800 rounded-lg shadow-2xl flex flex-col',
+      modalPatterns.content,
+      flexPatterns.col,
       'overflow-y-auto',
-      'w-full max-w-4xl min-h-[50vh] max-h-[90vh]'
+      'w-full max-w-4xl min-h-[50vh] max-h-[90vh]',
+      'shadow-2xl'
     )}
     role="dialog"
     aria-labelledby="editor-title"
     aria-modal="true"
     transition:scale={{ duration: 200, start: 0.95, opacity: 0, easing: cubicOut }}
   >
-    <form class="flex flex-col flex-1" onsubmit={handleSubmit}>
-      <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-        <h2 class="text-xl font-semibold text-slate-900 dark:text-white" data-testid="modal-title">
+    <form class={cn(flexPatterns.col, 'flex-1')} onsubmit={handleSubmit}>
+      <div class={cn(modalPatterns.header)}>
+        <h2 class={cn('text-xl font-semibold', colors.text.default)} data-testid="modal-title">
           {I18nService.getMessage('proxyConfiguration')}
         </h2>
       </div>

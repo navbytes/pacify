@@ -6,6 +6,8 @@
   import { I18nService } from '@/services/i18n/i18nService'
   import { Globe, Zap } from '@/utils/icons'
   import { cn } from '@/utils/cn'
+  import { flexPatterns } from '@/utils/classPatterns'
+  import { colors } from '@/utils/theme'
 
   // Note: settingsStore.init() is called by parent component (Popup.svelte)
   // No need to initialize again here to avoid duplicate storage reads
@@ -46,7 +48,7 @@
 
 <section class="w-full">
   {#if title !== ''}
-    <h2 class="mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100">
+    <h2 class={cn('mb-4 text-lg font-semibold', colors.text.default)}>
       {title}
     </h2>
   {/if}
@@ -55,7 +57,7 @@
     <div
       class={cn(
         'gap-4',
-        pageType === 'POPUP' ? 'flex flex-col' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+        pageType === 'POPUP' ? flexPatterns.col : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
       )}
     >
       {#each displayProxyConfigs as proxy (proxy.id)}
