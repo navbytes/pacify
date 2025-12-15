@@ -4,6 +4,7 @@
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import Tooltip from '@/components/Tooltip.svelte'
   import { CircleQuestionMark } from '@/utils/icons'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     icon: ComponentType
@@ -53,15 +54,17 @@
 </script>
 
 <div
-  class="mb-6 pb-2 {hideBorder
-    ? ''
-    : `border-b ${borderColorClasses[iconColor]}`} flex items-center justify-between gap-4"
+  class={cn(
+    'mb-6 pb-2 flex items-center justify-between gap-4',
+    !hideBorder && `border-b ${borderColorClasses[iconColor]}`
+  )}
 >
   <div class="flex items-center gap-2 flex-1 min-w-0">
     <div
-      class="flex-shrink-0 w-8 h-8 {iconColorClasses[
-        iconColor
-      ]} rounded-lg flex items-center justify-center shadow-md"
+      class={cn(
+        'flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center shadow-md',
+        iconColorClasses[iconColor]
+      )}
     >
       <Icon size={16} class="text-white" />
     </div>
@@ -71,9 +74,10 @@
           {title}
         </h2>
         <span
-          class="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full border {badgeColorClasses[
-            iconColor
-          ]}"
+          class={cn(
+            'inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full border',
+            badgeColorClasses[iconColor]
+          )}
         >
           {count}
         </span>

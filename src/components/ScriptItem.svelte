@@ -14,6 +14,7 @@
     getProxyModeColor,
     getProxyDescription,
   } from '@/utils/proxyModeHelpers'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     proxy: ProxyConfig
@@ -64,16 +65,14 @@
   bind:dragType
 >
   <div
-    class={`
-      group relative rounded-lg transition-all duration-200 border-l-4
-      ${pageType === 'POPUP' ? 'p-2' : 'p-5'}
-      ${pageType === 'QUICK_SWITCH' ? 'border-y border-r border-dashed' : 'border-y border-r'}
-      ${
-        proxy.isActive
-          ? 'bg-gradient-to-br from-blue-50 to-white dark:from-blue-950/20 dark:to-slate-800 border-y-blue-200 border-r-blue-200 dark:border-y-blue-800 dark:border-r-blue-800 shadow-md hover:shadow-lg ring-1 ring-blue-200/50 dark:ring-blue-800/30'
-          : 'bg-white dark:bg-slate-800 border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700 hover:shadow-md hover:border-y-slate-300 hover:border-r-slate-300 dark:hover:border-y-slate-600 dark:hover:border-r-slate-600 dark:hover:bg-slate-750 hover:scale-[1.005]'
-      }
-    `}
+    class={cn(
+      'group relative rounded-lg transition-all duration-200 border-l-4 border-y border-r',
+      pageType === 'POPUP' ? 'p-2' : 'p-5',
+      pageType === 'QUICK_SWITCH' && 'border-dashed',
+      proxy.isActive
+        ? 'bg-gradient-to-br from-blue-50 to-white dark:from-blue-950/20 dark:to-slate-800 border-y-blue-200 border-r-blue-200 dark:border-y-blue-800 dark:border-r-blue-800 shadow-md hover:shadow-lg ring-1 ring-blue-200/50 dark:ring-blue-800/30'
+        : 'bg-white dark:bg-slate-800 border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700 hover:shadow-md hover:border-y-slate-300 hover:border-r-slate-300 dark:hover:border-y-slate-600 dark:hover:border-r-slate-600 dark:hover:bg-slate-750 hover:scale-[1.005]'
+    )}
     style={`border-left-color: ${proxy.color}`}
     role="button"
     tabindex="0"
@@ -111,7 +110,7 @@
 
         <!-- Mode icon inline (POPUP only) -->
         {#if pageType === 'POPUP'}
-          <ModeIcon size={14} class="flex-shrink-0 {modeColors.text}" />
+          <ModeIcon size={14} class={cn('flex-shrink-0', modeColors.text)} />
         {/if}
 
         <h3 class="text-base font-semibold text-slate-900 dark:text-slate-100 truncate">
@@ -149,7 +148,12 @@
       <div class="flex flex-col gap-2 mb-4 mt-3">
         <!-- Mode badge -->
         <div
-          class={`inline-flex self-start items-center gap-1.5 px-2 py-1 rounded-md border text-xs font-medium ${modeColors.bg} ${modeColors.text} ${modeColors.border}`}
+          class={cn(
+            'inline-flex self-start items-center gap-1.5 px-2 py-1 rounded-md border text-xs font-medium',
+            modeColors.bg,
+            modeColors.text,
+            modeColors.border
+          )}
         >
           <ModeIcon size={13} />
           <span>{modeLabel}</span>
