@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Configure Tailwind to use class-based dark mode instead of media queries */
+@variant dark (&:is(.dark *));
+
 @theme {
   /* Custom colors */
   --color-primary: #2196f3;
