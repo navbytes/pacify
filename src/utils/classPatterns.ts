@@ -320,99 +320,103 @@ export function withPattern(pattern: string, ...classes: string[]) {
  * Variant-based component utilities
  * Type-safe alternatives to static patterns
  */
-import { createVariants } from './variants'
+import { cva } from 'class-variance-authority'
+export type { VariantProps } from 'class-variance-authority'
 
 /**
  * Button variants with type-safe props
  */
-export const buttonVariants = createVariants({
-  base: cn(
+export const buttonVariants = cva(
+  cn(
     'inline-flex items-center justify-center gap-2',
     'font-medium',
     transitions.colors,
     'disabled:opacity-50 disabled:cursor-not-allowed',
     'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
   ),
-  variants: {
-    intent: {
-      primary: cn(
-        colors.primary.base,
-        colors.primary.hover,
-        colors.text.inverse,
-        'focus-visible:ring-blue-500'
-      ),
-      secondary: cn(
-        'bg-slate-200 dark:bg-slate-700',
-        'hover:bg-slate-300 dark:hover:bg-slate-600',
-        colors.text.default,
-        'focus-visible:ring-slate-500'
-      ),
-      danger: cn(
-        colors.danger.base,
-        colors.danger.hover,
-        colors.text.inverse,
-        'focus-visible:ring-red-500'
-      ),
-      success: cn(
-        colors.success.base,
-        colors.success.hover,
-        colors.text.inverse,
-        'focus-visible:ring-green-500'
-      ),
-      ghost: cn(
-        'bg-transparent',
-        colors.interactive.hover,
-        colors.text.default,
-        'focus-visible:ring-blue-500'
-      ),
+  {
+    variants: {
+      intent: {
+        primary: cn(
+          colors.primary.base,
+          colors.primary.hover,
+          colors.text.inverse,
+          'focus-visible:ring-blue-500'
+        ),
+        secondary: cn(
+          'bg-slate-200 dark:bg-slate-700',
+          'hover:bg-slate-300 dark:hover:bg-slate-600',
+          colors.text.default,
+          'focus-visible:ring-slate-500'
+        ),
+        danger: cn(
+          colors.danger.base,
+          colors.danger.hover,
+          colors.text.inverse,
+          'focus-visible:ring-red-500'
+        ),
+        success: cn(
+          colors.success.base,
+          colors.success.hover,
+          colors.text.inverse,
+          'focus-visible:ring-green-500'
+        ),
+        ghost: cn(
+          'bg-transparent',
+          colors.interactive.hover,
+          colors.text.default,
+          'focus-visible:ring-blue-500'
+        ),
+      },
+      size: {
+        sm: cn('px-3 py-1.5', 'text-xs', radius.md),
+        md: cn('px-4 py-2', 'text-sm', radius.md),
+        lg: cn('px-6 py-3', 'text-base', radius.lg),
+      },
+      fullWidth: {
+        true: 'w-full',
+        false: '',
+      },
     },
-    size: {
-      sm: cn('px-3 py-1.5', 'text-xs', radius.md),
-      md: cn('px-4 py-2', 'text-sm', radius.md),
-      lg: cn('px-6 py-3', 'text-base', radius.lg),
+    defaultVariants: {
+      intent: 'primary',
+      size: 'md',
+      fullWidth: false,
     },
-    fullWidth: {
-      true: 'w-full',
-      false: '',
-    },
-  },
-  defaultVariants: {
-    intent: 'primary',
-    size: 'md',
-    fullWidth: false,
-  },
-})
+  }
+)
 
 /**
  * Badge variants with type-safe props
  */
-export const badgeVariants = createVariants({
-  base: cn('inline-flex items-center gap-1', 'text-xs font-medium', radius.full),
-  variants: {
-    intent: {
-      primary: cn(badgePatterns.primary),
-      success: cn(badgePatterns.success),
-      warning: cn(badgePatterns.warning),
-      danger: cn(badgePatterns.danger),
-      neutral: cn(badgePatterns.neutral),
+export const badgeVariants = cva(
+  cn('inline-flex items-center gap-1', 'text-xs font-medium', radius.full),
+  {
+    variants: {
+      intent: {
+        primary: cn(badgePatterns.primary),
+        success: cn(badgePatterns.success),
+        warning: cn(badgePatterns.warning),
+        danger: cn(badgePatterns.danger),
+        neutral: cn(badgePatterns.neutral),
+      },
+      size: {
+        sm: 'px-2 py-0.5',
+        md: 'px-2.5 py-0.5',
+        lg: 'px-3 py-1',
+      },
     },
-    size: {
-      sm: 'px-2 py-0.5',
-      md: 'px-2.5 py-0.5',
-      lg: 'px-3 py-1',
+    defaultVariants: {
+      intent: 'neutral',
+      size: 'md',
     },
-  },
-  defaultVariants: {
-    intent: 'neutral',
-    size: 'md',
-  },
-})
+  }
+)
 
 /**
  * Alert variants with type-safe props
  */
-export const alertVariants = createVariants({
-  base: cn('p-4', radius.lg, 'border', transitions.normal),
+export const alertVariants = cva(cn('p-4', radius.lg, 'border', transitions.normal), {
   variants: {
     intent: {
       info: cn(colors.info.light, colors.info.border, colors.info.text),
