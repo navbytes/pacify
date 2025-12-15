@@ -11,8 +11,10 @@
   import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
   import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
   import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
-  import { Cable, Zap, Search } from '@/utils/icons'
+  import ToggleSwitch from '@/components/ToggleSwitch.svelte'
+  import { Cable, Zap, Search, CircleQuestionMark } from '@/utils/icons'
   import { slide } from 'svelte/transition'
+  import { colors } from '@/utils/theme'
 
   interface Props {
     onOpenEditor: (scriptId?: string) => void
@@ -139,11 +141,21 @@
         description={I18nService.getMessage('quickSwitchConfigsDescription')}
         count={quickSwitchProxies.length}
         iconColor="purple"
-        showToggle={true}
-        toggleChecked={settings.quickSwitchEnabled}
-        toggleTooltip={I18nService.getMessage('tooltipQuickSwitchMode')}
-        ontoggle={handleQuickSwitchToggle}
-      />
+      >
+        {#snippet rightContent()}
+          <div class="flex items-center min-h-[44px]">
+            <Tooltip text={I18nService.getMessage('tooltipQuickSwitchMode')} position="left">
+              <CircleQuestionMark size={16} class={colors.icon.muted} />
+            </Tooltip>
+          </div>
+          <ToggleSwitch
+            id="sectionToggle-quick-switch"
+            checked={settings.quickSwitchEnabled}
+            onchange={handleQuickSwitchToggle}
+            aria-label="Toggle Quick Switch"
+          />
+        {/snippet}
+      </SectionHeader>
 
       <DropTarget onDrop={(item) => handleDrop(item, 'QUICK_SWITCH')}>
         <section

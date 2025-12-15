@@ -1,9 +1,6 @@
 <script lang="ts">
-  import type { ComponentType } from 'svelte'
+  import type { ComponentType, Snippet } from 'svelte'
   import Text from '@/components/Text.svelte'
-  import ToggleSwitch from '@/components/ToggleSwitch.svelte'
-  import Tooltip from '@/components/Tooltip.svelte'
-  import { CircleQuestionMark } from '@/utils/icons'
   import { cn } from '@/utils/cn'
   import { flexPatterns, badgePatterns } from '@/utils/classPatterns'
   import { colors } from '@/utils/theme'
@@ -14,13 +11,8 @@
     description?: string
     count: number
     iconColor: 'purple' | 'slate'
-    // Optional toggle functionality
-    showToggle?: boolean
-    toggleChecked?: boolean
-    toggleTooltip?: string
-    ontoggle?: (checked: boolean) => void
-    // Optional border control
     hideBorder?: boolean
+    rightContent?: Snippet
   }
 
   let {
@@ -29,11 +21,8 @@
     description,
     count,
     iconColor,
-    showToggle = false,
-    toggleChecked = false,
-    toggleTooltip,
-    ontoggle,
     hideBorder = false,
+    rightContent,
   }: Props = $props()
 
   const iconColorClasses = {
@@ -91,21 +80,9 @@
     </div>
   </div>
 
-  {#if showToggle}
+  {#if rightContent}
     <div class={cn(flexPatterns.centerVertical, 'gap-2 flex-shrink-0')}>
-      {#if toggleTooltip}
-        <div class={cn(flexPatterns.centerVertical, 'min-h-[44px]')}>
-          <Tooltip text={toggleTooltip} position="left">
-            <CircleQuestionMark size={16} class={colors.icon.muted} />
-          </Tooltip>
-        </div>
-      {/if}
-      <ToggleSwitch
-        id="sectionToggle-{title.replace(/\s+/g, '-').toLowerCase()}"
-        checked={toggleChecked}
-        onchange={ontoggle}
-        aria-label="Toggle {title}"
-      />
+      {@render rightContent()}
     </div>
   {/if}
 </div>
