@@ -5,7 +5,22 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.22.0] - 2024-11-13
+## [1.23.0] - 2025-12-16
+
+### Changed
+
+- **Consistent UX**
+  - Refactored css classes
+  - Improve accessibility
+  - Add logging service
+  - Improved theming
+  - Improve keyboard shortcuts
+
+### Fixed
+
+- Scroll issue in modal
+
+## [1.22.0] - 2025-11-13
 
 ### Changed
 
@@ -25,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed `getStorageStats()` method from StorageService
   - Cleaned up unused diagnostics and telemetry code
 
-## [1.21.0] - 2024-11-13
+## [1.21.0] - 2025-11-13
 
 ### Added
 

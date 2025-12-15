@@ -22,7 +22,7 @@
   let activeTab = $state('proxy-configs')
 
   // Dynamic import for ProxyConfigModal - only load when needed
-  let ProxyConfigModal = $state<Component | null>(null)
+  let ProxyConfigModal = $state<Component<any, {}, ''> | null>(null)
   let isLoadingModal = $state(false)
 
   onMount(() => {

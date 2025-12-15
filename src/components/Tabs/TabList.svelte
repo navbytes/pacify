@@ -67,25 +67,8 @@
   {@render children()}
 </div>
 
-<style>
-  /* Custom scrollbar for tab list */
-  .tab-list::-webkit-scrollbar {
-    height: 4px;
-  }
+<!-- Note: Custom scrollbar styles for .tab-list are defined globally in app.css
+     to avoid Lightning CSS warnings about .dark selector scoping issues.
 
-  .tab-list::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  .tab-list::-webkit-scrollbar-thumb {
-    background-color: rgb(203 213 225); /* slate-300 */
-    border-radius: 0.25rem;
-  }
-
-  .dark .tab-list::-webkit-scrollbar-thumb {
-    background-color: rgb(71 85 105); /* slate-600 */
-  }
-
-  /* Note: Tab list variant styles (pills, buttons) are defined globally in app.css
-     to avoid Lightning CSS warnings about :global() syntax */
-</style>
+     Tab list variant styles (pills, buttons) are also defined globally in app.css
+     to avoid Lightning CSS warnings about :global() syntax. -->
