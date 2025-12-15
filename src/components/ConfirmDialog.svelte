@@ -4,7 +4,7 @@
   import Text from './Text.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import { cn } from '@/utils/cn'
-  import { modalPatterns, flexPatterns } from '@/utils/classPatterns'
+  import { modalVariants, flexPatterns } from '@/utils/classPatterns'
   import { colors } from '@/utils/theme'
 
   interface Props {
@@ -54,7 +54,7 @@
 
 {#if open}
   <div
-    class={cn(modalPatterns.overlay, flexPatterns.center)}
+    class={cn(modalVariants.overlay(), flexPatterns.center)}
     onclick={handleBackdropClick}
     onkeydown={handleKeydown}
     role="dialog"
@@ -62,9 +62,9 @@
     aria-labelledby="dialog-title"
     tabindex="-1"
   >
-    <div class={cn(modalPatterns.content, 'mx-4 animate-scale-in')}>
+    <div class={cn(modalVariants.content({ size: 'md' }), 'mx-4 animate-scale-in')}>
       <!-- Header -->
-      <div class={cn(modalPatterns.header, 'items-start justify-between')}>
+      <div class={cn(modalVariants.header(), 'items-start justify-between')}>
         <div class={cn(flexPatterns.start, 'gap-3')}>
           <div
             class={cn(
@@ -100,14 +100,14 @@
       </div>
 
       <!-- Body -->
-      <div class={modalPatterns.body}>
+      <div class={modalVariants.body()}>
         <Text as="p" color="muted">
           {message}
         </Text>
       </div>
 
       <!-- Footer -->
-      <div class={modalPatterns.footer}>
+      <div class={modalVariants.footer()}>
         <Button color="secondary" onclick={handleCancel}>
           {cancelLabel}
         </Button>

@@ -677,3 +677,54 @@ export const cardVariants = cva(cn(radius.lg, 'border', transitions.normal), {
     padding: 'md',
   },
 })
+
+/**
+ * Modal/Dialog variants with type-safe props
+ */
+export const modalVariants = {
+  overlay: cva(cn('fixed inset-0 z-50', 'backdrop-blur-sm', transitions.opacity), {
+    variants: {
+      variant: {
+        default: 'bg-black/50 dark:bg-black/70',
+        light: 'bg-black/30 dark:bg-black/50',
+        heavy: 'bg-black/70 dark:bg-black/80',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }),
+  content: cva(
+    cn(
+      'relative',
+      'w-full max-w-lg',
+      radius.lg,
+      colors.background.elevated,
+      colors.border.default,
+      'border',
+      shadows.xl,
+      transitions.normal
+    ),
+    {
+      variants: {
+        size: {
+          sm: 'max-w-md',
+          md: 'max-w-lg',
+          lg: 'max-w-2xl',
+          xl: 'max-w-4xl',
+          full: 'max-w-full mx-4',
+        },
+      },
+      defaultVariants: {
+        size: 'md',
+      },
+    }
+  ),
+  header: cva(
+    cn('flex items-center justify-between', 'p-6 pb-4', 'border-b', colors.border.default)
+  ),
+  body: cva('p-6'),
+  footer: cva(
+    cn('flex items-center justify-end gap-3', 'p-6 pt-4', 'border-t', colors.border.default)
+  ),
+}

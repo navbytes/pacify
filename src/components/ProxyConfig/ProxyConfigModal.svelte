@@ -15,7 +15,7 @@
   import { cubicOut } from 'svelte/easing'
   import { logger } from '@/services/LoggerService'
   import { cn } from '@/utils/cn'
-  import { modalPatterns, flexPatterns } from '@/utils/classPatterns'
+  import { modalVariants, flexPatterns } from '@/utils/classPatterns'
   import { colors } from '@/utils/theme'
 
   interface Props {
@@ -181,7 +181,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <div
-  class={cn(modalPatterns.overlay, flexPatterns.center, 'p-4')}
+  class={cn(modalVariants.overlay(), flexPatterns.center, 'p-4')}
   data-testid="proxy-config-modal"
   role="presentation"
   transition:fade={{ duration: 200 }}
@@ -189,11 +189,10 @@
   <div
     bind:this={modalRef}
     class={cn(
-      modalPatterns.content,
+      modalVariants.content({ size: 'xl' }),
       flexPatterns.col,
       'overflow-y-auto',
-      'w-full max-w-4xl min-h-[50vh] max-h-[90vh]',
-      'shadow-2xl'
+      'min-h-[50vh] max-h-[90vh]'
     )}
     role="dialog"
     aria-labelledby="editor-title"
@@ -201,7 +200,7 @@
     transition:scale={{ duration: 200, start: 0.95, opacity: 0, easing: cubicOut }}
   >
     <form class={cn(flexPatterns.col, 'flex-1')} onsubmit={handleSubmit}>
-      <div class={cn(modalPatterns.header)}>
+      <div class={cn(modalVariants.header())}>
         <h2 class={cn('text-xl font-semibold', colors.text.default)} data-testid="modal-title">
           {I18nService.getMessage('proxyConfiguration')}
         </h2>
