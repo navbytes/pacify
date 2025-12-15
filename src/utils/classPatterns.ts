@@ -795,3 +795,228 @@ export const tabBadgeVariants = cva('ml-2 px-2 py-0.5 rounded-full text-xs font-
     active: false,
   },
 })
+
+/**
+ * FlexGroup variants with type-safe props
+ * Flexible layout component with direction, gap, alignment, and justification
+ */
+export const flexGroupVariants = cva('flex', {
+  variants: {
+    direction: {
+      horizontal: 'flex-row',
+      vertical: 'flex-col',
+    },
+    childrenGap: {
+      xxs: 'gap-1',
+      xs: 'gap-2',
+      sm: 'gap-3',
+      md: 'gap-4',
+      lg: 'gap-6',
+      xl: 'gap-8',
+      xxl: 'gap-10',
+    },
+    alignItems: {
+      start: 'items-start',
+      center: 'items-center',
+      end: 'items-end',
+      stretch: 'items-stretch',
+      baseline: 'items-baseline',
+    },
+    justifyContent: {
+      start: 'justify-start',
+      center: 'justify-center',
+      end: 'justify-end',
+      between: 'justify-between',
+      around: 'justify-around',
+      evenly: 'justify-evenly',
+    },
+  },
+  defaultVariants: {
+    direction: 'horizontal',
+    childrenGap: 'md',
+    alignItems: 'center',
+    justifyContent: 'start',
+  },
+})
+
+/**
+ * Text variants with type-safe props
+ * Typography component with size, weight, color, and decoration options
+ */
+export const textVariants = cva('', {
+  variants: {
+    size: {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      base: 'text-base',
+      lg: 'text-lg',
+      xl: 'text-xl',
+      '2xl': 'text-2xl',
+      '3xl': 'text-3xl',
+    },
+    weight: {
+      normal: 'font-normal',
+      medium: 'font-medium',
+      semibold: 'font-semibold',
+      bold: 'font-bold',
+    },
+    color: {
+      primary: colors.text.default,
+      secondary: 'text-slate-700 dark:text-slate-300',
+      muted: colors.text.muted,
+      success: colors.success.text,
+      error: colors.danger.text,
+      info: colors.info.text,
+      white: 'text-white',
+      inherit: 'text-inherit',
+    },
+    truncate: {
+      true: 'truncate',
+      false: '',
+    },
+    italic: {
+      true: 'italic',
+      false: '',
+    },
+    underline: {
+      true: 'underline',
+      false: '',
+    },
+  },
+  defaultVariants: {
+    size: 'base',
+    weight: 'normal',
+    color: 'primary',
+    truncate: false,
+    italic: false,
+    underline: false,
+  },
+})
+
+/**
+ * IconBadge variants with type-safe props
+ * Circular badge component with icon, color, and size variants
+ */
+export const iconBadgeVariants = cva('rounded-lg flex items-center justify-center', {
+  variants: {
+    color: {
+      blue: 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400',
+      red: 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400',
+      yellow: 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400',
+      green: 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400',
+      purple: 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400',
+      orange: 'bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400',
+    },
+    size: {
+      sm: 'w-8 h-8',
+      md: 'w-10 h-10',
+      lg: 'w-16 h-16',
+    },
+  },
+  defaultVariants: {
+    color: 'blue',
+    size: 'md',
+  },
+})
+
+/**
+ * LinkCard variants with type-safe props
+ * Provides hover color variants for IconBadge in LinkCard component
+ */
+export const linkCardIconBadgeVariants = cva('transition-all duration-200 group-hover:scale-110', {
+  variants: {
+    color: {
+      blue: 'group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 group-hover:text-blue-600 dark:group-hover:text-blue-400',
+      red: 'group-hover:bg-red-100 dark:group-hover:bg-red-900/30 group-hover:text-red-600 dark:group-hover:text-red-400',
+      yellow:
+        'group-hover:bg-yellow-100 dark:group-hover:bg-yellow-900/30 group-hover:text-yellow-600 dark:group-hover:text-yellow-400',
+      green:
+        'group-hover:bg-green-100 dark:group-hover:bg-green-900/30 group-hover:text-green-600 dark:group-hover:text-green-400',
+      purple:
+        'group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30 group-hover:text-purple-600 dark:group-hover:text-purple-400',
+      orange:
+        'group-hover:bg-orange-100 dark:group-hover:bg-orange-900/30 group-hover:text-orange-600 dark:group-hover:text-orange-400',
+    },
+  },
+  defaultVariants: {
+    color: 'blue',
+  },
+})
+
+/**
+ * LinkCard external link icon variants
+ */
+export const linkCardExternalIconVariants = cva(
+  'flex-shrink-0 text-slate-400 dark:text-slate-500 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
+  {
+    variants: {
+      color: {
+        blue: 'group-hover:text-blue-600 dark:group-hover:text-blue-400',
+        red: 'group-hover:text-red-600 dark:group-hover:text-red-400',
+        yellow: 'group-hover:text-yellow-600 dark:group-hover:text-yellow-400',
+        green: 'group-hover:text-green-600 dark:group-hover:text-green-400',
+        purple: 'group-hover:text-purple-600 dark:group-hover:text-purple-400',
+        orange: 'group-hover:text-orange-600 dark:group-hover:text-orange-400',
+      },
+    },
+    defaultVariants: {
+      color: 'blue',
+    },
+  }
+)
+
+/**
+ * SectionHeader variants with type-safe props
+ * Icon container with gradient background
+ */
+export const sectionHeaderIconVariants = cva(
+  'flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center shadow-md',
+  {
+    variants: {
+      iconColor: {
+        purple:
+          'bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700',
+        slate:
+          'bg-gradient-to-br from-slate-600 to-slate-700 dark:from-slate-500 dark:to-slate-600',
+      },
+    },
+    defaultVariants: {
+      iconColor: 'slate',
+    },
+  }
+)
+
+/**
+ * SectionHeader border variants
+ */
+export const sectionHeaderBorderVariants = cva('', {
+  variants: {
+    iconColor: {
+      purple: 'border-purple-200 dark:border-purple-800',
+      slate: 'border-slate-200 dark:border-slate-700',
+    },
+  },
+  defaultVariants: {
+    iconColor: 'slate',
+  },
+})
+
+/**
+ * SectionHeader badge variants
+ */
+export const sectionHeaderBadgeVariants = cva(
+  'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold border',
+  {
+    variants: {
+      iconColor: {
+        purple:
+          'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800',
+        slate:
+          'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600',
+      },
+    },
+    defaultVariants: {
+      iconColor: 'slate',
+    },
+  }
+)

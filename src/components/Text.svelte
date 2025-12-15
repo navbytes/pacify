@@ -1,26 +1,17 @@
 <script lang="ts">
   type TextElement = 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label'
-  type TextSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl'
-  type TextWeight = 'normal' | 'medium' | 'semibold' | 'bold'
-  type TextColor =
-    | 'primary'
-    | 'secondary'
-    | 'muted'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'white'
-    | 'inherit'
 
   import type { Snippet } from 'svelte'
   import { cn } from '@/utils/cn'
-  import { colors as themeColors } from '@/utils/theme'
+  import { textVariants, type VariantProps } from '@/utils/classPatterns'
+
+  type TextVariant = VariantProps<typeof textVariants>
 
   interface Props {
     as?: TextElement
-    size?: TextSize
-    weight?: TextWeight
-    color?: TextColor
+    size?: TextVariant['size']
+    weight?: TextVariant['weight']
+    color?: TextVariant['color']
     classes?: string
     truncate?: boolean
     italic?: boolean
@@ -42,42 +33,16 @@
     id = undefined,
   }: Props = $props()
 
-  const sizeClasses: Record<TextSize, string> = {
-    xs: 'text-xs',
-    sm: 'text-sm',
-    base: 'text-base',
-    lg: 'text-lg',
-    xl: 'text-xl',
-    '2xl': 'text-2xl',
-    '3xl': 'text-3xl',
-  }
-
-  const weightClasses: Record<TextWeight, string> = {
-    normal: 'font-normal',
-    medium: 'font-medium',
-    semibold: 'font-semibold',
-    bold: 'font-bold',
-  }
-
-  const colorClasses: Record<TextColor, string> = {
-    primary: themeColors.text.default,
-    secondary: 'text-slate-700 dark:text-slate-300',
-    muted: themeColors.text.muted,
-    success: themeColors.success.text,
-    error: themeColors.danger.text,
-    info: themeColors.info.text,
-    white: 'text-white',
-    inherit: 'text-inherit',
-  }
-
   const combinedClasses = $derived(
     cn(
-      sizeClasses[size],
-      weightClasses[weight],
-      colorClasses[color],
-      truncate && 'truncate',
-      italic && 'italic',
-      underline && 'underline',
+      textVariants({
+        size,
+        weight,
+        color,
+        truncate,
+        italic,
+        underline,
+      }),
       classes
     )
   )

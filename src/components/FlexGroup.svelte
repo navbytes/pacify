@@ -1,16 +1,15 @@
 <script lang="ts">
-  // Type definitions - moved from module context to regular script
-  type SpacingSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-  type AlignItems = 'start' | 'center' | 'end' | 'stretch' | 'baseline'
-  type JustifyContent = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
-  type Direction = 'horizontal' | 'vertical'
+  import { cn } from '@/utils/cn'
+  import { flexGroupVariants, type VariantProps } from '@/utils/classPatterns'
+
+  type FlexGroupVariant = VariantProps<typeof flexGroupVariants>
 
   interface Props {
     classes?: string
-    direction?: Direction
-    childrenGap?: SpacingSize
-    alignItems?: AlignItems
-    justifyContent?: JustifyContent
+    direction?: FlexGroupVariant['direction']
+    childrenGap?: FlexGroupVariant['childrenGap']
+    alignItems?: FlexGroupVariant['alignItems']
+    justifyContent?: FlexGroupVariant['justifyContent']
     children?: () => any
     role?: string
   }
@@ -25,42 +24,16 @@
     role,
   }: Props = $props()
 
-  // Map constants remain the same
-  const spacingMap: Record<SpacingSize, string> = {
-    xxs: 'gap-1',
-    xs: 'gap-2',
-    sm: 'gap-3',
-    md: 'gap-4',
-    lg: 'gap-6',
-    xl: 'gap-8',
-    xxl: 'gap-10',
-  }
-
-  const justifyMap: Record<JustifyContent, string> = {
-    start: 'justify-start',
-    center: 'justify-center',
-    end: 'justify-end',
-    between: 'justify-between',
-    around: 'justify-around',
-    evenly: 'justify-evenly',
-  }
-
-  const alignMap: Record<AlignItems, string> = {
-    start: 'items-start',
-    center: 'items-center',
-    end: 'items-end',
-    stretch: 'items-stretch',
-    baseline: 'items-baseline',
-  }
-
-  // Computed classes using $derived
-  const directionClass = $derived(direction === 'horizontal' ? 'flex-row' : 'flex-col')
-  const gapClass = $derived(spacingMap[childrenGap])
-  const justifyClass = $derived(justifyMap[justifyContent])
-  const alignClass = $derived(alignMap[alignItems])
-
   const flexGroupClasses = $derived(
-    `flex ${directionClass} ${gapClass} ${justifyClass} ${alignClass} ${classes}`.trim()
+    cn(
+      flexGroupVariants({
+        direction,
+        childrenGap,
+        alignItems,
+        justifyContent,
+      }),
+      classes
+    )
   )
 </script>
 
