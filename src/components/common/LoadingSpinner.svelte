@@ -1,5 +1,6 @@
 <script lang="ts">
   import { cn } from '@/utils/cn'
+  import { loadingPatterns } from '@/utils/classPatterns'
 
   interface Props {
     size?: 'sm' | 'md' | 'lg'
@@ -16,7 +17,5 @@
 </script>
 
 <div class="flex justify-center items-center">
-  <div
-    class={cn('animate-spin rounded-full border-2 border-t-transparent', sizeClasses[size], color)}
-  ></div>
+  <div class={cn(loadingPatterns.spinner, sizeClasses[size], color)}></div>
 </div>

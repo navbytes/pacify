@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { ListViewType } from '@/interfaces'
   import { cn } from '@/utils/cn'
+  import { dragPatterns } from '@/utils/classPatterns'
 
   interface Props {
     dragstart?: (event: DragEvent) => void
@@ -89,9 +90,9 @@
 
 <div
   class={cn(
-    'draggable-item',
-    dragType && dragType !== '' && 'dragging',
-    disabled && dataType !== 'POPUP' && 'disabled'
+    dragPatterns.draggable,
+    dragType && dragType !== '' && dragPatterns.dragging,
+    disabled && dataType !== 'POPUP' && 'cursor-not-allowed opacity-50'
   )}
   draggable={!disabled}
   ondragstart={handleDragStart}
@@ -101,28 +102,3 @@
 >
   {@render children?.()}
 </div>
-
-<style>
-  .draggable-item {
-    cursor: grab;
-    transition:
-      opacity 0.3s ease,
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .draggable-item:active {
-    cursor: grabbing;
-  }
-
-  .draggable-item.dragging {
-    opacity: 0.4;
-    transform: scale(0.95);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
-  }
-
-  .draggable-item.disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-</style>

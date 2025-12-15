@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Text from './Text.svelte'
+  import { cn } from '@/utils/cn'
 
   // Define types within the component
   type ButtonColor = 'primary' | 'secondary' | 'success' | 'error' | 'info'
@@ -73,16 +73,22 @@
     },
   }
 
-  // Use $derived instead of $: for computed values
-  const btnClasses = $derived(
-    minimal
-      ? `inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 dark:focus-visible:ring-blue-400/50 focus-visible:ring-offset-2 transition-all duration-150 cursor-pointer active:scale-95 ${colors[color].minimal} ${!children ? 'min-w-[44px] min-h-[44px]' : 'min-h-[44px]'}`
-      : `inline-flex items-center gap-2 ${sizes[size]} rounded shadow hover:shadow-md focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 dark:focus-visible:ring-blue-400/50 focus-visible:ring-offset-2 transition-all duration-150 cursor-pointer active:scale-95 ${colors[color].base}`
+  // Use $derived with cn utility for computed values
+  const combinedClasses = $derived(
+    cn(
+      'inline-flex items-center gap-2',
+      'focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 dark:focus-visible:ring-blue-400/50 focus-visible:ring-offset-2',
+      'transition-all duration-150 cursor-pointer active:scale-95',
+      minimal && 'justify-center',
+      minimal && (children ? 'min-h-[44px]' : 'min-w-[44px] min-h-[44px]'),
+      minimal && colors[color].minimal,
+      !minimal && sizes[size],
+      !minimal && 'rounded shadow hover:shadow-md',
+      !minimal && colors[color].base,
+      disabled && 'opacity-50 cursor-not-allowed',
+      classes
+    )
   )
-
-  const disabledClasses = $derived(disabled ? 'opacity-50 cursor-not-allowed' : '')
-
-  const combinedClasses = $derived(`${btnClasses} ${disabledClasses} ${classes}`.trim())
 </script>
 
 <button

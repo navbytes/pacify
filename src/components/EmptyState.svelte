@@ -3,8 +3,8 @@
   import type { ComponentType } from 'svelte'
   import Button from './Button.svelte'
   import Text from './Text.svelte'
-  import FlexGroup from './FlexGroup.svelte'
   import { cn } from '@/utils/cn'
+  import { emptyStatePatterns, flexPatterns } from '@/utils/classPatterns'
 
   interface Props {
     title: string
@@ -33,13 +33,8 @@
   let Icon = $derived(icon)
 </script>
 
-<FlexGroup
-  direction="vertical"
-  alignItems="center"
-  justifyContent="center"
-  classes={cn('px-4 text-center', compact ? 'py-8' : 'py-12')}
->
-  <div class={cn('opacity-50', compact ? 'mb-4' : 'mb-6')}>
+<div class={cn(emptyStatePatterns.container, compact ? 'py-8' : 'py-12')}>
+  <div class={cn(emptyStatePatterns.icon, compact ? 'mb-4' : 'mb-6')}>
     <Icon size={iconSize} class="text-slate-400 dark:text-slate-600" strokeWidth={1.5} />
   </div>
 
@@ -52,7 +47,7 @@
   </Text>
 
   {#if actionLabel && onAction}
-    <div class="flex items-center gap-3">
+    <div class={cn(flexPatterns.centerVertical, 'gap-3')}>
       <Button color="primary" onclick={onAction}>
         {#snippet icon()}<Plus size={18} />{/snippet}
         {actionLabel}
@@ -65,4 +60,4 @@
       {/if}
     </div>
   {/if}
-</FlexGroup>
+</div>

@@ -5,6 +5,8 @@
   import Tooltip from '@/components/Tooltip.svelte'
   import { CircleQuestionMark } from '@/utils/icons'
   import { cn } from '@/utils/cn'
+  import { flexPatterns, badgePatterns } from '@/utils/classPatterns'
+  import { colors } from '@/utils/theme'
 
   interface Props {
     icon: ComponentType
@@ -55,30 +57,29 @@
 
 <div
   class={cn(
-    'mb-6 pb-2 flex items-center justify-between gap-4',
+    'mb-6 pb-2',
+    flexPatterns.between,
+    'gap-4',
     !hideBorder && `border-b ${borderColorClasses[iconColor]}`
   )}
 >
-  <div class="flex items-center gap-2 flex-1 min-w-0">
+  <div class={cn(flexPatterns.centerVertical, 'gap-2 flex-1 min-w-0')}>
     <div
       class={cn(
-        'flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center shadow-md',
+        'flex-shrink-0 w-8 h-8 rounded-lg',
+        flexPatterns.center,
+        'shadow-md',
         iconColorClasses[iconColor]
       )}
     >
       <Icon size={16} class="text-white" />
     </div>
     <div class="flex-1 min-w-0">
-      <div class="flex items-center gap-2 flex-wrap">
-        <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
+      <div class={cn(flexPatterns.centerVertical, 'gap-2 flex-wrap')}>
+        <h2 class={cn('text-lg font-semibold tracking-tight', colors.text.default)}>
           {title}
         </h2>
-        <span
-          class={cn(
-            'inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full border',
-            badgeColorClasses[iconColor]
-          )}
-        >
+        <span class={cn(badgePatterns.base, 'font-semibold border', badgeColorClasses[iconColor])}>
           {count}
         </span>
       </div>
@@ -91,11 +92,11 @@
   </div>
 
   {#if showToggle}
-    <div class="flex items-center gap-2 flex-shrink-0">
+    <div class={cn(flexPatterns.centerVertical, 'gap-2 flex-shrink-0')}>
       {#if toggleTooltip}
-        <div class="flex items-center min-h-[44px]">
+        <div class={cn(flexPatterns.centerVertical, 'min-h-[44px]')}>
           <Tooltip text={toggleTooltip} position="left">
-            <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+            <CircleQuestionMark size={16} class={colors.icon.muted} />
           </Tooltip>
         </div>
       {/if}
