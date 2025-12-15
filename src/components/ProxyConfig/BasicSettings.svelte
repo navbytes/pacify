@@ -4,6 +4,7 @@
   import ToggleSwitch from '../ToggleSwitch.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import Text from '../Text.svelte'
+  import { inputVariants } from '@/utils/classPatterns'
 
   interface Props {
     name?: string
@@ -33,11 +34,17 @@
     }
 
     if (trimmed.length < MIN_NAME_LENGTH) {
-      return I18nService.getMessage('nameTooShort') || `Name must be at least ${MIN_NAME_LENGTH} character`
+      return (
+        I18nService.getMessage('nameTooShort') ||
+        `Name must be at least ${MIN_NAME_LENGTH} character`
+      )
     }
 
     if (trimmed.length > MAX_NAME_LENGTH) {
-      return I18nService.getMessage('nameTooLong') || `Name must be ${MAX_NAME_LENGTH} characters or less`
+      return (
+        I18nService.getMessage('nameTooLong') ||
+        `Name must be ${MAX_NAME_LENGTH} characters or less`
+      )
     }
 
     return ''
@@ -58,18 +65,11 @@
 <FlexGroup childrenGap="lg" alignItems="center" justifyContent="between">
   <div class="flex-1">
     <div class="flex items-center justify-between mb-1">
-      <label
-        for="scriptName"
-        class="block text-sm font-medium text-slate-700 dark:text-slate-300"
-      >
+      <label for="scriptName" class="block text-sm font-medium text-slate-700 dark:text-slate-300">
         {I18nService.getMessage('configurationName')}
         <Text classes="text-red-500">*</Text>
       </label>
-      <Text
-        size="xs"
-        color={charCount > MAX_NAME_LENGTH ? 'error' : 'muted'}
-        classes="font-medium"
-      >
+      <Text size="xs" color={charCount > MAX_NAME_LENGTH ? 'error' : 'muted'} classes="font-medium">
         {charCount}/{MAX_NAME_LENGTH}
       </Text>
     </div>
@@ -80,9 +80,7 @@
       oninput={handleNameInput}
       onblur={handleNameBlur}
       maxlength={MAX_NAME_LENGTH}
-      class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
-             focus:ring-2 focus:ring-primary focus:border-primary
-             {nameError && nameTouched ? 'border-red-500 dark:border-red-400' : 'border-slate-300 dark:border-slate-600'}"
+      class={inputVariants({ state: nameError && nameTouched ? 'error' : 'default', size: 'md' })}
       placeholder={I18nService.getMessage('enterConfigurationName')}
     />
     {#if nameError && nameTouched}

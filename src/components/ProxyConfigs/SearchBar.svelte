@@ -1,6 +1,8 @@
 <script lang="ts">
   import { Search, X } from '@/utils/icons'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { inputVariants } from '@/utils/classPatterns'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     searchQuery: string
@@ -44,7 +46,10 @@
     placeholder={I18nService.getMessage('searchProxiesPlaceholder')}
     oninput={handleInput}
     {onfocus}
-    class="block w-full pl-10 pr-10 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-150"
+    class={cn(
+      inputVariants({ state: 'default', size: 'md' }),
+      'block pl-10 pr-10 py-2.5 rounded-lg transition-all duration-150'
+    )}
   />
   {#if searchQuery}
     <button

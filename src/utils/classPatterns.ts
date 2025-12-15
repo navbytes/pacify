@@ -597,3 +597,83 @@ export const inputVariants = cva(
     },
   }
 )
+
+/**
+ * Toast/Notification variants with type-safe props
+ */
+export const toastVariants = cva(
+  cn(
+    'flex items-start gap-2',
+    'p-4',
+    radius.lg,
+    'border-l-4',
+    shadows.lg,
+    'backdrop-blur-sm',
+    transitions.normal
+  ),
+  {
+    variants: {
+      intent: {
+        success: cn(
+          'bg-green-50 dark:bg-green-900/20',
+          'border-green-500',
+          'text-green-800 dark:text-green-200'
+        ),
+        error: cn(
+          'bg-red-50 dark:bg-red-900/20',
+          'border-red-500',
+          'text-red-800 dark:text-red-200'
+        ),
+        warning: cn(
+          'bg-yellow-50 dark:bg-yellow-900/20',
+          'border-yellow-500',
+          'text-yellow-800 dark:text-yellow-200'
+        ),
+        info: cn(
+          'bg-blue-50 dark:bg-blue-900/20',
+          'border-blue-500',
+          'text-blue-800 dark:text-blue-200'
+        ),
+      },
+    },
+    defaultVariants: {
+      intent: 'info',
+    },
+  }
+)
+
+/**
+ * Card variants with type-safe props
+ */
+export const cardVariants = cva(cn(radius.lg, 'border', transitions.normal), {
+  variants: {
+    variant: {
+      default: cn(colors.background.default, colors.border.default, shadows.sm),
+      elevated: cn(colors.background.elevated, colors.border.default, shadows.md),
+      interactive: cn(
+        colors.background.default,
+        colors.border.default,
+        shadows.card,
+        'cursor-pointer hover:scale-[1.02]',
+        colors.interactive.hover
+      ),
+      outlined: cn(
+        'bg-transparent',
+        colors.border.default,
+        'border-2',
+        'hover:bg-slate-50 dark:hover:bg-slate-800/50'
+      ),
+    },
+    padding: {
+      none: 'p-0',
+      sm: 'p-3',
+      md: 'p-4',
+      lg: 'p-6',
+      xl: 'p-8',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+    padding: 'md',
+  },
+})

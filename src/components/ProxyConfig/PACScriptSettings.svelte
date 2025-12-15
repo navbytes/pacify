@@ -10,6 +10,7 @@
   import { I18nService } from '@/services/i18n/i18nService'
   import { defaultCodeMirrorOptions } from '@/utils/codemirror'
   import Text from '../Text.svelte'
+  import { inputVariants } from '@/utils/classPatterns'
 
   let themeCleanup: (() => void) | null = null
 
@@ -39,11 +40,18 @@
       const url = new URL(value)
       // PAC files are typically served via HTTP/HTTPS
       if (url.protocol !== 'http:' && url.protocol !== 'https:' && url.protocol !== 'file:') {
-        return I18nService.getMessage('invalidPacUrlProtocol') || 'PAC URL must use http://, https://, or file:// protocol'
+        return (
+          I18nService.getMessage('invalidPacUrlProtocol') ||
+          'PAC URL must use http://, https://, or file:// protocol'
+        )
       }
 
       // Check for .pac extension (common but not required)
-      if (!url.pathname.endsWith('.pac') && !url.pathname.endsWith('.js') && !url.pathname.includes('.pac?')) {
+      if (
+        !url.pathname.endsWith('.pac') &&
+        !url.pathname.endsWith('.js') &&
+        !url.pathname.includes('.pac?')
+      ) {
         return I18nService.getMessage('pacUrlWarning') || 'PAC files typically end with .pac'
       }
 
@@ -146,9 +154,7 @@
       bind:value={pacUrl}
       oninput={handleUrlInput}
       onblur={handleUrlBlur}
-      class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
-             focus:ring-2 focus:ring-primary focus:border-primary
-             {urlError && urlTouched ? 'border-red-500 dark:border-red-400' : 'border-slate-300 dark:border-slate-600'}"
+      class={inputVariants({ state: urlError && urlTouched ? 'error' : 'default', size: 'md' })}
       placeholder={I18nService.getMessage('pacUrlPlaceholder') || 'http://example.com/proxy.pac'}
     />
     {#if urlError && urlTouched}

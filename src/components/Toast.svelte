@@ -4,6 +4,8 @@
   import Text from './Text.svelte'
   import FlexGroup from './FlexGroup.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { toastVariants } from '@/utils/classPatterns'
+  import { cn } from '@/utils/cn'
 
   let toasts = $derived($toastStore)
 
@@ -19,19 +21,6 @@
         return Info
     }
   }
-
-  function getColors(type: ToastType) {
-    switch (type) {
-      case 'success':
-        return 'bg-green-50 dark:bg-green-900/20 border-green-500 text-green-800 dark:text-green-200'
-      case 'error':
-        return 'bg-red-50 dark:bg-red-900/20 border-red-500 text-red-800 dark:text-red-200'
-      case 'warning':
-        return 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-500 text-yellow-800 dark:text-yellow-200'
-      case 'info':
-        return 'bg-blue-50 dark:bg-blue-900/20 border-blue-500 text-blue-800 dark:text-blue-200'
-    }
-  }
 </script>
 
 <div
@@ -44,9 +33,7 @@
   {#each toasts as toast (toast.id)}
     {@const Icon = getIcon(toast.type)}
     <div
-      class="flex items-start gap-2 p-4 rounded-lg border-l-4 shadow-lg animate-slide-in backdrop-blur-sm {getColors(
-        toast.type
-      )}"
+      class={cn(toastVariants({ intent: toast.type }), 'animate-slide-in')}
       role={toast.type === 'error' ? 'alert' : 'status'}
       aria-live={toast.type === 'error' ? 'assertive' : 'polite'}
     >
