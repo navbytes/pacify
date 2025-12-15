@@ -40,11 +40,10 @@
     color: var(--color-slate-900);
   }
 
-  @media (prefers-color-scheme: dark) {
-    body {
-      background-color: #0f172a; /* Slate-900 - darkest bluish background */
-      color: #f1f5f9; /* Slate-100 - light bluish text */
-    }
+  /* Class-based dark mode instead of media query */
+  .dark body {
+    background-color: #0f172a; /* Slate-900 - darkest bluish background */
+    color: #f1f5f9; /* Slate-100 - light bluish text */
   }
 }
 
@@ -83,11 +82,10 @@
     color: var(--color-slate-900);
   }
 
-  @media (prefers-color-scheme: dark) {
-    .btn-secondary {
-      background-color: #334155; /* Slate-700 - bluish grey */
-      color: #f1f5f9; /* Slate-100 - light bluish text */
-    }
+  /* Class-based dark mode for button */
+  .dark .btn-secondary {
+    background-color: #334155; /* Slate-700 - bluish grey */
+    color: #f1f5f9; /* Slate-100 - light bluish text */
   }
 
   .btn-danger {
@@ -194,11 +192,10 @@
     border: 1px solid var(--color-slate-200);
   }
 
-  @media (prefers-color-scheme: dark) {
-    .surface {
-      background-color: var(--color-slate-800);
-      border-color: var(--color-slate-700);
-    }
+  /* Class-based dark mode for surface */
+  .dark .surface {
+    background-color: var(--color-slate-800);
+    border-color: var(--color-slate-700);
   }
 
   .surface-elevated {
@@ -209,11 +206,10 @@
       0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
 
-  @media (prefers-color-scheme: dark) {
-    .surface-elevated {
-      background-color: var(--color-slate-800);
-      border-color: var(--color-slate-700);
-    }
+  /* Class-based dark mode for surface-elevated */
+  .dark .surface-elevated {
+    background-color: var(--color-slate-800);
+    border-color: var(--color-slate-700);
   }
 }
 
