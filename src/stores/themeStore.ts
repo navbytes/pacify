@@ -13,25 +13,18 @@ function getSystemTheme(): 'light' | 'dark' {
 }
 
 function applyTheme(theme: Theme) {
-  console.log('[applyTheme] Called with theme:', theme)
-
   // Runtime check for browser environment
   if (typeof window === 'undefined' || typeof document === 'undefined') {
-    console.log('[applyTheme] Not in browser environment, skipping')
     return
   }
 
   const effectiveTheme = theme === 'system' ? getSystemTheme() : theme
-  console.log('[applyTheme] Effective theme:', effectiveTheme)
 
   if (effectiveTheme === 'dark') {
-    console.log('[applyTheme] Adding dark class to document')
     document.documentElement.classList.add('dark')
   } else {
-    console.log('[applyTheme] Removing dark class from document')
     document.documentElement.classList.remove('dark')
   }
-  console.log('[applyTheme] Current classes:', document.documentElement.className)
 }
 
 function createThemeStore() {
@@ -68,17 +61,12 @@ function createThemeStore() {
   return {
     subscribe,
     setTheme: async (theme: Theme) => {
-      console.log('[ThemeStore] setTheme called with:', theme)
       try {
-        console.log('[ThemeStore] Saving to storage...')
         await chrome.storage.local.set({ [STORAGE_KEY]: theme })
-        console.log('[ThemeStore] Updating store state...')
         set(theme)
-        console.log('[ThemeStore] Applying theme to DOM...')
         applyTheme(theme)
-        console.log('[ThemeStore] Theme applied successfully')
       } catch (error) {
-        console.error('[ThemeStore] Failed to save theme preference:', error)
+        console.error('Failed to save theme preference:', error)
         throw error
       }
     },

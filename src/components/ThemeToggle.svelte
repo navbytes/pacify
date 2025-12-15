@@ -13,10 +13,8 @@
   ]
 
   async function handleThemeChange(theme: Theme) {
-    console.log('Theme change requested:', theme)
     try {
       await themeStore.setTheme(theme)
-      console.log('Theme changed successfully to:', theme)
     } catch (error) {
       console.error('Failed to change theme:', error)
     }

@@ -86,7 +86,12 @@
   }
 
   .tab-list::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 dark:bg-slate-600 rounded;
+    @apply bg-slate-300 rounded;
+  }
+
+  /* Dark mode for scrollbar thumb */
+  .dark .tab-list::-webkit-scrollbar-thumb {
+    @apply bg-slate-600;
   }
 
   /* Remove border for pill and button variants */
@@ -97,7 +102,12 @@
   /* Button variant specific styling */
   :global([data-variant='buttons']) .tab-list {
     @apply border-b-0 gap-1;
-    @apply bg-slate-100 dark:bg-slate-800/50 p-1 rounded-lg inline-flex;
+    @apply bg-slate-100 p-1 rounded-lg inline-flex;
+  }
+
+  /* Dark mode for button variant */
+  :global(.dark [data-variant='buttons']) .tab-list {
+    @apply bg-slate-800/50;
   }
 
   /* Mobile: Make tabs scrollable */

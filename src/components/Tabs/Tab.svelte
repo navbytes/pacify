@@ -76,48 +76,56 @@
 
   .tab-button {
     @apply relative flex items-center gap-2.5 px-6 py-3.5;
-    @apply text-sm font-medium text-slate-600 dark:text-slate-400;
+    @apply text-sm font-medium text-slate-600;
     @apply transition-all duration-200;
     @apply border-b-2 border-transparent;
-    @apply hover:text-slate-900 dark:hover:text-slate-200;
-    @apply hover:bg-slate-50 dark:hover:bg-slate-800/50;
-    @apply hover:border-slate-300 dark:hover:border-slate-600;
+    @apply hover:text-slate-900 hover:bg-slate-50 hover:border-slate-300;
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
-    @apply whitespace-nowrap;
-    @apply bg-transparent;
-    @apply cursor-pointer;
-    @apply rounded-t-lg;
+    @apply whitespace-nowrap bg-transparent cursor-pointer rounded-t-lg;
+  }
+
+  .dark .tab-button {
+    @apply text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 hover:border-slate-600;
   }
 
   .tab-button.active {
-    @apply text-blue-600 dark:text-blue-400;
-    @apply bg-blue-50/50 dark:bg-blue-950/20;
-    @apply border-blue-600 dark:border-blue-400;
-    @apply border-b-4;
+    @apply text-blue-600 bg-blue-50/50 border-blue-600 border-b-4;
+  }
+
+  .dark .tab-button.active {
+    @apply text-blue-400 bg-blue-950/20 border-blue-400;
   }
 
   .tab-button.disabled {
-    @apply opacity-50 cursor-not-allowed;
-    @apply hover:text-slate-500 dark:hover:text-slate-400;
-    @apply hover:border-transparent;
+    @apply opacity-50 cursor-not-allowed hover:text-slate-500 hover:border-transparent;
+  }
+
+  .dark .tab-button.disabled {
+    @apply hover:text-slate-400;
   }
 
   .tab-icon {
-    @apply flex items-center justify-center;
-    @apply shrink-0;
-    @apply transition-colors duration-200;
+    @apply flex items-center justify-center shrink-0 transition-colors duration-200;
   }
 
   .tab-button.active .tab-icon {
-    @apply text-blue-600 dark:text-blue-400;
+    @apply text-blue-600;
+  }
+
+  .dark .tab-button.active .tab-icon {
+    @apply text-blue-400;
   }
 
   .tab-button:not(.active) .tab-icon {
-    @apply text-slate-500 dark:text-slate-500;
+    @apply text-slate-500;
   }
 
   .tab-button:hover:not(.active) .tab-icon {
-    @apply text-slate-700 dark:text-slate-300;
+    @apply text-slate-700;
+  }
+
+  .dark .tab-button:hover:not(.active) .tab-icon {
+    @apply text-slate-300;
   }
 
   .tab-label {
@@ -125,10 +133,12 @@
   }
 
   .tab-badge {
-    @apply ml-2 px-2 py-0.5 rounded-full;
-    @apply text-xs font-semibold;
-    @apply bg-blue-100 dark:bg-blue-900;
-    @apply text-blue-600 dark:text-blue-300;
+    @apply ml-2 px-2 py-0.5 rounded-full text-xs font-semibold;
+    @apply bg-blue-100 text-blue-600;
+  }
+
+  .dark .tab-badge {
+    @apply bg-blue-900 text-blue-300;
   }
 
   /* Variant: Pills */
@@ -137,26 +147,37 @@
   }
 
   :global([data-variant='pills']) .tab-button.active {
-    @apply bg-blue-100 dark:bg-blue-900;
+    @apply bg-blue-100;
+  }
+
+  :global(.dark [data-variant='pills']) .tab-button.active {
+    @apply bg-blue-900;
   }
 
   /* Variant: Buttons */
   :global([data-variant='buttons']) .tab-button {
-    @apply border-0 rounded-md mx-0;
-    @apply px-4 py-2;
-    @apply bg-transparent;
-    @apply text-slate-700 dark:text-slate-300;
-    @apply hover:bg-slate-200/50 dark:hover:bg-slate-700/50;
-    @apply transition-all duration-150;
+    @apply border-0 rounded-md mx-0 px-4 py-2;
+    @apply bg-transparent text-slate-700;
+    @apply hover:bg-slate-200/50 transition-all duration-150;
+  }
+
+  :global(.dark [data-variant='buttons']) .tab-button {
+    @apply text-slate-300 hover:bg-slate-700/50;
   }
 
   :global([data-variant='buttons']) .tab-button.active {
-    @apply bg-white dark:bg-slate-700;
-    @apply text-blue-600 dark:text-blue-400;
-    @apply shadow-sm;
+    @apply bg-white text-blue-600 shadow-sm;
+  }
+
+  :global(.dark [data-variant='buttons']) .tab-button.active {
+    @apply bg-slate-700 text-blue-400;
   }
 
   :global([data-variant='buttons']) .tab-button.active .tab-icon {
-    @apply text-blue-600 dark:text-blue-400;
+    @apply text-blue-600;
+  }
+
+  :global(.dark [data-variant='buttons']) .tab-button.active .tab-icon {
+    @apply text-blue-400;
   }
 </style>
