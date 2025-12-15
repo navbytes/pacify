@@ -10,6 +10,7 @@
   import Tab from '@/components/Tabs/Tab.svelte'
   import TabPanel from '@/components/Tabs/TabPanel.svelte'
   import Toast from '@/components/Toast.svelte'
+  import ThemeToggle from '@/components/ThemeToggle.svelte'
   import ProxyConfigsTab from './ProxyConfigsTab.svelte'
   import SettingsTab from './SettingsTab.svelte'
   import { Cable, Settings } from '@/utils/icons'
@@ -151,6 +152,9 @@
               Active
             </div>
           {/if}
+
+          <!-- Theme Toggle -->
+          <ThemeToggle />
 
           <TabList>
             <Tab id="proxy-configs" icon={Cable}>
