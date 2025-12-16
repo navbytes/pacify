@@ -1,29 +1,31 @@
 <script lang="ts">
   import Text from './Text.svelte'
   import FlexGroup from './FlexGroup.svelte'
+  import {
+    progressBarVariants,
+    progressBarFillVariants,
+    type VariantProps,
+  } from '@/utils/classPatterns'
+
+  type ProgressBarVariant = VariantProps<typeof progressBarVariants>
+  type ProgressBarFillVariant = VariantProps<typeof progressBarFillVariants>
 
   interface Props {
     value: number
     max: number
     label?: string
     showPercentage?: boolean
-    size?: 'sm' | 'md' | 'lg'
+    size?: ProgressBarVariant['size']
   }
 
   let { value, max, label, showPercentage = true, size = 'md' }: Props = $props()
 
   let percentage = $derived(Math.min((value / max) * 100, 100))
 
-  // Color based on usage percentage
-  let barColor = $derived(
-    percentage < 50
-      ? 'bg-green-500 dark:bg-green-400'
-      : percentage < 80
-        ? 'bg-yellow-500 dark:bg-yellow-400'
-        : 'bg-red-500 dark:bg-red-400'
+  // Determine color variant based on usage percentage
+  let percentageVariant = $derived<ProgressBarFillVariant['percentage']>(
+    percentage < 50 ? 'low' : percentage < 80 ? 'medium' : 'high'
   )
-
-  let height = $derived(size === 'sm' ? 'h-1' : size === 'lg' ? 'h-3' : 'h-2')
 </script>
 
 <div class="w-full">
@@ -40,9 +42,9 @@
     </FlexGroup>
   {/if}
 
-  <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden {height}">
+  <div class={progressBarVariants({ size })}>
     <div
-      class="h-full rounded-full transition-all duration-500 ease-out {barColor}"
+      class={progressBarFillVariants({ percentage: percentageVariant })}
       style="width: {percentage}%"
     ></div>
   </div>

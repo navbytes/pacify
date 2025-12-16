@@ -1,12 +1,14 @@
 <script lang="ts">
   import ScriptList from '@/components/ScriptList.svelte'
+  import EmptyState from '@/components/EmptyState.svelte'
   import { ChromeService } from '@/services/chrome'
   import { onMount } from 'svelte'
   import { settingsStore } from '@/stores/settingsStore'
-  import { Settings, Power } from 'lucide-svelte'
+  import { Settings, Power, Cable, Plus } from '@/utils/icons'
   import Button from '@/components/Button.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import Text from '@/components/Text.svelte'
+  import Tooltip from '@/components/Tooltip.svelte'
 
   let settings = $derived($settingsStore)
   let activeProxy = $derived(settings.proxyConfigs?.find((p) => p.isActive) || null)
@@ -19,6 +21,10 @@
 
   function openSettings() {
     ChromeService.openOptionsPage()
+  }
+
+  function quickAddProxy() {
+    ChromeService.openOptionsPage({ action: 'create' })
   }
 
   async function disableAllProxies() {
@@ -37,15 +43,39 @@
       {I18nService.getMessage('extName')}
     </h1>
 
-    <Button minimal color="secondary" onclick={openSettings}>
-      {#snippet icon()}<Settings size={18} />{/snippet}
-      <Text classes="sr-only">{I18nService.getMessage('settings')}</Text>
-    </Button>
+    <div class="flex items-center gap-1">
+      <Tooltip text="Add new proxy" position="bottom">
+        <Button minimal color="primary" onclick={quickAddProxy}>
+          {#snippet icon()}<Plus size={18} />{/snippet}
+          <Text classes="sr-only">Add new proxy</Text>
+        </Button>
+      </Tooltip>
+
+      <Tooltip text={I18nService.getMessage('settings')} position="bottom">
+        <Button minimal color="secondary" onclick={openSettings}>
+          {#snippet icon()}<Settings size={18} />{/snippet}
+          <Text classes="sr-only">{I18nService.getMessage('settings')}</Text>
+        </Button>
+      </Tooltip>
+    </div>
   </header>
 
   <!-- Main Content -->
   <main class="overflow-y-auto flex-1 px-5 pt-4 pb-4">
-    <ScriptList pageType="POPUP" title="" />
+    {#if hasProxies}
+      <ScriptList pageType="POPUP" title="" />
+    {:else}
+      <EmptyState
+        title={I18nService.getMessage('noProxiesYet') || 'No proxy configurations yet'}
+        description={I18nService.getMessage('noProxiesDescription') ||
+          'Get started by creating your first proxy configuration to control how your browser connects to the internet.'}
+        actionLabel={I18nService.getMessage('getStarted') || 'Get Started'}
+        onAction={openSettings}
+        icon={Cable}
+        iconSize={48}
+        compact
+      />
+    {/if}
   </main>
 
   <!-- Footer - Status & Actions -->

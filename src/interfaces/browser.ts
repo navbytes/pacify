@@ -78,7 +78,7 @@ export interface SendResponse {
 export interface RuntimeAPI {
   getURL(path: string): string
   sendMessage<T>(message: T): Promise<unknown>
-  openOptionsPage(): void
+  openOptionsPage(params?: Record<string, string>): void
   onMessage: {
     addListener(
       callback: (
@@ -112,6 +112,7 @@ export interface RuntimeAPI {
 export interface TabsAPI {
   query(queryInfo: { active: boolean; currentWindow: boolean }): Promise<Tab[]>
   reload(tabId?: number): Promise<void>
+  create(createProperties: { url: string }): Promise<Tab>
 }
 
 export interface ProxySettings {

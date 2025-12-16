@@ -304,8 +304,9 @@ export const defaultCodeMirrorOptions: Partial<CodeMirrorOptions> = {
 }
 
 // Get system theme preference
+// Safe for service worker environments
 export function getSystemTheme(): 'light' | 'dark' {
-  if (typeof window !== 'undefined' && window.matchMedia) {
+  if (typeof window !== 'undefined' && typeof window.matchMedia !== 'undefined') {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
   return 'light'

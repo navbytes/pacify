@@ -3,21 +3,27 @@
   import { settingsStore } from '@/stores/settingsStore'
   import { toastStore } from '@/stores/toastStore'
   import { type ProxyConfig } from '@/interfaces'
-  import ProxyConfigModal from '@/components/ProxyConfig/ProxyConfigModal.svelte'
+  import type { Component } from 'svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import Tabs from '@/components/Tabs/Tabs.svelte'
   import TabList from '@/components/Tabs/TabList.svelte'
   import Tab from '@/components/Tabs/Tab.svelte'
   import TabPanel from '@/components/Tabs/TabPanel.svelte'
   import Toast from '@/components/Toast.svelte'
+  import ThemeToggle from '@/components/ThemeToggle.svelte'
   import ProxyConfigsTab from './ProxyConfigsTab.svelte'
   import SettingsTab from './SettingsTab.svelte'
-  import { Cable, Settings } from 'lucide-svelte'
+  import { Cable, Settings } from '@/utils/icons'
+  import { logger } from '@/services/LoggerService'
 
   let showEditor = $state(false)
   let editingScriptId = $state<string | null>(null)
   let settings = $derived($settingsStore)
   let activeTab = $state('proxy-configs')
+
+  // Dynamic import for ProxyConfigModal - only load when needed
+  let ProxyConfigModal = $state<Component<any, {}, ''> | null>(null)
+  let isLoadingModal = $state(false)
 
   onMount(() => {
     const init = async () => {
@@ -27,6 +33,15 @@
       const saved = await chrome.storage.local.get('options.activeTab')
       if (saved['options.activeTab']) {
         activeTab = saved['options.activeTab']
+      }
+
+      // Check if we should auto-open the editor (from popup quick add)
+      const params = new URLSearchParams(window.location.search)
+      if (params.get('action') === 'create') {
+        activeTab = 'proxy-configs' // Ensure we're on the right tab
+        openEditor() // Auto-open the editor for new proxy
+        // Clean up URL parameter
+        window.history.replaceState({}, '', window.location.pathname)
       }
     }
 
@@ -60,25 +75,34 @@
     }
   })
 
-  function openEditor(scriptId?: string) {
+  async function openEditor(scriptId?: string) {
     editingScriptId = scriptId || null
     showEditor = true
+
+    // Lazy load the modal component if not already loaded
+    if (!ProxyConfigModal && !isLoadingModal) {
+      isLoadingModal = true
+      try {
+        const module = await import('@/components/ProxyConfig/ProxyConfigModal.svelte')
+        ProxyConfigModal = module.default
+      } catch (error) {
+        logger.error('Failed to load ProxyConfigModal:', error)
+        toastStore.show('Failed to load editor', 'error')
+        showEditor = false
+      } finally {
+        isLoadingModal = false
+      }
+    }
   }
 
   async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
-    console.log('handleScriptSave called with:', script)
-    console.log('showEditor before save:', showEditor)
-
     // Close modal immediately
     showEditor = false
-    console.log('Modal closed immediately')
 
     // Save in background
     settingsStore
       .updatePACScript(script, editingScriptId)
-      .then((result) => {
-        console.log('updatePACScript result:', result)
-
+      .then(() => {
         // Show success toast
         toastStore.show(
           editingScriptId
@@ -88,7 +112,7 @@
         )
       })
       .catch((error) => {
-        console.error('Error in handleScriptSave:', error)
+        logger.error('Error in handleScriptSave:', error)
         // Show error toast
         toastStore.show(I18nService.getMessage('failedToSaveProxy'), 'error')
       })
@@ -125,9 +149,12 @@
               class="flex items-center gap-2 px-3 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold flex-shrink-0 shadow-sm"
             >
               <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              ACTIVE
+              Active
             </div>
           {/if}
+
+          <!-- Theme Toggle -->
+          <ThemeToggle />
 
           <TabList>
             <Tab id="proxy-configs" icon={Cable}>
@@ -152,15 +179,28 @@
     </TabPanel>
   </Tabs>
 
-  <!-- Script Editor Modal -->
+  <!-- Script Editor Modal (Lazy Loaded) -->
   {#if showEditor}
-    <ProxyConfigModal
-      proxyConfig={editingScriptId
-        ? settings.proxyConfigs.find((s) => s.id === editingScriptId)
-        : undefined}
-      onSave={handleScriptSave}
-      onCancel={() => (showEditor = false)}
-    />
+    {#if ProxyConfigModal}
+      <ProxyConfigModal
+        proxyConfig={editingScriptId
+          ? settings.proxyConfigs.find((s) => s.id === editingScriptId)
+          : undefined}
+        onSave={handleScriptSave}
+        onCancel={() => (showEditor = false)}
+      />
+    {:else if isLoadingModal}
+      <!-- Loading placeholder -->
+      <div
+        class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-xl">
+          <p class="text-slate-900 dark:text-slate-100">Loading editor...</p>
+        </div>
+      </div>
+    {/if}
   {/if}
 
   <!-- Toast Notifications -->

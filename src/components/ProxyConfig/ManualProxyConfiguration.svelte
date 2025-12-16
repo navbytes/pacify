@@ -1,7 +1,10 @@
 <script lang="ts">
   import ProxyInput from './ProxyInput.svelte'
   import FlexGroup from '../FlexGroup.svelte'
+  import Text from '../Text.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { inputVariants } from '@/utils/classPatterns'
+  import { cn } from '@/utils/cn'
 
   interface ProxyServerSettings {
     scheme?: string
@@ -48,7 +51,7 @@
   }
 </script>
 
-<div class="space-y-6">
+<div class="space-y-4">
   <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
     <input
       type="checkbox"
@@ -109,9 +112,13 @@
       id="bypassList"
       bind:value={bypassListContent}
       rows="4"
-      class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md
-             bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 font-mono text-sm"
-      placeholder={I18nService.getMessage('bypassListPlaceholder')}
+      class={cn(inputVariants({ state: 'default', size: 'md' }), 'font-mono text-sm')}
+      placeholder={I18nService.getMessage('bypassListPlaceholder') ||
+        '*.example.com\n192.168.1.0/24\nlocalhost'}
     ></textarea>
+    <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-400">
+      {I18nService.getMessage('bypassListHelp') ||
+        'Enter one address per line. Supports wildcards (*), CIDR notation, and exact matches.'}
+    </Text>
   </div>
 </div>

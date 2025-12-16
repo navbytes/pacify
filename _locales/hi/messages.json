@@ -393,5 +393,86 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "तेज़ी से नई प्रॉक्सी जोड़ने के लिए Ctrl+N (Mac पर Cmd+N) दबाएं"
+  },
+  "invalidHost": {
+    "message": "अमान्य होस्टनाम या IP पता"
+  },
+  "invalidPort": {
+    "message": "पोर्ट 1 से 65535 के बीच होना चाहिए"
+  },
+  "invalidUrl": {
+    "message": "कृपया एक मान्य URL दर्ज करें"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "PAC URL को http://, https://, या file:// प्रोटोकॉल का उपयोग करना चाहिए"
+  },
+  "pacUrlWarning": {
+    "message": "PAC फाइलें आम तौर पर .pac के साथ समाप्त होती हैं"
+  },
+  "bypassListHelp": {
+    "message": "प्रति पंक्ति एक पता दर्ज करें। आप वाइल्डकार्ड (*) और IP रेंज (CIDR नोटेशन) का उपयोग कर सकते हैं।"
+  },
+  "nameTooLong": {
+    "message": "नाम 50 वर्णों या उससे कम होना चाहिए"
+  },
+  "nameTooShort": {
+    "message": "नाम कम से कम 1 वर्ण का होना चाहिए"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "स्कीम"
+  },
+  "noProxiesYet": {
+    "message": "अभी तक कोई प्रॉक्सी कॉन्फ़िगरेशन नहीं"
+  },
+  "noProxiesDescription": {
+    "message": "अपने ब्राउज़र के इंटरनेट से कनेक्ट होने के तरीके को नियंत्रित करने के लिए अपना पहला प्रॉक्सी कॉन्फ़िगरेशन बनाकर शुरुआत करें।"
+  },
+  "getStarted": {
+    "message": "शुरू करें"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "पॉपअप से त्वरित पहुंच के लिए प्रॉक्सी कॉन्फ़िगरेशन यहां खींचें"
+  },
+  "quickSwitchEmptySubHint": {
+    "message": "यहां जोड़े गए प्रॉक्सी एक-क्लिक स्विचिंग के लिए पॉपअप में दिखाई देंगे"
+  },
+  "pacUrlHelp": {
+    "message": "PAC स्क्रिप्ट इस URL से लोड की जाएगी"
+  },
+  "keyboardShortcuts": {
+    "message": "कीबोर्ड शॉर्टकट"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "खोज पर फ़ोकस करें"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "नया प्रॉक्सी"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "खोज साफ़ करें"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "प्रॉक्सी टॉगल करें 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "प्रॉक्सी खोजें... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

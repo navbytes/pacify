@@ -10,6 +10,7 @@
   import { I18nService } from '@/services/i18n/i18nService'
   import { defaultCodeMirrorOptions } from '@/utils/codemirror'
   import Text from '../Text.svelte'
+  import { inputVariants } from '@/utils/classPatterns'
 
   let themeCleanup: (() => void) | null = null
 
@@ -28,6 +29,48 @@
   let editor: ICodeMirrorEditor | null = null
   let editorContainer = $state<HTMLElement>()
   let editorHeight: string = '400px'
+  let urlError = $state('')
+  let urlTouched = $state(false)
+
+  // URL validation function
+  function validateUrl(value: string): string {
+    if (!value.trim()) return ''
+
+    try {
+      const url = new URL(value)
+      // PAC files are typically served via HTTP/HTTPS
+      if (url.protocol !== 'http:' && url.protocol !== 'https:' && url.protocol !== 'file:') {
+        return (
+          I18nService.getMessage('invalidPacUrlProtocol') ||
+          'PAC URL must use http://, https://, or file:// protocol'
+        )
+      }
+
+      // Check for .pac extension (common but not required)
+      if (
+        !url.pathname.endsWith('.pac') &&
+        !url.pathname.endsWith('.js') &&
+        !url.pathname.includes('.pac?')
+      ) {
+        return I18nService.getMessage('pacUrlWarning') || 'PAC files typically end with .pac'
+      }
+
+      return ''
+    } catch {
+      return I18nService.getMessage('invalidUrl') || 'Please enter a valid URL'
+    }
+  }
+
+  function handleUrlBlur() {
+    urlTouched = true
+    urlError = validateUrl(pacUrl)
+  }
+
+  function handleUrlInput() {
+    if (urlTouched) {
+      urlError = validateUrl(pacUrl)
+    }
+  }
 
   async function setTemplate(template: string) {
     editorContent = template
@@ -109,10 +152,21 @@
       type="url"
       id="pacUrl"
       bind:value={pacUrl}
-      class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100
-             focus:ring-2 focus:ring-primary focus:border-primary"
-      placeholder={I18nService.getMessage('pacUrlPlaceholder')}
+      oninput={handleUrlInput}
+      onblur={handleUrlBlur}
+      class={inputVariants({ state: urlError && urlTouched ? 'error' : 'default', size: 'md' })}
+      placeholder={I18nService.getMessage('pacUrlPlaceholder') || 'http://example.com/proxy.pac'}
     />
+    {#if urlError && urlTouched}
+      <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">
+        {urlError}
+      </Text>
+    {/if}
+    {#if pacUrl && !urlError}
+      <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-400">
+        {I18nService.getMessage('pacUrlHelp') || 'PAC script will be loaded from this URL'}
+      </Text>
+    {/if}
   </div>
 
   {#if !pacUrl}

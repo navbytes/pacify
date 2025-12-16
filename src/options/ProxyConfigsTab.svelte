@@ -3,15 +3,18 @@
   import { toastStore } from '@/stores/toastStore'
   import { type DropItem } from '@/interfaces'
   import Button from '@/components/Button.svelte'
-  import FlexGroup from '@/components/FlexGroup.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import DropTarget from '@/components/DragDrop/DropTarget.svelte'
   import Text from '@/components/Text.svelte'
   import Tooltip from '@/components/Tooltip.svelte'
-  import Card from '@/components/Card.svelte'
-  import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import ScriptList from '@/components/ScriptList.svelte'
-  import { Cable, Zap, CircleQuestionMark } from 'lucide-svelte'
+  import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
+  import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
+  import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
+  import ToggleSwitch from '@/components/ToggleSwitch.svelte'
+  import { Cable, Zap, Search, CircleQuestionMark } from '@/utils/icons'
+  import { slide } from 'svelte/transition'
+  import { colors } from '@/utils/theme'
 
   interface Props {
     onOpenEditor: (scriptId?: string) => void
@@ -22,7 +25,77 @@
   let settings = $derived($settingsStore)
   let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
   let dropError = $state<string | null>(null)
+  let searchQuery = $state('')
+  let showSearch = $state(false)
   let hasProxies = $derived(settings.proxyConfigs.length > 0)
+
+  // Quick Switch proxies are never filtered by search
+  let quickSwitchProxies = $derived(settings.proxyConfigs.filter((p) => p.quickSwitch))
+
+  // Only filter regular proxies based on search query
+  let regularProxies = $derived(
+    settings.proxyConfigs.filter((p) => {
+      if (p.quickSwitch) return false // Exclude quick switch proxies
+      if (!searchQuery.trim()) return true // No search, show all
+      const query = searchQuery.toLowerCase()
+      return (
+        p.name.toLowerCase().includes(query) || (p.mode && p.mode.toLowerCase().includes(query))
+      )
+    })
+  )
+
+  let searchBarRef = $state<SearchBar>()
+
+  // Toggle search visibility
+  function toggleSearch() {
+    showSearch = !showSearch
+    if (showSearch) {
+      // Auto-focus when showing
+      setTimeout(() => searchBarRef?.focus(), 100)
+    } else {
+      // Clear search when hiding
+      searchQuery = ''
+    }
+  }
+
+  // Keyboard shortcuts handler
+  function handleKeydown(event: KeyboardEvent) {
+    // Ctrl/Cmd+K to toggle search
+    if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+      event.preventDefault()
+      toggleSearch()
+    }
+
+    // Escape to hide search and clear
+    if (event.key === 'Escape' && showSearch) {
+      event.preventDefault()
+      toggleSearch()
+    }
+
+    // Ctrl/Cmd+N to create new proxy
+    if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
+      event.preventDefault()
+      onOpenEditor()
+    }
+
+    // Number keys 1-9 to toggle quick switch proxies
+    if (event.key >= '1' && event.key <= '9') {
+      const index = parseInt(event.key) - 1
+      if (index < quickSwitchProxies.length) {
+        event.preventDefault()
+        const proxy = quickSwitchProxies[index]
+        if (!proxy.id) return // Skip if no ID
+        const newState = !proxy.isActive
+        settingsStore.setProxy(proxy.id, newState)
+        toastStore.show(
+          newState
+            ? `${I18nService.getMessage('proxyActivated') || 'Activated'}: ${proxy.name}`
+            : `${I18nService.getMessage('proxyDeactivated') || 'Deactivated'}: ${proxy.name}`,
+          'success'
+        )
+      }
+    }
+  }
 
   async function handleQuickSwitchToggle(checked: boolean) {
     await settingsStore.quickSwitchToggle(checked)
@@ -35,7 +108,6 @@
   }
 
   async function handleDrop(item: DropItem, pageType: 'QUICK_SWITCH' | 'OPTIONS') {
-    // Handle the drop action
     const { dataType, dataId: scriptId } = item
 
     let isScriptQuickSwitch = null
@@ -49,66 +121,41 @@
       await settingsStore.updateScriptQuickSwitch(scriptId, isScriptQuickSwitch)
     }
   }
+
+  function handleSearch(query: string) {
+    searchQuery = query
+  }
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <div class="py-6 space-y-8">
   {#if hasProxies}
-    <!-- Quick Switch Mode Toggle Card -->
-    <Card
-      classes="hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-200"
-    >
-      <FlexGroup
-        direction="horizontal"
-        childrenGap="lg"
-        alignItems="center"
-        justifyContent="between"
-      >
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <Text as="label" weight="semibold" id="quickSwitchToggle">
-              {I18nService.getMessage('quickSwitchMode')}
-            </Text>
-            <Tooltip text={I18nService.getMessage('tooltipQuickSwitchMode')} position="top">
-              <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
-            </Tooltip>
-          </div>
-          <Text as="p" size="sm" color="muted" classes="mt-1">
-            {I18nService.getMessage('quickSwitchDescription')}
-          </Text>
-          {#if settings.quickSwitchEnabled}
-            <Text as="p" size="xs" weight="medium" classes="mt-2 text-blue-600 dark:text-blue-400">
-              {I18nService.getMessage('quickSwitchEnabledStatus')}
-            </Text>
-          {/if}
-        </div>
-        <ToggleSwitch
-          id="quickSwitchToggle"
-          checked={settings.quickSwitchEnabled}
-          onchange={handleQuickSwitchToggle}
-          aria-label="Toggle quick switch mode"
-        />
-      </FlexGroup>
-    </Card>
+    <KeyboardShortcutsCard />
 
     <!-- Quick Switch Configs Section -->
     <div>
-      <div
-        class="mb-6 pb-2 border-b border-purple-200 dark:border-purple-800 flex items-center gap-2"
+      <SectionHeader
+        icon={Zap}
+        title={I18nService.getMessage('quickSwitchConfigsTitle')}
+        description={I18nService.getMessage('quickSwitchConfigsDescription')}
+        count={quickSwitchProxies.length}
+        iconColor="purple"
       >
-        <div
-          class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 rounded-lg flex items-center justify-center shadow-md"
-        >
-          <svelte:component this={Zap} size={16} class="text-white" />
-        </div>
-        <div>
-          <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-            {I18nService.getMessage('quickSwitchConfigsTitle')}
-          </h2>
-          <Text as="p" size="xs" color="muted" classes="mt-0.5">
-            {I18nService.getMessage('quickSwitchConfigsDescription')}
-          </Text>
-        </div>
-      </div>
+        {#snippet rightContent()}
+          <div class="flex items-center min-h-[44px]">
+            <Tooltip text={I18nService.getMessage('tooltipQuickSwitchMode')} position="left">
+              <CircleQuestionMark size={16} class={colors.icon.muted} />
+            </Tooltip>
+          </div>
+          <ToggleSwitch
+            id="sectionToggle-quick-switch"
+            checked={settings.quickSwitchEnabled}
+            onchange={handleQuickSwitchToggle}
+            aria-label="Toggle Quick Switch"
+          />
+        {/snippet}
+      </SectionHeader>
 
       <DropTarget onDrop={(item) => handleDrop(item, 'QUICK_SWITCH')}>
         <section
@@ -116,7 +163,6 @@
           data-page-type="QUICK_SWITCH"
           class="rounded-lg bg-blue-50/50 dark:bg-blue-950/20 p-6 border-2 border-dashed border-blue-200 dark:border-blue-800 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-md"
         >
-          <!-- Quick Scripts Dropzone -->
           <div class="relative rounded-lg transition-colors">
             <div
               class="absolute inset-0 flex items-center justify-center rounded-lg bg-blue-100/80 dark:bg-blue-900/80 z-10"
@@ -127,7 +173,25 @@
               </Text>
             </div>
 
-            <ScriptList pageType="QUICK_SWITCH" title="" bind:dragType />
+            {#if hasProxies && settings.proxyConfigs.filter((p) => p.quickSwitch).length === 0}
+              <div class="text-center py-8">
+                <Text as="p" size="sm" color="muted" classes="mb-2">
+                  {I18nService.getMessage('quickSwitchEmptyHint') ||
+                    'Drag proxy configurations here for quick access'}
+                </Text>
+                <Text as="p" size="xs" color="muted">
+                  {I18nService.getMessage('quickSwitchEmptySubHint') ||
+                    'Proxies added here will appear in Quick Switch mode'}
+                </Text>
+              </div>
+            {:else}
+              <ScriptList
+                pageType="QUICK_SWITCH"
+                title=""
+                proxies={quickSwitchProxies}
+                bind:dragType
+              />
+            {/if}
           </div>
         </section>
       </DropTarget>
@@ -136,31 +200,43 @@
 
   <!-- All Proxy Configs Section -->
   <div>
-    <div
-      class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center"
+    <SectionHeader
+      icon={Cable}
+      title={I18nService.getMessage('allProxyConfigsTitle')}
+      description={I18nService.getMessage('allProxyConfigsDescription')}
+      count={regularProxies.length}
+      iconColor="slate"
     >
-      <div class="flex items-center gap-2">
-        <div
-          class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-700 dark:from-slate-500 dark:to-slate-600 rounded-lg flex items-center justify-center shadow-md"
-        >
-          <svelte:component this={Cable} size={16} class="text-white" />
-        </div>
-        <div>
-          <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-            {I18nService.getMessage('allProxyConfigsTitle')}
-          </h2>
-          <Text as="p" size="xs" color="muted" classes="mt-0.5">
-            {I18nService.getMessage('allProxyConfigsDescription')}
-          </Text>
-        </div>
+      {#snippet rightContent()}
+        <!-- Search Toggle Button -->
+        <Tooltip text={showSearch ? 'Hide search' : 'Show search (Ctrl+K)'} position="bottom">
+          <button
+            type="button"
+            onclick={toggleSearch}
+            class="p-2.5 rounded-lg transition-all duration-150 {showSearch
+              ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
+              : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600'}"
+            aria-label={showSearch ? 'Hide search' : 'Show search'}
+          >
+            <Search size={18} />
+          </button>
+        </Tooltip>
+
+        <!-- Add New Script Button -->
+        <Tooltip text={I18nService.getMessage('tooltipKeyboardShortcut')} position="bottom">
+          <Button data-testid="add-new-script-btn" color="primary" onclick={() => onOpenEditor()}
+            >{I18nService.getMessage('addNewScript')}</Button
+          >
+        </Tooltip>
+      {/snippet}
+    </SectionHeader>
+
+    <!-- Search Bar (only for All Proxy Configs) -->
+    {#if showSearch}
+      <div transition:slide={{ duration: 200 }} class="mb-4">
+        <SearchBar bind:this={searchBarRef} bind:searchQuery onsearch={handleSearch} />
       </div>
-      <!-- Add New Script Button (Header Action) -->
-      <Tooltip text={I18nService.getMessage('tooltipKeyboardShortcut')} position="bottom">
-        <Button data-testid="add-new-script-btn" color="primary" onclick={() => onOpenEditor()}
-          >{I18nService.getMessage('addNewScript')}</Button
-        >
-      </Tooltip>
-    </div>
+    {/if}
 
     <DropTarget onDrop={(item) => handleDrop(item, 'OPTIONS')}>
       <section
@@ -180,6 +256,7 @@
         <div role="list">
           <ScriptList
             pageType="OPTIONS"
+            proxies={regularProxies}
             onScriptEdit={(scriptId) => onOpenEditor(scriptId)}
             bind:dragType
             title=""
@@ -189,7 +266,6 @@
     </DropTarget>
   </div>
 
-  <!-- Error Message -->
   {#if dropError}
     <div class="mb-6 rounded-md bg-red-100 p-4 text-red-700 dark:bg-red-900/50 dark:text-red-200">
       <Text as="p">{dropError}</Text>

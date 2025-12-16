@@ -2,7 +2,7 @@
   import { getContext, onMount, onDestroy } from 'svelte'
   import type { TabsContext } from './types'
   import type { ComponentType, Snippet } from 'svelte'
-  import Text from '../Text.svelte'
+  import { tabVariants, tabIconVariants, tabBadgeVariants } from '@/utils/classPatterns'
 
   interface Props {
     id: string
@@ -52,114 +52,23 @@
   id={`tab-${id}`}
   tabindex={isActive ? 0 : -1}
   {disabled}
-  class={`
-    tab-button
-    ${isActive ? 'active' : ''}
-    ${disabled ? 'disabled' : ''}
-  `}
+  class={tabVariants({ active: isActive, disabled })}
   onclick={handleClick}
   onkeydown={handleKeydown}
 >
   {#if icon}
     {@const Icon = icon}
-    <Text classes="tab-icon">
+    <span class={tabIconVariants({ active: isActive })}>
       <Icon size={18} />
-    </Text>
+    </span>
   {/if}
-  <Text classes="tab-label">
+  <span class="flex items-center">
     {@render children()}
-  </Text>
+  </span>
   {#if badge !== undefined}
-    <Text classes="tab-badge">{badge}</Text>
+    <span class={tabBadgeVariants({ active: isActive })}>{badge}</span>
   {/if}
 </button>
 
-<style lang="postcss">
-  @import 'tailwindcss' reference;
-
-  .tab-button {
-    @apply relative flex items-center gap-2.5 px-6 py-3.5;
-    @apply text-sm font-medium text-slate-600 dark:text-slate-400;
-    @apply transition-all duration-200;
-    @apply border-b-2 border-transparent;
-    @apply hover:text-slate-900 dark:hover:text-slate-200;
-    @apply hover:bg-slate-50 dark:hover:bg-slate-800/50;
-    @apply hover:border-slate-300 dark:hover:border-slate-600;
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
-    @apply whitespace-nowrap;
-    @apply bg-transparent;
-    @apply cursor-pointer;
-    @apply rounded-t-lg;
-  }
-
-  .tab-button.active {
-    @apply text-blue-600 dark:text-blue-400;
-    @apply bg-blue-50/50 dark:bg-blue-950/20;
-    @apply border-blue-600 dark:border-blue-400;
-    @apply border-b-4;
-  }
-
-  .tab-button.disabled {
-    @apply opacity-50 cursor-not-allowed;
-    @apply hover:text-slate-500 dark:hover:text-slate-400;
-    @apply hover:border-transparent;
-  }
-
-  .tab-icon {
-    @apply flex items-center justify-center;
-    @apply shrink-0;
-    @apply transition-colors duration-200;
-  }
-
-  .tab-button.active .tab-icon {
-    @apply text-blue-600 dark:text-blue-400;
-  }
-
-  .tab-button:not(.active) .tab-icon {
-    @apply text-slate-500 dark:text-slate-500;
-  }
-
-  .tab-button:hover:not(.active) .tab-icon {
-    @apply text-slate-700 dark:text-slate-300;
-  }
-
-  .tab-label {
-    @apply flex items-center;
-  }
-
-  .tab-badge {
-    @apply ml-2 px-2 py-0.5 rounded-full;
-    @apply text-xs font-semibold;
-    @apply bg-blue-100 dark:bg-blue-900;
-    @apply text-blue-600 dark:text-blue-300;
-  }
-
-  /* Variant: Pills */
-  :global([data-variant='pills']) .tab-button {
-    @apply border-0 rounded-lg mx-1;
-  }
-
-  :global([data-variant='pills']) .tab-button.active {
-    @apply bg-blue-100 dark:bg-blue-900;
-  }
-
-  /* Variant: Buttons */
-  :global([data-variant='buttons']) .tab-button {
-    @apply border-0 rounded-md mx-0;
-    @apply px-4 py-2;
-    @apply bg-transparent;
-    @apply text-slate-700 dark:text-slate-300;
-    @apply hover:bg-slate-200/50 dark:hover:bg-slate-700/50;
-    @apply transition-all duration-150;
-  }
-
-  :global([data-variant='buttons']) .tab-button.active {
-    @apply bg-white dark:bg-slate-700;
-    @apply text-blue-600 dark:text-blue-400;
-    @apply shadow-sm;
-  }
-
-  :global([data-variant='buttons']) .tab-button.active .tab-icon {
-    @apply text-blue-600 dark:text-blue-400;
-  }
-</style>
+<!-- Note: Tab variant styles (pills, buttons) are defined globally in app.css
+     to avoid Lightning CSS warnings about :global() syntax -->

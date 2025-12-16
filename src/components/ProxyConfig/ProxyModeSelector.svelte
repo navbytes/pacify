@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Server } from 'lucide-svelte'
+  import { Server } from '@/utils/icons'
   import Button from '../Button.svelte'
   import FlexGroup from '../FlexGroup.svelte'
   import { I18nService } from '@/services/i18n/i18nService'

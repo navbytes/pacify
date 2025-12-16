@@ -9,6 +9,7 @@
   import Tooltip from '@/components/Tooltip.svelte'
   import Card from '@/components/Card.svelte'
   import LinkCard from '@/components/LinkCard.svelte'
+  import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
   import {
     Shield,
     Database,
@@ -18,7 +19,7 @@
     Bug,
     Lightbulb,
     BookOpen,
-  } from 'lucide-svelte'
+  } from '@/utils/icons'
 
   let settings = $derived($settingsStore)
 
@@ -41,12 +42,11 @@
 <div class="py-6 space-y-8">
   <!-- Proxy Behavior Section (Primary) -->
   <div>
-    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
-      <Shield size={20} class="text-blue-600 dark:text-blue-400" />
-      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-        {I18nService.getMessage('settingsProxyBehavior')}
-      </h2>
-    </div>
+    <SectionHeader
+      icon={Shield}
+      title={I18nService.getMessage('settingsProxyBehavior')}
+      iconColor="purple"
+    />
 
     <!-- Grid layout for proxy behavior cards -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -64,7 +64,7 @@
             <div
               class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
             >
-              <svelte:component this={Shield} size={20} class="text-white" />
+              <Shield size={20} class="text-white" />
             </div>
             <div class="flex-1">
               <div class="flex items-center gap-2">
@@ -106,7 +106,7 @@
             <div
               class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
             >
-              <svelte:component this={Shield} size={20} class="text-white" />
+              <Shield size={20} class="text-white" />
             </div>
             <div class="flex-1">
               <div class="flex items-center gap-2">
@@ -135,24 +135,21 @@
 
   <!-- Data Management Section -->
   <div>
-    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
-      <Database size={20} class="text-slate-600 dark:text-slate-400" />
-      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-        {I18nService.getMessage('settingsDataManagement')}
-      </h2>
-    </div>
-
+    <SectionHeader
+      icon={Database}
+      title={I18nService.getMessage('settingsDataManagement')}
+      iconColor="slate"
+    />
     <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
   </div>
 
   <!-- Help & Resources Section -->
   <div>
-    <div class="mb-6 pb-2 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
-      <HelpCircle size={20} class="text-green-600 dark:text-green-400" />
-      <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100 tracking-tight">
-        {I18nService.getMessage('aboutHelpResources')}
-      </h2>
-    </div>
+    <SectionHeader
+      icon={HelpCircle}
+      title={I18nService.getMessage('aboutHelpResources')}
+      iconColor="slate"
+    />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <LinkCard
         href="https://github.com/navbytes/pacify"

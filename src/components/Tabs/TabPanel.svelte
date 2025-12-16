@@ -2,6 +2,7 @@
   import { getContext } from 'svelte'
   import type { TabsContext } from './types'
   import type { Snippet } from 'svelte'
+  import { cn } from '@/utils/cn'
 
   interface Props {
     id: string
@@ -40,30 +41,9 @@
     role="tabpanel"
     id={`tabpanel-${id}`}
     aria-labelledby={`tab-${id}`}
-    class={`tab-panel ${isActive ? 'active' : 'inactive'}`}
+    class={cn('w-full transition-opacity duration-200', isActive ? 'opacity-100' : 'opacity-0')}
     hidden={!isActive}
   >
     {@render children()}
   </div>
 {/if}
-
-<style lang="postcss">
-  @import 'tailwindcss' reference;
-
-  .tab-panel {
-    @apply w-full;
-    @apply transition-opacity duration-200;
-  }
-
-  .tab-panel.active {
-    @apply opacity-100;
-  }
-
-  .tab-panel.inactive {
-    @apply opacity-0;
-  }
-
-  .tab-panel[hidden] {
-    @apply hidden;
-  }
-</style>

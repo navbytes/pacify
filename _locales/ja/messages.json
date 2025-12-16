@@ -393,5 +393,86 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "Ctrl+N（MacではCmd+N）を押して新しいプロキシを素早く追加"
+  },
+  "invalidHost": {
+    "message": "無効なホスト名またはIPアドレス"
+  },
+  "invalidPort": {
+    "message": "ポートは1から65535の間である必要があります"
+  },
+  "invalidUrl": {
+    "message": "有効なURLを入力してください"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "PAC URLはhttp://、https://、またはfile://プロトコルを使用する必要があります"
+  },
+  "pacUrlWarning": {
+    "message": "PACファイルは通常.pacで終わります"
+  },
+  "bypassListHelp": {
+    "message": "1行に1つのアドレスを入力してください。ワイルドカード(*)とIP範囲(CIDR表記)を使用できます。"
+  },
+  "nameTooLong": {
+    "message": "名前は50文字以内にする必要があります"
+  },
+  "nameTooShort": {
+    "message": "名前は最低1文字必要です"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "スキーム"
+  },
+  "noProxiesYet": {
+    "message": "まだプロキシ設定がありません"
+  },
+  "noProxiesDescription": {
+    "message": "ブラウザがインターネットに接続する方法を制御するために、最初のプロキシ設定を作成して開始しましょう。"
+  },
+  "getStarted": {
+    "message": "始める"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "ポップアップから素早くアクセスするには、プロキシ設定をここにドラッグしてください"
+  },
+  "quickSwitchEmptySubHint": {
+    "message": "ここに追加されたプロキシは、ワンクリック切り替えのためにポップアップに表示されます"
+  },
+  "pacUrlHelp": {
+    "message": "PACスクリプトはこのURLから読み込まれます"
+  },
+  "keyboardShortcuts": {
+    "message": "キーボードショートカット"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "検索にフォーカス"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "新しいプロキシ"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "検索をクリア"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "プロキシを切り替え 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "プロキシを検索... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

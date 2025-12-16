@@ -308,8 +308,8 @@ test.describe('3. Manual Proxy Configuration', () => {
     await sameProxyCheckbox.check()
 
     // Fill proxy
-    await page.fill('input[placeholder*="Host"]', 'proxy.example.com')
-    await page.fill('input[placeholder*="Port"]', '8080')
+    await page.getByTestId('single-proxy-host-input').fill('proxy.example.com')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
 
     // Fill bypass list
     const bypassInput = page.locator('textarea[placeholder*="Bypass"]')
@@ -430,7 +430,7 @@ test.describe('5. Quick Switch Mode', () => {
     await expect(page.locator('text=Quick Switch Test').first()).toBeVisible()
 
     // Find the quick switch toggle in proxy configs tab
-    const quickSwitchToggle = page.locator('input#quickSwitchToggle')
+    const quickSwitchToggle = page.locator('input#sectionToggle-quick-switch')
 
     // Get initial state
     const initialState = await quickSwitchToggle.isChecked()
@@ -472,7 +472,7 @@ test.describe('5. Quick Switch Mode', () => {
     await expect(page.locator('text=Quick Switch Area Test').first()).toBeVisible()
 
     // Enable quick switch mode - click the label since checkbox is hidden
-    const quickSwitchToggle = page.locator('input#quickSwitchToggle')
+    const quickSwitchToggle = page.locator('input#sectionToggle-quick-switch')
     const isChecked = await quickSwitchToggle.isChecked()
     if (!isChecked) {
       await quickSwitchToggle.locator('..').click()
@@ -830,7 +830,7 @@ test.describe('14. Popup Quick Switch Flow', () => {
     await expect(optionsPage.locator('text=Popup Test Proxy').first()).toBeVisible()
 
     // Enable quick switch mode - click the label since checkbox is hidden
-    const quickSwitchToggle = optionsPage.locator('input#quickSwitchToggle')
+    const quickSwitchToggle = optionsPage.locator('input#sectionToggle-quick-switch')
     const isChecked = await quickSwitchToggle.isChecked()
     if (!isChecked) {
       await quickSwitchToggle.locator('..').click()

@@ -260,8 +260,15 @@ export class BrowserService implements BrowserAPI {
       })
     },
 
-    openOptionsPage: (): void => {
-      chrome.runtime.openOptionsPage()
+    openOptionsPage: (params?: Record<string, string>): void => {
+      if (params && Object.keys(params).length > 0) {
+        // Build URL with query parameters
+        const queryString = new URLSearchParams(params).toString()
+        const optionsUrl = `${chrome.runtime.getURL('src/options/options.html')}?${queryString}`
+        chrome.tabs.create({ url: optionsUrl })
+      } else {
+        chrome.runtime.openOptionsPage()
+      }
     },
 
     onMessage: {
@@ -350,6 +357,22 @@ export class BrowserService implements BrowserAPI {
               }
             })
           }
+        } catch (error) {
+          reject(error)
+        }
+      })
+    },
+
+    create: async (createProperties: { url: string }): Promise<any> => {
+      return new Promise((resolve, reject) => {
+        try {
+          chrome.tabs.create(createProperties, (tab) => {
+            if (chrome.runtime.lastError) {
+              reject(chrome.runtime.lastError)
+            } else {
+              resolve(tab)
+            }
+          })
         } catch (error) {
           reject(error)
         }

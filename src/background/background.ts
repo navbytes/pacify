@@ -13,6 +13,7 @@ import {
 } from '@/constants/app'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
+import { logger } from '@/services/LoggerService'
 
 /**
  * Flag to track if the background worker is fully initialized
@@ -64,7 +65,7 @@ const messageHandlers: Record<
  * Processes queued messages after initialization completes
  */
 async function processMessageQueue(): Promise<void> {
-  console.log(`Processing ${messageQueue.length} queued message(s) after initialization`)
+  logger.info(`Processing ${messageQueue.length} queued message(s) after initialization`)
 
   while (messageQueue.length > 0) {
     const queuedMessage = messageQueue.shift()
@@ -73,7 +74,7 @@ async function processMessageQueue(): Promise<void> {
       try {
         await handleRuntimeMessageInternal(message, sender, sendResponse)
       } catch (error) {
-        console.error('Error processing queued message:', error)
+        logger.error('Error processing queued message:', error)
         // Send error response but continue processing remaining messages
         try {
           sendResponse({
@@ -81,13 +82,13 @@ async function processMessageQueue(): Promise<void> {
             error: error instanceof Error ? error.message : 'Unknown error',
           })
         } catch (sendError) {
-          console.error('Failed to send error response:', sendError)
+          logger.error('Failed to send error response:', sendError)
         }
       }
     }
   }
 
-  console.log('Message queue processing completed')
+  logger.info('Message queue processing completed')
 }
 
 /**
@@ -95,7 +96,7 @@ async function processMessageQueue(): Promise<void> {
  */
 async function initialize(): Promise<void> {
   try {
-    console.log('Background service worker initializing...')
+    logger.info('Background service worker initializing...')
 
     // CRITICAL: Register listeners only once to prevent duplicates
     if (!listenersRegistered) {
@@ -108,18 +109,18 @@ async function initialize(): Promise<void> {
 
       // Listen for browser startup events
       browserService.runtime.onStartup.addListener(async () => {
-        console.log('Browser started - reinitializing proxy settings and badge')
+        logger.info('Browser started - reinitializing proxy settings and badge')
         await initializeProxySettings()
       })
 
       // Listen for extension installation or update events
       browserService.runtime.onInstalled.addListener(async () => {
-        console.log('Extension installed/updated - initializing proxy settings and badge')
+        logger.info('Extension installed/updated - initializing proxy settings and badge')
         await initializeProxySettings()
       })
 
       listenersRegistered = true
-      console.log('Event listeners registered')
+      logger.info('Event listeners registered')
     }
 
     // Initialize proxy settings
@@ -130,12 +131,12 @@ async function initialize(): Promise<void> {
 
     // Mark as fully initialized
     isInitialized = true
-    console.log('Background service worker fully initialized')
+    logger.info('Background service worker fully initialized')
 
     // Process any queued messages that arrived during initialization
     await processMessageQueue()
   } catch (error) {
-    console.error('Initialization error:', error)
+    logger.error('Initialization error:', error)
     // Use a safer error handling approach for service workers
     setTimeout(initialize, 5000)
   }
@@ -151,7 +152,7 @@ function handleRuntimeMessage(
 ): boolean {
   // If not yet initialized, queue the message for later processing
   if (!isInitialized) {
-    console.log(
+    logger.info(
       `Message ${message.type} received during initialization - queuing for later processing`
     )
     messageQueue.push({ message, sender, sendResponse })
@@ -171,7 +172,7 @@ async function handleRuntimeMessageInternal(
   sender: chrome.runtime.MessageSender,
   sendResponse: (response?: unknown) => void
 ): Promise<void> {
-  console.log(`Processing message: ${message.type}`)
+  logger.info(`Processing message: ${message.type}`)
 
   const handler = messageHandlers[message.type]
   if (handler) {
@@ -179,14 +180,14 @@ async function handleRuntimeMessageInternal(
       await handler(message)
       sendResponse({ success: true })
     } catch (error) {
-      console.error(`Error handling message type ${message.type}:`, error)
+      logger.error(`Error handling message type ${message.type}:`, error)
       sendResponse({
         success: false,
         error: error instanceof Error ? error.message : 'Unknown error',
       })
     }
   } else {
-    console.warn(`Unhandled message type: ${message.type}`)
+    logger.warn(`Unhandled message type: ${message.type}`)
     sendResponse({ success: false, error: 'Unhandled message type' })
   }
 }
@@ -201,7 +202,7 @@ async function handleActionClick(): Promise<void> {
     // CRITICAL: Check if Quick Switch is actually enabled first
     // If disabled, the popup should open instead (this shouldn't be called)
     if (!settings.quickSwitchEnabled) {
-      console.log('Quick Switch is disabled - popup should open instead of switching')
+      logger.info('Quick Switch is disabled - popup should open instead of switching')
       // This shouldn't happen as popup should be enabled, but handle gracefully
       return
     }
@@ -211,7 +212,7 @@ async function handleActionClick(): Promise<void> {
 
     // Check if quick switch is enabled but no scripts available
     if (quickScripts.length === 0) {
-      console.warn('Quick Switch enabled but no scripts in rotation')
+      logger.warn('Quick Switch enabled but no scripts in rotation')
 
       // Show warning badge
       await updateBadge('!', '#FFA500') // Orange with exclamation
@@ -227,7 +228,7 @@ async function handleActionClick(): Promise<void> {
 
     await handleProxyUpdate(nextScript)
   } catch (error) {
-    console.error('Action click error:', error)
+    logger.error('Action click error:', error)
     // Show error badge
     await updateBadge('ERR', '#FF0000').catch(() => {
       /* ignore badge update errors */
@@ -356,7 +357,7 @@ async function setProxySettings(proxy: ProxyConfig): Promise<void> {
     const { name, color } = proxy
     await updateBadge(name, color)
   } catch (error) {
-    console.error('Error setting proxy:', error)
+    logger.error('Error setting proxy:', error)
   }
 }
 
@@ -369,7 +370,7 @@ async function clearProxySettings(): Promise<void> {
     await ChromeService.clearProxy(autoReload)
     await updateBadge(DEFAULT_BADGE_TEXT, DEFAULT_BADGE_COLOR)
   } catch (error) {
-    console.error('Error clearing proxy:', error)
+    logger.error('Error clearing proxy:', error)
   }
 }
 
@@ -380,7 +381,7 @@ async function updateBadge(text = 'N/A', color = DEFAULT_BADGE_COLOR): Promise<v
       text: text.slice(0, 3).toUpperCase(),
     })
   } catch (error) {
-    console.error('Error updating badge:', error)
+    logger.error('Error updating badge:', error)
   }
 }
 
@@ -388,7 +389,7 @@ async function safeGetSettings() {
   try {
     return await SettingsReader.getSettings()
   } catch (error) {
-    console.error('Error fetching settings:', error)
+    logger.error('Error fetching settings:', error)
     return null
   }
 }
@@ -397,7 +398,7 @@ async function safeSetPopup(popup: string): Promise<void> {
   try {
     await browserService.action.setPopup({ popup })
   } catch (error) {
-    console.error('Error setting popup:', error)
+    logger.error('Error setting popup:', error)
   }
 }
 

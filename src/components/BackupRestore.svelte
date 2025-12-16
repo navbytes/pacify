@@ -7,7 +7,7 @@
   import LabelButton from './LabelButton.svelte'
   import FlexGroup from './FlexGroup.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
-  import { Download, Upload } from 'lucide-svelte'
+  import { Download, Upload } from '@/utils/icons'
   import Text from './Text.svelte'
 
   interface Props {

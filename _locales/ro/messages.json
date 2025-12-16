@@ -393,5 +393,86 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "Apăsați Ctrl+N (Cmd+N pe Mac) pentru a adăuga rapid un proxy nou"
+  },
+  "invalidHost": {
+    "message": "Nume de gazdă sau adresă IP nevalidă"
+  },
+  "invalidPort": {
+    "message": "Portul trebuie să fie între 1 și 65535"
+  },
+  "invalidUrl": {
+    "message": "Vă rugăm să introduceți un URL valid"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "URL-ul PAC trebuie să folosească protocolul http://, https:// sau file://"
+  },
+  "pacUrlWarning": {
+    "message": "Fișierele PAC se termină de obicei cu .pac"
+  },
+  "bypassListHelp": {
+    "message": "Introduceți o adresă pe linie. Puteți folosi wildcard-uri (*) și intervale IP (notație CIDR)."
+  },
+  "nameTooLong": {
+    "message": "Numele trebuie să aibă maxim 50 de caractere"
+  },
+  "nameTooShort": {
+    "message": "Numele trebuie să aibă cel puțin 1 caracter"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "Schemă"
+  },
+  "noProxiesYet": {
+    "message": "Nicio configurație proxy încă"
+  },
+  "noProxiesDescription": {
+    "message": "Începeți prin a crea prima configurație proxy pentru a controla modul în care browserul dvs. se conectează la internet."
+  },
+  "getStarted": {
+    "message": "Începeți"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "Trageți configurații proxy aici pentru acces rapid din popup"
+  },
+  "quickSwitchEmptySubHint": {
+    "message": "Proxy-urile adăugate aici vor apărea în popup pentru comutare cu un singur clic"
+  },
+  "pacUrlHelp": {
+    "message": "Scriptul PAC va fi încărcat de la acest URL"
+  },
+  "keyboardShortcuts": {
+    "message": "Comenzi rapide de la tastatură"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "Focalizare căutare"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "Proxy nou"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "Șterge căutarea"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "Comutare proxy 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "Căutare proxy-uri... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

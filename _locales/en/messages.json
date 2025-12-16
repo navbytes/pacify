@@ -393,5 +393,83 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "Press Ctrl+N (Cmd+N on Mac) to quickly add a new proxy"
+  },
+  "invalidHost": {
+    "message": "Invalid hostname or IP address"
+  },
+  "invalidPort": {
+    "message": "Port must be between 1 and 65535"
+  },
+  "invalidUrl": {
+    "message": "Please enter a valid URL"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "PAC URL must use http://, https://, or file:// protocol"
+  },
+  "pacUrlWarning": {
+    "message": "PAC files typically end with .pac"
+  },
+  "bypassListHelp": {
+    "message": "Enter one address per line. You can use wildcards (*) and IP ranges (CIDR notation)."
+  },
+  "nameTooLong": {
+    "message": "Name must be 50 characters or less"
+  },
+  "nameTooShort": {
+    "message": "Name must be at least 1 character"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "Scheme"
+  },
+  "noProxiesYet": {
+    "message": "No proxy configurations yet"
+  },
+  "noProxiesDescription": {
+    "message": "Get started by creating your first proxy configuration to control how your browser connects to the internet."
+  },
+  "getStarted": {
+    "message": "Get Started"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "Drag proxy configurations here for quick access from the popup"
+  },
+  "quickSwitchEmptySubHint": {
+    "message": "Proxies added here will appear in the popup for one-click switching"
+  },
+  "keyboardShortcuts": {
+    "message": "Keyboard Shortcuts"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "Focus search"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "New proxy"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "Clear search"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "Toggle proxy 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "Search proxies... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

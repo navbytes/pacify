@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Configure Tailwind to use class-based dark mode instead of media queries */
+@variant dark (&:is(.dark *));
+
 @theme {
   /* Custom colors */
   --color-primary: #2196f3;
@@ -23,6 +26,15 @@
   /* Ensure white is pure white */
   --color-white: #ffffff;
   --color-black: #000000;
+
+  /* Custom spacing scale */
+  --spacing: 0.25rem;
+
+  /* Custom border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
 }
 
 @layer base {
@@ -31,11 +43,10 @@
     color: var(--color-slate-900);
   }
 
-  @media (prefers-color-scheme: dark) {
-    body {
-      background-color: #0f172a; /* Slate-900 - darkest bluish background */
-      color: #f1f5f9; /* Slate-100 - light bluish text */
-    }
+  /* Class-based dark mode instead of media query */
+  .dark body {
+    background-color: #0f172a; /* Slate-900 - darkest bluish background */
+    color: #f1f5f9; /* Slate-100 - light bluish text */
   }
 }
 
@@ -74,11 +85,10 @@
     color: var(--color-slate-900);
   }
 
-  @media (prefers-color-scheme: dark) {
-    .btn-secondary {
-      background-color: #334155; /* Slate-700 - bluish grey */
-      color: #f1f5f9; /* Slate-100 - light bluish text */
-    }
+  /* Class-based dark mode for button */
+  .dark .btn-secondary {
+    background-color: #334155; /* Slate-700 - bluish grey */
+    color: #f1f5f9; /* Slate-100 - light bluish text */
   }
 
   .btn-danger {
@@ -88,6 +98,121 @@
 
   .btn-danger:hover {
     background-color: #c82333;
+  }
+}
+
+@layer utilities {
+  /* Flex utilities for common layouts */
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Focus utilities */
+  .focus-ring {
+    outline: none;
+    ring: 2px;
+    ring-offset: 2px;
+  }
+
+  .focus-ring-primary {
+    outline: none;
+    ring: 2px;
+    ring-offset: 2px;
+    ring-color: var(--color-primary);
+  }
+
+  /* Animation utilities */
+  .animate-fadeIn {
+    animation: fadeIn 200ms ease-out;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 200ms ease-out;
+  }
+
+  .animate-scaleIn {
+    animation: scaleIn 200ms ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(0.5rem);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Surface utilities */
+  .surface {
+    background-color: white;
+    border: 1px solid var(--color-slate-200);
+  }
+
+  /* Class-based dark mode for surface */
+  .dark .surface {
+    background-color: var(--color-slate-800);
+    border-color: var(--color-slate-700);
+  }
+
+  .surface-elevated {
+    background-color: white;
+    border: 1px solid var(--color-slate-200);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  /* Class-based dark mode for surface-elevated */
+  .dark .surface-elevated {
+    background-color: var(--color-slate-800);
+    border-color: var(--color-slate-700);
   }
 }
 
@@ -102,4 +227,156 @@
 [data-drag-type='QUICK_SWITCH'][data-page-type='OPTIONS'] [data-overlay],
 [data-drag-type='OPTIONS'][data-page-type='QUICK_SWITCH'] [data-overlay] {
   display: flex;
+}
+
+/* Tab Component Variant Styles (Pills) */
+[data-variant='pills'] .tab-button {
+  @apply border-0 rounded-lg mx-1;
+}
+
+[data-variant='pills'] .tab-button.active {
+  @apply bg-blue-100;
+}
+
+.dark [data-variant='pills'] .tab-button.active {
+  @apply bg-blue-900;
+}
+
+[data-variant='pills'] .tab-list {
+  @apply border-b-0 gap-2;
+}
+
+/* Tab Component Variant Styles (Buttons) */
+[data-variant='buttons'] .tab-button {
+  @apply border-0 rounded-md mx-0 px-4 py-2;
+  @apply bg-transparent text-slate-700;
+  @apply hover:bg-slate-200/50 transition-all duration-150;
+}
+
+.dark [data-variant='buttons'] .tab-button {
+  @apply text-slate-300 hover:bg-slate-700/50;
+}
+
+[data-variant='buttons'] .tab-button.active {
+  @apply bg-white text-blue-600 shadow-sm;
+}
+
+.dark [data-variant='buttons'] .tab-button.active {
+  @apply bg-slate-700 text-blue-400;
+}
+
+[data-variant='buttons'] .tab-button.active .tab-icon {
+  @apply text-blue-600;
+}
+
+.dark [data-variant='buttons'] .tab-button.active .tab-icon {
+  @apply text-blue-400;
+}
+
+[data-variant='buttons'] .tab-list {
+  @apply border-b-0 gap-1;
+  @apply bg-slate-100 p-1 rounded-lg inline-flex;
+}
+
+.dark [data-variant='buttons'] .tab-list {
+  @apply bg-slate-800/50;
+}
+
+/* Tab List Scrollbar Styles */
+.tab-list::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tab-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.tab-list::-webkit-scrollbar-thumb {
+  background-color: rgb(203 213 225); /* slate-300 */
+  border-radius: 0.25rem;
+}
+
+.dark .tab-list::-webkit-scrollbar-thumb {
+  background-color: rgb(71 85 105); /* slate-600 */
+}
+
+/* Modal Body Scroll Lock */
+body.modal-open {
+  @apply overflow-hidden;
+}
+
+/* CodeMirror Editor Styling */
+.cm-editor {
+  @apply rounded-md shadow-sm;
+  overflow: hidden;
+  transition: all 150ms ease-in-out;
+}
+
+.cm-editor .cm-scroller {
+  overflow: auto !important;
+  max-height: 400px;
+}
+
+.cm-editor.cm-focused {
+  @apply outline-none ring-2 ring-blue-500 shadow-md;
+  transition: all 150ms ease-in-out;
+}
+
+.cm-scroller {
+  @apply font-mono;
+}
+
+/* Active line highlighting */
+.cm-activeLine {
+  background-color: rgba(59, 130, 246, 0.05) !important;
+}
+
+.dark .cm-activeLine {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+}
+
+/* Autocomplete styling */
+.cm-tooltip-autocomplete {
+  @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-xl;
+  animation: slideIn 150ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cm-tooltip-autocomplete > ul {
+  @apply max-h-64 overflow-auto p-1;
+}
+
+.cm-tooltip-autocomplete > ul > li {
+  @apply px-2 py-1 cursor-pointer text-sm;
+}
+
+.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  @apply bg-blue-500 text-white;
+}
+
+.cm-completionLabel {
+  @apply font-medium;
+}
+
+.cm-completionDetail {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
+.cm-completionInfo {
+  @apply text-xs text-gray-600 dark:text-gray-300 mt-1;
+}
+
+/* Grid Children Transitions (used in ScriptList) */
+.grid > * {
+  @apply transition-all duration-200;
 }

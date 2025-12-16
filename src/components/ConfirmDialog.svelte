@@ -1,8 +1,11 @@
 <script lang="ts">
-  import { AlertTriangle, X } from 'lucide-svelte'
+  import { AlertTriangle, X } from '@/utils/icons'
   import Button from './Button.svelte'
   import Text from './Text.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { cn } from '@/utils/cn'
+  import { modalVariants, flexPatterns } from '@/utils/classPatterns'
+  import { colors } from '@/utils/theme'
 
   interface Props {
     open?: boolean
@@ -51,7 +54,7 @@
 
 {#if open}
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+    class={cn(modalVariants.overlay(), flexPatterns.center)}
     onclick={handleBackdropClick}
     onkeydown={handleKeydown}
     role="dialog"
@@ -59,38 +62,37 @@
     aria-labelledby="dialog-title"
     tabindex="-1"
   >
-    <div
-      class="relative bg-white dark:bg-slate-800 rounded-lg shadow-xl max-w-md w-full mx-4 animate-scale-in"
-    >
+    <div class={cn(modalVariants.content({ size: 'md' }), 'mx-4 animate-scale-in')}>
       <!-- Header -->
-      <div
-        class="flex items-start justify-between p-6 border-b border-slate-200 dark:border-slate-700"
-      >
-        <div class="flex items-start gap-3">
+      <div class={cn(modalVariants.header(), 'items-start justify-between')}>
+        <div class={cn(flexPatterns.start, 'gap-3')}>
           <div
-            class={`
-              flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center
-              ${variant === 'danger' ? 'bg-red-100 dark:bg-red-900/30' : ''}
-              ${variant === 'warning' ? 'bg-yellow-100 dark:bg-yellow-900/30' : ''}
-              ${variant === 'info' ? 'bg-blue-100 dark:bg-blue-900/30' : ''}
-            `}
+            class={cn(
+              'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center',
+              variant === 'danger' && colors.danger.light,
+              variant === 'warning' && colors.warning.light,
+              variant === 'info' && colors.info.light
+            )}
           >
             <AlertTriangle
               size={20}
-              class={`
-                ${variant === 'danger' ? 'text-red-600 dark:text-red-400' : ''}
-                ${variant === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : ''}
-                ${variant === 'info' ? 'text-blue-600 dark:text-blue-400' : ''}
-              `}
+              class={cn(
+                variant === 'danger' && colors.danger.text,
+                variant === 'warning' && colors.warning.text,
+                variant === 'info' && colors.info.text
+              )}
             />
           </div>
-          <h3 id="dialog-title" class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+          <h3 id="dialog-title" class={cn('text-lg font-semibold', colors.text.default)}>
             {title}
           </h3>
         </div>
         <button
           onclick={handleCancel}
-          class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+          class={cn(
+            colors.icon.muted,
+            'hover:text-slate-600 dark:hover:text-slate-300 transition-colors'
+          )}
           aria-label={I18nService.getMessage('closeDialog')}
         >
           <X size={20} />
@@ -98,16 +100,14 @@
       </div>
 
       <!-- Body -->
-      <div class="p-6">
+      <div class={modalVariants.body()}>
         <Text as="p" color="muted">
           {message}
         </Text>
       </div>
 
       <!-- Footer -->
-      <div
-        class="flex items-center justify-end gap-3 p-6 border-t border-slate-200 dark:border-slate-700"
-      >
+      <div class={modalVariants.footer()}>
         <Button color="secondary" onclick={handleCancel}>
           {cancelLabel}
         </Button>

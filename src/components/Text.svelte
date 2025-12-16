@@ -1,24 +1,17 @@
 <script lang="ts">
   type TextElement = 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label'
-  type TextSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl'
-  type TextWeight = 'normal' | 'medium' | 'semibold' | 'bold'
-  type TextColor =
-    | 'primary'
-    | 'secondary'
-    | 'muted'
-    | 'success'
-    | 'error'
-    | 'info'
-    | 'white'
-    | 'inherit'
 
   import type { Snippet } from 'svelte'
+  import { cn } from '@/utils/cn'
+  import { textVariants, type VariantProps } from '@/utils/classPatterns'
+
+  type TextVariant = VariantProps<typeof textVariants>
 
   interface Props {
     as?: TextElement
-    size?: TextSize
-    weight?: TextWeight
-    color?: TextColor
+    size?: TextVariant['size']
+    weight?: TextVariant['weight']
+    color?: TextVariant['color']
     classes?: string
     truncate?: boolean
     italic?: boolean
@@ -40,47 +33,18 @@
     id = undefined,
   }: Props = $props()
 
-  const sizeClasses: Record<TextSize, string> = {
-    xs: 'text-xs',
-    sm: 'text-sm',
-    base: 'text-base',
-    lg: 'text-lg',
-    xl: 'text-xl',
-    '2xl': 'text-2xl',
-    '3xl': 'text-3xl',
-  }
-
-  const weightClasses: Record<TextWeight, string> = {
-    normal: 'font-normal',
-    medium: 'font-medium',
-    semibold: 'font-semibold',
-    bold: 'font-bold',
-  }
-
-  const colorClasses: Record<TextColor, string> = {
-    primary: 'text-slate-900 dark:text-slate-100',
-    secondary: 'text-slate-700 dark:text-slate-300',
-    muted: 'text-slate-600 dark:text-slate-400',
-    success: 'text-green-600 dark:text-green-400',
-    error: 'text-red-600 dark:text-red-400',
-    info: 'text-blue-600 dark:text-blue-400',
-    white: 'text-white',
-    inherit: 'text-inherit',
-  }
-
   const combinedClasses = $derived(
-    [
-      sizeClasses[size],
-      weightClasses[weight],
-      colorClasses[color],
-      truncate ? 'truncate' : '',
-      italic ? 'italic' : '',
-      underline ? 'underline' : '',
-      classes,
-    ]
-      .filter(Boolean)
-      .join(' ')
-      .trim()
+    cn(
+      textVariants({
+        size,
+        weight,
+        color,
+        truncate,
+        italic,
+        underline,
+      }),
+      classes
+    )
   )
 </script>
 

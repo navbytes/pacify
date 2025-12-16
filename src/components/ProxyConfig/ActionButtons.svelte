@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from '../Button.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
+  import { Loader2 } from '@/utils/icons'
 
   interface Props {
     isSubmitting?: boolean
@@ -23,6 +24,11 @@
   </Button>
   <!-- Using type="submit" lets the enclosing form trigger the submit event -->
   <Button color="primary" type="submit" disabled={isSubmitting} data-testid="save-config-btn">
+    {#if isSubmitting}
+      {#snippet icon()}
+        <Loader2 size={16} class="animate-spin" />
+      {/snippet}
+    {/if}
     {isSubmitting ? I18nService.getMessage('saving') : I18nService.getMessage('saveConfiguration')}
   </Button>
 </div>

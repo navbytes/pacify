@@ -393,5 +393,86 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "Presione Ctrl+N (Cmd+N en Mac) para agregar rápidamente un nuevo proxy"
+  },
+  "invalidHost": {
+    "message": "Nombre de host o dirección IP inválidos"
+  },
+  "invalidPort": {
+    "message": "El puerto debe estar entre 1 y 65535"
+  },
+  "invalidUrl": {
+    "message": "Por favor ingrese una URL válida"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "La URL PAC debe usar el protocolo http://, https:// o file://"
+  },
+  "pacUrlWarning": {
+    "message": "Los archivos PAC generalmente terminan con .pac"
+  },
+  "bypassListHelp": {
+    "message": "Ingrese una dirección por línea. Puede usar comodines (*) y rangos IP (notación CIDR)."
+  },
+  "nameTooLong": {
+    "message": "El nombre debe tener 50 caracteres o menos"
+  },
+  "nameTooShort": {
+    "message": "El nombre debe tener al menos 1 carácter"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "Esquema"
+  },
+  "noProxiesYet": {
+    "message": "Aún no hay configuraciones de proxy"
+  },
+  "noProxiesDescription": {
+    "message": "Comience creando su primera configuración de proxy para controlar cómo su navegador se conecta a Internet."
+  },
+  "getStarted": {
+    "message": "Comenzar"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "Arrastre configuraciones de proxy aquí para acceso rápido desde la ventana emergente"
+  },
+  "quickSwitchEmptySubHint": {
+    "message": "Los proxies agregados aquí aparecerán en la ventana emergente para cambio de un clic"
+  },
+  "pacUrlHelp": {
+    "message": "El script PAC se cargará desde esta URL"
+  },
+  "keyboardShortcuts": {
+    "message": "Atajos de teclado"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "Enfocar búsqueda"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "Nuevo proxy"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "Limpiar búsqueda"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "Alternar proxy 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "Buscar proxies... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }

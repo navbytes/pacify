@@ -60,50 +60,15 @@
 <div
   role="tablist"
   tabindex="0"
-  class="tab-list"
+  class="tab-list flex items-center gap-0 overflow-x-auto mb-0 -mx-4 px-4 sm:mx-0 sm:px-0"
   onkeydown={handleKeydown}
   aria-label="Options tabs"
 >
   {@render children()}
 </div>
 
-<style lang="postcss">
-  @import 'tailwindcss' reference;
+<!-- Note: Custom scrollbar styles for .tab-list are defined globally in app.css
+     to avoid Lightning CSS warnings about .dark selector scoping issues.
 
-  .tab-list {
-    @apply flex items-center gap-0;
-    @apply overflow-x-auto;
-    @apply mb-0;
-  }
-
-  /* Custom scrollbar for tab list */
-  .tab-list::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .tab-list::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  .tab-list::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 dark:bg-slate-600 rounded;
-  }
-
-  /* Remove border for pill and button variants */
-  :global([data-variant='pills']) .tab-list {
-    @apply border-b-0 gap-2;
-  }
-
-  /* Button variant specific styling */
-  :global([data-variant='buttons']) .tab-list {
-    @apply border-b-0 gap-1;
-    @apply bg-slate-100 dark:bg-slate-800/50 p-1 rounded-lg inline-flex;
-  }
-
-  /* Mobile: Make tabs scrollable */
-  @media (max-width: 640px) {
-    .tab-list {
-      @apply -mx-4 px-4;
-    }
-  }
-</style>
+     Tab list variant styles (pills, buttons) are also defined globally in app.css
+     to avoid Lightning CSS warnings about :global() syntax. -->

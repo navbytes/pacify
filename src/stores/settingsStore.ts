@@ -5,6 +5,7 @@ import { StorageService } from '@/services/StorageService'
 import { ChromeService } from '@/services/chrome'
 import { withErrorHandling } from '@/utils/errorHandling'
 import { debounce } from '@/utils/debounce'
+import { logger } from '@/services/LoggerService'
 
 function createSettingsStore() {
   const { subscribe, set, update } = writable<AppSettings>(DEFAULT_SETTINGS)
@@ -45,7 +46,7 @@ function createSettingsStore() {
       } else {
         // Handle errors instead of using void
         saveSettings(newSettings).catch((error) => {
-          console.error('Failed to save settings immediately:', error)
+          logger.error('Failed to save settings immediately:', error)
           // Error is already handled by withErrorHandling wrapper
         })
       }
@@ -155,7 +156,7 @@ function createSettingsStore() {
 
       // If the deleted script was active, clear Chrome's proxy
       if (wasActive) {
-        console.log('Deleted script was active, clearing Chrome proxy')
+        logger.info('Deleted script was active, clearing Chrome proxy')
         await ChromeService.sendMessage({
           type: 'CLEAR_PROXY',
         })
@@ -181,7 +182,7 @@ function createSettingsStore() {
     setProxy: withErrorHandling(async (id: string, isActive: boolean) => {
       // Wait for any pending proxy change to complete (prevent race conditions)
       if (proxyChangePending) {
-        console.log('Waiting for pending proxy change to complete...')
+        logger.info('Waiting for pending proxy change to complete...')
         await proxyChangePending
       }
 

@@ -393,5 +393,86 @@
   },
   "tooltipKeyboardShortcut": {
     "message": "Pressione Ctrl+N (Cmd+N no Mac) para adicionar rapidamente um novo proxy"
+  },
+  "invalidHost": {
+    "message": "Nome de host ou endereço IP inválido"
+  },
+  "invalidPort": {
+    "message": "A porta deve estar entre 1 e 65535"
+  },
+  "invalidUrl": {
+    "message": "Por favor, insira uma URL válida"
+  },
+  "invalidPacUrlProtocol": {
+    "message": "A URL PAC deve usar o protocolo http://, https:// ou file://"
+  },
+  "pacUrlWarning": {
+    "message": "Os arquivos PAC normalmente terminam com .pac"
+  },
+  "bypassListHelp": {
+    "message": "Digite um endereço por linha. Você pode usar curingas (*) e intervalos de IP (notação CIDR)."
+  },
+  "nameTooLong": {
+    "message": "O nome deve ter 50 caracteres ou menos"
+  },
+  "nameTooShort": {
+    "message": "O nome deve ter pelo menos 1 caractere"
+  },
+  "hostPlaceholder": {
+    "message": "proxy.example.com"
+  },
+  "portPlaceholder": {
+    "message": "8080"
+  },
+  "scheme": {
+    "message": "Esquema"
+  },
+  "noProxiesYet": {
+    "message": "Nenhuma configuração de proxy ainda"
+  },
+  "noProxiesDescription": {
+    "message": "Comece criando sua primeira configuração de proxy para controlar como seu navegador se conecta à internet."
+  },
+  "getStarted": {
+    "message": "Começar"
+  },
+  "quickSwitchEmptyHint": {
+    "message": "Arraste configurações de proxy aqui para acesso rápido no popup"
+  },
+  "quickSwitchEmptySubHint": {
+    "message": "Proxies adicionados aqui aparecerão no popup para alternância com um clique"
+  },
+  "pacUrlHelp": {
+    "message": "O script PAC será carregado a partir desta URL"
+  },
+  "keyboardShortcuts": {
+    "message": "Atalhos de teclado"
+  },
+  "keyboardShortcutFocusSearch": {
+    "message": "Focar pesquisa"
+  },
+  "keyboardShortcutNewProxy": {
+    "message": "Novo proxy"
+  },
+  "keyboardShortcutClearSearch": {
+    "message": "Limpar pesquisa"
+  },
+  "keyboardShortcutToggleProxy": {
+    "message": "Alternar proxy 1-9"
+  },
+  "searchProxiesPlaceholder": {
+    "message": "Pesquisar proxies... (Ctrl+K)"
+  },
+  "keyboardShortcutCtrlCmdK": {
+    "message": "Ctrl/Cmd+K"
+  },
+  "keyboardShortcutCtrlCmdN": {
+    "message": "Ctrl/Cmd+N"
+  },
+  "keyboardShortcutEscape": {
+    "message": "Escape"
+  },
+  "keyboardShortcutNumbers": {
+    "message": "1-9"
   }
 }
