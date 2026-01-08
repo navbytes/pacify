@@ -1,6 +1,9 @@
 import {
   type BrowserAPI,
   type NotificationOptions as BrowserNotificationOptions,
+  type Tab,
+  type MessageSender,
+  type ProxySettings,
 } from '@/interfaces/browser'
 
 /**
@@ -229,11 +232,13 @@ export class BrowserService implements BrowserAPI {
     },
 
     onClicked: {
-      addListener: (callback: (tab: chrome.tabs.Tab) => void): void => {
-        chrome.action.onClicked.addListener(callback)
+      addListener: (callback: (tab: Tab) => void): void => {
+        chrome.action.onClicked.addListener(callback as unknown as (tab: chrome.tabs.Tab) => void)
       },
-      removeListener: (callback: (tab: chrome.tabs.Tab) => void): void => {
-        chrome.action.onClicked.removeListener(callback)
+      removeListener: (callback: (tab: Tab) => void): void => {
+        chrome.action.onClicked.removeListener(
+          callback as unknown as (tab: chrome.tabs.Tab) => void
+        )
       },
     },
   }
@@ -275,20 +280,32 @@ export class BrowserService implements BrowserAPI {
       addListener: (
         callback: (
           message: unknown,
-          sender: chrome.runtime.MessageSender,
+          sender: MessageSender,
           sendResponse: (response?: unknown) => void
         ) => boolean | void
       ): void => {
-        chrome.runtime.onMessage.addListener(callback)
+        chrome.runtime.onMessage.addListener(
+          callback as unknown as (
+            message: unknown,
+            sender: chrome.runtime.MessageSender,
+            sendResponse: (response?: unknown) => void
+          ) => boolean | void
+        )
       },
       removeListener: (
         callback: (
           message: unknown,
-          sender: chrome.runtime.MessageSender,
+          sender: MessageSender,
           sendResponse: (response?: unknown) => void
         ) => boolean | void
       ): void => {
-        chrome.runtime.onMessage.removeListener(callback)
+        chrome.runtime.onMessage.removeListener(
+          callback as unknown as (
+            message: unknown,
+            sender: chrome.runtime.MessageSender,
+            sendResponse: (response?: unknown) => void
+          ) => boolean | void
+        )
       },
     },
 
@@ -384,18 +401,27 @@ export class BrowserService implements BrowserAPI {
   proxy = {
     settings: {
       set: (details: unknown, callback?: () => void): void => {
-        chrome.proxy.settings.set(details as chrome.types.ChromeSettingSetDetails, callback)
+        chrome.proxy.settings.set(
+          details as chrome.types.ChromeSettingSetDetails<any>,
+          callback || (() => {})
+        )
       },
 
       clear: (details: unknown, callback?: () => void): void => {
-        chrome.proxy.settings.clear(details as chrome.types.ChromeSettingClearDetails, callback)
+        chrome.proxy.settings.clear(
+          details as chrome.types.ChromeSettingClearDetails,
+          callback || (() => {})
+        )
       },
 
-      get: (
-        details: unknown,
-        callback?: (config: chrome.types.ChromeSettingGetResultDetails) => void
-      ): void => {
-        chrome.proxy.settings.get(details as chrome.types.ChromeSettingGetDetails, callback)
+      get: (details: unknown, callback?: (config: ProxySettings) => void): void => {
+        if (callback) {
+          chrome.proxy.settings.get(details as chrome.types.ChromeSettingGetDetails, (result) =>
+            callback(result as unknown as ProxySettings)
+          )
+        } else {
+          chrome.proxy.settings.get(details as chrome.types.ChromeSettingGetDetails, () => {})
+        }
       },
     },
   }

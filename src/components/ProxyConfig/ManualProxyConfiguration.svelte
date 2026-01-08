@@ -88,7 +88,7 @@
         <h3 class="text-sm font-medium text-slate-700 dark:text-slate-300">
           {proxyLocalizedNames[proxyType as ProxyType]}
         </h3>
-        {#if proxy}
+        {#if proxy && typeof proxy !== 'string' && !Array.isArray(proxy)}
           <ProxyInput
             bind:scheme={proxy.scheme}
             bind:host={proxy.host}

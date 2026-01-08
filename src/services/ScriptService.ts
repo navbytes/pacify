@@ -2,6 +2,7 @@ import type { ValidationResult } from '@/interfaces'
 
 export class ScriptService {
   private static readonly PROXY_KEYWORDS = ['DIRECT', 'PROXY', 'SOCKS', 'SOCKS5', 'HTTP']
+  // @ts-expect-error - Reserved for future PAC helper function validation
   private static readonly _COMMON_HELPER_FUNCTIONS = [
     'isPlainHostName',
     'dnsDomainIs',

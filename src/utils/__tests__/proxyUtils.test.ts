@@ -235,7 +235,7 @@ describe('createDefaultProxySettings', () => {
     expect(result).toHaveProperty('bypassList')
 
     // All proxy servers should be default empty servers
-    const expectedServer = { scheme: 'http', host: '', port: '' }
+    const expectedServer: ProxyServer = { scheme: 'http', host: '', port: '' }
     expect(result.singleProxy).toEqual(expectedServer)
     expect(result.proxyForHttp).toEqual(expectedServer)
     expect(result.proxyForHttps).toEqual(expectedServer)

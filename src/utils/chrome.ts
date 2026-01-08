@@ -6,9 +6,7 @@ Converts an AppSettings object to a Chrome proxy configuration object.
 @param appSettings - The complete application settings that include a list of proxy configurations.
 @returns An object to be used with chrome.proxy.settings.set.
 */
-export function convertAppSettingsToChromeConfig(
-  proxyConfig: ProxyConfig
-): ChromeProxyConfig {
+export function convertAppSettingsToChromeConfig(proxyConfig: ProxyConfig): ChromeProxyConfig {
   // If no active proxy configuration is found, return a default configuration (e.g. direct)
   if (!proxyConfig) {
     return { mode: 'direct' }

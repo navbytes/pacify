@@ -2,7 +2,7 @@
 
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import { ERROR_TYPES, type AppSettings } from '@/interfaces'
-import { NotifyService } from '../NotifyService'
+import { NotificationService } from '../NotificationService'
 
 // Mock storage to simulate chrome.storage.sync
 const mockStorage = {
@@ -71,7 +71,7 @@ export class MockChromeService {
     try {
       mockStorage.settings = settings
     } catch (error) {
-      NotifyService.error(ERROR_TYPES.SAVE_SETTINGS, error)
+      await NotificationService.error(ERROR_TYPES.SAVE_SETTINGS, error)
     }
   }
 
@@ -79,7 +79,7 @@ export class MockChromeService {
     try {
       return mockStorage.settings || DEFAULT_SETTINGS
     } catch (error) {
-      NotifyService.error(ERROR_TYPES.FETCH_SETTINGS, error)
+      await NotificationService.error(ERROR_TYPES.FETCH_SETTINGS, error)
       return DEFAULT_SETTINGS
     }
   }

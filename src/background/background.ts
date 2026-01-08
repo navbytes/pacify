@@ -103,7 +103,13 @@ async function initialize(): Promise<void> {
     if (!listenersRegistered) {
       // Register message listener FIRST, before any async operations
       // This ensures we don't miss messages during initialization
-      browserService.runtime.onMessage.addListener(handleRuntimeMessage)
+      browserService.runtime.onMessage.addListener((message, sender, sendResponse) =>
+        handleRuntimeMessage(
+          message as BackgroundMessage,
+          sender as unknown as chrome.runtime.MessageSender,
+          sendResponse
+        )
+      )
 
       // Set up browser action click listeners
       browserService.action.onClicked.addListener(handleActionClick)
@@ -176,7 +182,7 @@ function handleRuntimeMessage(
  */
 async function handleRuntimeMessageInternal(
   message: BackgroundMessage,
-  sender: chrome.runtime.MessageSender,
+  _sender: chrome.runtime.MessageSender,
   sendResponse: (response?: unknown) => void
 ): Promise<void> {
   const handler = messageHandlers[message.type]

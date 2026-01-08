@@ -1,7 +1,6 @@
 <script lang="ts">
   import { I18nService } from '@/services/i18n/i18nService'
   import Text from '../Text.svelte'
-  import { cn } from '@/utils/cn'
   import { inputVariants } from '@/utils/classPatterns'
 
   interface Props {

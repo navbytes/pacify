@@ -6,6 +6,7 @@
 export {
   AlertCircle,
   AlertTriangle,
+  Bell,
   BookOpen,
   Bug,
   Cable,

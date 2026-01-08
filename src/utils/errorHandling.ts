@@ -1,5 +1,5 @@
 // src/utils/errorHandling.ts
-import { NotifyService } from '@/services/NotifyService'
+import { NotificationService } from '@/services/NotificationService'
 import { ERROR_TYPES } from '@/interfaces'
 import { logger } from '@/services/LoggerService'
 
@@ -22,7 +22,7 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
       return await operation(...args)
     } catch (error) {
       // Default error handling
-      NotifyService.error(errorType, error)
+      await NotificationService.error(errorType, error)
 
       // Custom error handling if provided
       if (customHandler) {
@@ -50,7 +50,7 @@ export function withErrorHandlingAndFallback<
     try {
       return (await operation(...args)) as R
     } catch (error) {
-      NotifyService.error(errorType, error)
+      await NotificationService.error(errorType, error)
       return fallbackValue
     }
   }
@@ -90,7 +90,7 @@ export function withRetry<T extends (...args: any[]) => Promise<any>>(
     }
 
     // If we reach here, all retries failed
-    NotifyService.error(errorType, lastError)
+    await NotificationService.error(errorType, lastError)
     throw lastError
   }) as T
 }

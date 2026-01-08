@@ -340,7 +340,7 @@ describe('measureComponent', () => {
   test('should handle component without lifecycle hooks', () => {
     const mockComponent = {
       name: 'NoLifecycle',
-      prototype: {},
+      prototype: {} as { onMount?: () => void; onDestroy?: () => void },
     }
 
     expect(() => measureComponent(mockComponent)).not.toThrow()
@@ -348,9 +348,11 @@ describe('measureComponent', () => {
     const componentInstance = {}
 
     // Should be able to call the wrapped methods
+    // After measureComponent, the prototype will have these methods
+    const prototype = mockComponent.prototype as { onMount?: () => void; onDestroy?: () => void }
     expect(() => {
-      mockComponent.prototype.onMount?.call(componentInstance)
-      mockComponent.prototype.onDestroy?.call(componentInstance)
+      prototype.onMount?.call(componentInstance)
+      prototype.onDestroy?.call(componentInstance)
     }).not.toThrow()
   })
 

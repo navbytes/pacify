@@ -1,8 +1,5 @@
 export class I18nService {
-  static getMessage(
-    messageName: string,
-    substitutions?: string | string[]
-  ): string {
+  static getMessage(messageName: string, substitutions?: string | string[]): string {
     return chrome.i18n.getMessage(messageName, substitutions) || messageName
   }
 

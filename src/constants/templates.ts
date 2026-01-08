@@ -1,8 +1,5 @@
 // src/editor/templates.ts
-export const scriptTemplates: Record<
-  'empty' | 'basic' | 'advanced' | 'pro',
-  string
-> = {
+export const scriptTemplates: Record<'empty' | 'basic' | 'advanced' | 'pro', string> = {
   empty: `function FindProxyForURL(url, host) {
   // add your custom logic here
   

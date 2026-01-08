@@ -114,52 +114,69 @@
     }
   }
 
-  onMount(async () => {
-    if (!pacUrl) {
-      try {
-        // Detect initial system theme
-        const initialTheme = CodeMirror.getCurrentTheme()
+  // Watch for changes to pacUrl and editorContent to create/update editor
+  $effect(() => {
+    // This effect runs when pacUrl or editorContent changes
 
-        editor = await CodeMirror.create(editorContainer!, {
-          ...defaultCodeMirrorOptions,
-          value: editorContent,
-          language: 'pac',
-          theme: initialTheme,
-        })
-
-        // Set up content change listener using MutationObserver for CodeMirror
-        const observer = new MutationObserver(async () => {
-          if (editor) {
-            const newContent = await CodeMirror.getValue(editor)
-            if (newContent !== editorContent) {
-              editorContent = newContent
-            }
-          }
-        })
-
-        // Observe changes to the editor content
-        if (editor.dom) {
-          observer.observe(editor.dom, {
-            childList: true,
-            subtree: true,
-            characterData: true,
-          })
-        }
-
-        // Store observer for cleanup
-        ;(editor as any).__observer = observer
-
-        // Listen for theme changes and update editor
-        themeCleanup = CodeMirror.onThemeChange(async (newTheme) => {
-          if (editor) {
-            await CodeMirror.updateTheme(editor, newTheme)
-          }
-        })
-      } catch (error) {
-        NotifyService.error(ERROR_TYPES.EDITOR, error)
-      }
+    if (editorContainer && !editor) {
+      // Create editor if it doesn't exist (for both URL and inline modes)
+      createEditor()
+    } else if (editor && editorContent) {
+      // Update editor content when it changes (e.g., when PAC is fetched from URL)
+      CodeMirror.setValue(editor, editorContent)
     }
   })
+
+  async function createEditor() {
+    if (editor) return
+
+    try {
+      // Detect initial system theme
+      const initialTheme = CodeMirror.getCurrentTheme()
+
+      editor = await CodeMirror.create(editorContainer!, {
+        ...defaultCodeMirrorOptions,
+        value: editorContent,
+        language: 'pac',
+        theme: initialTheme,
+        readOnly: !!pacUrl, // Make read-only when using URL
+      })
+
+      // Set up content change listener using MutationObserver for CodeMirror
+      const observer = new MutationObserver(async () => {
+        if (editor && !pacUrl) {
+          // Only update content if not using URL
+          const newContent = await CodeMirror.getValue(editor)
+          if (newContent !== editorContent) {
+            editorContent = newContent
+          }
+        }
+      })
+
+      // Observe changes to the editor content
+      if (editor.dom) {
+        observer.observe(editor.dom, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+        })
+      }
+
+      // Store observer for cleanup
+      ;(editor as any).__observer = observer
+
+      // Listen for theme changes and update editor
+      themeCleanup = CodeMirror.onThemeChange(async (newTheme) => {
+        if (editor) {
+          await CodeMirror.updateTheme(editor, newTheme)
+        }
+      })
+    } catch (error) {
+      NotifyService.error(ERROR_TYPES.EDITOR, error)
+    }
+  }
+
+  // Editor creation is now handled by $effect, no need for onMount
 
   onDestroy(async () => {
     // Clean up theme listener

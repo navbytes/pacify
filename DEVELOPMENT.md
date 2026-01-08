@@ -273,19 +273,6 @@ type Shadow = 'sm' | 'md' | 'lg' | 'xl'
 2. Find PACify
 3. Click "background page" under "Inspect views"
 
-### Monaco Editor Debugging
-
-Monaco Editor is lazy-loaded. To debug:
-
-```typescript
-import { Monaco } from '@/services/MonacoService.optimized'
-
-// Preload Monaco
-await Monaco.preload()
-
-// Then use Monaco methods
-```
-
 ## 📊 Performance Optimization
 
 ### Bundle Analysis

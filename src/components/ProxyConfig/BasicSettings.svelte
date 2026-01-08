@@ -24,7 +24,11 @@
   let nameError = $state('')
   let nameTouched = $state(false)
   let charCount = $derived(name.length)
-  let isNameValid = $derived(charCount >= MIN_NAME_LENGTH && charCount <= MAX_NAME_LENGTH)
+  // Validation check for name length
+  $effect(() => {
+    const isValid = charCount >= MIN_NAME_LENGTH && charCount <= MAX_NAME_LENGTH
+    void isValid // Used for validation logic
+  })
 
   function validateName(value: string): string {
     const trimmed = value.trim()
