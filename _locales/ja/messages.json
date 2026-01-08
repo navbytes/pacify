@@ -474,5 +474,35 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "updateInterval": {
+    "message": "自動更新間隔"
+  },
+  "noAutoUpdate": {
+    "message": "自動更新なし"
+  },
+  "minutes": {
+    "message": "分"
+  },
+  "hour": {
+    "message": "時間"
+  },
+  "hours": {
+    "message": "時間"
+  },
+  "refreshNow": {
+    "message": "今すぐ更新"
+  },
+  "refreshing": {
+    "message": "更新中..."
+  },
+  "lastFetched": {
+    "message": "最終取得"
+  },
+  "pacScriptRefreshed": {
+    "message": "PACスクリプトが正常に更新されました"
+  },
+  "pacUrlHelp": {
+    "message": "PACスクリプトはこのURLから読み込まれます"
   }
 }

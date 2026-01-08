@@ -471,5 +471,35 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "updateInterval": {
+    "message": "Auto-update interval"
+  },
+  "noAutoUpdate": {
+    "message": "No auto-update"
+  },
+  "minutes": {
+    "message": "minutes"
+  },
+  "hour": {
+    "message": "hour"
+  },
+  "hours": {
+    "message": "hours"
+  },
+  "refreshNow": {
+    "message": "Refresh now"
+  },
+  "refreshing": {
+    "message": "Refreshing..."
+  },
+  "lastFetched": {
+    "message": "Last fetched"
+  },
+  "pacScriptRefreshed": {
+    "message": "PAC script refreshed successfully"
+  },
+  "pacUrlHelp": {
+    "message": "PAC script will be loaded from this URL"
   }
 }

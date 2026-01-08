@@ -53,4 +53,12 @@ export class NotifyService {
       console.info(`[ALERT] ${message}`)
     }
   }
+
+  public static success(message: string): void {
+    // Log success message
+    console.info(`[SUCCESS] ${message}`)
+
+    // In a browser context, you could show a toast notification here
+    // For now, just logging to console
+  }
 }

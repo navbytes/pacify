@@ -474,5 +474,35 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "updateInterval": {
+    "message": "자동 업데이트 간격"
+  },
+  "noAutoUpdate": {
+    "message": "자동 업데이트 없음"
+  },
+  "minutes": {
+    "message": "분"
+  },
+  "hour": {
+    "message": "시간"
+  },
+  "hours": {
+    "message": "시간"
+  },
+  "refreshNow": {
+    "message": "지금 새로고침"
+  },
+  "refreshing": {
+    "message": "새로고침 중..."
+  },
+  "lastFetched": {
+    "message": "마지막 가져오기"
+  },
+  "pacScriptRefreshed": {
+    "message": "PAC 스크립트가 성공적으로 새로고침되었습니다"
+  },
+  "pacUrlHelp": {
+    "message": "PAC 스크립트가 이 URL에서 로드됩니다"
   }
 }

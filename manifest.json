@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extName__",
-  "version": "1.23.0",
+  "version": "1.24.0",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
-  "permissions": ["proxy", "storage", "tabs"],
+  "permissions": ["proxy", "storage", "tabs", "alarms"],
+  "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "assets/background.js",
     "type": "module"

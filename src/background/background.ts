@@ -57,7 +57,8 @@ const messageHandlers: Record<
     await clearProxySettings()
   },
   SCRIPT_UPDATE: async () => {
-    // script updated
+    // Re-setup PAC refresh alarms when scripts are updated
+    await setupPacRefreshAlarms()
   },
 }
 
@@ -119,6 +120,9 @@ async function initialize(): Promise<void> {
         await initializeProxySettings()
       })
 
+      // Listen for alarms (for PAC script auto-refresh)
+      chrome.alarms.onAlarm.addListener(handleAlarm)
+
       listenersRegistered = true
       logger.info('Event listeners registered')
     }
@@ -128,6 +132,9 @@ async function initialize(): Promise<void> {
 
     // Update quick action
     await updateQuickAction()
+
+    // Set up PAC script auto-refresh alarms
+    await setupPacRefreshAlarms()
 
     // Mark as fully initialized
     isInitialized = true
@@ -172,8 +179,6 @@ async function handleRuntimeMessageInternal(
   sender: chrome.runtime.MessageSender,
   sendResponse: (response?: unknown) => void
 ): Promise<void> {
-  logger.info(`Processing message: ${message.type}`)
-
   const handler = messageHandlers[message.type]
   if (handler) {
     try {
@@ -202,7 +207,6 @@ async function handleActionClick(): Promise<void> {
     // CRITICAL: Check if Quick Switch is actually enabled first
     // If disabled, the popup should open instead (this shouldn't be called)
     if (!settings.quickSwitchEnabled) {
-      logger.info('Quick Switch is disabled - popup should open instead of switching')
       // This shouldn't happen as popup should be enabled, but handle gracefully
       return
     }
@@ -399,6 +403,103 @@ async function safeSetPopup(popup: string): Promise<void> {
     await browserService.action.setPopup({ popup })
   } catch (error) {
     logger.error('Error setting popup:', error)
+  }
+}
+
+/**
+ * Sets up alarms for auto-refreshing PAC scripts
+ */
+async function setupPacRefreshAlarms(): Promise<void> {
+  try {
+    const settings = await safeGetSettings()
+    if (!settings) return
+
+    // Clear all existing PAC refresh alarms
+    const alarms = await chrome.alarms.getAll()
+    for (const alarm of alarms) {
+      if (alarm.name.startsWith('pac-refresh-')) {
+        await chrome.alarms.clear(alarm.name)
+      }
+    }
+
+    // Set up new alarms for each PAC script with auto-refresh enabled
+    for (const config of settings.proxyConfigs) {
+      if (
+        config.mode === 'pac_script' &&
+        config.pacScript?.url &&
+        config.pacScript.updateInterval &&
+        config.pacScript.updateInterval > 0
+      ) {
+        const alarmName = `pac-refresh-${config.id}`
+        await chrome.alarms.create(alarmName, {
+          periodInMinutes: config.pacScript.updateInterval,
+        })
+      }
+    }
+  } catch (error) {
+    logger.error('Error setting up PAC refresh alarms:', error)
+  }
+}
+
+/**
+ * Handles alarm events for PAC script auto-refresh
+ */
+async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
+  if (!alarm.name.startsWith('pac-refresh-')) return
+
+  const configId = alarm.name.replace('pac-refresh-', '')
+
+  try {
+    const settings = await safeGetSettings()
+    if (!settings) return
+
+    const config = settings.proxyConfigs.find((c) => c.id === configId)
+    if (!config || !config.pacScript?.url) {
+      logger.warn(`Config ${configId} not found or has no URL, clearing alarm`)
+      await chrome.alarms.clear(alarm.name)
+      return
+    }
+
+    // Check if enough time has passed since last fetch
+    const now = Date.now()
+    const lastFetched = config.pacScript.lastFetched || 0
+    const intervalMs = (config.pacScript.updateInterval || 0) * 60 * 1000
+    const timeSinceLastFetch = now - lastFetched
+
+    if (timeSinceLastFetch < intervalMs * 0.9) {
+      // Less than 90% of interval has passed, skip this refresh
+      return
+    }
+
+    // Fetch the PAC script
+    const response = await fetch(config.pacScript.url)
+
+    if (!response.ok) {
+      logger.error(`Failed to fetch PAC script: HTTP ${response.status}`)
+      return
+    }
+
+    const data = await response.text()
+
+    // Update the config with new data and timestamp
+    const updatedConfig: ProxyConfig = {
+      ...config,
+      pacScript: {
+        ...config.pacScript,
+        data,
+        lastFetched: now,
+      },
+    }
+
+    // Update settings
+    await SettingsWriter.updatePACScript(updatedConfig)
+
+    // If this is the active script, re-apply it
+    if (config.isActive) {
+      await setProxySettings(updatedConfig)
+    }
+  } catch (error) {
+    logger.error(`Error refreshing PAC script for config ${configId}:`, error)
   }
 }
 

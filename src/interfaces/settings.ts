@@ -38,6 +38,8 @@ export interface ProxyConfig {
     url?: string
     data?: string
     mandatory?: boolean
+    updateInterval?: number // in minutes, 0 means no auto-update
+    lastFetched?: number // timestamp of last fetch
   }
   rules?: ProxyRules
 }
@@ -59,6 +61,8 @@ export interface ChromeProxyConfig {
     url?: string
     data?: string
     mandatory?: boolean
+    updateInterval?: number
+    lastFetched?: number
   }
   rules?: ProxyRules
 }

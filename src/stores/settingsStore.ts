@@ -109,6 +109,12 @@ function createSettingsStore() {
             }
           }
         })
+
+        // Send message to background to update PAC refresh alarms
+        await ChromeService.sendMessage({
+          type: 'SCRIPT_UPDATE',
+        })
+
         return updatedSettings
       },
       ERROR_TYPES.SAVE_SCRIPT

@@ -17,6 +17,7 @@
   import { cn } from '@/utils/cn'
   import { modalVariants, flexPatterns } from '@/utils/classPatterns'
   import { colors } from '@/utils/theme'
+  import { SettingsWriter } from '@/services/SettingsWriter'
 
   interface Props {
     proxyConfig?: ProxyConfig
@@ -43,8 +44,46 @@
 
   // PAC Script Settings
   let editorContent = $state<string>(proxyConfig?.pacScript?.data || '')
-  let pacUrl = $state<string>('')
-  let pacMandatory = $state<boolean>(false)
+  let pacUrl = $state<string>(proxyConfig?.pacScript?.url || '')
+  let pacMandatory = $state<boolean>(proxyConfig?.pacScript?.mandatory || false)
+  let updateInterval = $state<number>(proxyConfig?.pacScript?.updateInterval || 0)
+  let lastFetched = $state<number | undefined>(proxyConfig?.pacScript?.lastFetched)
+
+  async function handlePacRefresh() {
+    if (!pacUrl) return
+
+    try {
+      const response = await fetch(pacUrl)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const data = await response.text()
+      editorContent = data
+      lastFetched = Date.now()
+
+      // For existing scripts, immediately persist the lastFetched timestamp
+      // This ensures the background alarm system uses the correct timestamp
+      if (proxyConfig?.id) {
+        const updatedConfig: ProxyConfig = {
+          ...proxyConfig,
+          pacScript: {
+            ...proxyConfig.pacScript,
+            data,
+            lastFetched,
+          },
+        }
+        await SettingsWriter.updatePACScript(updatedConfig)
+      }
+
+      // Show success message (only logs to console in current implementation)
+      const successMsg =
+        I18nService.getMessage('pacScriptRefreshed') || 'PAC script refreshed successfully'
+      console.info(`[SUCCESS] ${successMsg}`)
+    } catch (error) {
+      logger.error('Error refreshing PAC script:', error)
+      NotifyService.error(ERROR_TYPES.VALIDATION, error)
+    }
+  }
 
   // Manual Proxy Settings
   let proxySettings = $state<ProxySettings>({
@@ -96,6 +135,8 @@
           url: pacUrl,
           data: pacUrl ? '' : editorContent.trim(),
           mandatory: pacMandatory,
+          updateInterval: pacUrl ? updateInterval : undefined,
+          lastFetched: pacUrl ? lastFetched : undefined,
         }
       } else if (proxyMode === 'fixed_servers') {
         config.rules = {
@@ -252,7 +293,14 @@
                 </Text>
               </div>
             {:else if proxyMode === 'pac_script'}
-              <PACScriptSettings bind:pacUrl bind:pacMandatory bind:editorContent />
+              <PACScriptSettings
+                bind:pacUrl
+                bind:pacMandatory
+                bind:editorContent
+                bind:updateInterval
+                bind:lastFetched
+                onRefresh={handlePacRefresh}
+              />
             {:else if proxyMode === 'fixed_servers'}
               <ManualProxyConfiguration
                 bind:useSharedProxy
