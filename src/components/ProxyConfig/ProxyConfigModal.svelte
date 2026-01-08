@@ -131,9 +131,34 @@
       }
 
       if (proxyMode === 'pac_script') {
+        // If using PAC URL, fetch the script if it hasn't been fetched yet or URL changed
+        if (pacUrl) {
+          const urlChanged = proxyConfig?.pacScript?.url !== pacUrl
+          const needsInitialFetch = !lastFetched || urlChanged
+
+          if (needsInitialFetch) {
+            try {
+              const response = await fetch(pacUrl)
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`)
+              }
+              const data = await response.text()
+              editorContent = data
+              lastFetched = Date.now()
+            } catch (error) {
+              logger.error('Error fetching PAC script:', error)
+              errorMessage =
+                I18nService.getMessage('pacScriptFetchError') ||
+                'Failed to fetch PAC script from URL'
+              NotifyService.error(ERROR_TYPES.VALIDATION, error)
+              return // Don't save if fetch fails
+            }
+          }
+        }
+
         config.pacScript = {
           url: pacUrl,
-          data: pacUrl ? '' : editorContent.trim(),
+          data: pacUrl ? editorContent.trim() : editorContent.trim(),
           mandatory: pacMandatory,
           updateInterval: pacUrl ? updateInterval : undefined,
           lastFetched: pacUrl ? lastFetched : undefined,
