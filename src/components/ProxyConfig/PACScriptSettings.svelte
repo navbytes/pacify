@@ -264,8 +264,8 @@
     </div>
   {/if}
 
-  {#if !pacUrl}
-    <div class="flex-1 min-h-0">
+  <div class="flex-1 min-h-0">
+    {#if !pacUrl}
       <FlexGroup>
         <label
           for="editorContainer"
@@ -289,14 +289,21 @@
           {I18nService.getMessage('proTemplate')}
         </Button>
       </FlexGroup>
-      <div
-        id="editorContainer"
-        bind:this={editorContainer}
-        class="border border-slate-300 dark:border-slate-600 rounded-md overflow-hidden"
-        style="height: {editorHeight}"
-      ></div>
-    </div>
-  {/if}
+    {:else}
+      <label
+        for="editorContainer"
+        class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+      >
+        {I18nService.getMessage('pacScriptPreview') || 'PAC Script Preview (Read-only)'}
+      </label>
+    {/if}
+    <div
+      id="editorContainer"
+      bind:this={editorContainer}
+      class="border border-slate-300 dark:border-slate-600 rounded-md overflow-hidden"
+      style="height: {editorHeight}"
+    ></div>
+  </div>
 
   <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
     <input
