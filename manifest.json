@@ -5,6 +5,7 @@
   "description": "__MSG_extDescription__",
   "default_locale": "en",
   "permissions": ["proxy", "storage", "tabs", "alarms"],
+  "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "assets/background.js",
     "type": "module"
