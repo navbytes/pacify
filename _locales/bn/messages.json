@@ -474,5 +474,35 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "updateInterval": {
+    "message": "স্বয়ংক্রিয়-আপডেট ব্যবধান"
+  },
+  "noAutoUpdate": {
+    "message": "কোনো স্বয়ংক্রিয়-আপডেট নেই"
+  },
+  "minutes": {
+    "message": "মিনিট"
+  },
+  "hour": {
+    "message": "ঘন্টা"
+  },
+  "hours": {
+    "message": "ঘন্টা"
+  },
+  "refreshNow": {
+    "message": "এখনই রিফ্রেশ করুন"
+  },
+  "refreshing": {
+    "message": "রিফ্রেশ করা হচ্ছে..."
+  },
+  "lastFetched": {
+    "message": "শেষবার আনা হয়েছে"
+  },
+  "pacScriptRefreshed": {
+    "message": "PAC স্ক্রিপ্ট সফলভাবে রিফ্রেশ করা হয়েছে"
+  },
+  "pacUrlHelp": {
+    "message": "PAC স্ক্রিপ্ট এই URL থেকে লোড হবে"
   }
 }

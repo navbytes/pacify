@@ -474,5 +474,35 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "updateInterval": {
+    "message": "Automatisches Aktualisierungsintervall"
+  },
+  "noAutoUpdate": {
+    "message": "Keine automatische Aktualisierung"
+  },
+  "minutes": {
+    "message": "Minuten"
+  },
+  "hour": {
+    "message": "Stunde"
+  },
+  "hours": {
+    "message": "Stunden"
+  },
+  "refreshNow": {
+    "message": "Jetzt aktualisieren"
+  },
+  "refreshing": {
+    "message": "Wird aktualisiert..."
+  },
+  "lastFetched": {
+    "message": "Zuletzt abgerufen"
+  },
+  "pacScriptRefreshed": {
+    "message": "PAC-Skript erfolgreich aktualisiert"
+  },
+  "pacUrlHelp": {
+    "message": "PAC-Skript wird von dieser URL geladen"
   }
 }

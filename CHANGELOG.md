@@ -5,6 +5,36 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.24.0] - 2026-01-08
+
+### Added
+
+- **PAC Script Auto-Update**
+  - Configurable auto-update intervals for URL-based PAC scripts (15 min to 24 hours)
+  - Manual "Refresh now" button to immediately fetch latest PAC script from URL
+  - "Last fetched" timestamp display showing when script was last updated
+  - Background service using Chrome alarms for automatic periodic refreshes
+  - Smart refresh logic that skips updates if triggered too soon
+  - Full internationalization support for all 12 supported languages
+
+### Fixed
+
+- **PAC Script URL Preservation**
+  - Fixed bug where PAC script URL was deleted when editing existing configurations
+  - URL and mandatory flag now properly loaded from saved configurations
+
+### Changed
+
+- **Chrome Permissions**
+  - Added `alarms` permission for background auto-refresh functionality
+
+### Technical
+
+- Enhanced `ProxyConfig` interface with `updateInterval` and `lastFetched` fields
+- Implemented alarm-based background refresh system in service worker
+- Added automatic alarm setup/cleanup when scripts are created, updated, or deleted
+- Active PAC scripts are automatically re-applied after background refresh
+
 ## [1.23.0] - 2025-12-16
 
 ### Changed

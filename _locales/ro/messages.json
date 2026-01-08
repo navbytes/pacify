@@ -474,5 +474,35 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "updateInterval": {
+    "message": "Interval de actualizare automată"
+  },
+  "noAutoUpdate": {
+    "message": "Fără actualizare automată"
+  },
+  "minutes": {
+    "message": "minute"
+  },
+  "hour": {
+    "message": "oră"
+  },
+  "hours": {
+    "message": "ore"
+  },
+  "refreshNow": {
+    "message": "Actualizează acum"
+  },
+  "refreshing": {
+    "message": "Se actualizează..."
+  },
+  "lastFetched": {
+    "message": "Ultima preluare"
+  },
+  "pacScriptRefreshed": {
+    "message": "Scriptul PAC a fost actualizat cu succes"
+  },
+  "pacUrlHelp": {
+    "message": "Scriptul PAC va fi încărcat de la acest URL"
   }
 }

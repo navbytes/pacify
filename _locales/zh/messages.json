@@ -474,5 +474,35 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "updateInterval": {
+    "message": "自动更新间隔"
+  },
+  "noAutoUpdate": {
+    "message": "无自动更新"
+  },
+  "minutes": {
+    "message": "分钟"
+  },
+  "hour": {
+    "message": "小时"
+  },
+  "hours": {
+    "message": "小时"
+  },
+  "refreshNow": {
+    "message": "立即刷新"
+  },
+  "refreshing": {
+    "message": "刷新中..."
+  },
+  "lastFetched": {
+    "message": "最后获取"
+  },
+  "pacScriptRefreshed": {
+    "message": "PAC脚本已成功刷新"
+  },
+  "pacUrlHelp": {
+    "message": "PAC脚本将从此URL加载"
   }
 }

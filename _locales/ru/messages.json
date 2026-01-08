@@ -474,5 +474,35 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "updateInterval": {
+    "message": "Интервал автообновления"
+  },
+  "noAutoUpdate": {
+    "message": "Без автообновления"
+  },
+  "minutes": {
+    "message": "минут"
+  },
+  "hour": {
+    "message": "час"
+  },
+  "hours": {
+    "message": "часов"
+  },
+  "refreshNow": {
+    "message": "Обновить сейчас"
+  },
+  "refreshing": {
+    "message": "Обновление..."
+  },
+  "lastFetched": {
+    "message": "Последнее получение"
+  },
+  "pacScriptRefreshed": {
+    "message": "PAC скрипт успешно обновлен"
+  },
+  "pacUrlHelp": {
+    "message": "PAC-скрипт будет загружен с этого URL"
   }
 }

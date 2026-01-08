@@ -18,12 +18,18 @@
     pacUrl?: string
     pacMandatory?: boolean
     editorContent?: string
+    updateInterval?: number
+    lastFetched?: number
+    onRefresh?: () => Promise<void>
   }
 
   let {
     pacUrl = $bindable(''),
     pacMandatory = $bindable(false),
     editorContent = $bindable(scriptTemplates.empty),
+    updateInterval = $bindable(0),
+    lastFetched = $bindable(undefined),
+    onRefresh = undefined,
   }: Props = $props()
 
   let editor: ICodeMirrorEditor | null = null
@@ -31,6 +37,35 @@
   let editorHeight: string = '400px'
   let urlError = $state('')
   let urlTouched = $state(false)
+  let isRefreshing = $state(false)
+
+  // Format last fetched time
+  let lastFetchedText = $derived.by(() => {
+    if (!lastFetched) return ''
+    const date = new Date(lastFetched)
+    const now = new Date()
+    const diffMs = now.getTime() - date.getTime()
+    const diffMins = Math.floor(diffMs / 60000)
+
+    if (diffMins < 1) return 'Just now'
+    if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`
+
+    const diffHours = Math.floor(diffMins / 60)
+    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
+
+    const diffDays = Math.floor(diffHours / 24)
+    return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
+  })
+
+  async function handleRefresh() {
+    if (!onRefresh || isRefreshing) return
+    isRefreshing = true
+    try {
+      await onRefresh()
+    } finally {
+      isRefreshing = false
+    }
+  }
 
   // URL validation function
   function validateUrl(value: string): string {
@@ -168,6 +203,49 @@
       </Text>
     {/if}
   </div>
+
+  {#if pacUrl && !urlError}
+    <div class="space-y-3">
+      <FlexGroup direction="horizontal" childrenGap="md" alignItems="center">
+        <div class="flex-1">
+          <label
+            for="updateInterval"
+            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+          >
+            {I18nService.getMessage('updateInterval') || 'Auto-update interval'}
+          </label>
+          <select
+            id="updateInterval"
+            bind:value={updateInterval}
+            class={inputVariants({ state: 'default', size: 'md' })}
+          >
+            <option value={0}>{I18nService.getMessage('noAutoUpdate') || 'No auto-update'}</option>
+            <option value={15}>15 {I18nService.getMessage('minutes') || 'minutes'}</option>
+            <option value={30}>30 {I18nService.getMessage('minutes') || 'minutes'}</option>
+            <option value={60}>1 {I18nService.getMessage('hour') || 'hour'}</option>
+            <option value={180}>3 {I18nService.getMessage('hours') || 'hours'}</option>
+            <option value={360}>6 {I18nService.getMessage('hours') || 'hours'}</option>
+            <option value={720}>12 {I18nService.getMessage('hours') || 'hours'}</option>
+            <option value={1440}>24 {I18nService.getMessage('hours') || 'hours'}</option>
+          </select>
+        </div>
+        <div class="flex flex-col items-end gap-1" style="margin-top: 1.5rem;">
+          <Button color="primary" onclick={handleRefresh} disabled={isRefreshing}>
+            {#if isRefreshing}
+              {I18nService.getMessage('refreshing') || 'Refreshing...'}
+            {:else}
+              {I18nService.getMessage('refreshNow') || 'Refresh now'}
+            {/if}
+          </Button>
+          {#if lastFetchedText}
+            <Text size="xs" classes="text-slate-500 dark:text-slate-400">
+              {I18nService.getMessage('lastFetched') || 'Last fetched'}: {lastFetchedText}
+            </Text>
+          {/if}
+        </div>
+      </FlexGroup>
+    </div>
+  {/if}
 
   {#if !pacUrl}
     <div class="flex-1 min-h-0">
