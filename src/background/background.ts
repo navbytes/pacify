@@ -179,8 +179,6 @@ async function handleRuntimeMessageInternal(
   sender: chrome.runtime.MessageSender,
   sendResponse: (response?: unknown) => void
 ): Promise<void> {
-  logger.info(`Processing message: ${message.type}`)
-
   const handler = messageHandlers[message.type]
   if (handler) {
     try {
@@ -209,7 +207,6 @@ async function handleActionClick(): Promise<void> {
     // CRITICAL: Check if Quick Switch is actually enabled first
     // If disabled, the popup should open instead (this shouldn't be called)
     if (!settings.quickSwitchEnabled) {
-      logger.info('Quick Switch is disabled - popup should open instead of switching')
       // This shouldn't happen as popup should be enabled, but handle gracefully
       return
     }
@@ -437,9 +434,6 @@ async function setupPacRefreshAlarms(): Promise<void> {
         await chrome.alarms.create(alarmName, {
           periodInMinutes: config.pacScript.updateInterval,
         })
-        logger.info(
-          `Created refresh alarm for ${config.name} (every ${config.pacScript.updateInterval} minutes)`
-        )
       }
     }
   } catch (error) {
@@ -454,7 +448,6 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
   if (!alarm.name.startsWith('pac-refresh-')) return
 
   const configId = alarm.name.replace('pac-refresh-', '')
-  logger.info(`PAC refresh alarm triggered for config ID: ${configId}`)
 
   try {
     const settings = await safeGetSettings()
@@ -475,12 +468,10 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
 
     if (timeSinceLastFetch < intervalMs * 0.9) {
       // Less than 90% of interval has passed, skip this refresh
-      logger.info(`Skipping refresh for ${config.name} - too soon since last fetch`)
       return
     }
 
     // Fetch the PAC script
-    logger.info(`Fetching PAC script for ${config.name} from ${config.pacScript.url}`)
     const response = await fetch(config.pacScript.url)
 
     if (!response.ok) {
@@ -501,14 +492,12 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
     }
 
     // Update settings
-    await SettingsWriter.updateScript(updatedConfig)
+    await SettingsWriter.updatePACScript(updatedConfig)
 
     // If this is the active script, re-apply it
     if (config.isActive) {
       await setProxySettings(updatedConfig)
     }
-
-    logger.info(`Successfully refreshed PAC script for ${config.name}`)
   } catch (error) {
     logger.error(`Error refreshing PAC script for config ${configId}:`, error)
   }

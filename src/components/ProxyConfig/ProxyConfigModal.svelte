@@ -17,6 +17,7 @@
   import { cn } from '@/utils/cn'
   import { modalVariants, flexPatterns } from '@/utils/classPatterns'
   import { colors } from '@/utils/theme'
+  import { SettingsWriter } from '@/services/SettingsWriter'
 
   interface Props {
     proxyConfig?: ProxyConfig
@@ -59,12 +60,28 @@
       const data = await response.text()
       editorContent = data
       lastFetched = Date.now()
-      NotifyService.success(
+
+      // For existing scripts, immediately persist the lastFetched timestamp
+      // This ensures the background alarm system uses the correct timestamp
+      if (proxyConfig?.id) {
+        const updatedConfig: ProxyConfig = {
+          ...proxyConfig,
+          pacScript: {
+            ...proxyConfig.pacScript,
+            data,
+            lastFetched,
+          },
+        }
+        await SettingsWriter.updatePACScript(updatedConfig)
+      }
+
+      // Show success message (only logs to console in current implementation)
+      const successMsg =
         I18nService.getMessage('pacScriptRefreshed') || 'PAC script refreshed successfully'
-      )
+      console.info(`[SUCCESS] ${successMsg}`)
     } catch (error) {
       logger.error('Error refreshing PAC script:', error)
-      NotifyService.error(ERROR_TYPES.NETWORK, error)
+      NotifyService.error(ERROR_TYPES.VALIDATION, error)
     }
   }
 
