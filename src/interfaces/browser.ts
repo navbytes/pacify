@@ -70,9 +70,7 @@ export interface MessageSender {
   [key: string]: unknown
 }
 
-export interface SendResponse {
-  (response?: unknown): void
-}
+export type SendResponse = (response?: unknown) => void
 
 // Runtime API
 export interface RuntimeAPI {

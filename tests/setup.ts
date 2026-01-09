@@ -39,12 +39,53 @@ const mockChrome = {
       clear: () => Promise.resolve(),
     },
   },
+  notifications: {
+    create: (id: string, options: any, callback?: (notificationId: string) => void) => {
+      if (callback) callback(id)
+    },
+    getAll: (callback: (notifications: Record<string, boolean>) => void) => {
+      callback({})
+    },
+    clear: (id: string, callback?: (wasCleared: boolean) => void) => {
+      if (callback) callback(true)
+    },
+    onClicked: {
+      addListener: () => {},
+      removeListener: () => {},
+    },
+    onClosed: {
+      addListener: () => {},
+      removeListener: () => {},
+    },
+    onButtonClicked: {
+      addListener: () => {},
+      removeListener: () => {},
+    },
+  },
+  tabs: {
+    query: () => Promise.resolve([]),
+    get: () => Promise.resolve({}),
+    create: () => Promise.resolve({}),
+    update: () => Promise.resolve({}),
+    remove: () => Promise.resolve(),
+    reload: () => Promise.resolve(),
+    onUpdated: {
+      addListener: () => {},
+      removeListener: () => {},
+    },
+    onRemoved: {
+      addListener: () => {},
+      removeListener: () => {},
+    },
+  },
 }
+
+// Setup global chrome object immediately (before any imports)
+// @ts-expect-error - Mock chrome API
+globalThis.chrome = mockChrome
 
 // Setup global chrome object for tests
 beforeAll(() => {
-  // @ts-expect-error - Mock chrome API
-  globalThis.chrome = mockChrome
   console.log('🧪 Bun test environment initialized')
 })
 

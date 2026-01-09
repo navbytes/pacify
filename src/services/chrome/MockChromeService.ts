@@ -1,7 +1,7 @@
 // MockChromeService.ts
 
 import { DEFAULT_SETTINGS } from '@/constants/app'
-import { ERROR_TYPES, type AppSettings } from '@/interfaces'
+import { type AppSettings, ERROR_TYPES } from '@/interfaces'
 import { NotificationService } from '../NotificationService'
 
 // Mock storage to simulate chrome.storage.sync
@@ -28,7 +28,7 @@ export class MockChromeService {
         },
         levelOfControl: 'controlled_by_this_extension',
       }
-      this.reloadActiveTab()
+      MockChromeService.reloadActiveTab()
       resolve()
     })
   }
@@ -42,7 +42,7 @@ export class MockChromeService {
         },
         levelOfControl: 'controlled_by_this_extension',
       }
-      this.reloadActiveTab()
+      MockChromeService.reloadActiveTab()
       resolve()
     })
   }

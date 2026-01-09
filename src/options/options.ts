@@ -1,6 +1,6 @@
 import { mount } from 'svelte'
-import App from './Options.svelte'
 import { themeStore } from '@/stores/themeStore'
+import App from './Options.svelte'
 
 class OptionsManager {
   constructor() {

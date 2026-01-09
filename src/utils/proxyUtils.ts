@@ -72,7 +72,7 @@ export function validateProxyServer(server: ProxyServer): {
   }
 
   const portNum = parseInt(server.port, 10)
-  if (isNaN(portNum) || portNum < 1 || portNum > 65535) {
+  if (Number.isNaN(portNum) || portNum < 1 || portNum > 65535) {
     return {
       isValid: false,
       message: 'Port must be a number between 1 and 65535',

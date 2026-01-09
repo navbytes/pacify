@@ -1,22 +1,22 @@
-import { describe, test, expect, beforeEach, afterEach, mock } from 'bun:test'
-import { withErrorHandling, withErrorHandlingAndFallback, withRetry } from '../errorHandling'
+import { afterEach, beforeEach, describe, expect, mock, test } from 'bun:test'
 import { ERROR_TYPES } from '@/interfaces'
-import { NotifyService } from '@/services/NotifyService'
+import { NotificationService } from '@/services/NotificationService'
+import { withErrorHandling, withErrorHandlingAndFallback, withRetry } from '../errorHandling'
 
 describe('errorHandling utilities', () => {
-  let originalNotifyError: typeof NotifyService.error
-  let mockNotifyError: any
+  let originalNotificationError: typeof NotificationService.error
+  let mockNotificationError: any
 
   beforeEach(() => {
     // Store original and create a spy
-    originalNotifyError = NotifyService.error
-    mockNotifyError = mock()
-    NotifyService.error = mockNotifyError
+    originalNotificationError = NotificationService.error
+    mockNotificationError = mock(() => Promise.resolve())
+    NotificationService.error = mockNotificationError
   })
 
   afterEach(() => {
     // Restore original method
-    NotifyService.error = originalNotifyError
+    NotificationService.error = originalNotificationError
   })
 
   describe('withErrorHandling', () => {
@@ -28,7 +28,7 @@ describe('errorHandling utilities', () => {
 
       expect(result).toBe('success')
       expect(mockOperation).toHaveBeenCalledWith('arg1', 'arg2')
-      expect(mockNotifyError).not.toHaveBeenCalled()
+      expect(mockNotificationError).not.toHaveBeenCalled()
     })
 
     test('should handle errors and call NotifyService.error', async () => {
@@ -37,7 +37,7 @@ describe('errorHandling utilities', () => {
       const wrappedOperation = withErrorHandling(mockOperation, ERROR_TYPES.SAVE_SCRIPT)
 
       await expect(wrappedOperation()).rejects.toThrow(testError)
-      expect(mockNotifyError).toHaveBeenCalledWith(ERROR_TYPES.SAVE_SCRIPT, testError)
+      expect(mockNotificationError).toHaveBeenCalledWith(ERROR_TYPES.SAVE_SCRIPT, testError)
     })
 
     test('should call custom error handler when provided', async () => {
@@ -47,7 +47,7 @@ describe('errorHandling utilities', () => {
       const wrappedOperation = withErrorHandling(mockOperation, ERROR_TYPES.BACKUP, customHandler)
 
       await expect(wrappedOperation()).rejects.toThrow(testError)
-      expect(mockNotifyError).toHaveBeenCalledWith(ERROR_TYPES.BACKUP, testError)
+      expect(mockNotificationError).toHaveBeenCalledWith(ERROR_TYPES.BACKUP, testError)
       expect(customHandler).toHaveBeenCalledWith(testError)
     })
 
@@ -69,7 +69,7 @@ describe('errorHandling utilities', () => {
       const wrappedOperation = withErrorHandling(mockOperation, ERROR_TYPES.SAVE_SETTINGS)
 
       await expect(wrappedOperation()).rejects.toThrow(testError)
-      expect(mockNotifyError).toHaveBeenCalledWith(ERROR_TYPES.SAVE_SETTINGS, testError)
+      expect(mockNotificationError).toHaveBeenCalledWith(ERROR_TYPES.SAVE_SETTINGS, testError)
     })
   })
 
@@ -86,7 +86,7 @@ describe('errorHandling utilities', () => {
 
       expect(result).toBe('success')
       expect(mockOperation).toHaveBeenCalledWith('arg1')
-      expect(mockNotifyError).not.toHaveBeenCalled()
+      expect(mockNotificationError).not.toHaveBeenCalled()
     })
 
     test('should return fallback value when operation fails', async () => {
@@ -102,7 +102,7 @@ describe('errorHandling utilities', () => {
       const result = await wrappedOperation()
 
       expect(result).toBe(fallbackValue)
-      expect(mockNotifyError).toHaveBeenCalledWith(ERROR_TYPES.FETCH_SETTINGS, testError)
+      expect(mockNotificationError).toHaveBeenCalledWith(ERROR_TYPES.FETCH_SETTINGS, testError)
     })
 
     test('should handle complex return types', async () => {
@@ -153,7 +153,7 @@ describe('errorHandling utilities', () => {
       expect(result).toBe('success')
       expect(mockOperation).toHaveBeenCalledTimes(1)
       expect(mockOperation).toHaveBeenCalledWith('arg')
-      expect(mockNotifyError).not.toHaveBeenCalled()
+      expect(mockNotificationError).not.toHaveBeenCalled()
     })
 
     test('should retry on failure and eventually succeed', async () => {
@@ -168,7 +168,7 @@ describe('errorHandling utilities', () => {
 
       expect(result).toBe('success on third try')
       expect(mockOperation).toHaveBeenCalledTimes(3)
-      expect(mockNotifyError).not.toHaveBeenCalled()
+      expect(mockNotificationError).not.toHaveBeenCalled()
     })
 
     test('should fail after exhausting all retries', async () => {
@@ -182,7 +182,7 @@ describe('errorHandling utilities', () => {
 
       await expect(wrappedOperation()).rejects.toThrow(finalError)
       expect(mockOperation).toHaveBeenCalledTimes(3) // Initial + 2 retries
-      expect(mockNotifyError).toHaveBeenCalledWith(ERROR_TYPES.CLEAR_PROXY, finalError)
+      expect(mockNotificationError).toHaveBeenCalledWith(ERROR_TYPES.CLEAR_PROXY, finalError)
     })
 
     test('should use default retry parameters', async () => {
@@ -193,7 +193,7 @@ describe('errorHandling utilities', () => {
       await expect(wrappedOperation()).rejects.toThrow(testError)
 
       expect(mockOperation).toHaveBeenCalledTimes(2) // Initial + 1 retry
-      expect(mockNotifyError).toHaveBeenCalledWith(ERROR_TYPES.BACKUP, testError)
+      expect(mockNotificationError).toHaveBeenCalledWith(ERROR_TYPES.BACKUP, testError)
     })
 
     test('should apply exponential backoff', async () => {
@@ -231,7 +231,7 @@ describe('errorHandling utilities', () => {
 
       await expect(wrappedOperation()).rejects.toThrow(testError)
       expect(mockOperation).toHaveBeenCalledTimes(1)
-      expect(mockNotifyError).toHaveBeenCalledWith(ERROR_TYPES.SEND_MESSAGE, testError)
+      expect(mockNotificationError).toHaveBeenCalledWith(ERROR_TYPES.SEND_MESSAGE, testError)
     })
   })
 })

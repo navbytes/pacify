@@ -362,7 +362,7 @@
     "message": "한 줄에 하나의 패턴 입력:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "사용 가능한 프록시 없음"
@@ -501,10 +501,6 @@
   },
   "pacScriptRefreshed": {
     "message": "PAC 스크립트가 성공적으로 새로고침되었습니다"
-  },
-  "pacUrlHelp": {
-    "message": "PAC 스크립트가 이 URL에서 로드됩니다"
-  }
   },
   "autoReloadEnabled": {
     "message": "Auto-reload enabled"

@@ -1,9 +1,9 @@
-import {
-  type BrowserAPI,
-  type NotificationOptions as BrowserNotificationOptions,
-  type Tab,
-  type MessageSender,
-  type ProxySettings,
+import type {
+  BrowserAPI,
+  NotificationOptions as BrowserNotificationOptions,
+  MessageSender,
+  ProxySettings,
+  Tab,
 } from '@/interfaces/browser'
 
 /**

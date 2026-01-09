@@ -1,29 +1,29 @@
 <script lang="ts">
-  import { Keyboard, ChevronDown, ChevronUp } from '@/utils/icons'
-  import Card from '@/components/Card.svelte'
-  import Text from '@/components/Text.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
+import Card from '@/components/Card.svelte'
+import Text from '@/components/Text.svelte'
+import { I18nService } from '@/services/i18n/i18nService'
+import { ChevronDown, ChevronUp, Keyboard } from '@/utils/icons'
 
-  let showKeyboardHints = $state(false)
+let showKeyboardHints = $state(false)
 
-  const shortcuts = $derived([
-    {
-      label: 'Toggle search',
-      keys: I18nService.getMessage('keyboardShortcutCtrlCmdK'),
-    },
-    {
-      label: I18nService.getMessage('keyboardShortcutNewProxy'),
-      keys: I18nService.getMessage('keyboardShortcutCtrlCmdN'),
-    },
-    {
-      label: 'Hide search',
-      keys: I18nService.getMessage('keyboardShortcutEscape'),
-    },
-    {
-      label: I18nService.getMessage('keyboardShortcutToggleProxy'),
-      keys: I18nService.getMessage('keyboardShortcutNumbers'),
-    },
-  ])
+const shortcuts = $derived([
+  {
+    label: 'Toggle search',
+    keys: I18nService.getMessage('keyboardShortcutCtrlCmdK'),
+  },
+  {
+    label: I18nService.getMessage('keyboardShortcutNewProxy'),
+    keys: I18nService.getMessage('keyboardShortcutCtrlCmdN'),
+  },
+  {
+    label: 'Hide search',
+    keys: I18nService.getMessage('keyboardShortcutEscape'),
+  },
+  {
+    label: I18nService.getMessage('keyboardShortcutToggleProxy'),
+    keys: I18nService.getMessage('keyboardShortcutNumbers'),
+  },
+])
 </script>
 
 <Card classes="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900">

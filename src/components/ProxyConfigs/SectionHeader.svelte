@@ -1,37 +1,34 @@
 <script lang="ts">
-  import type { ComponentType, Snippet } from 'svelte'
-  import Text from '@/components/Text.svelte'
-  import { cn } from '@/utils/cn'
-  import {
-    flexPatterns,
-    sectionHeaderIconVariants,
-    sectionHeaderBorderVariants,
-    sectionHeaderBadgeVariants,
-    type VariantProps,
-  } from '@/utils/classPatterns'
-  import { colors } from '@/utils/theme'
+import type { ComponentType, Snippet } from 'svelte'
+import Text from '@/components/Text.svelte'
+import {
+  flexPatterns,
+  sectionHeaderBadgeVariants,
+  sectionHeaderBorderVariants,
+  sectionHeaderIconVariants,
+} from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import { colors } from '@/utils/theme'
 
-  type SectionHeaderVariant = VariantProps<typeof sectionHeaderIconVariants>
+interface Props {
+  icon: ComponentType
+  title: string
+  description?: string
+  count?: number
+  iconColor: 'purple' | 'slate'
+  hideBorder?: boolean
+  rightContent?: Snippet
+}
 
-  interface Props {
-    icon: ComponentType
-    title: string
-    description?: string
-    count?: number
-    iconColor: SectionHeaderVariant['iconColor']
-    hideBorder?: boolean
-    rightContent?: Snippet
-  }
-
-  let {
-    icon: Icon,
-    title,
-    description,
-    count,
-    iconColor,
-    hideBorder = false,
-    rightContent,
-  }: Props = $props()
+let {
+  icon: Icon,
+  title,
+  description,
+  count,
+  iconColor,
+  hideBorder = false,
+  rightContent,
+}: Props = $props()
 </script>
 
 <div
@@ -48,18 +45,13 @@
     </div>
     <div class="flex-1 min-w-0">
       <div class={cn(flexPatterns.centerVertical, 'gap-2 flex-wrap')}>
-        <h2 class={cn('text-lg font-semibold tracking-tight', colors.text.default)}>
-          {title}
-        </h2>
-        {#if count}<span class={sectionHeaderBadgeVariants({ iconColor })}>
-            {count}
-          </span>
+        <h2 class={cn('text-lg font-semibold tracking-tight', colors.text.default)}>{title}</h2>
+        {#if count}
+          <span class={sectionHeaderBadgeVariants({ iconColor })}> {count} </span>
         {/if}
       </div>
       {#if description}
-        <Text as="p" size="xs" color="muted" classes="mt-0.5">
-          {description}
-        </Text>
+        <Text as="p" size="xs" color="muted" classes="mt-0.5">{description}</Text>
       {/if}
     </div>
   </div>

@@ -1,7 +1,8 @@
 // src/utils/errorHandling.ts
-import { NotificationService } from '@/services/NotificationService'
-import { ERROR_TYPES } from '@/interfaces'
+
+import type { ERROR_TYPES } from '@/interfaces'
 import { logger } from '@/services/LoggerService'
+import { NotificationService } from '@/services/NotificationService'
 
 export type ErrorHandler = (error: unknown) => void
 
@@ -84,7 +85,7 @@ export function withRetry<T extends (...args: any[]) => Promise<any>>(
           logger.warn(`Operation failed (attempt ${attempt}/${maxRetries + 1}). Retrying...`, error)
 
           // Exponential backoff
-          await new Promise((resolve) => setTimeout(resolve, delayMs * Math.pow(2, attempt - 1)))
+          await new Promise((resolve) => setTimeout(resolve, delayMs * 2 ** (attempt - 1)))
         }
       }
     }

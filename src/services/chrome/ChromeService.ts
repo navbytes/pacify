@@ -1,16 +1,16 @@
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import {
-  ERROR_TYPES,
   type AppSettings,
   type BackgroundMessage,
   type BackgroundMessageResponse,
   type ChromeProxyConfig,
+  ERROR_TYPES,
   type ProxyConfig,
 } from '@/interfaces'
-import { convertAppSettingsToChromeConfig } from '../../utils/chrome'
-import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
-import { browserService } from './BrowserService'
 import { logger } from '@/services/LoggerService'
+import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
+import { convertAppSettingsToChromeConfig } from '../../utils/chrome'
+import { browserService } from './BrowserService'
 
 export class ChromeService {
   // Reference to the browser service
@@ -76,11 +76,14 @@ export class ChromeService {
    */
   static async reloadActiveTab(): Promise<void> {
     try {
-      const activeTabs = await this.browser.tabs.query({ active: true, currentWindow: true })
+      const activeTabs = await ChromeService.browser.tabs.query({
+        active: true,
+        currentWindow: true,
+      })
       const tabToReload = activeTabs.find((tab) => tab.id && tab.id > 0)
 
       if (tabToReload?.id) {
-        await this.browser.tabs.reload(tabToReload.id)
+        await ChromeService.browser.tabs.reload(tabToReload.id)
       }
     } catch (error) {
       logger.debug('Could not reload tab:', error)
@@ -133,10 +136,10 @@ export class ChromeService {
     if (params && Object.keys(params).length > 0) {
       // Build URL with query parameters
       const queryString = new URLSearchParams(params).toString()
-      const optionsUrl = `${this.browser.runtime.getURL('src/options/options.html')}?${queryString}`
-      this.browser.tabs.create({ url: optionsUrl })
+      const optionsUrl = `${ChromeService.browser.runtime.getURL('src/options/options.html')}?${queryString}`
+      ChromeService.browser.tabs.create({ url: optionsUrl })
     } else {
-      this.browser.runtime.openOptionsPage()
+      ChromeService.browser.runtime.openOptionsPage()
     }
   }
 

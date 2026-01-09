@@ -1,5 +1,5 @@
-import { ALERT_TYPES } from '../interfaces/error'
 import { ERROR_TYPES } from '@/interfaces'
+import { ALERT_TYPES } from '../interfaces/error'
 
 export class NotifyService {
   public static error(type: ERROR_TYPES, error: unknown, context = ''): void {
@@ -11,14 +11,14 @@ export class NotifyService {
       // We're in an extension context
       if (chrome.runtime.getURL('')) {
         // Check if we can get URL (not in service worker)
-        this.showUIAlert(type, error)
+        NotifyService.showUIAlert(type, error)
       } else {
         // Service worker context - just log it
         console.error(`[${type}] Error:`, error)
       }
     } else {
       // Not in extension context, use regular alert if available
-      this.showUIAlert(type, error)
+      NotifyService.showUIAlert(type, error)
     }
   }
 

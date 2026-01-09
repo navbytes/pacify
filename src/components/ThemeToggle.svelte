@@ -1,24 +1,24 @@
 <script lang="ts">
-  import { Sun, Moon, Monitor } from '@/utils/icons'
-  import { themeStore, type Theme } from '@/stores/themeStore'
-  import { cn } from '@/utils/cn'
-  import { buttonVariants } from '@/utils/classPatterns'
+import { type Theme, themeStore } from '@/stores/themeStore'
+import { buttonVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import { Monitor, Moon, Sun } from '@/utils/icons'
 
-  let currentTheme = $derived($themeStore)
+let currentTheme = $derived($themeStore)
 
-  const themes: { value: Theme; icon: any; label: string }[] = [
-    { value: 'light', icon: Sun, label: 'Light' },
-    { value: 'dark', icon: Moon, label: 'Dark' },
-    { value: 'system', icon: Monitor, label: 'System' },
-  ]
+const themes: { value: Theme; icon: any; label: string }[] = [
+  { value: 'light', icon: Sun, label: 'Light' },
+  { value: 'dark', icon: Moon, label: 'Dark' },
+  { value: 'system', icon: Monitor, label: 'System' },
+]
 
-  async function handleThemeChange(theme: Theme) {
-    try {
-      await themeStore.setTheme(theme)
-    } catch (error) {
-      console.error('Failed to change theme:', error)
-    }
+async function handleThemeChange(theme: Theme) {
+  try {
+    await themeStore.setTheme(theme)
+  } catch (error) {
+    console.error('Failed to change theme:', error)
   }
+}
 </script>
 
 <div
@@ -48,15 +48,15 @@
 </div>
 
 <style>
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 </style>

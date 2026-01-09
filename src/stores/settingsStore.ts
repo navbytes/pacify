@@ -1,11 +1,11 @@
-import { writable, derived } from 'svelte/store'
-import { ERROR_TYPES, type AppSettings, type ProxyConfig } from '@/interfaces'
+import { derived, writable } from 'svelte/store'
 import { DEFAULT_SETTINGS } from '@/constants/app'
-import { StorageService } from '@/services/StorageService'
+import { type AppSettings, ERROR_TYPES, type ProxyConfig } from '@/interfaces'
 import { ChromeService } from '@/services/chrome'
-import { withErrorHandling } from '@/utils/errorHandling'
-import { debounce } from '@/utils/debounce'
 import { logger } from '@/services/LoggerService'
+import { StorageService } from '@/services/StorageService'
+import { debounce } from '@/utils/debounce'
+import { withErrorHandling } from '@/utils/errorHandling'
 
 function createSettingsStore() {
   const { subscribe, set, update } = writable<AppSettings>(DEFAULT_SETTINGS)

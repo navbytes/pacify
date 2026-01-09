@@ -1,14 +1,14 @@
-import { describe, test, expect } from 'bun:test'
+import { describe, expect, test } from 'bun:test'
+import type { ProxyServer } from '@/interfaces'
 import {
-  validateProxyServer,
   createDefaultProxyServer,
   createDefaultProxySettings,
   createEmptyProxyConfig,
-  parseProxyString,
-  formatProxyString,
   formatBypassList,
+  formatProxyString,
+  parseProxyString,
+  validateProxyServer,
 } from '../proxyUtils'
-import type { ProxyServer } from '@/interfaces'
 
 describe('validateProxyServer', () => {
   test('should return valid for correct proxy servers', () => {

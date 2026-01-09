@@ -1,247 +1,245 @@
 <script lang="ts">
-  import BasicSettings from './BasicSettings.svelte'
-  import ProxyModeSelector from './ProxyModeSelector.svelte'
-  import PACScriptSettings from './PACScriptSettings.svelte'
-  import ManualProxyConfiguration from './ManualProxyConfiguration.svelte'
-  import ActionButtons from './ActionButtons.svelte'
+import { cubicOut } from 'svelte/easing'
+import { fade, scale, slide } from 'svelte/transition'
+import type { ProxyConfig, ProxyMode, ProxyServer, ProxySettings } from '@/interfaces'
+import { ERROR_TYPES } from '@/interfaces'
+import { I18nService } from '@/services/i18n/i18nService'
+import { logger } from '@/services/LoggerService'
+import { NotifyService } from '@/services/NotifyService'
+import { SettingsWriter } from '@/services/SettingsWriter'
+import { flexPatterns, modalVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import { Globe, Radar, Settings, Zap } from '@/utils/icons'
+import { colors } from '@/utils/theme'
+import Text from '../Text.svelte'
+import ActionButtons from './ActionButtons.svelte'
+import BasicSettings from './BasicSettings.svelte'
+import ManualProxyConfiguration from './ManualProxyConfiguration.svelte'
+import PACScriptSettings from './PACScriptSettings.svelte'
+import ProxyModeSelector from './ProxyModeSelector.svelte'
 
-  import { NotifyService } from '@/services/NotifyService'
-  import { ERROR_TYPES } from '@/interfaces'
-  import type { ProxyConfig, ProxyMode, ProxySettings, ProxyServer } from '@/interfaces'
-  import { Globe, Radar, Settings, Zap } from '@/utils/icons'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import Text from '../Text.svelte'
-  import { fade, scale, slide } from 'svelte/transition'
-  import { cubicOut } from 'svelte/easing'
-  import { logger } from '@/services/LoggerService'
-  import { cn } from '@/utils/cn'
-  import { modalVariants, flexPatterns } from '@/utils/classPatterns'
-  import { colors } from '@/utils/theme'
-  import { SettingsWriter } from '@/services/SettingsWriter'
+interface Props {
+  proxyConfig?: ProxyConfig
+  onSave: (config: Omit<ProxyConfig, 'id'>) => Promise<void>
+  onCancel: () => void
+}
 
-  interface Props {
-    proxyConfig?: ProxyConfig
-    onSave: (config: Omit<ProxyConfig, 'id'>) => Promise<void>
-    onCancel: () => void
-  }
+let { proxyConfig = undefined, onSave, onCancel }: Props = $props()
 
-  let { proxyConfig = undefined, onSave, onCancel }: Props = $props()
+const DEFAULT_PROXY_CONFIG: ProxyServer = {
+  scheme: 'http',
+  host: '',
+  port: '',
+}
 
-  const DEFAULT_PROXY_CONFIG: ProxyServer = {
-    scheme: 'http',
-    host: '',
-    port: '',
-  }
+// Basic Settings
+let name = $state<string>(proxyConfig?.name || '')
+let color = $state<string>(proxyConfig?.color || 'gray')
+let isActive = $state<boolean>(proxyConfig?.isActive || false)
+let quickSwitch = $state<boolean>(proxyConfig?.quickSwitch || false)
 
-  // Basic Settings
-  let name = $state<string>(proxyConfig?.name || '')
-  let color = $state<string>(proxyConfig?.color || 'gray')
-  let isActive = $state<boolean>(proxyConfig?.isActive || false)
-  let quickSwitch = $state<boolean>(proxyConfig?.quickSwitch || false)
+// Proxy Mode
+let proxyMode = $state<ProxyMode>(proxyConfig?.mode || 'system')
 
-  // Proxy Mode
-  let proxyMode = $state<ProxyMode>(proxyConfig?.mode || 'system')
+// PAC Script Settings
+let editorContent = $state<string>(proxyConfig?.pacScript?.data || '')
+let pacUrl = $state<string>(proxyConfig?.pacScript?.url || '')
+let pacMandatory = $state<boolean>(proxyConfig?.pacScript?.mandatory || false)
+let updateInterval = $state<number>(proxyConfig?.pacScript?.updateInterval || 0)
+let lastFetched = $state<number | undefined>(proxyConfig?.pacScript?.lastFetched)
 
-  // PAC Script Settings
-  let editorContent = $state<string>(proxyConfig?.pacScript?.data || '')
-  let pacUrl = $state<string>(proxyConfig?.pacScript?.url || '')
-  let pacMandatory = $state<boolean>(proxyConfig?.pacScript?.mandatory || false)
-  let updateInterval = $state<number>(proxyConfig?.pacScript?.updateInterval || 0)
-  let lastFetched = $state<number | undefined>(proxyConfig?.pacScript?.lastFetched)
+async function handlePacRefresh() {
+  if (!pacUrl) return
 
-  async function handlePacRefresh() {
-    if (!pacUrl) return
-
-    try {
-      const response = await fetch(pacUrl)
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const data = await response.text()
-      editorContent = data
-      lastFetched = Date.now()
-
-      // For existing scripts, immediately persist the lastFetched timestamp
-      // This ensures the background alarm system uses the correct timestamp
-      if (proxyConfig?.id) {
-        const updatedConfig: ProxyConfig = {
-          ...proxyConfig,
-          pacScript: {
-            ...proxyConfig.pacScript,
-            data,
-            lastFetched,
-          },
-        }
-        await SettingsWriter.updatePACScript(updatedConfig)
-      }
-
-      // Show success message (only logs to console in current implementation)
-      const successMsg =
-        I18nService.getMessage('pacScriptRefreshed') || 'PAC script refreshed successfully'
-      console.info(`[SUCCESS] ${successMsg}`)
-    } catch (error) {
-      logger.error('Error refreshing PAC script:', error)
-      NotifyService.error(ERROR_TYPES.VALIDATION, error)
+  try {
+    const response = await fetch(pacUrl)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
-  }
+    const data = await response.text()
+    editorContent = data
+    lastFetched = Date.now()
 
-  // Manual Proxy Settings
-  let proxySettings = $state<ProxySettings>({
-    singleProxy: proxyConfig?.rules?.singleProxy || { ...DEFAULT_PROXY_CONFIG },
-    proxyForHttp: proxyConfig?.rules?.proxyForHttp || {
-      ...DEFAULT_PROXY_CONFIG,
-    },
-    proxyForHttps: proxyConfig?.rules?.proxyForHttps || {
-      ...DEFAULT_PROXY_CONFIG,
-    },
-    proxyForFtp: proxyConfig?.rules?.proxyForFtp || { ...DEFAULT_PROXY_CONFIG },
-    fallbackProxy: proxyConfig?.rules?.fallbackProxy || {
-      ...DEFAULT_PROXY_CONFIG,
-    },
-    bypassList: proxyConfig?.rules?.bypassList || [],
-  })
-  let useSharedProxy = $state<boolean>(
-    proxyConfig?.rules?.singleProxy !== undefined ? true : proxyConfig?.rules ? false : true
-  )
-  let bypassListContent = $derived(proxySettings.bypassList.join('\n'))
-
-  // Other state variables
-  let errorMessage = $state<string>('')
-  let isSubmitting = $state<boolean>(false)
-
-  async function handleSubmit(event: Event) {
-    event.preventDefault()
-    if (isSubmitting) return
-    errorMessage = ''
-
-    if (!name.trim()) {
-      errorMessage = I18nService.getMessage('nameRequired')
-      return
+    // For existing scripts, immediately persist the lastFetched timestamp
+    // This ensures the background alarm system uses the correct timestamp
+    if (proxyConfig?.id) {
+      const updatedConfig: ProxyConfig = {
+        ...proxyConfig,
+        pacScript: {
+          ...proxyConfig.pacScript,
+          data,
+          lastFetched,
+        },
+      }
+      await SettingsWriter.updatePACScript(updatedConfig)
     }
 
-    try {
-      isSubmitting = true
+    // Show success message (only logs to console in current implementation)
+    const successMsg =
+      I18nService.getMessage('pacScriptRefreshed') || 'PAC script refreshed successfully'
+    console.info(`[SUCCESS] ${successMsg}`)
+  } catch (error) {
+    logger.error('Error refreshing PAC script:', error)
+    NotifyService.error(ERROR_TYPES.VALIDATION, error)
+  }
+}
 
-      const config: ProxyConfig = {
-        mode: proxyMode as ProxyMode,
-        name: name.trim(),
-        color,
-        isActive,
-        quickSwitch,
-      }
+// Manual Proxy Settings
+let proxySettings = $state<ProxySettings>({
+  singleProxy: proxyConfig?.rules?.singleProxy || { ...DEFAULT_PROXY_CONFIG },
+  proxyForHttp: proxyConfig?.rules?.proxyForHttp || {
+    ...DEFAULT_PROXY_CONFIG,
+  },
+  proxyForHttps: proxyConfig?.rules?.proxyForHttps || {
+    ...DEFAULT_PROXY_CONFIG,
+  },
+  proxyForFtp: proxyConfig?.rules?.proxyForFtp || { ...DEFAULT_PROXY_CONFIG },
+  fallbackProxy: proxyConfig?.rules?.fallbackProxy || {
+    ...DEFAULT_PROXY_CONFIG,
+  },
+  bypassList: proxyConfig?.rules?.bypassList || [],
+})
+let useSharedProxy = $state<boolean>(
+  proxyConfig?.rules?.singleProxy !== undefined ? true : proxyConfig?.rules ? false : true
+)
+let bypassListContent = $derived(proxySettings.bypassList.join('\n'))
 
-      if (proxyMode === 'pac_script') {
-        // If using PAC URL, fetch the script if it hasn't been fetched yet or URL changed
-        if (pacUrl) {
-          const urlChanged = proxyConfig?.pacScript?.url !== pacUrl
-          const needsInitialFetch = !lastFetched || urlChanged
+// Other state variables
+let errorMessage = $state<string>('')
+let isSubmitting = $state<boolean>(false)
 
-          if (needsInitialFetch) {
-            try {
-              const response = await fetch(pacUrl)
-              if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`)
-              }
-              const data = await response.text()
-              editorContent = data
-              lastFetched = Date.now()
-            } catch (error) {
-              logger.error('Error fetching PAC script:', error)
-              errorMessage =
-                I18nService.getMessage('pacScriptFetchError') ||
-                'Failed to fetch PAC script from URL'
-              // Error is shown in modal via errorMessage, no need for toast notification
-              return // Don't save if fetch fails
+async function handleSubmit(event: Event) {
+  event.preventDefault()
+  if (isSubmitting) return
+  errorMessage = ''
+
+  if (!name.trim()) {
+    errorMessage = I18nService.getMessage('nameRequired')
+    return
+  }
+
+  try {
+    isSubmitting = true
+
+    const config: ProxyConfig = {
+      mode: proxyMode as ProxyMode,
+      name: name.trim(),
+      color,
+      isActive,
+      quickSwitch,
+    }
+
+    if (proxyMode === 'pac_script') {
+      // If using PAC URL, fetch the script if it hasn't been fetched yet or URL changed
+      if (pacUrl) {
+        const urlChanged = proxyConfig?.pacScript?.url !== pacUrl
+        const needsInitialFetch = !lastFetched || urlChanged
+
+        if (needsInitialFetch) {
+          try {
+            const response = await fetch(pacUrl)
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`)
             }
+            const data = await response.text()
+            editorContent = data
+            lastFetched = Date.now()
+          } catch (error) {
+            logger.error('Error fetching PAC script:', error)
+            errorMessage =
+              I18nService.getMessage('pacScriptFetchError') || 'Failed to fetch PAC script from URL'
+            // Error is shown in modal via errorMessage, no need for toast notification
+            return // Don't save if fetch fails
           }
         }
+      }
 
-        config.pacScript = {
-          url: pacUrl,
-          data: pacUrl ? editorContent.trim() : editorContent.trim(),
-          mandatory: pacMandatory,
-          updateInterval: pacUrl ? updateInterval : undefined,
-          lastFetched: pacUrl ? lastFetched : undefined,
-        }
-      } else if (proxyMode === 'fixed_servers') {
-        config.rules = {
-          bypassList: bypassListContent.split('\n').filter((line) => line.trim()),
-        }
+      config.pacScript = {
+        url: pacUrl,
+        data: pacUrl ? editorContent.trim() : editorContent.trim(),
+        mandatory: pacMandatory,
+        updateInterval: pacUrl ? updateInterval : undefined,
+        lastFetched: pacUrl ? lastFetched : undefined,
+      }
+    } else if (proxyMode === 'fixed_servers') {
+      config.rules = {
+        bypassList: bypassListContent.split('\n').filter((line) => line.trim()),
+      }
 
-        if (useSharedProxy) {
-          // For single proxy, we need to ensure the proxy has at least a host
-          if (proxySettings.singleProxy?.host?.trim()) {
-            config.rules.singleProxy = proxySettings.singleProxy
-          } else {
-            // If no host is provided, but we're in fixed_servers mode with useSharedProxy,
-            // we still need to save the configuration (it might be intentionally empty)
-            config.rules.singleProxy = proxySettings.singleProxy
-          }
+      if (useSharedProxy) {
+        // For single proxy, we need to ensure the proxy has at least a host
+        if (proxySettings.singleProxy?.host?.trim()) {
+          config.rules.singleProxy = proxySettings.singleProxy
         } else {
-          // For individual proxies, add only those with hosts
-          if (proxySettings.proxyForHttp?.host?.trim())
-            config.rules.proxyForHttp = proxySettings.proxyForHttp
-          if (proxySettings.proxyForHttps?.host?.trim())
-            config.rules.proxyForHttps = proxySettings.proxyForHttps
-          if (proxySettings.proxyForFtp?.host?.trim())
-            config.rules.proxyForFtp = proxySettings.proxyForFtp
-          if (proxySettings.fallbackProxy?.host?.trim())
-            config.rules.fallbackProxy = proxySettings.fallbackProxy
+          // If no host is provided, but we're in fixed_servers mode with useSharedProxy,
+          // we still need to save the configuration (it might be intentionally empty)
+          config.rules.singleProxy = proxySettings.singleProxy
         }
-      }
-
-      await onSave(config)
-    } catch (error) {
-      logger.error('Error saving proxy configuration:', error)
-      errorMessage =
-        error instanceof Error ? error.message : I18nService.getMessage('invalidConfiguration')
-      NotifyService.error(ERROR_TYPES.VALIDATION, error)
-    } finally {
-      isSubmitting = false
-    }
-  }
-
-  let modalRef = $state<HTMLDivElement>()
-  let previouslyFocusedElement: HTMLElement | null = null
-
-  $effect(() => {
-    // Store the previously focused element
-    previouslyFocusedElement = document.activeElement as HTMLElement
-
-    // Focus the modal content when it opens
-    if (modalRef) {
-      const firstInput = modalRef.querySelector('input, textarea, select, button') as HTMLElement
-      firstInput?.focus()
-    }
-
-    // Return focus when modal closes
-    return () => {
-      previouslyFocusedElement?.focus()
-    }
-  })
-
-  function handleKeydown(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      onCancel()
-    }
-
-    // Trap focus within modal
-    if (event.key === 'Tab' && modalRef) {
-      const focusableElements = modalRef.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      )
-      const firstElement = focusableElements[0] as HTMLElement
-      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
-
-      if (event.shiftKey && document.activeElement === firstElement) {
-        event.preventDefault()
-        lastElement?.focus()
-      } else if (!event.shiftKey && document.activeElement === lastElement) {
-        event.preventDefault()
-        firstElement?.focus()
+      } else {
+        // For individual proxies, add only those with hosts
+        if (proxySettings.proxyForHttp?.host?.trim())
+          config.rules.proxyForHttp = proxySettings.proxyForHttp
+        if (proxySettings.proxyForHttps?.host?.trim())
+          config.rules.proxyForHttps = proxySettings.proxyForHttps
+        if (proxySettings.proxyForFtp?.host?.trim())
+          config.rules.proxyForFtp = proxySettings.proxyForFtp
+        if (proxySettings.fallbackProxy?.host?.trim())
+          config.rules.fallbackProxy = proxySettings.fallbackProxy
       }
     }
+
+    await onSave(config)
+  } catch (error) {
+    logger.error('Error saving proxy configuration:', error)
+    errorMessage =
+      error instanceof Error ? error.message : I18nService.getMessage('invalidConfiguration')
+    NotifyService.error(ERROR_TYPES.VALIDATION, error)
+  } finally {
+    isSubmitting = false
   }
+}
+
+let modalRef = $state<HTMLDivElement>()
+let previouslyFocusedElement: HTMLElement | null = null
+
+$effect(() => {
+  // Store the previously focused element
+  previouslyFocusedElement = document.activeElement as HTMLElement
+
+  // Focus the modal content when it opens
+  if (modalRef) {
+    const firstInput = modalRef.querySelector('input, textarea, select, button') as HTMLElement
+    firstInput?.focus()
+  }
+
+  // Return focus when modal closes
+  return () => {
+    previouslyFocusedElement?.focus()
+  }
+})
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') {
+    onCancel()
+  }
+
+  // Trap focus within modal
+  if (event.key === 'Tab' && modalRef) {
+    const focusableElements = modalRef.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0] as HTMLElement
+    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault()
+      lastElement?.focus()
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault()
+      firstElement?.focus()
+    }
+  }
+}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -370,8 +368,8 @@
 </div>
 
 <style lang="postcss">
-  @import 'tailwindcss' reference;
+@import "tailwindcss" reference;
 
-  /* Note: Global styles for modal body scroll lock and CodeMirror editor
+/* Note: Global styles for modal body scroll lock and CodeMirror editor
      are defined in app.css to avoid Lightning CSS warnings about :global() syntax */
 </style>

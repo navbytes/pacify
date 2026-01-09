@@ -1,68 +1,68 @@
 <script lang="ts">
-  import { settingsStore } from '@/stores/settingsStore'
-  import { toastStore } from '@/stores/toastStore'
-  import { StorageService } from '@/services/StorageService'
-  import ToggleSwitch from '@/components/ToggleSwitch.svelte'
-  import BackupRestore from '@/components/BackupRestore.svelte'
-  import FlexGroup from '@/components/FlexGroup.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import Text from '@/components/Text.svelte'
-  import Tooltip from '@/components/Tooltip.svelte'
-  import Card from '@/components/Card.svelte'
-  import LinkCard from '@/components/LinkCard.svelte'
-  import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
-  import {
-    Shield,
-    Database,
-    CircleQuestionMark,
-    HelpCircle,
-    Github,
-    Bug,
-    Lightbulb,
-    BookOpen,
-    Bell,
-  } from '@/utils/icons'
+import BackupRestore from '@/components/BackupRestore.svelte'
+import Card from '@/components/Card.svelte'
+import FlexGroup from '@/components/FlexGroup.svelte'
+import LinkCard from '@/components/LinkCard.svelte'
+import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
+import Text from '@/components/Text.svelte'
+import ToggleSwitch from '@/components/ToggleSwitch.svelte'
+import Tooltip from '@/components/Tooltip.svelte'
+import { I18nService } from '@/services/i18n/i18nService'
+import { StorageService } from '@/services/StorageService'
+import { settingsStore } from '@/stores/settingsStore'
+import { toastStore } from '@/stores/toastStore'
+import {
+  Bell,
+  BookOpen,
+  Bug,
+  CircleQuestionMark,
+  Database,
+  Github,
+  HelpCircle,
+  Lightbulb,
+  Shield,
+} from '@/utils/icons'
 
-  let settings = $derived($settingsStore)
-  let notificationsEnabled = $state(true)
+let settings = $derived($settingsStore)
+let notificationsEnabled = $state(true)
 
-  // Load notification preference on mount
-  $effect(() => {
-    StorageService.getPreferences().then((prefs) => {
-      notificationsEnabled = prefs.notifications
-    })
+// Load notification preference on mount
+$effect(() => {
+  StorageService.getPreferences().then((prefs) => {
+    notificationsEnabled = prefs.notifications
   })
+})
 
-  async function handleDisableProxyOnStartupToggle(checked: boolean) {
-    await settingsStore.updateSettings({ disableProxyOnStartup: checked })
-    toastStore.show(
-      checked
-        ? I18nService.getMessage('proxyDisabledOnStartup')
-        : I18nService.getMessage('proxyPersistOnStartup'),
-      'success'
-    )
-  }
+async function handleDisableProxyOnStartupToggle(checked: boolean) {
+  await settingsStore.updateSettings({ disableProxyOnStartup: checked })
+  toastStore.show(
+    checked
+      ? I18nService.getMessage('proxyDisabledOnStartup')
+      : I18nService.getMessage('proxyPersistOnStartup'),
+    'success'
+  )
+}
 
-  async function handleAutoReloadToggle(checked: boolean) {
-    await settingsStore.updateSettings({ autoReloadOnProxySwitch: checked })
-    toastStore.show(
-      checked
-        ? I18nService.getMessage('autoReloadEnabled')
-        : I18nService.getMessage('autoReloadDisabled'),
-      'success'
-    )
-  }
+async function handleAutoReloadToggle(checked: boolean) {
+  await settingsStore.updateSettings({ autoReloadOnProxySwitch: checked })
+  toastStore.show(
+    checked
+      ? I18nService.getMessage('autoReloadEnabled')
+      : I18nService.getMessage('autoReloadDisabled'),
+    'success'
+  )
+}
 
-  async function handleNotificationsToggle(checked: boolean) {
-    notificationsEnabled = checked
-    await StorageService.savePreferences({ notifications: checked })
-    toastStore.show(
-      checked
-        ? I18nService.getMessage('systemNotificationsEnabled')
-        : I18nService.getMessage('systemNotificationsDisabled'),
-      'success'
-    )
-  }
+async function handleNotificationsToggle(checked: boolean) {
+  notificationsEnabled = checked
+  await StorageService.savePreferences({ notifications: checked })
+  toastStore.show(
+    checked
+      ? I18nService.getMessage('systemNotificationsEnabled')
+      : I18nService.getMessage('systemNotificationsDisabled'),
+    'success'
+  )
+}
 </script>
 
 <div class="py-6 space-y-8">

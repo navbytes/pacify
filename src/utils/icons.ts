@@ -1,47 +1,46 @@
 /**
  * Centralized icon exports from lucide-svelte
- * This helps with tree-shaking and makes it easier to track icon usage
+ * Using direct imports for faster dev server performance
+ * @see https://github.com/lucide-icons/lucide/issues/2806
  */
 
-export {
-  AlertCircle,
-  AlertTriangle,
-  Bell,
-  BookOpen,
-  Bug,
-  Cable,
-  CheckCircle,
-  ChevronDown,
-  ChevronUp,
-  CircleQuestionMark,
-  Database,
-  Download,
-  ExternalLink,
-  FileText,
-  Github,
-  Globe,
-  GripVertical,
-  HelpCircle,
-  Info,
-  Keyboard,
-  Lightbulb,
-  Loader2,
-  Monitor,
-  Moon,
-  Pencil,
-  Plus,
-  Power,
-  Radar,
-  Search,
-  Server,
-  Settings,
-  Shield,
-  ShieldCheck,
-  Sun,
-  Trash,
-  Upload,
-  Wrench,
-  X,
-  XCircle,
-  Zap,
-} from 'lucide-svelte'
+export { default as AlertCircle } from 'lucide-svelte/icons/alert-circle'
+export { default as AlertTriangle } from 'lucide-svelte/icons/alert-triangle'
+export { default as Bell } from 'lucide-svelte/icons/bell'
+export { default as BookOpen } from 'lucide-svelte/icons/book-open'
+export { default as Bug } from 'lucide-svelte/icons/bug'
+export { default as Cable } from 'lucide-svelte/icons/cable'
+export { default as CheckCircle } from 'lucide-svelte/icons/check-circle'
+export { default as ChevronDown } from 'lucide-svelte/icons/chevron-down'
+export { default as ChevronUp } from 'lucide-svelte/icons/chevron-up'
+export { default as CircleQuestionMark } from 'lucide-svelte/icons/circle-help'
+export { default as Database } from 'lucide-svelte/icons/database'
+export { default as Download } from 'lucide-svelte/icons/download'
+export { default as ExternalLink } from 'lucide-svelte/icons/external-link'
+export { default as FileText } from 'lucide-svelte/icons/file-text'
+export { default as Github } from 'lucide-svelte/icons/github'
+export { default as Globe } from 'lucide-svelte/icons/globe'
+export { default as GripVertical } from 'lucide-svelte/icons/grip-vertical'
+export { default as HelpCircle } from 'lucide-svelte/icons/help-circle'
+export { default as Info } from 'lucide-svelte/icons/info'
+export { default as Keyboard } from 'lucide-svelte/icons/keyboard'
+export { default as Lightbulb } from 'lucide-svelte/icons/lightbulb'
+export { default as Loader2 } from 'lucide-svelte/icons/loader-2'
+export { default as Monitor } from 'lucide-svelte/icons/monitor'
+export { default as Moon } from 'lucide-svelte/icons/moon'
+export { default as Pencil } from 'lucide-svelte/icons/pencil'
+export { default as Plus } from 'lucide-svelte/icons/plus'
+export { default as Power } from 'lucide-svelte/icons/power'
+export { default as Radar } from 'lucide-svelte/icons/radar'
+export { default as Search } from 'lucide-svelte/icons/search'
+export { default as Server } from 'lucide-svelte/icons/server'
+export { default as Settings } from 'lucide-svelte/icons/settings'
+export { default as Shield } from 'lucide-svelte/icons/shield'
+export { default as ShieldCheck } from 'lucide-svelte/icons/shield-check'
+export { default as Sun } from 'lucide-svelte/icons/sun'
+export { default as Trash } from 'lucide-svelte/icons/trash'
+export { default as Upload } from 'lucide-svelte/icons/upload'
+export { default as Wrench } from 'lucide-svelte/icons/wrench'
+export { default as X } from 'lucide-svelte/icons/x'
+export { default as XCircle } from 'lucide-svelte/icons/x-circle'
+export { default as Zap } from 'lucide-svelte/icons/zap'

@@ -1,130 +1,127 @@
 <script lang="ts">
-  import { settingsStore } from '@/stores/settingsStore'
-  import { toastStore } from '@/stores/toastStore'
-  import { type DropItem } from '@/interfaces'
-  import Button from '@/components/Button.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import DropTarget from '@/components/DragDrop/DropTarget.svelte'
-  import Text from '@/components/Text.svelte'
-  import Tooltip from '@/components/Tooltip.svelte'
-  import ScriptList from '@/components/ScriptList.svelte'
-  import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
-  import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
-  import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
-  import ToggleSwitch from '@/components/ToggleSwitch.svelte'
-  import { Cable, Zap, Search, CircleQuestionMark } from '@/utils/icons'
-  import { slide } from 'svelte/transition'
-  import { colors } from '@/utils/theme'
+import { slide } from 'svelte/transition'
+import Button from '@/components/Button.svelte'
+import DropTarget from '@/components/DragDrop/DropTarget.svelte'
+import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
+import type SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
+import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
+import ScriptList from '@/components/ScriptList.svelte'
+import Text from '@/components/Text.svelte'
+import ToggleSwitch from '@/components/ToggleSwitch.svelte'
+import Tooltip from '@/components/Tooltip.svelte'
+import type { DropItem } from '@/interfaces'
+import { I18nService } from '@/services/i18n/i18nService'
+import { settingsStore } from '@/stores/settingsStore'
+import { toastStore } from '@/stores/toastStore'
+import { Cable, CircleQuestionMark, Search, Zap } from '@/utils/icons'
+import { colors } from '@/utils/theme'
 
-  interface Props {
-    onOpenEditor: (scriptId?: string) => void
+interface Props {
+  onOpenEditor: (scriptId?: string) => void
+}
+
+let { onOpenEditor }: Props = $props()
+
+let settings = $derived($settingsStore)
+let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
+let dropError = $state<string | null>(null)
+let searchQuery = $state('')
+let showSearch = $state(false)
+let hasProxies = $derived(settings.proxyConfigs.length > 0)
+
+// Quick Switch proxies are never filtered by search
+let quickSwitchProxies = $derived(settings.proxyConfigs.filter((p) => p.quickSwitch))
+
+// All proxies filtered by search query (includes quick switch proxies)
+let regularProxies = $derived(
+  settings.proxyConfigs.filter((p) => {
+    if (!searchQuery.trim()) return true // No search, show all
+    const query = searchQuery.toLowerCase()
+    return p.name.toLowerCase().includes(query) || p.mode?.toLowerCase().includes(query)
+  })
+)
+
+let searchBarRef = $state<SearchBar>()
+
+// Toggle search visibility
+function toggleSearch() {
+  showSearch = !showSearch
+  if (showSearch) {
+    // Auto-focus when showing
+    setTimeout(() => searchBarRef?.focus(), 100)
+  } else {
+    // Clear search when hiding
+    searchQuery = ''
+  }
+}
+
+// Keyboard shortcuts handler
+function handleKeydown(event: KeyboardEvent) {
+  // Ctrl/Cmd+K to toggle search
+  if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+    event.preventDefault()
+    toggleSearch()
   }
 
-  let { onOpenEditor }: Props = $props()
+  // Escape to hide search and clear
+  if (event.key === 'Escape' && showSearch) {
+    event.preventDefault()
+    toggleSearch()
+  }
 
-  let settings = $derived($settingsStore)
-  let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
-  let dropError = $state<string | null>(null)
-  let searchQuery = $state('')
-  let showSearch = $state(false)
-  let hasProxies = $derived(settings.proxyConfigs.length > 0)
+  // Ctrl/Cmd+N to create new proxy
+  if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
+    event.preventDefault()
+    onOpenEditor()
+  }
 
-  // Quick Switch proxies are never filtered by search
-  let quickSwitchProxies = $derived(settings.proxyConfigs.filter((p) => p.quickSwitch))
-
-  // Only filter regular proxies based on search query
-  let regularProxies = $derived(
-    settings.proxyConfigs.filter((p) => {
-      if (p.quickSwitch) return false // Exclude quick switch proxies
-      if (!searchQuery.trim()) return true // No search, show all
-      const query = searchQuery.toLowerCase()
-      return (
-        p.name.toLowerCase().includes(query) || (p.mode && p.mode.toLowerCase().includes(query))
+  // Number keys 1-9 to toggle quick switch proxies
+  if (event.key >= '1' && event.key <= '9') {
+    const index = parseInt(event.key) - 1
+    if (index < quickSwitchProxies.length) {
+      event.preventDefault()
+      const proxy = quickSwitchProxies[index]
+      if (!proxy.id) return // Skip if no ID
+      const newState = !proxy.isActive
+      settingsStore.setProxy(proxy.id, newState)
+      toastStore.show(
+        newState
+          ? `${I18nService.getMessage('proxyActivated') || 'Activated'}: ${proxy.name}`
+          : `${I18nService.getMessage('proxyDeactivated') || 'Deactivated'}: ${proxy.name}`,
+        'success'
       )
-    })
+    }
+  }
+}
+
+async function handleQuickSwitchToggle(checked: boolean) {
+  await settingsStore.quickSwitchToggle(checked)
+  toastStore.show(
+    checked
+      ? I18nService.getMessage('quickSwitchEnabled')
+      : I18nService.getMessage('quickSwitchDisabled'),
+    'success'
   )
+}
 
-  let searchBarRef = $state<SearchBar>()
+async function handleDrop(item: DropItem, pageType: 'QUICK_SWITCH' | 'OPTIONS') {
+  const { dataType, dataId: scriptId } = item
 
-  // Toggle search visibility
-  function toggleSearch() {
-    showSearch = !showSearch
-    if (showSearch) {
-      // Auto-focus when showing
-      setTimeout(() => searchBarRef?.focus(), 100)
-    } else {
-      // Clear search when hiding
-      searchQuery = ''
-    }
+  let isScriptQuickSwitch = null
+  if (dataType === 'QUICK_SWITCH' && pageType === 'OPTIONS') {
+    isScriptQuickSwitch = false
+  } else if (dataType === 'OPTIONS' && pageType === 'QUICK_SWITCH') {
+    isScriptQuickSwitch = true
   }
 
-  // Keyboard shortcuts handler
-  function handleKeydown(event: KeyboardEvent) {
-    // Ctrl/Cmd+K to toggle search
-    if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
-      event.preventDefault()
-      toggleSearch()
-    }
-
-    // Escape to hide search and clear
-    if (event.key === 'Escape' && showSearch) {
-      event.preventDefault()
-      toggleSearch()
-    }
-
-    // Ctrl/Cmd+N to create new proxy
-    if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
-      event.preventDefault()
-      onOpenEditor()
-    }
-
-    // Number keys 1-9 to toggle quick switch proxies
-    if (event.key >= '1' && event.key <= '9') {
-      const index = parseInt(event.key) - 1
-      if (index < quickSwitchProxies.length) {
-        event.preventDefault()
-        const proxy = quickSwitchProxies[index]
-        if (!proxy.id) return // Skip if no ID
-        const newState = !proxy.isActive
-        settingsStore.setProxy(proxy.id, newState)
-        toastStore.show(
-          newState
-            ? `${I18nService.getMessage('proxyActivated') || 'Activated'}: ${proxy.name}`
-            : `${I18nService.getMessage('proxyDeactivated') || 'Deactivated'}: ${proxy.name}`,
-          'success'
-        )
-      }
-    }
+  if (isScriptQuickSwitch !== null) {
+    await settingsStore.updateScriptQuickSwitch(scriptId, isScriptQuickSwitch)
   }
+}
 
-  async function handleQuickSwitchToggle(checked: boolean) {
-    await settingsStore.quickSwitchToggle(checked)
-    toastStore.show(
-      checked
-        ? I18nService.getMessage('quickSwitchEnabled')
-        : I18nService.getMessage('quickSwitchDisabled'),
-      'success'
-    )
-  }
-
-  async function handleDrop(item: DropItem, pageType: 'QUICK_SWITCH' | 'OPTIONS') {
-    const { dataType, dataId: scriptId } = item
-
-    let isScriptQuickSwitch = null
-    if (dataType === 'QUICK_SWITCH' && pageType === 'OPTIONS') {
-      isScriptQuickSwitch = false
-    } else if (dataType === 'OPTIONS' && pageType === 'QUICK_SWITCH') {
-      isScriptQuickSwitch = true
-    }
-
-    if (isScriptQuickSwitch !== null) {
-      await settingsStore.updateScriptQuickSwitch(scriptId, isScriptQuickSwitch)
-    }
-  }
-
-  function handleSearch(query: string) {
-    searchQuery = query
-  }
+function handleSearch(query: string) {
+  searchQuery = query
+}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -224,9 +221,9 @@
 
         <!-- Add New Script Button -->
         <Tooltip text={I18nService.getMessage('tooltipKeyboardShortcut')} position="bottom">
-          <Button data-testid="add-new-script-btn" color="primary" onclick={() => onOpenEditor()}
-            >{I18nService.getMessage('addNewScript')}</Button
-          >
+          <Button data-testid="add-new-script-btn" color="primary" onclick={() => onOpenEditor()}>
+            {I18nService.getMessage('addNewScript')}
+          </Button>
         </Tooltip>
       {/snippet}
     </SectionHeader>

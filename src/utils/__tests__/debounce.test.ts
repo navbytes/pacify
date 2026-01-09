@@ -1,4 +1,4 @@
-import { describe, test, expect, mock, beforeEach, afterEach } from 'bun:test'
+import { afterEach, beforeEach, describe, expect, mock, test } from 'bun:test'
 import { debounce, throttle } from '../debounce'
 
 describe('debounce', () => {
@@ -102,7 +102,6 @@ describe('debounce', () => {
   test('should preserve this context', async () => {
     let capturedThis: any
     function testFunc(this: any) {
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
       capturedThis = this
     }
 
@@ -193,7 +192,6 @@ describe('throttle', () => {
   test('should preserve this context', () => {
     let capturedThis: any
     function testFunc(this: any) {
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
       capturedThis = this
     }
 

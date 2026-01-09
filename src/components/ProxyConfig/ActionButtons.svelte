@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Button from '../Button.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import { Loader2 } from '@/utils/icons'
+import { I18nService } from '@/services/i18n/i18nService'
+import { Loader2 } from '@/utils/icons'
+import Button from '../Button.svelte'
 
-  interface Props {
-    isSubmitting?: boolean
-    onCancel: () => void
-  }
+interface Props {
+  isSubmitting?: boolean
+  onCancel: () => void
+}
 
-  let { isSubmitting = false, onCancel }: Props = $props()
+let { isSubmitting = false, onCancel }: Props = $props()
 </script>
 
 <div

@@ -1,15 +1,15 @@
-import { EditorView } from '@codemirror/view'
-import type { Extension } from '@codemirror/state'
-import { javascript } from '@codemirror/lang-javascript'
-import { oneDark } from '@codemirror/theme-one-dark'
 import {
   autocompletion,
   type CompletionContext,
   type CompletionResult,
 } from '@codemirror/autocomplete'
-import { syntaxHighlighting, HighlightStyle } from '@codemirror/language'
+import { javascript } from '@codemirror/lang-javascript'
+import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
+import type { Extension } from '@codemirror/state'
+import { oneDark } from '@codemirror/theme-one-dark'
+import { EditorView } from '@codemirror/view'
 import { tags } from '@lezer/highlight'
-import type { CodeMirrorOptions, PACCompletionItem, CodeMirrorTheme } from '@/interfaces/codemirror'
+import type { CodeMirrorOptions, CodeMirrorTheme, PACCompletionItem } from '@/interfaces/codemirror'
 
 // PAC function completions data
 export const PAC_COMPLETIONS: PACCompletionItem[] = [

@@ -53,7 +53,7 @@ export class ScriptService {
       }
 
       // Check for proxy directives
-      if (!this.PROXY_KEYWORDS.some((keyword) => script.includes(keyword))) {
+      if (!ScriptService.PROXY_KEYWORDS.some((keyword) => script.includes(keyword))) {
         return {
           isValid: false,
           errorMessage: 'Script must contain at least one proxy directive',
@@ -72,7 +72,7 @@ export class ScriptService {
       const proxyStrings = script.match(/return\s+["']([^"']+)["']/g)
       if (proxyStrings) {
         for (const proxyString of proxyStrings) {
-          if (!this.validateProxyString(proxyString)) {
+          if (!ScriptService.validateProxyString(proxyString)) {
             return {
               isValid: false,
               errorMessage: 'Invalid proxy string format',
@@ -82,7 +82,7 @@ export class ScriptService {
       }
 
       // Warning checks (not errors but might indicate issues)
-      const warnings = this.getScriptWarnings(script)
+      const warnings = ScriptService.getScriptWarnings(script)
 
       return { isValid: true, errorMessage: warnings }
     } catch (error) {

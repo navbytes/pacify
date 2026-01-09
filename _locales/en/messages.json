@@ -362,7 +362,7 @@
     "message": "Enter one pattern per line:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "No Proxies Available"

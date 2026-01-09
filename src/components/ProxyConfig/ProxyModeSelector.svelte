@@ -1,23 +1,23 @@
 <script lang="ts">
-  import { Server } from '@/utils/icons'
-  import Button from '../Button.svelte'
-  import FlexGroup from '../FlexGroup.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import Text from '../Text.svelte'
+import { I18nService } from '@/services/i18n/i18nService'
+import { Server } from '@/utils/icons'
+import Button from '../Button.svelte'
+import FlexGroup from '../FlexGroup.svelte'
+import Text from '../Text.svelte'
 
-  interface Props {
-    proxyMode?: string
-  }
+interface Props {
+  proxyMode?: string
+}
 
-  let { proxyMode = $bindable('system') }: Props = $props()
+let { proxyMode = $bindable('system') }: Props = $props()
 
-  const options = [
-    { value: 'system', label: I18nService.getMessage('systemMode') },
-    { value: 'direct', label: I18nService.getMessage('directMode') },
-    { value: 'auto_detect', label: I18nService.getMessage('autoDetectMode') },
-    { value: 'pac_script', label: I18nService.getMessage('pacScriptMode') },
-    { value: 'fixed_servers', label: I18nService.getMessage('manualMode') },
-  ]
+const options = [
+  { value: 'system', label: I18nService.getMessage('systemMode') },
+  { value: 'direct', label: I18nService.getMessage('directMode') },
+  { value: 'auto_detect', label: I18nService.getMessage('autoDetectMode') },
+  { value: 'pac_script', label: I18nService.getMessage('pacScriptMode') },
+  { value: 'fixed_servers', label: I18nService.getMessage('manualMode') },
+]
 </script>
 
 <div>

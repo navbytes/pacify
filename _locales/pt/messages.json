@@ -362,7 +362,7 @@
     "message": "Digite um padrão por linha:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "Nenhum proxy disponível"
@@ -501,10 +501,6 @@
   },
   "pacScriptRefreshed": {
     "message": "Script PAC atualizado com sucesso"
-  },
-  "pacUrlHelp": {
-    "message": "O script PAC será carregado a partir desta URL"
-  }
   },
   "autoReloadEnabled": {
     "message": "Auto-reload enabled"

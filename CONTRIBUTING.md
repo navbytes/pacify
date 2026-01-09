@@ -43,11 +43,13 @@ Thank you for your interest in contributing to PACify! This document provides gu
 
 5. **Code Quality Checks**
    ```bash
-   npm run check           # TypeScript type checking
-   npm run lint            # ESLint
-   npm run lint:fix        # Auto-fix ESLint issues
-   npm run format          # Format with Prettier
-   npm run format:check    # Check formatting
+   bun run check           # TypeScript type checking
+   bun run lint            # Biome linting
+   bun run lint:fix        # Auto-fix linting issues
+   bun run format          # Format with Biome
+   bun run format:check    # Check formatting
+   bun run check:biome     # Combined lint + format check
+   bun run check:biome:fix # Auto-fix all issues
    ```
 
 ## 📋 Development Workflow
@@ -98,8 +100,7 @@ test(proxyUtils): add validation test cases
 
 Pre-commit hooks automatically run:
 
-- ESLint with auto-fix
-- Prettier formatting
+- Biome linting and formatting with auto-fix
 - Type checking (on push)
 
 These ensure code quality before commits.

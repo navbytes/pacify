@@ -1,9 +1,9 @@
-import { browserService } from './chrome/BrowserService'
-import { StorageService } from './StorageService'
 import { ERROR_TYPES } from '@/interfaces'
 import { ALERT_TYPES } from '@/interfaces/error'
-import { toastStore, type ToastType } from '@/stores/toastStore'
+import { type ToastType, toastStore } from '@/stores/toastStore'
+import { browserService } from './chrome/BrowserService'
 import { I18nService } from './i18n/i18nService'
+import { StorageService } from './StorageService'
 
 /**
  * Notification context determines where notifications are shown
@@ -62,21 +62,21 @@ export class NotificationService {
       type = 'info',
       duration = 3000,
       requireInteraction = false,
-      context = this.isUIContext() ? 'foreground' : 'background',
+      context = NotificationService.isUIContext() ? 'foreground' : 'background',
     } = options
 
     // For foreground context, prefer toasts
-    if (context === 'foreground' && this.isUIContext()) {
+    if (context === 'foreground' && NotificationService.isUIContext()) {
       toastStore.show(message, type, duration)
       return
     }
 
     // For background context, use Chrome notifications if enabled
-    const notificationsEnabled = await this.areNotificationsEnabled()
+    const notificationsEnabled = await NotificationService.areNotificationsEnabled()
     if (notificationsEnabled && context === 'background') {
       try {
-        await this.showChromeNotification({
-          title: title || this.EXTENSION_NAME,
+        await NotificationService.showChromeNotification({
+          title: title || NotificationService.EXTENSION_NAME,
           message,
           type,
           requireInteraction,
@@ -84,11 +84,11 @@ export class NotificationService {
       } catch (error) {
         console.error('Failed to show Chrome notification:', error)
         // Fallback to toast if in UI context
-        if (this.isUIContext()) {
+        if (NotificationService.isUIContext()) {
           toastStore.show(message, type, duration)
         }
       }
-    } else if (this.isUIContext()) {
+    } else if (NotificationService.isUIContext()) {
       // Fallback to toast if notifications disabled but we're in UI
       toastStore.show(message, type, duration)
     }
@@ -107,7 +107,7 @@ export class NotificationService {
 
     await browserService.notifications.create(crypto.randomUUID(), {
       type: 'basic',
-      iconUrl: this.DEFAULT_ICON,
+      iconUrl: NotificationService.DEFAULT_ICON,
       title,
       message,
       priority: type === 'error' ? 2 : type === 'warning' ? 1 : 0,
@@ -119,7 +119,7 @@ export class NotificationService {
    * Show a success notification
    */
   static async success(message: string, options?: Partial<NotificationOptions>): Promise<void> {
-    await this.show({
+    await NotificationService.show({
       message,
       type: 'success',
       ...options,
@@ -146,17 +146,17 @@ export class NotificationService {
       console.error(context || '', errorType, error)
 
       // Map error type to user-friendly message
-      message = this.getErrorMessage(errorType)
+      message = NotificationService.getErrorMessage(errorType)
 
       // Errors from background should show as system notifications
       notificationContext = 'background'
     } else {
       // Direct string message
       message = messageOrType
-      notificationContext = this.isUIContext() ? 'foreground' : 'background'
+      notificationContext = NotificationService.isUIContext() ? 'foreground' : 'background'
     }
 
-    await this.show({
+    await NotificationService.show({
       message,
       type: 'error',
       duration: 5000, // Longer duration for errors
@@ -169,7 +169,7 @@ export class NotificationService {
    * Show a warning notification
    */
   static async warning(message: string, options?: Partial<NotificationOptions>): Promise<void> {
-    await this.show({
+    await NotificationService.show({
       message,
       type: 'warning',
       duration: 4000,
@@ -181,7 +181,7 @@ export class NotificationService {
    * Show an info notification
    */
   static async info(message: string, options?: Partial<NotificationOptions>): Promise<void> {
-    await this.show({
+    await NotificationService.show({
       message,
       type: 'info',
       ...options,
@@ -194,7 +194,7 @@ export class NotificationService {
    */
   static alert(message: ALERT_TYPES | string): void {
     // In UI context, use toast
-    if (this.isUIContext()) {
+    if (NotificationService.isUIContext()) {
       toastStore.show(message, 'warning', 4000)
     } else {
       // In service worker, just log
@@ -241,7 +241,7 @@ export class NotificationService {
       ? I18nService.getMessage('proxySwitchedToForHost', [proxyName, new URL(url).hostname])
       : I18nService.getMessage('proxySwitchedTo', [proxyName])
 
-    await this.show({
+    await NotificationService.show({
       title: I18nService.getMessage('proxySwitched'),
       message,
       type: 'info',
@@ -260,7 +260,7 @@ export class NotificationService {
    * @see FEASIBILITY_STUDY_AUTOMATIC_MODE.md for implementation details
    */
   static async proxyError(proxyName: string, error: string): Promise<void> {
-    await this.show({
+    await NotificationService.show({
       title: I18nService.getMessage('proxyError'),
       message: I18nService.getMessage('proxyErrorMessage', [proxyName, error]),
       type: 'error',

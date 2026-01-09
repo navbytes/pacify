@@ -1,25 +1,25 @@
 <script lang="ts">
-  import { CheckCircle, XCircle, AlertCircle, Info, X } from '@/utils/icons'
-  import { toastStore, type ToastType } from '@/stores/toastStore'
-  import Text from './Text.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import { toastVariants } from '@/utils/classPatterns'
-  import { cn } from '@/utils/cn'
+import { I18nService } from '@/services/i18n/i18nService'
+import { type ToastType, toastStore } from '@/stores/toastStore'
+import { toastVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import { AlertCircle, CheckCircle, Info, X, XCircle } from '@/utils/icons'
+import Text from './Text.svelte'
 
-  let toasts = $derived($toastStore)
+let toasts = $derived($toastStore)
 
-  function getIcon(type: ToastType) {
-    switch (type) {
-      case 'success':
-        return CheckCircle
-      case 'error':
-        return XCircle
-      case 'warning':
-        return AlertCircle
-      case 'info':
-        return Info
-    }
+function getIcon(type: ToastType) {
+  switch (type) {
+    case 'success':
+      return CheckCircle
+    case 'error':
+      return XCircle
+    case 'warning':
+      return AlertCircle
+    case 'info':
+      return Info
   }
+}
 </script>
 
 <div
@@ -50,18 +50,18 @@
 </div>
 
 <style>
-  @keyframes slide-in {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
-  .animate-slide-in {
-    animation: slide-in 0.3s ease-out;
-  }
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
 </style>

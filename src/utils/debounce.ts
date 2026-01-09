@@ -27,7 +27,7 @@ export function debounce<T extends (...args: never[]) => unknown>(
     if (callNow) func.apply(this, args)
   }
 
-  debounced.cancel = function () {
+  debounced.cancel = () => {
     if (timeout) {
       clearTimeout(timeout)
       timeout = null

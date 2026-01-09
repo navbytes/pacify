@@ -362,7 +362,7 @@
     "message": "Введите один шаблон в строке:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "Нет доступных прокси"
@@ -501,10 +501,6 @@
   },
   "pacScriptRefreshed": {
     "message": "PAC скрипт успешно обновлен"
-  },
-  "pacUrlHelp": {
-    "message": "PAC-скрипт будет загружен с этого URL"
-  }
   },
   "autoReloadEnabled": {
     "message": "Auto-reload enabled"

@@ -1,7 +1,7 @@
-import { I18nService } from '@/services/i18n/i18nService'
-import type { ProxyConfig, ProxyMode } from '@/interfaces'
 import type { ComponentType } from 'svelte'
-import { Monitor, Zap, Radar, FileText, Wrench, Globe } from '@/utils/icons'
+import type { ProxyConfig, ProxyMode } from '@/interfaces'
+import { I18nService } from '@/services/i18n/i18nService'
+import { FileText, Globe, Monitor, Radar, Wrench, Zap } from '@/utils/icons'
 
 export function getProxyModeLabel(mode: ProxyMode): string {
   const labels: Record<ProxyMode, string> = {

@@ -362,7 +362,7 @@
     "message": "प्रति लाइन एक पैटर्न दर्ज करें:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "कोई प्रॉक्सी उपलब्ध नहीं"
@@ -501,10 +501,6 @@
   },
   "pacScriptRefreshed": {
     "message": "PAC स्क्रिप्ट सफलतापूर्वक रिफ्रेश की गई"
-  },
-  "pacUrlHelp": {
-    "message": "PAC स्क्रिप्ट इस URL से लोड की जाएगी"
-  }
   },
   "autoReloadEnabled": {
     "message": "Auto-reload enabled"

@@ -1,54 +1,54 @@
 <script lang="ts">
-  import ProxyInput from './ProxyInput.svelte'
-  import FlexGroup from '../FlexGroup.svelte'
-  import Text from '../Text.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import { inputVariants } from '@/utils/classPatterns'
-  import { cn } from '@/utils/cn'
+import { I18nService } from '@/services/i18n/i18nService'
+import { inputVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import FlexGroup from '../FlexGroup.svelte'
+import Text from '../Text.svelte'
+import ProxyInput from './ProxyInput.svelte'
 
-  interface ProxyServerSettings {
-    scheme?: string
-    host?: string
-    port?: string
-  }
+interface ProxyServerSettings {
+  scheme?: string
+  host?: string
+  port?: string
+}
 
-  interface ProxySettings {
-    singleProxy?: ProxyServerSettings
-    proxyForHttp?: ProxyServerSettings
-    proxyForHttps?: ProxyServerSettings
-    proxyForFtp?: ProxyServerSettings
-    fallbackProxy?: ProxyServerSettings
-    bypassList?: string[]
-  }
+interface ProxySettings {
+  singleProxy?: ProxyServerSettings
+  proxyForHttp?: ProxyServerSettings
+  proxyForHttps?: ProxyServerSettings
+  proxyForFtp?: ProxyServerSettings
+  fallbackProxy?: ProxyServerSettings
+  bypassList?: string[]
+}
 
-  interface Props {
-    useSharedProxy?: boolean
-    proxySettings: ProxySettings
-    bypassListContent?: string
-  }
+interface Props {
+  useSharedProxy?: boolean
+  proxySettings: ProxySettings
+  bypassListContent?: string
+}
 
-  let {
-    useSharedProxy = $bindable(true),
-    proxySettings = $bindable(),
-    bypassListContent = $bindable(''),
-  }: Props = $props()
+let {
+  useSharedProxy = $bindable(true),
+  proxySettings = $bindable(),
+  bypassListContent = $bindable(''),
+}: Props = $props()
 
-  // Map for individual proxies with proper typing
-  const proxyTypeMap = {
-    HTTP: 'proxyForHttp',
-    HTTPS: 'proxyForHttps',
-    FTP: 'proxyForFtp',
-    Fallback: 'fallbackProxy',
-  } as const
+// Map for individual proxies with proper typing
+const proxyTypeMap = {
+  HTTP: 'proxyForHttp',
+  HTTPS: 'proxyForHttps',
+  FTP: 'proxyForFtp',
+  Fallback: 'fallbackProxy',
+} as const
 
-  type ProxyType = keyof typeof proxyTypeMap
+type ProxyType = keyof typeof proxyTypeMap
 
-  const proxyLocalizedNames: Record<ProxyType, string> = {
-    HTTP: I18nService.getMessage('httpProxy'),
-    HTTPS: I18nService.getMessage('httpsProxy'),
-    FTP: I18nService.getMessage('ftpProxy'),
-    Fallback: I18nService.getMessage('fallbackProxy'),
-  }
+const proxyLocalizedNames: Record<ProxyType, string> = {
+  HTTP: I18nService.getMessage('httpProxy'),
+  HTTPS: I18nService.getMessage('httpsProxy'),
+  FTP: I18nService.getMessage('ftpProxy'),
+  Fallback: I18nService.getMessage('fallbackProxy'),
+}
 </script>
 
 <div class="space-y-4">
@@ -58,7 +58,7 @@
       id="useSharedProxy"
       bind:checked={useSharedProxy}
       class="rounded border-slate-300 text-primary focus:ring-primary"
-    />
+    >
     <label for="useSharedProxy" class="text-sm text-slate-700 dark:text-slate-300">
       {I18nService.getMessage('useSameProxy')}
     </label>

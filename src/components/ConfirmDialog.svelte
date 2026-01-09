@@ -1,55 +1,55 @@
 <script lang="ts">
-  import { AlertTriangle, X } from '@/utils/icons'
-  import Button from './Button.svelte'
-  import Text from './Text.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import { cn } from '@/utils/cn'
-  import { modalVariants, flexPatterns } from '@/utils/classPatterns'
-  import { colors } from '@/utils/theme'
+import { I18nService } from '@/services/i18n/i18nService'
+import { flexPatterns, modalVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import { AlertTriangle, X } from '@/utils/icons'
+import { colors } from '@/utils/theme'
+import Button from './Button.svelte'
+import Text from './Text.svelte'
 
-  interface Props {
-    open?: boolean
-    title: string
-    message: string
-    confirmLabel?: string
-    cancelLabel?: string
-    variant?: 'danger' | 'warning' | 'info'
-    onConfirm: () => void
-    onCancel: () => void
+interface Props {
+  open?: boolean
+  title: string
+  message: string
+  confirmLabel?: string
+  cancelLabel?: string
+  variant?: 'danger' | 'warning' | 'info'
+  onConfirm: () => void
+  onCancel: () => void
+}
+
+let {
+  open = $bindable(false),
+  title,
+  message,
+  confirmLabel = I18nService.getMessage('confirm'),
+  cancelLabel = I18nService.getMessage('cancel'),
+  variant = 'danger',
+  onConfirm,
+  onCancel,
+}: Props = $props()
+
+function handleConfirm() {
+  onConfirm()
+  open = false
+}
+
+function handleCancel() {
+  onCancel()
+  open = false
+}
+
+function handleBackdropClick(e: MouseEvent) {
+  if (e.target === e.currentTarget) {
+    handleCancel()
   }
+}
 
-  let {
-    open = $bindable(false),
-    title,
-    message,
-    confirmLabel = I18nService.getMessage('confirm'),
-    cancelLabel = I18nService.getMessage('cancel'),
-    variant = 'danger',
-    onConfirm,
-    onCancel,
-  }: Props = $props()
-
-  function handleConfirm() {
-    onConfirm()
-    open = false
+function handleKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    handleCancel()
   }
-
-  function handleCancel() {
-    onCancel()
-    open = false
-  }
-
-  function handleBackdropClick(e: MouseEvent) {
-    if (e.target === e.currentTarget) {
-      handleCancel()
-    }
-  }
-
-  function handleKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape') {
-      handleCancel()
-    }
-  }
+}
 </script>
 
 {#if open}
@@ -101,16 +101,12 @@
 
       <!-- Body -->
       <div class={modalVariants.body()}>
-        <Text as="p" color="muted">
-          {message}
-        </Text>
+        <Text as="p" color="muted">{message}</Text>
       </div>
 
       <!-- Footer -->
       <div class={modalVariants.footer()}>
-        <Button color="secondary" onclick={handleCancel}>
-          {cancelLabel}
-        </Button>
+        <Button color="secondary" onclick={handleCancel}>{cancelLabel}</Button>
         <Button
           color={variant === 'danger' ? 'error' : 'primary'}
           onclick={handleConfirm}
@@ -124,18 +120,18 @@
 {/if}
 
 <style>
-  @keyframes scale-in {
-    from {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
   }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
-  .animate-scale-in {
-    animation: scale-in 0.2s ease-out;
-  }
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
 </style>

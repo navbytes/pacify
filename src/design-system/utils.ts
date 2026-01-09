@@ -4,7 +4,7 @@
  * Helper functions for generating class names and handling design tokens
  */
 
-import { spacing, type Spacing } from './tokens'
+import { type Spacing, spacing } from './tokens'
 
 /**
  * Combines class names, filtering out falsy values

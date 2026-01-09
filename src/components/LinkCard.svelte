@@ -1,34 +1,28 @@
 <script lang="ts">
-  import type { ComponentType } from 'svelte'
-  import Card from './Card.svelte'
-  import FlexGroup from './FlexGroup.svelte'
-  import IconBadge from './IconBadge.svelte'
-  import { ExternalLink } from '@/utils/icons'
-  import {
-    linkCardIconBadgeVariants,
-    linkCardExternalIconVariants,
-    type VariantProps,
-  } from '@/utils/classPatterns'
+import type { ComponentType } from 'svelte'
+import { linkCardExternalIconVariants, linkCardIconBadgeVariants } from '@/utils/classPatterns'
+import { ExternalLink } from '@/utils/icons'
+import Card from './Card.svelte'
+import FlexGroup from './FlexGroup.svelte'
+import IconBadge from './IconBadge.svelte'
 
-  type LinkCardVariant = VariantProps<typeof linkCardIconBadgeVariants>
+interface Props {
+  href: string
+  icon: ComponentType
+  label: string
+  color?: 'blue' | 'red' | 'yellow' | 'green' | 'purple' | 'orange'
+  target?: string
+  rel?: string
+}
 
-  interface Props {
-    href: string
-    icon: ComponentType
-    label: string
-    color?: LinkCardVariant['color']
-    target?: string
-    rel?: string
-  }
-
-  let {
-    href,
-    icon,
-    label,
-    color = 'blue',
-    target = '_blank',
-    rel = 'noopener noreferrer',
-  }: Props = $props()
+let {
+  href,
+  icon,
+  label,
+  color = 'blue',
+  target = '_blank',
+  rel = 'noopener noreferrer',
+}: Props = $props()
 </script>
 
 <a {href} {target} {rel} class="group block">

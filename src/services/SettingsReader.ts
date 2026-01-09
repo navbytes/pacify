@@ -7,17 +7,17 @@ import { StorageService } from './StorageService'
  */
 export class SettingsReader {
   static async getScripts(): Promise<ProxyConfig[]> {
-    const settings = await this.getSettings()
+    const settings = await SettingsReader.getSettings()
     return settings.proxyConfigs
   }
 
   static async getActiveScript(): Promise<ProxyConfig | null> {
-    const settings = await this.getSettings()
+    const settings = await SettingsReader.getSettings()
     return settings.proxyConfigs.find((script) => script.id === settings.activeScriptId) || null
   }
 
   static async getPacScriptById(id: string): Promise<ProxyConfig | null> {
-    const settings = await this.getSettings()
+    const settings = await SettingsReader.getSettings()
     return settings.proxyConfigs.find((s) => s.id === id) || null
   }
 
