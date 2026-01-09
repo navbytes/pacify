@@ -267,7 +267,7 @@ For feature requests:
 - [Bun Test](https://bun.sh/docs/cli/test)
 - [Playwright](https://playwright.dev/docs/intro)
 - [Tailwind CSS](https://tailwindcss.com/docs)
-- [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- [Codemirror](https://github.com/codemirror)
 
 ### Chrome Extension APIs
 

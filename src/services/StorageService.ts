@@ -1,5 +1,5 @@
 // src/services/StorageService.ts
-import { ERROR_TYPES, type AppSettings } from '@/interfaces'
+import { ERROR_TYPES, type AppSettings, type Settings } from '@/interfaces'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
 import { browserService } from './chrome/BrowserService'
@@ -18,7 +18,7 @@ export class StorageService {
    */
   static saveSettings = withErrorHandling(async (settings: AppSettings): Promise<void> => {
     // Clone settings to avoid modifying the original - use JSON parse/stringify to handle undefined values
-    const settingsCopy = JSON.parse(JSON.stringify(settings))
+    const settingsCopy: AppSettings = JSON.parse(JSON.stringify(settings))
 
     // Store base settings in sync storage
     const baseSettings: AppSettings = {
@@ -141,4 +141,23 @@ export class StorageService {
       await this.saveSettings(data.settings)
     }
   }, ERROR_TYPES.SAVE_SETTINGS)
+
+  /**
+   * Save user preferences (separate from AppSettings)
+   */
+  static savePreferences = withErrorHandling(async (preferences: Settings): Promise<void> => {
+    await browserService.storage.sync.set({ preferences })
+  }, ERROR_TYPES.SAVE_SETTINGS)
+
+  /**
+   * Get user preferences with fallback to defaults
+   */
+  static getPreferences = withErrorHandlingAndFallback(
+    async (): Promise<Settings> => {
+      const data = await browserService.storage.sync.get('preferences')
+      return data.preferences || { notifications: true }
+    },
+    ERROR_TYPES.FETCH_SETTINGS,
+    { notifications: true }
+  )
 }

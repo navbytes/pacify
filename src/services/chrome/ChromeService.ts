@@ -97,7 +97,7 @@ export class ChromeService {
           if (this.browser.runtime.lastError) {
             return reject(this.browser.runtime.lastError)
           }
-          resolve(config)
+          resolve(config as unknown as chrome.types.ChromeSettingGetDetails)
         })
       })
     },

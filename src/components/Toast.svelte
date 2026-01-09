@@ -2,7 +2,6 @@
   import { CheckCircle, XCircle, AlertCircle, Info, X } from '@/utils/icons'
   import { toastStore, type ToastType } from '@/stores/toastStore'
   import Text from './Text.svelte'
-  import FlexGroup from './FlexGroup.svelte'
   import { I18nService } from '@/services/i18n/i18nService'
   import { toastVariants } from '@/utils/classPatterns'
   import { cn } from '@/utils/cn'

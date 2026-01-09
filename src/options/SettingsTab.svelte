@@ -1,6 +1,7 @@
 <script lang="ts">
   import { settingsStore } from '@/stores/settingsStore'
   import { toastStore } from '@/stores/toastStore'
+  import { StorageService } from '@/services/StorageService'
   import ToggleSwitch from '@/components/ToggleSwitch.svelte'
   import BackupRestore from '@/components/BackupRestore.svelte'
   import FlexGroup from '@/components/FlexGroup.svelte'
@@ -19,9 +20,18 @@
     Bug,
     Lightbulb,
     BookOpen,
+    Bell,
   } from '@/utils/icons'
 
   let settings = $derived($settingsStore)
+  let notificationsEnabled = $state(true)
+
+  // Load notification preference on mount
+  $effect(() => {
+    StorageService.getPreferences().then((prefs) => {
+      notificationsEnabled = prefs.notifications
+    })
+  })
 
   async function handleDisableProxyOnStartupToggle(checked: boolean) {
     await settingsStore.updateSettings({ disableProxyOnStartup: checked })
@@ -35,7 +45,23 @@
 
   async function handleAutoReloadToggle(checked: boolean) {
     await settingsStore.updateSettings({ autoReloadOnProxySwitch: checked })
-    toastStore.show(checked ? 'Auto-reload enabled' : 'Auto-reload disabled', 'success')
+    toastStore.show(
+      checked
+        ? I18nService.getMessage('autoReloadEnabled')
+        : I18nService.getMessage('autoReloadDisabled'),
+      'success'
+    )
+  }
+
+  async function handleNotificationsToggle(checked: boolean) {
+    notificationsEnabled = checked
+    await StorageService.savePreferences({ notifications: checked })
+    toastStore.show(
+      checked
+        ? I18nService.getMessage('systemNotificationsEnabled')
+        : I18nService.getMessage('systemNotificationsDisabled'),
+      'success'
+    )
   }
 </script>
 
@@ -49,7 +75,7 @@
     />
 
     <!-- Grid layout for proxy behavior cards -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
       <!-- Disable Proxy on Startup Card -->
       <Card
         classes="ring-2 ring-blue-500/10 dark:ring-blue-400/10 hover:ring-blue-500/20 dark:hover:ring-blue-400/20 hover:shadow-lg transition-all duration-200"
@@ -127,6 +153,45 @@
             checked={settings.autoReloadOnProxySwitch}
             onchange={handleAutoReloadToggle}
             aria-label="Toggle auto-reload on proxy switch"
+          />
+        </FlexGroup>
+      </Card>
+
+      <!-- System Notifications Card -->
+      <Card
+        classes="ring-2 ring-purple-500/10 dark:ring-purple-400/10 hover:ring-purple-500/20 dark:hover:ring-purple-400/20 hover:shadow-lg transition-all duration-200"
+      >
+        <FlexGroup
+          direction="horizontal"
+          childrenGap="lg"
+          alignItems="center"
+          justifyContent="between"
+        >
+          <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 rounded-lg flex items-center justify-center mt-1 shadow-md hover:shadow-lg hover:scale-110 transition-all duration-200"
+            >
+              <Bell size={20} class="text-white" />
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <label class="text-base font-semibold cursor-pointer" for="notificationsToggle">
+                  {I18nService.getMessage('systemNotifications')}
+                </label>
+                <Tooltip text={I18nService.getMessage('systemNotificationsTooltip')} position="top">
+                  <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+                </Tooltip>
+              </div>
+              <Text as="p" size="sm" color="muted" classes="mt-1">
+                {I18nService.getMessage('systemNotificationsDescription')}
+              </Text>
+            </div>
+          </FlexGroup>
+          <ToggleSwitch
+            id="notificationsToggle"
+            checked={notificationsEnabled}
+            onchange={handleNotificationsToggle}
+            aria-label="Toggle system notifications"
           />
         </FlexGroup>
       </Card>

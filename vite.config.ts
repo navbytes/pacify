@@ -183,11 +183,6 @@ export default defineConfig(({ command, mode }) => {
             return 'assets/[name].[hash].[ext]'
           },
           manualChunks: (id) => {
-            // Monaco editor gets its own chunk
-            if (id.includes('monaco-editor')) {
-              return 'monaco'
-            }
-
             // ProxyConfigModal and its heavy dependencies get their own chunk
             if (
               id.includes('ProxyConfigModal') ||
@@ -261,14 +256,6 @@ export default defineConfig(({ command, mode }) => {
         // Watch for changes in the source files
         ignored: ['**/node_modules/**', '**/dist/**', '**/dev/**'],
       },
-    },
-    optimizeDeps: {
-      exclude: [
-        'monaco-editor/esm/vs/language/typescript/ts.worker',
-        'monaco-editor/esm/vs/language/html/html.worker',
-        'monaco-editor/esm/vs/language/css/css.worker',
-        'monaco-editor/esm/vs/language/json/json.worker',
-      ],
     },
     worker: {
       format: 'es',

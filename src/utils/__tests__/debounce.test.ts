@@ -44,7 +44,7 @@ describe('debounce', () => {
   })
 
   test('should pass arguments correctly', async () => {
-    const func = mock(() => {})
+    const func = mock((_arg1: string, _arg2: string) => {})
     const debouncedFunc = debounce(func, 100)
 
     debouncedFunc('arg1', 'arg2')
@@ -177,7 +177,7 @@ describe('throttle', () => {
   })
 
   test('should pass arguments correctly', async () => {
-    const func = mock(() => {})
+    const func = mock((_arg1: string, _arg2: string) => {})
     const throttledFunc = throttle(func, 50)
 
     throttledFunc('arg1', 'arg2')

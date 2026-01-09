@@ -211,12 +211,12 @@ test.describe('Chrome Web Store Screenshots', () => {
     // The editor container should appear automatically when PAC mode is selected
     // and pacUrl is empty (which it is by default)
 
-    // Wait for editor - increased timeout for Monaco initialization
-    console.log('Waiting for Monaco editor container to appear after URL cleared...')
+    // Wait for editor - increased timeout for editor initialization
+    console.log('Waiting for editor container to appear after URL cleared...')
     await optionsPage.waitForSelector('#editorContainer', { timeout: 10000 })
-    console.log('Editor container found, waiting for Monaco to fully render...')
-    await optionsPage.waitForTimeout(2000) // Let Monaco fully render
-    console.log('Monaco editor should be fully initialized')
+    console.log('Editor container found, waiting for editor to fully render...')
+    await optionsPage.waitForTimeout(2000) // Let editor fully render
+    console.log('Editor should be fully initialized')
 
     // Select a template
     const advancedButton = await optionsPage.$('button:has-text("Advanced")')

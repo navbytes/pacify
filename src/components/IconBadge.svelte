@@ -14,13 +14,13 @@
 
   let { icon: Icon, color = 'blue', size = 'md', classes = '' }: Props = $props()
 
-  const iconSizeMap = {
+  const iconSizeMap: Record<NonNullable<IconBadgeVariant['size']>, number> = {
     sm: 16,
     md: 20,
     lg: 32,
   }
 
-  const iconSize = $derived(iconSizeMap[size])
+  const iconSize = $derived(iconSizeMap[size!])
   const badgeClasses = $derived(cn(iconBadgeVariants({ color, size }), classes))
 </script>
 

@@ -24,11 +24,11 @@
   </Button>
   <!-- Using type="submit" lets the enclosing form trigger the submit event -->
   <Button color="primary" type="submit" disabled={isSubmitting} data-testid="save-config-btn">
-    {#if isSubmitting}
-      {#snippet icon()}
+    {#snippet icon()}
+      {#if isSubmitting}
         <Loader2 size={16} class="animate-spin" />
-      {/snippet}
-    {/if}
+      {/if}
+    {/snippet}
     {isSubmitting ? I18nService.getMessage('saving') : I18nService.getMessage('saveConfiguration')}
   </Button>
 </div>

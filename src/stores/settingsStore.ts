@@ -110,9 +110,16 @@ function createSettingsStore() {
           }
         })
 
+        // Get the actual scriptId (either the one passed in or the new one created)
+        const actualScriptId =
+          scriptId ||
+          updatedSettings.proxyConfigs.find((s) => !scriptId && s.name === script.name)?.id ||
+          ''
+
         // Send message to background to update PAC refresh alarms
         await ChromeService.sendMessage({
           type: 'SCRIPT_UPDATE',
+          scriptId: actualScriptId,
         })
 
         return updatedSettings
