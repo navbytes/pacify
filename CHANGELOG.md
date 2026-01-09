@@ -5,6 +5,94 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.25.0] - 2026-01-09
+
+### Added
+
+- **Unified Notification System**
+  - Introduced `NotificationService` for Chrome system notifications and in-app toasts
+  - User preference toggle for system notifications in Settings
+  - Intelligent notification routing based on context (foreground/background)
+  - Support for success, error, warning, and info notification types
+  - Persist notification preferences in Chrome storage
+  - Added Bell icon to icon exports
+
+- **Settings & Preferences**
+  - New `Settings` interface for user preferences separate from `AppSettings`
+  - Added `getPreferences` and `savePreferences` methods to `StorageService`
+
+- **Documentation & Planning**
+  - Added `CLAUDE.md` for Bun development preferences
+  - Added `FEASIBILITY_STUDY_AUTOMATIC_MODE.md` for automatic mode feature planning
+
+### Fixed
+
+- **PAC Script Editor**
+  - Fixed editor initialization to properly display fetched PAC scripts
+  - Migrated from `onMount` to Svelte 5 `$effect` for reactive editor updates
+  - Made editor read-only when using URL-based PAC scripts
+  - Improved editor content synchronization when PAC URL is refreshed
+
+- **Proxy Configuration Display**
+  - Fixed bug where proxy configs in Quick Switch section were excluded from "All Proxy Configs" section
+  - All proxy configurations now properly display regardless of Quick Switch status
+
+- **Test Suite**
+  - Fixed test hanging issue caused by Chrome API mock timing
+  - Moved Chrome API mock setup to top-level (before module imports)
+  - Added comprehensive mocks for notifications and tabs APIs
+  - Fixed `NotificationService.error` mocking in error handling tests
+  - 113 unit tests now pass successfully (previously timed out)
+
+- **Type Safety**
+  - Fixed 70 TypeScript errors from tailwind-variants migration
+  - Replaced inferred `VariantProps` types with explicit union types
+  - Fixed SearchBar import from type-only to value import
+  - All type checking now passes with 0 errors
+
+### Changed
+
+- **Development Tooling - Biome Migration**
+  - Migrated from ESLint + Prettier to Biome v2.3.11
+  - Removed 141 packages (ESLint, Prettier, class-variance-authority, and related plugins)
+  - Configured Biome with experimental Svelte support
+  - Updated lint-staged to use Biome commands
+  - 10x faster linting and formatting with Rust-based tooling
+
+- **Component Styling Library**
+  - Migrated from `class-variance-authority` (CVA) to `tailwind-variants`
+  - Updated all variant definitions to use `tv()` API with config objects
+  - Converted all `cn()` usage within variants to plain strings
+  - Removed dependencies: `clsx`, `tailwind-merge`
+
+- **Icon Optimization**
+  - Changed lucide-svelte imports from barrel exports to direct paths
+  - 10x faster dev server reload times
+  - Improved tree-shaking for smaller production bundles
+
+- **Code Quality**
+  - Removed unused `MonacoService.optimized.ts` and `monaco-completions.ts`
+  - Cleaned up code comments and improved error handling
+  - Updated `CONTRIBUTING.md` and `DEVELOPMENT.md`
+
+### Technical
+
+- **Build System**
+  - Configured Biome with Tailwind CSS support and custom rules for Svelte
+  - Excluded `app.css` from Biome (Tailwind-specific syntax)
+  - Updated package scripts for lint, format, and check commands
+
+- **Test Infrastructure**
+  - Enhanced test setup with comprehensive Chrome API mocks
+  - Fixed singleton instantiation timing issues
+  - Added support for notifications, tabs, storage, and proxy APIs in tests
+
+### Performance
+
+- **Development Server**: 10x faster hot reload with optimized icon imports
+- **Linting**: Significantly faster with Rust-based Biome (vs. Node-based ESLint)
+- **Bundle Size**: Reduced dependencies from 141 removed packages
+
 ## [1.24.0] - 2026-01-08
 
 ### Added
