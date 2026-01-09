@@ -1,122 +1,122 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  import { settingsStore } from '@/stores/settingsStore'
-  import { toastStore } from '@/stores/toastStore'
-  import { type ProxyConfig } from '@/interfaces'
-  import type { Component } from 'svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import Tabs from '@/components/Tabs/Tabs.svelte'
-  import TabList from '@/components/Tabs/TabList.svelte'
-  import Tab from '@/components/Tabs/Tab.svelte'
-  import TabPanel from '@/components/Tabs/TabPanel.svelte'
-  import Toast from '@/components/Toast.svelte'
-  import ThemeToggle from '@/components/ThemeToggle.svelte'
-  import ProxyConfigsTab from './ProxyConfigsTab.svelte'
-  import SettingsTab from './SettingsTab.svelte'
-  import { Cable, Settings } from '@/utils/icons'
-  import { logger } from '@/services/LoggerService'
+import type { Component } from 'svelte'
+import { onMount } from 'svelte'
+import Tab from '@/components/Tabs/Tab.svelte'
+import TabList from '@/components/Tabs/TabList.svelte'
+import TabPanel from '@/components/Tabs/TabPanel.svelte'
+import Tabs from '@/components/Tabs/Tabs.svelte'
+import ThemeToggle from '@/components/ThemeToggle.svelte'
+import Toast from '@/components/Toast.svelte'
+import type { ProxyConfig } from '@/interfaces'
+import { I18nService } from '@/services/i18n/i18nService'
+import { logger } from '@/services/LoggerService'
+import { settingsStore } from '@/stores/settingsStore'
+import { toastStore } from '@/stores/toastStore'
+import { Cable, Settings } from '@/utils/icons'
+import ProxyConfigsTab from './ProxyConfigsTab.svelte'
+import SettingsTab from './SettingsTab.svelte'
 
-  let showEditor = $state(false)
-  let editingScriptId = $state<string | null>(null)
-  let settings = $derived($settingsStore)
-  let activeTab = $state('proxy-configs')
+let showEditor = $state(false)
+let editingScriptId = $state<string | null>(null)
+let settings = $derived($settingsStore)
+let activeTab = $state('proxy-configs')
 
-  // Dynamic import for ProxyConfigModal - only load when needed
-  let ProxyConfigModal = $state<Component<any, {}, ''> | null>(null)
-  let isLoadingModal = $state(false)
+// Dynamic import for ProxyConfigModal - only load when needed
+let ProxyConfigModal = $state<Component<any, {}, ''> | null>(null)
+let isLoadingModal = $state(false)
 
-  onMount(() => {
-    const init = async () => {
-      await settingsStore.init()
+onMount(() => {
+  const init = async () => {
+    await settingsStore.init()
 
-      // Load saved active tab
-      const saved = await chrome.storage.local.get('options.activeTab')
-      if (saved['options.activeTab']) {
-        activeTab = saved['options.activeTab']
-      }
-
-      // Check if we should auto-open the editor (from popup quick add)
-      const params = new URLSearchParams(window.location.search)
-      if (params.get('action') === 'create') {
-        activeTab = 'proxy-configs' // Ensure we're on the right tab
-        openEditor() // Auto-open the editor for new proxy
-        // Clean up URL parameter
-        window.history.replaceState({}, '', window.location.pathname)
-      }
+    // Load saved active tab
+    const saved = await chrome.storage.local.get('options.activeTab')
+    if (saved['options.activeTab']) {
+      activeTab = saved['options.activeTab']
     }
 
-    init()
-
-    // Keyboard shortcuts
-    const handleKeydown = (e: KeyboardEvent) => {
-      // Ctrl+N or Cmd+N to add new proxy (only on Proxy Configs tab)
-      if ((e.ctrlKey || e.metaKey) && e.key === 'n' && activeTab === 'proxy-configs') {
-        e.preventDefault()
-        openEditor()
-      }
-      // Escape to close modal
-      if (e.key === 'Escape' && showEditor) {
-        e.preventDefault()
-        showEditor = false
-      }
-    }
-
-    document.addEventListener('keydown', handleKeydown)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeydown)
-    }
-  })
-
-  // Save active tab when it changes
-  $effect(() => {
-    if (activeTab) {
-      chrome.storage.local.set({ 'options.activeTab': activeTab })
-    }
-  })
-
-  async function openEditor(scriptId?: string) {
-    editingScriptId = scriptId || null
-    showEditor = true
-
-    // Lazy load the modal component if not already loaded
-    if (!ProxyConfigModal && !isLoadingModal) {
-      isLoadingModal = true
-      try {
-        const module = await import('@/components/ProxyConfig/ProxyConfigModal.svelte')
-        ProxyConfigModal = module.default
-      } catch (error) {
-        logger.error('Failed to load ProxyConfigModal:', error)
-        toastStore.show('Failed to load editor', 'error')
-        showEditor = false
-      } finally {
-        isLoadingModal = false
-      }
+    // Check if we should auto-open the editor (from popup quick add)
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('action') === 'create') {
+      activeTab = 'proxy-configs' // Ensure we're on the right tab
+      openEditor() // Auto-open the editor for new proxy
+      // Clean up URL parameter
+      window.history.replaceState({}, '', window.location.pathname)
     }
   }
 
-  async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
-    // Close modal immediately
-    showEditor = false
+  init()
 
-    // Save in background
-    settingsStore
-      .updatePACScript(script, editingScriptId)
-      .then(() => {
-        // Show success toast
-        toastStore.show(
-          editingScriptId
-            ? I18nService.getMessage('proxyUpdated').replace('$1', script.name)
-            : I18nService.getMessage('proxyCreated').replace('$1', script.name),
-          'success'
-        )
-      })
-      .catch((error) => {
-        logger.error('Error in handleScriptSave:', error)
-        // Show error toast
-        toastStore.show(I18nService.getMessage('failedToSaveProxy'), 'error')
-      })
+  // Keyboard shortcuts
+  const handleKeydown = (e: KeyboardEvent) => {
+    // Ctrl+N or Cmd+N to add new proxy (only on Proxy Configs tab)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'n' && activeTab === 'proxy-configs') {
+      e.preventDefault()
+      openEditor()
+    }
+    // Escape to close modal
+    if (e.key === 'Escape' && showEditor) {
+      e.preventDefault()
+      showEditor = false
+    }
   }
+
+  document.addEventListener('keydown', handleKeydown)
+
+  return () => {
+    document.removeEventListener('keydown', handleKeydown)
+  }
+})
+
+// Save active tab when it changes
+$effect(() => {
+  if (activeTab) {
+    chrome.storage.local.set({ 'options.activeTab': activeTab })
+  }
+})
+
+async function openEditor(scriptId?: string) {
+  editingScriptId = scriptId || null
+  showEditor = true
+
+  // Lazy load the modal component if not already loaded
+  if (!ProxyConfigModal && !isLoadingModal) {
+    isLoadingModal = true
+    try {
+      const module = await import('@/components/ProxyConfig/ProxyConfigModal.svelte')
+      ProxyConfigModal = module.default
+    } catch (error) {
+      logger.error('Failed to load ProxyConfigModal:', error)
+      toastStore.show('Failed to load editor', 'error')
+      showEditor = false
+    } finally {
+      isLoadingModal = false
+    }
+  }
+}
+
+async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
+  // Close modal immediately
+  showEditor = false
+
+  // Save in background
+  settingsStore
+    .updatePACScript(script, editingScriptId)
+    .then(() => {
+      // Show success toast
+      toastStore.show(
+        editingScriptId
+          ? I18nService.getMessage('proxyUpdated').replace('$1', script.name)
+          : I18nService.getMessage('proxyCreated').replace('$1', script.name),
+        'success'
+      )
+    })
+    .catch((error) => {
+      logger.error('Error in handleScriptSave:', error)
+      // Show error toast
+      toastStore.show(I18nService.getMessage('failedToSaveProxy'), 'error')
+    })
+}
 </script>
 
 <div id="options-container" class="container mx-auto max-w-7xl px-4" role="region">
@@ -129,7 +129,7 @@
       >
         <!-- Left: App Branding -->
         <div class="flex items-center gap-4 flex-shrink-0 min-w-0">
-          <img src="/icons/icon48.png" alt="PACify" class="w-12 h-12 flex-shrink-0" />
+          <img src="/icons/icon48.png" alt="PACify" class="w-12 h-12 flex-shrink-0">
           <div class="min-w-0">
             <h1
               class="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight"
@@ -157,12 +157,8 @@
           <ThemeToggle />
 
           <TabList>
-            <Tab id="proxy-configs" icon={Cable}>
-              {I18nService.getMessage('tabProxyConfigs')}
-            </Tab>
-            <Tab id="settings" icon={Settings}>
-              {I18nService.getMessage('tabSettings')}
-            </Tab>
+            <Tab id="proxy-configs" icon={Cable}>{I18nService.getMessage('tabProxyConfigs')}</Tab>
+            <Tab id="settings" icon={Settings}>{I18nService.getMessage('tabSettings')}</Tab>
           </TabList>
         </div>
       </div>

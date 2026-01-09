@@ -362,7 +362,7 @@
     "message": "Ein Muster pro Zeile eingeben:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "Keine Proxys verfügbar"
@@ -441,9 +441,6 @@
   },
   "quickSwitchEmptySubHint": {
     "message": "Proxies, die hier hinzugefügt werden, erscheinen im Popup für Ein-Klick-Wechsel"
-  },
-  "pacUrlHelp": {
-    "message": "PAC-Skript wird von dieser URL geladen"
   },
   "keyboardShortcuts": {
     "message": "Tastaturkürzel"

@@ -1,69 +1,67 @@
 <script lang="ts">
-  import FlexGroup from '../FlexGroup.svelte'
-  import LabelButton from '../LabelButton.svelte'
-  import ToggleSwitch from '../ToggleSwitch.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import Text from '../Text.svelte'
-  import { inputVariants } from '@/utils/classPatterns'
+import { I18nService } from '@/services/i18n/i18nService'
+import { inputVariants } from '@/utils/classPatterns'
+import FlexGroup from '../FlexGroup.svelte'
+import LabelButton from '../LabelButton.svelte'
+import Text from '../Text.svelte'
+import ToggleSwitch from '../ToggleSwitch.svelte'
 
-  interface Props {
-    name?: string
-    color?: string
-    isActive?: boolean
+interface Props {
+  name?: string
+  color?: string
+  isActive?: boolean
+}
+
+let {
+  name = $bindable(''),
+  color = $bindable('gray'),
+  isActive = $bindable(false),
+}: Props = $props()
+
+const MAX_NAME_LENGTH = 50
+const MIN_NAME_LENGTH = 1
+
+let nameError = $state('')
+let nameTouched = $state(false)
+let charCount = $derived(name.length)
+// Validation check for name length
+$effect(() => {
+  const isValid = charCount >= MIN_NAME_LENGTH && charCount <= MAX_NAME_LENGTH
+  void isValid // Used for validation logic
+})
+
+function validateName(value: string): string {
+  const trimmed = value.trim()
+
+  if (trimmed.length === 0) {
+    return I18nService.getMessage('nameRequired') || 'Name is required'
   }
 
-  let {
-    name = $bindable(''),
-    color = $bindable('gray'),
-    isActive = $bindable(false),
-  }: Props = $props()
-
-  const MAX_NAME_LENGTH = 50
-  const MIN_NAME_LENGTH = 1
-
-  let nameError = $state('')
-  let nameTouched = $state(false)
-  let charCount = $derived(name.length)
-  // Validation check for name length
-  $effect(() => {
-    const isValid = charCount >= MIN_NAME_LENGTH && charCount <= MAX_NAME_LENGTH
-    void isValid // Used for validation logic
-  })
-
-  function validateName(value: string): string {
-    const trimmed = value.trim()
-
-    if (trimmed.length === 0) {
-      return I18nService.getMessage('nameRequired') || 'Name is required'
-    }
-
-    if (trimmed.length < MIN_NAME_LENGTH) {
-      return (
-        I18nService.getMessage('nameTooShort') ||
-        `Name must be at least ${MIN_NAME_LENGTH} character`
-      )
-    }
-
-    if (trimmed.length > MAX_NAME_LENGTH) {
-      return (
-        I18nService.getMessage('nameTooLong') ||
-        `Name must be ${MAX_NAME_LENGTH} characters or less`
-      )
-    }
-
-    return ''
+  if (trimmed.length < MIN_NAME_LENGTH) {
+    return (
+      I18nService.getMessage('nameTooShort') || `Name must be at least ${MIN_NAME_LENGTH} character`
+    )
   }
 
-  function handleNameBlur() {
-    nameTouched = true
+  if (trimmed.length > MAX_NAME_LENGTH) {
+    return (
+      I18nService.getMessage('nameTooLong') || `Name must be ${MAX_NAME_LENGTH} characters or less`
+    )
+  }
+
+  return ''
+}
+
+function handleNameBlur() {
+  nameTouched = true
+  nameError = validateName(name)
+}
+
+function handleNameInput() {
+  if (nameTouched) {
     nameError = validateName(name)
   }
-
-  function handleNameInput() {
-    if (nameTouched) {
-      nameError = validateName(name)
-    }
-  }
+}
 </script>
 
 <FlexGroup childrenGap="lg" alignItems="center" justifyContent="between">
@@ -86,11 +84,9 @@
       maxlength={MAX_NAME_LENGTH}
       class={inputVariants({ state: nameError && nameTouched ? 'error' : 'default', size: 'md' })}
       placeholder={I18nService.getMessage('enterConfigurationName')}
-    />
+    >
     {#if nameError && nameTouched}
-      <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">
-        {nameError}
-      </Text>
+      <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">{nameError}</Text>
     {/if}
   </div>
   <div>
@@ -107,7 +103,7 @@
           <Text classes="relative inline-flex py-2 px-4">&nbsp;</Text>
         {/snippet}
         {#snippet input()}
-          <input type="color" bind:value={color} />
+          <input type="color" bind:value={color}>
         {/snippet}
       </LabelButton>
     </div>

@@ -1,46 +1,46 @@
 <script lang="ts">
-  import type { ListViewType } from '@/interfaces'
-  import { cn } from '@/utils/cn'
-  import { dragPatterns } from '@/utils/classPatterns'
+import type { ListViewType } from '@/interfaces'
+import { dragPatterns } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
 
-  interface Props {
-    dragstart?: (event: DragEvent) => void
-    dragend?: (event: DragEvent) => void
-    name: string
-    id: string
-    dataType: ListViewType
-    disabled: boolean
-    dragType?: string
-    children?: () => any
-  }
+interface Props {
+  dragstart?: (event: DragEvent) => void
+  dragend?: (event: DragEvent) => void
+  name: string
+  id: string
+  dataType: ListViewType
+  disabled: boolean
+  dragType?: string
+  children?: () => any
+}
 
-  let {
-    dragstart,
-    dragend,
-    name,
-    id,
-    dataType,
-    disabled,
-    dragType = $bindable(),
-    children,
-  }: Props = $props()
+let {
+  dragstart,
+  dragend,
+  name,
+  id,
+  dataType,
+  disabled,
+  dragType = $bindable(),
+  children,
+}: Props = $props()
 
-  function handleDragStart(event: DragEvent) {
-    if (disabled || !event.dataTransfer) return
+function handleDragStart(event: DragEvent) {
+  if (disabled || !event.dataTransfer) return
 
-    dragType = dataType
-    dragstart && dragstart(event)
+  dragType = dataType
+  dragstart && dragstart(event)
 
-    // Set the drag data
-    event.dataTransfer.setData('text/plain', `${dataType}__${id}`)
-    event.dataTransfer.effectAllowed = 'move'
+  // Set the drag data
+  event.dataTransfer.setData('text/plain', `${dataType}__${id}`)
+  event.dataTransfer.effectAllowed = 'move'
 
-    // Create or get drag ghost element
-    let dragGhost = document.getElementById('drag-ghost')
-    if (!dragGhost) {
-      dragGhost = document.createElement('div')
-      dragGhost.id = 'drag-ghost'
-      dragGhost.style.cssText = `
+  // Create or get drag ghost element
+  let dragGhost = document.getElementById('drag-ghost')
+  if (!dragGhost) {
+    dragGhost = document.createElement('div')
+    dragGhost.id = 'drag-ghost'
+    dragGhost.style.cssText = `
         position: absolute;
         top: -9999px;
         left: -9999px;
@@ -56,36 +56,36 @@
         z-index: 9999;
         transform: rotate(2deg);
       `
-      document.body.appendChild(dragGhost)
-    }
-
-    // Update drag ghost appearance
-    const item = event.currentTarget as HTMLElement
-    const color = item.dataset.color || '#3B82F6'
-
-    dragGhost.style.borderLeftColor = color
-    dragGhost.textContent = `📦 ${name}`
-    dragGhost.style.display = 'block'
-
-    // Set the drag image
-    event.dataTransfer.setDragImage(dragGhost, 20, 20)
-
-    // Restore position after browser captures the image
-    setTimeout(() => {
-      if (dragGhost) dragGhost.style.display = 'none'
-    }, 0)
+    document.body.appendChild(dragGhost)
   }
 
-  function handleDragEnd(event: DragEvent) {
-    dragType = ''
-    dragend && dragend(event)
+  // Update drag ghost appearance
+  const item = event.currentTarget as HTMLElement
+  const color = item.dataset.color || '#3B82F6'
 
-    // Hide drag image
-    const dragImage = document.getElementById('drag-image')
-    if (dragImage) {
-      dragImage.style.display = 'none'
-    }
+  dragGhost.style.borderLeftColor = color
+  dragGhost.textContent = `📦 ${name}`
+  dragGhost.style.display = 'block'
+
+  // Set the drag image
+  event.dataTransfer.setDragImage(dragGhost, 20, 20)
+
+  // Restore position after browser captures the image
+  setTimeout(() => {
+    if (dragGhost) dragGhost.style.display = 'none'
+  }, 0)
+}
+
+function handleDragEnd(event: DragEvent) {
+  dragType = ''
+  dragend && dragend(event)
+
+  // Hide drag image
+  const dragImage = document.getElementById('drag-image')
+  if (dragImage) {
+    dragImage.style.display = 'none'
   }
+}
 </script>
 
 <div

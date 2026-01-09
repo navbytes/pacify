@@ -11,14 +11,14 @@ export class SettingsWriter {
   static async updateSettings(partialSettings: Partial<AppSettings>): Promise<void> {
     const currentSettings = await SettingsReader.getSettings()
     const updatedSettings = { ...currentSettings, ...partialSettings }
-    await this.saveSettings(updatedSettings)
+    await SettingsWriter.saveSettings(updatedSettings)
   }
 
   static async addPACScript(script: Omit<ProxyConfig, 'id'>): Promise<void> {
     const settings = await SettingsReader.getSettings()
     const newScript: ProxyConfig = { ...script, id: crypto.randomUUID() }
     settings.proxyConfigs.push(newScript)
-    await this.saveSettings(settings)
+    await SettingsWriter.saveSettings(settings)
   }
 
   static async updatePACScript(script: ProxyConfig): Promise<void> {
@@ -26,7 +26,7 @@ export class SettingsWriter {
     const index = settings.proxyConfigs.findIndex((s) => s.id === script.id)
     if (index !== -1) {
       settings.proxyConfigs[index] = script
-      await this.saveSettings(settings)
+      await SettingsWriter.saveSettings(settings)
     }
   }
 
@@ -36,23 +36,23 @@ export class SettingsWriter {
     if (settings.activeScriptId === id) {
       settings.activeScriptId = null
     }
-    await this.saveSettings(settings)
+    await SettingsWriter.saveSettings(settings)
   }
 
   static async toggleQuickSwitch(enabled: boolean): Promise<void> {
     const settings = await SettingsReader.getSettings()
     settings.quickSwitchEnabled = enabled
-    await this.saveSettings(settings)
+    await SettingsWriter.saveSettings(settings)
   }
   public static async updateAllScripts(scripts: ProxyConfig[]): Promise<void> {
     const settings = await SettingsReader.getSettings()
     settings.proxyConfigs = scripts
-    await this.saveSettings(settings)
+    await SettingsWriter.saveSettings(settings)
   }
   public static async updateScriptQuickSwitch(id: string, enabled: boolean): Promise<void> {
     const script = await SettingsReader.getPacScriptById(id)
     if (script) {
-      await this.updatePACScript({ ...script, quickSwitch: enabled })
+      await SettingsWriter.updatePACScript({ ...script, quickSwitch: enabled })
     }
   }
 
@@ -92,7 +92,7 @@ export class SettingsWriter {
       settings.disableProxyOnStartup = settings.disableProxyOnStartup ?? false
 
       // Update the settings in storage
-      await this.saveSettings(settings)
+      await SettingsWriter.saveSettings(settings)
     } catch {
       throw new Error('Failed to restore settings. Please check the file format.')
     }

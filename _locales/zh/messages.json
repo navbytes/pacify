@@ -362,7 +362,7 @@
     "message": "每行输入一个模式：\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "没有可用的代理"
@@ -501,10 +501,6 @@
   },
   "pacScriptRefreshed": {
     "message": "PAC脚本已成功刷新"
-  },
-  "pacUrlHelp": {
-    "message": "PAC脚本将从此URL加载"
-  }
   },
   "autoReloadEnabled": {
     "message": "Auto-reload enabled"

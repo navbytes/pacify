@@ -1,16 +1,16 @@
-import { SettingsReader, SettingsWriter } from '@/services'
 import {
-  type BackgroundMessage,
-  type BackgroundMessageType,
-  type ProxyConfig,
-  type SetProxyMessage,
-} from '@/interfaces'
-import {
-  DEFAULT_BADGE_TEXT,
   DEFAULT_BADGE_COLOR,
+  DEFAULT_BADGE_TEXT,
   POPUP_DISABLED,
   POPUP_ENABLED,
 } from '@/constants/app'
+import type {
+  BackgroundMessage,
+  BackgroundMessageType,
+  ProxyConfig,
+  SetProxyMessage,
+} from '@/interfaces'
+import { SettingsReader, SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
 import { logger } from '@/services/LoggerService'

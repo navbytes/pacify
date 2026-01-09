@@ -1,42 +1,38 @@
 <script lang="ts">
-  import { cn } from '@/utils/cn'
-  import { flexGroupVariants, type VariantProps } from '@/utils/classPatterns'
+import { flexGroupVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
 
-  type FlexGroupVariant = VariantProps<typeof flexGroupVariants>
+interface Props {
+  classes?: string
+  direction?: 'horizontal' | 'vertical'
+  childrenGap?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+  alignItems?: 'start' | 'center' | 'end' | 'stretch' | 'baseline'
+  justifyContent?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
+  children?: () => any
+  role?: string
+}
 
-  interface Props {
-    classes?: string
-    direction?: FlexGroupVariant['direction']
-    childrenGap?: FlexGroupVariant['childrenGap']
-    alignItems?: FlexGroupVariant['alignItems']
-    justifyContent?: FlexGroupVariant['justifyContent']
-    children?: () => any
-    role?: string
-  }
+const {
+  classes = '',
+  direction = 'horizontal',
+  childrenGap = 'md',
+  alignItems = 'center',
+  justifyContent = 'start',
+  children,
+  role,
+}: Props = $props()
 
-  const {
-    classes = '',
-    direction = 'horizontal',
-    childrenGap = 'md',
-    alignItems = 'center',
-    justifyContent = 'start',
-    children,
-    role,
-  }: Props = $props()
-
-  const flexGroupClasses = $derived(
-    cn(
-      flexGroupVariants({
-        direction,
-        childrenGap,
-        alignItems,
-        justifyContent,
-      }),
-      classes
-    )
+const flexGroupClasses = $derived(
+  cn(
+    flexGroupVariants({
+      direction,
+      childrenGap,
+      alignItems,
+      justifyContent,
+    }),
+    classes
   )
+)
 </script>
 
-<div class={flexGroupClasses} {role}>
-  {@render children?.()}
-</div>
+<div class={flexGroupClasses} {role}>{@render children?.()}</div>

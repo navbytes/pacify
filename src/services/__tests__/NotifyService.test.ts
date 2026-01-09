@@ -1,6 +1,6 @@
-import { describe, test, expect, mock } from 'bun:test'
+import { describe, expect, mock, test } from 'bun:test'
+import { ALERT_TYPES, ERROR_TYPES } from '@/interfaces'
 import { NotifyService } from '../NotifyService'
-import { ERROR_TYPES, ALERT_TYPES } from '@/interfaces'
 
 describe('NotifyService', () => {
   describe('error method', () => {

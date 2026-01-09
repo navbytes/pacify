@@ -1,62 +1,62 @@
 <script lang="ts">
-  import ToggleSwitch from '@/components/ToggleSwitch.svelte'
-  import { type ProxyConfig, type ListViewType } from '@/interfaces'
-  import { settingsStore } from '@/stores/settingsStore'
-  import { toastStore } from '@/stores/toastStore'
-  import { ShieldCheck, Pencil, Trash, GripVertical } from '@/utils/icons'
-  import Button from './Button.svelte'
-  import ConfirmDialog from './ConfirmDialog.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import DraggableItem from './DragDrop/DraggableItem.svelte'
-  import {
-    getProxyModeLabel,
-    getProxyModeIcon,
-    getProxyModeColor,
-    getProxyDescription,
-  } from '@/utils/proxyModeHelpers'
-  import { cn } from '@/utils/cn'
-  import { flexPatterns, badgePatterns } from '@/utils/classPatterns'
-  import { colors, transitions } from '@/utils/theme'
+import ToggleSwitch from '@/components/ToggleSwitch.svelte'
+import type { ListViewType, ProxyConfig } from '@/interfaces'
+import { I18nService } from '@/services/i18n/i18nService'
+import { settingsStore } from '@/stores/settingsStore'
+import { toastStore } from '@/stores/toastStore'
+import { badgePatterns, flexPatterns } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import { GripVertical, Pencil, ShieldCheck, Trash } from '@/utils/icons'
+import {
+  getProxyDescription,
+  getProxyModeColor,
+  getProxyModeIcon,
+  getProxyModeLabel,
+} from '@/utils/proxyModeHelpers'
+import { colors, transitions } from '@/utils/theme'
+import Button from './Button.svelte'
+import ConfirmDialog from './ConfirmDialog.svelte'
+import DraggableItem from './DragDrop/DraggableItem.svelte'
 
-  interface Props {
-    proxy: ProxyConfig
-    pageType?: ListViewType
-    dragType?: string
-    onScriptEdit: (scriptId: string) => void
-  }
+interface Props {
+  proxy: ProxyConfig
+  pageType?: ListViewType
+  dragType?: string
+  onScriptEdit: (scriptId: string) => void
+}
 
-  let { proxy, pageType = 'POPUP', onScriptEdit, dragType = $bindable() }: Props = $props()
+let { proxy, pageType = 'POPUP', onScriptEdit, dragType = $bindable() }: Props = $props()
 
-  let modeColors = $derived(getProxyModeColor(proxy.mode))
-  let ModeIcon = $derived(getProxyModeIcon(proxy.mode))
-  let modeLabel = $derived(getProxyModeLabel(proxy.mode))
-  let proxyDesc = $derived(getProxyDescription(proxy.mode, proxy))
-  let showDeleteDialog = $state(false)
+let modeColors = $derived(getProxyModeColor(proxy.mode))
+let ModeIcon = $derived(getProxyModeIcon(proxy.mode))
+let modeLabel = $derived(getProxyModeLabel(proxy.mode))
+let proxyDesc = $derived(getProxyDescription(proxy.mode, proxy))
+let showDeleteDialog = $state(false)
 
-  async function handleSetProxy(isActive: boolean, scriptId?: string) {
-    if (!scriptId) return
-    await settingsStore.setProxy(scriptId, isActive)
-    const message = isActive
-      ? I18nService.getMessage('proxyEnabled', proxy.name)
-      : I18nService.getMessage('proxyDisabled', proxy.name)
-    toastStore.show(message, isActive ? 'success' : 'info')
-  }
+async function handleSetProxy(isActive: boolean, scriptId?: string) {
+  if (!scriptId) return
+  await settingsStore.setProxy(scriptId, isActive)
+  const message = isActive
+    ? I18nService.getMessage('proxyEnabled', proxy.name)
+    : I18nService.getMessage('proxyDisabled', proxy.name)
+  toastStore.show(message, isActive ? 'success' : 'info')
+}
 
-  function openEditor(scriptId?: string) {
-    if (!scriptId) return
-    onScriptEdit(scriptId)
-  }
+function openEditor(scriptId?: string) {
+  if (!scriptId) return
+  onScriptEdit(scriptId)
+}
 
-  function confirmDelete() {
-    showDeleteDialog = true
-  }
+function confirmDelete() {
+  showDeleteDialog = true
+}
 
-  async function handleScriptDelete() {
-    if (!proxy.id) return
-    await settingsStore.deletePACScript(proxy.id)
-    const message = I18nService.getMessage('proxyDeleted', proxy.name)
-    toastStore.show(message, 'success')
-  }
+async function handleScriptDelete() {
+  if (!proxy.id) return
+  await settingsStore.deletePACScript(proxy.id)
+  const message = I18nService.getMessage('proxyDeleted', proxy.name)
+  toastStore.show(message, 'success')
+}
 </script>
 
 <DraggableItem
@@ -131,9 +131,7 @@
           <ModeIcon size={14} class={cn('flex-shrink-0', modeColors.text)} />
         {/if}
 
-        <h3 class={cn('text-base font-semibold truncate', colors.text.default)}>
-          {proxy.name}
-        </h3>
+        <h3 class={cn('text-base font-semibold truncate', colors.text.default)}>{proxy.name}</h3>
 
         {#if proxy.isActive}
           <span
@@ -187,9 +185,7 @@
 
         <!-- Description -->
         {#if proxyDesc}
-          <p class={cn('text-sm truncate', colors.text.muted)}>
-            {proxyDesc}
-          </p>
+          <p class={cn('text-sm truncate', colors.text.muted)}>{proxyDesc}</p>
         {/if}
       </div>
     {/if}
@@ -214,7 +210,9 @@
             aria-label={I18nService.getMessage('editConfiguration', proxy.name)}
             classes="hover:bg-blue-50 dark:hover:bg-blue-950/20"
           >
-            {#snippet icon()}<Pencil size={16} />{/snippet}
+            {#snippet icon()}
+              <Pencil size={16} />
+            {/snippet}
             <span class="text-sm">Edit</span>
           </Button>
           <Button
@@ -225,7 +223,9 @@
             classes="hover:bg-red-50 dark:hover:bg-red-950/20"
             data-testid={`delete-proxy-button-${proxy.id}`}
           >
-            {#snippet icon()}<Trash size={16} class={cn(colors.danger.text)} />{/snippet}
+            {#snippet icon()}
+              <Trash size={16} class={cn(colors.danger.text)} />
+            {/snippet}
             <span class="text-sm">Delete</span>
           </Button>
         </div>

@@ -128,7 +128,7 @@ Powered by CodeMirror 6 (modern, lightweight code editor):
 - **Code Editor**: CodeMirror 6 (lightweight, modern)
 - **Icons**: Lucide Svelte
 - **Testing**: Bun Test + Playwright
-- **Code Quality**: ESLint, Prettier, Husky
+- **Code Quality**: Biome, Husky
 
 ### Project Structure
 

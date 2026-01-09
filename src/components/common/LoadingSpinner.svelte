@@ -1,15 +1,13 @@
 <script lang="ts">
-  import { cn } from '@/utils/cn'
-  import { loadingSpinnerVariants, type VariantProps } from '@/utils/classPatterns'
+import { loadingSpinnerVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
 
-  type LoadingSpinnerVariant = VariantProps<typeof loadingSpinnerVariants>
+interface Props {
+  size?: 'sm' | 'md' | 'lg'
+  color?: string
+}
 
-  interface Props {
-    size?: LoadingSpinnerVariant['size']
-    color?: string
-  }
-
-  let { size = 'md', color = 'text-blue-500' }: Props = $props()
+let { size = 'md', color = 'text-blue-500' }: Props = $props()
 </script>
 
 <div class="flex justify-center items-center">

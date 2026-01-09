@@ -1,25 +1,26 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  import Text from '../Text.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import { logger } from '@/services/LoggerService'
-  let { children } = $props()
+import { onMount } from 'svelte'
+import { I18nService } from '@/services/i18n/i18nService'
+import { logger } from '@/services/LoggerService'
+import Text from '../Text.svelte'
 
-  let error = $state<Error | null>(null)
-  let hasError = $state(false)
+let { children } = $props()
 
-  function handleError(event: ErrorEvent) {
-    hasError = true
-    error = event.error
-    logger.error('Component Error:', event.error)
+let error = $state<Error | null>(null)
+let hasError = $state(false)
+
+function handleError(event: ErrorEvent) {
+  hasError = true
+  error = event.error
+  logger.error('Component Error:', event.error)
+}
+
+onMount(() => {
+  window.addEventListener('error', handleError)
+  return () => {
+    window.removeEventListener('error', handleError)
   }
-
-  onMount(() => {
-    window.addEventListener('error', handleError)
-    return () => {
-      window.removeEventListener('error', handleError)
-    }
-  })
+})
 </script>
 
 {#if hasError && error}

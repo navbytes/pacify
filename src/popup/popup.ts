@@ -1,6 +1,6 @@
 import { mount } from 'svelte'
-import App from './Popup.svelte'
 import { themeStore } from '@/stores/themeStore'
+import App from './Popup.svelte'
 
 // popup.ts
 

@@ -362,7 +362,7 @@
     "message": "Introduceți un model pe linie:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "Nu există proxy-uri disponibile"
@@ -501,10 +501,6 @@
   },
   "pacScriptRefreshed": {
     "message": "Scriptul PAC a fost actualizat cu succes"
-  },
-  "pacUrlHelp": {
-    "message": "Scriptul PAC va fi încărcat de la acest URL"
-  }
   },
   "autoReloadEnabled": {
     "message": "Auto-reload enabled"

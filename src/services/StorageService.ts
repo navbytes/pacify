@@ -1,6 +1,7 @@
 // src/services/StorageService.ts
-import { ERROR_TYPES, type AppSettings, type Settings } from '@/interfaces'
+
 import { DEFAULT_SETTINGS } from '@/constants/app'
+import { type AppSettings, ERROR_TYPES, type Settings } from '@/interfaces'
 import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
 import { browserService } from './chrome/BrowserService'
 
@@ -125,8 +126,8 @@ export class StorageService {
    * Invalidates the settings cache
    */
   static invalidateCache(): void {
-    this.settingsCache = null
-    this.lastSettingsUpdate = 0
+    StorageService.settingsCache = null
+    StorageService.lastSettingsUpdate = 0
   }
 
   /**

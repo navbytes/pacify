@@ -1,34 +1,32 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte'
-  import { tooltipVariants, tooltipArrowVariants, type VariantProps } from '@/utils/classPatterns'
+import type { Snippet } from 'svelte'
+import { tooltipArrowVariants, tooltipVariants } from '@/utils/classPatterns'
 
-  type TooltipVariant = VariantProps<typeof tooltipVariants>
+interface Props {
+  text: string
+  position?: 'top' | 'bottom' | 'left' | 'right'
+  delay?: number
+  children?: Snippet
+}
 
-  interface Props {
-    text: string
-    position?: TooltipVariant['position']
-    delay?: number
-    children?: Snippet
+let { text, position = 'top', delay = 300, children }: Props = $props()
+
+let showTooltip = $state(false)
+let timeout: ReturnType<typeof setTimeout> | null = null
+
+function handleMouseEnter() {
+  timeout = setTimeout(() => {
+    showTooltip = true
+  }, delay)
+}
+
+function handleMouseLeave() {
+  if (timeout) {
+    clearTimeout(timeout)
+    timeout = null
   }
-
-  let { text, position = 'top', delay = 300, children }: Props = $props()
-
-  let showTooltip = $state(false)
-  let timeout: ReturnType<typeof setTimeout> | null = null
-
-  function handleMouseEnter() {
-    timeout = setTimeout(() => {
-      showTooltip = true
-    }, delay)
-  }
-
-  function handleMouseLeave() {
-    if (timeout) {
-      clearTimeout(timeout)
-      timeout = null
-    }
-    showTooltip = false
-  }
+  showTooltip = false
+}
 </script>
 
 <div
@@ -50,18 +48,18 @@
 </div>
 
 <style lang="postcss">
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .animate-fade-in {
-    animation: fade-in 0.15s ease-out;
-  }
+.animate-fade-in {
+  animation: fade-in 0.15s ease-out;
+}
 </style>

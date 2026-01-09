@@ -1,8 +1,7 @@
-import type { EditorView } from '@codemirror/view'
 import type { Extension } from '@codemirror/state'
+import type { EditorView } from '@codemirror/view'
 
 // Type for CodeMirror Editor instance
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ICodeMirrorEditor extends EditorView {
   // EditorView already has all the methods we need
 }

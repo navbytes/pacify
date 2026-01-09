@@ -1,56 +1,54 @@
 <script lang="ts">
-  import { settingsStore } from '@/stores/settingsStore'
-  import ScriptItem from './ScriptItem.svelte'
-  import EmptyState from './EmptyState.svelte'
-  import type { ListViewType, ProxyConfig } from '@/interfaces'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import { Globe, Zap } from '@/utils/icons'
-  import { cn } from '@/utils/cn'
-  import { flexPatterns } from '@/utils/classPatterns'
-  import { colors } from '@/utils/theme'
+import type { ListViewType, ProxyConfig } from '@/interfaces'
+import { I18nService } from '@/services/i18n/i18nService'
+import { settingsStore } from '@/stores/settingsStore'
+import { flexPatterns } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import { Globe, Zap } from '@/utils/icons'
+import { colors } from '@/utils/theme'
+import EmptyState from './EmptyState.svelte'
+import ScriptItem from './ScriptItem.svelte'
 
-  // Note: settingsStore.init() is called by parent component (Popup.svelte)
-  // No need to initialize again here to avoid duplicate storage reads
-  let proxyConfigsFromStore = $derived($settingsStore.proxyConfigs ?? [])
+// Note: settingsStore.init() is called by parent component (Popup.svelte)
+// No need to initialize again here to avoid duplicate storage reads
+let proxyConfigsFromStore = $derived($settingsStore.proxyConfigs ?? [])
 
-  interface Props {
-    pageType?: ListViewType
-    title: string
-    onScriptEdit?: (scriptId: string) => void
-    dragType?: string
-    proxies?: ProxyConfig[] // Optional filtered proxies list
-  }
+interface Props {
+  pageType?: ListViewType
+  title: string
+  onScriptEdit?: (scriptId: string) => void
+  dragType?: string
+  proxies?: ProxyConfig[] // Optional filtered proxies list
+}
 
-  let { pageType = 'POPUP', title, onScriptEdit, dragType = $bindable(), proxies }: Props = $props()
+let { pageType = 'POPUP', title, onScriptEdit, dragType = $bindable(), proxies }: Props = $props()
 
-  // Use provided proxies or fall back to store
-  let proxyConfigs = $derived(proxies ?? proxyConfigsFromStore)
+// Use provided proxies or fall back to store
+let proxyConfigs = $derived(proxies ?? proxyConfigsFromStore)
 
-  function openEditor(scriptId?: string) {
-    if (!scriptId || !onScriptEdit) return
-    onScriptEdit(scriptId)
-  }
+function openEditor(scriptId?: string) {
+  if (!scriptId || !onScriptEdit) return
+  onScriptEdit(scriptId)
+}
 
-  // Fix: Use $derived to create a derived array instead of a function
-  let displayProxyConfigs = $derived<ProxyConfig[]>(
-    pageType === 'QUICK_SWITCH'
-      ? proxyConfigs.filter((script) => script.quickSwitch)
-      : pageType === 'POPUP'
-        ? [...proxyConfigs].sort((a, b) => {
-            // Sort Quick Switch proxies to the top
-            if (a.quickSwitch && !b.quickSwitch) return -1
-            if (!a.quickSwitch && b.quickSwitch) return 1
-            return 0
-          })
-        : proxyConfigs
-  )
+// Fix: Use $derived to create a derived array instead of a function
+let displayProxyConfigs = $derived<ProxyConfig[]>(
+  pageType === 'QUICK_SWITCH'
+    ? proxyConfigs.filter((script) => script.quickSwitch)
+    : pageType === 'POPUP'
+      ? [...proxyConfigs].sort((a, b) => {
+          // Sort Quick Switch proxies to the top
+          if (a.quickSwitch && !b.quickSwitch) return -1
+          if (!a.quickSwitch && b.quickSwitch) return 1
+          return 0
+        })
+      : proxyConfigs
+)
 </script>
 
 <section class="w-full">
   {#if title !== ''}
-    <h2 class={cn('mb-4 text-lg font-semibold', colors.text.default)}>
-      {title}
-    </h2>
+    <h2 class={cn('mb-4 text-lg font-semibold', colors.text.default)}>{title}</h2>
   {/if}
 
   {#if displayProxyConfigs.length > 0}
@@ -94,8 +92,8 @@
 </section>
 
 <style lang="postcss">
-  @import 'tailwindcss' reference;
+@import "tailwindcss" reference;
 
-  /* Note: Grid children transitions are defined globally in app.css
+/* Note: Grid children transitions are defined globally in app.css
      to avoid Lightning CSS warnings about :global() syntax */
 </style>

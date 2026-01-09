@@ -1,43 +1,32 @@
 <script lang="ts">
-  import Text from './Text.svelte'
-  import FlexGroup from './FlexGroup.svelte'
-  import {
-    progressBarVariants,
-    progressBarFillVariants,
-    type VariantProps,
-  } from '@/utils/classPatterns'
+import { progressBarFillVariants, progressBarVariants } from '@/utils/classPatterns'
+import FlexGroup from './FlexGroup.svelte'
+import Text from './Text.svelte'
 
-  type ProgressBarVariant = VariantProps<typeof progressBarVariants>
-  type ProgressBarFillVariant = VariantProps<typeof progressBarFillVariants>
+interface Props {
+  value: number
+  max: number
+  label?: string
+  showPercentage?: boolean
+  size?: 'sm' | 'md' | 'lg'
+}
 
-  interface Props {
-    value: number
-    max: number
-    label?: string
-    showPercentage?: boolean
-    size?: ProgressBarVariant['size']
-  }
+let { value, max, label, showPercentage = true, size = 'md' }: Props = $props()
 
-  let { value, max, label, showPercentage = true, size = 'md' }: Props = $props()
+let percentage = $derived(Math.min((value / max) * 100, 100))
 
-  let percentage = $derived(Math.min((value / max) * 100, 100))
-
-  // Determine color variant based on usage percentage
-  let percentageVariant = $derived<ProgressBarFillVariant['percentage']>(
-    percentage < 50 ? 'low' : percentage < 80 ? 'medium' : 'high'
-  )
+// Determine color variant based on usage percentage
+let percentageVariant = $derived<'low' | 'medium' | 'high'>(
+  percentage < 50 ? 'low' : percentage < 80 ? 'medium' : 'high'
+)
 </script>
 
 <div class="w-full">
   {#if label}
     <FlexGroup alignItems="center" justifyContent="between" classes="mb-1">
-      <Text size="sm" weight="medium" classes="text-slate-700 dark:text-slate-300">
-        {label}
-      </Text>
+      <Text size="sm" weight="medium" classes="text-slate-700 dark:text-slate-300">{label}</Text>
       {#if showPercentage}
-        <Text size="sm" color="muted">
-          {percentage.toFixed(1)}%
-        </Text>
+        <Text size="sm" color="muted">{percentage.toFixed(1)}%</Text>
       {/if}
     </FlexGroup>
   {/if}

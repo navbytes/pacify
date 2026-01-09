@@ -362,7 +362,7 @@
     "message": "1行に1つのパターンを入力:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
   },
   "pacUrlPlaceholder": {
-    "message": "https://example.com/proxy.pac"
+    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
   },
   "noProxiesTitle": {
     "message": "利用可能なプロキシがありません"
@@ -501,10 +501,6 @@
   },
   "pacScriptRefreshed": {
     "message": "PACスクリプトが正常に更新されました"
-  },
-  "pacUrlHelp": {
-    "message": "PACスクリプトはこのURLから読み込まれます"
-  }
   },
   "autoReloadEnabled": {
     "message": "Auto-reload enabled"

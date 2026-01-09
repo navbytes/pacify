@@ -1,17 +1,17 @@
-import { EditorView, lineNumbers, keymap } from '@codemirror/view'
-import { EditorState, Compartment } from '@codemirror/state'
-import { basicSetup } from 'codemirror'
 import { startCompletion } from '@codemirror/autocomplete'
-import { ERROR_TYPES, type CodeMirrorOptions, type ICodeMirrorEditor } from '@/interfaces'
-import { withErrorHandling } from '@/utils/errorHandling'
+import { Compartment, EditorState } from '@codemirror/state'
+import { EditorView, keymap, lineNumbers } from '@codemirror/view'
+import { basicSetup } from 'codemirror'
+import { type CodeMirrorOptions, ERROR_TYPES, type ICodeMirrorEditor } from '@/interfaces'
 import {
   createBasicExtensions,
+  createThemeExtension,
+  darkTheme,
   defaultCodeMirrorOptions,
   getSystemTheme,
   lightTheme,
-  darkTheme,
-  createThemeExtension,
 } from '@/utils/codemirror'
+import { withErrorHandling } from '@/utils/errorHandling'
 
 // Detect if we're in a browser context (runtime check for testability)
 const isBrowserContext = (): boolean => typeof window !== 'undefined'
@@ -34,7 +34,9 @@ export class CodeMirror {
 
       const handleThemeChange = (e: MediaQueryListEvent) => {
         const newTheme = e.matches ? 'dark' : 'light'
-        this.themeChangeListeners.forEach((listener) => listener(newTheme))
+        this.themeChangeListeners.forEach((listener) => {
+          listener(newTheme)
+        })
       }
 
       mediaQuery.addEventListener('change', handleThemeChange)
@@ -328,11 +330,11 @@ export class CodeMirror {
    * Adds an event listener for theme changes
    */
   static onThemeChange(listener: (theme: 'light' | 'dark') => void): () => void {
-    this.themeChangeListeners.add(listener)
+    CodeMirror.themeChangeListeners.add(listener)
 
     // Return cleanup function
     return () => {
-      this.themeChangeListeners.delete(listener)
+      CodeMirror.themeChangeListeners.delete(listener)
     }
   }
 

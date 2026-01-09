@@ -14,9 +14,9 @@ export class PerformanceMonitor {
    * Start measuring a performance event
    */
   static startMeasure(name: string, data?: Record<string, unknown>): void {
-    if (!this.enabled) return
+    if (!PerformanceMonitor.enabled) return
 
-    this.events.set(name, {
+    PerformanceMonitor.events.set(name, {
       name,
       startTime: performance.now(),
       data,
@@ -32,9 +32,9 @@ export class PerformanceMonitor {
    * End measuring a performance event
    */
   static endMeasure(name: string, additionalData?: Record<string, unknown>): number | undefined {
-    if (!this.enabled) return
+    if (!PerformanceMonitor.enabled) return
 
-    const event = this.events.get(name)
+    const event = PerformanceMonitor.events.get(name)
     if (!event) {
       console.warn(`No performance measurement found for: ${name}`)
       return
@@ -50,8 +50,8 @@ export class PerformanceMonitor {
     const duration = endTime - event.startTime
 
     // Store the completed measure
-    this.measures.push({ ...event })
-    this.events.delete(name)
+    PerformanceMonitor.measures.push({ ...event })
+    PerformanceMonitor.events.delete(name)
 
     // Also use the built-in Performance API if available
     if (typeof performance !== 'undefined' && performance.measure) {
@@ -79,23 +79,23 @@ export class PerformanceMonitor {
     _threshold: number = 100
   ): (...args: Parameters<T>) => ReturnType<T> {
     return (...args: Parameters<T>): ReturnType<T> => {
-      this.startMeasure(name, { args: args.length > 0 ? args : undefined })
+      PerformanceMonitor.startMeasure(name, { args: args.length > 0 ? args : undefined })
       const result = fn(...args)
 
       // Handle promises
       if (result instanceof Promise) {
         return result
           .then((value) => {
-            this.endMeasure(name)
+            PerformanceMonitor.endMeasure(name)
             return value
           })
           .catch((error) => {
-            this.endMeasure(name, { error: error.message })
+            PerformanceMonitor.endMeasure(name, { error: error.message })
             throw error
           }) as ReturnType<T>
       }
 
-      this.endMeasure(name)
+      PerformanceMonitor.endMeasure(name)
       return result as ReturnType<T>
     }
   }
@@ -104,15 +104,15 @@ export class PerformanceMonitor {
    * Get all completed performance measures
    */
   static getMeasures(): readonly PerformanceEvent[] {
-    return [...this.measures]
+    return [...PerformanceMonitor.measures]
   }
 
   /**
    * Clear all performance measures
    */
   static clearMeasures(): void {
-    this.measures = []
-    this.events.clear()
+    PerformanceMonitor.measures = []
+    PerformanceMonitor.events.clear()
 
     // Also clear the Performance API if available
     if (typeof performance !== 'undefined' && performance.clearMarks) {
@@ -125,19 +125,18 @@ export class PerformanceMonitor {
    * Enable or disable performance monitoring
    */
   static setEnabled(enabled: boolean): void {
-    this.enabled = enabled
+    PerformanceMonitor.enabled = enabled
   }
 
   /**
    * Check if performance monitoring is enabled
    */
   static isEnabled(): boolean {
-    return this.enabled
+    return PerformanceMonitor.enabled
   }
 }
 
 // HOC for measuring component render performance
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function measureComponent(component: any, name?: string): any {
   const componentName = name || component.name || 'UnnamedComponent'
 

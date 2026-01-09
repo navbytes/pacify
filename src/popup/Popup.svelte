@@ -1,37 +1,37 @@
 <script lang="ts">
-  import ScriptList from '@/components/ScriptList.svelte'
-  import EmptyState from '@/components/EmptyState.svelte'
-  import { ChromeService } from '@/services/chrome'
-  import { onMount } from 'svelte'
-  import { settingsStore } from '@/stores/settingsStore'
-  import { Settings, Power, Cable, Plus } from '@/utils/icons'
-  import Button from '@/components/Button.svelte'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import Text from '@/components/Text.svelte'
-  import Tooltip from '@/components/Tooltip.svelte'
+import { onMount } from 'svelte'
+import Button from '@/components/Button.svelte'
+import EmptyState from '@/components/EmptyState.svelte'
+import ScriptList from '@/components/ScriptList.svelte'
+import Text from '@/components/Text.svelte'
+import Tooltip from '@/components/Tooltip.svelte'
+import { ChromeService } from '@/services/chrome'
+import { I18nService } from '@/services/i18n/i18nService'
+import { settingsStore } from '@/stores/settingsStore'
+import { Cable, Plus, Power, Settings } from '@/utils/icons'
 
-  let settings = $derived($settingsStore)
-  let activeProxy = $derived(settings.proxyConfigs?.find((p) => p.isActive) || null)
-  let hasProxies = $derived((settings.proxyConfigs?.length || 0) > 0)
+let settings = $derived($settingsStore)
+let activeProxy = $derived(settings.proxyConfigs?.find((p) => p.isActive) || null)
+let hasProxies = $derived((settings.proxyConfigs?.length || 0) > 0)
 
-  // Initialize settings on mount
-  onMount(() => {
-    settingsStore.init()
-  })
+// Initialize settings on mount
+onMount(() => {
+  settingsStore.init()
+})
 
-  function openSettings() {
-    ChromeService.openOptionsPage()
+function openSettings() {
+  ChromeService.openOptionsPage()
+}
+
+function quickAddProxy() {
+  ChromeService.openOptionsPage({ action: 'create' })
+}
+
+async function disableAllProxies() {
+  if (activeProxy) {
+    await settingsStore.setProxy(activeProxy.id!, false)
   }
-
-  function quickAddProxy() {
-    ChromeService.openOptionsPage({ action: 'create' })
-  }
-
-  async function disableAllProxies() {
-    if (activeProxy) {
-      await settingsStore.setProxy(activeProxy.id!, false)
-    }
-  }
+}
 </script>
 
 <div class="w-96 bg-white dark:bg-slate-900 flex flex-col">
@@ -46,14 +46,18 @@
     <div class="flex items-center gap-1">
       <Tooltip text="Add new proxy" position="bottom">
         <Button minimal color="primary" onclick={quickAddProxy}>
-          {#snippet icon()}<Plus size={18} />{/snippet}
+          {#snippet icon()}
+            <Plus size={18} />
+          {/snippet}
           <Text classes="sr-only">Add new proxy</Text>
         </Button>
       </Tooltip>
 
       <Tooltip text={I18nService.getMessage('settings')} position="bottom">
         <Button minimal color="secondary" onclick={openSettings}>
-          {#snippet icon()}<Settings size={18} />{/snippet}
+          {#snippet icon()}
+            <Settings size={18} />
+          {/snippet}
           <Text classes="sr-only">{I18nService.getMessage('settings')}</Text>
         </Button>
       </Tooltip>
@@ -100,14 +104,18 @@
         <div class="flex-shrink-0">
           {#if activeProxy}
             <Button size="sm" color="secondary" onclick={disableAllProxies}>
-              {#snippet icon()}<Power size={14} />{/snippet}
+              {#snippet icon()}
+                <Power size={14} />
+              {/snippet}
               {I18nService.getMessage('offButton')}
             </Button>
           {:else}
             <!-- Invisible placeholder to maintain layout -->
             <div class="invisible">
               <Button size="sm" color="secondary">
-                {#snippet icon()}<Power size={14} />{/snippet}
+                {#snippet icon()}
+                  <Power size={14} />
+                {/snippet}
                 {I18nService.getMessage('offButton')}
               </Button>
             </div>
@@ -119,45 +127,45 @@
 </div>
 
 <style lang="postcss">
-  /* Custom scrollbar styles */
-  main {
-    max-height: calc(400px - 4rem);
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-slate-300) var(--color-slate-100);
-  }
+/* Custom scrollbar styles */
+main {
+  max-height: calc(400px - 4rem);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-slate-300) var(--color-slate-100);
+}
 
-  main::-webkit-scrollbar {
-    width: 0.375rem;
+main::-webkit-scrollbar {
+  width: 0.375rem;
+}
+
+main::-webkit-scrollbar-track {
+  background-color: var(--color-slate-100);
+}
+
+@media (prefers-color-scheme: dark) {
+  main {
+    scrollbar-color: var(--color-slate-600) var(--color-slate-700);
   }
 
   main::-webkit-scrollbar-track {
-    background-color: var(--color-slate-100);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    main {
-      scrollbar-color: var(--color-slate-600) var(--color-slate-700);
-    }
-
-    main::-webkit-scrollbar-track {
-      background-color: var(--color-slate-700);
-    }
-
-    main::-webkit-scrollbar-thumb {
-      background-color: var(--color-slate-600);
-    }
-
-    main::-webkit-scrollbar-thumb:hover {
-      background-color: var(--color-slate-500);
-    }
+    background-color: var(--color-slate-700);
   }
 
   main::-webkit-scrollbar-thumb {
-    background-color: var(--color-slate-300);
-    border-radius: 9999px;
+    background-color: var(--color-slate-600);
   }
 
   main::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-slate-400);
+    background-color: var(--color-slate-500);
   }
+}
+
+main::-webkit-scrollbar-thumb {
+  background-color: var(--color-slate-300);
+  border-radius: 9999px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-slate-400);
+}
 </style>

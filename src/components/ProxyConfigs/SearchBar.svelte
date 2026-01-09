@@ -1,38 +1,38 @@
 <script lang="ts">
-  import { Search, X } from '@/utils/icons'
-  import { I18nService } from '@/services/i18n/i18nService'
-  import { inputVariants } from '@/utils/classPatterns'
-  import { cn } from '@/utils/cn'
+import { I18nService } from '@/services/i18n/i18nService'
+import { inputVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
+import { Search, X } from '@/utils/icons'
 
-  interface Props {
-    searchQuery: string
-    onsearch: (query: string) => void
-    onfocus?: () => void
-  }
+interface Props {
+  searchQuery: string
+  onsearch: (query: string) => void
+  onfocus?: () => void
+}
 
-  let { searchQuery = $bindable(), onsearch, onfocus }: Props = $props()
+let { searchQuery = $bindable(), onsearch, onfocus }: Props = $props()
 
-  let searchInputRef = $state<HTMLInputElement>()
+let searchInputRef = $state<HTMLInputElement>()
 
-  function handleClear() {
-    searchQuery = ''
-    onsearch('')
-    searchInputRef?.focus()
-  }
+function handleClear() {
+  searchQuery = ''
+  onsearch('')
+  searchInputRef?.focus()
+}
 
-  function handleInput(event: Event) {
-    const target = event.target as HTMLInputElement
-    onsearch(target.value)
-  }
+function handleInput(event: Event) {
+  const target = event.target as HTMLInputElement
+  onsearch(target.value)
+}
 
-  // Expose focus method for parent component
-  export function focus() {
-    searchInputRef?.focus()
-  }
+// Expose focus method for parent component
+export function focus() {
+  searchInputRef?.focus()
+}
 
-  export function blur() {
-    searchInputRef?.blur()
-  }
+export function blur() {
+  searchInputRef?.blur()
+}
 </script>
 
 <div class="relative">
@@ -50,7 +50,7 @@
       inputVariants({ state: 'default', size: 'md' }),
       'block pl-10 pr-10 py-2.5 rounded-lg transition-all duration-150'
     )}
-  />
+  >
   {#if searchQuery}
     <button
       type="button"

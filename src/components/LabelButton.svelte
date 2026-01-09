@@ -1,40 +1,38 @@
 <script lang="ts" module>
-  import type { ComponentType } from 'svelte'
+import type { ComponentType } from 'svelte'
 
-  export type HideType = 'hidden' | 'invisible'
+export type HideType = 'hidden' | 'invisible'
 </script>
 
 <script lang="ts">
-  import type { Snippet } from 'svelte'
-  import Text from './Text.svelte'
-  import { labelButtonVariants, type VariantProps } from '@/utils/classPatterns'
+import type { Snippet } from 'svelte'
+import { labelButtonVariants } from '@/utils/classPatterns'
+import Text from './Text.svelte'
 
-  type LabelButtonVariant = VariantProps<typeof labelButtonVariants>
+interface Props {
+  color?: 'primary' | 'secondary' | 'success' | 'error' | 'info'
+  minimal?: boolean
+  hideType?: HideType
+  icon?: ComponentType | null
+  children?: Snippet
+  input?: Snippet
+}
 
-  interface Props {
-    color?: LabelButtonVariant['intent']
-    minimal?: boolean
-    hideType?: HideType
-    icon?: ComponentType | null
-    children?: Snippet
-    input?: Snippet
-  }
+let {
+  color = 'primary',
+  minimal = false,
+  hideType = 'hidden',
+  icon = null,
+  children,
+  input,
+}: Props = $props()
 
-  let {
-    color = 'primary',
-    minimal = false,
-    hideType = 'hidden',
-    icon = null,
-    children,
-    input,
-  }: Props = $props()
-
-  const labelClasses = $derived(
-    labelButtonVariants({
-      intent: color,
-      variant: minimal ? 'minimal' : 'base',
-    })
-  )
+const labelClasses = $derived(
+  labelButtonVariants({
+    intent: color,
+    variant: minimal ? 'minimal' : 'base',
+  })
+)
 </script>
 
 <label class={labelClasses}>
@@ -51,8 +49,6 @@
   {#if input}
     <!-- Wrap the input snippet in a hidden span so that it is still part of the DOM,
          but not visible. -->
-    <Text classes={hideType}>
-      {@render input()}
-    </Text>
+    <Text classes={hideType}>{@render input()}</Text>
   {/if}
 </label>

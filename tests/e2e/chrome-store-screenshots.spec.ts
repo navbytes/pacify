@@ -1,8 +1,8 @@
-import { expect, test, type BrowserContext } from '@playwright/test'
+import { type BrowserContext, expect, test } from '@playwright/test'
 import {
+  getExtensionUrls,
   launchExtension,
   navigateToExtensionPage,
-  getExtensionUrls,
 } from './helpers/extension-loader'
 
 /**
@@ -292,10 +292,7 @@ test.describe('Chrome Web Store Screenshots', () => {
         }
       }
 
-      await optionsPage.fill(
-        'input#pacUrl',
-        `https://example.com/${config.name.toLowerCase().replace(' ', '-')}.pac`
-      )
+      await optionsPage.fill('input#pacUrl', 'https://nav-proxy.vercel.app/api/proxyman.pac')
 
       // Set color
       const colorInput = await optionsPage.$('input[type="color"]')
