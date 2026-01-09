@@ -3,6 +3,7 @@ import { StorageService } from './StorageService'
 import { ERROR_TYPES } from '@/interfaces'
 import { ALERT_TYPES } from '@/interfaces/error'
 import { toastStore, type ToastType } from '@/stores/toastStore'
+import { I18nService } from './i18n/i18nService'
 
 /**
  * Notification context determines where notifications are shown
@@ -213,13 +214,13 @@ export class NotificationService {
         return ALERT_TYPES.SAVE_FAILURE
       case ERROR_TYPES.FETCH_SETTINGS:
       case ERROR_TYPES.LOAD_SETTINGS:
-        return 'Failed to load settings'
+        return I18nService.getMessage('errorFailedToLoadSettings')
       case ERROR_TYPES.SET_PROXY:
-        return 'Failed to set proxy configuration'
+        return I18nService.getMessage('errorFailedToSetProxy')
       case ERROR_TYPES.CLEAR_PROXY:
-        return 'Failed to clear proxy configuration'
+        return I18nService.getMessage('errorFailedToClearProxy')
       case ERROR_TYPES.DELETE_SCRIPT:
-        return 'Failed to delete script'
+        return I18nService.getMessage('errorFailedToDeleteScript')
       default:
         return ALERT_TYPES.UNKNOWN_ERROR
     }
@@ -227,14 +228,21 @@ export class NotificationService {
 
   /**
    * Show a notification for proxy switching events (for automatic mode)
+   *
+   * @remarks
+   * This method is reserved for future automatic mode functionality.
+   * It is not currently used in the codebase but is prepared for when
+   * automatic proxy switching based on URLs is implemented.
+   *
+   * @see FEASIBILITY_STUDY_AUTOMATIC_MODE.md for implementation details
    */
   static async proxySwitch(proxyName: string, url?: string): Promise<void> {
     const message = url
-      ? `Switched to "${proxyName}" for ${new URL(url).hostname}`
-      : `Switched to "${proxyName}"`
+      ? I18nService.getMessage('proxySwitchedToForHost', [proxyName, new URL(url).hostname])
+      : I18nService.getMessage('proxySwitchedTo', [proxyName])
 
     await this.show({
-      title: 'Proxy Switched',
+      title: I18nService.getMessage('proxySwitched'),
       message,
       type: 'info',
       duration: 3000,
@@ -244,11 +252,17 @@ export class NotificationService {
 
   /**
    * Show a notification for proxy errors
+   *
+   * @remarks
+   * This method is reserved for future automatic mode functionality.
+   * It will be used to notify users when a proxy fails in automatic mode.
+   *
+   * @see FEASIBILITY_STUDY_AUTOMATIC_MODE.md for implementation details
    */
   static async proxyError(proxyName: string, error: string): Promise<void> {
     await this.show({
-      title: 'Proxy Error',
-      message: `Failed to use "${proxyName}": ${error}`,
+      title: I18nService.getMessage('proxyError'),
+      message: I18nService.getMessage('proxyErrorMessage', [proxyName, error]),
       type: 'error',
       duration: 5000,
       requireInteraction: true,

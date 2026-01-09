@@ -45,14 +45,21 @@
 
   async function handleAutoReloadToggle(checked: boolean) {
     await settingsStore.updateSettings({ autoReloadOnProxySwitch: checked })
-    toastStore.show(checked ? 'Auto-reload enabled' : 'Auto-reload disabled', 'success')
+    toastStore.show(
+      checked
+        ? I18nService.getMessage('autoReloadEnabled')
+        : I18nService.getMessage('autoReloadDisabled'),
+      'success'
+    )
   }
 
   async function handleNotificationsToggle(checked: boolean) {
     notificationsEnabled = checked
     await StorageService.savePreferences({ notifications: checked })
     toastStore.show(
-      checked ? 'System notifications enabled' : 'System notifications disabled',
+      checked
+        ? I18nService.getMessage('systemNotificationsEnabled')
+        : I18nService.getMessage('systemNotificationsDisabled'),
       'success'
     )
   }
@@ -169,14 +176,14 @@
             <div class="flex-1">
               <div class="flex items-center gap-2">
                 <label class="text-base font-semibold cursor-pointer" for="notificationsToggle">
-                  System Notifications
+                  {I18nService.getMessage('systemNotifications')}
                 </label>
-                <Tooltip text="Enable Chrome notifications for background events" position="top">
+                <Tooltip text={I18nService.getMessage('systemNotificationsTooltip')} position="top">
                   <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
                 </Tooltip>
               </div>
               <Text as="p" size="sm" color="muted" classes="mt-1">
-                Show system notifications for proxy switches and errors
+                {I18nService.getMessage('systemNotificationsDescription')}
               </Text>
             </div>
           </FlexGroup>

@@ -150,7 +150,7 @@
               errorMessage =
                 I18nService.getMessage('pacScriptFetchError') ||
                 'Failed to fetch PAC script from URL'
-              NotifyService.error(ERROR_TYPES.VALIDATION, error)
+              // Error is shown in modal via errorMessage, no need for toast notification
               return // Don't save if fetch fails
             }
           }
