@@ -505,4 +505,59 @@
   "pacUrlHelp": {
     "message": "Le script PAC sera chargé depuis cette URL"
   }
+  },
+  "autoReloadEnabled": {
+    "message": "Auto-reload enabled"
+  },
+  "autoReloadDisabled": {
+    "message": "Auto-reload disabled"
+  },
+  "systemNotifications": {
+    "message": "System Notifications"
+  },
+  "systemNotificationsEnabled": {
+    "message": "System notifications enabled"
+  },
+  "systemNotificationsDisabled": {
+    "message": "System notifications disabled"
+  },
+  "systemNotificationsTooltip": {
+    "message": "Enable Chrome notifications for background events"
+  },
+  "systemNotificationsDescription": {
+    "message": "Show system notifications for proxy switches and errors"
+  },
+  "errorFailedToLoadSettings": {
+    "message": "Failed to load settings"
+  },
+  "errorFailedToSetProxy": {
+    "message": "Failed to set proxy configuration"
+  },
+  "errorFailedToClearProxy": {
+    "message": "Failed to clear proxy configuration"
+  },
+  "errorFailedToDeleteScript": {
+    "message": "Failed to delete script"
+  },
+  "proxySwitched": {
+    "message": "Proxy Switched"
+  },
+  "proxySwitchedTo": {
+    "message": "Switched to \"$1\""
+  },
+  "proxySwitchedToForHost": {
+    "message": "Switched to \"$1\" for $2"
+  },
+  "proxyError": {
+    "message": "Proxy Error"
+  },
+  "proxyErrorMessage": {
+    "message": "Failed to use \"$1\": $2"
+  },
+  "pacScriptPreview": {
+    "message": "PAC Script Preview (Read-only)"
+  },
+  "pacScriptFetchError": {
+    "message": "Failed to fetch PAC script from URL"
+  }
 }
