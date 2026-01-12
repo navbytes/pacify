@@ -555,5 +555,254 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "자동 프록시 추가"
+  },
+  "addAutoProxyTooltip": {
+    "message": "URL 기반 라우팅 규칙 생성"
+  },
+  "autoProxyMode": {
+    "message": "자동 프록시"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1개 규칙"
+  },
+  "createAutoProxy": {
+    "message": "자동 프록시 생성"
+  },
+  "editAutoProxy": {
+    "message": "자동 프록시 편집"
+  },
+  "autoProxyCreated": {
+    "message": "자동 프록시 \"$1\" 생성 완료"
+  },
+  "autoProxyUpdated": {
+    "message": "자동 프록시 \"$1\" 업데이트 완료"
+  },
+  "autoProxyDeleted": {
+    "message": "자동 프록시 \"$1\" 삭제 완료"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "예: 업무 라우팅, 스플릿 터널"
+  },
+  "addRule": {
+    "message": "규칙 추가"
+  },
+  "editRule": {
+    "message": "규칙 편집"
+  },
+  "deleteRule": {
+    "message": "규칙 삭제"
+  },
+  "saveRule": {
+    "message": "규칙 저장"
+  },
+  "cancelRule": {
+    "message": "취소"
+  },
+  "urlPattern": {
+    "message": "URL 패턴"
+  },
+  "patternType": {
+    "message": "패턴 유형"
+  },
+  "wildcardPattern": {
+    "message": "와일드카드"
+  },
+  "regexPattern": {
+    "message": "정규식"
+  },
+  "exactMatch": {
+    "message": "정확히 일치"
+  },
+  "cidrPattern": {
+    "message": "CIDR (IP 범위)"
+  },
+  "selectProxy": {
+    "message": "프록시 선택"
+  },
+  "defineInline": {
+    "message": "인라인 정의"
+  },
+  "directConnection": {
+    "message": "직접 연결"
+  },
+  "fallbackBehavior": {
+    "message": "폴백 동작"
+  },
+  "fallbackDescription": {
+    "message": "URL과 일치하는 규칙이 없을 때 적용됩니다"
+  },
+  "testPattern": {
+    "message": "패턴 테스트"
+  },
+  "testUrl": {
+    "message": "테스트 URL"
+  },
+  "testUrlPlaceholder": {
+    "message": "규칙에 대해 테스트할 URL을 입력하세요"
+  },
+  "patternMatches": {
+    "message": "패턴이 일치합니다!"
+  },
+  "noPatternMatch": {
+    "message": "일치하는 패턴 없음 - 폴백이 사용됩니다"
+  },
+  "ruleEnabled": {
+    "message": "규칙 활성화됨"
+  },
+  "ruleDisabled": {
+    "message": "규칙 비활성화됨"
+  },
+  "routingRules": {
+    "message": "라우팅 규칙"
+  },
+  "noRulesYet": {
+    "message": "아직 정의된 규칙이 없습니다"
+  },
+  "noRulesDescription": {
+    "message": "URL을 다른 프록시로 라우팅하는 방법을 정의하는 규칙을 추가하세요"
+  },
+  "atLeastOneRule": {
+    "message": "최소 하나의 규칙이 필요합니다"
+  },
+  "failedToSave": {
+    "message": "구성 저장 실패"
+  },
+  "proxyType": {
+    "message": "프록시 유형"
+  },
+  "noProxiesAvailable": {
+    "message": "사용 가능한 프록시 없음"
+  },
+  "name": {
+    "message": "이름"
+  },
+  "ruleDescription": {
+    "message": "설명 (선택 사항)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "예: 모든 Google 트래픽 라우팅"
+  },
+  "patternPlaceholder": {
+    "message": "예: *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "모든 문자와 일치시키려면 *를 사용하세요. 예: *.example.com"
+  },
+  "regexHelp": {
+    "message": "JavaScript 정규식 구문을 사용하세요. 예: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "정확한 호스트 이름과 일치시킵니다. 예: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "IP 범위에는 CIDR 표기법을 사용하세요. 예: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "잘못된 패턴"
+  },
+  "patternRequired": {
+    "message": "패턴이 필요합니다"
+  },
+  "saveChanges": {
+    "message": "변경 사항 저장"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "이 프록시는 다음 자동 프록시 구성에서 사용됩니다:"
+  },
+  "autoProxyRefSingular": {
+    "message": "1개 규칙"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1개 규칙",
+    "placeholders": {
+      "1": { "content": "$1", "example": "3" }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "이 프록시를 삭제하면 해당 규칙이 자동으로 제거됩니다."
+  },
+  "orphanedProxyWarning": {
+    "message": "참조된 프록시가 삭제되었습니다. 다른 프록시를 선택하세요."
+  },
+  "matchedRule": {
+    "message": "일치한 규칙"
+  },
+  "useFallback": {
+    "message": "폴백 사용"
+  },
+  "dragToReorder": {
+    "message": "드래그하여 규칙 순서 변경"
+  },
+  "failedToSaveProxy": {
+    "message": "프록시 구성 저장 실패"
+  },
+  "autoProxySubtitle": {
+    "message": "URL 기반 스마트 트래픽 라우팅"
+  },
+  "close": {
+    "message": "닫기"
+  },
+  "ruleSingular": {
+    "message": "규칙"
+  },
+  "rulePlural": {
+    "message": "규칙"
+  },
+  "rulesConfigured": {
+    "message": "$1개의 $2이 구성됨"
+  },
+  "ruleActiveDescription": {
+    "message": "구성이 활성화되면 이 규칙이 활성화됩니다"
+  },
+  "ruleSkippedDescription": {
+    "message": "이 규칙은 건너뜁니다"
+  },
+  "matchTypeWildcard": {
+    "message": "와일드카드"
+  },
+  "matchTypeExact": {
+    "message": "정확히 일치"
+  },
+  "matchTypeRegex": {
+    "message": "정규식"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "프록시 삭제됨"
+  },
+  "testPatternHint": {
+    "message": "규칙이 올바르게 작동하는지 확인하세요"
+  },
+  "testButton": {
+    "message": "테스트"
+  },
+  "ruleLabel": {
+    "message": "규칙:"
+  },
+  "testPatternHelp": {
+    "message": "위에 URL을 입력하고 테스트를 클릭하여 일치하는 규칙을 확인하세요"
+  },
+  "proxyModePacScript": {
+    "message": "(PAC 스크립트)"
+  },
+  "proxyModeSystem": {
+    "message": "(시스템)"
+  },
+  "proxyModeDirect": {
+    "message": "(직접 연결)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(자동 감지)"
+  },
+  "toggleSearch": {
+    "message": "검색 전환"
+  },
+  "hideSearch": {
+    "message": "검색 숨기기"
   }
 }

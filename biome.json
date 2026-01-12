@@ -9,14 +9,14 @@
     "ignoreUnknown": false,
     "includes": [
       "**",
-      "!**/dist/**",
-      "!**/dev/**",
-      "!**/node_modules/**",
+      "!**/dist",
+      "!**/dev",
+      "!**/node_modules",
       "!**/*.config.js",
       "!**/*.config.ts",
-      "!**/.husky/**",
-      "!**/~/**",
-      "!**/playwright-report/**",
+      "!**/.husky",
+      "!**/~",
+      "!**/playwright-report",
       "!**/app.css"
     ]
   },
@@ -99,6 +99,26 @@
           },
           "suspicious": {
             "noImplicitAnyLet": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.test.ts", "**/__tests__/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/codemirror.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noTemplateCurlyInString": "off"
           }
         }
       }

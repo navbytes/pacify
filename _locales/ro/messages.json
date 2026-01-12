@@ -555,5 +555,254 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "Adaugă Auto-Proxy"
+  },
+  "addAutoProxyTooltip": {
+    "message": "Creați reguli de rutare bazate pe URL"
+  },
+  "autoProxyMode": {
+    "message": "Auto-Proxy"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1 reguli"
+  },
+  "createAutoProxy": {
+    "message": "Creează Auto-Proxy"
+  },
+  "editAutoProxy": {
+    "message": "Editează Auto-Proxy"
+  },
+  "autoProxyCreated": {
+    "message": "Auto-Proxy \"$1\" creat cu succes"
+  },
+  "autoProxyUpdated": {
+    "message": "Auto-Proxy \"$1\" actualizat cu succes"
+  },
+  "autoProxyDeleted": {
+    "message": "Auto-Proxy \"$1\" șters cu succes"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "ex., Rutare de lucru, Split Tunnel"
+  },
+  "addRule": {
+    "message": "Adaugă regulă"
+  },
+  "editRule": {
+    "message": "Editează regulă"
+  },
+  "deleteRule": {
+    "message": "Șterge regulă"
+  },
+  "saveRule": {
+    "message": "Salvează regulă"
+  },
+  "cancelRule": {
+    "message": "Anulare"
+  },
+  "urlPattern": {
+    "message": "Model URL"
+  },
+  "patternType": {
+    "message": "Tip de model"
+  },
+  "wildcardPattern": {
+    "message": "Wildcard"
+  },
+  "regexPattern": {
+    "message": "Regex"
+  },
+  "exactMatch": {
+    "message": "Potrivire exactă"
+  },
+  "cidrPattern": {
+    "message": "CIDR (Interval IP)"
+  },
+  "selectProxy": {
+    "message": "Selectează proxy"
+  },
+  "defineInline": {
+    "message": "Definește inline"
+  },
+  "directConnection": {
+    "message": "Conexiune directă"
+  },
+  "fallbackBehavior": {
+    "message": "Comportament de rezervă"
+  },
+  "fallbackDescription": {
+    "message": "Aplicat când nicio regulă nu corespunde URL-ului"
+  },
+  "testPattern": {
+    "message": "Testează model"
+  },
+  "testUrl": {
+    "message": "URL de test"
+  },
+  "testUrlPlaceholder": {
+    "message": "Introduceți un URL pentru a testa contra regulilor"
+  },
+  "patternMatches": {
+    "message": "Modelul corespunde!"
+  },
+  "noPatternMatch": {
+    "message": "Niciun model nu corespunde - se va folosi rezerva"
+  },
+  "ruleEnabled": {
+    "message": "Regulă activată"
+  },
+  "ruleDisabled": {
+    "message": "Regulă dezactivată"
+  },
+  "routingRules": {
+    "message": "Reguli de rutare"
+  },
+  "noRulesYet": {
+    "message": "Nu există reguli definite încă"
+  },
+  "noRulesDescription": {
+    "message": "Adăugați reguli pentru a defini cum vor fi rutate URL-urile către diferite proxy-uri"
+  },
+  "atLeastOneRule": {
+    "message": "Este necesară cel puțin o regulă"
+  },
+  "failedToSave": {
+    "message": "Salvarea configurației a eșuat"
+  },
+  "proxyType": {
+    "message": "Tip de proxy"
+  },
+  "noProxiesAvailable": {
+    "message": "Nu există proxy-uri disponibile"
+  },
+  "name": {
+    "message": "Nume"
+  },
+  "ruleDescription": {
+    "message": "Descriere (opțional)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "ex., Rutare tot traficul Google"
+  },
+  "patternPlaceholder": {
+    "message": "ex., *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "Folosiți * pentru a potrivi orice caracter. Exemplu: *.example.com"
+  },
+  "regexHelp": {
+    "message": "Folosiți sintaxa regex JavaScript. Exemplu: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "Potriviți numele de gazdă exact. Exemplu: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "Folosiți notația CIDR pentru intervale IP. Exemplu: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "Model invalid"
+  },
+  "patternRequired": {
+    "message": "Modelul este obligatoriu"
+  },
+  "saveChanges": {
+    "message": "Salvează modificările"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "Acest proxy este utilizat de următoarele configurații Auto-Proxy:"
+  },
+  "autoProxyRefSingular": {
+    "message": "1 regulă"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1 reguli",
+    "placeholders": {
+      "1": { "content": "$1", "example": "3" }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "Aceste reguli vor fi eliminate automat când ștergeți acest proxy."
+  },
+  "orphanedProxyWarning": {
+    "message": "Proxy-ul referențiat a fost șters. Vă rugăm să selectați un alt proxy."
+  },
+  "matchedRule": {
+    "message": "Regulă potrivită"
+  },
+  "useFallback": {
+    "message": "Folosește rezerva"
+  },
+  "dragToReorder": {
+    "message": "Trageți pentru a reordona regulile"
+  },
+  "failedToSaveProxy": {
+    "message": "Salvarea configurației proxy a eșuat"
+  },
+  "autoProxySubtitle": {
+    "message": "Rutare inteligentă a traficului bazată pe URL"
+  },
+  "close": {
+    "message": "Închide"
+  },
+  "ruleSingular": {
+    "message": "regulă"
+  },
+  "rulePlural": {
+    "message": "reguli"
+  },
+  "rulesConfigured": {
+    "message": "$1 $2 configurate"
+  },
+  "ruleActiveDescription": {
+    "message": "Această regulă va fi activă când configurația este activată"
+  },
+  "ruleSkippedDescription": {
+    "message": "Această regulă va fi omisă"
+  },
+  "matchTypeWildcard": {
+    "message": "Wildcard"
+  },
+  "matchTypeExact": {
+    "message": "Exact"
+  },
+  "matchTypeRegex": {
+    "message": "Regex"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "Proxy șters"
+  },
+  "testPatternHint": {
+    "message": "Verificați dacă regulile funcționează corect"
+  },
+  "testButton": {
+    "message": "Test"
+  },
+  "ruleLabel": {
+    "message": "Regulă:"
+  },
+  "testPatternHelp": {
+    "message": "Introduceți un URL mai sus și faceți clic pe Test pentru a vedea ce regulă se potrivește"
+  },
+  "proxyModePacScript": {
+    "message": "(Script PAC)"
+  },
+  "proxyModeSystem": {
+    "message": "(Sistem)"
+  },
+  "proxyModeDirect": {
+    "message": "(Direct)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(Detectare automată)"
+  },
+  "toggleSearch": {
+    "message": "Comută căutarea"
+  },
+  "hideSearch": {
+    "message": "Ascunde căutarea"
   }
 }

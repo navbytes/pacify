@@ -555,5 +555,254 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "অটো-প্রক্সি যোগ করুন"
+  },
+  "addAutoProxyTooltip": {
+    "message": "URL-ভিত্তিক রাউটিং নিয়ম তৈরি করুন"
+  },
+  "autoProxyMode": {
+    "message": "অটো-প্রক্সি"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1টি নিয়ম"
+  },
+  "createAutoProxy": {
+    "message": "অটো-প্রক্সি তৈরি করুন"
+  },
+  "editAutoProxy": {
+    "message": "অটো-প্রক্সি সম্পাদনা করুন"
+  },
+  "autoProxyCreated": {
+    "message": "অটো-প্রক্সি \"$1\" সফলভাবে তৈরি করা হয়েছে"
+  },
+  "autoProxyUpdated": {
+    "message": "অটো-প্রক্সি \"$1\" সফলভাবে আপডেট করা হয়েছে"
+  },
+  "autoProxyDeleted": {
+    "message": "অটো-প্রক্সি \"$1\" সফলভাবে মুছে ফেলা হয়েছে"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "যেমন, কর্মক্ষেত্রের রাউটিং, স্প্লিট টানেল"
+  },
+  "addRule": {
+    "message": "নিয়ম যোগ করুন"
+  },
+  "editRule": {
+    "message": "নিয়ম সম্পাদনা করুন"
+  },
+  "deleteRule": {
+    "message": "নিয়ম মুছুন"
+  },
+  "saveRule": {
+    "message": "নিয়ম সংরক্ষণ করুন"
+  },
+  "cancelRule": {
+    "message": "বাতিল করুন"
+  },
+  "urlPattern": {
+    "message": "URL প্যাটার্ন"
+  },
+  "patternType": {
+    "message": "প্যাটার্ন প্রকার"
+  },
+  "wildcardPattern": {
+    "message": "ওয়াইল্ডকার্ড"
+  },
+  "regexPattern": {
+    "message": "রেজেক্স"
+  },
+  "exactMatch": {
+    "message": "সঠিক মিল"
+  },
+  "cidrPattern": {
+    "message": "CIDR (IP রেঞ্জ)"
+  },
+  "selectProxy": {
+    "message": "প্রক্সি নির্বাচন করুন"
+  },
+  "defineInline": {
+    "message": "ইনলাইন সংজ্ঞায়িত করুন"
+  },
+  "directConnection": {
+    "message": "সরাসরি সংযোগ"
+  },
+  "fallbackBehavior": {
+    "message": "ফলব্যাক আচরণ"
+  },
+  "fallbackDescription": {
+    "message": "URL এর সাথে কোন নিয়ম মিলে না গেলে প্রয়োগ করা হয়"
+  },
+  "testPattern": {
+    "message": "প্যাটার্ন পরীক্ষা করুন"
+  },
+  "testUrl": {
+    "message": "পরীক্ষা URL"
+  },
+  "testUrlPlaceholder": {
+    "message": "নিয়মের বিপরীতে পরীক্ষা করতে একটি URL লিখুন"
+  },
+  "patternMatches": {
+    "message": "প্যাটার্ন মিলেছে!"
+  },
+  "noPatternMatch": {
+    "message": "কোন প্যাটার্ন মেলেনি - ফলব্যাক ব্যবহার করা হবে"
+  },
+  "ruleEnabled": {
+    "message": "নিয়ম সক্রিয়"
+  },
+  "ruleDisabled": {
+    "message": "নিয়ম নিষ্ক্রিয়"
+  },
+  "routingRules": {
+    "message": "রাউটিং নিয়ম"
+  },
+  "noRulesYet": {
+    "message": "এখনও কোন নিয়ম সংজ্ঞায়িত করা হয়নি"
+  },
+  "noRulesDescription": {
+    "message": "বিভিন্ন প্রক্সিতে URL কীভাবে রাউট করা হবে তা সংজ্ঞায়িত করতে নিয়ম যোগ করুন"
+  },
+  "atLeastOneRule": {
+    "message": "অন্তত একটি নিয়ম প্রয়োজন"
+  },
+  "failedToSave": {
+    "message": "কনফিগারেশন সংরক্ষণ করতে ব্যর্থ"
+  },
+  "proxyType": {
+    "message": "প্রক্সি প্রকার"
+  },
+  "noProxiesAvailable": {
+    "message": "কোন প্রক্সি উপলব্ধ নেই"
+  },
+  "name": {
+    "message": "নাম"
+  },
+  "ruleDescription": {
+    "message": "বিবরণ (ঐচ্ছিক)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "যেমন, সমস্ত Google ট্রাফিক রাউট করুন"
+  },
+  "patternPlaceholder": {
+    "message": "যেমন, *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "যেকোনো অক্ষর মেলাতে * ব্যবহার করুন। উদাহরণ: *.example.com"
+  },
+  "regexHelp": {
+    "message": "JavaScript রেজেক্স সিনট্যাক্স ব্যবহার করুন। উদাহরণ: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "সঠিক হোস্টনাম মেলান। উদাহরণ: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "IP রেঞ্জের জন্য CIDR নোটেশন ব্যবহার করুন। উদাহরণ: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "অবৈধ প্যাটার্ন"
+  },
+  "patternRequired": {
+    "message": "প্যাটার্ন প্রয়োজন"
+  },
+  "saveChanges": {
+    "message": "পরিবর্তন সংরক্ষণ করুন"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "এই প্রক্সি নিম্নলিখিত অটো-প্রক্সি কনফিগারেশন দ্বারা ব্যবহৃত হয়:"
+  },
+  "autoProxyRefSingular": {
+    "message": "১টি নিয়ম"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1টি নিয়ম",
+    "placeholders": {
+      "1": { "content": "$1", "example": "3" }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "আপনি এই প্রক্সি মুছে ফেললে এই নিয়মগুলি স্বয়ংক্রিয়ভাবে সরানো হবে।"
+  },
+  "orphanedProxyWarning": {
+    "message": "রেফারেন্সকৃত প্রক্সি মুছে ফেলা হয়েছে। অনুগ্রহ করে একটি ভিন্ন প্রক্সি নির্বাচন করুন।"
+  },
+  "matchedRule": {
+    "message": "মিলে যাওয়া নিয়ম"
+  },
+  "useFallback": {
+    "message": "ফলব্যাক ব্যবহার করুন"
+  },
+  "dragToReorder": {
+    "message": "নিয়ম পুনর্বিন্যাস করতে টেনে আনুন"
+  },
+  "failedToSaveProxy": {
+    "message": "প্রক্সি কনফিগারেশন সংরক্ষণ করতে ব্যর্থ"
+  },
+  "autoProxySubtitle": {
+    "message": "URL-ভিত্তিক স্মার্ট ট্রাফিক রাউটিং"
+  },
+  "close": {
+    "message": "বন্ধ করুন"
+  },
+  "ruleSingular": {
+    "message": "নিয়ম"
+  },
+  "rulePlural": {
+    "message": "নিয়ম"
+  },
+  "rulesConfigured": {
+    "message": "$1টি $2 কনফিগার করা হয়েছে"
+  },
+  "ruleActiveDescription": {
+    "message": "কনফিগারেশন সক্ষম হলে এই নিয়মটি সক্রিয় থাকবে"
+  },
+  "ruleSkippedDescription": {
+    "message": "এই নিয়মটি এড়িয়ে যাওয়া হবে"
+  },
+  "matchTypeWildcard": {
+    "message": "ওয়াইল্ডকার্ড"
+  },
+  "matchTypeExact": {
+    "message": "সঠিক"
+  },
+  "matchTypeRegex": {
+    "message": "রেজেক্স"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "প্রক্সি মুছে ফেলা হয়েছে"
+  },
+  "testPatternHint": {
+    "message": "আপনার নিয়মগুলি সঠিকভাবে কাজ করছে কিনা যাচাই করুন"
+  },
+  "testButton": {
+    "message": "পরীক্ষা"
+  },
+  "ruleLabel": {
+    "message": "নিয়ম:"
+  },
+  "testPatternHelp": {
+    "message": "উপরে একটি URL লিখুন এবং পরীক্ষায় ক্লিক করুন কোন নিয়ম মেলে তা দেখতে"
+  },
+  "proxyModePacScript": {
+    "message": "(PAC স্ক্রিপ্ট)"
+  },
+  "proxyModeSystem": {
+    "message": "(সিস্টেম)"
+  },
+  "proxyModeDirect": {
+    "message": "(ডাইরেক্ট)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(অটো-ডিটেক্ট)"
+  },
+  "toggleSearch": {
+    "message": "অনুসন্ধান টগল করুন"
+  },
+  "hideSearch": {
+    "message": "অনুসন্ধান লুকান"
   }
 }

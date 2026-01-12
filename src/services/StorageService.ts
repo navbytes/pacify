@@ -8,6 +8,7 @@ import { browserService } from './chrome/BrowserService'
 // Size limit for storing in sync storage (Chrome limit is 8KB per item)
 const SYNC_SIZE_LIMIT = 8000 // 8KB
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class StorageService {
   // Cache for settings to reduce storage reads
   private static settingsCache: AppSettings | null = null
@@ -66,7 +67,8 @@ export class StorageService {
 
       // Get base settings from sync storage
       const data = await browserService.storage.sync.get('settings')
-      const baseSettings: AppSettings = data.settings || DEFAULT_SETTINGS
+      const baseSettings: AppSettings =
+        (data.settings as AppSettings | undefined) || DEFAULT_SETTINGS
 
       // Resolve any script references
       const resolvedSettings: AppSettings = {
@@ -116,7 +118,7 @@ export class StorageService {
   private static getScriptData = withErrorHandlingAndFallback(
     async (scriptId: string): Promise<string | null> => {
       const data = await browserService.storage.local.get(`script_${scriptId}`)
-      return data[`script_${scriptId}`] || null
+      return (data[`script_${scriptId}`] as string | undefined) || null
     },
     ERROR_TYPES.FETCH_SETTINGS,
     null
@@ -139,7 +141,7 @@ export class StorageService {
 
     if (data.settings) {
       // Save using the new hybrid approach
-      await this.saveSettings(data.settings)
+      await this.saveSettings(data.settings as AppSettings)
     }
   }, ERROR_TYPES.SAVE_SETTINGS)
 
@@ -156,7 +158,7 @@ export class StorageService {
   static getPreferences = withErrorHandlingAndFallback(
     async (): Promise<Settings> => {
       const data = await browserService.storage.sync.get('preferences')
-      return data.preferences || { notifications: true }
+      return (data.preferences as Settings | undefined) || { notifications: true }
     },
     ERROR_TYPES.FETCH_SETTINGS,
     { notifications: true }

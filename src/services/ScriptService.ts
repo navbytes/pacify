@@ -1,20 +1,8 @@
 import type { ValidationResult } from '@/interfaces'
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class ScriptService {
   private static readonly PROXY_KEYWORDS = ['DIRECT', 'PROXY', 'SOCKS', 'SOCKS5', 'HTTP']
-  // @ts-expect-error - Reserved for future PAC helper function validation
-  private static readonly _COMMON_HELPER_FUNCTIONS = [
-    'isPlainHostName',
-    'dnsDomainIs',
-    'localHostOrDomainIs',
-    'isResolvable',
-    'isInNet',
-    'dnsResolve',
-    'convert_addr',
-    'myIpAddress',
-    'dnsDomainLevels',
-    'shExpMatch',
-  ]
 
   /**
    * @description Validate PAC script comprehensively

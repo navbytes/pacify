@@ -16,7 +16,6 @@ export class BrowserService implements BrowserAPI {
     create: async (id: string, options: BrowserNotificationOptions): Promise<string> => {
       return new Promise((resolve, reject) => {
         try {
-          // Cast to any to bypass strict type checking
           const chromeOptions = {
             type: options.type as chrome.notifications.TemplateType,
             iconUrl: options.iconUrl || '',
@@ -25,7 +24,7 @@ export class BrowserService implements BrowserAPI {
             priority: options.priority,
             requireInteraction: options.requireInteraction,
             buttons: options.buttons,
-          } as any
+          } satisfies chrome.notifications.NotificationOptions
 
           chrome.notifications.create(id, chromeOptions, (notificationId) => {
             if (chrome.runtime.lastError) {
@@ -77,7 +76,7 @@ export class BrowserService implements BrowserAPI {
   // Storage API
   storage = {
     sync: {
-      get: async (keys: string | string[] | null): Promise<Record<string, any>> => {
+      get: async (keys: string | string[] | null): Promise<Record<string, unknown>> => {
         return new Promise((resolve, reject) => {
           try {
             chrome.storage.sync.get(keys, (result) => {
@@ -93,7 +92,7 @@ export class BrowserService implements BrowserAPI {
         })
       },
 
-      set: async (items: Record<string, any>): Promise<void> => {
+      set: async (items: Record<string, unknown>): Promise<void> => {
         return new Promise((resolve, reject) => {
           try {
             chrome.storage.sync.set(items, () => {
@@ -129,7 +128,7 @@ export class BrowserService implements BrowserAPI {
     },
 
     local: {
-      get: async (keys: string | string[] | null): Promise<Record<string, any>> => {
+      get: async (keys: string | string[] | null): Promise<Record<string, unknown>> => {
         return new Promise((resolve, reject) => {
           try {
             chrome.storage.local.get(keys, (result) => {
@@ -145,7 +144,7 @@ export class BrowserService implements BrowserAPI {
         })
       },
 
-      set: async (items: Record<string, any>): Promise<void> => {
+      set: async (items: Record<string, unknown>): Promise<void> => {
         return new Promise((resolve, reject) => {
           try {
             chrome.storage.local.set(items, () => {
@@ -282,14 +281,14 @@ export class BrowserService implements BrowserAPI {
           message: unknown,
           sender: MessageSender,
           sendResponse: (response?: unknown) => void
-        ) => boolean | void
+        ) => boolean | undefined
       ): void => {
         chrome.runtime.onMessage.addListener(
           callback as unknown as (
             message: unknown,
             sender: chrome.runtime.MessageSender,
             sendResponse: (response?: unknown) => void
-          ) => boolean | void
+          ) => boolean | undefined
         )
       },
       removeListener: (
@@ -297,14 +296,14 @@ export class BrowserService implements BrowserAPI {
           message: unknown,
           sender: MessageSender,
           sendResponse: (response?: unknown) => void
-        ) => boolean | void
+        ) => boolean | undefined
       ): void => {
         chrome.runtime.onMessage.removeListener(
           callback as unknown as (
             message: unknown,
             sender: chrome.runtime.MessageSender,
             sendResponse: (response?: unknown) => void
-          ) => boolean | void
+          ) => boolean | undefined
         )
       },
     },
@@ -338,14 +337,14 @@ export class BrowserService implements BrowserAPI {
 
   // Tabs API
   tabs = {
-    query: async (queryInfo: { active: boolean; currentWindow: boolean }): Promise<any[]> => {
+    query: async (queryInfo: { active: boolean; currentWindow: boolean }): Promise<Tab[]> => {
       return new Promise((resolve, reject) => {
         try {
           chrome.tabs.query(queryInfo, (tabs) => {
             if (chrome.runtime.lastError) {
               reject(chrome.runtime.lastError)
             } else {
-              resolve(tabs)
+              resolve(tabs as unknown as Tab[])
             }
           })
         } catch (error) {
@@ -380,14 +379,14 @@ export class BrowserService implements BrowserAPI {
       })
     },
 
-    create: async (createProperties: { url: string }): Promise<any> => {
+    create: async (createProperties: { url: string }): Promise<Tab> => {
       return new Promise((resolve, reject) => {
         try {
           chrome.tabs.create(createProperties, (tab) => {
             if (chrome.runtime.lastError) {
               reject(chrome.runtime.lastError)
             } else {
-              resolve(tab)
+              resolve(tab as unknown as Tab)
             }
           })
         } catch (error) {
@@ -402,7 +401,7 @@ export class BrowserService implements BrowserAPI {
     settings: {
       set: (details: unknown, callback?: () => void): void => {
         chrome.proxy.settings.set(
-          details as chrome.types.ChromeSettingSetDetails<any>,
+          details as chrome.types.ChromeSettingSetDetails<chrome.proxy.ProxyConfig>,
           callback || (() => {})
         )
       },

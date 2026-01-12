@@ -555,5 +555,254 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "Agregar Auto-Proxy"
+  },
+  "addAutoProxyTooltip": {
+    "message": "Crear reglas de enrutamiento basadas en URL"
+  },
+  "autoProxyMode": {
+    "message": "Auto-Proxy"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1 reglas"
+  },
+  "createAutoProxy": {
+    "message": "Crear Auto-Proxy"
+  },
+  "editAutoProxy": {
+    "message": "Editar Auto-Proxy"
+  },
+  "autoProxyCreated": {
+    "message": "Auto-Proxy \"$1\" creado exitosamente"
+  },
+  "autoProxyUpdated": {
+    "message": "Auto-Proxy \"$1\" actualizado exitosamente"
+  },
+  "autoProxyDeleted": {
+    "message": "Auto-Proxy \"$1\" eliminado exitosamente"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "ej., Enrutamiento de trabajo, Split Tunnel"
+  },
+  "addRule": {
+    "message": "Agregar regla"
+  },
+  "editRule": {
+    "message": "Editar regla"
+  },
+  "deleteRule": {
+    "message": "Eliminar regla"
+  },
+  "saveRule": {
+    "message": "Guardar regla"
+  },
+  "cancelRule": {
+    "message": "Cancelar"
+  },
+  "urlPattern": {
+    "message": "Patrón de URL"
+  },
+  "patternType": {
+    "message": "Tipo de patrón"
+  },
+  "wildcardPattern": {
+    "message": "Comodín"
+  },
+  "regexPattern": {
+    "message": "Regex"
+  },
+  "exactMatch": {
+    "message": "Coincidencia exacta"
+  },
+  "cidrPattern": {
+    "message": "CIDR (Rango IP)"
+  },
+  "selectProxy": {
+    "message": "Seleccionar proxy"
+  },
+  "defineInline": {
+    "message": "Definir en línea"
+  },
+  "directConnection": {
+    "message": "Conexión directa"
+  },
+  "fallbackBehavior": {
+    "message": "Comportamiento alternativo"
+  },
+  "fallbackDescription": {
+    "message": "Se aplica cuando ninguna regla coincide con la URL"
+  },
+  "testPattern": {
+    "message": "Probar patrón"
+  },
+  "testUrl": {
+    "message": "URL de prueba"
+  },
+  "testUrlPlaceholder": {
+    "message": "Ingrese una URL para probar contra las reglas"
+  },
+  "patternMatches": {
+    "message": "¡El patrón coincide!"
+  },
+  "noPatternMatch": {
+    "message": "Ningún patrón coincide - se usará el alternativo"
+  },
+  "ruleEnabled": {
+    "message": "Regla habilitada"
+  },
+  "ruleDisabled": {
+    "message": "Regla deshabilitada"
+  },
+  "routingRules": {
+    "message": "Reglas de enrutamiento"
+  },
+  "noRulesYet": {
+    "message": "Aún no hay reglas definidas"
+  },
+  "noRulesDescription": {
+    "message": "Agregue reglas para definir cómo se enrutarán las URL a diferentes proxies"
+  },
+  "atLeastOneRule": {
+    "message": "Se requiere al menos una regla"
+  },
+  "failedToSave": {
+    "message": "Error al guardar la configuración"
+  },
+  "proxyType": {
+    "message": "Tipo de proxy"
+  },
+  "noProxiesAvailable": {
+    "message": "No hay proxies disponibles"
+  },
+  "name": {
+    "message": "Nombre"
+  },
+  "ruleDescription": {
+    "message": "Descripción (opcional)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "ej., Enrutar todo el tráfico de Google"
+  },
+  "patternPlaceholder": {
+    "message": "ej., *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "Use * para coincidir con cualquier carácter. Ejemplo: *.example.com"
+  },
+  "regexHelp": {
+    "message": "Use sintaxis de regex de JavaScript. Ejemplo: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "Coincide con el nombre de host exacto. Ejemplo: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "Use notación CIDR para rangos de IP. Ejemplo: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "Patrón inválido"
+  },
+  "patternRequired": {
+    "message": "El patrón es requerido"
+  },
+  "saveChanges": {
+    "message": "Guardar cambios"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "Este proxy es utilizado por las siguientes configuraciones de Auto-Proxy:"
+  },
+  "autoProxyRefSingular": {
+    "message": "1 regla"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1 reglas",
+    "placeholders": {
+      "1": { "content": "$1", "example": "3" }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "Estas reglas se eliminarán automáticamente cuando elimine este proxy."
+  },
+  "orphanedProxyWarning": {
+    "message": "El proxy referenciado ha sido eliminado. Por favor seleccione un proxy diferente."
+  },
+  "matchedRule": {
+    "message": "Regla coincidente"
+  },
+  "useFallback": {
+    "message": "Usar alternativo"
+  },
+  "dragToReorder": {
+    "message": "Arrastre para reordenar las reglas"
+  },
+  "failedToSaveProxy": {
+    "message": "Error al guardar la configuración del proxy"
+  },
+  "autoProxySubtitle": {
+    "message": "Enrutamiento de tráfico inteligente basado en URL"
+  },
+  "close": {
+    "message": "Cerrar"
+  },
+  "ruleSingular": {
+    "message": "regla"
+  },
+  "rulePlural": {
+    "message": "reglas"
+  },
+  "rulesConfigured": {
+    "message": "$1 $2 configuradas"
+  },
+  "ruleActiveDescription": {
+    "message": "Esta regla estará activa cuando la configuración esté habilitada"
+  },
+  "ruleSkippedDescription": {
+    "message": "Esta regla será omitida"
+  },
+  "matchTypeWildcard": {
+    "message": "Comodín"
+  },
+  "matchTypeExact": {
+    "message": "Exacto"
+  },
+  "matchTypeRegex": {
+    "message": "Regex"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "Proxy eliminado"
+  },
+  "testPatternHint": {
+    "message": "Verifica que tus reglas funcionen correctamente"
+  },
+  "testButton": {
+    "message": "Probar"
+  },
+  "ruleLabel": {
+    "message": "Regla:"
+  },
+  "testPatternHelp": {
+    "message": "Ingresa una URL arriba y haz clic en Probar para ver qué regla coincide"
+  },
+  "proxyModePacScript": {
+    "message": "(Script PAC)"
+  },
+  "proxyModeSystem": {
+    "message": "(Sistema)"
+  },
+  "proxyModeDirect": {
+    "message": "(Directo)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(Detección automática)"
+  },
+  "toggleSearch": {
+    "message": "Alternar búsqueda"
+  },
+  "hideSearch": {
+    "message": "Ocultar búsqueda"
   }
 }

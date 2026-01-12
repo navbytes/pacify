@@ -2,6 +2,7 @@ import type { AppSettings, ProxyConfig } from '@/interfaces'
 import { SettingsReader } from './SettingsReader'
 import { StorageService } from './StorageService'
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class SettingsWriter {
   static async saveSettings(settings: AppSettings): Promise<void> {
     await StorageService.saveSettings(settings)

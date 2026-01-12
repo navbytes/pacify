@@ -13,6 +13,7 @@ export type ErrorHandler = (error: unknown) => void
  * @param errorType - The type of error for logging
  * @param customHandler - Optional custom error handler
  */
+// biome-ignore lint/suspicious/noExplicitAny: Generic function wrapper requires any for proper type inference
 export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
   operation: T,
   errorType: ERROR_TYPES,
@@ -44,6 +45,7 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<any>>(
  * @param fallbackValue - The value to return if the operation fails
  */
 export function withErrorHandlingAndFallback<
+  // biome-ignore lint/suspicious/noExplicitAny: Generic function wrapper requires any for proper type inference
   T extends (...args: any[]) => Promise<any>,
   R = Awaited<ReturnType<T>>,
 >(operation: T, errorType: ERROR_TYPES, fallbackValue: R): (...args: Parameters<T>) => Promise<R> {
@@ -65,6 +67,7 @@ export function withErrorHandlingAndFallback<
  * @param maxRetries - Maximum number of retry attempts
  * @param delayMs - Base delay between retries (will increase exponentially)
  */
+// biome-ignore lint/suspicious/noExplicitAny: Generic function wrapper requires any for proper type inference
 export function withRetry<T extends (...args: any[]) => Promise<any>>(
   operation: T,
   errorType: ERROR_TYPES,

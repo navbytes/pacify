@@ -1,6 +1,6 @@
 <script lang="ts">
 import { I18nService } from '@/services/i18n/i18nService'
-import { inputVariants } from '@/utils/classPatterns'
+import { formLabelVariants, inputVariants } from '@/utils/classPatterns'
 import FlexGroup from '../FlexGroup.svelte'
 import LabelButton from '../LabelButton.svelte'
 import Text from '../Text.svelte'
@@ -67,7 +67,7 @@ function handleNameInput() {
 <FlexGroup childrenGap="lg" alignItems="center" justifyContent="between">
   <div class="flex-1">
     <div class="flex items-center justify-between mb-1">
-      <label for="scriptName" class="block text-sm font-medium text-slate-700 dark:text-slate-300">
+      <label for="scriptName" class={formLabelVariants({ spacing: 'none' })}>
         {I18nService.getMessage('configurationName')}
         <Text classes="text-red-500">*</Text>
       </label>

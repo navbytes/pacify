@@ -60,7 +60,7 @@ function handleKeydown(event: KeyboardEvent) {
 <div
   role="tablist"
   tabindex="0"
-  class="tab-list flex items-center gap-0 overflow-x-auto mb-0 -mx-4 px-4 sm:mx-0 sm:px-0"
+  class="tab-list flex items-center gap-1 p-1 overflow-x-auto bg-slate-100 dark:bg-slate-800/50 rounded-xl border border-slate-200/50 dark:border-slate-700/50"
   onkeydown={handleKeydown}
   aria-label="Options tabs"
 >

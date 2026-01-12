@@ -6,6 +6,7 @@ import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
 import { Download, Upload } from '@/utils/icons'
 import Button from './Button.svelte'
+import Card from './Card.svelte'
 import FlexGroup from './FlexGroup.svelte'
 import LabelButton from './LabelButton.svelte'
 import Text from './Text.svelte'
@@ -62,46 +63,42 @@ async function handleRestore(event: Event) {
 <div class="space-y-4">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <!-- Backup Settings -->
-    <FlexGroup
-      classes="rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800"
-      direction="vertical"
-      childrenGap="xs"
-    >
-      <Button
-        color="secondary"
-        onclick={handleBackup}
-        aria-label="Backup all proxy configurations and settings"
-      >
-        {#snippet icon()}
-          <Download size={18} />
-        {/snippet}
-        {I18nService.getMessage('backupSettings')}
-      </Button>
-      <Text as="p" size="xs" color="muted" classes="px-1">
-        {I18nService.getMessage('backupDescription')}
-      </Text>
-    </FlexGroup>
+    <Card variant="elevated" padding="lg">
+      <FlexGroup direction="vertical" childrenGap="xs">
+        <Button
+          color="secondary"
+          onclick={handleBackup}
+          aria-label="Backup all proxy configurations and settings"
+        >
+          {#snippet icon()}
+            <Download size={18} />
+          {/snippet}
+          {I18nService.getMessage('backupSettings')}
+        </Button>
+        <Text as="p" size="xs" color="muted" classes="px-1">
+          {I18nService.getMessage('backupDescription')}
+        </Text>
+      </FlexGroup>
+    </Card>
 
     <!-- Restore Settings -->
-    <FlexGroup
-      classes="rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800"
-      direction="vertical"
-      childrenGap="xs"
-    >
-      <LabelButton color="secondary" icon={Upload}>
-        {I18nService.getMessage('restoreSettings')}
-        {#snippet input()}
-          <input
-            type="file"
-            accept=".json"
-            onchange={handleRestore}
-            aria-label="Upload backup file to restore configurations"
-          >
-        {/snippet}
-      </LabelButton>
-      <Text as="p" size="xs" color="muted" classes="px-1">
-        {I18nService.getMessage('restoreDescription')}
-      </Text>
-    </FlexGroup>
+    <Card variant="elevated" padding="lg">
+      <FlexGroup direction="vertical" childrenGap="xs">
+        <LabelButton color="secondary" icon={Upload}>
+          {I18nService.getMessage('restoreSettings')}
+          {#snippet input()}
+            <input
+              type="file"
+              accept=".json"
+              onchange={handleRestore}
+              aria-label="Upload backup file to restore configurations"
+            >
+          {/snippet}
+        </LabelButton>
+        <Text as="p" size="xs" color="muted" classes="px-1">
+          {I18nService.getMessage('restoreDescription')}
+        </Text>
+      </FlexGroup>
+    </Card>
   </div>
 </div>

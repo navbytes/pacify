@@ -5,6 +5,7 @@ interface PerformanceEvent {
   data?: Record<string, unknown>
 }
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Utility class pattern provides namespace and consistent API
 export class PerformanceMonitor {
   private static events: Map<string, PerformanceEvent> = new Map()
   private static measures: PerformanceEvent[] = []
@@ -136,8 +137,17 @@ export class PerformanceMonitor {
   }
 }
 
+// Interface for class-based components with lifecycle hooks
+interface ComponentWithLifecycle {
+  name?: string
+  prototype: {
+    onMount?: (...args: unknown[]) => unknown
+    onDestroy?: (...args: unknown[]) => unknown
+  }
+}
+
 // HOC for measuring component render performance
-export function measureComponent(component: any, name?: string): any {
+export function measureComponent<T extends ComponentWithLifecycle>(component: T, name?: string): T {
   const componentName = name || component.name || 'UnnamedComponent'
 
   // Store original component lifecycle hooks
@@ -145,18 +155,20 @@ export function measureComponent(component: any, name?: string): any {
   const originalOnDestroy = component.prototype.onDestroy
 
   // Wrap the component's lifecycle hooks with performance measurement
-  component.prototype.onMount = function (...args: unknown[]) {
+  component.prototype.onMount = function (...args: unknown[]): unknown {
     PerformanceMonitor.startMeasure(`render:${componentName}`)
     if (originalOnMount) {
       return originalOnMount.apply(this, args)
     }
+    return undefined
   }
 
-  component.prototype.onDestroy = function (...args: unknown[]) {
+  component.prototype.onDestroy = function (...args: unknown[]): unknown {
     PerformanceMonitor.endMeasure(`render:${componentName}`)
     if (originalOnDestroy) {
       return originalOnDestroy.apply(this, args)
     }
+    return undefined
   }
 
   return component

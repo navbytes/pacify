@@ -2,8 +2,8 @@
 import { slide } from 'svelte/transition'
 import Button from '@/components/Button.svelte'
 import DropTarget from '@/components/DragDrop/DropTarget.svelte'
-import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
-import type SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
+// biome-ignore lint/style/useImportType: Used as Svelte component in template
+import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
 import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
 import ScriptList from '@/components/ScriptList.svelte'
 import Text from '@/components/Text.svelte'
@@ -13,14 +13,15 @@ import type { DropItem } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
-import { Cable, CircleQuestionMark, Search, Zap } from '@/utils/icons'
+import { Cable, CircleQuestionMark, GitBranch, Search, Zap } from '@/utils/icons'
 import { colors } from '@/utils/theme'
 
 interface Props {
   onOpenEditor: (scriptId?: string) => void
+  onOpenAutoProxyEditor: () => void
 }
 
-let { onOpenEditor }: Props = $props()
+let { onOpenEditor, onOpenAutoProxyEditor }: Props = $props()
 
 let settings = $derived($settingsStore)
 let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
@@ -77,7 +78,7 @@ function handleKeydown(event: KeyboardEvent) {
 
   // Number keys 1-9 to toggle quick switch proxies
   if (event.key >= '1' && event.key <= '9') {
-    const index = parseInt(event.key) - 1
+    const index = parseInt(event.key, 10) - 1
     if (index < quickSwitchProxies.length) {
       event.preventDefault()
       const proxy = quickSwitchProxies[index]
@@ -128,8 +129,6 @@ function handleSearch(query: string) {
 
 <div class="py-6 space-y-8">
   {#if hasProxies}
-    <KeyboardShortcutsCard />
-
     <!-- Quick Switch Configs Section -->
     <div>
       <SectionHeader
@@ -210,13 +209,26 @@ function handleSearch(query: string) {
           <button
             type="button"
             onclick={toggleSearch}
-            class="p-2.5 rounded-lg transition-all duration-150 {showSearch
-              ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
-              : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600'}"
+            class="p-2.5 min-w-[44px] min-h-[44px] rounded-xl transition-all duration-200 flex items-center justify-center focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 {showSearch
+              ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 text-blue-600 dark:text-blue-400 shadow-md'
+              : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 hover:shadow-md'}"
             aria-label={showSearch ? 'Hide search' : 'Show search'}
           >
             <Search size={18} />
           </button>
+        </Tooltip>
+
+        <!-- Add Auto-Proxy Button -->
+        <Tooltip
+          text={I18nService.getMessage('addAutoProxyTooltip') || 'Create URL-based routing rules'}
+          position="bottom"
+        >
+          <Button color="secondary" onclick={onOpenAutoProxyEditor}>
+            {#snippet icon()}
+              <GitBranch size={16} />
+            {/snippet}
+            {I18nService.getMessage('addAutoProxy') || 'Add Auto-Proxy'}
+          </Button>
         </Tooltip>
 
         <!-- Add New Script Button -->

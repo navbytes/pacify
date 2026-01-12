@@ -1,6 +1,10 @@
 <script lang="ts">
 import type { ComponentType } from 'svelte'
-import { linkCardExternalIconVariants, linkCardIconBadgeVariants } from '@/utils/classPatterns'
+import {
+  linkCardExternalIconVariants,
+  linkCardIconBadgeVariants,
+  linkCardLabelVariants,
+} from '@/utils/classPatterns'
 import { ExternalLink } from '@/utils/icons'
 import Card from './Card.svelte'
 import FlexGroup from './FlexGroup.svelte'
@@ -32,11 +36,7 @@ let {
     <FlexGroup childrenGap="sm" alignItems="center">
       <IconBadge {icon} {color} size="md" classes={linkCardIconBadgeVariants({ color })} />
       <div class="flex-1 min-w-0">
-        <div
-          class="text-sm font-medium text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
-        >
-          {label}
-        </div>
+        <div class={linkCardLabelVariants()}>{label}</div>
       </div>
       <ExternalLink size={16} class={linkCardExternalIconVariants({ color })} />
     </FlexGroup>

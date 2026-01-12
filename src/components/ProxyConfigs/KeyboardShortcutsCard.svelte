@@ -1,14 +1,15 @@
 <script lang="ts">
-import Card from '@/components/Card.svelte'
+import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
 import Text from '@/components/Text.svelte'
 import { I18nService } from '@/services/i18n/i18nService'
-import { ChevronDown, ChevronUp, Keyboard } from '@/utils/icons'
+import { keyboardShortcutCardVariants } from '@/utils/classPatterns'
+import { Keyboard } from '@/utils/icons'
 
-let showKeyboardHints = $state(false)
+const styles = keyboardShortcutCardVariants({ color: 'slate' })
 
 const shortcuts = $derived([
   {
-    label: 'Toggle search',
+    label: I18nService.getMessage('toggleSearch'),
     keys: I18nService.getMessage('keyboardShortcutCtrlCmdK'),
   },
   {
@@ -16,7 +17,7 @@ const shortcuts = $derived([
     keys: I18nService.getMessage('keyboardShortcutCtrlCmdN'),
   },
   {
-    label: 'Hide search',
+    label: I18nService.getMessage('hideSearch'),
     keys: I18nService.getMessage('keyboardShortcutEscape'),
   },
   {
@@ -26,37 +27,30 @@ const shortcuts = $derived([
 ])
 </script>
 
-<Card classes="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900">
-  <button
-    type="button"
-    onclick={() => (showKeyboardHints = !showKeyboardHints)}
-    class="w-full flex items-center justify-between text-left"
-  >
-    <div class="flex items-center gap-2">
-      <Keyboard size={18} class="text-blue-600 dark:text-blue-400" />
-      <Text weight="semibold" classes="text-blue-900 dark:text-blue-100">
-        {I18nService.getMessage('keyboardShortcuts')}
-      </Text>
-    </div>
-    {#if showKeyboardHints}
-      <ChevronUp size={18} class="text-blue-600 dark:text-blue-400" />
-    {:else}
-      <ChevronDown size={18} class="text-blue-600 dark:text-blue-400" />
-    {/if}
-  </button>
+<div>
+  <SectionHeader
+    icon={Keyboard}
+    title={I18nService.getMessage('keyboardShortcuts')}
+    iconColor="slate"
+  />
 
-  {#if showKeyboardHints}
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
-      {#each shortcuts as { label, keys }}
-        <div class="flex items-center justify-between py-1.5">
-          <Text size="sm" color="muted">{label}</Text>
-          <kbd
-            class="px-2 py-1 text-xs font-mono bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-800 rounded shadow-sm"
-          >
-            {keys}
-          </kbd>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    {#each shortcuts as { label, keys }}
+      <div class={styles.wrapper()}>
+        <!-- Background gradient -->
+        <div class={styles.background()}></div>
+
+        <!-- Decorative elements -->
+        <div class={styles.decorativeBlur()}></div>
+
+        <!-- Top accent -->
+        <div class={styles.accentBar()}></div>
+
+        <div class={styles.content()}>
+          <kbd class={styles.kbd()}>{keys}</kbd>
+          <Text size="sm" color="muted" classes="leading-tight">{label}</Text>
         </div>
-      {/each}
-    </div>
-  {/if}
-</Card>
+      </div>
+    {/each}
+  </div>
+</div>

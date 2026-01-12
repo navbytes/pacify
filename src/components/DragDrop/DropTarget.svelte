@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Snippet } from 'svelte'
 import { type DropItem, ERROR_TYPES } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { NotifyService } from '@/services/NotifyService'
@@ -11,7 +12,7 @@ interface Props {
   onDrop?: (item: DropItem) => void
   onDragEnter?: (event: DragEvent) => void
   onDragLeave?: (event: DragEvent) => void
-  children?: () => any
+  children?: Snippet
 }
 const {
   dropEffect = 'move',

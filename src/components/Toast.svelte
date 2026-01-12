@@ -4,6 +4,7 @@ import { type ToastType, toastStore } from '@/stores/toastStore'
 import { toastVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { AlertCircle, CheckCircle, Info, X, XCircle } from '@/utils/icons'
+import Button from './Button.svelte'
 import Text from './Text.svelte'
 
 let toasts = $derived($toastStore)
@@ -38,13 +39,17 @@ function getIcon(type: ToastType) {
     >
       <Icon size={20} class="flex-shrink-0 mt-0.5" aria-hidden="true" />
       <Text as="p" size="sm" weight="medium" classes="flex-1">{toast.message}</Text>
-      <button
+      <Button
         onclick={() => toastStore.dismiss(toast.id)}
-        class="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity min-h-[44px] min-w-[44px] flex items-center justify-center rounded focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50"
+        color="ghost"
+        variant="minimal"
         aria-label={I18nService.getMessage('closeNotification') || 'Close notification'}
+        classes="flex-shrink-0 opacity-70 hover:opacity-100 min-h-[44px] min-w-[44px] hover:bg-white/20"
       >
-        <X size={16} aria-hidden="true" />
-      </button>
+        {#snippet icon()}
+          <X size={16} aria-hidden="true" />
+        {/snippet}
+      </Button>
     </div>
   {/each}
 </div>

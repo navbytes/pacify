@@ -1,6 +1,6 @@
 <script lang="ts">
 import { I18nService } from '@/services/i18n/i18nService'
-import { inputVariants } from '@/utils/classPatterns'
+import { checkboxLabelVariants, formLabelVariants, inputVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import FlexGroup from '../FlexGroup.svelte'
 import Text from '../Text.svelte'
@@ -49,6 +49,8 @@ const proxyLocalizedNames: Record<ProxyType, string> = {
   FTP: I18nService.getMessage('ftpProxy'),
   Fallback: I18nService.getMessage('fallbackProxy'),
 }
+
+const checkboxStyles = checkboxLabelVariants()
 </script>
 
 <div class="space-y-4">
@@ -57,9 +59,9 @@ const proxyLocalizedNames: Record<ProxyType, string> = {
       type="checkbox"
       id="useSharedProxy"
       bind:checked={useSharedProxy}
-      class="rounded border-slate-300 text-primary focus:ring-primary"
+      class={checkboxStyles.checkbox}
     >
-    <label for="useSharedProxy" class="text-sm text-slate-700 dark:text-slate-300">
+    <label for="useSharedProxy" class={checkboxStyles.label}>
       {I18nService.getMessage('useSameProxy')}
     </label>
   </FlexGroup>
@@ -67,7 +69,7 @@ const proxyLocalizedNames: Record<ProxyType, string> = {
   {#if useSharedProxy}
     <!-- Single Proxy Configuration -->
     <div class="space-y-4">
-      <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300">
+      <h3 class={formLabelVariants({ spacing: 'none' })}>
         {I18nService.getMessage('proxyServer')}
       </h3>
       {#if proxySettings.singleProxy}
@@ -85,7 +87,7 @@ const proxyLocalizedNames: Record<ProxyType, string> = {
       {@const proxyKey = proxyTypeMap[proxyType as ProxyType]}
       {@const proxy = proxySettings[proxyKey as keyof ProxySettings]}
       <div class="space-y-4">
-        <h3 class="text-sm font-medium text-slate-700 dark:text-slate-300">
+        <h3 class={formLabelVariants({ spacing: 'none' })}>
           {proxyLocalizedNames[proxyType as ProxyType]}
         </h3>
         {#if proxy && typeof proxy !== 'string' && !Array.isArray(proxy)}
@@ -102,10 +104,7 @@ const proxyLocalizedNames: Record<ProxyType, string> = {
 
   <!-- Bypass List -->
   <div>
-    <label
-      for="bypassList"
-      class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
-    >
+    <label for="bypassList" class={formLabelVariants()}>
       {I18nService.getMessage('bypassList')}
     </label>
     <textarea

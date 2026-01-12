@@ -12,7 +12,10 @@ class PopupManager {
   private async initialize() {
     // Initialize theme before mounting
     await themeStore.initialize()
-    mount(App, { target: document.getElementById('app')! })
+    const appElement = document.getElementById('app')
+    if (appElement) {
+      mount(App, { target: appElement })
+    }
   }
 }
 

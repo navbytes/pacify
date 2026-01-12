@@ -29,6 +29,17 @@ frozen = false
 # Enable coverage by default
 coverage = true
 
+# Exclude files from coverage that are difficult to test (Chrome API dependent)
+coverageSkipTestFiles = true
+coveragePathIgnorePatterns = [
+  "src/services/chrome/**",
+  "src/services/StorageService.ts",
+  "src/services/NotificationService.ts",
+  "src/services/CodeMirrorService.ts",
+  "src/utils/codemirror.ts",
+  "tests/**"
+]
+
 # Preload test setup files - ensure chrome mocking is available
 preload = ["./tests/setup.ts"]
 

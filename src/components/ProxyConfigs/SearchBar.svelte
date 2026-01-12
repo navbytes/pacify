@@ -1,8 +1,10 @@
 <script lang="ts">
 import { I18nService } from '@/services/i18n/i18nService'
-import { inputVariants } from '@/utils/classPatterns'
+import { inputVariants, searchInputVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Search, X } from '@/utils/icons'
+
+const styles = searchInputVariants()
 
 interface Props {
   searchQuery: string
@@ -35,9 +37,9 @@ export function blur() {
 }
 </script>
 
-<div class="relative">
-  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-    <Search size={18} class="text-slate-400 dark:text-slate-500" />
+<div class={styles.wrapper()}>
+  <div class={styles.iconWrapper()}>
+    <Search size={18} class={styles.icon()} />
   </div>
   <input
     bind:this={searchInputRef}
@@ -55,9 +57,10 @@ export function blur() {
     <button
       type="button"
       onclick={handleClear}
-      class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+      class={cn(styles.clearButton(), 'hover:text-slate-700 dark:hover:text-slate-300')}
+      aria-label="Clear search"
     >
-      <X size={18} class="text-slate-400 dark:text-slate-500" />
+      <X size={18} class={cn(styles.icon(), 'hover:text-slate-600 dark:hover:text-slate-300')} />
     </button>
   {/if}
 </div>

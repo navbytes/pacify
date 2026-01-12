@@ -12,6 +12,7 @@ import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHa
 import { convertAppSettingsToChromeConfig } from '../../utils/chrome'
 import { browserService } from './BrowserService'
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class ChromeService {
   // Reference to the browser service
   private static browser = browserService
@@ -156,7 +157,7 @@ export class ChromeService {
   static getSyncSettings = withErrorHandlingAndFallback(
     async (): Promise<AppSettings> => {
       const data = await this.browser.storage.sync.get('settings')
-      return data.settings || DEFAULT_SETTINGS
+      return (data.settings as AppSettings | undefined) || DEFAULT_SETTINGS
     },
     ERROR_TYPES.FETCH_SETTINGS,
     DEFAULT_SETTINGS

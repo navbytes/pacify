@@ -1,4 +1,4 @@
-import type { ProxyConfig, ProxyMode, ProxyServer, ProxySettings } from '@/interfaces'
+import type { ProxyConfig, ProxyMode, ProxyScheme, ProxyServer, ProxySettings } from '@/interfaces'
 
 /**
  * Creates a default proxy server configuration
@@ -92,7 +92,7 @@ export function parseProxyString(proxyString: string): ProxyServer | null {
 
   const [, type, host, port] = match
 
-  const schemeMap: Record<string, string> = {
+  const schemeMap: Record<string, ProxyScheme> = {
     PROXY: 'http',
     HTTP: 'http',
     HTTPS: 'https',
@@ -103,7 +103,7 @@ export function parseProxyString(proxyString: string): ProxyServer | null {
   }
 
   return {
-    scheme: (schemeMap[type] as any) || 'http',
+    scheme: schemeMap[type] ?? 'http',
     host,
     port,
   }

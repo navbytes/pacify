@@ -555,5 +555,254 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "Ajouter Auto-Proxy"
+  },
+  "addAutoProxyTooltip": {
+    "message": "Créer des règles de routage basées sur l'URL"
+  },
+  "autoProxyMode": {
+    "message": "Auto-Proxy"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1 règles"
+  },
+  "createAutoProxy": {
+    "message": "Créer Auto-Proxy"
+  },
+  "editAutoProxy": {
+    "message": "Modifier Auto-Proxy"
+  },
+  "autoProxyCreated": {
+    "message": "Auto-Proxy \"$1\" créé avec succès"
+  },
+  "autoProxyUpdated": {
+    "message": "Auto-Proxy \"$1\" mis à jour avec succès"
+  },
+  "autoProxyDeleted": {
+    "message": "Auto-Proxy \"$1\" supprimé avec succès"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "ex., Routage de travail, Split Tunnel"
+  },
+  "addRule": {
+    "message": "Ajouter une règle"
+  },
+  "editRule": {
+    "message": "Modifier la règle"
+  },
+  "deleteRule": {
+    "message": "Supprimer la règle"
+  },
+  "saveRule": {
+    "message": "Enregistrer la règle"
+  },
+  "cancelRule": {
+    "message": "Annuler"
+  },
+  "urlPattern": {
+    "message": "Modèle d'URL"
+  },
+  "patternType": {
+    "message": "Type de modèle"
+  },
+  "wildcardPattern": {
+    "message": "Joker"
+  },
+  "regexPattern": {
+    "message": "Regex"
+  },
+  "exactMatch": {
+    "message": "Correspondance exacte"
+  },
+  "cidrPattern": {
+    "message": "CIDR (Plage IP)"
+  },
+  "selectProxy": {
+    "message": "Sélectionner un proxy"
+  },
+  "defineInline": {
+    "message": "Définir en ligne"
+  },
+  "directConnection": {
+    "message": "Connexion directe"
+  },
+  "fallbackBehavior": {
+    "message": "Comportement de repli"
+  },
+  "fallbackDescription": {
+    "message": "Appliqué lorsqu'aucune règle ne correspond à l'URL"
+  },
+  "testPattern": {
+    "message": "Tester le modèle"
+  },
+  "testUrl": {
+    "message": "URL de test"
+  },
+  "testUrlPlaceholder": {
+    "message": "Entrez une URL pour tester contre les règles"
+  },
+  "patternMatches": {
+    "message": "Le modèle correspond !"
+  },
+  "noPatternMatch": {
+    "message": "Aucun modèle ne correspond - le repli sera utilisé"
+  },
+  "ruleEnabled": {
+    "message": "Règle activée"
+  },
+  "ruleDisabled": {
+    "message": "Règle désactivée"
+  },
+  "routingRules": {
+    "message": "Règles de routage"
+  },
+  "noRulesYet": {
+    "message": "Aucune règle définie pour l'instant"
+  },
+  "noRulesDescription": {
+    "message": "Ajoutez des règles pour définir comment les URL seront routées vers différents proxys"
+  },
+  "atLeastOneRule": {
+    "message": "Au moins une règle est requise"
+  },
+  "failedToSave": {
+    "message": "Échec de l'enregistrement de la configuration"
+  },
+  "proxyType": {
+    "message": "Type de proxy"
+  },
+  "noProxiesAvailable": {
+    "message": "Aucun proxy disponible"
+  },
+  "name": {
+    "message": "Nom"
+  },
+  "ruleDescription": {
+    "message": "Description (optionnel)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "ex., Router tout le trafic Google"
+  },
+  "patternPlaceholder": {
+    "message": "ex., *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "Utilisez * pour correspondre à n'importe quel caractère. Exemple : *.example.com"
+  },
+  "regexHelp": {
+    "message": "Utilisez la syntaxe regex JavaScript. Exemple : ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "Correspondance exacte du nom d'hôte. Exemple : www.example.com"
+  },
+  "cidrHelp": {
+    "message": "Utilisez la notation CIDR pour les plages IP. Exemple : 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "Modèle invalide"
+  },
+  "patternRequired": {
+    "message": "Le modèle est requis"
+  },
+  "saveChanges": {
+    "message": "Enregistrer les modifications"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "Ce proxy est utilisé par les configurations Auto-Proxy suivantes :"
+  },
+  "autoProxyRefSingular": {
+    "message": "1 règle"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1 règles",
+    "placeholders": {
+      "1": { "content": "$1", "example": "3" }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "Ces règles seront automatiquement supprimées lorsque vous supprimerez ce proxy."
+  },
+  "orphanedProxyWarning": {
+    "message": "Le proxy référencé a été supprimé. Veuillez sélectionner un autre proxy."
+  },
+  "matchedRule": {
+    "message": "Règle correspondante"
+  },
+  "useFallback": {
+    "message": "Utiliser le repli"
+  },
+  "dragToReorder": {
+    "message": "Glissez pour réorganiser les règles"
+  },
+  "failedToSaveProxy": {
+    "message": "Échec de l'enregistrement de la configuration du proxy"
+  },
+  "autoProxySubtitle": {
+    "message": "Routage de trafic intelligent basé sur les URL"
+  },
+  "close": {
+    "message": "Fermer"
+  },
+  "ruleSingular": {
+    "message": "règle"
+  },
+  "rulePlural": {
+    "message": "règles"
+  },
+  "rulesConfigured": {
+    "message": "$1 $2 configurées"
+  },
+  "ruleActiveDescription": {
+    "message": "Cette règle sera active lorsque la configuration est activée"
+  },
+  "ruleSkippedDescription": {
+    "message": "Cette règle sera ignorée"
+  },
+  "matchTypeWildcard": {
+    "message": "Joker"
+  },
+  "matchTypeExact": {
+    "message": "Exact"
+  },
+  "matchTypeRegex": {
+    "message": "Regex"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "Proxy supprimé"
+  },
+  "testPatternHint": {
+    "message": "Vérifiez que vos règles fonctionnent correctement"
+  },
+  "testButton": {
+    "message": "Tester"
+  },
+  "ruleLabel": {
+    "message": "Règle :"
+  },
+  "testPatternHelp": {
+    "message": "Entrez une URL ci-dessus et cliquez sur Tester pour voir quelle règle correspond"
+  },
+  "proxyModePacScript": {
+    "message": "(Script PAC)"
+  },
+  "proxyModeSystem": {
+    "message": "(Système)"
+  },
+  "proxyModeDirect": {
+    "message": "(Direct)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(Détection auto)"
+  },
+  "toggleSearch": {
+    "message": "Basculer la recherche"
+  },
+  "hideSearch": {
+    "message": "Masquer la recherche"
   }
 }

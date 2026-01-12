@@ -18,6 +18,7 @@ let mockProxyConfig = {
   levelOfControl: 'controlled_by_this_extension' as const,
 }
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Mock service class mirrors the real service API
 export class MockChromeService {
   static async setProxy(data: string): Promise<void> {
     return new Promise((resolve) => {

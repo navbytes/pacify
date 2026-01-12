@@ -6,11 +6,14 @@ import { ERROR_TYPES } from '@/interfaces'
 import { CodeMirror } from '@/services/CodeMirrorService'
 import { I18nService } from '@/services/i18n/i18nService'
 import { NotifyService } from '@/services/NotifyService'
-import { inputVariants } from '@/utils/classPatterns'
+import { checkboxLabelVariants, formLabelVariants, inputVariants } from '@/utils/classPatterns'
 import { defaultCodeMirrorOptions } from '@/utils/codemirror'
 import Button from '../Button.svelte'
 import FlexGroup from '../FlexGroup.svelte'
 import Text from '../Text.svelte'
+
+// WeakMap to store MutationObserver for each editor instance
+const editorObservers = new WeakMap<ICodeMirrorEditor, MutationObserver>()
 
 let themeCleanup: (() => void) | null = null
 
@@ -128,13 +131,13 @@ $effect(() => {
 })
 
 async function createEditor() {
-  if (editor) return
+  if (editor || !editorContainer) return
 
   try {
     // Detect initial system theme
     const initialTheme = CodeMirror.getCurrentTheme()
 
-    editor = await CodeMirror.create(editorContainer!, {
+    editor = await CodeMirror.create(editorContainer, {
       ...defaultCodeMirrorOptions,
       value: editorContent,
       language: 'pac',
@@ -161,8 +164,8 @@ async function createEditor() {
         characterData: true,
       })
     }
-    // Store observer for cleanup
-    ;(editor as any).__observer = observer
+    // Store observer for cleanup using WeakMap
+    editorObservers.set(editor, observer)
 
     // Listen for theme changes and update editor
     themeCleanup = CodeMirror.onThemeChange(async (newTheme) => {
@@ -186,8 +189,10 @@ onDestroy(async () => {
 
   if (editor) {
     // Clean up observer
-    if ((editor as any).__observer) {
-      ;((editor as any).__observer as MutationObserver).disconnect()
+    const observer = editorObservers.get(editor)
+    if (observer) {
+      observer.disconnect()
+      editorObservers.delete(editor)
     }
     await CodeMirror.dispose(editor)
   }
@@ -196,9 +201,7 @@ onDestroy(async () => {
 
 <div class="space-y-4">
   <div>
-    <label for="pacUrl" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-      {I18nService.getMessage('pacScriptUrl')}
-    </label>
+    <label for="pacUrl" class={formLabelVariants()}>{I18nService.getMessage('pacScriptUrl')}</label>
     <input
       type="url"
       id="pacUrl"
@@ -222,10 +225,7 @@ onDestroy(async () => {
     <div class="space-y-3">
       <FlexGroup direction="horizontal" childrenGap="md" alignItems="center">
         <div class="flex-1">
-          <label
-            for="updateInterval"
-            class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
-          >
+          <label for="updateInterval" class={formLabelVariants()}>
             {I18nService.getMessage('updateInterval') || 'Auto-update interval'}
           </label>
           <select
@@ -264,10 +264,7 @@ onDestroy(async () => {
   <div class="flex-1 min-h-0">
     {#if !pacUrl}
       <FlexGroup>
-        <label
-          for="editorContainer"
-          class="flex-grow text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
-        >
+        <label for="editorContainer" class={formLabelVariants({ spacing: 'none' })}>
           {I18nService.getMessage('pacScript')}
         </label>
         <Text size="sm" weight="medium" classes="text-slate-700 dark:text-slate-300">
@@ -287,10 +284,7 @@ onDestroy(async () => {
         </Button>
       </FlexGroup>
     {:else}
-      <label
-        for="editorContainer"
-        class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
-      >
+      <label for="editorContainer" class={formLabelVariants()}>
         {I18nService.getMessage('pacScriptPreview') || 'PAC Script Preview (Read-only)'}
       </label>
     {/if}
@@ -302,15 +296,19 @@ onDestroy(async () => {
     ></div>
   </div>
 
-  <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
-    <input
-      type="checkbox"
-      id="pacMandatory"
-      bind:checked={pacMandatory}
-      class="rounded border-slate-300 text-primary focus:ring-primary"
-    >
-    <label for="pacMandatory" class="text-sm text-slate-700 dark:text-slate-300">
-      {I18nService.getMessage('mandatoryPacScript')}
-    </label>
-  </FlexGroup>
+  {#snippet checkboxArea()}
+    {@const checkboxStyles = checkboxLabelVariants()}
+    <FlexGroup direction="horizontal" childrenGap="sm" alignItems="center">
+      <input
+        type="checkbox"
+        id="pacMandatory"
+        bind:checked={pacMandatory}
+        class={checkboxStyles.checkbox}
+      >
+      <label for="pacMandatory" class={checkboxStyles.label}>
+        {I18nService.getMessage('mandatoryPacScript')}
+      </label>
+    </FlexGroup>
+  {/snippet}
+  {@render checkboxArea()}
 </div>

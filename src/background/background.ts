@@ -14,6 +14,7 @@ import { SettingsReader, SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
 import { logger } from '@/services/LoggerService'
+import { PACScriptGenerator } from '@/services/PACScriptGenerator'
 
 /**
  * Flag to track if the background worker is fully initialized
@@ -363,7 +364,20 @@ async function setProxySettings(proxy: ProxyConfig): Promise<void> {
     const settings = await safeGetSettings()
     const autoReload = settings?.autoReloadOnProxySwitch ?? true
 
-    await ChromeService.setProxy(proxy, autoReload)
+    // Check if this is an Auto-Proxy config and generate PAC script if needed
+    let proxyToApply = proxy
+    if (proxy.autoProxy && settings) {
+      const generatedPAC = PACScriptGenerator.generate(proxy.autoProxy, settings.proxyConfigs)
+      // Create a copy with the generated PAC script
+      proxyToApply = {
+        ...proxy,
+        pacScript: { data: generatedPAC },
+        mode: 'pac_script',
+      }
+      logger.info('Generated PAC script for Auto-Proxy config:', proxy.name)
+    }
+
+    await ChromeService.setProxy(proxyToApply, autoReload)
     const { name, color } = proxy
     await updateBadge(name, color)
   } catch (error) {

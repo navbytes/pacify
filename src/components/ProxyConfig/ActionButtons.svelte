@@ -1,5 +1,6 @@
 <script lang="ts">
 import { I18nService } from '@/services/i18n/i18nService'
+import { modalFooterVariants } from '@/utils/classPatterns'
 import { Loader2 } from '@/utils/icons'
 import Button from '../Button.svelte'
 
@@ -11,9 +12,7 @@ interface Props {
 let { isSubmitting = false, onCancel }: Props = $props()
 </script>
 
-<div
-  class="p-4 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3 sticky bottom-0 bg-white dark:bg-slate-800"
->
+<div class={modalFooterVariants()}>
   <Button
     color="secondary"
     onclick={onCancel}

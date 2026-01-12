@@ -555,5 +555,254 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "ऑटो-प्रॉक्सी जोड़ें"
+  },
+  "addAutoProxyTooltip": {
+    "message": "URL-आधारित रूटिंग नियम बनाएं"
+  },
+  "autoProxyMode": {
+    "message": "ऑटो-प्रॉक्सी"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1 नियम"
+  },
+  "createAutoProxy": {
+    "message": "ऑटो-प्रॉक्सी बनाएं"
+  },
+  "editAutoProxy": {
+    "message": "ऑटो-प्रॉक्सी संपादित करें"
+  },
+  "autoProxyCreated": {
+    "message": "ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक बनाया गया"
+  },
+  "autoProxyUpdated": {
+    "message": "ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक अपडेट किया गया"
+  },
+  "autoProxyDeleted": {
+    "message": "ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक हटाया गया"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "जैसे, कार्य रूटिंग, स्प्लिट टनल"
+  },
+  "addRule": {
+    "message": "नियम जोड़ें"
+  },
+  "editRule": {
+    "message": "नियम संपादित करें"
+  },
+  "deleteRule": {
+    "message": "नियम हटाएं"
+  },
+  "saveRule": {
+    "message": "नियम सहेजें"
+  },
+  "cancelRule": {
+    "message": "रद्द करें"
+  },
+  "urlPattern": {
+    "message": "URL पैटर्न"
+  },
+  "patternType": {
+    "message": "पैटर्न प्रकार"
+  },
+  "wildcardPattern": {
+    "message": "वाइल्डकार्ड"
+  },
+  "regexPattern": {
+    "message": "रेजेक्स"
+  },
+  "exactMatch": {
+    "message": "सटीक मिलान"
+  },
+  "cidrPattern": {
+    "message": "CIDR (IP रेंज)"
+  },
+  "selectProxy": {
+    "message": "प्रॉक्सी चुनें"
+  },
+  "defineInline": {
+    "message": "इनलाइन परिभाषित करें"
+  },
+  "directConnection": {
+    "message": "सीधा कनेक्शन"
+  },
+  "fallbackBehavior": {
+    "message": "फ़ॉलबैक व्यवहार"
+  },
+  "fallbackDescription": {
+    "message": "जब कोई नियम URL से मेल नहीं खाता तो लागू होता है"
+  },
+  "testPattern": {
+    "message": "पैटर्न परीक्षण करें"
+  },
+  "testUrl": {
+    "message": "परीक्षण URL"
+  },
+  "testUrlPlaceholder": {
+    "message": "नियमों के विरुद्ध परीक्षण करने के लिए URL दर्ज करें"
+  },
+  "patternMatches": {
+    "message": "पैटर्न मेल खाता है!"
+  },
+  "noPatternMatch": {
+    "message": "कोई पैटर्न मेल नहीं खाता - फ़ॉलबैक का उपयोग किया जाएगा"
+  },
+  "ruleEnabled": {
+    "message": "नियम सक्षम"
+  },
+  "ruleDisabled": {
+    "message": "नियम अक्षम"
+  },
+  "routingRules": {
+    "message": "रूटिंग नियम"
+  },
+  "noRulesYet": {
+    "message": "अभी तक कोई नियम परिभाषित नहीं"
+  },
+  "noRulesDescription": {
+    "message": "URL को विभिन्न प्रॉक्सी पर कैसे रूट किया जाए यह परिभाषित करने के लिए नियम जोड़ें"
+  },
+  "atLeastOneRule": {
+    "message": "कम से कम एक नियम आवश्यक है"
+  },
+  "failedToSave": {
+    "message": "कॉन्फ़िगरेशन सहेजने में विफल"
+  },
+  "proxyType": {
+    "message": "प्रॉक्सी प्रकार"
+  },
+  "noProxiesAvailable": {
+    "message": "कोई प्रॉक्सी उपलब्ध नहीं"
+  },
+  "name": {
+    "message": "नाम"
+  },
+  "ruleDescription": {
+    "message": "विवरण (वैकल्पिक)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "जैसे, सभी Google ट्रैफ़िक रूट करें"
+  },
+  "patternPlaceholder": {
+    "message": "जैसे, *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "किसी भी वर्ण से मिलान करने के लिए * का उपयोग करें। उदाहरण: *.example.com"
+  },
+  "regexHelp": {
+    "message": "JavaScript रेजेक्स सिंटैक्स का उपयोग करें। उदाहरण: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "सटीक होस्टनाम का मिलान करें। उदाहरण: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "IP रेंज के लिए CIDR नोटेशन का उपयोग करें। उदाहरण: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "अमान्य पैटर्न"
+  },
+  "patternRequired": {
+    "message": "पैटर्न आवश्यक है"
+  },
+  "saveChanges": {
+    "message": "परिवर्तन सहेजें"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "यह प्रॉक्सी निम्नलिखित ऑटो-प्रॉक्सी कॉन्फ़िगरेशन द्वारा उपयोग किया जाता है:"
+  },
+  "autoProxyRefSingular": {
+    "message": "1 नियम"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1 नियम",
+    "placeholders": {
+      "1": { "content": "$1", "example": "3" }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "जब आप इस प्रॉक्सी को हटाएंगे तो ये नियम स्वचालित रूप से हटा दिए जाएंगे।"
+  },
+  "orphanedProxyWarning": {
+    "message": "संदर्भित प्रॉक्सी हटा दिया गया है। कृपया एक अलग प्रॉक्सी चुनें।"
+  },
+  "matchedRule": {
+    "message": "मेल खाता नियम"
+  },
+  "useFallback": {
+    "message": "फ़ॉलबैक का उपयोग करें"
+  },
+  "dragToReorder": {
+    "message": "नियमों को पुनर्व्यवस्थित करने के लिए खींचें"
+  },
+  "failedToSaveProxy": {
+    "message": "प्रॉक्सी कॉन्फ़िगरेशन सहेजने में विफल"
+  },
+  "autoProxySubtitle": {
+    "message": "URL-आधारित स्मार्ट ट्रैफ़िक रूटिंग"
+  },
+  "close": {
+    "message": "बंद करें"
+  },
+  "ruleSingular": {
+    "message": "नियम"
+  },
+  "rulePlural": {
+    "message": "नियम"
+  },
+  "rulesConfigured": {
+    "message": "$1 $2 कॉन्फ़िगर किए गए"
+  },
+  "ruleActiveDescription": {
+    "message": "कॉन्फ़िगरेशन सक्षम होने पर यह नियम सक्रिय होगा"
+  },
+  "ruleSkippedDescription": {
+    "message": "यह नियम छोड़ दिया जाएगा"
+  },
+  "matchTypeWildcard": {
+    "message": "वाइल्डकार्ड"
+  },
+  "matchTypeExact": {
+    "message": "सटीक"
+  },
+  "matchTypeRegex": {
+    "message": "रेगेक्स"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "प्रॉक्सी हटा दी गई"
+  },
+  "testPatternHint": {
+    "message": "सत्यापित करें कि आपके नियम सही ढंग से काम कर रहे हैं"
+  },
+  "testButton": {
+    "message": "परीक्षण"
+  },
+  "ruleLabel": {
+    "message": "नियम:"
+  },
+  "testPatternHelp": {
+    "message": "ऊपर URL दर्ज करें और परीक्षण पर क्लिक करें यह देखने के लिए कि कौन सा नियम मेल खाता है"
+  },
+  "proxyModePacScript": {
+    "message": "(PAC स्क्रिप्ट)"
+  },
+  "proxyModeSystem": {
+    "message": "(सिस्टम)"
+  },
+  "proxyModeDirect": {
+    "message": "(डायरेक्ट)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(ऑटो-डिटेक्ट)"
+  },
+  "toggleSearch": {
+    "message": "खोज टॉगल करें"
+  },
+  "hideSearch": {
+    "message": "खोज छुपाएं"
   }
 }

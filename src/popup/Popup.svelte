@@ -28,8 +28,8 @@ function quickAddProxy() {
 }
 
 async function disableAllProxies() {
-  if (activeProxy) {
-    await settingsStore.setProxy(activeProxy.id!, false)
+  if (activeProxy?.id) {
+    await settingsStore.setProxy(activeProxy.id, false)
   }
 }
 </script>

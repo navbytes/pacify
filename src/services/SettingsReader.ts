@@ -5,6 +5,7 @@ import { StorageService } from './StorageService'
  * SettingsReader provides read-only access to application settings
  * It delegates to StorageService for the actual storage operations and caching
  */
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class SettingsReader {
   static async getScripts(): Promise<ProxyConfig[]> {
     const settings = await SettingsReader.getSettings()

@@ -1,9 +1,21 @@
 import type { ComponentType } from 'svelte'
 import type { ProxyConfig, ProxyMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
-import { FileText, Globe, Monitor, Radar, Wrench, Zap } from '@/utils/icons'
+import { FileText, GitBranch, Globe, Monitor, Radar, Wrench, Zap } from '@/utils/icons'
 
-export function getProxyModeLabel(mode: ProxyMode): string {
+/**
+ * Checks if a ProxyConfig is an Auto-Proxy configuration
+ */
+export function isAutoProxy(config: ProxyConfig): boolean {
+  return config.autoProxy !== undefined
+}
+
+export function getProxyModeLabel(mode: ProxyMode, config?: ProxyConfig): string {
+  // Check if this is an Auto-Proxy config
+  if (config && isAutoProxy(config)) {
+    return I18nService.getMessage('autoProxyMode')
+  }
+
   const labels: Record<ProxyMode, string> = {
     system: I18nService.getMessage('systemMode'),
     direct: I18nService.getMessage('directMode'),
@@ -14,7 +26,12 @@ export function getProxyModeLabel(mode: ProxyMode): string {
   return labels[mode] || mode
 }
 
-export function getProxyModeIcon(mode: ProxyMode): ComponentType {
+export function getProxyModeIcon(mode: ProxyMode, config?: ProxyConfig): ComponentType {
+  // Check if this is an Auto-Proxy config
+  if (config && isAutoProxy(config)) {
+    return GitBranch
+  }
+
   const icons: Record<ProxyMode, ComponentType> = {
     system: Monitor,
     direct: Zap,
@@ -25,11 +42,26 @@ export function getProxyModeIcon(mode: ProxyMode): ComponentType {
   return icons[mode] || Globe
 }
 
-export function getProxyModeColor(mode: ProxyMode): {
+// Auto-Proxy color scheme (distinct orange/amber)
+const AUTO_PROXY_COLORS = {
+  bg: 'bg-orange-100 dark:bg-orange-900/30',
+  text: 'text-orange-800 dark:text-orange-200',
+  border: 'border-orange-300 dark:border-orange-700',
+}
+
+export function getProxyModeColor(
+  mode: ProxyMode,
+  config?: ProxyConfig
+): {
   bg: string
   text: string
   border: string
 } {
+  // Check if this is an Auto-Proxy config
+  if (config && isAutoProxy(config)) {
+    return AUTO_PROXY_COLORS
+  }
+
   const colors: Record<ProxyMode, { bg: string; text: string; border: string }> = {
     system: {
       bg: 'bg-slate-100 dark:bg-slate-800',
@@ -66,7 +98,68 @@ export function getProxyModeColor(mode: ProxyMode): {
   )
 }
 
+/**
+ * Find Auto-Proxy configs that reference a given proxy ID
+ * Returns the names of Auto-Proxy configs that would be affected if this proxy is deleted
+ */
+export function findAutoProxyReferences(
+  proxyId: string,
+  allConfigs: ProxyConfig[]
+): { configName: string; ruleCount: number }[] {
+  const references: { configName: string; ruleCount: number }[] = []
+
+  for (const config of allConfigs) {
+    if (!isAutoProxy(config) || !config.autoProxy) continue
+
+    // Count rules that reference this proxy
+    const referencingRules = config.autoProxy.rules.filter(
+      (rule) => rule.proxyType === 'existing' && rule.proxyId === proxyId
+    )
+
+    // Check fallback
+    const fallbackReferences =
+      config.autoProxy.fallbackType === 'existing' && config.autoProxy.fallbackProxyId === proxyId
+        ? 1
+        : 0
+
+    const totalReferences = referencingRules.length + fallbackReferences
+
+    if (totalReferences > 0) {
+      references.push({
+        configName: config.name,
+        ruleCount: totalReferences,
+      })
+    }
+  }
+
+  return references
+}
+
+/**
+ * Check if a proxy ID is referenced by any Auto-Proxy config
+ */
+export function isProxyReferencedByAutoProxy(proxyId: string, allConfigs: ProxyConfig[]): boolean {
+  return findAutoProxyReferences(proxyId, allConfigs).length > 0
+}
+
+/**
+ * Check if a rule references a deleted/missing proxy
+ */
+export function isOrphanedRule(
+  rule: { proxyType: string; proxyId?: string },
+  allConfigs: ProxyConfig[]
+): boolean {
+  if (rule.proxyType !== 'existing' || !rule.proxyId) return false
+  return !allConfigs.some((config) => config.id === rule.proxyId)
+}
+
 export function getProxyDescription(mode: ProxyMode, config: ProxyConfig): string {
+  // Check if this is an Auto-Proxy config
+  if (isAutoProxy(config)) {
+    const ruleCount = config.autoProxy?.rules?.length || 0
+    return I18nService.getMessage('autoProxyRulesCount', String(ruleCount))
+  }
+
   switch (mode) {
     case 'system':
       return I18nService.getMessage('systemProxy')
