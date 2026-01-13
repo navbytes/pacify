@@ -42,13 +42,26 @@ interface Props {
 let { rule = undefined, availableProxies, onSave, onCancel }: Props = $props()
 
 // Form state
-let pattern = $state(rule?.pattern || '')
-let matchType = $state<AutoProxyMatchType>(rule?.matchType || 'wildcard')
-let proxyType = $state<AutoProxyRouteType>(rule?.proxyType || 'direct')
-let proxyId = $state(rule?.proxyId)
-let inlineProxy = $state<ProxyServer | undefined>(rule?.inlineProxy)
-let description = $state(rule?.description || '')
-let enabled = $state(rule?.enabled ?? true)
+let pattern = $state('')
+let matchType = $state<AutoProxyMatchType>('wildcard')
+let proxyType = $state<AutoProxyRouteType>('direct')
+let proxyId = $state<string | undefined>(undefined)
+let inlineProxy = $state<ProxyServer | undefined>(undefined)
+let description = $state('')
+let enabled = $state(true)
+
+// Initialize form state from rule
+$effect(() => {
+  if (rule) {
+    pattern = rule.pattern || ''
+    matchType = rule.matchType || 'wildcard'
+    proxyType = rule.proxyType || 'direct'
+    proxyId = rule.proxyId
+    inlineProxy = rule.inlineProxy
+    description = rule.description || ''
+    enabled = rule.enabled ?? true
+  }
+})
 
 // Validation state
 let patternError = $state<string | null>(null)
@@ -205,7 +218,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
         <div
           class="flex items-center gap-2 mt-2 p-2 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800"
         >
-          <AlertCircle size={14} class="text-red-500 flex-shrink-0" />
+          <AlertCircle size={14} class="text-red-500 shrink-0" />
           <Text size="xs" classes="text-red-600 dark:text-red-400">{patternError}</Text>
         </div>
       {/if}
@@ -366,7 +379,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
           <div
             class={`w-12 h-7 rounded-full transition-all duration-300 ${
             enabled
-              ? 'bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg shadow-green-500/30'
+              ? 'bg-linear-to-r from-green-500 to-emerald-500 shadow-lg shadow-green-500/30'
               : 'bg-slate-300 dark:bg-slate-600'
           }`}
           >

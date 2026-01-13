@@ -37,17 +37,25 @@ interface Props {
 let { proxyConfig = undefined, availableProxies, onSave, onCancel }: Props = $props()
 
 // Basic settings state
-let name = $state(proxyConfig?.name || '')
+let name = $state('')
 // Use existing color for editing, random color for new Auto-Proxy configs
-let color = $state(proxyConfig?.color || getRandomProxyColor())
+let color = $state('')
 
 // Auto-Proxy config state
-let rules = $state<AutoProxyRule[]>(proxyConfig?.autoProxy?.rules || [])
-let fallbackType = $state<AutoProxyRouteType>(proxyConfig?.autoProxy?.fallbackType || 'direct')
-let fallbackProxyId = $state(proxyConfig?.autoProxy?.fallbackProxyId)
-let fallbackInlineProxy = $state<ProxyServer | undefined>(
-  proxyConfig?.autoProxy?.fallbackInlineProxy
-)
+let rules = $state<AutoProxyRule[]>([])
+let fallbackType = $state<AutoProxyRouteType>('direct')
+let fallbackProxyId = $state<string | undefined>(undefined)
+let fallbackInlineProxy = $state<ProxyServer | undefined>(undefined)
+
+// Initialize state from proxyConfig
+$effect(() => {
+  name = proxyConfig?.name || ''
+  color = proxyConfig?.color || getRandomProxyColor()
+  rules = proxyConfig?.autoProxy?.rules || []
+  fallbackType = proxyConfig?.autoProxy?.fallbackType || 'direct'
+  fallbackProxyId = proxyConfig?.autoProxy?.fallbackProxyId
+  fallbackInlineProxy = proxyConfig?.autoProxy?.fallbackInlineProxy
+})
 
 // UI state
 let editingRule = $state<AutoProxyRule | null>(null)

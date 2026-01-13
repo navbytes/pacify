@@ -28,9 +28,9 @@ let {
 let selectableProxies = $derived(availableProxies.filter((p) => p.autoProxy === undefined))
 
 // Local state for inline proxy
-let inlineHost = $state(inlineProxy?.host || '')
-let inlinePort = $state(inlineProxy?.port || '')
-let inlineScheme = $state<ProxyServer['scheme']>(inlineProxy?.scheme || 'http')
+let inlineHost = $derived(inlineProxy?.host || '')
+let inlinePort = $derived(inlineProxy?.port || '')
+let inlineScheme = $derived<ProxyServer['scheme']>(inlineProxy?.scheme || 'http')
 
 // Input styles
 const selectClasses = inputVariants({ size: 'md' })

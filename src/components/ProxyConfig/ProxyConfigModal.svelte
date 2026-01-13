@@ -33,26 +33,38 @@ const DEFAULT_PROXY_CONFIG: ProxyServer = {
 }
 
 // Basic Settings
-let name = $state<string>(proxyConfig?.name || '')
+let name = $state<string>('')
 // Use existing color for editing, random color for new proxies
-let color = $state<string>(proxyConfig?.color || getRandomProxyColor())
-let isActive = $state<boolean>(proxyConfig?.isActive || false)
-let quickSwitch = $state<boolean>(proxyConfig?.quickSwitch || false)
+let color = $state<string>('')
+let isActive = $state<boolean>(false)
+let quickSwitch = $state<boolean>(false)
 
 // Proxy Mode
-let proxyMode = $state<ProxyMode>(proxyConfig?.mode || 'system')
+let proxyMode = $state<ProxyMode>('system')
 
 // PAC Script Settings
-let editorContent = $state<string>(proxyConfig?.pacScript?.data || '')
-let pacUrl = $state<string>(proxyConfig?.pacScript?.url || '')
-let pacMandatory = $state<boolean>(proxyConfig?.pacScript?.mandatory || false)
-let updateInterval = $state<number>(proxyConfig?.pacScript?.updateInterval || 0)
-let lastFetched = $state<number | undefined>(proxyConfig?.pacScript?.lastFetched)
+let editorContent = $state<string>('')
+let pacUrl = $state<string>('')
+let pacMandatory = $state<boolean>(false)
+let updateInterval = $state<number>(0)
+let lastFetched = $state<number | undefined>(undefined)
 
 // Animation state
 let isVisible = $state(false)
 
 $effect(() => {
+  // Initialize state from proxyConfig
+  name = proxyConfig?.name || ''
+  color = proxyConfig?.color || getRandomProxyColor()
+  isActive = proxyConfig?.isActive || false
+  quickSwitch = proxyConfig?.quickSwitch || false
+  proxyMode = proxyConfig?.mode || 'system'
+  editorContent = proxyConfig?.pacScript?.data || ''
+  pacUrl = proxyConfig?.pacScript?.url || ''
+  pacMandatory = proxyConfig?.pacScript?.mandatory || false
+  updateInterval = proxyConfig?.pacScript?.updateInterval || 0
+  lastFetched = proxyConfig?.pacScript?.lastFetched
+
   // Trigger entrance animation
   requestAnimationFrame(() => {
     isVisible = true
@@ -96,7 +108,7 @@ async function handlePacRefresh() {
 }
 
 // Manual Proxy Settings
-let proxySettings = $state<ProxySettings>({
+let proxySettings = $derived<ProxySettings>({
   singleProxy: proxyConfig?.rules?.singleProxy || { ...DEFAULT_PROXY_CONFIG },
   proxyForHttp: proxyConfig?.rules?.proxyForHttp || {
     ...DEFAULT_PROXY_CONFIG,
@@ -110,7 +122,7 @@ let proxySettings = $state<ProxySettings>({
   },
   bypassList: proxyConfig?.rules?.bypassList || [],
 })
-let useSharedProxy = $state<boolean>(
+let useSharedProxy = $derived<boolean>(
   proxyConfig?.rules?.singleProxy !== undefined ? true : !proxyConfig?.rules
 )
 let bypassListContent = $derived(proxySettings.bypassList.join('\n'))

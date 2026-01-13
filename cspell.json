@@ -1,0 +1,9 @@
+{
+  "version": "0.2",
+  "ignorePaths": ["_locales/**/*.json"],
+  "dictionaryDefinitions": [],
+  "dictionaries": [],
+  "words": [],
+  "ignoreWords": [],
+  "import": []
+}
