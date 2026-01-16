@@ -13,7 +13,7 @@ export const gradientSectionVariants = tv({
   slots: {
     wrapper: 'relative overflow-hidden rounded-xl',
     background: 'absolute inset-0',
-    accentBar: 'absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r',
+    accentBar: 'absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r',
     content: 'relative p-4 border rounded-xl',
     decorativeBlur: 'absolute w-24 h-24 rounded-full blur-2xl',
   },
@@ -77,14 +77,14 @@ export const gradientSectionVariants = tv({
       },
       red: {
         background:
-          'bg-gradient-to-r from-red-500/10 to-rose-500/10 dark:from-red-500/5 dark:to-rose-500/5',
+          'bg-linear-to-r from-red-500/10 to-rose-500/10 dark:from-red-500/5 dark:to-rose-500/5',
         accentBar: 'from-red-500 to-rose-500',
         content: 'border-red-200 dark:border-red-800',
         decorativeBlur: 'bg-gradient-to-br from-red-400/10 to-rose-400/10',
       },
       green: {
         background:
-          'bg-gradient-to-r from-emerald-500/10 via-green-500/10 to-teal-500/10 dark:from-emerald-500/5 dark:via-green-500/5 dark:to-teal-500/5',
+          'bg-linear-to-r from-emerald-500/10 via-green-500/10 to-teal-500/10 dark:from-emerald-500/5 dark:via-green-500/5 dark:to-teal-500/5',
         accentBar: 'from-emerald-500 via-green-500 to-teal-500',
         content: 'border-green-200 dark:border-green-800',
         decorativeBlur: 'bg-gradient-to-br from-green-400/10 to-emerald-400/10',
@@ -258,7 +258,7 @@ export const ruleListItemVariants = tv({
     wrapper:
       'group relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.01]',
     background:
-      'absolute inset-0 bg-gradient-to-r from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-750',
+      'absolute inset-0 bg-linear-to-r from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-700',
     accentBar: 'absolute left-0 top-0 bottom-0 w-1 transition-all duration-200',
     content:
       'relative p-4 pl-5 border border-l-0 rounded-xl rounded-l-none border-slate-200/80 dark:border-slate-700/50',
@@ -307,7 +307,7 @@ export const matchTypeBadgeGradients: Record<string, string> = {
  * Match type badge variants
  */
 export const matchTypeBadgeVariants = tv({
-  base: 'inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold text-white bg-gradient-to-r',
+  base: 'inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold text-white bg-linear-to-r',
 })
 
 /**
@@ -412,7 +412,7 @@ export const modalContentVariants = tv({
   slots: {
     wrapper:
       'relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl shadow-2xl flex flex-col w-full overflow-hidden border border-white/20 dark:border-slate-700/50 transition-all duration-300 transform',
-    accentBar: 'absolute top-0 left-0 right-0 h-1 bg-gradient-to-r',
+    accentBar: 'absolute top-0 left-0 right-0 h-1 bg-linear-to-r',
     header: 'relative px-6 py-5 border-b border-slate-200/80 dark:border-slate-700/80',
     headerBackground: 'absolute inset-0',
     body: 'flex-1 overflow-y-auto px-6 py-6 space-y-6',
@@ -437,23 +437,23 @@ export const modalContentVariants = tv({
       orange: {
         accentBar: 'from-orange-500 via-amber-500 to-yellow-500',
         headerBackground:
-          'bg-gradient-to-r from-orange-50/50 via-transparent to-amber-50/50 dark:from-orange-950/20 dark:via-transparent dark:to-amber-950/20',
+          'bg-linear-to-r from-orange-50/50 via-transparent to-amber-50/50 dark:from-orange-950/20 dark:via-transparent dark:to-amber-950/20',
         footerBackground:
-          'bg-gradient-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
+          'bg-linear-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
       },
       purple: {
         accentBar: 'from-violet-500 via-purple-500 to-fuchsia-500',
         headerBackground:
-          'bg-gradient-to-r from-purple-50/50 via-transparent to-fuchsia-50/50 dark:from-purple-950/20 dark:via-transparent dark:to-fuchsia-950/20',
+          'bg-linear-to-r from-purple-50/50 via-transparent to-fuchsia-50/50 dark:from-purple-950/20 dark:via-transparent dark:to-fuchsia-950/20',
         footerBackground:
-          'bg-gradient-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
+          'bg-linear-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
       },
       blue: {
         accentBar: 'from-blue-500 via-indigo-500 to-violet-500',
         headerBackground:
-          'bg-gradient-to-r from-blue-50/50 via-transparent to-indigo-50/50 dark:from-blue-950/20 dark:via-transparent dark:to-indigo-950/20',
+          'bg-linear-to-r from-blue-50/50 via-transparent to-indigo-50/50 dark:from-blue-950/20 dark:via-transparent dark:to-indigo-950/20',
         footerBackground:
-          'bg-gradient-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
+          'bg-linear-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
       },
     },
   },

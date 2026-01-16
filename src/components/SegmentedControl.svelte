@@ -118,14 +118,14 @@ function handleKeydown(event: KeyboardEvent, index: number) {
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         currentSize.button,
-        fullWidth && 'flex-1',
+        fullWidth && 'grow',
         isActive
           ? cn(
               'bg-white dark:bg-slate-700',
               'text-slate-900 dark:text-white',
               'shadow-sm',
               variant === 'pills' &&
-                'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-md shadow-blue-500/20'
+                'bg-linear-to-r from-blue-500 to-purple-500 text-white shadow-md shadow-blue-500/20'
             )
           : cn(
               'text-slate-600 dark:text-slate-400',

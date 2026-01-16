@@ -162,13 +162,13 @@ const combinedClasses = $derived(
     <!-- Gradient background layer -->
     <div
       class={cn(
-        'absolute inset-0 bg-gradient-to-r transition-all duration-300 group-hover:scale-105',
+        'absolute inset-0 bg-linear-to-r transition-all duration-300 group-hover:scale-105',
         currentGradient.bg
       )}
     ></div>
     <div
       class={cn(
-        'absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300',
+        'absolute inset-0 bg-linear-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300',
         currentGradient.hover
       )}
     ></div>
@@ -176,7 +176,7 @@ const combinedClasses = $derived(
     <!-- Shine effect -->
     <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
       <div
-        class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
+        class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
       ></div>
     </div>
 

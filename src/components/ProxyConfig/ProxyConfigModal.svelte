@@ -1,4 +1,5 @@
 <script lang="ts">
+import { onMount } from 'svelte'
 import { cubicOut } from 'svelte/easing'
 import { fade, slide } from 'svelte/transition'
 import type { ProxyConfig, ProxyMode, ProxyServer, ProxySettings } from '@/interfaces'
@@ -77,8 +78,11 @@ $effect(() => {
     bypassList: proxyConfig?.rules?.bypassList || [],
   }
   useSharedProxy = proxyConfig?.rules?.singleProxy !== undefined ? true : !proxyConfig?.rules
-  bypassListContent = proxySettings.bypassList.join('\n')
+  // Initialize bypassListContent directly from proxyConfig to avoid reading from proxySettings
+  bypassListContent = (proxyConfig?.rules?.bypassList || []).join('\n')
+})
 
+onMount(() => {
   // Trigger entrance animation
   requestAnimationFrame(() => {
     isVisible = true
@@ -297,14 +301,14 @@ function handleKeydown(event: KeyboardEvent) {
     aria-label="Close modal"
   >
     <div
-      class="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-blue-900/40 to-slate-900/80 backdrop-blur-md"
+      class="absolute inset-0 bg-linear-to-br from-slate-900/80 via-blue-900/40 to-slate-900/80 backdrop-blur-md"
     ></div>
   </div>
 
   <!-- Modal Content -->
   <div
     bind:this={modalRef}
-    class="relative w-full max-w-3xl max-h-[90vh] overflow-hidden transition-all duration-300"
+    class="relative w-full max-w-4xl max-h-[90vh] overflow-hidden transition-all duration-300"
     class:scale-100={isVisible}
     class:opacity-100={isVisible}
     class:scale-95={!isVisible}
@@ -319,15 +323,15 @@ function handleKeydown(event: KeyboardEvent) {
     >
       <!-- Top gradient accent -->
       <div
-        class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+        class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500"
       ></div>
 
       <!-- Decorative blur elements -->
       <div
-        class="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
+        class="absolute -top-20 -right-20 w-40 h-40 bg-linear-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
       ></div>
       <div
-        class="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-br from-pink-400/20 to-orange-400/20 rounded-full blur-3xl"
+        class="absolute -bottom-20 -left-20 w-40 h-40 bg-linear-to-br from-pink-400/20 to-orange-400/20 rounded-full blur-3xl"
       ></div>
 
       <form class={cn(flexPatterns.col, 'flex-1 relative')} onsubmit={handleSubmit}>
@@ -338,10 +342,10 @@ function handleKeydown(event: KeyboardEvent) {
               <!-- Animated icon -->
               <div class="relative">
                 <div
-                  class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-40 animate-pulse"
+                  class="absolute inset-0 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-40 animate-pulse"
                 ></div>
                 <div
-                  class="relative p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg shadow-blue-500/25"
+                  class="relative p-3 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 shadow-lg shadow-blue-500/25"
                 >
                   <Settings size={24} class="text-white" strokeWidth={2.5} />
                 </div>
@@ -381,10 +385,10 @@ function handleKeydown(event: KeyboardEvent) {
           <!-- Basic Settings Section -->
           <div class="relative overflow-hidden rounded-xl">
             <div
-              class="absolute inset-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-800/50 dark:via-gray-800/50 dark:to-zinc-800/50"
+              class="absolute inset-0 bg-linear-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-800/50 dark:via-gray-800/50 dark:to-zinc-800/50"
             ></div>
             <div
-              class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-slate-400 via-gray-500 to-zinc-400"
+              class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 via-gray-500 to-zinc-400"
             ></div>
 
             <div
@@ -393,10 +397,10 @@ function handleKeydown(event: KeyboardEvent) {
               <div class="flex items-center gap-2 mb-4">
                 <div class="relative">
                   <div
-                    class="absolute inset-0 bg-gradient-to-br from-slate-400 to-gray-500 rounded-lg blur-md opacity-30"
+                    class="absolute inset-0 bg-linear-to-br from-slate-400 to-gray-500 rounded-lg blur-md opacity-30"
                   ></div>
                   <div
-                    class="relative p-1.5 rounded-lg bg-gradient-to-br from-slate-500 to-gray-600 shadow-lg"
+                    class="relative p-1.5 rounded-lg bg-linear-to-br from-slate-500 to-gray-600 shadow-lg"
                   >
                     <Settings size={14} class="text-white" />
                   </div>
@@ -418,10 +422,10 @@ function handleKeydown(event: KeyboardEvent) {
               {#if proxyMode === 'system'}
                 <div class="relative overflow-hidden rounded-xl">
                   <div
-                    class="absolute inset-0 bg-gradient-to-br from-slate-50 to-slate-100/50 dark:from-slate-700/50 dark:to-slate-800/30"
+                    class="absolute inset-0 bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-700/50 dark:to-slate-800/30"
                   ></div>
                   <div
-                    class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-slate-400 to-gray-500"
+                    class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-gray-500"
                   ></div>
                   <div
                     class="relative p-5 border border-slate-200 dark:border-slate-700 rounded-xl"
@@ -437,10 +441,10 @@ function handleKeydown(event: KeyboardEvent) {
               {:else if proxyMode === 'direct'}
                 <div class="relative overflow-hidden rounded-xl">
                   <div
-                    class="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/20"
+                    class="absolute inset-0 bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/20"
                   ></div>
                   <div
-                    class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500"
+                    class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-500"
                   ></div>
                   <div class="relative p-5 border border-blue-200 dark:border-blue-800 rounded-xl">
                     <div class="flex items-center gap-3">
@@ -454,10 +458,10 @@ function handleKeydown(event: KeyboardEvent) {
               {:else if proxyMode === 'auto_detect'}
                 <div class="relative overflow-hidden rounded-xl">
                   <div
-                    class="absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
+                    class="absolute inset-0 bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
                   ></div>
                   <div
-                    class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500"
+                    class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-500 to-pink-500"
                   ></div>
                   <div
                     class="relative p-5 border border-purple-200 dark:border-purple-800 rounded-xl"
@@ -499,15 +503,15 @@ function handleKeydown(event: KeyboardEvent) {
             transition:slide={{ duration: 200 }}
           >
             <div
-              class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-rose-500/10 dark:from-red-500/5 dark:to-rose-500/5"
+              class="absolute inset-0 bg-linear-to-r from-red-500/10 to-rose-500/10 dark:from-red-500/5 dark:to-rose-500/5"
             ></div>
             <div
-              class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-rose-500"
+              class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-red-500 to-rose-500"
             ></div>
             <div
               class="relative flex items-start gap-3 p-4 border border-red-200 dark:border-red-800 rounded-xl"
             >
-              <div class="flex-shrink-0 p-1.5 rounded-lg bg-red-100 dark:bg-red-900/30">
+              <div class="shrink-0 p-1.5 rounded-lg bg-red-100 dark:bg-red-900/30">
                 <svg
                   class="w-4 h-4 text-red-600 dark:text-red-400"
                   fill="none"

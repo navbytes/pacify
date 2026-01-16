@@ -204,7 +204,7 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
             </div>
             <div class="min-w-0">
               <h1
-                class="text-2xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800 dark:from-slate-100 dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent tracking-tight"
+                class="text-2xl font-bold bg-linear-to-r from-slate-900 via-blue-800 to-purple-800 dark:from-slate-100 dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent tracking-tight"
                 data-testid="page-title"
               >
                 PACify
@@ -220,7 +220,7 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
             <!-- Status Indicator (if active) -->
             {#if settings.proxyConfigs.find((p) => p.isActive)}
               <div
-                class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500/10 to-emerald-500/10 dark:from-green-500/20 dark:to-emerald-500/20 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold flex-shrink-0 border border-green-200 dark:border-green-800 shadow-sm"
+                class="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-green-500/10 to-emerald-500/10 dark:from-green-500/20 dark:to-emerald-500/20 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold flex-shrink-0 border border-green-200 dark:border-green-800 shadow-sm"
               >
                 <span class="relative flex h-2.5 w-2.5">
                   <span

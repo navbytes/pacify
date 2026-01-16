@@ -22,6 +22,7 @@ import Button from '../Button.svelte'
 import FlexGroup from '../FlexGroup.svelte'
 import LabelButton from '../LabelButton.svelte'
 import Text from '../Text.svelte'
+import ToggleSwitch from '../ToggleSwitch.svelte'
 import AutoProxyRuleEditor from './AutoProxyRuleEditor.svelte'
 import AutoProxyRuleList from './AutoProxyRuleList.svelte'
 import FallbackConfig from './FallbackConfig.svelte'
@@ -41,6 +42,7 @@ let name = $state('')
 // Use existing color for editing, random color for new Auto-Proxy configs
 let color = $state('')
 let badgeLabel = $state('')
+let isActive = $state(false)
 
 // Auto-Proxy config state
 let rules = $state<AutoProxyRule[]>([])
@@ -53,6 +55,7 @@ $effect(() => {
   name = proxyConfig?.name || ''
   color = proxyConfig?.color || getRandomProxyColor()
   badgeLabel = proxyConfig?.badgeLabel || ''
+  isActive = proxyConfig?.isActive || false
   rules = proxyConfig?.autoProxy?.rules || []
   fallbackType = proxyConfig?.autoProxy?.fallbackType || 'direct'
   fallbackProxyId = proxyConfig?.autoProxy?.fallbackProxyId
@@ -179,7 +182,7 @@ async function handleSubmit() {
       name: name.trim(),
       color,
       badgeLabel: badgeLabel.trim() || undefined,
-      isActive: proxyConfig?.isActive || false,
+      isActive,
       quickSwitch: proxyConfig?.quickSwitch,
       mode: 'pac_script', // Auto-Proxy uses PAC script mode under the hood
       autoProxy: autoProxyConfig,
@@ -281,63 +284,31 @@ let selectableProxies = $derived(
           </Text>
         </FlexGroup>
 
-        <div class="flex flex-col sm:flex-row gap-5">
-          <!-- Name Input -->
-          <div class="flex-1 space-y-2">
-            <label for="name" class="block text-sm font-medium text-slate-600 dark:text-slate-400">
-              {I18nService.getMessage('name')}
-              <span class="text-orange-500">*</span>
-            </label>
+        <!-- Configuration Name, Color, and Active Toggle in one row -->
+        <FlexGroup childrenGap="lg" alignItems="center" justifyContent="between" classes="mb-4">
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <label
+                for="name"
+                class="block text-sm font-medium text-slate-600 dark:text-slate-400"
+              >
+                {I18nService.getMessage('configurationName')}
+                <span class="text-orange-500">*</span>
+              </label>
+              <Text size="xs" color="muted" classes="font-medium">{name.length}/50</Text>
+            </div>
             <div class="relative group">
               <input
                 id="name"
                 type="text"
+                maxlength="50"
                 bind:value={name}
                 placeholder={I18nService.getMessage('autoProxyNamePlaceholder')}
                 class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all duration-200"
               >
               <div
-                class="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-focus-within:opacity-100 -z-10 blur transition-opacity duration-200"
+                class="absolute inset-0 rounded-xl bg-linear-to-r from-orange-500 to-amber-500 opacity-0 group-focus-within:opacity-100 -z-10 blur transition-opacity duration-200"
               ></div>
-            </div>
-          </div>
-
-          <!-- Badge Label Input -->
-          <div class="flex-1 space-y-2">
-            <div class="flex items-center justify-between">
-              <label
-                for="badgeLabel"
-                class="block text-sm font-medium text-slate-600 dark:text-slate-400"
-              >
-                {I18nService.getMessage('badgeLabel')}
-                <span class="text-xs text-slate-500 ml-1">(Optional)</span>
-              </label>
-              <Text size="xs" color="muted" classes="font-medium">{badgeLabel.length}/4</Text>
-            </div>
-            <div class="relative group">
-              <input
-                id="badgeLabel"
-                type="text"
-                maxlength="4"
-                bind:value={badgeLabel}
-                placeholder="Auto"
-                class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all duration-200"
-              >
-              <div
-                class="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-focus-within:opacity-100 -z-10 blur transition-opacity duration-200"
-              ></div>
-            </div>
-            <!-- Badge Preview -->
-            <div
-              class="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700"
-            >
-              <Text size="xs" color="muted" weight="medium">Preview:</Text>
-              <div
-                class="px-2 py-0.5 rounded text-xs font-bold text-white shadow-sm"
-                style="background-color: {color}"
-              >
-                {badgePreview}
-              </div>
             </div>
           </div>
 
@@ -345,6 +316,7 @@ let selectableProxies = $derived(
           <div class="space-y-2">
             <Text size="sm" weight="medium" classes="block text-slate-600 dark:text-slate-400">
               {I18nService.getMessage('color')}
+              <span class="text-orange-500">*</span>
             </Text>
             <div
               class="relative w-12 h-12 rounded-xl shadow-lg cursor-pointer overflow-hidden group transition-transform duration-200 hover:scale-105"
@@ -363,6 +335,56 @@ let selectableProxies = $derived(
               </LabelButton>
             </div>
           </div>
+
+          <!-- Active Toggle -->
+          <div class="space-y-2">
+            <Text size="sm" weight="medium" classes="block text-slate-600 dark:text-slate-400">
+              {I18nService.getMessage('active')}
+            </Text>
+            <ToggleSwitch bind:checked={isActive} />
+          </div>
+        </FlexGroup>
+
+        <!-- Badge Label Input with Preview -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between mb-1">
+            <label
+              for="badgeLabel"
+              class="block text-sm font-medium text-slate-600 dark:text-slate-400"
+            >
+              {I18nService.getMessage('badgeLabel')}
+              <span class="text-xs text-slate-500 ml-1">(Optional)</span>
+            </label>
+            <Text size="xs" color="muted" classes="font-medium">{badgeLabel.length}/4</Text>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex-1 relative group">
+              <input
+                id="badgeLabel"
+                type="text"
+                maxlength="4"
+                bind:value={badgeLabel}
+                placeholder="Auto"
+                class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all duration-200"
+              >
+              <div
+                class="absolute inset-0 rounded-xl bg-linear-to-r from-orange-500 to-amber-500 opacity-0 group-focus-within:opacity-100 -z-10 blur transition-opacity duration-200"
+              ></div>
+            </div>
+            <!-- Badge Preview -->
+            <div
+              class="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700"
+            >
+              <Text size="xs" color="muted" weight="medium">Preview:</Text>
+              <div
+                class="px-2 py-0.5 rounded text-xs font-bold text-white shadow-sm"
+                style="background-color: {color}"
+              >
+                {badgePreview}
+              </div>
+            </div>
+          </div>
+          <Text size="xs" color="muted">{I18nService.getMessage('badgeLabelHelp')}</Text>
         </div>
       </div>
 
@@ -371,7 +393,7 @@ let selectableProxies = $derived(
         <div class={settingsCardVariants({ color: 'blue' })}>
           <!-- Animated border glow -->
           <div
-            class="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-500/10 animate-pulse rounded-xl"
+            class="absolute inset-0 bg-linear-to-r from-blue-500/10 via-cyan-500/10 to-blue-500/10 animate-pulse rounded-xl"
           ></div>
 
           <div class="relative">

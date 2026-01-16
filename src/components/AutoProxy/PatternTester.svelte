@@ -114,7 +114,7 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
           class="{formInputVariants({ state: 'cyan' })} pl-11"
         >
         <div
-          class="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-focus-within:opacity-10 -z-10 blur transition-opacity duration-200"
+          class="absolute inset-0 rounded-xl bg-linear-to-r from-cyan-500 to-blue-500 opacity-0 group-focus-within:opacity-10 -z-10 blur transition-opacity duration-200"
         ></div>
       </div>
 

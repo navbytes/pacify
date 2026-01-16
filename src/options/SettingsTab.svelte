@@ -93,7 +93,7 @@ async function handleNotificationsToggle(checked: boolean) {
 
         <!-- Top accent -->
         <div
-          class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500"
+          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 via-indigo-500 to-violet-500"
         ></div>
 
         <div class="relative p-5">
@@ -157,7 +157,7 @@ async function handleNotificationsToggle(checked: boolean) {
 
         <!-- Top accent -->
         <div
-          class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500"
+          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-green-500 via-emerald-500 to-teal-500"
         ></div>
 
         <div class="relative p-5">
@@ -221,7 +221,7 @@ async function handleNotificationsToggle(checked: boolean) {
 
         <!-- Top accent -->
         <div
-          class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-violet-500 to-fuchsia-500"
+          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-purple-500 via-violet-500 to-fuchsia-500"
         ></div>
 
         <div class="relative p-5">

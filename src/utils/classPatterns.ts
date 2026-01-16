@@ -893,7 +893,7 @@ export const keyboardShortcutCardVariants = tv({
       'group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border',
     background: 'absolute inset-0 bg-gradient-to-br',
     decorativeBlur: 'absolute -top-10 -right-10 w-24 h-24 rounded-full blur-2xl',
-    accentBar: 'absolute top-0 left-0 right-0 h-1 bg-gradient-to-r',
+    accentBar: 'absolute top-0 left-0 right-0 h-1 bg-linear-to-r',
     content: 'relative p-4 flex flex-col items-center text-center gap-3',
     kbd: 'px-3 py-1.5 text-sm font-mono font-semibold rounded-lg shadow-sm',
   },

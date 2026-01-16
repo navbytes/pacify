@@ -196,10 +196,10 @@ function handleCancelDelete() {
           <!-- Orphaned warning overlay -->
           {#if isOrphaned}
             <div
-              class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-orange-500/10 dark:from-amber-500/5 dark:to-orange-500/5"
+              class="absolute inset-0 bg-linear-to-r from-amber-500/10 to-orange-500/10 dark:from-amber-500/5 dark:to-orange-500/5"
             ></div>
             <div
-              class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-500 to-orange-500"
+              class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-amber-500 to-orange-500"
             ></div>
           {/if}
 
