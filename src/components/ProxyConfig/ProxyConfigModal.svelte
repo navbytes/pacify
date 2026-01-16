@@ -1,4 +1,5 @@
 <script lang="ts">
+import { onMount } from 'svelte'
 import { cubicOut } from 'svelte/easing'
 import { fade, slide } from 'svelte/transition'
 import type { ProxyConfig, ProxyMode, ProxyServer, ProxySettings } from '@/interfaces'
@@ -77,8 +78,11 @@ $effect(() => {
     bypassList: proxyConfig?.rules?.bypassList || [],
   }
   useSharedProxy = proxyConfig?.rules?.singleProxy !== undefined ? true : !proxyConfig?.rules
-  bypassListContent = proxySettings.bypassList.join('\n')
+  // Initialize bypassListContent directly from proxyConfig to avoid reading from proxySettings
+  bypassListContent = (proxyConfig?.rules?.bypassList || []).join('\n')
+})
 
+onMount(() => {
   // Trigger entrance animation
   requestAnimationFrame(() => {
     isVisible = true

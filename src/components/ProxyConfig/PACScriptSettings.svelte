@@ -1,5 +1,5 @@
 <script lang="ts">
-import { onDestroy } from 'svelte'
+import { onDestroy, untrack } from 'svelte'
 import { scriptTemplates } from '@/constants/templates'
 import type { ICodeMirrorEditor } from '@/interfaces'
 import { ERROR_TYPES } from '@/interfaces'
@@ -41,6 +41,7 @@ let editorHeight: string = '400px'
 let urlError = $state('')
 let urlTouched = $state(false)
 let isRefreshing = $state(false)
+let isCreatingEditor = false // Flag to prevent concurrent editor creation
 
 // Format last fetched time
 let lastFetchedText = $derived.by(() => {
@@ -121,18 +122,24 @@ async function setTemplate(template: string) {
 $effect(() => {
   // This effect runs when pacUrl or editorContent changes
 
-  if (editorContainer && !editor) {
+  if (editorContainer && !editor && !isCreatingEditor) {
     // Create editor if it doesn't exist (for both URL and inline modes)
     createEditor()
-  } else if (editor && editorContent) {
+  } else if (editor) {
     // Update editor content when it changes (e.g., when PAC is fetched from URL)
-    CodeMirror.setValue(editor, editorContent)
+    // Use untrack to avoid reactive dependency on editorContent when checking
+    // if we should update (prevents infinite loop with MutationObserver)
+    const currentContent = untrack(() => editorContent)
+    if (currentContent) {
+      CodeMirror.setValue(editor, currentContent)
+    }
   }
 })
 
 async function createEditor() {
-  if (editor || !editorContainer) return
+  if (editor || !editorContainer || isCreatingEditor) return
 
+  isCreatingEditor = true
   try {
     // Detect initial system theme
     const initialTheme = CodeMirror.getCurrentTheme()
@@ -175,6 +182,8 @@ async function createEditor() {
     })
   } catch (error) {
     NotifyService.error(ERROR_TYPES.EDITOR, error)
+  } finally {
+    isCreatingEditor = false
   }
 }
 
