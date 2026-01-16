@@ -65,6 +65,18 @@ $effect(() => {
   updateInterval = proxyConfig?.pacScript?.updateInterval || 0
   lastFetched = proxyConfig?.pacScript?.lastFetched
 
+  // Initialize manual proxy settings
+  proxySettings = {
+    singleProxy: proxyConfig?.rules?.singleProxy || { ...DEFAULT_PROXY_CONFIG },
+    proxyForHttp: proxyConfig?.rules?.proxyForHttp || { ...DEFAULT_PROXY_CONFIG },
+    proxyForHttps: proxyConfig?.rules?.proxyForHttps || { ...DEFAULT_PROXY_CONFIG },
+    proxyForFtp: proxyConfig?.rules?.proxyForFtp || { ...DEFAULT_PROXY_CONFIG },
+    fallbackProxy: proxyConfig?.rules?.fallbackProxy || { ...DEFAULT_PROXY_CONFIG },
+    bypassList: proxyConfig?.rules?.bypassList || [],
+  }
+  useSharedProxy = proxyConfig?.rules?.singleProxy !== undefined ? true : !proxyConfig?.rules
+  bypassListContent = proxySettings.bypassList.join('\n')
+
   // Trigger entrance animation
   requestAnimationFrame(() => {
     isVisible = true
@@ -108,24 +120,16 @@ async function handlePacRefresh() {
 }
 
 // Manual Proxy Settings
-let proxySettings = $derived<ProxySettings>({
-  singleProxy: proxyConfig?.rules?.singleProxy || { ...DEFAULT_PROXY_CONFIG },
-  proxyForHttp: proxyConfig?.rules?.proxyForHttp || {
-    ...DEFAULT_PROXY_CONFIG,
-  },
-  proxyForHttps: proxyConfig?.rules?.proxyForHttps || {
-    ...DEFAULT_PROXY_CONFIG,
-  },
-  proxyForFtp: proxyConfig?.rules?.proxyForFtp || { ...DEFAULT_PROXY_CONFIG },
-  fallbackProxy: proxyConfig?.rules?.fallbackProxy || {
-    ...DEFAULT_PROXY_CONFIG,
-  },
-  bypassList: proxyConfig?.rules?.bypassList || [],
+let proxySettings = $state<ProxySettings>({
+  singleProxy: { ...DEFAULT_PROXY_CONFIG },
+  proxyForHttp: { ...DEFAULT_PROXY_CONFIG },
+  proxyForHttps: { ...DEFAULT_PROXY_CONFIG },
+  proxyForFtp: { ...DEFAULT_PROXY_CONFIG },
+  fallbackProxy: { ...DEFAULT_PROXY_CONFIG },
+  bypassList: [],
 })
-let useSharedProxy = $derived<boolean>(
-  proxyConfig?.rules?.singleProxy !== undefined ? true : !proxyConfig?.rules
-)
-let bypassListContent = $derived(proxySettings.bypassList.join('\n'))
+let useSharedProxy = $state<boolean>(true)
+let bypassListContent = $state<string>('')
 
 // Other state variables
 let errorMessage = $state<string>('')
