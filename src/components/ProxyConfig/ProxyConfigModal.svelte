@@ -36,6 +36,7 @@ const DEFAULT_PROXY_CONFIG: ProxyServer = {
 let name = $state<string>('')
 // Use existing color for editing, random color for new proxies
 let color = $state<string>('')
+let badgeLabel = $state<string>('')
 let isActive = $state<boolean>(false)
 let quickSwitch = $state<boolean>(false)
 
@@ -56,6 +57,7 @@ $effect(() => {
   // Initialize state from proxyConfig
   name = proxyConfig?.name || ''
   color = proxyConfig?.color || getRandomProxyColor()
+  badgeLabel = proxyConfig?.badgeLabel || ''
   isActive = proxyConfig?.isActive || false
   quickSwitch = proxyConfig?.quickSwitch || false
   proxyMode = proxyConfig?.mode || 'system'
@@ -152,6 +154,7 @@ async function handleSubmit(event: Event) {
       mode: proxyMode as ProxyMode,
       name: name.trim(),
       color,
+      badgeLabel: badgeLabel.trim() || undefined,
       isActive,
       quickSwitch,
     }
@@ -402,7 +405,7 @@ function handleKeydown(event: KeyboardEvent) {
                   {I18nService.getMessage('basicSettings')}
                 </Text>
               </div>
-              <BasicSettings bind:name bind:color bind:isActive />
+              <BasicSettings bind:name bind:color bind:badgeLabel bind:isActive />
             </div>
           </div>
 

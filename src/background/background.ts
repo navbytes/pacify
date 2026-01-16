@@ -350,7 +350,7 @@ async function initializeProxySettings(): Promise<void> {
   if (proxyConfig.value.mode !== 'direct') {
     // If proxy is active but badge might not be set, update it from the active script
     if (activeScript) {
-      await updateBadge(activeScript.name, activeScript.color)
+      await updateBadge(activeScript.badgeLabel || activeScript.name, activeScript.color)
     }
   } else {
     // If no proxy is active, ensure the badge shows the default state
@@ -378,8 +378,8 @@ async function setProxySettings(proxy: ProxyConfig): Promise<void> {
     }
 
     await ChromeService.setProxy(proxyToApply, autoReload)
-    const { name, color } = proxy
-    await updateBadge(name, color)
+    const { name, color, badgeLabel } = proxy
+    await updateBadge(badgeLabel || name, color)
   } catch (error) {
     logger.error('Error setting proxy:', error)
   }
@@ -402,7 +402,7 @@ async function updateBadge(text = 'N/A', color = DEFAULT_BADGE_COLOR): Promise<v
   try {
     await browserService.action.setBadgeBackgroundColor({ color })
     await browserService.action.setBadgeText({
-      text: text.slice(0, 3).toUpperCase(),
+      text: text.slice(0, 4).toUpperCase(),
     })
   } catch (error) {
     logger.error('Error updating badge:', error)

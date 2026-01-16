@@ -148,6 +148,12 @@
   "color": {
     "message": "颜色"
   },
+  "badgeLabel": {
+    "message": "徽章标签"
+  },
+  "badgeLabelHelp": {
+    "message": "扩展图标的自定义文本（最多4个字符）。留空以自动生成。"
+  },
   "active": {
     "message": "激活"
   },

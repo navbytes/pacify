@@ -148,6 +148,12 @@
   "color": {
     "message": "色"
   },
+  "badgeLabel": {
+    "message": "バッジラベル"
+  },
+  "badgeLabelHelp": {
+    "message": "拡張機能アイコンのカスタムテキスト（最大4文字）。空にすると自動生成されます。"
+  },
   "active": {
     "message": "アクティブ"
   },

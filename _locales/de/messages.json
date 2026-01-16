@@ -148,6 +148,12 @@
   "color": {
     "message": "Farbe"
   },
+  "badgeLabel": {
+    "message": "Badge-Label"
+  },
+  "badgeLabelHelp": {
+    "message": "Benutzerdefinierter Text für Erweiterungssymbol (max. 4 Zeichen). Leer lassen für automatische Generierung."
+  },
   "active": {
     "message": "Aktiv"
   },

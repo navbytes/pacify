@@ -59,6 +59,7 @@ export interface ProxyConfig {
   id?: string
   name: string
   color: string
+  badgeLabel?: string // Custom badge text for extension icon (max 4 chars)
   quickSwitch?: boolean
   isActive: boolean
   mode: ProxyMode

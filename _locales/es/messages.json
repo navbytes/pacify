@@ -148,6 +148,12 @@
   "color": {
     "message": "Color"
   },
+  "badgeLabel": {
+    "message": "Etiqueta de insignia"
+  },
+  "badgeLabelHelp": {
+    "message": "Texto personalizado para el icono de extensión (máx. 4 caracteres). Dejar vacío para generación automática."
+  },
   "active": {
     "message": "Activo"
   },

@@ -152,6 +152,12 @@
   "color": {
     "message": "Color"
   },
+  "badgeLabel": {
+    "message": "Badge Label"
+  },
+  "badgeLabelHelp": {
+    "message": "Custom text for extension icon (max 4 characters). Leave empty to auto-generate from name."
+  },
   "active": {
     "message": "Active"
   },

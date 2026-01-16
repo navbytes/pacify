@@ -40,6 +40,7 @@ let { proxyConfig = undefined, availableProxies, onSave, onCancel }: Props = $pr
 let name = $state('')
 // Use existing color for editing, random color for new Auto-Proxy configs
 let color = $state('')
+let badgeLabel = $state('')
 
 // Auto-Proxy config state
 let rules = $state<AutoProxyRule[]>([])
@@ -51,6 +52,7 @@ let fallbackInlineProxy = $state<ProxyServer | undefined>(undefined)
 $effect(() => {
   name = proxyConfig?.name || ''
   color = proxyConfig?.color || getRandomProxyColor()
+  badgeLabel = proxyConfig?.badgeLabel || ''
   rules = proxyConfig?.autoProxy?.rules || []
   fallbackType = proxyConfig?.autoProxy?.fallbackType || 'direct'
   fallbackProxyId = proxyConfig?.autoProxy?.fallbackProxyId
@@ -63,6 +65,11 @@ let isAddingRule = $state(false)
 let errorMessage = $state('')
 let isSubmitting = $state(false)
 let isVisible = $state(false)
+
+// Badge preview - shows what the badge will display
+let badgePreview = $derived(
+  (badgeLabel.trim() || name.trim().slice(0, 3) || 'N/A').slice(0, 4).toUpperCase()
+)
 
 // Styling variants
 const orangeIconBadge = gradientIconBadgeVariants({ color: 'amber', size: 'lg' })
@@ -171,6 +178,7 @@ async function handleSubmit() {
     const config: Omit<ProxyConfig, 'id'> = {
       name: name.trim(),
       color,
+      badgeLabel: badgeLabel.trim() || undefined,
       isActive: proxyConfig?.isActive || false,
       quickSwitch: proxyConfig?.quickSwitch,
       mode: 'pac_script', // Auto-Proxy uses PAC script mode under the hood
@@ -291,6 +299,45 @@ let selectableProxies = $derived(
               <div
                 class="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-focus-within:opacity-100 -z-10 blur transition-opacity duration-200"
               ></div>
+            </div>
+          </div>
+
+          <!-- Badge Label Input -->
+          <div class="flex-1 space-y-2">
+            <div class="flex items-center justify-between">
+              <label
+                for="badgeLabel"
+                class="block text-sm font-medium text-slate-600 dark:text-slate-400"
+              >
+                {I18nService.getMessage('badgeLabel')}
+                <span class="text-xs text-slate-500 ml-1">(Optional)</span>
+              </label>
+              <Text size="xs" color="muted" classes="font-medium">{badgeLabel.length}/4</Text>
+            </div>
+            <div class="relative group">
+              <input
+                id="badgeLabel"
+                type="text"
+                maxlength="4"
+                bind:value={badgeLabel}
+                placeholder="Auto"
+                class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all duration-200"
+              >
+              <div
+                class="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-focus-within:opacity-100 -z-10 blur transition-opacity duration-200"
+              ></div>
+            </div>
+            <!-- Badge Preview -->
+            <div
+              class="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700"
+            >
+              <Text size="xs" color="muted" weight="medium">Preview:</Text>
+              <div
+                class="px-2 py-0.5 rounded text-xs font-bold text-white shadow-sm"
+                style="background-color: {color}"
+              >
+                {badgePreview}
+              </div>
             </div>
           </div>
 

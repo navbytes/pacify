@@ -148,6 +148,12 @@
   "color": {
     "message": "Culoare"
   },
+  "badgeLabel": {
+    "message": "Etichetă insignă"
+  },
+  "badgeLabelHelp": {
+    "message": "Text personalizat pentru pictograma extensiei (max. 4 caractere). Lăsați gol pentru generare automată."
+  },
   "active": {
     "message": "Activ"
   },

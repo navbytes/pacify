@@ -148,6 +148,12 @@
   "color": {
     "message": "색상"
   },
+  "badgeLabel": {
+    "message": "배지 레이블"
+  },
+  "badgeLabelHelp": {
+    "message": "확장 프로그램 아이콘의 맞춤 텍스트(최대 4자). 비워두면 자동 생성됩니다."
+  },
   "active": {
     "message": "활성"
   },
