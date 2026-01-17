@@ -151,7 +151,7 @@ ${extractedBody}
     const functionRegex = /function\s+FindProxyForURL\s*\(\s*\w*\s*,?\s*\w*\s*\)\s*\{/i
     const match = pacScript.match(functionRegex)
 
-    if (!match || match.index === undefined) {
+    if (match?.index === undefined) {
       return null
     }
 
@@ -280,7 +280,7 @@ ${extractedBody}
    */
   private static generateRegexCondition(pattern: string): string {
     // Escape the pattern for use in JavaScript regex constructor
-    const escapedPattern = pattern.replace(/\\/g, '\\\\')
+    const escapedPattern = pattern.replaceAll('\\', '\\\\')
     return `new RegExp("${escapedPattern}").test(host)`
   }
 
@@ -548,9 +548,9 @@ ${extractedBody}
   private static matchWildcard(host: string, pattern: string): boolean {
     // Convert wildcard pattern to regex
     const regexPattern = pattern
-      .replace(/[.+^${}()|[\]\\]/g, '\\$&') // Escape special regex chars except * and ?
-      .replace(/\*/g, '.*') // Convert * to .*
-      .replace(/\?/g, '.') // Convert ? to .
+      .replaceAll(/[.+^${}()|[\]\\]/g, String.raw`\$&`) // Escape special regex chars except * and ?
+      .replaceAll('*', '.*') // Convert * to .*
+      .replaceAll('?', '.') // Convert ? to .
 
     try {
       return new RegExp(`^${regexPattern}$`, 'i').test(host)

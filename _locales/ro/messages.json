@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "Plasați aici pentru a elimina din scripturile rapide"
   },
-  "quickPacScripts": { "message": "Configurații de comutare rapidă" },
-  "allProxyConfigs": { "message": "Toate configurațiile proxy" },
+  "quickPacScripts": {
+    "message": "Configurații de comutare rapidă"
+  },
+  "allProxyConfigs": {
+    "message": "Toate configurațiile proxy"
+  },
   "dragScriptsHere": {
     "message": "Trageți scripturile aici pentru a activa comutarea rapidă. Comutarea rapidă vă permite să schimbați proxy-ul făcând clic pe pictograma extensiei."
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "Solicitare funcționalitate"
+  },
+  "feedbackAndRating": {
+    "message": "Feedback și Evaluare"
+  },
+  "rateExtension": {
+    "message": "Evaluați Extensia"
+  },
+  "leaveReview": {
+    "message": "Lăsați o Recenzie"
+  },
+  "supportProject": {
+    "message": "Sprijiniți Proiectul"
   },
   "statusConnected": {
     "message": "Conectat"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1 reguli",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {

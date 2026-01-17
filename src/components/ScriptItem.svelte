@@ -154,14 +154,14 @@ async function handleScriptDelete() {
 
         <!-- Color indicator badge (for colorblind accessibility) -->
         <div
-          class="w-3 h-3 rounded-full flex-shrink-0 ring-2 ring-white dark:ring-slate-800"
+          class="w-3 h-3 rounded-full shrink-0 ring-2 ring-white dark:ring-slate-800"
           style="background-color: {proxy.color}"
           aria-label="Proxy color: {proxy.color}"
         ></div>
 
         <!-- Mode icon inline (POPUP only) -->
         {#if pageType === 'POPUP'}
-          <ModeIcon size={14} class={cn('flex-shrink-0', modeColors.text)} />
+          <ModeIcon size={14} class={cn('shrink-0', modeColors.text)} />
         {/if}
 
         <h3 class={cn('text-base font-semibold truncate', colors.text.default)}>{proxy.name}</h3>

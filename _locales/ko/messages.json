@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "빠른 스크립트에서 제거하려면 여기에 놓으세요"
   },
-  "quickPacScripts": { "message": "빠른 전환 구성" },
-  "allProxyConfigs": { "message": "모든 프록시 구성" },
+  "quickPacScripts": {
+    "message": "빠른 전환 구성"
+  },
+  "allProxyConfigs": {
+    "message": "모든 프록시 구성"
+  },
   "dragScriptsHere": {
     "message": "빠른 전환을 활성화하려면 스크립트를 여기에 끌어다 놓으세요. 빠른 전환을 사용하면 확장 프로그램 아이콘을 클릭하여 프록시를 전환할 수 있습니다."
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "기능 요청"
+  },
+  "feedbackAndRating": {
+    "message": "피드백 및 평가"
+  },
+  "rateExtension": {
+    "message": "확장 프로그램 평가"
+  },
+  "leaveReview": {
+    "message": "리뷰 남기기"
+  },
+  "supportProject": {
+    "message": "프로젝트 지원"
   },
   "statusConnected": {
     "message": "연결됨"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1개 규칙",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {

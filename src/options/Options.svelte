@@ -190,16 +190,16 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
         <!-- Single Row: Branding, Tab Navigation, and Status -->
         <div class="relative flex items-center justify-between px-6 py-6 gap-6">
           <!-- Left: App Branding -->
-          <div class="flex items-center gap-4 flex-shrink-0 min-w-0">
+          <div class="flex items-center gap-4 shrink-0 min-w-0">
             <!-- Logo with glow effect -->
             <div class="relative">
               <div
-                class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-30"
+                class="absolute inset-0 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-30"
               ></div>
               <div
-                class="relative p-2 rounded-xl bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 shadow-lg border border-white/50 dark:border-slate-700/50"
+                class="relative p-2 rounded-xl bg-linear-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 shadow-lg border border-white/50 dark:border-slate-700/50"
               >
-                <img src="/icons/icon48.png" alt="PACify" class="w-10 h-10 flex-shrink-0">
+                <img src="/icons/icon48.png" alt="PACify" class="w-10 h-10 shrink-0">
               </div>
             </div>
             <div class="min-w-0">
@@ -216,11 +216,11 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
           </div>
 
           <!-- Right: Tab Navigation + Status -->
-          <div class="flex items-center gap-4 flex-shrink-0">
+          <div class="flex items-center gap-4 shrink-0">
             <!-- Status Indicator (if active) -->
             {#if settings.proxyConfigs.find((p) => p.isActive)}
               <div
-                class="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-green-500/10 to-emerald-500/10 dark:from-green-500/20 dark:to-emerald-500/20 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold flex-shrink-0 border border-green-200 dark:border-green-800 shadow-sm"
+                class="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-green-500/10 to-emerald-500/10 dark:from-green-500/20 dark:to-emerald-500/20 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold shrink-0 border border-green-200 dark:border-green-800 shadow-sm"
               >
                 <span class="relative flex h-2.5 w-2.5">
                   <span
@@ -276,7 +276,7 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
         aria-modal="true"
       >
         <div
-          class="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-blue-900/40 to-slate-900/80 backdrop-blur-md"
+          class="absolute inset-0 bg-linear-to-br from-slate-900/80 via-blue-900/40 to-slate-900/80 backdrop-blur-md"
         ></div>
         <div
           class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/20 dark:border-slate-700/50"
@@ -284,9 +284,9 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
           <div class="flex items-center gap-4">
             <div class="relative">
               <div
-                class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-40 animate-pulse"
+                class="absolute inset-0 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-40 animate-pulse"
               ></div>
-              <div class="relative p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600">
+              <div class="relative p-3 rounded-xl bg-linear-to-br from-blue-500 to-purple-600">
                 <svg class="w-6 h-6 text-white animate-spin" viewBox="0 0 24 24">
                   <circle
                     class="opacity-25"
@@ -331,7 +331,7 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
         aria-modal="true"
       >
         <div
-          class="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-orange-900/40 to-slate-900/80 backdrop-blur-md"
+          class="absolute inset-0 bg-linear-to-br from-slate-900/80 via-orange-900/40 to-slate-900/80 backdrop-blur-md"
         ></div>
         <div
           class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/20 dark:border-slate-700/50"
@@ -339,9 +339,9 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
           <div class="flex items-center gap-4">
             <div class="relative">
               <div
-                class="absolute inset-0 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl blur-lg opacity-40 animate-pulse"
+                class="absolute inset-0 bg-linear-to-br from-orange-400 to-amber-500 rounded-xl blur-lg opacity-40 animate-pulse"
               ></div>
-              <div class="relative p-3 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600">
+              <div class="relative p-3 rounded-xl bg-linear-to-br from-orange-500 to-amber-600">
                 <svg class="w-6 h-6 text-white animate-spin" viewBox="0 0 24 24">
                   <circle
                     class="opacity-25"

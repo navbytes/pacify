@@ -84,7 +84,7 @@ async function disableAllProxies() {
 
   <!-- Footer - Status & Actions -->
   {#if hasProxies}
-    <footer class="px-5 py-2.5 border-t border-slate-200 dark:border-slate-700 min-h-[52px]">
+    <footer class="px-5 py-2.5 border-t border-slate-200 dark:border-slate-700 min-h-13">
       <div class="flex items-center justify-between h-full">
         <div class="flex items-center gap-2">
           {#if activeProxy}
@@ -101,7 +101,7 @@ async function disableAllProxies() {
         </div>
 
         <!-- Always reserve space for the button to prevent layout shift -->
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           {#if activeProxy}
             <Button size="sm" color="secondary" onclick={disableAllProxies}>
               {#snippet icon()}

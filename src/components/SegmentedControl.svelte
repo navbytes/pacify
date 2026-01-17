@@ -46,7 +46,7 @@ const sizeClasses = {
   },
   lg: {
     container: 'p-1.5 gap-1',
-    button: 'px-5 py-2.5 text-base min-h-[44px]',
+    button: 'px-5 py-2.5 text-base min-h-11',
     icon: 20,
   },
 }
@@ -145,7 +145,7 @@ function handleKeydown(event: KeyboardEvent, index: number) {
       {#if option.badge !== undefined}
         <span
           class={cn(
-            'inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-semibold rounded-full min-w-[18px]',
+            'inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-semibold rounded-full min-w-4.5',
             isActive
               ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300'
               : 'bg-slate-200 text-slate-600 dark:bg-slate-600 dark:text-slate-300'

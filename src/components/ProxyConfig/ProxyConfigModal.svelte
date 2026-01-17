@@ -371,7 +371,7 @@ function handleKeydown(event: KeyboardEvent) {
               color="ghost"
               variant="minimal"
               aria-label="Close"
-              classes="p-2 min-w-[44px] min-h-[44px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
             >
               {#snippet icon()}
                 <X size={20} />

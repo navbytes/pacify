@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "দ্রুত স্ক্রিপ্ট থেকে সরাতে এখানে ড্রপ করুন"
   },
-  "quickPacScripts": { "message": "দ্রুত স্যুইচ কনফিগারেশন" },
-  "allProxyConfigs": { "message": "সমস্ত প্রক্সি কনফিগারেশন" },
+  "quickPacScripts": {
+    "message": "দ্রুত স্যুইচ কনফিগারেশন"
+  },
+  "allProxyConfigs": {
+    "message": "সমস্ত প্রক্সি কনফিগারেশন"
+  },
   "dragScriptsHere": {
     "message": "দ্রুত সুইচিং সক্ষম করতে এখানে স্ক্রিপ্ট টেনে আনুন। দ্রুত সুইচ আপনাকে এক্সটেনশন আইকনে ক্লিক করে প্রক্সি পরিবর্তন করতে দেয়।"
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "একটি বৈশিষ্ট্য অনুরোধ করুন"
+  },
+  "feedbackAndRating": {
+    "message": "প্রতিক্রিয়া এবং রেটিং"
+  },
+  "rateExtension": {
+    "message": "এক্সটেনশন রেট করুন"
+  },
+  "leaveReview": {
+    "message": "পর্যালোচনা দিন"
+  },
+  "supportProject": {
+    "message": "প্রকল্প সমর্থন করুন"
   },
   "statusConnected": {
     "message": "সংযুক্ত"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1টি নিয়ম",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {

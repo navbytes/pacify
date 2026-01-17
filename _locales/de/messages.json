@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "Hier ablegen, um aus Schnellskripten zu entfernen"
   },
-  "quickPacScripts": { "message": "Quick Switch-Konfigurationen" },
-  "allProxyConfigs": { "message": "Alle Proxy-Konfigurationen" },
+  "quickPacScripts": {
+    "message": "Quick Switch-Konfigurationen"
+  },
+  "allProxyConfigs": {
+    "message": "Alle Proxy-Konfigurationen"
+  },
   "dragScriptsHere": {
     "message": "Ziehen Sie Skripte hierher, um den Schnellwechsel zu aktivieren. Mit dem Schnellwechsel können Sie den Proxy durch Klicken auf das Erweiterungssymbol wechseln."
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "Feature anfordern"
+  },
+  "feedbackAndRating": {
+    "message": "Feedback & Bewertung"
+  },
+  "rateExtension": {
+    "message": "Erweiterung bewerten"
+  },
+  "leaveReview": {
+    "message": "Eine Bewertung hinterlassen"
+  },
+  "supportProject": {
+    "message": "Projekt unterstützen"
   },
   "statusConnected": {
     "message": "Verbunden"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1 Regeln",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {

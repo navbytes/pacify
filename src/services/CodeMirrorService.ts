@@ -21,7 +21,7 @@ export class CodeMirror {
   private static hasInitialized = false
   private static themeChangeListeners = new Set<(theme: 'light' | 'dark') => void>()
   private static themeCompartments = new WeakMap<EditorView, Compartment>()
-  private static themeCleanupFunctions = new WeakMap<EditorView, () => void>()
+  private static readonly themeCleanupFunctions = new WeakMap<EditorView, () => void>()
 
   /**
    * Initializes CodeMirror with system theme detection

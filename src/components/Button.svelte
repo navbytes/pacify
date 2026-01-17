@@ -119,9 +119,9 @@ const buttonClasses = $derived(
         'focus:outline-none focus-visible:ring-4',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         'relative overflow-hidden text-white rounded-xl',
-        size === 'sm' && 'py-2 px-3 text-sm min-h-[44px]',
-        size === 'md' && 'py-2.5 px-5 min-h-[44px]',
-        size === 'lg' && 'py-3 px-6 text-lg min-h-[44px]',
+        size === 'sm' && 'py-2 px-3 text-sm min-h-11',
+        size === 'md' && 'py-2.5 px-5 min-h-11',
+        size === 'lg' && 'py-3 px-6 text-lg min-h-11',
         'shadow-lg hover:shadow-xl hover:scale-105 active:scale-95',
         currentGradient.shadow,
         currentGradient.ring,
@@ -140,7 +140,7 @@ const combinedClasses = $derived(
   cn(
     buttonClasses,
     // Add icon-only button sizing for minimal buttons without children
-    minimal && !children && 'min-w-[44px]',
+    minimal && !children && 'min-w-11',
     classes
   )
 )
@@ -183,13 +183,13 @@ const combinedClasses = $derived(
     <!-- Content -->
     <span class="relative flex items-center gap-2">
       {#if icon}
-        <span class="flex-shrink-0"> {@render icon()} </span>
+        <span class="shrink-0"> {@render icon()} </span>
       {/if}
       {@render children?.()}
     </span>
   {:else}
     {#if icon}
-      <span class="flex-shrink-0"> {@render icon()} </span>
+      <span class="shrink-0"> {@render icon()} </span>
     {/if}
     {@render children?.()}
   {/if}

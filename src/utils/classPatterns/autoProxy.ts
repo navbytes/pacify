@@ -21,73 +21,73 @@ export const gradientSectionVariants = tv({
     color: {
       purple: {
         background:
-          'bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/20 dark:via-purple-950/20 dark:to-fuchsia-950/20',
+          'bg-linear-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/20 dark:via-purple-950/20 dark:to-fuchsia-950/20',
         accentBar: 'from-violet-500 via-purple-500 to-fuchsia-500',
         content: 'border-purple-200/50 dark:border-purple-800/30',
         decorativeBlur:
-          'bg-gradient-to-br from-purple-400/10 to-pink-400/10 dark:from-purple-400/5 dark:to-pink-400/5',
+          'bg-linear-to-br from-purple-400/10 to-pink-400/10 dark:from-purple-400/5 dark:to-pink-400/5',
       },
       blue: {
         background:
-          'bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 dark:from-blue-950/20 dark:via-indigo-950/20 dark:to-violet-950/20',
+          'bg-linear-to-br from-blue-50 via-indigo-50 to-violet-50 dark:from-blue-950/20 dark:via-indigo-950/20 dark:to-violet-950/20',
         accentBar: 'from-blue-500 via-indigo-500 to-violet-500',
         content: 'border-blue-200/50 dark:border-blue-800/30',
         decorativeBlur:
-          'bg-gradient-to-br from-blue-400/10 to-indigo-400/10 dark:from-blue-400/5 dark:to-indigo-400/5',
+          'bg-linear-to-br from-blue-400/10 to-indigo-400/10 dark:from-blue-400/5 dark:to-indigo-400/5',
       },
       cyan: {
         background:
-          'bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50 dark:from-cyan-950/20 dark:via-blue-950/20 dark:to-indigo-950/20',
+          'bg-linear-to-br from-cyan-50 via-blue-50 to-indigo-50 dark:from-cyan-950/20 dark:via-blue-950/20 dark:to-indigo-950/20',
         accentBar: 'from-cyan-500 via-blue-500 to-indigo-500',
         content: 'border-cyan-200/50 dark:border-cyan-800/30',
         decorativeBlur:
-          'bg-gradient-to-br from-cyan-400/10 to-blue-400/10 dark:from-cyan-400/5 dark:to-blue-400/5',
+          'bg-linear-to-br from-cyan-400/10 to-blue-400/10 dark:from-cyan-400/5 dark:to-blue-400/5',
       },
       teal: {
         background:
-          'bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20',
+          'bg-linear-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20',
         accentBar: 'from-teal-500 via-emerald-500 to-green-500',
         content: 'border-teal-200/50 dark:border-teal-800/30',
         decorativeBlur:
-          'bg-gradient-to-br from-teal-400/10 to-emerald-400/10 dark:from-teal-400/5 dark:to-emerald-400/5',
+          'bg-linear-to-br from-teal-400/10 to-emerald-400/10 dark:from-teal-400/5 dark:to-emerald-400/5',
       },
       amber: {
         background:
-          'bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/20 dark:via-yellow-950/20 dark:to-orange-950/20',
+          'bg-linear-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/20 dark:via-yellow-950/20 dark:to-orange-950/20',
         accentBar: 'from-amber-500 via-yellow-500 to-orange-500',
         content: 'border-amber-200/50 dark:border-amber-800/30',
         decorativeBlur:
-          'bg-gradient-to-br from-amber-400/10 to-orange-400/10 dark:from-amber-400/5 dark:to-orange-400/5',
+          'bg-linear-to-br from-amber-400/10 to-orange-400/10 dark:from-amber-400/5 dark:to-orange-400/5',
       },
       orange: {
         background:
-          'bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20',
+          'bg-linear-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20',
         accentBar: 'from-amber-500 via-orange-500 to-yellow-500',
         content: 'border-amber-200/50 dark:border-amber-800/30',
         decorativeBlur:
-          'bg-gradient-to-br from-amber-400/10 to-orange-400/10 dark:from-amber-400/5 dark:to-orange-400/5',
+          'bg-linear-to-br from-amber-400/10 to-orange-400/10 dark:from-amber-400/5 dark:to-orange-400/5',
       },
       slate: {
         background:
-          'bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/20 dark:via-gray-950/20 dark:to-zinc-950/20',
+          'bg-linear-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/20 dark:via-gray-950/20 dark:to-zinc-950/20',
         accentBar: 'from-slate-400 via-gray-500 to-zinc-400',
         content: 'border-slate-200/50 dark:border-slate-700/30',
         decorativeBlur:
-          'bg-gradient-to-br from-slate-400/10 to-gray-400/10 dark:from-slate-400/5 dark:to-gray-400/5',
+          'bg-linear-to-br from-slate-400/10 to-gray-400/10 dark:from-slate-400/5 dark:to-gray-400/5',
       },
       red: {
         background:
           'bg-linear-to-r from-red-500/10 to-rose-500/10 dark:from-red-500/5 dark:to-rose-500/5',
         accentBar: 'from-red-500 to-rose-500',
         content: 'border-red-200 dark:border-red-800',
-        decorativeBlur: 'bg-gradient-to-br from-red-400/10 to-rose-400/10',
+        decorativeBlur: 'bg-linear-to-br from-red-400/10 to-rose-400/10',
       },
       green: {
         background:
           'bg-linear-to-r from-emerald-500/10 via-green-500/10 to-teal-500/10 dark:from-emerald-500/5 dark:via-green-500/5 dark:to-teal-500/5',
         accentBar: 'from-emerald-500 via-green-500 to-teal-500',
         content: 'border-green-200 dark:border-green-800',
-        decorativeBlur: 'bg-gradient-to-br from-green-400/10 to-emerald-400/10',
+        decorativeBlur: 'bg-linear-to-br from-green-400/10 to-emerald-400/10',
       },
     },
     rounded: {
@@ -125,40 +125,40 @@ export const gradientIconBadgeVariants = tv({
   variants: {
     color: {
       purple: {
-        glow: 'bg-gradient-to-br from-violet-400 to-purple-500',
-        badge: 'bg-gradient-to-br from-violet-500 to-purple-600 shadow-violet-500/20',
+        glow: 'bg-linear-to-br from-violet-400 to-purple-500',
+        badge: 'bg-linear-to-br from-violet-500 to-purple-600 shadow-violet-500/20',
       },
       blue: {
-        glow: 'bg-gradient-to-br from-blue-400 to-indigo-500',
-        badge: 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-blue-500/20',
+        glow: 'bg-linear-to-br from-blue-400 to-indigo-500',
+        badge: 'bg-linear-to-br from-blue-500 to-indigo-600 shadow-blue-500/20',
       },
       cyan: {
-        glow: 'bg-gradient-to-br from-cyan-400 to-blue-500',
-        badge: 'bg-gradient-to-br from-cyan-500 to-blue-600 shadow-cyan-500/20',
+        glow: 'bg-linear-to-br from-cyan-400 to-blue-500',
+        badge: 'bg-linear-to-br from-cyan-500 to-blue-600 shadow-cyan-500/20',
       },
       teal: {
-        glow: 'bg-gradient-to-br from-teal-400 to-emerald-500',
-        badge: 'bg-gradient-to-br from-teal-500 to-emerald-600 shadow-teal-500/20',
+        glow: 'bg-linear-to-br from-teal-400 to-emerald-500',
+        badge: 'bg-linear-to-br from-teal-500 to-emerald-600 shadow-teal-500/20',
       },
       amber: {
-        glow: 'bg-gradient-to-br from-amber-400 to-orange-500',
-        badge: 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-amber-500/20',
+        glow: 'bg-linear-to-br from-amber-400 to-orange-500',
+        badge: 'bg-linear-to-br from-amber-500 to-orange-600 shadow-amber-500/20',
       },
       orange: {
-        glow: 'bg-gradient-to-br from-orange-400 to-red-500',
-        badge: 'bg-gradient-to-br from-orange-500 to-red-600 shadow-orange-500/20',
+        glow: 'bg-linear-to-br from-orange-400 to-red-500',
+        badge: 'bg-linear-to-br from-orange-500 to-red-600 shadow-orange-500/20',
       },
       slate: {
-        glow: 'bg-gradient-to-br from-slate-400 to-gray-500',
-        badge: 'bg-gradient-to-br from-slate-500 to-gray-600',
+        glow: 'bg-linear-to-br from-slate-400 to-gray-500',
+        badge: 'bg-linear-to-br from-slate-500 to-gray-600',
       },
       green: {
-        glow: 'bg-gradient-to-br from-green-400 to-emerald-500',
-        badge: 'bg-gradient-to-br from-green-500 to-emerald-600 shadow-green-500/20',
+        glow: 'bg-linear-to-br from-green-400 to-emerald-500',
+        badge: 'bg-linear-to-br from-green-500 to-emerald-600 shadow-green-500/20',
       },
       red: {
-        glow: 'bg-gradient-to-br from-red-400 to-rose-500',
-        badge: 'bg-gradient-to-br from-red-500 to-rose-600 shadow-red-500/20',
+        glow: 'bg-linear-to-br from-red-400 to-rose-500',
+        badge: 'bg-linear-to-br from-red-500 to-rose-600 shadow-red-500/20',
       },
     },
     size: {
@@ -265,7 +265,7 @@ export const ruleListItemVariants = tv({
     dragHandle:
       'cursor-grab active:cursor-grabbing text-slate-300 hover:text-slate-500 dark:text-slate-600 dark:hover:text-slate-400 transition-colors',
     priorityBadge:
-      'flex-shrink-0 w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center',
+      'shrink-0 w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center',
     patternCode:
       'text-sm font-mono font-medium text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-700/80 px-2.5 py-1 rounded-lg truncate max-w-[300px] border border-slate-200 dark:border-slate-600',
     actions: 'flex items-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity',
@@ -356,18 +356,18 @@ export const emptyStateCardVariants = tv({
       purple: {
         wrapper: 'border-slate-200 dark:border-slate-700',
         background:
-          'bg-gradient-to-br from-purple-50/50 via-transparent to-pink-50/50 dark:from-purple-950/20 dark:via-transparent dark:to-pink-950/20',
+          'bg-linear-to-br from-purple-50/50 via-transparent to-pink-50/50 dark:from-purple-950/20 dark:via-transparent dark:to-pink-950/20',
         iconWrapper:
-          'bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30',
+          'bg-linear-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30',
         title: 'text-slate-800 dark:text-slate-200',
         description: 'text-slate-500 dark:text-slate-400',
       },
       slate: {
         wrapper: 'border-slate-200 dark:border-slate-700',
         background:
-          'bg-gradient-to-br from-slate-50/50 via-transparent to-gray-50/50 dark:from-slate-950/20 dark:via-transparent dark:to-gray-950/20',
+          'bg-linear-to-br from-slate-50/50 via-transparent to-gray-50/50 dark:from-slate-950/20 dark:via-transparent dark:to-gray-950/20',
         iconWrapper:
-          'bg-gradient-to-br from-slate-100 to-gray-100 dark:from-slate-900/30 dark:to-gray-900/30',
+          'bg-linear-to-br from-slate-100 to-gray-100 dark:from-slate-900/30 dark:to-gray-900/30',
         title: 'text-slate-800 dark:text-slate-200',
         description: 'text-slate-500 dark:text-slate-400',
       },
@@ -386,7 +386,7 @@ export const modalBackdropVariants = tv({
     container:
       'fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300',
     background:
-      'absolute inset-0 bg-gradient-to-br from-slate-900/80 via-purple-900/40 to-slate-900/80 backdrop-blur-md transition-opacity duration-300',
+      'absolute inset-0 bg-linear-to-br from-slate-900/80 via-purple-900/40 to-slate-900/80 backdrop-blur-md transition-opacity duration-300',
   },
   variants: {
     visible: {
@@ -468,7 +468,7 @@ export const modalContentVariants = tv({
  * Basic settings card variants for modal forms
  */
 export const settingsCardVariants = tv({
-  base: 'relative p-5 rounded-xl bg-gradient-to-br border',
+  base: 'relative p-5 rounded-xl bg-linear-to-br border',
   variants: {
     color: {
       slate:

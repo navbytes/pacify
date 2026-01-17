@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "拖放到此处从快速脚本中移除"
   },
-  "quickPacScripts": { "message": "快速切換配置" },
-  "allProxyConfigs": { "message": "所有代理程式設定" },
+  "quickPacScripts": {
+    "message": "快速切換配置"
+  },
+  "allProxyConfigs": {
+    "message": "所有代理程式設定"
+  },
   "dragScriptsHere": {
     "message": "将脚本拖到此处以启用快速切换。快速切换允许您通过点击扩展图标切换代理。"
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "请求功能"
+  },
+  "feedbackAndRating": {
+    "message": "反馈与评分"
+  },
+  "rateExtension": {
+    "message": "评价扩展"
+  },
+  "leaveReview": {
+    "message": "留下评论"
+  },
+  "supportProject": {
+    "message": "支持项目"
   },
   "statusConnected": {
     "message": "已连接"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1条规则",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {

@@ -139,7 +139,7 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
             <div class="relative p-4 {greenSection.content()}">
               <div class="flex items-start gap-4">
                 <!-- Success icon -->
-                <div class="flex-shrink-0">
+                <div class="shrink-0">
                   <div class={greenIconBadge.wrapper()}>
                     <div class="{greenIconBadge.glow()} animate-pulse"></div>
                     <div class="{greenIconBadge.badge()} rounded-full">
@@ -191,7 +191,7 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
             <div class="relative p-4 {slateSection.content()}">
               <div class="flex items-start gap-4">
                 <!-- Info icon -->
-                <div class="flex-shrink-0">
+                <div class="shrink-0">
                   <div class="p-2 rounded-full bg-slate-200 dark:bg-slate-700">
                     <XCircle size={20} class="text-slate-500 dark:text-slate-400" />
                   </div>

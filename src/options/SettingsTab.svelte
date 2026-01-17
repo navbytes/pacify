@@ -18,10 +18,13 @@ import {
   CircleQuestionMark,
   Database,
   Github,
+  Heart,
   HelpCircle,
   Lightbulb,
+  MessageSquare,
   RefreshCw,
   Shield,
+  Star,
 } from '@/utils/icons'
 
 let settings = $derived($settingsStore)
@@ -83,12 +86,12 @@ async function handleNotificationsToggle(checked: boolean) {
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30"
+          class="absolute inset-0 bg-linear-to-br from-blue-50 via-indigo-50 to-violet-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30"
         ></div>
 
         <!-- Decorative elements -->
         <div
-          class="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-2xl"
+          class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-2xl"
         ></div>
 
         <!-- Top accent -->
@@ -106,10 +109,10 @@ async function handleNotificationsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div
-                  class="absolute inset-0 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-xl blur-md opacity-40"
+                  class="absolute inset-0 bg-linear-to-br from-blue-400 to-indigo-500 rounded-xl blur-md opacity-40"
                 ></div>
                 <div
-                  class="relative w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300"
+                  class="relative w-12 h-12 bg-linear-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300"
                 >
                   <Shield size={22} class="text-white" />
                 </div>
@@ -147,12 +150,12 @@ async function handleNotificationsToggle(checked: boolean) {
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30"
+          class="absolute inset-0 bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30"
         ></div>
 
         <!-- Decorative elements -->
         <div
-          class="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-2xl"
+          class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-2xl"
         ></div>
 
         <!-- Top accent -->
@@ -170,10 +173,10 @@ async function handleNotificationsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div
-                  class="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl blur-md opacity-40"
+                  class="absolute inset-0 bg-linear-to-br from-green-400 to-emerald-500 rounded-xl blur-md opacity-40"
                 ></div>
                 <div
-                  class="relative w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:scale-110 transition-transform duration-300"
+                  class="relative w-12 h-12 bg-linear-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:scale-110 transition-transform duration-300"
                 >
                   <RefreshCw size={22} class="text-white" />
                 </div>
@@ -211,12 +214,12 @@ async function handleNotificationsToggle(checked: boolean) {
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-gradient-to-br from-purple-50 via-violet-50 to-fuchsia-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30"
+          class="absolute inset-0 bg-linear-to-br from-purple-50 via-violet-50 to-fuchsia-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30"
         ></div>
 
         <!-- Decorative elements -->
         <div
-          class="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-purple-400/20 to-violet-400/20 rounded-full blur-2xl"
+          class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-purple-400/20 to-violet-400/20 rounded-full blur-2xl"
         ></div>
 
         <!-- Top accent -->
@@ -234,10 +237,10 @@ async function handleNotificationsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div
-                  class="absolute inset-0 bg-gradient-to-br from-purple-400 to-violet-500 rounded-xl blur-md opacity-40"
+                  class="absolute inset-0 bg-linear-to-br from-purple-400 to-violet-500 rounded-xl blur-md opacity-40"
                 ></div>
                 <div
-                  class="relative w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:scale-110 transition-transform duration-300"
+                  class="relative w-12 h-12 bg-linear-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:scale-110 transition-transform duration-300"
                 >
                   <Bell size={22} class="text-white" />
                 </div>
@@ -286,6 +289,38 @@ async function handleNotificationsToggle(checked: boolean) {
 
   <!-- Keyboard Shortcuts Section -->
   <KeyboardShortcutsCard />
+
+  <!-- Feedback & Rating Section -->
+  <div>
+    <SectionHeader
+      icon={Heart}
+      title={I18nService.getMessage('feedbackAndRating') || 'Feedback & Rating'}
+      iconColor="pink"
+    />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Rate Extension Card -->
+      <LinkCard
+        href="https://chromewebstore.google.com/detail/pacify-the-proxy-manager/kgepmkaldicdcljckhamnhkigddnbcbd/reviews"
+        icon={Star}
+        label={I18nService.getMessage('rateExtension') || 'Rate Extension'}
+        color="yellow"
+      />
+      <!-- Leave a Review Card -->
+      <LinkCard
+        href="https://chromewebstore.google.com/detail/pacify-the-proxy-manager/kgepmkaldicdcljckhamnhkigddnbcbd/reviews"
+        icon={MessageSquare}
+        label={I18nService.getMessage('leaveReview') || 'Leave a Review'}
+        color="blue"
+      />
+      <!-- Support Project Card -->
+      <LinkCard
+        href="https://github.com/sponsors/navbytes"
+        icon={Heart}
+        label={I18nService.getMessage('supportProject') || 'Support Project'}
+        color="pink"
+      />
+    </div>
+  </div>
 
   <!-- Help & Resources Section -->
   <div>

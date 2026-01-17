@@ -139,7 +139,7 @@ function handleSearch(query: string) {
         iconColor="purple"
       >
         {#snippet rightContent()}
-          <div class="flex items-center min-h-[44px]">
+          <div class="flex items-center min-h-11">
             <Tooltip text={I18nService.getMessage('tooltipQuickSwitchMode')} position="left">
               <CircleQuestionMark size={16} class={colors.icon.muted} />
             </Tooltip>
@@ -209,8 +209,8 @@ function handleSearch(query: string) {
           <button
             type="button"
             onclick={toggleSearch}
-            class="p-2.5 min-w-[44px] min-h-[44px] rounded-xl transition-all duration-200 flex items-center justify-center focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 {showSearch
-              ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 text-blue-600 dark:text-blue-400 shadow-md'
+            class="p-2.5 min-w-11 min-h-11 rounded-xl transition-all duration-200 flex items-center justify-center focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 {showSearch
+              ? 'bg-linear-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 text-blue-600 dark:text-blue-400 shadow-md'
               : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 hover:shadow-md'}"
             aria-label={showSearch ? 'Hide search' : 'Show search'}
           >

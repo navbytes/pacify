@@ -236,6 +236,18 @@
   "aboutFeatureRequest": {
     "message": "Request a Feature"
   },
+  "feedbackAndRating": {
+    "message": "Feedback & Rating"
+  },
+  "rateExtension": {
+    "message": "Rate Extension"
+  },
+  "leaveReview": {
+    "message": "Leave a Review"
+  },
+  "supportProject": {
+    "message": "Support Project"
+  },
   "statusConnected": {
     "message": "Connected"
   },

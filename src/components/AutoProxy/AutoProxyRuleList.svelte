@@ -232,7 +232,7 @@ function handleCancelDelete() {
                   </span>
 
                   <!-- Arrow indicator -->
-                  <ArrowRight size={14} class="text-slate-400 flex-shrink-0" />
+                  <ArrowRight size={14} class="text-slate-400 shrink-0" />
 
                   <!-- Proxy destination -->
                   <div class="flex items-center gap-1.5">

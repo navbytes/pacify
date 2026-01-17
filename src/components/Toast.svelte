@@ -37,14 +37,14 @@ function getIcon(type: ToastType) {
       role={toast.type === 'error' ? 'alert' : 'status'}
       aria-live={toast.type === 'error' ? 'assertive' : 'polite'}
     >
-      <Icon size={20} class="flex-shrink-0 mt-0.5" aria-hidden="true" />
+      <Icon size={20} class="shrink-0 mt-0.5" aria-hidden="true" />
       <Text as="p" size="sm" weight="medium" classes="flex-1">{toast.message}</Text>
       <Button
         onclick={() => toastStore.dismiss(toast.id)}
         color="ghost"
         variant="minimal"
         aria-label={I18nService.getMessage('closeNotification') || 'Close notification'}
-        classes="flex-shrink-0 opacity-70 hover:opacity-100 min-h-[44px] min-w-[44px] hover:bg-white/20"
+        classes="shrink-0 opacity-70 hover:opacity-100 min-h-11 min-w-11 hover:bg-white/20"
       >
         {#snippet icon()}
           <X size={16} aria-hidden="true" />

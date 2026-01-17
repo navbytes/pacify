@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "クイックスクリプトから削除するにはここにドロップ"
   },
-  "quickPacScripts": { "message": "クイックスイッチ設定" },
-  "allProxyConfigs": { "message": "すべてのプロキシ設定" },
+  "quickPacScripts": {
+    "message": "クイックスイッチ設定"
+  },
+  "allProxyConfigs": {
+    "message": "すべてのプロキシ設定"
+  },
   "dragScriptsHere": {
     "message": "クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。クイックスイッチを使うと拡張機能アイコンをクリックするだけでプロキシを切り替えられます。"
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "機能をリクエスト"
+  },
+  "feedbackAndRating": {
+    "message": "フィードバックと評価"
+  },
+  "rateExtension": {
+    "message": "拡張機能を評価"
+  },
+  "leaveReview": {
+    "message": "レビューを残す"
+  },
+  "supportProject": {
+    "message": "プロジェクトを支援"
   },
   "statusConnected": {
     "message": "接続済み"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1ルール",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {

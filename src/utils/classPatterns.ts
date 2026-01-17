@@ -40,7 +40,7 @@ export const dragPatterns = {
   dropZone: cn('relative border-2 border-dashed border-transparent', transitions.normal),
   dropZoneActive: cn(
     'border-blue-500',
-    'bg-gradient-to-br from-blue-50/50 to-blue-100/50 dark:from-blue-950/20 dark:to-blue-900/20',
+    'bg-linear-to-br from-blue-50/50 to-blue-100/50 dark:from-blue-950/20 dark:to-blue-900/20',
     'scale-[1.01]',
     'shadow-lg shadow-blue-500/20'
   ),
@@ -93,9 +93,9 @@ export const buttonVariants = tv({
       minimal: '',
     },
     size: {
-      sm: `py-2 px-3 text-sm min-h-[44px] ${radius.xl}`,
-      md: `py-2.5 px-4 min-h-[44px] ${radius.xl}`,
-      lg: `py-3 px-6 text-lg min-h-[44px] ${radius.xl}`,
+      sm: `py-2 px-3 text-sm min-h-11 ${radius.xl}`,
+      md: `py-2.5 px-4 min-h-11 ${radius.xl}`,
+      lg: `py-3 px-6 text-lg min-h-11 ${radius.xl}`,
     },
     fullWidth: {
       true: 'w-full',
@@ -598,7 +598,7 @@ export const linkCardIconBadgeVariants = tv({
  * LinkCard external link icon variants
  */
 export const linkCardExternalIconVariants = tv({
-  base: 'flex-shrink-0 text-slate-400 dark:text-slate-500 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
+  base: 'shrink-0 text-slate-400 dark:text-slate-500 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
   variants: {
     color: {
       blue: 'group-hover:text-blue-600 dark:group-hover:text-blue-400',
@@ -618,12 +618,13 @@ export const linkCardExternalIconVariants = tv({
  * SectionHeader variants with type-safe props
  */
 export const sectionHeaderIconVariants = tv({
-  base: 'flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center shadow-md',
+  base: 'shrink-0 w-8 h-8 rounded-lg flex items-center justify-center shadow-md',
   variants: {
     iconColor: {
       purple:
-        'bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700',
-      slate: 'bg-gradient-to-br from-slate-600 to-slate-700 dark:from-slate-500 dark:to-slate-600',
+        'bg-linear-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700',
+      slate: 'bg-linear-to-br from-slate-600 to-slate-700 dark:from-slate-500 dark:to-slate-600',
+      pink: 'bg-linear-to-br from-pink-500 to-pink-600 dark:from-pink-600 dark:to-pink-700',
     },
   },
   defaultVariants: {
@@ -891,7 +892,7 @@ export const keyboardShortcutCardVariants = tv({
   slots: {
     wrapper:
       'group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border',
-    background: 'absolute inset-0 bg-gradient-to-br',
+    background: 'absolute inset-0 bg-linear-to-br',
     decorativeBlur: 'absolute -top-10 -right-10 w-24 h-24 rounded-full blur-2xl',
     accentBar: 'absolute top-0 left-0 right-0 h-1 bg-linear-to-r',
     content: 'relative p-4 flex flex-col items-center text-center gap-3',
@@ -903,7 +904,7 @@ export const keyboardShortcutCardVariants = tv({
         wrapper: 'border-slate-200/50 dark:border-slate-700/30',
         background:
           'from-slate-50 via-slate-100 to-slate-50 dark:from-slate-800/50 dark:via-slate-800/30 dark:to-slate-800/50',
-        decorativeBlur: 'bg-gradient-to-br from-slate-400/10 to-slate-500/10',
+        decorativeBlur: 'bg-linear-to-br from-slate-400/10 to-slate-500/10',
         accentBar: 'from-slate-400 via-slate-500 to-slate-400',
         kbd: 'bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200',
       },

@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "त्वरित स्क्रिप्ट से हटाने के लिए यहां ड्रॉप करें"
   },
-  "quickPacScripts": { "message": "त्वरित स्विच कॉन्फ़िगरेशन" },
-  "allProxyConfigs": { "message": "सभी प्रॉक्सी कॉन्फ़िगरेशन" },
+  "quickPacScripts": {
+    "message": "त्वरित स्विच कॉन्फ़िगरेशन"
+  },
+  "allProxyConfigs": {
+    "message": "सभी प्रॉक्सी कॉन्फ़िगरेशन"
+  },
   "dragScriptsHere": {
     "message": "त्वरित स्विचिंग सक्षम करने के लिए स्क्रिप्ट यहां खींचें। त्वरित स्विच आपको एक्सटेंशन आइकन पर क्लिक करके प्रॉक्सी स्विच करने की अनुमति देता है।"
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "सुविधा का अनुरोध करें"
+  },
+  "feedbackAndRating": {
+    "message": "प्रतिक्रिया और रेटिंग"
+  },
+  "rateExtension": {
+    "message": "एक्सटेंशन रेट करें"
+  },
+  "leaveReview": {
+    "message": "समीक्षा दें"
+  },
+  "supportProject": {
+    "message": "परियोजना का समर्थन करें"
   },
   "statusConnected": {
     "message": "कनेक्ट किया गया"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1 नियम",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {

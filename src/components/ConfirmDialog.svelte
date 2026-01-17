@@ -68,7 +68,7 @@ function handleKeydown(e: KeyboardEvent) {
         <div class={cn(flexPatterns.start, 'gap-3')}>
           <div
             class={cn(
-              'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center',
+              'shrink-0 w-10 h-10 rounded-full flex items-center justify-center',
               variant === 'danger' && colors.danger.light,
               variant === 'warning' && colors.warning.light,
               variant === 'info' && colors.info.light

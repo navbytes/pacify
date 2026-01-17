@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "Перетащите сюда, чтобы удалить из быстрых скриптов"
   },
-  "quickPacScripts": { "message": "Конфигурации быстрого переключения" },
-  "allProxyConfigs": { "message": "Все конфигурации прокси" },
+  "quickPacScripts": {
+    "message": "Конфигурации быстрого переключения"
+  },
+  "allProxyConfigs": {
+    "message": "Все конфигурации прокси"
+  },
   "dragScriptsHere": {
     "message": "Перетащите скрипты сюда, чтобы включить быстрое переключение. Быстрое переключение позволяет менять прокси, нажимая на значок расширения."
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "Запросить функцию"
+  },
+  "feedbackAndRating": {
+    "message": "Отзывы и Оценка"
+  },
+  "rateExtension": {
+    "message": "Оценить Расширение"
+  },
+  "leaveReview": {
+    "message": "Оставить Отзыв"
+  },
+  "supportProject": {
+    "message": "Поддержать Проект"
   },
   "statusConnected": {
     "message": "Подключено"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1 правил",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {

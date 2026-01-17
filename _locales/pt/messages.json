@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "Solte aqui para remover dos scripts rápidos"
   },
-  "quickPacScripts": { "message": "Configurações de troca rápida" },
-  "allProxyConfigs": { "message": "Todas as configurações de proxy" },
+  "quickPacScripts": {
+    "message": "Configurações de troca rápida"
+  },
+  "allProxyConfigs": {
+    "message": "Todas as configurações de proxy"
+  },
   "dragScriptsHere": {
     "message": "Arraste scripts aqui para ativar a alternância rápida. A alternância rápida permite alternar o proxy clicando no ícone da extensão."
   },
@@ -231,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "Solicitar um recurso"
+  },
+  "feedbackAndRating": {
+    "message": "Feedback e Avaliação"
+  },
+  "rateExtension": {
+    "message": "Avaliar Extensão"
+  },
+  "leaveReview": {
+    "message": "Deixar uma Avaliação"
+  },
+  "supportProject": {
+    "message": "Apoiar Projeto"
   },
   "statusConnected": {
     "message": "Conectado"
@@ -724,7 +740,10 @@
   "autoProxyRefPlural": {
     "message": "$1 regras",
     "placeholders": {
-      "1": { "content": "$1", "example": "3" }
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
     }
   },
   "autoProxyDeleteConsequence": {
