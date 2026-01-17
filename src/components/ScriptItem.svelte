@@ -24,9 +24,16 @@ interface Props {
   pageType?: ListViewType
   dragType?: string
   onScriptEdit: (scriptId: string) => void
+  disableDrag?: boolean
 }
 
-let { proxy, pageType = 'POPUP', onScriptEdit, dragType = $bindable() }: Props = $props()
+let {
+  proxy,
+  pageType = 'POPUP',
+  onScriptEdit,
+  dragType = $bindable(),
+  disableDrag = false,
+}: Props = $props()
 
 let settings = $derived($settingsStore)
 let modeColors = $derived(getProxyModeColor(proxy.mode, proxy))
@@ -96,12 +103,12 @@ async function handleScriptDelete() {
   name={proxy.name || ''}
   id={proxy.id || ''}
   dataType={pageType}
-  disabled={pageType === 'POPUP'}
+  disabled={pageType === 'POPUP' || disableDrag}
   bind:dragType
 >
   <div
     class={cn(
-      'group relative rounded-lg border-l-4 border-y border-r',
+      'group relative rounded-xl border-l-4 border-y border-r overflow-hidden',
       transitions.normal,
       pageType === 'POPUP' ? 'p-2' : 'p-5',
       pageType === 'QUICK_SWITCH' && 'border-dashed',
@@ -109,13 +116,14 @@ async function handleScriptDelete() {
         ? [
             colors.background.active,
             'border-y-blue-200 border-r-blue-200 dark:border-y-blue-800 dark:border-r-blue-800',
-            'shadow-md hover:shadow-lg',
+            'shadow-lg shadow-blue-500/10 hover:shadow-xl hover:shadow-blue-500/20',
             'ring-1 ring-blue-200/50 dark:ring-blue-800/30',
+            'hover:-translate-y-0.5',
           ]
         : [
             colors.background.default,
             'border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700',
-            'hover:shadow-md hover:scale-[1.005]',
+            'hover:shadow-lg hover:-translate-y-1',
             'hover:border-y-slate-300 hover:border-r-slate-300 dark:hover:border-y-slate-600 dark:hover:border-r-slate-600',
           ]
     )}
@@ -131,11 +139,24 @@ async function handleScriptDelete() {
         }
       : undefined}
   >
+    <!-- Gradient overlay background -->
+    <div
+      class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+      style={`background: linear-gradient(135deg, ${proxy.color}08 0%, transparent 60%)`}
+    ></div>
+
+    <!-- Active state glow -->
+    {#if proxy.isActive && pageType !== 'POPUP'}
+      <div
+        class="absolute -inset-[1px] rounded-xl opacity-20 blur-sm pointer-events-none"
+        style={`background: linear-gradient(135deg, ${proxy.color} 0%, transparent 60%)`}
+      ></div>
+    {/if}
     <!-- Card Header -->
     <div class={cn(flexPatterns.between, 'gap-2.5 min-w-0 flex-1')}>
       <div class={cn(flexPatterns.centerVertical, 'gap-2.5 min-w-0 flex-1')}>
-        {#if pageType !== 'POPUP'}
-          <!-- Drag handle (only for OPTIONS and QUICK_SWITCH) -->
+        {#if pageType !== 'POPUP' && !disableDrag}
+          <!-- Drag handle (only for OPTIONS and QUICK_SWITCH when drag is enabled) -->
           <div
             class={cn(
               'hidden group-hover:flex cursor-grab active:cursor-grabbing',
@@ -153,11 +174,21 @@ async function handleScriptDelete() {
         {/if}
 
         <!-- Color indicator badge (for colorblind accessibility) -->
-        <div
-          class="w-3 h-3 rounded-full shrink-0 ring-2 ring-white dark:ring-slate-800"
-          style="background-color: {proxy.color}"
-          aria-label="Proxy color: {proxy.color}"
-        ></div>
+        <div class="relative shrink-0">
+          <!-- Outer glow ring -->
+          {#if proxy.isActive}
+            <div
+              class="absolute inset-0 w-4 h-4 rounded-full blur-sm animate-pulse"
+              style="background-color: {proxy.color}"
+            ></div>
+          {/if}
+          <!-- Main color dot -->
+          <div
+            class="relative w-4 h-4 rounded-full ring-2 ring-white dark:ring-slate-800 shadow-sm group-hover:scale-110 transition-transform duration-200"
+            style="background: linear-gradient(135deg, {proxy.color} 0%, {proxy.color}dd 100%)"
+            aria-label="Proxy color: {proxy.color}"
+          ></div>
+        </div>
 
         <!-- Mode icon inline (POPUP only) -->
         {#if pageType === 'POPUP'}
@@ -201,12 +232,13 @@ async function handleScriptDelete() {
     <!-- Card Content -->
     {#if pageType !== 'POPUP'}
       <!-- Full content for OPTIONS/QUICK_SWITCH -->
-      <div class={cn(flexPatterns.col, 'gap-2 mb-4 mt-3')}>
+      <div class={cn(flexPatterns.col, 'gap-2 mb-4 mt-3', 'relative z-10')}>
         <!-- Mode badge -->
         <div
           class={cn(
             badgePatterns.base,
-            'self-start font-medium border rounded-md',
+            'self-start font-medium border rounded-lg shadow-sm backdrop-blur-sm',
+            'transition-all duration-200 hover:scale-105',
             modeColors.bg,
             modeColors.text,
             modeColors.border
@@ -225,7 +257,7 @@ async function handleScriptDelete() {
 
     <!-- Card Footer (OPTIONS only) -->
     {#if pageType === 'OPTIONS'}
-      <div class={cn(flexPatterns.between, 'pt-3 border-t', colors.border.default)}>
+      <div class={cn(flexPatterns.between, 'pt-3 border-t relative z-10', colors.border.default)}>
         <ToggleSwitch
           checked={proxy.isActive}
           onchange={(checked) => handleSetProxy(checked, proxy.id)}
@@ -235,31 +267,31 @@ async function handleScriptDelete() {
           )}
         />
 
-        <div class={cn(flexPatterns.centerVertical, 'gap-1')}>
+        <div class={cn(flexPatterns.centerVertical, 'gap-1.5')}>
           <Button
             color="primary"
             minimal
             onclick={() => openEditor(proxy.id)}
             aria-label={I18nService.getMessage('editConfiguration', proxy.name)}
-            classes="hover:bg-blue-50 dark:hover:bg-blue-950/20"
+            classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all hover:scale-105"
           >
             {#snippet icon()}
               <Pencil size={16} />
             {/snippet}
-            <span class="text-sm">Edit</span>
+            <span class="text-sm font-medium">Edit</span>
           </Button>
           <Button
             color="error"
             minimal
             onclick={confirmDelete}
             aria-label={I18nService.getMessage('deleteConfiguration', proxy.name)}
-            classes="hover:bg-red-50 dark:hover:bg-red-950/20"
+            classes="hover:bg-red-50 dark:hover:bg-red-950/20 transition-all hover:scale-105"
             data-testid={`delete-proxy-button-${proxy.id}`}
           >
             {#snippet icon()}
               <Trash size={16} class={cn(colors.danger.text)} />
             {/snippet}
-            <span class="text-sm">Delete</span>
+            <span class="text-sm font-medium">Delete</span>
           </Button>
         </div>
       </div>

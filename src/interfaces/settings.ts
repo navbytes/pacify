@@ -1,5 +1,6 @@
 export interface AppSettings {
   quickSwitchEnabled: boolean
+  showQuickSettings: boolean
   activeScriptId: string | null
   proxyConfigs: ProxyConfig[]
   disableProxyOnStartup: boolean

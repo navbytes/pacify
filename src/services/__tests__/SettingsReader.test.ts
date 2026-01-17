@@ -170,6 +170,7 @@ describe('SettingsReader', () => {
     test('returns complete settings object', async () => {
       mockSettings = {
         quickSwitchEnabled: true,
+        showQuickSettings: true,
         activeScriptId: 'test-id',
         proxyConfigs: [
           { id: 'test-id', name: 'Test', color: '#000', isActive: true, mode: 'direct' },

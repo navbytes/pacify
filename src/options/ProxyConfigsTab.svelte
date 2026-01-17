@@ -128,7 +128,7 @@ function handleSearch(query: string) {
 <svelte:window on:keydown={handleKeydown} />
 
 <div class="py-6 space-y-8">
-  {#if hasProxies}
+  {#if hasProxies && settings.showQuickSettings}
     <!-- Quick Switch Configs Section -->
     <div>
       <SectionHeader
@@ -185,6 +185,7 @@ function handleSearch(query: string) {
                 pageType="QUICK_SWITCH"
                 title=""
                 proxies={quickSwitchProxies}
+                disableDrag={false}
                 bind:dragType
               />
             {/if}
@@ -267,6 +268,7 @@ function handleSearch(query: string) {
             pageType="OPTIONS"
             proxies={regularProxies}
             onScriptEdit={(scriptId) => onOpenEditor(scriptId)}
+            disableDrag={!settings.showQuickSettings}
             bind:dragType
             title=""
           />

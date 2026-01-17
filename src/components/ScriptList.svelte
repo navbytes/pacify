@@ -19,9 +19,17 @@ interface Props {
   onScriptEdit?: (scriptId: string) => void
   dragType?: string
   proxies?: ProxyConfig[] // Optional filtered proxies list
+  disableDrag?: boolean // Disable drag-and-drop functionality
 }
 
-let { pageType = 'POPUP', title, onScriptEdit, dragType = $bindable(), proxies }: Props = $props()
+let {
+  pageType = 'POPUP',
+  title,
+  onScriptEdit,
+  dragType = $bindable(),
+  proxies,
+  disableDrag = false,
+}: Props = $props()
 
 // Use provided proxies or fall back to store
 let proxyConfigs = $derived(proxies ?? proxyConfigsFromStore)
@@ -59,7 +67,13 @@ let displayProxyConfigs = $derived<ProxyConfig[]>(
       )}
     >
       {#each displayProxyConfigs as proxy (proxy.id)}
-        <ScriptItem {proxy} {pageType} bind:dragType onScriptEdit={() => openEditor(proxy.id)} />
+        <ScriptItem
+          {proxy}
+          {pageType}
+          {disableDrag}
+          bind:dragType
+          onScriptEdit={() => openEditor(proxy.id)}
+        />
       {/each}
     </div>
   {:else if pageType === 'POPUP'}

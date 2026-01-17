@@ -91,9 +91,8 @@ function handleDragEnd(event: DragEvent) {
 
 <div
   class={cn(
-    dragPatterns.draggable,
-    dragType && dragType !== '' && dragPatterns.dragging,
-    disabled && dataType !== 'POPUP' && 'cursor-not-allowed opacity-50'
+    !disabled && dragPatterns.draggable,
+    dragType && dragType !== '' && dragPatterns.dragging
   )}
   draggable={!disabled}
   ondragstart={handleDragStart}

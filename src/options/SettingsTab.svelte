@@ -17,6 +17,7 @@ import {
   Bug,
   CircleQuestionMark,
   Database,
+  Eye,
   Github,
   Heart,
   HelpCircle,
@@ -67,6 +68,16 @@ async function handleNotificationsToggle(checked: boolean) {
     'success'
   )
 }
+
+async function handleShowQuickSettingsToggle(checked: boolean) {
+  await settingsStore.updateSettings({ showQuickSettings: checked })
+  toastStore.show(
+    checked
+      ? I18nService.getMessage('showQuickSettingsEnabled')
+      : I18nService.getMessage('showQuickSettingsDisabled'),
+    'success'
+  )
+}
 </script>
 
 <div class="py-6 space-y-8">
@@ -82,11 +93,11 @@ async function handleNotificationsToggle(checked: boolean) {
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
       <!-- Disable Proxy on Startup Card -->
       <div
-        class="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-blue-200/50 dark:border-blue-800/30"
+        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-blue-200/50 dark:border-blue-800/30"
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-blue-50 via-indigo-50 to-violet-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30"
+          class="absolute inset-0 bg-linear-to-br from-blue-50 via-indigo-50 to-violet-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30 rounded-2xl overflow-hidden"
         ></div>
 
         <!-- Decorative elements -->
@@ -146,11 +157,11 @@ async function handleNotificationsToggle(checked: boolean) {
 
       <!-- Auto-reload toggle Card -->
       <div
-        class="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-green-200/50 dark:border-green-800/30"
+        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-green-200/50 dark:border-green-800/30"
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30"
+          class="absolute inset-0 bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 rounded-2xl overflow-hidden"
         ></div>
 
         <!-- Decorative elements -->
@@ -210,11 +221,11 @@ async function handleNotificationsToggle(checked: boolean) {
 
       <!-- System Notifications Card -->
       <div
-        class="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-purple-200/50 dark:border-purple-800/30"
+        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-purple-200/50 dark:border-purple-800/30"
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-purple-50 via-violet-50 to-fuchsia-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30"
+          class="absolute inset-0 bg-linear-to-br from-purple-50 via-violet-50 to-fuchsia-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30 rounded-2xl overflow-hidden"
         ></div>
 
         <!-- Decorative elements -->
@@ -270,6 +281,70 @@ async function handleNotificationsToggle(checked: boolean) {
               checked={notificationsEnabled}
               onchange={handleNotificationsToggle}
               aria-label="Toggle system notifications"
+            />
+          </FlexGroup>
+        </div>
+      </div>
+
+      <!-- Show Quick Settings Card -->
+      <div
+        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-amber-200/50 dark:border-amber-800/30"
+      >
+        <!-- Background gradient -->
+        <div
+          class="absolute inset-0 bg-linear-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30 rounded-2xl overflow-hidden"
+        ></div>
+
+        <!-- Decorative elements -->
+        <div
+          class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-amber-400/20 to-orange-400/20 rounded-full blur-2xl"
+        ></div>
+
+        <!-- Top accent -->
+        <div
+          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-amber-500 via-orange-500 to-yellow-500"
+        ></div>
+
+        <div class="relative p-5">
+          <FlexGroup
+            direction="horizontal"
+            childrenGap="lg"
+            alignItems="center"
+            justifyContent="between"
+          >
+            <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
+              <div class="relative">
+                <div
+                  class="absolute inset-0 bg-linear-to-br from-amber-400 to-orange-500 rounded-xl blur-md opacity-40"
+                ></div>
+                <div
+                  class="relative w-12 h-12 bg-linear-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/25 group-hover:scale-110 transition-transform duration-300"
+                >
+                  <Eye size={22} class="text-white" />
+                </div>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <label
+                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
+                    for="showQuickSettingsToggle"
+                  >
+                    {I18nService.getMessage('showQuickSettings')}
+                  </label>
+                  <Tooltip text={I18nService.getMessage('showQuickSettingsTooltip')} position="top">
+                    <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+                  </Tooltip>
+                </div>
+                <Text as="p" size="sm" color="muted" classes="mt-1">
+                  {I18nService.getMessage('showQuickSettingsDescription')}
+                </Text>
+              </div>
+            </FlexGroup>
+            <ToggleSwitch
+              id="showQuickSettingsToggle"
+              checked={settings.showQuickSettings}
+              onchange={handleShowQuickSettingsToggle}
+              aria-label="Toggle show quick settings"
             />
           </FlexGroup>
         </div>

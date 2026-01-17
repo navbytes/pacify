@@ -6,7 +6,6 @@ import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
 import { Download, Upload } from '@/utils/icons'
 import Button from './Button.svelte'
-import Card from './Card.svelte'
 import FlexGroup from './FlexGroup.svelte'
 import Text from './Text.svelte'
 

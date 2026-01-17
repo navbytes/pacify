@@ -545,6 +545,21 @@
   "systemNotificationsDescription": {
     "message": "Show system notifications for proxy switches and errors"
   },
+  "showQuickSettings": {
+    "message": "Show Quick Settings"
+  },
+  "showQuickSettingsDescription": {
+    "message": "Display quick settings section in the Proxy Configs page"
+  },
+  "showQuickSettingsEnabled": {
+    "message": "Quick settings section is now visible"
+  },
+  "showQuickSettingsDisabled": {
+    "message": "Quick settings section is now hidden"
+  },
+  "showQuickSettingsTooltip": {
+    "message": "When disabled, the Quick Switch section will be hidden from the Proxy Configs page"
+  },
   "errorFailedToLoadSettings": {
     "message": "Failed to load settings"
   },
