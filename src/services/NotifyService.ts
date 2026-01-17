@@ -1,6 +1,7 @@
 import { ERROR_TYPES } from '@/interfaces'
 import { ALERT_TYPES } from '../interfaces/error'
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class NotifyService {
   public static error(type: ERROR_TYPES, error: unknown, context = ''): void {
     console.error(context, type, error)

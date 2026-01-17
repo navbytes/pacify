@@ -83,14 +83,14 @@ export interface RuntimeAPI {
         message: unknown,
         sender: MessageSender,
         sendResponse: SendResponse
-      ) => boolean | void
+      ) => boolean | undefined
     ): void
     removeListener(
       callback: (
         message: unknown,
         sender: MessageSender,
         sendResponse: SendResponse
-      ) => boolean | void
+      ) => boolean | undefined
     ): void
   }
   onStartup: {

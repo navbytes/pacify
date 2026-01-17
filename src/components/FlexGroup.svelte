@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Snippet } from 'svelte'
 import { flexGroupVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 
@@ -8,7 +9,7 @@ interface Props {
   childrenGap?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
   alignItems?: 'start' | 'center' | 'end' | 'stretch' | 'baseline'
   justifyContent?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
-  children?: () => any
+  children?: Snippet
   role?: string
 }
 

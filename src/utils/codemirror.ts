@@ -6,7 +6,6 @@ import {
 import { javascript } from '@codemirror/lang-javascript'
 import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import type { Extension } from '@codemirror/state'
-import { oneDark } from '@codemirror/theme-one-dark'
 import { EditorView } from '@codemirror/view'
 import { tags } from '@lezer/highlight'
 import type { CodeMirrorOptions, CodeMirrorTheme, PACCompletionItem } from '@/interfaces/codemirror'
@@ -335,18 +334,11 @@ export function createBasicExtensions(options: CodeMirrorOptions): Extension[] {
     )
   }
 
-  // Theme
-  const theme = options.theme === 'dark' ? darkTheme : lightTheme
-  if (options.enableSyntaxHighlighting) {
-    extensions.push(createThemeExtension(theme))
-  }
-
-  // One Dark theme for dark mode
-  if (options.theme === 'dark') {
-    extensions.push(oneDark)
-  }
+  // Note: Theme is added through Compartment in CodeMirrorService.create
+  // Do not add theme extensions here to avoid duplicate extension errors
 
   // Custom styling
+  const theme = options.theme === 'dark' ? darkTheme : lightTheme
   extensions.push(
     EditorView.theme({
       '&': {

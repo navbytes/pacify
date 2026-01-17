@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "クイックスクリプトから削除するにはここにドロップ"
   },
-  "quickPacScripts": { "message": "クイックスイッチ設定" },
-  "allProxyConfigs": { "message": "すべてのプロキシ設定" },
+  "quickPacScripts": {
+    "message": "クイックスイッチ設定"
+  },
+  "allProxyConfigs": {
+    "message": "すべてのプロキシ設定"
+  },
   "dragScriptsHere": {
     "message": "クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。クイックスイッチを使うと拡張機能アイコンをクリックするだけでプロキシを切り替えられます。"
   },
@@ -147,6 +151,12 @@
   },
   "color": {
     "message": "色"
+  },
+  "badgeLabel": {
+    "message": "バッジラベル"
+  },
+  "badgeLabelHelp": {
+    "message": "拡張機能アイコンのカスタムテキスト（最大4文字）。空にすると自動生成されます。"
   },
   "active": {
     "message": "アクティブ"
@@ -225,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "機能をリクエスト"
+  },
+  "feedbackAndRating": {
+    "message": "フィードバックと評価"
+  },
+  "rateExtension": {
+    "message": "拡張機能を評価"
+  },
+  "leaveReview": {
+    "message": "レビューを残す"
+  },
+  "supportProject": {
+    "message": "プロジェクトを支援"
   },
   "statusConnected": {
     "message": "接続済み"
@@ -555,5 +577,257 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "オートプロキシを追加"
+  },
+  "addAutoProxyTooltip": {
+    "message": "URLベースのルーティングルールを作成"
+  },
+  "autoProxyMode": {
+    "message": "オートプロキシ"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1件のルール"
+  },
+  "createAutoProxy": {
+    "message": "オートプロキシを作成"
+  },
+  "editAutoProxy": {
+    "message": "オートプロキシを編集"
+  },
+  "autoProxyCreated": {
+    "message": "オートプロキシ \"$1\" を作成しました"
+  },
+  "autoProxyUpdated": {
+    "message": "オートプロキシ \"$1\" を更新しました"
+  },
+  "autoProxyDeleted": {
+    "message": "オートプロキシ \"$1\" を削除しました"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "例: ワークルーティング、スプリットトンネル"
+  },
+  "addRule": {
+    "message": "ルールを追加"
+  },
+  "editRule": {
+    "message": "ルールを編集"
+  },
+  "deleteRule": {
+    "message": "ルールを削除"
+  },
+  "saveRule": {
+    "message": "ルールを保存"
+  },
+  "cancelRule": {
+    "message": "キャンセル"
+  },
+  "urlPattern": {
+    "message": "URLパターン"
+  },
+  "patternType": {
+    "message": "パターンタイプ"
+  },
+  "wildcardPattern": {
+    "message": "ワイルドカード"
+  },
+  "regexPattern": {
+    "message": "正規表現"
+  },
+  "exactMatch": {
+    "message": "完全一致"
+  },
+  "cidrPattern": {
+    "message": "CIDR (IP範囲)"
+  },
+  "selectProxy": {
+    "message": "プロキシを選択"
+  },
+  "defineInline": {
+    "message": "インラインで定義"
+  },
+  "directConnection": {
+    "message": "直接接続"
+  },
+  "fallbackBehavior": {
+    "message": "フォールバック動作"
+  },
+  "fallbackDescription": {
+    "message": "URLに一致するルールがない場合に適用されます"
+  },
+  "testPattern": {
+    "message": "パターンをテスト"
+  },
+  "testUrl": {
+    "message": "テストURL"
+  },
+  "testUrlPlaceholder": {
+    "message": "ルールに対してテストするURLを入力"
+  },
+  "patternMatches": {
+    "message": "パターンが一致しました！"
+  },
+  "noPatternMatch": {
+    "message": "一致するパターンがありません - フォールバックが使用されます"
+  },
+  "ruleEnabled": {
+    "message": "ルール有効"
+  },
+  "ruleDisabled": {
+    "message": "ルール無効"
+  },
+  "routingRules": {
+    "message": "ルーティングルール"
+  },
+  "noRulesYet": {
+    "message": "まだルールが定義されていません"
+  },
+  "noRulesDescription": {
+    "message": "URLを異なるプロキシにルーティングする方法を定義するルールを追加してください"
+  },
+  "atLeastOneRule": {
+    "message": "少なくとも1つのルールが必要です"
+  },
+  "failedToSave": {
+    "message": "設定の保存に失敗しました"
+  },
+  "proxyType": {
+    "message": "プロキシタイプ"
+  },
+  "noProxiesAvailable": {
+    "message": "利用可能なプロキシがありません"
+  },
+  "name": {
+    "message": "名前"
+  },
+  "ruleDescription": {
+    "message": "説明（オプション）"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "例: すべてのGoogleトラフィックをルーティング"
+  },
+  "patternPlaceholder": {
+    "message": "例: *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "任意の文字に一致させるには * を使用します。例: *.example.com"
+  },
+  "regexHelp": {
+    "message": "JavaScript正規表現構文を使用します。例: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "正確なホスト名に一致させます。例: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "IP範囲にはCIDR表記を使用します。例: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "無効なパターン"
+  },
+  "patternRequired": {
+    "message": "パターンは必須です"
+  },
+  "saveChanges": {
+    "message": "変更を保存"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "このプロキシは以下のオートプロキシ設定で使用されています:"
+  },
+  "autoProxyRefSingular": {
+    "message": "1ルール"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1ルール",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "このプロキシを削除すると、これらのルールは自動的に削除されます。"
+  },
+  "orphanedProxyWarning": {
+    "message": "参照されているプロキシは削除されました。別のプロキシを選択してください。"
+  },
+  "matchedRule": {
+    "message": "一致したルール"
+  },
+  "useFallback": {
+    "message": "フォールバックを使用"
+  },
+  "dragToReorder": {
+    "message": "ドラッグしてルールを並べ替え"
+  },
+  "failedToSaveProxy": {
+    "message": "プロキシ設定の保存に失敗しました"
+  },
+  "autoProxySubtitle": {
+    "message": "URLベースのスマートなトラフィックルーティング"
+  },
+  "close": {
+    "message": "閉じる"
+  },
+  "ruleSingular": {
+    "message": "ルール"
+  },
+  "rulePlural": {
+    "message": "ルール"
+  },
+  "rulesConfigured": {
+    "message": "$1 $2 設定済み"
+  },
+  "ruleActiveDescription": {
+    "message": "設定が有効な場合、このルールはアクティブになります"
+  },
+  "ruleSkippedDescription": {
+    "message": "このルールはスキップされます"
+  },
+  "matchTypeWildcard": {
+    "message": "ワイルドカード"
+  },
+  "matchTypeExact": {
+    "message": "完全一致"
+  },
+  "matchTypeRegex": {
+    "message": "正規表現"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "プロキシが削除されました"
+  },
+  "testPatternHint": {
+    "message": "ルールが正しく機能するか確認してください"
+  },
+  "testButton": {
+    "message": "テスト"
+  },
+  "ruleLabel": {
+    "message": "ルール："
+  },
+  "testPatternHelp": {
+    "message": "上にURLを入力し、テストをクリックして一致するルールを確認してください"
+  },
+  "proxyModePacScript": {
+    "message": "（PACスクリプト）"
+  },
+  "proxyModeSystem": {
+    "message": "（システム）"
+  },
+  "proxyModeDirect": {
+    "message": "（ダイレクト）"
+  },
+  "proxyModeAutoDetect": {
+    "message": "（自動検出）"
+  },
+  "toggleSearch": {
+    "message": "検索を切り替え"
+  },
+  "hideSearch": {
+    "message": "検索を非表示"
   }
 }

@@ -68,7 +68,7 @@ function handleKeydown(e: KeyboardEvent) {
         <div class={cn(flexPatterns.start, 'gap-3')}>
           <div
             class={cn(
-              'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center',
+              'shrink-0 w-10 h-10 rounded-full flex items-center justify-center',
               variant === 'danger' && colors.danger.light,
               variant === 'warning' && colors.warning.light,
               variant === 'info' && colors.info.light
@@ -87,21 +87,25 @@ function handleKeydown(e: KeyboardEvent) {
             {title}
           </h3>
         </div>
-        <button
+        <Button
           onclick={handleCancel}
-          class={cn(
-            colors.icon.muted,
-            'hover:text-slate-600 dark:hover:text-slate-300 transition-colors'
-          )}
+          color="ghost"
+          variant="minimal"
           aria-label={I18nService.getMessage('closeDialog')}
+          classes={cn(
+            colors.icon.muted,
+            'p-2 min-w-[40px] min-h-[40px] hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+          )}
         >
-          <X size={20} />
-        </button>
+          {#snippet icon()}
+            <X size={20} />
+          {/snippet}
+        </Button>
       </div>
 
       <!-- Body -->
       <div class={modalVariants.body()}>
-        <Text as="p" color="muted">{message}</Text>
+        <Text as="p" color="muted" classes="whitespace-pre-line">{message}</Text>
       </div>
 
       <!-- Footer -->

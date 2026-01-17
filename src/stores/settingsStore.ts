@@ -3,6 +3,7 @@ import { DEFAULT_SETTINGS } from '@/constants/app'
 import { type AppSettings, ERROR_TYPES, type ProxyConfig } from '@/interfaces'
 import { ChromeService } from '@/services/chrome'
 import { logger } from '@/services/LoggerService'
+import { PACScriptGenerator } from '@/services/PACScriptGenerator'
 import { StorageService } from '@/services/StorageService'
 import { debounce } from '@/utils/debounce'
 import { withErrorHandling } from '@/utils/errorHandling'
@@ -122,6 +123,45 @@ function createSettingsStore() {
           scriptId: actualScriptId,
         })
 
+        // Check if this edit affects an active Auto-Proxy config
+        // If the edited proxy is referenced by the currently active Auto-Proxy, regenerate and re-apply PAC
+        if (scriptId && updatedSettings.activeScriptId) {
+          const activeConfig = updatedSettings.proxyConfigs.find(
+            (p) => p.id === updatedSettings.activeScriptId
+          )
+
+          if (activeConfig?.autoProxy) {
+            // Check if the edited proxy is referenced by this Auto-Proxy's rules or fallback
+            const isReferencedInRules = activeConfig.autoProxy.rules.some(
+              (rule) => rule.proxyType === 'existing' && rule.proxyId === scriptId
+            )
+            const isReferencedInFallback =
+              activeConfig.autoProxy.fallbackType === 'existing' &&
+              activeConfig.autoProxy.fallbackProxyId === scriptId
+
+            if (isReferencedInRules || isReferencedInFallback) {
+              // Regenerate PAC script with updated proxy config
+              const generatedPAC = PACScriptGenerator.generate(
+                activeConfig.autoProxy,
+                updatedSettings.proxyConfigs
+              )
+              const proxyToSend = {
+                ...activeConfig,
+                pacScript: { data: generatedPAC },
+                mode: 'pac_script' as const,
+              }
+              logger.info(
+                'Regenerating PAC script for active Auto-Proxy after referenced proxy update:',
+                activeConfig.name
+              )
+              await ChromeService.sendMessage({
+                type: 'SET_PROXY',
+                proxy: proxyToSend,
+              })
+            }
+          }
+        }
+
         return updatedSettings
       },
       ERROR_TYPES.SAVE_SCRIPT
@@ -153,14 +193,45 @@ function createSettingsStore() {
       const wasActive = settings.activeScriptId === scriptId
 
       // Save without debounce to make sure changes are persisted before UI updates
-      handleSettingsChange((settings) => {
+      handleSettingsChange((currentSettings) => {
+        // Remove the proxy config
+        let proxyConfigs = currentSettings.proxyConfigs.filter((s) => s.id !== scriptId)
+
+        // Cascade cleanup: Remove orphaned references from Auto-Proxy configs
+        proxyConfigs = proxyConfigs.map((config) => {
+          if (!config.autoProxy) return config
+
+          // Remove rules that reference the deleted proxy
+          const cleanedRules = config.autoProxy.rules
+            .filter((rule) => !(rule.proxyType === 'existing' && rule.proxyId === scriptId))
+            .map((rule, index) => ({ ...rule, priority: index })) // Recalculate priorities
+
+          // Clean fallback if it references the deleted proxy
+          let fallbackType = config.autoProxy.fallbackType
+          let fallbackProxyId = config.autoProxy.fallbackProxyId
+          if (fallbackType === 'existing' && fallbackProxyId === scriptId) {
+            fallbackType = 'direct'
+            fallbackProxyId = undefined
+          }
+
+          return {
+            ...config,
+            autoProxy: {
+              ...config.autoProxy,
+              rules: cleanedRules,
+              fallbackType,
+              fallbackProxyId,
+            },
+          }
+        })
+
         const newSettings = {
-          ...settings,
-          proxyConfigs: settings.proxyConfigs.filter((s) => s.id !== scriptId),
+          ...currentSettings,
+          proxyConfigs,
         }
 
         // Clear activeScriptId if it was deleted
-        if (settings.activeScriptId === scriptId) {
+        if (currentSettings.activeScriptId === scriptId) {
           newSettings.activeScriptId = null
         }
 
@@ -222,9 +293,25 @@ function createSettingsStore() {
 
         // Send the appropriate message based on the active state
         if (isActive && activeScript) {
+          // Check if this is an Auto-Proxy config and generate PAC script
+          let proxyToSend = activeScript
+          if (activeScript.autoProxy) {
+            const generatedPAC = PACScriptGenerator.generate(
+              activeScript.autoProxy,
+              savedSettings.proxyConfigs
+            )
+            // Create a copy with the generated PAC script
+            proxyToSend = {
+              ...activeScript,
+              pacScript: { data: generatedPAC },
+              mode: 'pac_script',
+            }
+            logger.info('Generated PAC script for Auto-Proxy config:', activeScript.name)
+          }
+
           await ChromeService.sendMessage({
             type: 'SET_PROXY',
-            proxy: activeScript,
+            proxy: proxyToSend,
           })
         } else {
           await ChromeService.sendMessage({

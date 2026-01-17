@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "拖放到此处从快速脚本中移除"
   },
-  "quickPacScripts": { "message": "快速切換配置" },
-  "allProxyConfigs": { "message": "所有代理程式設定" },
+  "quickPacScripts": {
+    "message": "快速切換配置"
+  },
+  "allProxyConfigs": {
+    "message": "所有代理程式設定"
+  },
   "dragScriptsHere": {
     "message": "将脚本拖到此处以启用快速切换。快速切换允许您通过点击扩展图标切换代理。"
   },
@@ -147,6 +151,12 @@
   },
   "color": {
     "message": "颜色"
+  },
+  "badgeLabel": {
+    "message": "徽章标签"
+  },
+  "badgeLabelHelp": {
+    "message": "扩展图标的自定义文本（最多4个字符）。留空以自动生成。"
   },
   "active": {
     "message": "激活"
@@ -225,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "请求功能"
+  },
+  "feedbackAndRating": {
+    "message": "反馈与评分"
+  },
+  "rateExtension": {
+    "message": "评价扩展"
+  },
+  "leaveReview": {
+    "message": "留下评论"
+  },
+  "supportProject": {
+    "message": "支持项目"
   },
   "statusConnected": {
     "message": "已连接"
@@ -555,5 +577,257 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "添加自动代理"
+  },
+  "addAutoProxyTooltip": {
+    "message": "创建基于URL的路由规则"
+  },
+  "autoProxyMode": {
+    "message": "自动代理"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1 条规则"
+  },
+  "createAutoProxy": {
+    "message": "创建自动代理"
+  },
+  "editAutoProxy": {
+    "message": "编辑自动代理"
+  },
+  "autoProxyCreated": {
+    "message": "自动代理 \"$1\" 创建成功"
+  },
+  "autoProxyUpdated": {
+    "message": "自动代理 \"$1\" 更新成功"
+  },
+  "autoProxyDeleted": {
+    "message": "自动代理 \"$1\" 删除成功"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "例如：工作路由、分流隧道"
+  },
+  "addRule": {
+    "message": "添加规则"
+  },
+  "editRule": {
+    "message": "编辑规则"
+  },
+  "deleteRule": {
+    "message": "删除规则"
+  },
+  "saveRule": {
+    "message": "保存规则"
+  },
+  "cancelRule": {
+    "message": "取消"
+  },
+  "urlPattern": {
+    "message": "URL模式"
+  },
+  "patternType": {
+    "message": "模式类型"
+  },
+  "wildcardPattern": {
+    "message": "通配符"
+  },
+  "regexPattern": {
+    "message": "正则表达式"
+  },
+  "exactMatch": {
+    "message": "精确匹配"
+  },
+  "cidrPattern": {
+    "message": "CIDR (IP范围)"
+  },
+  "selectProxy": {
+    "message": "选择代理"
+  },
+  "defineInline": {
+    "message": "内联定义"
+  },
+  "directConnection": {
+    "message": "直接连接"
+  },
+  "fallbackBehavior": {
+    "message": "回退行为"
+  },
+  "fallbackDescription": {
+    "message": "当没有规则匹配URL时应用"
+  },
+  "testPattern": {
+    "message": "测试模式"
+  },
+  "testUrl": {
+    "message": "测试URL"
+  },
+  "testUrlPlaceholder": {
+    "message": "输入URL以测试规则"
+  },
+  "patternMatches": {
+    "message": "模式匹配成功！"
+  },
+  "noPatternMatch": {
+    "message": "没有匹配的模式 - 将使用回退"
+  },
+  "ruleEnabled": {
+    "message": "规则已启用"
+  },
+  "ruleDisabled": {
+    "message": "规则已禁用"
+  },
+  "routingRules": {
+    "message": "路由规则"
+  },
+  "noRulesYet": {
+    "message": "尚未定义规则"
+  },
+  "noRulesDescription": {
+    "message": "添加规则以定义如何将URL路由到不同的代理"
+  },
+  "atLeastOneRule": {
+    "message": "至少需要一条规则"
+  },
+  "failedToSave": {
+    "message": "保存配置失败"
+  },
+  "proxyType": {
+    "message": "代理类型"
+  },
+  "noProxiesAvailable": {
+    "message": "没有可用的代理"
+  },
+  "name": {
+    "message": "名称"
+  },
+  "ruleDescription": {
+    "message": "描述（可选）"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "例如：路由所有Google流量"
+  },
+  "patternPlaceholder": {
+    "message": "例如：*.google.com"
+  },
+  "wildcardHelp": {
+    "message": "使用 * 匹配任意字符。示例：*.example.com"
+  },
+  "regexHelp": {
+    "message": "使用JavaScript正则表达式语法。示例：^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "匹配精确的主机名。示例：www.example.com"
+  },
+  "cidrHelp": {
+    "message": "使用CIDR表示法表示IP范围。示例：192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "无效的模式"
+  },
+  "patternRequired": {
+    "message": "模式为必填项"
+  },
+  "saveChanges": {
+    "message": "保存更改"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "此代理被以下自动代理配置使用："
+  },
+  "autoProxyRefSingular": {
+    "message": "1条规则"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1条规则",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "删除此代理时，这些规则将被自动移除。"
+  },
+  "orphanedProxyWarning": {
+    "message": "引用的代理已被删除。请选择其他代理。"
+  },
+  "matchedRule": {
+    "message": "匹配的规则"
+  },
+  "useFallback": {
+    "message": "使用回退"
+  },
+  "dragToReorder": {
+    "message": "拖动以重新排序规则"
+  },
+  "failedToSaveProxy": {
+    "message": "保存代理配置失败"
+  },
+  "autoProxySubtitle": {
+    "message": "基于URL的智能流量路由"
+  },
+  "close": {
+    "message": "关闭"
+  },
+  "ruleSingular": {
+    "message": "规则"
+  },
+  "rulePlural": {
+    "message": "规则"
+  },
+  "rulesConfigured": {
+    "message": "已配置 $1 条$2"
+  },
+  "ruleActiveDescription": {
+    "message": "启用配置后，此规则将生效"
+  },
+  "ruleSkippedDescription": {
+    "message": "此规则将被跳过"
+  },
+  "matchTypeWildcard": {
+    "message": "通配符"
+  },
+  "matchTypeExact": {
+    "message": "精确匹配"
+  },
+  "matchTypeRegex": {
+    "message": "正则表达式"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "代理已删除"
+  },
+  "testPatternHint": {
+    "message": "验证您的规则是否正常工作"
+  },
+  "testButton": {
+    "message": "测试"
+  },
+  "ruleLabel": {
+    "message": "规则："
+  },
+  "testPatternHelp": {
+    "message": "在上方输入URL并点击测试以查看匹配的规则"
+  },
+  "proxyModePacScript": {
+    "message": "（PAC脚本）"
+  },
+  "proxyModeSystem": {
+    "message": "（系统）"
+  },
+  "proxyModeDirect": {
+    "message": "（直连）"
+  },
+  "proxyModeAutoDetect": {
+    "message": "（自动检测）"
+  },
+  "toggleSearch": {
+    "message": "切换搜索"
+  },
+  "hideSearch": {
+    "message": "隐藏搜索"
   }
 }

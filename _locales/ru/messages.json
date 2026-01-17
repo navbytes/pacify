@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "Перетащите сюда, чтобы удалить из быстрых скриптов"
   },
-  "quickPacScripts": { "message": "Конфигурации быстрого переключения" },
-  "allProxyConfigs": { "message": "Все конфигурации прокси" },
+  "quickPacScripts": {
+    "message": "Конфигурации быстрого переключения"
+  },
+  "allProxyConfigs": {
+    "message": "Все конфигурации прокси"
+  },
   "dragScriptsHere": {
     "message": "Перетащите скрипты сюда, чтобы включить быстрое переключение. Быстрое переключение позволяет менять прокси, нажимая на значок расширения."
   },
@@ -147,6 +151,12 @@
   },
   "color": {
     "message": "Цвет"
+  },
+  "badgeLabel": {
+    "message": "Метка значка"
+  },
+  "badgeLabelHelp": {
+    "message": "Пользовательский текст для значка расширения (макс. 4 символа). Оставьте пустым для автогенерации."
   },
   "active": {
     "message": "Активный"
@@ -225,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "Запросить функцию"
+  },
+  "feedbackAndRating": {
+    "message": "Отзывы и Оценка"
+  },
+  "rateExtension": {
+    "message": "Оценить Расширение"
+  },
+  "leaveReview": {
+    "message": "Оставить Отзыв"
+  },
+  "supportProject": {
+    "message": "Поддержать Проект"
   },
   "statusConnected": {
     "message": "Подключено"
@@ -555,5 +577,257 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "Добавить авто-прокси"
+  },
+  "addAutoProxyTooltip": {
+    "message": "Создать правила маршрутизации на основе URL"
+  },
+  "autoProxyMode": {
+    "message": "Авто-прокси"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1 правил"
+  },
+  "createAutoProxy": {
+    "message": "Создать авто-прокси"
+  },
+  "editAutoProxy": {
+    "message": "Редактировать авто-прокси"
+  },
+  "autoProxyCreated": {
+    "message": "Авто-прокси \"$1\" успешно создан"
+  },
+  "autoProxyUpdated": {
+    "message": "Авто-прокси \"$1\" успешно обновлен"
+  },
+  "autoProxyDeleted": {
+    "message": "Авто-прокси \"$1\" успешно удален"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "напр., Рабочая маршрутизация, Split Tunnel"
+  },
+  "addRule": {
+    "message": "Добавить правило"
+  },
+  "editRule": {
+    "message": "Редактировать правило"
+  },
+  "deleteRule": {
+    "message": "Удалить правило"
+  },
+  "saveRule": {
+    "message": "Сохранить правило"
+  },
+  "cancelRule": {
+    "message": "Отмена"
+  },
+  "urlPattern": {
+    "message": "Шаблон URL"
+  },
+  "patternType": {
+    "message": "Тип шаблона"
+  },
+  "wildcardPattern": {
+    "message": "Подстановочный знак"
+  },
+  "regexPattern": {
+    "message": "Регулярное выражение"
+  },
+  "exactMatch": {
+    "message": "Точное совпадение"
+  },
+  "cidrPattern": {
+    "message": "CIDR (Диапазон IP)"
+  },
+  "selectProxy": {
+    "message": "Выбрать прокси"
+  },
+  "defineInline": {
+    "message": "Определить встроенно"
+  },
+  "directConnection": {
+    "message": "Прямое подключение"
+  },
+  "fallbackBehavior": {
+    "message": "Резервное поведение"
+  },
+  "fallbackDescription": {
+    "message": "Применяется, когда ни одно правило не соответствует URL"
+  },
+  "testPattern": {
+    "message": "Тестировать шаблон"
+  },
+  "testUrl": {
+    "message": "Тестовый URL"
+  },
+  "testUrlPlaceholder": {
+    "message": "Введите URL для проверки правил"
+  },
+  "patternMatches": {
+    "message": "Шаблон совпадает!"
+  },
+  "noPatternMatch": {
+    "message": "Ни один шаблон не совпадает - будет использован резервный"
+  },
+  "ruleEnabled": {
+    "message": "Правило включено"
+  },
+  "ruleDisabled": {
+    "message": "Правило отключено"
+  },
+  "routingRules": {
+    "message": "Правила маршрутизации"
+  },
+  "noRulesYet": {
+    "message": "Правила еще не определены"
+  },
+  "noRulesDescription": {
+    "message": "Добавьте правила, чтобы определить, как URL будут маршрутизироваться на разные прокси"
+  },
+  "atLeastOneRule": {
+    "message": "Требуется хотя бы одно правило"
+  },
+  "failedToSave": {
+    "message": "Не удалось сохранить конфигурацию"
+  },
+  "proxyType": {
+    "message": "Тип прокси"
+  },
+  "noProxiesAvailable": {
+    "message": "Нет доступных прокси"
+  },
+  "name": {
+    "message": "Имя"
+  },
+  "ruleDescription": {
+    "message": "Описание (необязательно)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "напр., Маршрутизировать весь трафик Google"
+  },
+  "patternPlaceholder": {
+    "message": "напр., *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "Используйте * для соответствия любым символам. Пример: *.example.com"
+  },
+  "regexHelp": {
+    "message": "Используйте синтаксис регулярных выражений JavaScript. Пример: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "Совпадение с точным именем хоста. Пример: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "Используйте нотацию CIDR для диапазонов IP. Пример: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "Недопустимый шаблон"
+  },
+  "patternRequired": {
+    "message": "Шаблон обязателен"
+  },
+  "saveChanges": {
+    "message": "Сохранить изменения"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "Этот прокси используется в следующих конфигурациях авто-прокси:"
+  },
+  "autoProxyRefSingular": {
+    "message": "1 правило"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1 правил",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "Эти правила будут автоматически удалены при удалении этого прокси."
+  },
+  "orphanedProxyWarning": {
+    "message": "Связанный прокси был удален. Пожалуйста, выберите другой прокси."
+  },
+  "matchedRule": {
+    "message": "Совпавшее правило"
+  },
+  "useFallback": {
+    "message": "Использовать резервный"
+  },
+  "dragToReorder": {
+    "message": "Перетащите для изменения порядка правил"
+  },
+  "failedToSaveProxy": {
+    "message": "Не удалось сохранить конфигурацию прокси"
+  },
+  "autoProxySubtitle": {
+    "message": "Умная маршрутизация трафика на основе URL"
+  },
+  "close": {
+    "message": "Закрыть"
+  },
+  "ruleSingular": {
+    "message": "правило"
+  },
+  "rulePlural": {
+    "message": "правила"
+  },
+  "rulesConfigured": {
+    "message": "$1 $2 настроено"
+  },
+  "ruleActiveDescription": {
+    "message": "Это правило будет активно при включенной конфигурации"
+  },
+  "ruleSkippedDescription": {
+    "message": "Это правило будет пропущено"
+  },
+  "matchTypeWildcard": {
+    "message": "Маска"
+  },
+  "matchTypeExact": {
+    "message": "Точное"
+  },
+  "matchTypeRegex": {
+    "message": "Регулярное выражение"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "Прокси удален"
+  },
+  "testPatternHint": {
+    "message": "Проверьте правильность работы ваших правил"
+  },
+  "testButton": {
+    "message": "Тест"
+  },
+  "ruleLabel": {
+    "message": "Правило:"
+  },
+  "testPatternHelp": {
+    "message": "Введите URL выше и нажмите Тест, чтобы увидеть совпадающее правило"
+  },
+  "proxyModePacScript": {
+    "message": "(PAC-скрипт)"
+  },
+  "proxyModeSystem": {
+    "message": "(Системный)"
+  },
+  "proxyModeDirect": {
+    "message": "(Прямое)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(Автоопределение)"
+  },
+  "toggleSearch": {
+    "message": "Переключить поиск"
+  },
+  "hideSearch": {
+    "message": "Скрыть поиск"
   }
 }

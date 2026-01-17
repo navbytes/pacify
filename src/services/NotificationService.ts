@@ -29,6 +29,7 @@ interface NotificationOptions {
  *
  * Respects user's notification preferences from settings.
  */
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class NotificationService {
   private static readonly DEFAULT_ICON = 'icons/icon128.png'
   private static readonly EXTENSION_NAME = 'Pacify'

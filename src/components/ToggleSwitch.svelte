@@ -10,7 +10,7 @@ interface Props {
 let { checked = $bindable(), onchange, id = '', 'aria-label': ariaLabel }: Props = $props()
 </script>
 
-<label class="relative w-12 h-7 cursor-pointer min-h-[44px] flex items-center">
+<label class="relative w-12 h-7 cursor-pointer min-h-11 flex items-center">
   <input
     {id}
     type="checkbox"

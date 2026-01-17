@@ -1,3 +1,4 @@
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class I18nService {
   static getMessage(messageName: string, substitutions?: string | string[]): string {
     return chrome.i18n.getMessage(messageName, substitutions) || messageName

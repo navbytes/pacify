@@ -18,7 +18,7 @@ const iconSizeMap: Record<'sm' | 'md' | 'lg', number> = {
   lg: 32,
 }
 
-const iconSize = $derived(iconSizeMap[size!])
+const iconSize = $derived(iconSizeMap[size])
 const badgeClasses = $derived(cn(iconBadgeVariants({ color, size }), classes))
 </script>
 

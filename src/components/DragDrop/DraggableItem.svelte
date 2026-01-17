@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Snippet } from 'svelte'
 import type { ListViewType } from '@/interfaces'
 import { dragPatterns } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
@@ -11,7 +12,7 @@ interface Props {
   dataType: ListViewType
   disabled: boolean
   dragType?: string
-  children?: () => any
+  children?: Snippet
 }
 
 let {
@@ -29,7 +30,7 @@ function handleDragStart(event: DragEvent) {
   if (disabled || !event.dataTransfer) return
 
   dragType = dataType
-  dragstart && dragstart(event)
+  dragstart?.(event)
 
   // Set the drag data
   event.dataTransfer.setData('text/plain', `${dataType}__${id}`)
@@ -78,7 +79,7 @@ function handleDragStart(event: DragEvent) {
 
 function handleDragEnd(event: DragEvent) {
   dragType = ''
-  dragend && dragend(event)
+  dragend?.(event)
 
   // Hide drag image
   const dragImage = document.getElementById('drag-image')

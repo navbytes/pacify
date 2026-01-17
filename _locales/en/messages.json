@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "Drop here to remove from quick scripts"
   },
-  "quickPacScripts": { "message": "Quick Switch Configs" },
-  "allProxyConfigs": { "message": "All Proxy Configs" },
+  "quickPacScripts": {
+    "message": "Quick Switch Configs"
+  },
+  "allProxyConfigs": {
+    "message": "All Proxy Configs"
+  },
   "dragScriptsHere": {
     "message": "Drag scripts here to enable quick switching. Quick switch allows you to switch proxy by clicking the extension icon."
   },
@@ -147,6 +151,12 @@
   },
   "color": {
     "message": "Color"
+  },
+  "badgeLabel": {
+    "message": "Badge Label"
+  },
+  "badgeLabelHelp": {
+    "message": "Custom text for extension icon (max 4 characters). Leave empty to auto-generate from name."
   },
   "active": {
     "message": "Active"
@@ -225,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "Request a Feature"
+  },
+  "feedbackAndRating": {
+    "message": "Feedback & Rating"
+  },
+  "rateExtension": {
+    "message": "Rate Extension"
+  },
+  "leaveReview": {
+    "message": "Leave a Review"
+  },
+  "supportProject": {
+    "message": "Support Project"
   },
   "statusConnected": {
     "message": "Connected"
@@ -555,5 +577,267 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "Add Auto-Proxy"
+  },
+  "addAutoProxyTooltip": {
+    "message": "Create URL-based routing rules"
+  },
+  "autoProxyMode": {
+    "message": "Auto-Proxy"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1 rules"
+  },
+  "createAutoProxy": {
+    "message": "Create Auto-Proxy"
+  },
+  "editAutoProxy": {
+    "message": "Edit Auto-Proxy"
+  },
+  "autoProxyCreated": {
+    "message": "Auto-Proxy \"$1\" created successfully"
+  },
+  "autoProxyUpdated": {
+    "message": "Auto-Proxy \"$1\" updated successfully"
+  },
+  "autoProxyDeleted": {
+    "message": "Auto-Proxy \"$1\" deleted successfully"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "e.g., Work Routing, Split Tunnel"
+  },
+  "addRule": {
+    "message": "Add Rule"
+  },
+  "editRule": {
+    "message": "Edit Rule"
+  },
+  "deleteRule": {
+    "message": "Delete Rule"
+  },
+  "saveRule": {
+    "message": "Save Rule"
+  },
+  "cancelRule": {
+    "message": "Cancel"
+  },
+  "urlPattern": {
+    "message": "URL Pattern"
+  },
+  "patternType": {
+    "message": "Pattern Type"
+  },
+  "wildcardPattern": {
+    "message": "Wildcard"
+  },
+  "regexPattern": {
+    "message": "Regex"
+  },
+  "exactMatch": {
+    "message": "Exact Match"
+  },
+  "cidrPattern": {
+    "message": "CIDR (IP Range)"
+  },
+  "selectProxy": {
+    "message": "Select Proxy"
+  },
+  "defineInline": {
+    "message": "Define Inline"
+  },
+  "directConnection": {
+    "message": "Direct Connection"
+  },
+  "fallbackBehavior": {
+    "message": "Fallback Behavior"
+  },
+  "fallbackDescription": {
+    "message": "Applied when no rules match the URL"
+  },
+  "testPattern": {
+    "message": "Test Pattern"
+  },
+  "testUrl": {
+    "message": "Test URL"
+  },
+  "testUrlPlaceholder": {
+    "message": "Enter a URL to test against rules"
+  },
+  "patternMatches": {
+    "message": "Pattern matches!"
+  },
+  "noPatternMatch": {
+    "message": "No pattern matches - fallback will be used"
+  },
+  "ruleEnabled": {
+    "message": "Rule enabled"
+  },
+  "ruleDisabled": {
+    "message": "Rule disabled"
+  },
+  "routingRules": {
+    "message": "Routing Rules"
+  },
+  "noRulesYet": {
+    "message": "No rules defined yet"
+  },
+  "noRulesDescription": {
+    "message": "Add rules to define how URLs should be routed to different proxies"
+  },
+  "atLeastOneRule": {
+    "message": "At least one rule is required"
+  },
+  "failedToSave": {
+    "message": "Failed to save configuration"
+  },
+  "proxyType": {
+    "message": "Proxy Type"
+  },
+  "noProxiesAvailable": {
+    "message": "No proxies available"
+  },
+  "name": {
+    "message": "Name"
+  },
+  "ruleDescription": {
+    "message": "Description (optional)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "e.g., Route all Google traffic"
+  },
+  "patternPlaceholder": {
+    "message": "e.g., *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "Use * to match any characters. Example: *.example.com"
+  },
+  "regexHelp": {
+    "message": "Use JavaScript regex syntax. Example: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "Match the exact hostname. Example: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "Use CIDR notation for IP ranges. Example: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "Invalid pattern"
+  },
+  "patternRequired": {
+    "message": "Pattern is required"
+  },
+  "saveChanges": {
+    "message": "Save Changes"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "This proxy is used by the following Auto-Proxy configurations:"
+  },
+  "autoProxyRefSingular": {
+    "message": "1 rule"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1 rules",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "These rules will be automatically removed when you delete this proxy."
+  },
+  "orphanedProxyWarning": {
+    "message": "The referenced proxy has been deleted. Please select a different proxy."
+  },
+  "matchedRule": {
+    "message": "Matched rule"
+  },
+  "useFallback": {
+    "message": "Use fallback"
+  },
+  "dragToReorder": {
+    "message": "Drag to reorder rules"
+  },
+  "failedToSaveProxy": {
+    "message": "Failed to save proxy configuration"
+  },
+  "autoProxySubtitle": {
+    "message": "Smart URL-based traffic routing"
+  },
+  "close": {
+    "message": "Close"
+  },
+  "ruleSingular": {
+    "message": "rule"
+  },
+  "rulePlural": {
+    "message": "rules"
+  },
+  "rulesConfigured": {
+    "message": "$1 $2 configured",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "3"
+      },
+      "2": {
+        "content": "$2",
+        "example": "rules"
+      }
+    }
+  },
+  "ruleActiveDescription": {
+    "message": "This rule will be active when the config is enabled"
+  },
+  "ruleSkippedDescription": {
+    "message": "This rule will be skipped"
+  },
+  "matchTypeWildcard": {
+    "message": "Wildcard"
+  },
+  "matchTypeExact": {
+    "message": "Exact"
+  },
+  "matchTypeRegex": {
+    "message": "Regex"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "Proxy deleted"
+  },
+  "testPatternHint": {
+    "message": "Verify your rules work correctly"
+  },
+  "testButton": {
+    "message": "Test"
+  },
+  "ruleLabel": {
+    "message": "Rule:"
+  },
+  "testPatternHelp": {
+    "message": "Enter a URL above and click Test to see which rule matches"
+  },
+  "proxyModePacScript": {
+    "message": "(PAC Script)"
+  },
+  "proxyModeSystem": {
+    "message": "(System)"
+  },
+  "proxyModeDirect": {
+    "message": "(Direct)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(Auto-detect)"
+  },
+  "toggleSearch": {
+    "message": "Toggle search"
+  },
+  "hideSearch": {
+    "message": "Hide search"
   }
 }

@@ -2,6 +2,8 @@
 import { onMount } from 'svelte'
 import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
+import { errorContainerVariants } from '@/utils/classPatterns'
+import Button from '../Button.svelte'
 import Text from '../Text.svelte'
 
 let { children } = $props()
@@ -24,18 +26,21 @@ onMount(() => {
 </script>
 
 {#if hasError && error}
-  <div class="bg-red-50 border border-red-200 rounded p-4 text-red-700">
+  <div class={errorContainerVariants({ variant: 'subtle' })}>
     <Text as="h3" weight="bold">{I18nService.getMessage('errorBoundaryTitle')}</Text>
     <Text as="p" size="sm">{error.message}</Text>
-    <button
-      class="mt-2 text-sm text-red-600 hover:text-red-800"
+    <Button
+      classes="mt-3"
+      variant="gradient"
+      gradient="red"
+      size="sm"
       onclick={() => {
         hasError = false
         error = null
       }}
     >
       {I18nService.getMessage('errorBoundaryRetry')}
-    </button>
+    </Button>
   </div>
 {:else}
   {@render children?.()}

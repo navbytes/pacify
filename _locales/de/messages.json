@@ -134,8 +134,12 @@
   "dropToRemoveQuickScripts": {
     "message": "Hier ablegen, um aus Schnellskripten zu entfernen"
   },
-  "quickPacScripts": { "message": "Quick Switch-Konfigurationen" },
-  "allProxyConfigs": { "message": "Alle Proxy-Konfigurationen" },
+  "quickPacScripts": {
+    "message": "Quick Switch-Konfigurationen"
+  },
+  "allProxyConfigs": {
+    "message": "Alle Proxy-Konfigurationen"
+  },
   "dragScriptsHere": {
     "message": "Ziehen Sie Skripte hierher, um den Schnellwechsel zu aktivieren. Mit dem Schnellwechsel können Sie den Proxy durch Klicken auf das Erweiterungssymbol wechseln."
   },
@@ -147,6 +151,12 @@
   },
   "color": {
     "message": "Farbe"
+  },
+  "badgeLabel": {
+    "message": "Badge-Label"
+  },
+  "badgeLabelHelp": {
+    "message": "Benutzerdefinierter Text für Erweiterungssymbol (max. 4 Zeichen). Leer lassen für automatische Generierung."
   },
   "active": {
     "message": "Aktiv"
@@ -225,6 +235,18 @@
   },
   "aboutFeatureRequest": {
     "message": "Feature anfordern"
+  },
+  "feedbackAndRating": {
+    "message": "Feedback & Bewertung"
+  },
+  "rateExtension": {
+    "message": "Erweiterung bewerten"
+  },
+  "leaveReview": {
+    "message": "Eine Bewertung hinterlassen"
+  },
+  "supportProject": {
+    "message": "Projekt unterstützen"
   },
   "statusConnected": {
     "message": "Verbunden"
@@ -555,5 +577,257 @@
   },
   "pacScriptFetchError": {
     "message": "Failed to fetch PAC script from URL"
+  },
+  "addAutoProxy": {
+    "message": "Auto-Proxy hinzufügen"
+  },
+  "addAutoProxyTooltip": {
+    "message": "URL-basierte Routing-Regeln erstellen"
+  },
+  "autoProxyMode": {
+    "message": "Auto-Proxy"
+  },
+  "autoProxyRulesCount": {
+    "message": "$1 Regeln"
+  },
+  "createAutoProxy": {
+    "message": "Auto-Proxy erstellen"
+  },
+  "editAutoProxy": {
+    "message": "Auto-Proxy bearbeiten"
+  },
+  "autoProxyCreated": {
+    "message": "Auto-Proxy \"$1\" erfolgreich erstellt"
+  },
+  "autoProxyUpdated": {
+    "message": "Auto-Proxy \"$1\" erfolgreich aktualisiert"
+  },
+  "autoProxyDeleted": {
+    "message": "Auto-Proxy \"$1\" erfolgreich gelöscht"
+  },
+  "autoProxyNamePlaceholder": {
+    "message": "z.B. Arbeits-Routing, Split-Tunnel"
+  },
+  "addRule": {
+    "message": "Regel hinzufügen"
+  },
+  "editRule": {
+    "message": "Regel bearbeiten"
+  },
+  "deleteRule": {
+    "message": "Regel löschen"
+  },
+  "saveRule": {
+    "message": "Regel speichern"
+  },
+  "cancelRule": {
+    "message": "Abbrechen"
+  },
+  "urlPattern": {
+    "message": "URL-Muster"
+  },
+  "patternType": {
+    "message": "Mustertyp"
+  },
+  "wildcardPattern": {
+    "message": "Platzhalter"
+  },
+  "regexPattern": {
+    "message": "Regex"
+  },
+  "exactMatch": {
+    "message": "Exakte Übereinstimmung"
+  },
+  "cidrPattern": {
+    "message": "CIDR (IP-Bereich)"
+  },
+  "selectProxy": {
+    "message": "Proxy auswählen"
+  },
+  "defineInline": {
+    "message": "Inline definieren"
+  },
+  "directConnection": {
+    "message": "Direkte Verbindung"
+  },
+  "fallbackBehavior": {
+    "message": "Fallback-Verhalten"
+  },
+  "fallbackDescription": {
+    "message": "Wird angewendet, wenn keine Regeln mit der URL übereinstimmen"
+  },
+  "testPattern": {
+    "message": "Muster testen"
+  },
+  "testUrl": {
+    "message": "Test-URL"
+  },
+  "testUrlPlaceholder": {
+    "message": "URL eingeben, um gegen Regeln zu testen"
+  },
+  "patternMatches": {
+    "message": "Muster stimmt überein!"
+  },
+  "noPatternMatch": {
+    "message": "Kein Muster stimmt überein - Fallback wird verwendet"
+  },
+  "ruleEnabled": {
+    "message": "Regel aktiviert"
+  },
+  "ruleDisabled": {
+    "message": "Regel deaktiviert"
+  },
+  "routingRules": {
+    "message": "Routing-Regeln"
+  },
+  "noRulesYet": {
+    "message": "Noch keine Regeln definiert"
+  },
+  "noRulesDescription": {
+    "message": "Regeln hinzufügen, um festzulegen, wie URLs an verschiedene Proxys geleitet werden"
+  },
+  "atLeastOneRule": {
+    "message": "Mindestens eine Regel ist erforderlich"
+  },
+  "failedToSave": {
+    "message": "Konfiguration konnte nicht gespeichert werden"
+  },
+  "proxyType": {
+    "message": "Proxy-Typ"
+  },
+  "noProxiesAvailable": {
+    "message": "Keine Proxys verfügbar"
+  },
+  "name": {
+    "message": "Name"
+  },
+  "ruleDescription": {
+    "message": "Beschreibung (optional)"
+  },
+  "ruleDescriptionPlaceholder": {
+    "message": "z.B. Alle Google-Daten weiterleiten"
+  },
+  "patternPlaceholder": {
+    "message": "z.B. *.google.com"
+  },
+  "wildcardHelp": {
+    "message": "Verwenden Sie * um beliebige Zeichen abzugleichen. Beispiel: *.example.com"
+  },
+  "regexHelp": {
+    "message": "Verwenden Sie JavaScript Regex-Syntax. Beispiel: ^https?://.*\\.example\\.com"
+  },
+  "exactHelp": {
+    "message": "Exakten Hostnamen abgleichen. Beispiel: www.example.com"
+  },
+  "cidrHelp": {
+    "message": "CIDR-Notation für IP-Bereiche verwenden. Beispiel: 192.168.1.0/24"
+  },
+  "invalidPattern": {
+    "message": "Ungültiges Muster"
+  },
+  "patternRequired": {
+    "message": "Muster ist erforderlich"
+  },
+  "saveChanges": {
+    "message": "Änderungen speichern"
+  },
+  "autoProxyReferenceWarning": {
+    "message": "Dieser Proxy wird von folgenden Auto-Proxy-Konfigurationen verwendet:"
+  },
+  "autoProxyRefSingular": {
+    "message": "1 Regel"
+  },
+  "autoProxyRefPlural": {
+    "message": "$1 Regeln",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "autoProxyDeleteConsequence": {
+    "message": "Diese Regeln werden automatisch entfernt, wenn Sie diesen Proxy löschen."
+  },
+  "orphanedProxyWarning": {
+    "message": "Der referenzierte Proxy wurde gelöscht. Bitte wählen Sie einen anderen Proxy."
+  },
+  "matchedRule": {
+    "message": "Übereinstimmende Regel"
+  },
+  "useFallback": {
+    "message": "Fallback verwenden"
+  },
+  "dragToReorder": {
+    "message": "Ziehen, um Regeln neu zu ordnen"
+  },
+  "failedToSaveProxy": {
+    "message": "Proxy-Konfiguration konnte nicht gespeichert werden"
+  },
+  "autoProxySubtitle": {
+    "message": "Intelligentes URL-basiertes Traffic-Routing"
+  },
+  "close": {
+    "message": "Schließen"
+  },
+  "ruleSingular": {
+    "message": "Regel"
+  },
+  "rulePlural": {
+    "message": "Regeln"
+  },
+  "rulesConfigured": {
+    "message": "$1 $2 konfiguriert"
+  },
+  "ruleActiveDescription": {
+    "message": "Diese Regel ist aktiv, wenn die Konfiguration aktiviert ist"
+  },
+  "ruleSkippedDescription": {
+    "message": "Diese Regel wird übersprungen"
+  },
+  "matchTypeWildcard": {
+    "message": "Platzhalter"
+  },
+  "matchTypeExact": {
+    "message": "Exakt"
+  },
+  "matchTypeRegex": {
+    "message": "Regex"
+  },
+  "matchTypeCidr": {
+    "message": "CIDR"
+  },
+  "referencedProxyDeleted": {
+    "message": "Proxy gelöscht"
+  },
+  "testPatternHint": {
+    "message": "Überprüfen Sie, ob Ihre Regeln korrekt funktionieren"
+  },
+  "testButton": {
+    "message": "Testen"
+  },
+  "ruleLabel": {
+    "message": "Regel:"
+  },
+  "testPatternHelp": {
+    "message": "Geben Sie oben eine URL ein und klicken Sie auf Testen, um zu sehen, welche Regel übereinstimmt"
+  },
+  "proxyModePacScript": {
+    "message": "(PAC-Skript)"
+  },
+  "proxyModeSystem": {
+    "message": "(System)"
+  },
+  "proxyModeDirect": {
+    "message": "(Direkt)"
+  },
+  "proxyModeAutoDetect": {
+    "message": "(Automatisch erkennen)"
+  },
+  "toggleSearch": {
+    "message": "Suche umschalten"
+  },
+  "hideSearch": {
+    "message": "Suche ausblenden"
   }
 }

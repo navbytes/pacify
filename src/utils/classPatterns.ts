@@ -1,39 +1,22 @@
 /**
  * Reusable class patterns for common UI elements
  * These patterns encapsulate frequently used class combinations
+ *
+ * Note: AutoProxy-specific variants are in ./classPatterns/autoProxy.ts
  */
 
+import { tv } from 'tailwind-variants'
 import { cn } from './cn'
 import { colors, radius, shadows, transitions } from './theme'
 
-/**
- * Card patterns
- */
-export const cardPatterns = {
-  base: cn(
-    'rounded-lg border',
-    colors.background.default,
-    colors.border.default,
-    shadows.sm,
-    transitions.normal
-  ),
+export type { VariantProps } from 'tailwind-variants'
 
-  interactive: cn(
-    'rounded-lg border cursor-pointer',
-    colors.background.default,
-    colors.border.default,
-    shadows.card,
-    transitions.normal,
-    'hover:scale-[1.02]'
-  ),
-
-  compact: cn('rounded-lg border p-2', colors.background.default, colors.border.default),
-
-  elevated: cn('rounded-lg border', colors.background.elevated, colors.border.default, shadows.lg),
-}
+// ============================================================================
+// STATIC PATTERNS (Simple string-based patterns for common utilities)
+// ============================================================================
 
 /**
- * Flex layout patterns
+ * Flex layout patterns - commonly used flex combinations
  */
 export const flexPatterns = {
   center: 'flex items-center justify-center',
@@ -49,233 +32,15 @@ export const flexPatterns = {
 }
 
 /**
- * Button patterns
- */
-export const buttonPatterns = {
-  base: cn(
-    'inline-flex items-center justify-center gap-2',
-    'px-4 py-2',
-    radius.md,
-    'font-medium text-sm',
-    transitions.colors,
-    colors.interactive.focus,
-    'disabled:opacity-50 disabled:cursor-not-allowed'
-  ),
-
-  primary: cn(
-    'inline-flex items-center justify-center gap-2',
-    'px-4 py-2',
-    radius.md,
-    'font-medium text-sm',
-    colors.primary.base,
-    colors.primary.hover,
-    colors.text.inverse,
-    transitions.colors,
-    colors.interactive.focus
-  ),
-
-  secondary: cn(
-    'inline-flex items-center justify-center gap-2',
-    'px-4 py-2',
-    radius.md,
-    'font-medium text-sm',
-    'bg-slate-200 dark:bg-slate-700',
-    'hover:bg-slate-300 dark:hover:bg-slate-600',
-    colors.text.default,
-    transitions.colors,
-    colors.interactive.focus
-  ),
-
-  ghost: cn(
-    'inline-flex items-center justify-center gap-2',
-    'px-4 py-2',
-    radius.md,
-    'font-medium text-sm',
-    'bg-transparent',
-    colors.interactive.hover,
-    colors.text.default,
-    transitions.colors,
-    colors.interactive.focus
-  ),
-
-  icon: cn(
-    'inline-flex items-center justify-center',
-    'p-2',
-    radius.md,
-    'bg-transparent',
-    colors.interactive.hover,
-    transitions.colors,
-    colors.interactive.focus
-  ),
-
-  sm: cn(
-    'inline-flex items-center justify-center gap-1.5',
-    'px-3 py-1.5',
-    radius.md,
-    'font-medium text-xs'
-  ),
-
-  lg: cn(
-    'inline-flex items-center justify-center gap-2.5',
-    'px-6 py-3',
-    radius.lg,
-    'font-medium text-base'
-  ),
-}
-
-/**
- * Input patterns
- */
-export const inputPatterns = {
-  base: cn(
-    'w-full px-3 py-2',
-    radius.md,
-    'border',
-    colors.background.default,
-    colors.border.default,
-    colors.text.default,
-    'placeholder:text-slate-400 dark:placeholder:text-slate-500',
-    transitions.colors,
-    colors.interactive.focus
-  ),
-
-  error: cn(
-    'w-full px-3 py-2',
-    radius.md,
-    'border',
-    colors.background.default,
-    colors.danger.border,
-    colors.text.default,
-    transitions.colors,
-    'focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
-  ),
-
-  sm: 'px-2 py-1.5 text-sm',
-  lg: 'px-4 py-3 text-base',
-}
-
-/**
- * Badge patterns
- */
-export const badgePatterns = {
-  base: cn('inline-flex items-center gap-1', 'px-2.5 py-0.5', radius.full, 'text-xs font-medium'),
-
-  primary: cn(
-    'inline-flex items-center gap-1',
-    'px-2.5 py-0.5',
-    radius.full,
-    'text-xs font-medium',
-    colors.primary.light,
-    colors.primary.text
-  ),
-
-  success: cn(
-    'inline-flex items-center gap-1',
-    'px-2.5 py-0.5',
-    radius.full,
-    'text-xs font-medium',
-    colors.success.light,
-    colors.success.text
-  ),
-
-  warning: cn(
-    'inline-flex items-center gap-1',
-    'px-2.5 py-0.5',
-    radius.full,
-    'text-xs font-medium',
-    colors.warning.light,
-    colors.warning.text
-  ),
-
-  danger: cn(
-    'inline-flex items-center gap-1',
-    'px-2.5 py-0.5',
-    radius.full,
-    'text-xs font-medium',
-    colors.danger.light,
-    colors.danger.text
-  ),
-
-  neutral: cn(
-    'inline-flex items-center gap-1',
-    'px-2.5 py-0.5',
-    radius.full,
-    'text-xs font-medium',
-    'bg-slate-100 dark:bg-slate-800',
-    colors.text.muted
-  ),
-}
-
-/**
- * Modal/Dialog patterns
- */
-export const modalPatterns = {
-  overlay: cn(
-    'fixed inset-0 z-50',
-    'bg-black/50 dark:bg-black/70',
-    'backdrop-blur-sm',
-    transitions.opacity
-  ),
-
-  content: cn(
-    'fixed left-1/2 top-1/2 z-50',
-    'w-full max-w-lg',
-    '-translate-x-1/2 -translate-y-1/2',
-    radius.lg,
-    colors.background.elevated,
-    colors.border.default,
-    'border',
-    shadows.xl,
-    transitions.normal
-  ),
-
-  header: cn('flex items-center justify-between', 'p-6 pb-4', 'border-b', colors.border.default),
-
-  body: 'p-6',
-
-  footer: cn('flex items-center justify-end gap-3', 'p-6 pt-4', 'border-t', colors.border.default),
-}
-
-/**
- * List patterns
- */
-export const listPatterns = {
-  container: cn('divide-y', colors.border.default),
-
-  item: cn('px-4 py-3', transitions.colors, colors.interactive.hover, 'cursor-pointer'),
-
-  itemActive: cn('px-4 py-3', colors.primary.light, colors.primary.border, 'border-l-2'),
-}
-
-/**
- * Loading/skeleton patterns
- */
-export const loadingPatterns = {
-  spinner: cn('animate-spin rounded-full border-2 border-t-transparent', colors.primary.text),
-
-  skeleton: cn('animate-pulse', 'bg-slate-200 dark:bg-slate-700', radius.md),
-
-  shimmer: cn(
-    'animate-pulse',
-    'bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700',
-    'bg-[length:200%_100%]',
-    radius.md
-  ),
-}
-
-/**
  * Drag and drop patterns
  */
 export const dragPatterns = {
   draggable: cn('cursor-grab', transitions.normal, 'active:cursor-grabbing'),
-
   dragging: cn('opacity-40', 'scale-95', 'shadow-lg'),
-
   dropZone: cn('relative border-2 border-dashed border-transparent', transitions.normal),
-
   dropZoneActive: cn(
     'border-blue-500',
-    'bg-gradient-to-br from-blue-50/50 to-blue-100/50 dark:from-blue-950/20 dark:to-blue-900/20',
+    'bg-linear-to-br from-blue-50/50 to-blue-100/50 dark:from-blue-950/20 dark:to-blue-900/20',
     'scale-[1.01]',
     'shadow-lg shadow-blue-500/20'
   ),
@@ -286,27 +51,16 @@ export const dragPatterns = {
  */
 export const emptyStatePatterns = {
   container: cn(flexPatterns.colCenter, 'px-4 py-12 text-center'),
-
   icon: cn(colors.icon.muted, 'mb-4'),
-
   title: cn('text-lg font-semibold mb-2', colors.text.default),
-
   description: cn('text-sm max-w-md mb-6', colors.text.muted),
 }
 
 /**
- * Status indicator patterns
+ * Badge patterns - kept for backward compatibility (used in ScriptItem)
  */
-export const statusPatterns = {
-  dot: cn('inline-block w-2 h-2', radius.full),
-
-  dotSuccess: cn('inline-block w-2 h-2', radius.full, 'bg-green-500'),
-
-  dotWarning: cn('inline-block w-2 h-2', radius.full, 'bg-yellow-500'),
-
-  dotDanger: cn('inline-block w-2 h-2', radius.full, 'bg-red-500'),
-
-  dotInactive: cn('inline-block w-2 h-2', radius.full, 'bg-slate-400'),
+export const badgePatterns = {
+  base: cn('inline-flex items-center gap-1', 'px-2.5 py-0.5', radius.full, 'text-xs font-medium'),
 }
 
 /**
@@ -316,13 +70,9 @@ export function withPattern(pattern: string, ...classes: string[]) {
   return cn(pattern, ...classes)
 }
 
-/**
- * Variant-based component utilities
- * Type-safe alternatives to static patterns
- */
-import { tv } from 'tailwind-variants'
-
-export type { VariantProps } from 'tailwind-variants'
+// ============================================================================
+// TV VARIANTS (Type-safe component variants using tailwind-variants)
+// ============================================================================
 
 /**
  * Button variants with type-safe props
@@ -343,9 +93,9 @@ export const buttonVariants = tv({
       minimal: '',
     },
     size: {
-      sm: `py-2 px-3 text-sm min-h-[44px] ${radius.md}`,
-      md: `py-2.5 px-4 min-h-[44px] ${radius.md}`,
-      lg: `py-3 px-6 text-lg min-h-[44px] ${radius.lg}`,
+      sm: `py-2 px-3 text-sm min-h-11 ${radius.xl}`,
+      md: `py-2.5 px-4 min-h-11 ${radius.xl}`,
+      lg: `py-3 px-6 text-lg min-h-11 ${radius.xl}`,
     },
     fullWidth: {
       true: 'w-full',
@@ -361,7 +111,7 @@ export const buttonVariants = tv({
         'bg-blue-500 text-white hover:bg-blue-600',
         'dark:bg-blue-700 dark:hover:bg-blue-800',
         'focus-visible:ring-blue-300 dark:focus-visible:ring-blue-400/50',
-        'rounded shadow hover:shadow-md'
+        'shadow hover:shadow-md'
       ),
     },
     // Minimal Primary
@@ -372,8 +122,7 @@ export const buttonVariants = tv({
         'justify-center text-blue-600 hover:text-blue-700',
         'hover:bg-blue-100 border border-transparent hover:border-blue-200',
         'dark:text-blue-400 dark:hover:text-blue-300',
-        'dark:hover:bg-blue-950/20 dark:hover:border-blue-800',
-        'rounded px-2 py-1 min-h-[44px]'
+        'dark:hover:bg-blue-950/20 dark:hover:border-blue-800'
       ),
     },
     // Solid Secondary
@@ -384,7 +133,7 @@ export const buttonVariants = tv({
         'bg-slate-200 text-black hover:bg-slate-300',
         'dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800',
         'focus-visible:ring-slate-300',
-        'rounded shadow hover:shadow-md'
+        'shadow hover:shadow-md'
       ),
     },
     // Minimal Secondary
@@ -395,8 +144,7 @@ export const buttonVariants = tv({
         'justify-center text-slate-700 hover:text-slate-900',
         'hover:bg-slate-200 border border-transparent hover:border-slate-300',
         'dark:text-slate-400 dark:hover:text-slate-300',
-        'dark:hover:bg-slate-800 dark:hover:border-slate-700',
-        'rounded px-2 py-1 min-h-[44px]'
+        'dark:hover:bg-slate-800 dark:hover:border-slate-700'
       ),
     },
     // Solid Success
@@ -407,7 +155,7 @@ export const buttonVariants = tv({
         'bg-green-500 text-white hover:bg-green-600',
         'dark:bg-green-700 dark:hover:bg-green-800',
         'focus-visible:ring-green-300',
-        'rounded shadow hover:shadow-md'
+        'shadow hover:shadow-md'
       ),
     },
     // Minimal Success
@@ -418,8 +166,7 @@ export const buttonVariants = tv({
         'justify-center text-green-600 hover:text-green-700',
         'hover:bg-green-100 border border-transparent hover:border-green-200',
         'dark:text-green-400 dark:hover:text-green-300',
-        'dark:hover:bg-green-950/20 dark:hover:border-green-800',
-        'rounded px-2 py-1 min-h-[44px]'
+        'dark:hover:bg-green-950/20 dark:hover:border-green-800'
       ),
     },
     // Solid Error
@@ -430,7 +177,7 @@ export const buttonVariants = tv({
         'bg-red-500 text-white hover:bg-red-600',
         'dark:bg-red-700 dark:hover:bg-red-800',
         'focus-visible:ring-red-300',
-        'rounded shadow hover:shadow-md'
+        'shadow hover:shadow-md'
       ),
     },
     // Minimal Error
@@ -441,8 +188,7 @@ export const buttonVariants = tv({
         'justify-center text-red-600 hover:text-red-700',
         'hover:bg-red-100 border border-transparent hover:border-red-200',
         'dark:text-red-400 dark:hover:text-red-300',
-        'dark:hover:bg-red-950/20 dark:hover:border-red-800',
-        'rounded px-2 py-1 min-h-[44px]'
+        'dark:hover:bg-red-950/20 dark:hover:border-red-800'
       ),
     },
     // Solid Info
@@ -453,7 +199,7 @@ export const buttonVariants = tv({
         'bg-indigo-500 text-white hover:bg-indigo-600',
         'dark:bg-indigo-700 dark:hover:bg-indigo-800',
         'focus-visible:ring-indigo-300',
-        'rounded shadow hover:shadow-md'
+        'shadow hover:shadow-md'
       ),
     },
     // Minimal Info
@@ -464,8 +210,7 @@ export const buttonVariants = tv({
         'justify-center text-indigo-600 hover:text-indigo-700',
         'hover:bg-indigo-100 border border-transparent hover:border-indigo-200',
         'dark:text-indigo-400 dark:hover:text-indigo-300',
-        'dark:hover:bg-indigo-950/20 dark:hover:border-indigo-800',
-        'rounded px-2 py-1 min-h-[44px]'
+        'dark:hover:bg-indigo-950/20 dark:hover:border-indigo-800'
       ),
     },
     // Ghost (transparent background)
@@ -475,8 +220,7 @@ export const buttonVariants = tv({
         'bg-transparent justify-center',
         colors.interactive.hover,
         colors.text.default,
-        'focus-visible:ring-blue-500',
-        'rounded px-2 py-1 min-h-[44px]'
+        'focus-visible:ring-blue-500'
       ),
     },
   ],
@@ -657,18 +401,17 @@ export const modalVariants = {
 
 /**
  * Tab component variants with type-safe props
- * Supports active/disabled states and different tab styles
  */
 export const tabVariants = tv({
-  base: 'group relative flex items-center gap-2.5 px-6 py-3.5 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap bg-transparent cursor-pointer rounded-t-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2',
+  base: 'group relative flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-200 whitespace-nowrap cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 min-h-[40px]',
   variants: {
     active: {
-      true: 'text-blue-600 bg-blue-50/50 border-blue-600 border-b-4 dark:text-blue-400 dark:bg-blue-950/20 dark:border-blue-400',
+      true: 'text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow-sm',
       false:
-        'text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-50 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800/50 dark:hover:border-slate-600',
+        'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50',
     },
     disabled: {
-      true: 'opacity-50 cursor-not-allowed hover:!text-slate-500 hover:!border-transparent dark:hover:!text-slate-400',
+      true: 'opacity-50 cursor-not-allowed hover:!text-slate-500 hover:!bg-transparent dark:hover:!text-slate-400',
       false: '',
     },
   },
@@ -682,7 +425,7 @@ export const tabIconVariants = tv({
   base: 'flex items-center justify-center shrink-0 transition-colors duration-200',
   variants: {
     active: {
-      true: 'text-blue-600 dark:text-blue-400',
+      true: 'text-slate-900 dark:text-white',
       false: 'text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300',
     },
   },
@@ -695,8 +438,8 @@ export const tabBadgeVariants = tv({
   base: 'ml-2 px-2 py-0.5 rounded-full text-xs font-semibold',
   variants: {
     active: {
-      true: 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300',
-      false: 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300',
+      true: 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
+      false: 'bg-slate-200 text-slate-600 dark:bg-slate-600 dark:text-slate-300',
     },
   },
   defaultVariants: {
@@ -706,7 +449,6 @@ export const tabBadgeVariants = tv({
 
 /**
  * FlexGroup variants with type-safe props
- * Flexible layout component with direction, gap, alignment, and justification
  */
 export const flexGroupVariants = tv({
   base: 'flex',
@@ -750,7 +492,6 @@ export const flexGroupVariants = tv({
 
 /**
  * Text variants with type-safe props
- * Typography component with size, weight, color, and decoration options
  */
 export const textVariants = tv({
   base: '',
@@ -805,7 +546,6 @@ export const textVariants = tv({
 
 /**
  * IconBadge variants with type-safe props
- * Circular badge component with icon, color, and size variants
  */
 export const iconBadgeVariants = tv({
   base: 'rounded-lg flex items-center justify-center',
@@ -832,7 +572,6 @@ export const iconBadgeVariants = tv({
 
 /**
  * LinkCard variants with type-safe props
- * Provides hover color variants for IconBadge in LinkCard component
  */
 export const linkCardIconBadgeVariants = tv({
   base: 'transition-all duration-200 group-hover:scale-110',
@@ -848,6 +587,7 @@ export const linkCardIconBadgeVariants = tv({
         'group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30 group-hover:text-purple-600 dark:group-hover:text-purple-400',
       orange:
         'group-hover:bg-orange-100 dark:group-hover:bg-orange-900/30 group-hover:text-orange-600 dark:group-hover:text-orange-400',
+      pink: 'group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 group-hover:text-pink-600 dark:group-hover:text-pink-400',
     },
   },
   defaultVariants: {
@@ -859,7 +599,7 @@ export const linkCardIconBadgeVariants = tv({
  * LinkCard external link icon variants
  */
 export const linkCardExternalIconVariants = tv({
-  base: 'flex-shrink-0 text-slate-400 dark:text-slate-500 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
+  base: 'shrink-0 text-slate-400 dark:text-slate-500 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
   variants: {
     color: {
       blue: 'group-hover:text-blue-600 dark:group-hover:text-blue-400',
@@ -868,6 +608,7 @@ export const linkCardExternalIconVariants = tv({
       green: 'group-hover:text-green-600 dark:group-hover:text-green-400',
       purple: 'group-hover:text-purple-600 dark:group-hover:text-purple-400',
       orange: 'group-hover:text-orange-600 dark:group-hover:text-orange-400',
+      pink: 'group-hover:text-pink-600 dark:group-hover:text-pink-400',
     },
   },
   defaultVariants: {
@@ -877,15 +618,15 @@ export const linkCardExternalIconVariants = tv({
 
 /**
  * SectionHeader variants with type-safe props
- * Icon container with gradient background
  */
 export const sectionHeaderIconVariants = tv({
-  base: 'flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center shadow-md',
+  base: 'shrink-0 w-8 h-8 rounded-lg flex items-center justify-center shadow-md',
   variants: {
     iconColor: {
       purple:
-        'bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700',
-      slate: 'bg-gradient-to-br from-slate-600 to-slate-700 dark:from-slate-500 dark:to-slate-600',
+        'bg-linear-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700',
+      slate: 'bg-linear-to-br from-slate-600 to-slate-700 dark:from-slate-500 dark:to-slate-600',
+      pink: 'bg-linear-to-br from-pink-500 to-pink-600 dark:from-pink-600 dark:to-pink-700',
     },
   },
   defaultVariants: {
@@ -893,15 +634,13 @@ export const sectionHeaderIconVariants = tv({
   },
 })
 
-/**
- * SectionHeader border variants
- */
 export const sectionHeaderBorderVariants = tv({
   base: '',
   variants: {
     iconColor: {
       purple: 'border-purple-200 dark:border-purple-800',
       slate: 'border-slate-200 dark:border-slate-700',
+      pink: 'border-pink-200 dark:border-pink-800',
     },
   },
   defaultVariants: {
@@ -909,9 +648,6 @@ export const sectionHeaderBorderVariants = tv({
   },
 })
 
-/**
- * SectionHeader badge variants
- */
 export const sectionHeaderBadgeVariants = tv({
   base: 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold border',
   variants: {
@@ -920,6 +656,7 @@ export const sectionHeaderBadgeVariants = tv({
         'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800',
       slate:
         'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600',
+      pink: 'bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-800',
     },
   },
   defaultVariants: {
@@ -928,28 +665,22 @@ export const sectionHeaderBadgeVariants = tv({
 })
 
 /**
- * ToggleSwitch track classes with organized peer states
- * Combined classes for toggle switch with automatic checked state handling via peer selector
+ * ToggleSwitch track classes
  */
 export const toggleSwitchTrackClasses = cn(
   'block w-12 h-7 rounded-full transition-all duration-200 ease-in-out relative',
-  // Unchecked state colors
   'bg-slate-400 dark:bg-slate-600',
   'hover:bg-slate-500 dark:hover:bg-slate-500',
-  // Checked state colors (via peer selector)
   'peer-checked:bg-green-500 dark:peer-checked:bg-green-600',
   'peer-checked:hover:bg-green-600 dark:peer-checked:hover:bg-green-500',
-  // Toggle circle (using before pseudo-element)
   'before:absolute before:content-[""] before:h-5 before:w-5 before:left-[4px] before:top-[4px]',
   'before:bg-white before:rounded-full before:transition-transform before:duration-200 before:ease-in-out before:shadow-md',
   'peer-checked:before:translate-x-5',
-  // Focus states
   'peer-focus:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-green-500/50 dark:peer-focus-visible:ring-green-400/50 peer-focus-visible:ring-offset-2'
 )
 
 /**
  * Tooltip variants with type-safe props
- * Tooltip positioning and arrow direction
  */
 export const tooltipVariants = tv({
   base: 'absolute z-50 px-3 py-2 text-sm font-medium text-white bg-slate-800 dark:bg-slate-700 rounded-lg shadow-lg whitespace-nowrap animate-fade-in',
@@ -966,9 +697,6 @@ export const tooltipVariants = tv({
   },
 })
 
-/**
- * Tooltip arrow variants
- */
 export const tooltipArrowVariants = tv({
   base: 'absolute w-0 h-0 border-4 border-transparent',
   variants: {
@@ -986,7 +714,6 @@ export const tooltipArrowVariants = tv({
 
 /**
  * ProgressBar variants with type-safe props
- * Progress bar with size and color variants
  */
 export const progressBarVariants = tv({
   base: 'w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden',
@@ -1002,9 +729,6 @@ export const progressBarVariants = tv({
   },
 })
 
-/**
- * ProgressBar fill variants with dynamic color based on percentage
- */
 export const progressBarFillVariants = tv({
   base: 'h-full rounded-full transition-all duration-500 ease-out',
   variants: {
@@ -1021,7 +745,6 @@ export const progressBarFillVariants = tv({
 
 /**
  * LabelButton variants with type-safe props
- * Label-styled button with color and minimal/base variants
  */
 export const labelButtonVariants = tv({
   base: 'inline-flex items-center',
@@ -1039,66 +762,56 @@ export const labelButtonVariants = tv({
     },
   },
   compoundVariants: [
-    // Base Primary
     {
       intent: 'primary',
       variant: 'base',
       class:
         'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800',
     },
-    // Minimal Primary
     {
       intent: 'primary',
       variant: 'minimal',
       class: 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500',
     },
-    // Base Secondary
     {
       intent: 'secondary',
       variant: 'base',
       class:
         'bg-slate-200 text-black hover:bg-slate-300 focus:ring-slate-300 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-800',
     },
-    // Minimal Secondary
     {
       intent: 'secondary',
       variant: 'minimal',
       class: 'text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-500',
     },
-    // Base Success
     {
       intent: 'success',
       variant: 'base',
       class:
         'bg-green-500 text-white hover:bg-green-600 focus:ring-green-300 dark:bg-green-700 dark:hover:bg-green-800',
     },
-    // Minimal Success
     {
       intent: 'success',
       variant: 'minimal',
       class: 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-500',
     },
-    // Base Error
     {
       intent: 'error',
       variant: 'base',
       class:
         'bg-red-500 text-white hover:bg-red-600 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800',
     },
-    // Minimal Error
     {
       intent: 'error',
       variant: 'minimal',
       class: 'text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500',
     },
-    // Base Info
     {
       intent: 'info',
       variant: 'base',
       class:
         'bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-300 dark:bg-indigo-700 dark:hover:bg-indigo-800',
     },
-    // Minimal Info
     {
       intent: 'info',
       variant: 'minimal',
@@ -1114,7 +827,6 @@ export const labelButtonVariants = tv({
 
 /**
  * LoadingSpinner variants with type-safe props
- * Animated spinner with size variants
  */
 export const loadingSpinnerVariants = tv({
   base: `animate-spin rounded-full border-2 border-t-transparent ${colors.primary.text}`,
@@ -1127,5 +839,161 @@ export const loadingSpinnerVariants = tv({
   },
   defaultVariants: {
     size: 'md',
+  },
+})
+
+/**
+ * Form label variants for consistent label styling
+ */
+export const formLabelVariants = tv({
+  base: 'block font-medium text-slate-700 dark:text-slate-300',
+  variants: {
+    size: {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-base',
+    },
+    spacing: {
+      none: '',
+      sm: 'mb-1',
+      md: 'mb-2',
+    },
+  },
+  defaultVariants: {
+    size: 'sm',
+    spacing: 'sm',
+  },
+})
+
+/**
+ * Error container variants for error messages and error boundaries
+ */
+export const errorContainerVariants = tv({
+  base: 'rounded border p-4',
+  variants: {
+    variant: {
+      subtle:
+        'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800 text-red-700 dark:text-red-300',
+      solid: 'bg-red-500 text-white border-red-600',
+      outline: 'bg-transparent border-red-300 dark:border-red-700 text-red-600 dark:text-red-400',
+    },
+    size: {
+      sm: 'p-2 text-sm',
+      md: 'p-4',
+      lg: 'p-6',
+    },
+  },
+  defaultVariants: {
+    variant: 'subtle',
+    size: 'md',
+  },
+})
+
+/**
+ * Keyboard shortcut card variants
+ */
+export const keyboardShortcutCardVariants = tv({
+  slots: {
+    wrapper:
+      'group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border',
+    background: 'absolute inset-0 bg-linear-to-br',
+    decorativeBlur: 'absolute -top-10 -right-10 w-24 h-24 rounded-full blur-2xl',
+    accentBar: 'absolute top-0 left-0 right-0 h-1 bg-linear-to-r',
+    content: 'relative p-4 flex flex-col items-center text-center gap-3',
+    kbd: 'px-3 py-1.5 text-sm font-mono font-semibold rounded-lg shadow-sm',
+  },
+  variants: {
+    color: {
+      slate: {
+        wrapper: 'border-slate-200/50 dark:border-slate-700/30',
+        background:
+          'from-slate-50 via-slate-100 to-slate-50 dark:from-slate-800/50 dark:via-slate-800/30 dark:to-slate-800/50',
+        decorativeBlur: 'bg-linear-to-br from-slate-400/10 to-slate-500/10',
+        accentBar: 'from-slate-400 via-slate-500 to-slate-400',
+        kbd: 'bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200',
+      },
+      indigo: {
+        wrapper: 'border-indigo-200/50 dark:border-indigo-800/30',
+        background:
+          'from-indigo-50 via-violet-50 to-purple-50 dark:from-indigo-950/30 dark:via-violet-950/30 dark:to-purple-950/30',
+        decorativeBlur: 'bg-linear-to-br from-indigo-400/20 to-violet-400/20',
+        accentBar: 'from-indigo-500 via-violet-500 to-purple-500',
+        kbd: 'bg-white dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300',
+      },
+    },
+  },
+  defaultVariants: {
+    color: 'slate',
+  },
+})
+
+/**
+ * Search input container variants
+ */
+export const searchInputVariants = tv({
+  slots: {
+    wrapper: 'relative',
+    iconWrapper: 'absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none',
+    icon: 'text-slate-400 dark:text-slate-500',
+    clearButton:
+      'absolute inset-y-0 right-0 pr-2 flex items-center justify-center w-10 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-r-lg',
+  },
+})
+
+/**
+ * Checkbox with label variants
+ */
+export const checkboxLabelVariants = tv({
+  slots: {
+    wrapper: 'flex items-center gap-2',
+    checkbox:
+      'rounded border-slate-300 dark:border-slate-600 text-blue-600 focus:ring-blue-500 focus:ring-offset-0',
+    label: 'text-sm text-slate-700 dark:text-slate-300',
+  },
+})
+
+/**
+ * Modal footer action bar variants
+ */
+export const modalFooterVariants = tv({
+  base: 'p-4 border-t flex justify-end gap-3 sticky bottom-0',
+  variants: {
+    variant: {
+      default: 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800',
+      transparent:
+        'border-slate-200/50 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
+
+/**
+ * Section title variants for page headers
+ */
+export const sectionTitleVariants = tv({
+  slots: {
+    wrapper: '',
+    header: 'flex items-center gap-2 mb-2',
+    title: 'text-xl font-semibold text-slate-900 dark:text-slate-100',
+    description: 'mt-1 ml-8',
+  },
+})
+
+/**
+ * Link card label text variants
+ */
+export const linkCardLabelVariants = tv({
+  base: 'text-sm font-medium transition-colors',
+  variants: {
+    active: {
+      true: 'text-blue-600 dark:text-blue-400',
+      false:
+        'text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400',
+    },
+  },
+  defaultVariants: {
+    active: false,
   },
 })

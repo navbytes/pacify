@@ -15,7 +15,7 @@ interface Props {
   title: string
   description?: string
   count?: number
-  iconColor: 'purple' | 'slate'
+  iconColor: 'purple' | 'slate' | 'pink'
   hideBorder?: boolean
   rightContent?: Snippet
 }
@@ -57,8 +57,6 @@ let {
   </div>
 
   {#if rightContent}
-    <div class={cn(flexPatterns.centerVertical, 'gap-2 flex-shrink-0')}>
-      {@render rightContent()}
-    </div>
+    <div class={cn(flexPatterns.centerVertical, 'gap-2 shrink-0')}>{@render rightContent()}</div>
   {/if}
 </div>

@@ -57,7 +57,7 @@ export const colors = {
     elevated: 'bg-white dark:bg-slate-900',
     muted: 'bg-slate-50 dark:bg-slate-900/50',
     hover: 'hover:bg-slate-50 dark:hover:bg-slate-700/50',
-    active: 'bg-gradient-to-br from-blue-50 to-white dark:from-blue-950/20 dark:to-slate-800',
+    active: 'bg-linear-to-br from-blue-50 to-white dark:from-blue-950/20 dark:to-slate-800',
     inactive: 'bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50',
   },
 

@@ -14,6 +14,7 @@ import { SettingsReader, SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
 import { logger } from '@/services/LoggerService'
+import { PACScriptGenerator } from '@/services/PACScriptGenerator'
 
 /**
  * Flag to track if the background worker is fully initialized
@@ -349,7 +350,7 @@ async function initializeProxySettings(): Promise<void> {
   if (proxyConfig.value.mode !== 'direct') {
     // If proxy is active but badge might not be set, update it from the active script
     if (activeScript) {
-      await updateBadge(activeScript.name, activeScript.color)
+      await updateBadge(activeScript.badgeLabel || activeScript.name, activeScript.color)
     }
   } else {
     // If no proxy is active, ensure the badge shows the default state
@@ -363,9 +364,22 @@ async function setProxySettings(proxy: ProxyConfig): Promise<void> {
     const settings = await safeGetSettings()
     const autoReload = settings?.autoReloadOnProxySwitch ?? true
 
-    await ChromeService.setProxy(proxy, autoReload)
-    const { name, color } = proxy
-    await updateBadge(name, color)
+    // Check if this is an Auto-Proxy config and generate PAC script if needed
+    let proxyToApply = proxy
+    if (proxy.autoProxy && settings) {
+      const generatedPAC = PACScriptGenerator.generate(proxy.autoProxy, settings.proxyConfigs)
+      // Create a copy with the generated PAC script
+      proxyToApply = {
+        ...proxy,
+        pacScript: { data: generatedPAC },
+        mode: 'pac_script',
+      }
+      logger.info('Generated PAC script for Auto-Proxy config:', proxy.name)
+    }
+
+    await ChromeService.setProxy(proxyToApply, autoReload)
+    const { name, color, badgeLabel } = proxy
+    await updateBadge(badgeLabel || name, color)
   } catch (error) {
     logger.error('Error setting proxy:', error)
   }
@@ -388,7 +402,7 @@ async function updateBadge(text = 'N/A', color = DEFAULT_BADGE_COLOR): Promise<v
   try {
     await browserService.action.setBadgeBackgroundColor({ color })
     await browserService.action.setBadgeText({
-      text: text.slice(0, 3).toUpperCase(),
+      text: text.slice(0, 4).toUpperCase(),
     })
   } catch (error) {
     logger.error('Error updating badge:', error)

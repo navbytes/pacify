@@ -16,10 +16,12 @@ import { withErrorHandling } from '@/utils/errorHandling'
 // Detect if we're in a browser context (runtime check for testability)
 const isBrowserContext = (): boolean => typeof window !== 'undefined'
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class CodeMirror {
   private static hasInitialized = false
   private static themeChangeListeners = new Set<(theme: 'light' | 'dark') => void>()
   private static themeCompartments = new WeakMap<EditorView, Compartment>()
+  private static readonly themeCleanupFunctions = new WeakMap<EditorView, () => void>()
 
   /**
    * Initializes CodeMirror with system theme detection
@@ -113,7 +115,7 @@ export class CodeMirror {
 
       // Set up theme change listener for this editor
       const themeChangeListener = (newTheme: 'light' | 'dark') => {
-        if (view && view.dom && view.dom.isConnected) {
+        if (view?.dom?.isConnected) {
           const compartment = this.themeCompartments.get(view)
           if (compartment) {
             const currentTheme = newTheme === 'dark' ? darkTheme : lightTheme
@@ -128,11 +130,11 @@ export class CodeMirror {
 
       this.themeChangeListeners.add(themeChangeListener)
 
-      // Store the cleanup function on the view for later use
-      ;(view as any).__themeCleanup = () => {
+      // Store the cleanup function in WeakMap for later use
+      this.themeCleanupFunctions.set(view, () => {
         this.themeChangeListeners.delete(themeChangeListener)
         this.themeCompartments.delete(view)
-      }
+      })
 
       return view as ICodeMirrorEditor
     },
@@ -146,8 +148,10 @@ export class CodeMirror {
     if (!isBrowserContext() || !editor) return
 
     // Clean up theme listener
-    if ((editor as any).__themeCleanup) {
-      ;(editor as any).__themeCleanup()
+    const cleanup = this.themeCleanupFunctions.get(editor as EditorView)
+    if (cleanup) {
+      cleanup()
+      this.themeCleanupFunctions.delete(editor as EditorView)
     }
 
     editor.destroy()

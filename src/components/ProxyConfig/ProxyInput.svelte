@@ -1,6 +1,6 @@
 <script lang="ts">
 import { I18nService } from '@/services/i18n/i18nService'
-import { inputVariants } from '@/utils/classPatterns'
+import { formLabelVariants, inputVariants } from '@/utils/classPatterns'
 import Text from '../Text.svelte'
 
 interface Props {
@@ -78,10 +78,7 @@ function handlePortInput() {
 <div class="space-y-4">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <div>
-      <label
-        for="{testIdPrefix}-scheme"
-        class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1"
-      >
+      <label for="{testIdPrefix}-scheme" class={formLabelVariants({ size: 'xs' })}>
         {I18nService.getMessage('scheme') || 'Scheme'}
       </label>
       <select
@@ -98,10 +95,7 @@ function handlePortInput() {
     </div>
 
     <div>
-      <label
-        for="{testIdPrefix}-host"
-        class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1"
-      >
+      <label for="{testIdPrefix}-host" class={formLabelVariants({ size: 'xs' })}>
         {I18nService.getMessage('host') || 'Host'}
         <span class="text-red-500">*</span>
       </label>
@@ -130,10 +124,7 @@ function handlePortInput() {
     </div>
 
     <div>
-      <label
-        for="{testIdPrefix}-port"
-        class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1"
-      >
+      <label for="{testIdPrefix}-port" class={formLabelVariants({ size: 'xs' })}>
         {I18nService.getMessage('port') || 'Port'}
         <span class="text-red-500">*</span>
       </label>

@@ -8,6 +8,7 @@ import { badgePatterns, flexPatterns } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { GripVertical, Pencil, ShieldCheck, Trash } from '@/utils/icons'
 import {
+  findAutoProxyReferences,
   getProxyDescription,
   getProxyModeColor,
   getProxyModeIcon,
@@ -27,11 +28,43 @@ interface Props {
 
 let { proxy, pageType = 'POPUP', onScriptEdit, dragType = $bindable() }: Props = $props()
 
-let modeColors = $derived(getProxyModeColor(proxy.mode))
-let ModeIcon = $derived(getProxyModeIcon(proxy.mode))
-let modeLabel = $derived(getProxyModeLabel(proxy.mode))
+let settings = $derived($settingsStore)
+let modeColors = $derived(getProxyModeColor(proxy.mode, proxy))
+let ModeIcon = $derived(getProxyModeIcon(proxy.mode, proxy))
+let modeLabel = $derived(getProxyModeLabel(proxy.mode, proxy))
 let proxyDesc = $derived(getProxyDescription(proxy.mode, proxy))
 let showDeleteDialog = $state(false)
+let autoProxyRefs = $derived(
+  proxy.id ? findAutoProxyReferences(proxy.id, settings.proxyConfigs) : []
+)
+
+// Generate delete confirmation message with Auto-Proxy warning if applicable
+let deleteMessage = $derived(() => {
+  const baseMessage = I18nService.getMessage('deleteProxyMessage', proxy.name)
+  if (autoProxyRefs.length === 0) {
+    return baseMessage
+  }
+
+  // Build a clearer warning message
+  const warningIntro =
+    I18nService.getMessage('autoProxyReferenceWarning') ||
+    'This proxy is used by the following Auto-Proxy configurations:'
+  const refList = autoProxyRefs
+    .map((r) => {
+      const refText =
+        r.ruleCount === 1
+          ? I18nService.getMessage('autoProxyRefSingular') || '1 rule'
+          : I18nService.getMessage('autoProxyRefPlural', String(r.ruleCount)) ||
+            `${r.ruleCount} rules`
+      return `  • ${r.configName} (${refText})`
+    })
+    .join('\n')
+  const consequence =
+    I18nService.getMessage('autoProxyDeleteConsequence') ||
+    'These rules will be automatically removed when you delete this proxy.'
+
+  return `${baseMessage}\n\n${warningIntro}\n${refList}\n\n${consequence}`
+})
 
 async function handleSetProxy(isActive: boolean, scriptId?: string) {
   if (!scriptId) return
@@ -121,14 +154,14 @@ async function handleScriptDelete() {
 
         <!-- Color indicator badge (for colorblind accessibility) -->
         <div
-          class="w-3 h-3 rounded-full flex-shrink-0 ring-2 ring-white dark:ring-slate-800"
+          class="w-3 h-3 rounded-full shrink-0 ring-2 ring-white dark:ring-slate-800"
           style="background-color: {proxy.color}"
           aria-label="Proxy color: {proxy.color}"
         ></div>
 
         <!-- Mode icon inline (POPUP only) -->
         {#if pageType === 'POPUP'}
-          <ModeIcon size={14} class={cn('flex-shrink-0', modeColors.text)} />
+          <ModeIcon size={14} class={cn('shrink-0', modeColors.text)} />
         {/if}
 
         <h3 class={cn('text-base font-semibold truncate', colors.text.default)}>{proxy.name}</h3>
@@ -237,7 +270,7 @@ async function handleScriptDelete() {
 <ConfirmDialog
   bind:open={showDeleteDialog}
   title={I18nService.getMessage('deleteProxyTitle')}
-  message={I18nService.getMessage('deleteProxyMessage', proxy.name)}
+  message={deleteMessage()}
   confirmLabel={I18nService.getMessage('delete')}
   cancelLabel={I18nService.getMessage('cancel')}
   variant="danger"
