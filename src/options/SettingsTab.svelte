@@ -282,7 +282,7 @@ async function handleNotificationsToggle(checked: boolean) {
     <SectionHeader
       icon={Database}
       title={I18nService.getMessage('settingsDataManagement')}
-      iconColor="slate"
+      iconColor="purple"
     />
     <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
   </div>
@@ -327,7 +327,7 @@ async function handleNotificationsToggle(checked: boolean) {
     <SectionHeader
       icon={HelpCircle}
       title={I18nService.getMessage('aboutHelpResources')}
-      iconColor="slate"
+      iconColor="purple"
     />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <LinkCard

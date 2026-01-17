@@ -5,7 +5,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { keyboardShortcutCardVariants } from '@/utils/classPatterns'
 import { Keyboard } from '@/utils/icons'
 
-const styles = keyboardShortcutCardVariants({ color: 'slate' })
+const styles = keyboardShortcutCardVariants({ color: 'indigo' })
 
 const shortcuts = $derived([
   {
@@ -31,7 +31,7 @@ const shortcuts = $derived([
   <SectionHeader
     icon={Keyboard}
     title={I18nService.getMessage('keyboardShortcuts')}
-    iconColor="slate"
+    iconColor="purple"
   />
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

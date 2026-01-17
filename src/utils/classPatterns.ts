@@ -587,6 +587,7 @@ export const linkCardIconBadgeVariants = tv({
         'group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30 group-hover:text-purple-600 dark:group-hover:text-purple-400',
       orange:
         'group-hover:bg-orange-100 dark:group-hover:bg-orange-900/30 group-hover:text-orange-600 dark:group-hover:text-orange-400',
+      pink: 'group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 group-hover:text-pink-600 dark:group-hover:text-pink-400',
     },
   },
   defaultVariants: {
@@ -607,6 +608,7 @@ export const linkCardExternalIconVariants = tv({
       green: 'group-hover:text-green-600 dark:group-hover:text-green-400',
       purple: 'group-hover:text-purple-600 dark:group-hover:text-purple-400',
       orange: 'group-hover:text-orange-600 dark:group-hover:text-orange-400',
+      pink: 'group-hover:text-pink-600 dark:group-hover:text-pink-400',
     },
   },
   defaultVariants: {
@@ -638,6 +640,7 @@ export const sectionHeaderBorderVariants = tv({
     iconColor: {
       purple: 'border-purple-200 dark:border-purple-800',
       slate: 'border-slate-200 dark:border-slate-700',
+      pink: 'border-pink-200 dark:border-pink-800',
     },
   },
   defaultVariants: {
@@ -653,6 +656,7 @@ export const sectionHeaderBadgeVariants = tv({
         'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800',
       slate:
         'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-600',
+      pink: 'bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-800',
     },
   },
   defaultVariants: {
@@ -907,6 +911,14 @@ export const keyboardShortcutCardVariants = tv({
         decorativeBlur: 'bg-linear-to-br from-slate-400/10 to-slate-500/10',
         accentBar: 'from-slate-400 via-slate-500 to-slate-400',
         kbd: 'bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200',
+      },
+      indigo: {
+        wrapper: 'border-indigo-200/50 dark:border-indigo-800/30',
+        background:
+          'from-indigo-50 via-violet-50 to-purple-50 dark:from-indigo-950/30 dark:via-violet-950/30 dark:to-purple-950/30',
+        decorativeBlur: 'bg-linear-to-br from-indigo-400/20 to-violet-400/20',
+        accentBar: 'from-indigo-500 via-violet-500 to-purple-500',
+        kbd: 'bg-white dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300',
       },
     },
   },

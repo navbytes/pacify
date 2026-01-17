@@ -223,7 +223,7 @@ function handleSearch(query: string) {
           text={I18nService.getMessage('addAutoProxyTooltip') || 'Create URL-based routing rules'}
           position="bottom"
         >
-          <Button color="secondary" onclick={onOpenAutoProxyEditor}>
+          <Button variant="gradient" gradient="orange" onclick={onOpenAutoProxyEditor}>
             {#snippet icon()}
               <GitBranch size={16} />
             {/snippet}

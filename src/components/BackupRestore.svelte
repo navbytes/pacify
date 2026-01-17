@@ -8,7 +8,6 @@ import { Download, Upload } from '@/utils/icons'
 import Button from './Button.svelte'
 import Card from './Card.svelte'
 import FlexGroup from './FlexGroup.svelte'
-import LabelButton from './LabelButton.svelte'
 import Text from './Text.svelte'
 
 interface Props {
@@ -16,6 +15,8 @@ interface Props {
 }
 
 let { onRestore }: Props = $props()
+
+let fileInputElement: HTMLInputElement | undefined = $state()
 
 // Handle the backup action
 async function handleBackup() {
@@ -27,6 +28,11 @@ async function handleBackup() {
     toastStore.show(I18nService.getMessage('backupFailed'), 'error')
     NotifyService.error(ERROR_TYPES.BACKUP, error)
   }
+}
+
+// Trigger the hidden file input
+function triggerFileInput() {
+  fileInputElement?.click()
 }
 
 // Handle the restore action
@@ -60,10 +66,27 @@ async function handleRestore(event: Event) {
 }
 </script>
 
-<div class="space-y-4">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <!-- Backup Settings -->
-    <Card variant="elevated" padding="lg">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <!-- Backup Settings -->
+  <div
+    class="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-emerald-200/50 dark:border-emerald-800/30"
+  >
+    <!-- Background gradient -->
+    <div
+      class="absolute inset-0 bg-linear-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30"
+    ></div>
+
+    <!-- Decorative elements -->
+    <div
+      class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-2xl"
+    ></div>
+
+    <!-- Top accent -->
+    <div
+      class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500"
+    ></div>
+
+    <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
         <Button
           color="secondary"
@@ -79,26 +102,52 @@ async function handleRestore(event: Event) {
           {I18nService.getMessage('backupDescription')}
         </Text>
       </FlexGroup>
-    </Card>
+    </div>
+  </div>
 
-    <!-- Restore Settings -->
-    <Card variant="elevated" padding="lg">
+  <!-- Restore Settings -->
+  <div
+    class="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-amber-200/50 dark:border-amber-800/30"
+  >
+    <!-- Background gradient -->
+    <div
+      class="absolute inset-0 bg-linear-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30"
+    ></div>
+
+    <!-- Decorative elements -->
+    <div
+      class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-amber-400/20 to-orange-400/20 rounded-full blur-2xl"
+    ></div>
+
+    <!-- Top accent -->
+    <div
+      class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-amber-500 via-orange-500 to-yellow-500"
+    ></div>
+
+    <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
-        <LabelButton color="secondary" icon={Upload}>
-          {I18nService.getMessage('restoreSettings')}
-          {#snippet input()}
-            <input
-              type="file"
-              accept=".json"
-              onchange={handleRestore}
-              aria-label="Upload backup file to restore configurations"
-            >
+        <Button
+          color="secondary"
+          onclick={triggerFileInput}
+          aria-label="Upload backup file to restore configurations"
+        >
+          {#snippet icon()}
+            <Upload size={18} />
           {/snippet}
-        </LabelButton>
+          {I18nService.getMessage('restoreSettings')}
+        </Button>
+        <input
+          bind:this={fileInputElement}
+          type="file"
+          accept=".json"
+          onchange={handleRestore}
+          class="hidden"
+          aria-label="Upload backup file to restore configurations"
+        >
         <Text as="p" size="xs" color="muted" classes="px-1">
           {I18nService.getMessage('restoreDescription')}
         </Text>
       </FlexGroup>
-    </Card>
+    </div>
   </div>
 </div>

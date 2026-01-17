@@ -15,7 +15,7 @@ interface Props {
   title: string
   description?: string
   count?: number
-  iconColor: 'purple' | 'slate'
+  iconColor: 'purple' | 'slate' | 'pink'
   hideBorder?: boolean
   rightContent?: Snippet
 }
