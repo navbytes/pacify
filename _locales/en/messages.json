@@ -854,5 +854,20 @@
   },
   "hideSearch": {
     "message": "Hide search"
+  },
+  "viewMode": {
+    "message": "View Mode"
+  },
+  "viewModeGrid": {
+    "message": "Grid View"
+  },
+  "viewModeList": {
+    "message": "List View"
+  },
+  "viewModeGridDescription": {
+    "message": "Display proxies in a card grid layout"
+  },
+  "viewModeListDescription": {
+    "message": "Display proxies in a horizontal list"
   }
 }

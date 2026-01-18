@@ -40,7 +40,7 @@ const gradientMap = {
 
 <a {href} {target} {rel} class="group block">
   <div
-    class="relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
+    class="relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
   >
     <!-- Subtle gradient overlay on hover -->
     <div

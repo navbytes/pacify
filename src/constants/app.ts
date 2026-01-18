@@ -3,6 +3,7 @@ import type { AppSettings } from '@/interfaces'
 export const DEFAULT_SETTINGS: AppSettings = {
   quickSwitchEnabled: false,
   showQuickSettings: true,
+  viewMode: 'grid',
   activeScriptId: null,
   proxyConfigs: [],
   disableProxyOnStartup: false,

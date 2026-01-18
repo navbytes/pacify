@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "অনুসন্ধান লুকান"
+  },
+  "viewMode": {
+    "message": "দেখার মোড"
+  },
+  "viewModeGrid": {
+    "message": "গ্রিড ভিউ"
+  },
+  "viewModeList": {
+    "message": "তালিকা ভিউ"
+  },
+  "viewModeGridDescription": {
+    "message": "কার্ড গ্রিড লেআউটে প্রক্সি প্রদর্শন করুন"
+  },
+  "viewModeListDescription": {
+    "message": "অনুভূমিক তালিকায় প্রক্সি প্রদর্শন করুন"
   }
 }

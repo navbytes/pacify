@@ -59,6 +59,7 @@ describe('SettingsWriter', () => {
       const settings: AppSettings = {
         quickSwitchEnabled: true,
         showQuickSettings: true,
+        viewMode: 'grid',
         activeScriptId: 'test-id',
         proxyConfigs: [
           { id: 'test-id', name: 'Test', color: '#000', isActive: true, mode: 'direct' },
@@ -381,6 +382,7 @@ describe('SettingsWriter', () => {
       const validSettings: AppSettings = {
         quickSwitchEnabled: true,
         showQuickSettings: true,
+        viewMode: 'grid',
         activeScriptId: null,
         proxyConfigs: [],
         disableProxyOnStartup: false,

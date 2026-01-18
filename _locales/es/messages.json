@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "Ocultar búsqueda"
+  },
+  "viewMode": {
+    "message": "Modo de vista"
+  },
+  "viewModeGrid": {
+    "message": "Vista de cuadrícula"
+  },
+  "viewModeList": {
+    "message": "Vista de lista"
+  },
+  "viewModeGridDescription": {
+    "message": "Mostrar proxies en diseño de cuadrícula"
+  },
+  "viewModeListDescription": {
+    "message": "Mostrar proxies en lista horizontal"
   }
 }

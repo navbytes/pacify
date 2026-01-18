@@ -140,7 +140,6 @@ function handleCancelDelete() {
   <div class="flex items-center justify-between">
     <div class="flex items-center gap-3">
       <div class={purpleIconBadge.wrapper()}>
-        <div class={purpleIconBadge.glow()}></div>
         <div class={purpleIconBadge.badge()}>
           <Route size={18} class="text-white" />
         </div>

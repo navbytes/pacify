@@ -141,7 +141,6 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
                 <!-- Success icon -->
                 <div class="shrink-0">
                   <div class={greenIconBadge.wrapper()}>
-                    <div class="{greenIconBadge.glow()} animate-pulse"></div>
                     <div class="{greenIconBadge.badge()} rounded-full">
                       <CheckCircle size={20} class="text-white" />
                     </div>

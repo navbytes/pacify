@@ -71,26 +71,26 @@ const gradientConfigs: Record<
   { bg: string; hover: string; shadow: string; ring: string }
 > = {
   blue: {
-    bg: 'from-blue-600 via-purple-600 to-pink-600',
-    hover: 'from-blue-500 via-purple-500 to-pink-500',
+    bg: 'from-blue-600 to-pink-600',
+    hover: 'from-blue-500 to-pink-500',
     shadow: 'shadow-blue-500/25 hover:shadow-blue-500/30',
     ring: 'focus-visible:ring-blue-500/50',
   },
   purple: {
-    bg: 'from-violet-600 via-purple-600 to-fuchsia-600',
-    hover: 'from-violet-500 via-purple-500 to-fuchsia-500',
+    bg: 'from-violet-600 to-fuchsia-600',
+    hover: 'from-violet-500 to-fuchsia-500',
     shadow: 'shadow-purple-500/25 hover:shadow-purple-500/30',
     ring: 'focus-visible:ring-purple-500/50',
   },
   orange: {
-    bg: 'from-orange-500 via-amber-500 to-orange-500',
-    hover: 'from-orange-400 via-amber-400 to-orange-400',
+    bg: 'from-orange-500 to-amber-500',
+    hover: 'from-orange-400 to-amber-400',
     shadow: 'shadow-orange-500/25 hover:shadow-orange-500/30',
     ring: 'focus-visible:ring-orange-500/50',
   },
   green: {
-    bg: 'from-green-500 via-emerald-500 to-teal-500',
-    hover: 'from-green-400 via-emerald-400 to-teal-400',
+    bg: 'from-green-500 to-emerald-500',
+    hover: 'from-green-400 to-emerald-400',
     shadow: 'shadow-green-500/25 hover:shadow-green-500/30',
     ring: 'focus-visible:ring-green-500/50',
   },
@@ -101,8 +101,8 @@ const gradientConfigs: Record<
     ring: 'focus-visible:ring-red-500/50',
   },
   cyan: {
-    bg: 'from-cyan-500 via-blue-500 to-indigo-500',
-    hover: 'from-cyan-400 via-blue-400 to-indigo-400',
+    bg: 'from-cyan-500 to-blue-500',
+    hover: 'from-cyan-400 to-blue-400',
     shadow: 'shadow-cyan-500/25 hover:shadow-cyan-500/30',
     ring: 'focus-visible:ring-cyan-500/50',
   },
@@ -122,7 +122,7 @@ const buttonClasses = $derived(
         size === 'sm' && 'py-2 px-3 text-sm min-h-11',
         size === 'md' && 'py-2.5 px-5 min-h-11',
         size === 'lg' && 'py-3 px-6 text-lg min-h-11',
-        'shadow-lg hover:shadow-xl hover:scale-105 active:scale-95',
+        'shadow-md hover:shadow-lg hover:scale-105 active:scale-95',
         currentGradient.shadow,
         currentGradient.ring,
         fullWidth && 'w-full'

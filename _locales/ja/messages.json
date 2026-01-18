@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "検索を非表示"
+  },
+  "viewMode": {
+    "message": "表示モード"
+  },
+  "viewModeGrid": {
+    "message": "グリッド表示"
+  },
+  "viewModeList": {
+    "message": "リスト表示"
+  },
+  "viewModeGridDescription": {
+    "message": "プロキシをカードグリッドレイアウトで表示"
+  },
+  "viewModeListDescription": {
+    "message": "プロキシを横並びリストで表示"
   }
 }

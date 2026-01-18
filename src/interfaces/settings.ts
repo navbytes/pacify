@@ -1,6 +1,9 @@
+export type ViewMode = 'grid' | 'list'
+
 export interface AppSettings {
   quickSwitchEnabled: boolean
   showQuickSettings: boolean
+  viewMode: ViewMode
   activeScriptId: string | null
   proxyConfigs: ProxyConfig[]
   disableProxyOnStartup: boolean

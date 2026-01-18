@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "Ascunde căutarea"
+  },
+  "viewMode": {
+    "message": "Mod de vizualizare"
+  },
+  "viewModeGrid": {
+    "message": "Vizualizare grilă"
+  },
+  "viewModeList": {
+    "message": "Vizualizare listă"
+  },
+  "viewModeGridDescription": {
+    "message": "Afișează proxy-urile într-o grilă de carduri"
+  },
+  "viewModeListDescription": {
+    "message": "Afișează proxy-urile într-o listă orizontală"
   }
 }

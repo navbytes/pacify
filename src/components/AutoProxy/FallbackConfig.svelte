@@ -66,7 +66,6 @@ function handleChange(proxyType: AutoProxyRouteType, proxyId?: string, inlinePro
     <!-- Header -->
     <div class="flex items-center gap-3 mb-4">
       <div class={orangeIconBadge.wrapper()}>
-        <div class={orangeIconBadge.glow()}></div>
         <div class={orangeIconBadge.badge()}>
           <Shield size={18} class="text-white" />
         </div>

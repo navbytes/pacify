@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "Ocultar pesquisa"
+  },
+  "viewMode": {
+    "message": "Modo de visualização"
+  },
+  "viewModeGrid": {
+    "message": "Visualização em grade"
+  },
+  "viewModeList": {
+    "message": "Visualização em lista"
+  },
+  "viewModeGridDescription": {
+    "message": "Exibir proxies em layout de grade de cartões"
+  },
+  "viewModeListDescription": {
+    "message": "Exibir proxies em lista horizontal"
   }
 }

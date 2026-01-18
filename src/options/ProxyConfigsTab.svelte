@@ -9,7 +9,8 @@ import ScriptList from '@/components/ScriptList.svelte'
 import Text from '@/components/Text.svelte'
 import ToggleSwitch from '@/components/ToggleSwitch.svelte'
 import Tooltip from '@/components/Tooltip.svelte'
-import type { DropItem } from '@/interfaces'
+import ViewModeSwitcher from '@/components/ViewModeSwitcher.svelte'
+import type { DropItem, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
@@ -123,6 +124,10 @@ async function handleDrop(item: DropItem, pageType: 'QUICK_SWITCH' | 'OPTIONS') 
 function handleSearch(query: string) {
   searchQuery = query
 }
+
+async function handleViewModeChange(mode: ViewMode) {
+  await settingsStore.updateSettings({ viewMode: mode })
+}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -205,6 +210,9 @@ function handleSearch(query: string) {
       iconColor="slate"
     >
       {#snippet rightContent()}
+        <!-- View Mode Switcher -->
+        <ViewModeSwitcher viewMode={settings.viewMode} onViewModeChange={handleViewModeChange} />
+
         <!-- Search Toggle Button -->
         <Tooltip text={showSearch ? 'Hide search' : 'Show search (Ctrl+K)'} position="bottom">
           <button
@@ -269,6 +277,7 @@ function handleSearch(query: string) {
             proxies={regularProxies}
             onScriptEdit={(scriptId) => onOpenEditor(scriptId)}
             disableDrag={!settings.showQuickSettings}
+            viewMode={settings.viewMode}
             bind:dragType
             title=""
           />

@@ -171,6 +171,7 @@ describe('SettingsReader', () => {
       mockSettings = {
         quickSwitchEnabled: true,
         showQuickSettings: true,
+        viewMode: 'grid',
         activeScriptId: 'test-id',
         proxyConfigs: [
           { id: 'test-id', name: 'Test', color: '#000', isActive: true, mode: 'direct' },

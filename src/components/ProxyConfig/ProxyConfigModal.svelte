@@ -323,7 +323,7 @@ function handleKeydown(event: KeyboardEvent) {
     >
       <!-- Top gradient accent -->
       <div
-        class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500"
+        class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 to-purple-500"
       ></div>
 
       <!-- Decorative blur elements -->
@@ -345,7 +345,7 @@ function handleKeydown(event: KeyboardEvent) {
                   class="absolute inset-0 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-40 animate-pulse"
                 ></div>
                 <div
-                  class="relative p-3 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 shadow-lg shadow-blue-500/25"
+                  class="relative p-3 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 shadow-md shadow-blue-500/20"
                 >
                   <Settings size={24} class="text-white" strokeWidth={2.5} />
                 </div>
@@ -385,10 +385,10 @@ function handleKeydown(event: KeyboardEvent) {
           <!-- Basic Settings Section -->
           <div class="relative overflow-hidden rounded-xl">
             <div
-              class="absolute inset-0 bg-linear-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-800/50 dark:via-gray-800/50 dark:to-zinc-800/50"
+              class="absolute inset-0 bg-linear-to-br from-slate-50 to-gray-50 dark:from-slate-800/50 dark:via-gray-800/50 dark:to-zinc-800/50"
             ></div>
             <div
-              class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 via-gray-500 to-zinc-400"
+              class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-gray-500"
             ></div>
 
             <div
@@ -397,10 +397,7 @@ function handleKeydown(event: KeyboardEvent) {
               <div class="flex items-center gap-2 mb-4">
                 <div class="relative">
                   <div
-                    class="absolute inset-0 bg-linear-to-br from-slate-400 to-gray-500 rounded-lg blur-md opacity-30"
-                  ></div>
-                  <div
-                    class="relative p-1.5 rounded-lg bg-linear-to-br from-slate-500 to-gray-600 shadow-lg"
+                    class="relative p-1.5 rounded-lg bg-linear-to-br from-slate-500 to-gray-600 shadow-sm"
                   >
                     <Settings size={14} class="text-white" />
                   </div>

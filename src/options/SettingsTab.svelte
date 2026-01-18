@@ -97,17 +97,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-blue-50 via-indigo-50 to-violet-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30 rounded-2xl overflow-hidden"
+          class="absolute inset-0 bg-linear-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30 rounded-2xl overflow-hidden"
         ></div>
 
         <!-- Decorative elements -->
-        <div
-          class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-2xl"
-        ></div>
+        <div></div>
 
         <!-- Top accent -->
         <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 via-indigo-500 to-violet-500"
+          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 to-indigo-500"
         ></div>
 
         <div class="relative p-5">
@@ -119,9 +117,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
           >
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
-                <div
-                  class="absolute inset-0 bg-linear-to-br from-blue-400 to-indigo-500 rounded-xl blur-md opacity-40"
-                ></div>
+                <div></div>
                 <div
                   class="relative w-12 h-12 bg-linear-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300"
                 >
@@ -161,17 +157,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 rounded-2xl overflow-hidden"
+          class="absolute inset-0 bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 rounded-2xl overflow-hidden"
         ></div>
 
         <!-- Decorative elements -->
-        <div
-          class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-green-400/20 to-emerald-400/20 rounded-full blur-2xl"
-        ></div>
+        <div></div>
 
         <!-- Top accent -->
         <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-green-500 via-emerald-500 to-teal-500"
+          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-green-500 to-emerald-500"
         ></div>
 
         <div class="relative p-5">
@@ -183,9 +177,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
           >
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
-                <div
-                  class="absolute inset-0 bg-linear-to-br from-green-400 to-emerald-500 rounded-xl blur-md opacity-40"
-                ></div>
+                <div></div>
                 <div
                   class="relative w-12 h-12 bg-linear-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:scale-110 transition-transform duration-300"
                 >
@@ -225,17 +217,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-purple-50 via-violet-50 to-fuchsia-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30 rounded-2xl overflow-hidden"
+          class="absolute inset-0 bg-linear-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30 rounded-2xl overflow-hidden"
         ></div>
 
         <!-- Decorative elements -->
-        <div
-          class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-purple-400/20 to-violet-400/20 rounded-full blur-2xl"
-        ></div>
+        <div></div>
 
         <!-- Top accent -->
         <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-purple-500 via-violet-500 to-fuchsia-500"
+          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-purple-500 to-violet-500"
         ></div>
 
         <div class="relative p-5">
@@ -247,9 +237,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
           >
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
-                <div
-                  class="absolute inset-0 bg-linear-to-br from-purple-400 to-violet-500 rounded-xl blur-md opacity-40"
-                ></div>
+                <div></div>
                 <div
                   class="relative w-12 h-12 bg-linear-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:scale-110 transition-transform duration-300"
                 >
@@ -292,17 +280,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       >
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30 rounded-2xl overflow-hidden"
+          class="absolute inset-0 bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30 rounded-2xl overflow-hidden"
         ></div>
 
         <!-- Decorative elements -->
-        <div
-          class="absolute -top-10 -right-10 w-24 h-24 bg-linear-to-br from-amber-400/20 to-orange-400/20 rounded-full blur-2xl"
-        ></div>
+        <div></div>
 
         <!-- Top accent -->
         <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-amber-500 via-orange-500 to-yellow-500"
+          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-amber-500 to-orange-500"
         ></div>
 
         <div class="relative p-5">
@@ -314,9 +300,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
           >
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
-                <div
-                  class="absolute inset-0 bg-linear-to-br from-amber-400 to-orange-500 rounded-xl blur-md opacity-40"
-                ></div>
+                <div></div>
                 <div
                   class="relative w-12 h-12 bg-linear-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/25 group-hover:scale-110 transition-transform duration-300"
                 >

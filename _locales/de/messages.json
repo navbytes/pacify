@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "Suche ausblenden"
+  },
+  "viewMode": {
+    "message": "Ansichtsmodus"
+  },
+  "viewModeGrid": {
+    "message": "Rasteransicht"
+  },
+  "viewModeList": {
+    "message": "Listenansicht"
+  },
+  "viewModeGridDescription": {
+    "message": "Proxys in einem Kartengitter anzeigen"
+  },
+  "viewModeListDescription": {
+    "message": "Proxys in einer horizontalen Liste anzeigen"
   }
 }

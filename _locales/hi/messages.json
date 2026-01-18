@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "खोज छुपाएं"
+  },
+  "viewMode": {
+    "message": "देखने का तरीका"
+  },
+  "viewModeGrid": {
+    "message": "ग्रिड दृश्य"
+  },
+  "viewModeList": {
+    "message": "सूची दृश्य"
+  },
+  "viewModeGridDescription": {
+    "message": "कार्ड ग्रिड लेआउट में प्रॉक्सी प्रदर्शित करें"
+  },
+  "viewModeListDescription": {
+    "message": "क्षैतिज सूची में प्रॉक्सी प्रदर्शित करें"
   }
 }

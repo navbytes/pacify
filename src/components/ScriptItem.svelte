@@ -1,6 +1,6 @@
 <script lang="ts">
 import ToggleSwitch from '@/components/ToggleSwitch.svelte'
-import type { ListViewType, ProxyConfig } from '@/interfaces'
+import type { ListViewType, ProxyConfig, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
@@ -25,6 +25,7 @@ interface Props {
   dragType?: string
   onScriptEdit: (scriptId: string) => void
   disableDrag?: boolean
+  viewMode?: ViewMode
 }
 
 let {
@@ -33,6 +34,7 @@ let {
   onScriptEdit,
   dragType = $bindable(),
   disableDrag = false,
+  viewMode = 'grid',
 }: Props = $props()
 
 let settings = $derived($settingsStore)
@@ -108,22 +110,27 @@ async function handleScriptDelete() {
 >
   <div
     class={cn(
-      'group relative rounded-xl border-l-4 border-y border-r overflow-hidden',
+      'group relative border-l-4 border-y border-r overflow-hidden',
       transitions.normal,
-      pageType === 'POPUP' ? 'p-2' : 'p-5',
+      pageType === 'POPUP'
+        ? 'p-2 rounded-xl'
+        : viewMode === 'list'
+          ? 'p-4 rounded-lg'
+          : 'p-5 rounded-xl',
       pageType === 'QUICK_SWITCH' && 'border-dashed',
       proxy.isActive
         ? [
             colors.background.active,
             'border-y-blue-200 border-r-blue-200 dark:border-y-blue-800 dark:border-r-blue-800',
-            'shadow-lg shadow-blue-500/10 hover:shadow-xl hover:shadow-blue-500/20',
+            'shadow-md shadow-blue-500/10 hover:shadow-md hover:shadow-blue-500/15',
             'ring-1 ring-blue-200/50 dark:ring-blue-800/30',
             'hover:-translate-y-0.5',
           ]
         : [
             colors.background.default,
             'border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700',
-            'hover:shadow-lg hover:-translate-y-1',
+            'hover:shadow-md',
+            'hover:-translate-y-1',
             'hover:border-y-slate-300 hover:border-r-slate-300 dark:hover:border-y-slate-600 dark:hover:border-r-slate-600',
           ]
     )}
@@ -144,17 +151,19 @@ async function handleScriptDelete() {
       class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
       style={`background: linear-gradient(135deg, ${proxy.color}08 0%, transparent 60%)`}
     ></div>
-
-    <!-- Active state glow -->
-    {#if proxy.isActive && pageType !== 'POPUP'}
-      <div
-        class="absolute -inset-[1px] rounded-xl opacity-20 blur-sm pointer-events-none"
-        style={`background: linear-gradient(135deg, ${proxy.color} 0%, transparent 60%)`}
-      ></div>
-    {/if}
     <!-- Card Header -->
-    <div class={cn(flexPatterns.between, 'gap-2.5 min-w-0 flex-1')}>
-      <div class={cn(flexPatterns.centerVertical, 'gap-2.5 min-w-0 flex-1')}>
+    <div
+      class={cn(
+        flexPatterns.between,
+        'gap-2.5 min-w-0 flex-1'
+      )}
+    >
+      <div
+        class={cn(
+          flexPatterns.centerVertical,
+          'gap-2.5 min-w-0 flex-1'
+        )}
+      >
         {#if pageType !== 'POPUP' && !disableDrag}
           <!-- Drag handle (only for OPTIONS and QUICK_SWITCH when drag is enabled) -->
           <div
@@ -175,17 +184,17 @@ async function handleScriptDelete() {
 
         <!-- Color indicator badge (for colorblind accessibility) -->
         <div class="relative shrink-0">
-          <!-- Outer glow ring -->
-          {#if proxy.isActive}
-            <div
-              class="absolute inset-0 w-4 h-4 rounded-full blur-sm animate-pulse"
-              style="background-color: {proxy.color}"
-            ></div>
-          {/if}
           <!-- Main color dot -->
           <div
-            class="relative w-4 h-4 rounded-full ring-2 ring-white dark:ring-slate-800 shadow-sm group-hover:scale-110 transition-transform duration-200"
-            style="background: linear-gradient(135deg, {proxy.color} 0%, {proxy.color}dd 100%)"
+            class={cn(
+              'rounded-full shadow-sm transition-transform duration-200 w-4 h-4',
+              proxy.isActive
+                ? 'ring-2 ring-offset-1 group-hover:scale-110'
+                : 'ring-1 ring-slate-200 dark:ring-slate-700 group-hover:scale-105'
+            )}
+            style={proxy.isActive
+              ? `background-color: ${proxy.color}; ring-color: ${proxy.color}40`
+              : `background-color: ${proxy.color}`}
             aria-label="Proxy color: {proxy.color}"
           ></div>
         </div>
@@ -195,7 +204,14 @@ async function handleScriptDelete() {
           <ModeIcon size={14} class={cn('shrink-0', modeColors.text)} />
         {/if}
 
-        <h3 class={cn('text-base font-semibold truncate', colors.text.default)}>{proxy.name}</h3>
+        <h3
+          class={cn(
+            'font-semibold truncate text-base',
+            colors.text.default
+          )}
+        >
+          {proxy.name}
+        </h3>
 
         {#if proxy.isActive}
           <span
@@ -257,7 +273,13 @@ async function handleScriptDelete() {
 
     <!-- Card Footer (OPTIONS only) -->
     {#if pageType === 'OPTIONS'}
-      <div class={cn(flexPatterns.between, 'pt-3 border-t relative z-10', colors.border.default)}>
+      <div
+        class={cn(
+          flexPatterns.between,
+          'relative z-10 pt-3 border-t',
+          colors.border.default
+        )}
+      >
         <ToggleSwitch
           checked={proxy.isActive}
           onchange={(checked) => handleSetProxy(checked, proxy.id)}

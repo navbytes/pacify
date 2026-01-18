@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "Masquer la recherche"
+  },
+  "viewMode": {
+    "message": "Mode d'affichage"
+  },
+  "viewModeGrid": {
+    "message": "Vue grille"
+  },
+  "viewModeList": {
+    "message": "Vue liste"
+  },
+  "viewModeGridDescription": {
+    "message": "Afficher les proxies dans une grille de cartes"
+  },
+  "viewModeListDescription": {
+    "message": "Afficher les proxies dans une liste horizontale"
   }
 }

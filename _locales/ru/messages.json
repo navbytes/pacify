@@ -829,5 +829,20 @@
   },
   "hideSearch": {
     "message": "Скрыть поиск"
+  },
+  "viewMode": {
+    "message": "Режим просмотра"
+  },
+  "viewModeGrid": {
+    "message": "Сеточный вид"
+  },
+  "viewModeList": {
+    "message": "Список"
+  },
+  "viewModeGridDescription": {
+    "message": "Отображать прокси в виде сетки карточек"
+  },
+  "viewModeListDescription": {
+    "message": "Отображать прокси в горизонтальном списке"
   }
 }

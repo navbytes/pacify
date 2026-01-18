@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ListViewType, ProxyConfig } from '@/interfaces'
+import type { ListViewType, ProxyConfig, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
 import { flexPatterns } from '@/utils/classPatterns'
@@ -20,6 +20,7 @@ interface Props {
   dragType?: string
   proxies?: ProxyConfig[] // Optional filtered proxies list
   disableDrag?: boolean // Disable drag-and-drop functionality
+  viewMode?: ViewMode // Layout view mode
 }
 
 let {
@@ -29,6 +30,7 @@ let {
   dragType = $bindable(),
   proxies,
   disableDrag = false,
+  viewMode = 'grid',
 }: Props = $props()
 
 // Use provided proxies or fall back to store
@@ -63,7 +65,13 @@ let displayProxyConfigs = $derived<ProxyConfig[]>(
     <div
       class={cn(
         'gap-4',
-        pageType === 'POPUP' ? flexPatterns.col : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+        pageType === 'POPUP'
+          ? flexPatterns.col
+          : viewMode === 'grid'
+            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+            : viewMode === 'list'
+              ? 'flex flex-col'
+              : 'flex flex-col gap-2'
       )}
     >
       {#each displayProxyConfigs as proxy (proxy.id)}
@@ -71,6 +79,7 @@ let displayProxyConfigs = $derived<ProxyConfig[]>(
           {proxy}
           {pageType}
           {disableDrag}
+          {viewMode}
           bind:dragType
           onScriptEdit={() => openEditor(proxy.id)}
         />
