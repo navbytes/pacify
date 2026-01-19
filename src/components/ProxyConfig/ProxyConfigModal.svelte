@@ -8,11 +8,17 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
 import { NotifyService } from '@/services/NotifyService'
 import { SettingsWriter } from '@/services/SettingsWriter'
-import { flexPatterns } from '@/utils/classPatterns'
+import {
+  flexPatterns,
+  modalBackdropVariants,
+  modalGlassmorphismVariants,
+} from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { getRandomProxyColor } from '@/utils/colors'
 import { Globe, Radar, Settings, Sparkles, X, Zap } from '@/utils/icons'
+import AnimatedIconBadge from '../AnimatedIconBadge.svelte'
 import Button from '../Button.svelte'
+import ModalDecorations from '../ModalDecorations.svelte'
 import Text from '../Text.svelte'
 import BasicSettings from './BasicSettings.svelte'
 import ManualProxyConfiguration from './ManualProxyConfiguration.svelte'
@@ -300,9 +306,7 @@ function handleKeydown(event: KeyboardEvent) {
     tabindex="-1"
     aria-label="Close modal"
   >
-    <div
-      class="absolute inset-0 bg-linear-to-br from-slate-900/80 via-blue-900/40 to-slate-900/80 backdrop-blur-md"
-    ></div>
+    <div class={modalBackdropVariants()}></div>
   </div>
 
   <!-- Modal Content -->
@@ -318,21 +322,9 @@ function handleKeydown(event: KeyboardEvent) {
     aria-modal="true"
   >
     <!-- Glassmorphism container -->
-    <div
-      class="relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-slate-700/50 overflow-hidden"
-    >
-      <!-- Top gradient accent -->
-      <div
-        class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 to-purple-500"
-      ></div>
-
-      <!-- Decorative blur elements -->
-      <div
-        class="absolute -top-20 -right-20 w-40 h-40 bg-linear-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
-      ></div>
-      <div
-        class="absolute -bottom-20 -left-20 w-40 h-40 bg-linear-to-br from-pink-400/20 to-orange-400/20 rounded-full blur-3xl"
-      ></div>
+    <div class={modalGlassmorphismVariants()}>
+      <!-- Modal decorations -->
+      <ModalDecorations />
 
       <form class={cn(flexPatterns.col, 'flex-1 relative')} onsubmit={handleSubmit}>
         <!-- Header -->
@@ -340,16 +332,7 @@ function handleKeydown(event: KeyboardEvent) {
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
               <!-- Animated icon -->
-              <div class="relative">
-                <div
-                  class="absolute inset-0 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-40 animate-pulse"
-                ></div>
-                <div
-                  class="relative p-3 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 shadow-md shadow-blue-500/20"
-                >
-                  <Settings size={24} class="text-white" strokeWidth={2.5} />
-                </div>
-              </div>
+              <AnimatedIconBadge icon={Settings} />
               <div>
                 <h2
                   id="editor-title"

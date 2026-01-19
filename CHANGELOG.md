@@ -9,13 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Automatic mode**
-  - introduce automatic mode to create
+- **View Mode Functionality**
+  - Introduced new `ViewMode` type to manage layout preferences (grid/list)
+  - Added `ViewModeSwitcher` component for toggling between grid and list views
+  - Updated proxy configuration display to support both grid and list layouts
+  - Added view mode persistence in settings
+  - Localized view mode labels and descriptions in 12 languages
 
-- **Custom label for proxies**
-  - custom label
-
-- **New layout option foe proxy list**
+- **Settings Enhancements**
+  - Added "Show Quick Settings" toggle to control Quick Switch section visibility
+  - Improved settings UI organization and layout
 
 ## [1.25.0] - 2026-01-09
 

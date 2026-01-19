@@ -477,7 +477,7 @@
     "message": "Clear search"
   },
   "keyboardShortcutToggleProxy": {
-    "message": "Toggle proxy 1-9"
+    "message": "Toggle Quick Switch proxy (1-9)"
   },
   "searchProxiesPlaceholder": {
     "message": "Search proxies... (Ctrl+K)"
@@ -493,6 +493,12 @@
   },
   "keyboardShortcutNumbers": {
     "message": "1-9"
+  },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
   },
   "updateInterval": {
     "message": "Auto-update interval"

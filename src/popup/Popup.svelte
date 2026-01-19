@@ -67,7 +67,7 @@ async function disableAllProxies() {
   <!-- Main Content -->
   <main class="overflow-y-auto flex-1 px-5 pt-4 pb-4">
     {#if hasProxies}
-      <ScriptList pageType="POPUP" title="" />
+      <ScriptList pageType="POPUP" title="" viewMode="list" />
     {:else}
       <EmptyState
         title={I18nService.getMessage('noProxiesYet') || 'No proxy configurations yet'}

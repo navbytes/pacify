@@ -494,6 +494,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "Automatisches Aktualisierungsintervall"
   },

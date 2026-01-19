@@ -2,7 +2,7 @@
 import type { ListViewType, ProxyConfig, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
-import { flexPatterns } from '@/utils/classPatterns'
+import { viewModeContainerVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Globe, Zap } from '@/utils/icons'
 import { colors } from '@/utils/theme'
@@ -62,18 +62,7 @@ let displayProxyConfigs = $derived<ProxyConfig[]>(
   {/if}
 
   {#if displayProxyConfigs.length > 0}
-    <div
-      class={cn(
-        'gap-4',
-        pageType === 'POPUP'
-          ? flexPatterns.col
-          : viewMode === 'grid'
-            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-            : viewMode === 'list'
-              ? 'flex flex-col'
-              : 'flex flex-col gap-2'
-      )}
-    >
+    <div class={viewModeContainerVariants({ viewMode, pageType })}>
       {#each displayProxyConfigs as proxy (proxy.id)}
         <ScriptItem
           {proxy}

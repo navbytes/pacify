@@ -158,6 +158,15 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         '@': resolve(__dirname, 'src'),
       },
+      // Force deduplication of CodeMirror packages to prevent multiple instances
+      dedupe: [
+        '@codemirror/state',
+        '@codemirror/view',
+        '@codemirror/language',
+        '@codemirror/commands',
+        '@codemirror/autocomplete',
+        'codemirror',
+      ],
     },
     define: {
       __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '1.27.0'),
