@@ -497,6 +497,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "自動更新間隔"
   },
@@ -829,5 +835,20 @@
   },
   "hideSearch": {
     "message": "検索を非表示"
+  },
+  "viewMode": {
+    "message": "表示モード"
+  },
+  "viewModeGrid": {
+    "message": "グリッド表示"
+  },
+  "viewModeList": {
+    "message": "リスト表示"
+  },
+  "viewModeGridDescription": {
+    "message": "プロキシをカードグリッドレイアウトで表示"
+  },
+  "viewModeListDescription": {
+    "message": "プロキシを横並びリストで表示"
   }
 }

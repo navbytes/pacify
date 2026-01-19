@@ -494,6 +494,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "স্বয়ংক্রিয়-আপডেট ব্যবধান"
   },
@@ -829,5 +835,20 @@
   },
   "hideSearch": {
     "message": "অনুসন্ধান লুকান"
+  },
+  "viewMode": {
+    "message": "দেখার মোড"
+  },
+  "viewModeGrid": {
+    "message": "গ্রিড ভিউ"
+  },
+  "viewModeList": {
+    "message": "তালিকা ভিউ"
+  },
+  "viewModeGridDescription": {
+    "message": "কার্ড গ্রিড লেআউটে প্রক্সি প্রদর্শন করুন"
+  },
+  "viewModeListDescription": {
+    "message": "অনুভূমিক তালিকায় প্রক্সি প্রদর্শন করুন"
   }
 }

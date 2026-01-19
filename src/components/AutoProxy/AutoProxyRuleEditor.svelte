@@ -186,7 +186,6 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
     <div class={purpleSection.content()}>
       <div class="flex items-center gap-2 mb-3">
         <div class={purpleIconBadge.wrapper()}>
-          <div class={purpleIconBadge.glow()}></div>
           <div class={purpleIconBadge.badge()}>
             <Globe size={14} class="text-white" />
           </div>
@@ -233,7 +232,6 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
     <div class={slateSection.content()}>
       <div class="flex items-center gap-2 mb-3">
         <div class={slateIconBadge.wrapper()}>
-          <div class={slateIconBadge.glow()}></div>
           <div class={slateIconBadge.badge()}>
             <Regex size={14} class="text-white" />
           </div>
@@ -298,7 +296,6 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
     <div class={blueSection.content()}>
       <div class="flex items-center gap-2 mb-3">
         <div class={blueIconBadge.wrapper()}>
-          <div class={blueIconBadge.glow()}></div>
           <div class={blueIconBadge.badge()}>
             <Route size={14} class="text-white" />
           </div>
@@ -328,7 +325,6 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
     <div class={tealSection.content()}>
       <div class="flex items-center gap-2 mb-3">
         <div class={tealIconBadge.wrapper()}>
-          <div class={tealIconBadge.glow()}></div>
           <div class={tealIconBadge.badge()}>
             <FileText size={14} class="text-white" />
           </div>
@@ -359,7 +355,6 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
     <div class={amberSection.content()}>
       <label for="enabled" class="flex items-center gap-3 cursor-pointer group">
         <div class={amberIconBadge.wrapper()}>
-          <div class={amberIconBadge.glow()}></div>
           <div class={amberIconBadge.badge()}>
             <ToggleRight size={14} class="text-white" />
           </div>
@@ -379,7 +374,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
           <div
             class={`w-12 h-7 rounded-full transition-all duration-300 ${
             enabled
-              ? 'bg-linear-to-r from-green-500 to-emerald-500 shadow-lg shadow-green-500/30'
+              ? 'bg-linear-to-r from-green-500 to-emerald-500 shadow-md shadow-green-500/20'
               : 'bg-slate-300 dark:bg-slate-600'
           }`}
           >

@@ -497,6 +497,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "자동 업데이트 간격"
   },
@@ -829,5 +835,20 @@
   },
   "hideSearch": {
     "message": "검색 숨기기"
+  },
+  "viewMode": {
+    "message": "보기 모드"
+  },
+  "viewModeGrid": {
+    "message": "그리드 보기"
+  },
+  "viewModeList": {
+    "message": "목록 보기"
+  },
+  "viewModeGridDescription": {
+    "message": "프록시를 카드 그리드 레이아웃으로 표시"
+  },
+  "viewModeListDescription": {
+    "message": "프록시를 가로 목록으로 표시"
   }
 }

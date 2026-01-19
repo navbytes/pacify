@@ -21,56 +21,56 @@ export const gradientSectionVariants = tv({
     color: {
       purple: {
         background:
-          'bg-linear-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/20 dark:via-purple-950/20 dark:to-fuchsia-950/20',
-        accentBar: 'from-violet-500 via-purple-500 to-fuchsia-500',
+          'bg-linear-to-br from-violet-50 to-purple-50 dark:from-violet-950/20 dark:to-purple-950/20',
+        accentBar: 'from-violet-500 to-purple-500',
         content: 'border-purple-200/50 dark:border-purple-800/30',
         decorativeBlur:
           'bg-linear-to-br from-purple-400/10 to-pink-400/10 dark:from-purple-400/5 dark:to-pink-400/5',
       },
       blue: {
         background:
-          'bg-linear-to-br from-blue-50 via-indigo-50 to-violet-50 dark:from-blue-950/20 dark:via-indigo-950/20 dark:to-violet-950/20',
-        accentBar: 'from-blue-500 via-indigo-500 to-violet-500',
+          'bg-linear-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20',
+        accentBar: 'from-blue-500 to-indigo-500',
         content: 'border-blue-200/50 dark:border-blue-800/30',
         decorativeBlur:
           'bg-linear-to-br from-blue-400/10 to-indigo-400/10 dark:from-blue-400/5 dark:to-indigo-400/5',
       },
       cyan: {
         background:
-          'bg-linear-to-br from-cyan-50 via-blue-50 to-indigo-50 dark:from-cyan-950/20 dark:via-blue-950/20 dark:to-indigo-950/20',
-        accentBar: 'from-cyan-500 via-blue-500 to-indigo-500',
+          'bg-linear-to-br from-cyan-50 to-blue-50 dark:from-cyan-950/20 dark:to-blue-950/20',
+        accentBar: 'from-cyan-500 to-blue-500',
         content: 'border-cyan-200/50 dark:border-cyan-800/30',
         decorativeBlur:
           'bg-linear-to-br from-cyan-400/10 to-blue-400/10 dark:from-cyan-400/5 dark:to-blue-400/5',
       },
       teal: {
         background:
-          'bg-linear-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20',
-        accentBar: 'from-teal-500 via-emerald-500 to-green-500',
+          'bg-linear-to-br from-teal-50 to-emerald-50 dark:from-teal-950/20 dark:to-emerald-950/20',
+        accentBar: 'from-teal-500 to-emerald-500',
         content: 'border-teal-200/50 dark:border-teal-800/30',
         decorativeBlur:
           'bg-linear-to-br from-teal-400/10 to-emerald-400/10 dark:from-teal-400/5 dark:to-emerald-400/5',
       },
       amber: {
         background:
-          'bg-linear-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/20 dark:via-yellow-950/20 dark:to-orange-950/20',
-        accentBar: 'from-amber-500 via-yellow-500 to-orange-500',
+          'bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20',
+        accentBar: 'from-amber-500 to-orange-500',
         content: 'border-amber-200/50 dark:border-amber-800/30',
         decorativeBlur:
           'bg-linear-to-br from-amber-400/10 to-orange-400/10 dark:from-amber-400/5 dark:to-orange-400/5',
       },
       orange: {
         background:
-          'bg-linear-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20',
-        accentBar: 'from-amber-500 via-orange-500 to-yellow-500',
+          'bg-linear-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20',
+        accentBar: 'from-orange-500 to-amber-500',
         content: 'border-amber-200/50 dark:border-amber-800/30',
         decorativeBlur:
-          'bg-linear-to-br from-amber-400/10 to-orange-400/10 dark:from-amber-400/5 dark:to-orange-400/5',
+          'bg-linear-to-br from-orange-400/10 to-amber-400/10 dark:from-orange-400/5 dark:to-amber-400/5',
       },
       slate: {
         background:
-          'bg-linear-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/20 dark:via-gray-950/20 dark:to-zinc-950/20',
-        accentBar: 'from-slate-400 via-gray-500 to-zinc-400',
+          'bg-linear-to-br from-slate-50 to-gray-50 dark:from-slate-950/20 dark:to-gray-950/20',
+        accentBar: 'from-slate-400 to-gray-500',
         content: 'border-slate-200/50 dark:border-slate-700/30',
         decorativeBlur:
           'bg-linear-to-br from-slate-400/10 to-gray-400/10 dark:from-slate-400/5 dark:to-gray-400/5',
@@ -84,8 +84,8 @@ export const gradientSectionVariants = tv({
       },
       green: {
         background:
-          'bg-linear-to-r from-emerald-500/10 via-green-500/10 to-teal-500/10 dark:from-emerald-500/5 dark:via-green-500/5 dark:to-teal-500/5',
-        accentBar: 'from-emerald-500 via-green-500 to-teal-500',
+          'bg-linear-to-r from-emerald-500/10 to-green-500/10 dark:from-emerald-500/5 dark:to-green-500/5',
+        accentBar: 'from-emerald-500 to-green-500',
         content: 'border-green-200 dark:border-green-800',
         decorativeBlur: 'bg-linear-to-br from-green-400/10 to-emerald-400/10',
       },
@@ -114,51 +114,41 @@ export const gradientSectionVariants = tv({
 
 /**
  * Gradient icon badge variants for section headers
- * Small icons with gradient backgrounds and glow effects
+ * Small icons with solid gradient backgrounds
  */
 export const gradientIconBadgeVariants = tv({
   slots: {
     wrapper: 'relative',
-    glow: 'absolute inset-0 rounded-lg blur-md opacity-30',
-    badge: 'relative rounded-lg shadow-lg flex items-center justify-center',
+    badge: 'rounded-lg shadow-sm flex items-center justify-center',
   },
   variants: {
     color: {
       purple: {
-        glow: 'bg-linear-to-br from-violet-400 to-purple-500',
-        badge: 'bg-linear-to-br from-violet-500 to-purple-600 shadow-violet-500/20',
+        badge: 'bg-linear-to-br from-violet-500 to-purple-600',
       },
       blue: {
-        glow: 'bg-linear-to-br from-blue-400 to-indigo-500',
-        badge: 'bg-linear-to-br from-blue-500 to-indigo-600 shadow-blue-500/20',
+        badge: 'bg-linear-to-br from-blue-500 to-indigo-600',
       },
       cyan: {
-        glow: 'bg-linear-to-br from-cyan-400 to-blue-500',
-        badge: 'bg-linear-to-br from-cyan-500 to-blue-600 shadow-cyan-500/20',
+        badge: 'bg-linear-to-br from-cyan-500 to-blue-600',
       },
       teal: {
-        glow: 'bg-linear-to-br from-teal-400 to-emerald-500',
-        badge: 'bg-linear-to-br from-teal-500 to-emerald-600 shadow-teal-500/20',
+        badge: 'bg-linear-to-br from-teal-500 to-emerald-600',
       },
       amber: {
-        glow: 'bg-linear-to-br from-amber-400 to-orange-500',
-        badge: 'bg-linear-to-br from-amber-500 to-orange-600 shadow-amber-500/20',
+        badge: 'bg-linear-to-br from-amber-500 to-orange-600',
       },
       orange: {
-        glow: 'bg-linear-to-br from-orange-400 to-red-500',
-        badge: 'bg-linear-to-br from-orange-500 to-red-600 shadow-orange-500/20',
+        badge: 'bg-linear-to-br from-orange-500 to-red-600',
       },
       slate: {
-        glow: 'bg-linear-to-br from-slate-400 to-gray-500',
         badge: 'bg-linear-to-br from-slate-500 to-gray-600',
       },
       green: {
-        glow: 'bg-linear-to-br from-green-400 to-emerald-500',
-        badge: 'bg-linear-to-br from-green-500 to-emerald-600 shadow-green-500/20',
+        badge: 'bg-linear-to-br from-green-500 to-emerald-600',
       },
       red: {
-        glow: 'bg-linear-to-br from-red-400 to-rose-500',
-        badge: 'bg-linear-to-br from-red-500 to-rose-600 shadow-red-500/20',
+        badge: 'bg-linear-to-br from-red-500 to-rose-600',
       },
     },
     size: {
@@ -181,9 +171,9 @@ export const selectionCardVariants = tv({
   base: 'relative p-3 rounded-xl border-2 transition-all duration-200 text-left group cursor-pointer',
   variants: {
     selected: {
-      true: 'border-transparent shadow-lg scale-[1.02]',
+      true: 'border-transparent shadow-md scale-[1.02]',
       false:
-        'border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-md',
+        'border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-sm',
     },
   },
   defaultVariants: {
@@ -435,25 +425,25 @@ export const modalContentVariants = tv({
     },
     color: {
       orange: {
-        accentBar: 'from-orange-500 via-amber-500 to-yellow-500',
+        accentBar: 'from-orange-500 to-amber-500',
         headerBackground:
-          'bg-linear-to-r from-orange-50/50 via-transparent to-amber-50/50 dark:from-orange-950/20 dark:via-transparent dark:to-amber-950/20',
+          'bg-linear-to-r from-orange-50/50 to-amber-50/50 dark:from-orange-950/20 dark:to-amber-950/20',
         footerBackground:
-          'bg-linear-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
+          'bg-linear-to-r from-slate-50 to-slate-50 dark:from-slate-900/50 dark:to-slate-800/50',
       },
       purple: {
-        accentBar: 'from-violet-500 via-purple-500 to-fuchsia-500',
+        accentBar: 'from-violet-500 to-purple-500',
         headerBackground:
-          'bg-linear-to-r from-purple-50/50 via-transparent to-fuchsia-50/50 dark:from-purple-950/20 dark:via-transparent dark:to-fuchsia-950/20',
+          'bg-linear-to-r from-purple-50/50 to-violet-50/50 dark:from-purple-950/20 dark:to-violet-950/20',
         footerBackground:
-          'bg-linear-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
+          'bg-linear-to-r from-slate-50 to-slate-50 dark:from-slate-900/50 dark:to-slate-800/50',
       },
       blue: {
-        accentBar: 'from-blue-500 via-indigo-500 to-violet-500',
+        accentBar: 'from-blue-500 to-indigo-500',
         headerBackground:
-          'bg-linear-to-r from-blue-50/50 via-transparent to-indigo-50/50 dark:from-blue-950/20 dark:via-transparent dark:to-indigo-950/20',
+          'bg-linear-to-r from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20',
         footerBackground:
-          'bg-linear-to-r from-slate-50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-800/50 dark:to-slate-900/50',
+          'bg-linear-to-r from-slate-50 to-slate-50 dark:from-slate-900/50 dark:to-slate-800/50',
       },
     },
   },

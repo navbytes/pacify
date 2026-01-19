@@ -497,6 +497,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "Intervalo de actualización automática"
   },
@@ -829,5 +835,20 @@
   },
   "hideSearch": {
     "message": "Ocultar búsqueda"
+  },
+  "viewMode": {
+    "message": "Modo de vista"
+  },
+  "viewModeGrid": {
+    "message": "Vista de cuadrícula"
+  },
+  "viewModeList": {
+    "message": "Vista de lista"
+  },
+  "viewModeGridDescription": {
+    "message": "Mostrar proxies en diseño de cuadrícula"
+  },
+  "viewModeListDescription": {
+    "message": "Mostrar proxies en lista horizontal"
   }
 }

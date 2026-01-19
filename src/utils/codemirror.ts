@@ -337,8 +337,8 @@ export function createBasicExtensions(options: CodeMirrorOptions): Extension[] {
   // Note: Theme is added through Compartment in CodeMirrorService.create
   // Do not add theme extensions here to avoid duplicate extension errors
 
-  // Custom styling
-  const theme = options.theme === 'dark' ? darkTheme : lightTheme
+  // Custom styling (font size and editor border only - theme colors handled separately)
+  const isDarkTheme = options.theme === 'dark'
   extensions.push(
     EditorView.theme({
       '&': {
@@ -347,11 +347,11 @@ export function createBasicExtensions(options: CodeMirrorOptions): Extension[] {
       '.cm-editor': {
         borderRadius: '6px',
         border: '1px solid',
-        borderColor: theme.isDark ? '#404040' : '#D1D5DB',
+        borderColor: isDarkTheme ? '#404040' : '#D1D5DB',
       },
       '.cm-focused': {
         outline: 'none',
-        borderColor: theme.isDark ? '#569CD6' : '#0000FF',
+        borderColor: isDarkTheme ? '#569CD6' : '#0000FF',
       },
     })
   )

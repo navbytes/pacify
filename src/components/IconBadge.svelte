@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn'
 
 interface Props {
   icon: ComponentType
-  color?: 'blue' | 'red' | 'yellow' | 'green' | 'purple' | 'orange'
+  color?: 'blue' | 'red' | 'yellow' | 'green' | 'purple' | 'orange' | 'pink'
   size?: 'sm' | 'md' | 'lg'
   classes?: string
 }

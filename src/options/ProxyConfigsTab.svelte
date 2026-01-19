@@ -1,7 +1,8 @@
 <script lang="ts">
 import { slide } from 'svelte/transition'
 import Button from '@/components/Button.svelte'
-import DropTarget from '@/components/DragDrop/DropTarget.svelte'
+import DropZone from '@/components/DropZone.svelte'
+import IconButton from '@/components/IconButton.svelte'
 // biome-ignore lint/style/useImportType: Used as Svelte component in template
 import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
 import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
@@ -9,7 +10,8 @@ import ScriptList from '@/components/ScriptList.svelte'
 import Text from '@/components/Text.svelte'
 import ToggleSwitch from '@/components/ToggleSwitch.svelte'
 import Tooltip from '@/components/Tooltip.svelte'
-import type { DropItem } from '@/interfaces'
+import ViewModeSwitcher from '@/components/ViewModeSwitcher.svelte'
+import type { DropItem, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
@@ -57,9 +59,17 @@ function toggleSearch() {
 }
 
 // Keyboard shortcuts handler
+// Note: Some shortcuts may conflict with browser/OS shortcuts (e.g., Cmd+N on macOS)
+// We check for input focus to avoid interfering with typing
 function handleKeydown(event: KeyboardEvent) {
+  // Ignore shortcuts if user is typing in an input field
+  const target = event.target as HTMLElement
+  const isInputField =
+    target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
+
   // Ctrl/Cmd+K to toggle search
-  if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+  // Note: May conflict with browser's "Insert Link" on some platforms
+  if (!isInputField && (event.ctrlKey || event.metaKey) && event.key === 'k') {
     event.preventDefault()
     toggleSearch()
   }
@@ -71,13 +81,15 @@ function handleKeydown(event: KeyboardEvent) {
   }
 
   // Ctrl/Cmd+N to create new proxy
-  if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
+  // Note: May conflict with browser's "New Window" (especially Cmd+N on macOS)
+  if (!isInputField && (event.ctrlKey || event.metaKey) && event.key === 'n') {
     event.preventDefault()
     onOpenEditor()
   }
 
   // Number keys 1-9 to toggle quick switch proxies
-  if (event.key >= '1' && event.key <= '9') {
+  // Only works for proxies in the Quick Switch section
+  if (!isInputField && event.key >= '1' && event.key <= '9') {
     const index = parseInt(event.key, 10) - 1
     if (index < quickSwitchProxies.length) {
       event.preventDefault()
@@ -123,12 +135,16 @@ async function handleDrop(item: DropItem, pageType: 'QUICK_SWITCH' | 'OPTIONS') 
 function handleSearch(query: string) {
   searchQuery = query
 }
+
+async function handleViewModeChange(mode: ViewMode) {
+  await settingsStore.updateSettings({ viewMode: mode })
+}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
 
 <div class="py-6 space-y-8">
-  {#if hasProxies}
+  {#if hasProxies && settings.showQuickSettings}
     <!-- Quick Switch Configs Section -->
     <div>
       <SectionHeader
@@ -153,44 +169,34 @@ function handleSearch(query: string) {
         {/snippet}
       </SectionHeader>
 
-      <DropTarget onDrop={(item) => handleDrop(item, 'QUICK_SWITCH')}>
-        <section
-          data-drag-type={dragType}
-          data-page-type="QUICK_SWITCH"
-          class="rounded-lg bg-blue-50/50 dark:bg-blue-950/20 p-6 border-2 border-dashed border-blue-200 dark:border-blue-800 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-md"
-        >
-          <div class="relative rounded-lg transition-colors">
-            <div
-              class="absolute inset-0 flex items-center justify-center rounded-lg bg-blue-100/80 dark:bg-blue-900/80 z-10"
-              data-overlay
-            >
-              <Text as="p" size="xl" weight="medium" classes="text-blue-700 dark:text-blue-300">
-                {I18nService.getMessage('dropToAddQuickScripts')}
-              </Text>
-            </div>
-
-            {#if hasProxies && settings.proxyConfigs.filter((p) => p.quickSwitch).length === 0}
-              <div class="text-center py-8">
-                <Text as="p" size="sm" color="muted" classes="mb-2">
-                  {I18nService.getMessage('quickSwitchEmptyHint') ||
-                    'Drag proxy configurations here for quick access'}
-                </Text>
-                <Text as="p" size="xs" color="muted">
-                  {I18nService.getMessage('quickSwitchEmptySubHint') ||
-                    'Proxies added here will appear in Quick Switch mode'}
-                </Text>
-              </div>
-            {:else}
-              <ScriptList
-                pageType="QUICK_SWITCH"
-                title=""
-                proxies={quickSwitchProxies}
-                bind:dragType
-              />
-            {/if}
+      <DropZone
+        color="blue"
+        overlayMessage={I18nService.getMessage('dropToAddQuickScripts')}
+        pageType="QUICK_SWITCH"
+        bind:dragType
+        onDrop={(item) => handleDrop(item, 'QUICK_SWITCH')}
+      >
+        {#if hasProxies && settings.proxyConfigs.filter((p) => p.quickSwitch).length === 0}
+          <div class="text-center py-8">
+            <Text as="p" size="sm" color="muted" classes="mb-2">
+              {I18nService.getMessage('quickSwitchEmptyHint') ||
+                'Drag proxy configurations here for quick access'}
+            </Text>
+            <Text as="p" size="xs" color="muted">
+              {I18nService.getMessage('quickSwitchEmptySubHint') ||
+                'Proxies added here will appear in Quick Switch mode'}
+            </Text>
           </div>
-        </section>
-      </DropTarget>
+        {:else}
+          <ScriptList
+            pageType="QUICK_SWITCH"
+            title=""
+            proxies={quickSwitchProxies}
+            disableDrag={false}
+            bind:dragType
+          />
+        {/if}
+      </DropZone>
     </div>
   {/if}
 
@@ -204,19 +210,16 @@ function handleSearch(query: string) {
       iconColor="slate"
     >
       {#snippet rightContent()}
+        <!-- View Mode Switcher -->
+        <ViewModeSwitcher viewMode={settings.viewMode} onViewModeChange={handleViewModeChange} />
+
         <!-- Search Toggle Button -->
-        <Tooltip text={showSearch ? 'Hide search' : 'Show search (Ctrl+K)'} position="bottom">
-          <button
-            type="button"
-            onclick={toggleSearch}
-            class="p-2.5 min-w-11 min-h-11 rounded-xl transition-all duration-200 flex items-center justify-center focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 {showSearch
-              ? 'bg-linear-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 text-blue-600 dark:text-blue-400 shadow-md'
-              : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 hover:shadow-md'}"
-            aria-label={showSearch ? 'Hide search' : 'Show search'}
-          >
-            <Search size={18} />
-          </button>
-        </Tooltip>
+        <IconButton
+          icon={Search}
+          label={showSearch ? 'Hide search' : 'Show search (Ctrl+K)'}
+          active={showSearch}
+          onclick={toggleSearch}
+        />
 
         <!-- Add Auto-Proxy Button -->
         <Tooltip
@@ -247,32 +250,25 @@ function handleSearch(query: string) {
       </div>
     {/if}
 
-    <DropTarget onDrop={(item) => handleDrop(item, 'OPTIONS')}>
-      <section
-        data-drag-type={dragType}
-        data-page-type="OPTIONS"
-        class="relative rounded-lg bg-white p-6 shadow-sm dark:bg-slate-800 border-2 border-transparent transition-all duration-200 hover:shadow-md hover:border-slate-200 dark:hover:border-slate-700"
-      >
-        <div
-          class="absolute inset-0 flex items-center justify-center rounded-lg bg-red-100/90 dark:bg-red-900/90 z-10"
-          data-overlay
-        >
-          <Text as="p" size="xl" weight="medium" classes="text-red-700 dark:text-red-300">
-            {I18nService.getMessage('dropToRemoveQuickScripts')}
-          </Text>
-        </div>
-
-        <div role="list">
-          <ScriptList
-            pageType="OPTIONS"
-            proxies={regularProxies}
-            onScriptEdit={(scriptId) => onOpenEditor(scriptId)}
-            bind:dragType
-            title=""
-          />
-        </div>
-      </section>
-    </DropTarget>
+    <DropZone
+      color="red"
+      overlayMessage={I18nService.getMessage('dropToRemoveQuickScripts')}
+      pageType="OPTIONS"
+      bind:dragType
+      onDrop={(item) => handleDrop(item, 'OPTIONS')}
+    >
+      <div role="list">
+        <ScriptList
+          pageType="OPTIONS"
+          proxies={regularProxies}
+          onScriptEdit={(scriptId) => onOpenEditor(scriptId)}
+          disableDrag={!settings.showQuickSettings}
+          viewMode={settings.viewMode}
+          bind:dragType
+          title=""
+        />
+      </div>
+    </DropZone>
   </div>
 
   {#if dropError}

@@ -58,6 +58,8 @@ describe('SettingsWriter', () => {
     test('saves complete settings object', async () => {
       const settings: AppSettings = {
         quickSwitchEnabled: true,
+        showQuickSettings: true,
+        viewMode: 'grid',
         activeScriptId: 'test-id',
         proxyConfigs: [
           { id: 'test-id', name: 'Test', color: '#000', isActive: true, mode: 'direct' },
@@ -128,7 +130,7 @@ describe('SettingsWriter', () => {
       })
 
       expect(savedSettings?.proxyConfigs[0].id).toBeDefined()
-      expect(savedSettings?.proxyConfigs[0].id.length).toBeGreaterThan(0)
+      expect(savedSettings?.proxyConfigs[0].id?.length).toBeGreaterThan(0)
     })
 
     test('preserves existing scripts when adding new one', async () => {
@@ -379,6 +381,8 @@ describe('SettingsWriter', () => {
     test('restores valid settings file', async () => {
       const validSettings: AppSettings = {
         quickSwitchEnabled: true,
+        showQuickSettings: true,
+        viewMode: 'grid',
         activeScriptId: null,
         proxyConfigs: [],
         disableProxyOnStartup: false,

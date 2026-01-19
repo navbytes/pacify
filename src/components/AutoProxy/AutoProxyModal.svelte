@@ -237,9 +237,8 @@ let selectableProxies = $derived(
 
       <div class="relative flex items-center justify-between">
         <FlexGroup direction="horizontal" alignItems="center" childrenGap="md">
-          <!-- Animated icon container -->
+          <!-- Icon container -->
           <div class={orangeIconBadge.wrapper()}>
-            <div class="{orangeIconBadge.glow()} animate-pulse"></div>
             <div class={orangeIconBadge.badge()}>
               <GitBranch size={24} class="text-white" strokeWidth={2.5} />
             </div>
@@ -319,7 +318,7 @@ let selectableProxies = $derived(
               <span class="text-orange-500">*</span>
             </Text>
             <div
-              class="relative w-12 h-12 rounded-xl shadow-lg cursor-pointer overflow-hidden group transition-transform duration-200 hover:scale-105"
+              class="relative w-12 h-12 rounded-xl shadow-md cursor-pointer overflow-hidden group transition-transform duration-200 hover:scale-105"
               style="background-color: {color}"
             >
               <div

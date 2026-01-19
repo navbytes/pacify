@@ -194,9 +194,6 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
             <!-- Logo with glow effect -->
             <div class="relative">
               <div
-                class="absolute inset-0 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-30"
-              ></div>
-              <div
                 class="relative p-2 rounded-xl bg-linear-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 shadow-lg border border-white/50 dark:border-slate-700/50"
               >
                 <img src="/icons/icon48.png" alt="PACify" class="w-10 h-10 shrink-0">

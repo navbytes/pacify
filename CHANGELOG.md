@@ -5,6 +5,21 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.27.0] - 2026-01-18
+
+### Added
+
+- **View Mode Functionality**
+  - Introduced new `ViewMode` type to manage layout preferences (grid/list)
+  - Added `ViewModeSwitcher` component for toggling between grid and list views
+  - Updated proxy configuration display to support both grid and list layouts
+  - Added view mode persistence in settings
+  - Localized view mode labels and descriptions in 12 languages
+
+- **Settings Enhancements**
+  - Added "Show Quick Settings" toggle to control Quick Switch section visibility
+  - Improved settings UI organization and layout
+
 ## [1.25.0] - 2026-01-09
 
 ### Added

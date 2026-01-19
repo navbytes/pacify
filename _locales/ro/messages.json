@@ -497,6 +497,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "Interval de actualizare automată"
   },
@@ -829,5 +835,20 @@
   },
   "hideSearch": {
     "message": "Ascunde căutarea"
+  },
+  "viewMode": {
+    "message": "Mod de vizualizare"
+  },
+  "viewModeGrid": {
+    "message": "Vizualizare grilă"
+  },
+  "viewModeList": {
+    "message": "Vizualizare listă"
+  },
+  "viewModeGridDescription": {
+    "message": "Afișează proxy-urile într-o grilă de carduri"
+  },
+  "viewModeListDescription": {
+    "message": "Afișează proxy-urile într-o listă orizontală"
   }
 }

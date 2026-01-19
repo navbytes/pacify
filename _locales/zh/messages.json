@@ -497,6 +497,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "自动更新间隔"
   },
@@ -829,5 +835,20 @@
   },
   "hideSearch": {
     "message": "隐藏搜索"
+  },
+  "viewMode": {
+    "message": "查看模式"
+  },
+  "viewModeGrid": {
+    "message": "网格视图"
+  },
+  "viewModeList": {
+    "message": "列表视图"
+  },
+  "viewModeGridDescription": {
+    "message": "以卡片网格布局显示代理"
+  },
+  "viewModeListDescription": {
+    "message": "以横向列表显示代理"
   }
 }

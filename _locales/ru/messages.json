@@ -497,6 +497,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "Интервал автообновления"
   },
@@ -829,5 +835,20 @@
   },
   "hideSearch": {
     "message": "Скрыть поиск"
+  },
+  "viewMode": {
+    "message": "Режим просмотра"
+  },
+  "viewModeGrid": {
+    "message": "Сеточный вид"
+  },
+  "viewModeList": {
+    "message": "Список"
+  },
+  "viewModeGridDescription": {
+    "message": "Отображать прокси в виде сетки карточек"
+  },
+  "viewModeListDescription": {
+    "message": "Отображать прокси в горизонтальном списке"
   }
 }

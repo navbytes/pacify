@@ -35,11 +35,11 @@ let {
   class={cn(
     'mb-6 pb-2',
     flexPatterns.between,
-    'gap-4',
+    'gap-4 flex-wrap',
     !hideBorder && `border-b ${sectionHeaderBorderVariants({ iconColor })}`
   )}
 >
-  <div class={cn(flexPatterns.centerVertical, 'gap-2 flex-1 min-w-0')}>
+  <div class={cn(flexPatterns.centerVertical, 'gap-2 flex-1 min-w-fit')}>
     <div class={sectionHeaderIconVariants({ iconColor })}>
       <Icon size={16} class="text-white" />
     </div>

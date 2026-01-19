@@ -1,10 +1,15 @@
 <script lang="ts">
 import ToggleSwitch from '@/components/ToggleSwitch.svelte'
-import type { ListViewType, ProxyConfig } from '@/interfaces'
+import type { ListViewType, ProxyConfig, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
-import { badgePatterns, flexPatterns } from '@/utils/classPatterns'
+import {
+  badgePatterns,
+  flexPatterns,
+  gradientOverlayVariants,
+  scriptItemVariants,
+} from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { GripVertical, Pencil, ShieldCheck, Trash } from '@/utils/icons'
 import {
@@ -24,9 +29,18 @@ interface Props {
   pageType?: ListViewType
   dragType?: string
   onScriptEdit: (scriptId: string) => void
+  disableDrag?: boolean
+  viewMode?: ViewMode
 }
 
-let { proxy, pageType = 'POPUP', onScriptEdit, dragType = $bindable() }: Props = $props()
+let {
+  proxy,
+  pageType = 'POPUP',
+  onScriptEdit,
+  dragType = $bindable(),
+  disableDrag = false,
+  viewMode = 'grid',
+}: Props = $props()
 
 let settings = $derived($settingsStore)
 let modeColors = $derived(getProxyModeColor(proxy.mode, proxy))
@@ -96,28 +110,18 @@ async function handleScriptDelete() {
   name={proxy.name || ''}
   id={proxy.id || ''}
   dataType={pageType}
-  disabled={pageType === 'POPUP'}
+  disabled={pageType === 'POPUP' || disableDrag}
   bind:dragType
 >
   <div
     class={cn(
-      'group relative rounded-lg border-l-4 border-y border-r',
-      transitions.normal,
-      pageType === 'POPUP' ? 'p-2' : 'p-5',
-      pageType === 'QUICK_SWITCH' && 'border-dashed',
-      proxy.isActive
-        ? [
-            colors.background.active,
-            'border-y-blue-200 border-r-blue-200 dark:border-y-blue-800 dark:border-r-blue-800',
-            'shadow-md hover:shadow-lg',
-            'ring-1 ring-blue-200/50 dark:ring-blue-800/30',
-          ]
-        : [
-            colors.background.default,
-            'border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700',
-            'hover:shadow-md hover:scale-[1.005]',
-            'hover:border-y-slate-300 hover:border-r-slate-300 dark:hover:border-y-slate-600 dark:hover:border-r-slate-600',
-          ]
+      scriptItemVariants({
+        viewMode,
+        pageType,
+        isActive: proxy.isActive,
+      }),
+      // List view: horizontal layout with content on left and actions on right
+      pageType === 'OPTIONS' && viewMode === 'list' && 'flex items-center gap-4'
     )}
     style={`border-left-color: ${proxy.color}`}
     role="button"
@@ -131,44 +135,79 @@ async function handleScriptDelete() {
         }
       : undefined}
   >
-    <!-- Card Header -->
-    <div class={cn(flexPatterns.between, 'gap-2.5 min-w-0 flex-1')}>
-      <div class={cn(flexPatterns.centerVertical, 'gap-2.5 min-w-0 flex-1')}>
-        {#if pageType !== 'POPUP'}
-          <!-- Drag handle (only for OPTIONS and QUICK_SWITCH) -->
-          <div
-            class={cn(
+    <!-- Gradient overlay background -->
+    <div
+      class={gradientOverlayVariants()}
+      style={`background: linear-gradient(135deg, ${proxy.color}08 0%, transparent 60%)`}
+    ></div>
+
+    <!-- Main Content Wrapper (left side in list view) -->
+    <div class={cn('flex-1 min-w-0', viewMode === 'list' && 'flex flex-col gap-2')}>
+      <!-- Card Header -->
+      <div
+        class={cn(
+          flexPatterns.between,
+          'gap-2.5 min-w-0 flex-1'
+        )}
+      >
+        <div
+          class={cn(
+          flexPatterns.centerVertical,
+          'gap-2.5 min-w-0 flex-1'
+        )}
+        >
+          {#if pageType !== 'POPUP' && !disableDrag}
+            <!-- Drag handle (only for OPTIONS and QUICK_SWITCH when drag is enabled) -->
+            <div
+              class={cn(
               'hidden group-hover:flex cursor-grab active:cursor-grabbing',
               colors.icon.muted,
               'hover:text-blue-600 dark:hover:text-blue-400',
               transitions.fast
             )}
-            role="button"
-            tabindex="0"
-            aria-label="Drag to move to Quick Switch"
-            title="Drag to Quick Switch"
-          >
-            <GripVertical size={18} strokeWidth={2.5} />
+              role="button"
+              tabindex="0"
+              aria-label="Drag to move to Quick Switch"
+              title="Drag to Quick Switch"
+            >
+              <GripVertical size={18} strokeWidth={2.5} />
+            </div>
+          {/if}
+
+          <!-- Color indicator badge (for colorblind accessibility) -->
+          <div class="relative shrink-0">
+            <!-- Main color dot -->
+            <div
+              class={cn(
+              'rounded-full shadow-sm transition-transform duration-200 w-4 h-4',
+              proxy.isActive
+                ? 'ring-2 ring-offset-1 group-hover:scale-110'
+                : 'ring-1 ring-slate-200 dark:ring-slate-700 group-hover:scale-105'
+            )}
+              style={proxy.isActive
+              ? `background-color: ${proxy.color}; ring-color: ${proxy.color}40`
+              : `background-color: ${proxy.color}`}
+              aria-label="Proxy color: {proxy.color}"
+            ></div>
           </div>
-        {/if}
 
-        <!-- Color indicator badge (for colorblind accessibility) -->
-        <div
-          class="w-3 h-3 rounded-full shrink-0 ring-2 ring-white dark:ring-slate-800"
-          style="background-color: {proxy.color}"
-          aria-label="Proxy color: {proxy.color}"
-        ></div>
+          <!-- Mode icon inline (POPUP only) -->
+          {#if pageType === 'POPUP'}
+            <ModeIcon size={14} class={cn('shrink-0', modeColors.text)} />
+          {/if}
 
-        <!-- Mode icon inline (POPUP only) -->
-        {#if pageType === 'POPUP'}
-          <ModeIcon size={14} class={cn('shrink-0', modeColors.text)} />
-        {/if}
-
-        <h3 class={cn('text-base font-semibold truncate', colors.text.default)}>{proxy.name}</h3>
-
-        {#if proxy.isActive}
-          <span
+          <h3
             class={cn(
+            'font-semibold truncate text-base',
+            colors.text.default
+          )}
+          >
+            {proxy.name}
+          </h3>
+
+          {#if proxy.isActive}
+            <span
+              class={cn(
               badgePatterns.base,
               'font-semibold border',
               colors.success.light,
@@ -176,93 +215,146 @@ async function handleScriptDelete() {
               colors.success.border,
               'rounded-md'
             )}
-            role="status"
-            aria-label="This proxy is currently active"
-          >
-            <ShieldCheck size={12} aria-hidden="true" />
-            Active
-          </span>
-        {/if}
-      </div>
-
-      {#if pageType === 'POPUP' || pageType === 'QUICK_SWITCH'}
-        <!-- POPUP & QUICK_SWITCH: Toggle in header -->
-        <ToggleSwitch
-          checked={proxy.isActive}
-          onchange={(checked) => handleSetProxy(checked, proxy.id)}
-          aria-label={I18nService.getMessage(
-            proxy.isActive ? 'toggleProxyOff' : 'toggleProxyOn',
-            proxy.name
-          )}
-        />
-      {/if}
-    </div>
-
-    <!-- Card Content -->
-    {#if pageType !== 'POPUP'}
-      <!-- Full content for OPTIONS/QUICK_SWITCH -->
-      <div class={cn(flexPatterns.col, 'gap-2 mb-4 mt-3')}>
-        <!-- Mode badge -->
-        <div
-          class={cn(
-            badgePatterns.base,
-            'self-start font-medium border rounded-md',
-            modeColors.bg,
-            modeColors.text,
-            modeColors.border
-          )}
-        >
-          <ModeIcon size={13} />
-          <span>{modeLabel}</span>
+              role="status"
+              aria-label="This proxy is currently active"
+            >
+              <ShieldCheck size={12} aria-hidden="true" />
+              Active
+            </span>
+          {/if}
         </div>
 
-        <!-- Description -->
-        {#if proxyDesc}
-          <p class={cn('text-sm truncate', colors.text.muted)}>{proxyDesc}</p>
-        {/if}
-      </div>
-    {/if}
-
-    <!-- Card Footer (OPTIONS only) -->
-    {#if pageType === 'OPTIONS'}
-      <div class={cn(flexPatterns.between, 'pt-3 border-t', colors.border.default)}>
-        <ToggleSwitch
-          checked={proxy.isActive}
-          onchange={(checked) => handleSetProxy(checked, proxy.id)}
-          aria-label={I18nService.getMessage(
+        {#if pageType === 'POPUP' || pageType === 'QUICK_SWITCH'}
+          <!-- POPUP & QUICK_SWITCH: Toggle in header -->
+          <ToggleSwitch
+            checked={proxy.isActive}
+            onchange={(checked) => handleSetProxy(checked, proxy.id)}
+            aria-label={I18nService.getMessage(
             proxy.isActive ? 'toggleProxyOff' : 'toggleProxyOn',
             proxy.name
           )}
-        />
+          />
+        {/if}
+      </div>
 
-        <div class={cn(flexPatterns.centerVertical, 'gap-1')}>
+      <!-- Card Content -->
+      {#if pageType !== 'POPUP'}
+        <!-- Full content for OPTIONS/QUICK_SWITCH -->
+        <div
+          class={cn(flexPatterns.col, 'gap-2', viewMode === 'grid' ? 'mb-4 mt-3' : 'mt-2', 'relative z-10')}
+        >
+          <!-- Mode badge -->
+          <div
+            class={cn(
+              badgePatterns.base,
+              'self-start font-medium border rounded-lg shadow-sm backdrop-blur-sm',
+              'transition-all duration-200 hover:scale-105',
+              modeColors.bg,
+              modeColors.text,
+              modeColors.border
+            )}
+          >
+            <ModeIcon size={13} />
+            <span>{modeLabel}</span>
+          </div>
+
+          <!-- Description -->
+          {#if proxyDesc}
+            <p class={cn('text-sm truncate', colors.text.muted)}>{proxyDesc}</p>
+          {/if}
+        </div>
+      {/if}
+    </div>
+    <!-- End Main Content Wrapper -->
+
+    <!-- Actions Section -->
+    {#if pageType === 'OPTIONS'}
+      {#if viewMode === 'list'}
+        <!-- List View: Actions on right side (vertical layout) -->
+        <div class={cn(flexPatterns.centerVertical, 'gap-3 shrink-0 relative z-10')}>
+          <ToggleSwitch
+            checked={proxy.isActive}
+            onchange={(checked) => handleSetProxy(checked, proxy.id)}
+            aria-label={I18nService.getMessage(
+              proxy.isActive ? 'toggleProxyOff' : 'toggleProxyOn',
+              proxy.name
+            )}
+          />
+
           <Button
             color="primary"
             minimal
             onclick={() => openEditor(proxy.id)}
             aria-label={I18nService.getMessage('editConfiguration', proxy.name)}
-            classes="hover:bg-blue-50 dark:hover:bg-blue-950/20"
+            classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all hover:scale-105"
           >
             {#snippet icon()}
               <Pencil size={16} />
             {/snippet}
-            <span class="text-sm">Edit</span>
+            <span class="text-sm font-medium">Edit</span>
           </Button>
+
           <Button
             color="error"
             minimal
             onclick={confirmDelete}
             aria-label={I18nService.getMessage('deleteConfiguration', proxy.name)}
-            classes="hover:bg-red-50 dark:hover:bg-red-950/20"
+            classes="hover:bg-red-50 dark:hover:bg-red-950/20 transition-all hover:scale-105"
             data-testid={`delete-proxy-button-${proxy.id}`}
           >
             {#snippet icon()}
               <Trash size={16} class={cn(colors.danger.text)} />
             {/snippet}
-            <span class="text-sm">Delete</span>
+            <span class="text-sm font-medium">Delete</span>
           </Button>
         </div>
-      </div>
+      {:else}
+        <!-- Grid View: Actions in footer (horizontal layout) -->
+        <div
+          class={cn(
+            flexPatterns.between,
+            'relative z-10 pt-3 border-t',
+            colors.border.default
+          )}
+        >
+          <ToggleSwitch
+            checked={proxy.isActive}
+            onchange={(checked) => handleSetProxy(checked, proxy.id)}
+            aria-label={I18nService.getMessage(
+              proxy.isActive ? 'toggleProxyOff' : 'toggleProxyOn',
+              proxy.name
+            )}
+          />
+
+          <div class={cn(flexPatterns.centerVertical, 'gap-1.5')}>
+            <Button
+              color="primary"
+              minimal
+              onclick={() => openEditor(proxy.id)}
+              aria-label={I18nService.getMessage('editConfiguration', proxy.name)}
+              classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all hover:scale-105"
+            >
+              {#snippet icon()}
+                <Pencil size={16} />
+              {/snippet}
+              <span class="text-sm font-medium">Edit</span>
+            </Button>
+            <Button
+              color="error"
+              minimal
+              onclick={confirmDelete}
+              aria-label={I18nService.getMessage('deleteConfiguration', proxy.name)}
+              classes="hover:bg-red-50 dark:hover:bg-red-950/20 transition-all hover:scale-105"
+              data-testid={`delete-proxy-button-${proxy.id}`}
+            >
+              {#snippet icon()}
+                <Trash size={16} class={cn(colors.danger.text)} />
+              {/snippet}
+              <span class="text-sm font-medium">Delete</span>
+            </Button>
+          </div>
+        </div>
+      {/if}
     {/if}
   </div>
 </DraggableItem>

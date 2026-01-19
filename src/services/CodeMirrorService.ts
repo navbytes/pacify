@@ -1,7 +1,19 @@
 import { startCompletion } from '@codemirror/autocomplete'
+import { defaultKeymap, history, historyKeymap, indentWithTab } from '@codemirror/commands'
+import { bracketMatching, foldGutter, foldKeymap } from '@codemirror/language'
 import { Compartment, EditorState } from '@codemirror/state'
-import { EditorView, keymap, lineNumbers } from '@codemirror/view'
-import { basicSetup } from 'codemirror'
+import {
+  crosshairCursor,
+  drawSelection,
+  dropCursor,
+  EditorView,
+  highlightActiveLine,
+  highlightActiveLineGutter,
+  highlightSpecialChars,
+  keymap,
+  lineNumbers,
+  rectangularSelection,
+} from '@codemirror/view'
 import { type CodeMirrorOptions, ERROR_TYPES, type ICodeMirrorEditor } from '@/interfaces'
 import {
   createBasicExtensions,
@@ -71,8 +83,21 @@ export class CodeMirror {
       // Create extensions
       const extensions = createBasicExtensions(mergedOptions)
 
-      // Add basic setup
-      extensions.unshift(basicSetup)
+      // Add minimal editor setup (without default highlight style to avoid conflicts)
+      extensions.push(
+        history(),
+        drawSelection(),
+        dropCursor(),
+        EditorState.allowMultipleSelections.of(true),
+        highlightSpecialChars(),
+        foldGutter(),
+        highlightActiveLine(),
+        highlightActiveLineGutter(),
+        bracketMatching(),
+        rectangularSelection(),
+        crosshairCursor(),
+        keymap.of([indentWithTab, ...defaultKeymap, ...historyKeymap, ...foldKeymap])
+      )
 
       // Configure line numbers
       if (mergedOptions.lineNumbers) {

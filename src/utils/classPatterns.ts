@@ -557,6 +557,7 @@ export const iconBadgeVariants = tv({
       green: 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400',
       purple: 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400',
       orange: 'bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400',
+      pink: 'bg-pink-50 dark:bg-pink-900/20 text-pink-600 dark:text-pink-400',
     },
     size: {
       sm: 'w-8 h-8',
@@ -991,6 +992,333 @@ export const linkCardLabelVariants = tv({
       true: 'text-blue-600 dark:text-blue-400',
       false:
         'text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400',
+    },
+  },
+  defaultVariants: {
+    active: false,
+  },
+})
+
+// ============================================================================
+// MODAL & OVERLAY VARIANTS
+// ============================================================================
+
+/**
+ * Shared gradient color configurations for consistency across components
+ */
+const gradientColors = {
+  bluePurple: {
+    light: 'from-blue-400/20 to-purple-400/20',
+    medium: 'from-blue-400 to-purple-500',
+    dark: 'from-blue-500 to-purple-600',
+    accent: 'from-blue-500 to-purple-500',
+  },
+  purplePink: {
+    light: 'from-purple-400/20 to-pink-400/20',
+    medium: 'from-purple-400 to-pink-500',
+    dark: 'from-purple-500 to-pink-600',
+    accent: 'from-purple-500 to-pink-500',
+  },
+  tealCyan: {
+    light: 'from-teal-400/20 to-cyan-400/20',
+    medium: 'from-teal-400 to-cyan-500',
+    dark: 'from-teal-500 to-cyan-600',
+    accent: 'from-teal-500 to-blue-500',
+  },
+  pinkOrange: {
+    light: 'from-pink-400/20 to-orange-400/20',
+    medium: 'from-orange-400 to-red-500',
+    dark: 'from-orange-500 to-red-600',
+    accent: 'from-orange-500 to-red-500',
+  },
+  greenTeal: {
+    light: 'from-green-400/20 to-teal-400/20',
+    medium: 'from-green-400 to-teal-500',
+    dark: 'from-green-500 to-teal-600',
+    accent: 'from-green-500 to-teal-500',
+  },
+} as const
+
+/**
+ * Shared position utilities for absolutely positioned elements
+ */
+const absolutePositions = {
+  topRight: '-top-20 -right-20',
+  topLeft: '-top-20 -left-20',
+  bottomRight: '-bottom-20 -right-20',
+  bottomLeft: '-bottom-20 -left-20',
+} as const
+
+/**
+ * Base overlay pattern for reusable overlays
+ */
+const baseOverlay = 'absolute inset-0'
+
+/**
+ * Modal backdrop variants with blur and gradient effects
+ */
+export const modalBackdropVariants = tv({
+  base: baseOverlay,
+  variants: {
+    variant: {
+      default: 'bg-linear-to-br from-slate-900/80 via-blue-900/40 to-slate-900/80 backdrop-blur-md',
+      dark: 'bg-linear-to-br from-slate-900/90 via-slate-800/60 to-slate-900/90 backdrop-blur-lg',
+      light: 'bg-linear-to-br from-white/80 via-slate-100/60 to-white/80 backdrop-blur-md',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
+
+/**
+ * Modal glassmorphism container variants
+ */
+export const modalGlassmorphismVariants = tv({
+  base: 'relative backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden',
+  variants: {
+    variant: {
+      default: 'bg-white/95 dark:bg-slate-900/95 border border-white/20 dark:border-slate-700/50',
+      frosted: 'bg-white/90 dark:bg-slate-900/90 border border-white/30 dark:border-slate-600/50',
+      solid: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
+
+/**
+ * Modal decorative blur element variants
+ */
+export const modalDecorativeBlurVariants = tv({
+  base: 'absolute w-40 h-40 rounded-full blur-3xl',
+  variants: {
+    position: {
+      topRight: absolutePositions.topRight,
+      topLeft: absolutePositions.topLeft,
+      bottomRight: absolutePositions.bottomRight,
+      bottomLeft: absolutePositions.bottomLeft,
+    },
+    color: {
+      bluePurple: `bg-linear-to-br ${gradientColors.bluePurple.light}`,
+      pinkOrange: `bg-linear-to-br ${gradientColors.pinkOrange.light}`,
+      tealCyan: `bg-linear-to-br ${gradientColors.tealCyan.light}`,
+      purplePink: `bg-linear-to-br ${gradientColors.purplePink.light}`,
+      greenTeal: `bg-linear-to-br ${gradientColors.greenTeal.light}`,
+    },
+  },
+  defaultVariants: {
+    position: 'topRight',
+    color: 'bluePurple',
+  },
+})
+
+/**
+ * Modal top accent bar variants
+ */
+export const modalAccentBarVariants = tv({
+  base: 'absolute top-0 left-0 right-0 h-1',
+  variants: {
+    gradient: {
+      bluePurple: `bg-linear-to-r ${gradientColors.bluePurple.accent}`,
+      purplePink: `bg-linear-to-r ${gradientColors.purplePink.accent}`,
+      tealBlue: `bg-linear-to-r ${gradientColors.tealCyan.accent}`,
+      orangeRed: `bg-linear-to-r ${gradientColors.pinkOrange.accent}`,
+      greenTeal: `bg-linear-to-r ${gradientColors.greenTeal.accent}`,
+    },
+  },
+  defaultVariants: {
+    gradient: 'bluePurple',
+  },
+})
+
+/**
+ * Modal animated icon background variants
+ */
+export const modalAnimatedIconVariants = tv({
+  slots: {
+    glow: `${baseOverlay} rounded-xl blur-lg opacity-40 animate-pulse`,
+    container: 'relative p-3 rounded-xl shadow-md',
+  },
+  variants: {
+    color: {
+      blue: {
+        glow: `bg-linear-to-br ${gradientColors.bluePurple.medium}`,
+        container: `bg-linear-to-br ${gradientColors.bluePurple.dark} shadow-blue-500/20`,
+      },
+      purple: {
+        glow: `bg-linear-to-br ${gradientColors.purplePink.medium}`,
+        container: `bg-linear-to-br ${gradientColors.purplePink.dark} shadow-purple-500/20`,
+      },
+      teal: {
+        glow: `bg-linear-to-br ${gradientColors.tealCyan.medium}`,
+        container: `bg-linear-to-br ${gradientColors.tealCyan.dark} shadow-teal-500/20`,
+      },
+      orange: {
+        glow: `bg-linear-to-br ${gradientColors.pinkOrange.medium}`,
+        container: `bg-linear-to-br ${gradientColors.pinkOrange.dark} shadow-orange-500/20`,
+      },
+      green: {
+        glow: `bg-linear-to-br ${gradientColors.greenTeal.medium}`,
+        container: `bg-linear-to-br ${gradientColors.greenTeal.dark} shadow-green-500/20`,
+      },
+    },
+  },
+  defaultVariants: {
+    color: 'blue',
+  },
+})
+
+// ============================================================================
+// VIEW MODE & LAYOUT VARIANTS
+// ============================================================================
+
+/**
+ * View mode container variants for grid/list layouts
+ */
+export const viewModeContainerVariants = tv({
+  base: 'gap-4',
+  variants: {
+    viewMode: {
+      grid: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+      list: 'flex flex-col',
+    },
+    pageType: {
+      POPUP: 'flex flex-col',
+      OPTIONS: '',
+      QUICK_SWITCH: '',
+    },
+  },
+  defaultVariants: {
+    viewMode: 'grid',
+    pageType: 'OPTIONS',
+  },
+})
+
+/**
+ * Script item card variants with view mode support
+ * Note: Compound variants are intentionally NOT used here as they would duplicate
+ * the behavior already defined in the simple variants above.
+ */
+export const scriptItemVariants = tv({
+  base: cn('group relative border-l-4 border-y border-r overflow-hidden', transitions.normal),
+  variants: {
+    pageType: {
+      POPUP: 'p-2 rounded-xl',
+      OPTIONS: 'p-4',
+      QUICK_SWITCH: 'p-4 border-dashed',
+    },
+    viewMode: {
+      grid: 'rounded-xl',
+      list: 'rounded-lg',
+    },
+    isActive: {
+      true: cn(
+        colors.background.active,
+        'border-y-blue-200 border-r-blue-200 dark:border-y-blue-800 dark:border-r-blue-800',
+        'shadow-md shadow-blue-500/10 hover:shadow-md hover:shadow-blue-500/15',
+        'ring-1 ring-blue-200/50 dark:ring-blue-800/30',
+        'hover:-translate-y-0.5'
+      ),
+      false: cn(
+        colors.background.default,
+        'border-y-slate-200 border-r-slate-200 dark:border-y-slate-700 dark:border-r-slate-700',
+        'hover:shadow-md',
+        'hover:-translate-y-1',
+        'hover:border-y-slate-300 hover:border-r-slate-300 dark:hover:border-y-slate-600 dark:hover:border-r-slate-600'
+      ),
+    },
+  },
+  defaultVariants: {
+    pageType: 'OPTIONS',
+    viewMode: 'grid',
+    isActive: false,
+  },
+})
+
+/**
+ * Gradient overlay for hover effects
+ */
+export const gradientOverlayVariants = tv({
+  base: `${baseOverlay} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`,
+  variants: {
+    variant: {
+      subtle: '',
+      medium: '',
+      strong: '',
+    },
+  },
+  defaultVariants: {
+    variant: 'subtle',
+  },
+})
+
+/**
+ * Shared drop zone color configurations
+ */
+const dropZoneColors = {
+  blue: {
+    section:
+      'bg-white dark:bg-slate-800 border-transparent hover:border-slate-200 dark:hover:border-slate-700 shadow-sm',
+    overlay: 'bg-blue-100/80 dark:bg-blue-900/80',
+  },
+  red: {
+    section:
+      'bg-white dark:bg-slate-800 border-transparent hover:border-slate-200 dark:hover:border-slate-700 shadow-sm',
+    overlay: 'bg-red-100/90 dark:bg-red-900/90',
+  },
+  slate: {
+    section:
+      'bg-white dark:bg-slate-800 border-transparent hover:border-slate-200 dark:hover:border-slate-700 shadow-sm',
+    overlay: 'bg-slate-100/80 dark:bg-slate-900/80',
+  },
+} as const
+
+/**
+ * Drop zone section variants
+ */
+export const dropZoneSectionVariants = tv({
+  base: 'rounded-lg p-6 border-2 border-dashed transition-all duration-200 hover:shadow-md',
+  variants: {
+    color: {
+      blue: dropZoneColors.blue.section,
+      red: dropZoneColors.red.section,
+      slate: dropZoneColors.slate.section,
+    },
+  },
+  defaultVariants: {
+    color: 'blue',
+  },
+})
+
+/**
+ * Drop zone overlay variants (shown during drag)
+ */
+export const dropZoneOverlayVariants = tv({
+  base: `${baseOverlay} flex items-center justify-center rounded-lg z-10`,
+  variants: {
+    color: {
+      blue: dropZoneColors.blue.overlay,
+      red: dropZoneColors.red.overlay,
+      slate: dropZoneColors.slate.overlay,
+    },
+  },
+  defaultVariants: {
+    color: 'blue',
+  },
+})
+
+/**
+ * Icon button variants with toggle state
+ */
+export const iconButtonVariants = tv({
+  base: 'p-2.5 min-w-11 min-h-11 rounded-xl transition-all duration-200 flex items-center justify-center focus:outline-none focus-visible:ring-4',
+  variants: {
+    active: {
+      true: 'bg-linear-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 text-blue-600 dark:text-blue-400 shadow-md focus-visible:ring-blue-500/50',
+      false:
+        'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 hover:shadow-md focus-visible:ring-slate-500/50',
     },
   },
   defaultVariants: {

@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { ListViewType, ProxyConfig } from '@/interfaces'
+import type { ListViewType, ProxyConfig, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
-import { flexPatterns } from '@/utils/classPatterns'
+import { viewModeContainerVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Globe, Zap } from '@/utils/icons'
 import { colors } from '@/utils/theme'
@@ -19,9 +19,19 @@ interface Props {
   onScriptEdit?: (scriptId: string) => void
   dragType?: string
   proxies?: ProxyConfig[] // Optional filtered proxies list
+  disableDrag?: boolean // Disable drag-and-drop functionality
+  viewMode?: ViewMode // Layout view mode
 }
 
-let { pageType = 'POPUP', title, onScriptEdit, dragType = $bindable(), proxies }: Props = $props()
+let {
+  pageType = 'POPUP',
+  title,
+  onScriptEdit,
+  dragType = $bindable(),
+  proxies,
+  disableDrag = false,
+  viewMode = 'grid',
+}: Props = $props()
 
 // Use provided proxies or fall back to store
 let proxyConfigs = $derived(proxies ?? proxyConfigsFromStore)
@@ -52,14 +62,16 @@ let displayProxyConfigs = $derived<ProxyConfig[]>(
   {/if}
 
   {#if displayProxyConfigs.length > 0}
-    <div
-      class={cn(
-        'gap-4',
-        pageType === 'POPUP' ? flexPatterns.col : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-      )}
-    >
+    <div class={viewModeContainerVariants({ viewMode, pageType })}>
       {#each displayProxyConfigs as proxy (proxy.id)}
-        <ScriptItem {proxy} {pageType} bind:dragType onScriptEdit={() => openEditor(proxy.id)} />
+        <ScriptItem
+          {proxy}
+          {pageType}
+          {disableDrag}
+          {viewMode}
+          bind:dragType
+          onScriptEdit={() => openEditor(proxy.id)}
+        />
       {/each}
     </div>
   {:else if pageType === 'POPUP'}

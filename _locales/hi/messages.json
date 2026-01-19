@@ -497,6 +497,12 @@
   "keyboardShortcutNumbers": {
     "message": "1-9"
   },
+  "keyboardShortcutsNote": {
+    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
+  },
+  "keyboardShortcutQuickSwitchOnly": {
+    "message": "Only works for proxies in the Quick Switch section"
+  },
   "updateInterval": {
     "message": "स्वचालित-अपडेट अंतराल"
   },
@@ -829,5 +835,20 @@
   },
   "hideSearch": {
     "message": "खोज छुपाएं"
+  },
+  "viewMode": {
+    "message": "देखने का तरीका"
+  },
+  "viewModeGrid": {
+    "message": "ग्रिड दृश्य"
+  },
+  "viewModeList": {
+    "message": "सूची दृश्य"
+  },
+  "viewModeGridDescription": {
+    "message": "कार्ड ग्रिड लेआउट में प्रॉक्सी प्रदर्शित करें"
+  },
+  "viewModeListDescription": {
+    "message": "क्षैतिज सूची में प्रॉक्सी प्रदर्शित करें"
   }
 }
