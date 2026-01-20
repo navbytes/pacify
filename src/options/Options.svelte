@@ -251,7 +251,7 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
 
     <!-- Tab 2: Settings -->
     <TabPanel id="settings">
-      <SettingsTab />
+      <SettingsTab bind:activeTab />
     </TabPanel>
   </Tabs>
 

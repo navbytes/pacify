@@ -28,6 +28,12 @@ import {
   Star,
 } from '@/utils/icons'
 
+interface Props {
+  activeTab?: string
+}
+
+let { activeTab = $bindable() }: Props = $props()
+
 let settings = $derived($settingsStore)
 let notificationsEnabled = $state(true)
 
@@ -343,7 +349,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       title={I18nService.getMessage('settingsDataManagement')}
       iconColor="purple"
     />
-    <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
+    <BackupRestore
+      onRestore={async () => {
+        await settingsStore.reloadSettings()
+        // Switch to Proxy Configs tab to show the restored proxies
+        if (activeTab !== undefined) {
+          activeTab = 'proxy-configs'
+        }
+      }}
+    />
   </div>
 
   <!-- Keyboard Shortcuts Section -->
