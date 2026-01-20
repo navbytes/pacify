@@ -36,6 +36,8 @@ const DEFAULT_PROXY_CONFIG: ProxyServer = {
   scheme: 'http',
   host: '',
   port: '',
+  username: '',
+  password: '',
 }
 
 // Basic Settings
