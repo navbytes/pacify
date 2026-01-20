@@ -153,7 +153,7 @@ function handleCancelDelete() {
         </Text>
       </div>
     </div>
-    <Button onclick={onAddRule} variant="gradient" gradient="purple" size="sm">
+    <Button onclick={onAddRule} variant="gradient" gradient="purple" size="sm" data-testid="add-rule-btn">
       {#snippet icon()}
         <Plus size={16} />
       {/snippet}
@@ -285,6 +285,7 @@ function handleCancelDelete() {
                   variant="minimal"
                   aria-label={I18nService.getMessage('editRule')}
                   classes="p-2 min-w-[40px] min-h-[40px] text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+                  data-testid="edit-rule-btn-{rule.id}"
                 >
                   {#snippet icon()}
                     <Pencil size={16} />
@@ -297,6 +298,7 @@ function handleCancelDelete() {
                   variant="minimal"
                   aria-label={I18nService.getMessage('deleteRule')}
                   classes="p-2 min-w-[40px] min-h-[40px] text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+                  data-testid="delete-rule-btn-{rule.id}"
                 >
                   {#snippet icon()}
                     <Trash size={16} />
@@ -324,7 +326,7 @@ function handleCancelDelete() {
         <p class={emptyState.description()}>
           {I18nService.getMessage('noRulesDescription') || 'Add rules to define how URLs should be routed to different proxies'}
         </p>
-        <Button onclick={onAddRule} variant="gradient" gradient="purple">
+        <Button onclick={onAddRule} variant="gradient" gradient="purple" data-testid="add-rule-empty-btn">
           {#snippet icon()}
             <Plus size={18} />
           {/snippet}

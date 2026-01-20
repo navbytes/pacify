@@ -20,6 +20,8 @@ export interface ProxyServer {
   scheme: ProxyScheme
   host: string
   port: string
+  username?: string
+  password?: string
 }
 
 export interface ProxyRules {

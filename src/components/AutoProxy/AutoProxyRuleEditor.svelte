@@ -203,6 +203,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
           bind:value={pattern}
           placeholder={currentMatchType.description}
           class={formInputVariants({ state: inputState, variant: 'mono' })}
+          data-testid="rule-pattern-input"
         >
         {#if pattern && !patternError}
           <div class="absolute right-3 top-1/2 -translate-y-1/2">
@@ -343,6 +344,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
         bind:value={description}
         placeholder={I18nService.getMessage('ruleDescriptionPlaceholder')}
         class={formInputVariants({ state: 'teal' })}
+        data-testid="rule-description-input"
       >
     </div>
   </div>
@@ -391,7 +393,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
 
   <!-- Actions -->
   <div class="flex items-center justify-end gap-3 pt-2">
-    <Button color="secondary" onclick={onCancel} type="button" classes="px-6">
+    <Button color="secondary" onclick={onCancel} type="button" classes="px-6" data-testid="rule-cancel-btn">
       {I18nService.getMessage('cancel')}
     </Button>
 
@@ -401,6 +403,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
       variant="gradient"
       gradient="purple"
       classes="px-6"
+      data-testid="rule-save-btn"
     >
       {#snippet icon()}
         <Check size={16} />

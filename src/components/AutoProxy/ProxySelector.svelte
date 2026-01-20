@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Network, Server, Zap } from 'lucide-svelte'
+import { Network, Server, Zap, Eye, EyeOff } from 'lucide-svelte'
 import type { AutoProxyRouteType, ProxyConfig, ProxyServer } from '@/interfaces/settings'
 import { I18nService } from '@/services/i18n/i18nService'
 import { inputVariants } from '@/utils/classPatterns'
@@ -7,6 +7,8 @@ import { sectionInnerContentVariants } from '@/utils/classPatterns/autoProxy'
 import FlexGroup from '../FlexGroup.svelte'
 import SegmentedControl from '../SegmentedControl.svelte'
 import Text from '../Text.svelte'
+
+let showInlinePassword = $state(false)
 
 interface Props {
   proxyType: AutoProxyRouteType
@@ -27,10 +29,22 @@ let {
 // Filter out Auto-Proxy configs from available proxies
 let selectableProxies = $derived(availableProxies.filter((p) => p.autoProxy === undefined))
 
-// Local state for inline proxy
-let inlineHost = $derived(inlineProxy?.host || '')
-let inlinePort = $derived(inlineProxy?.port || '')
-let inlineScheme = $derived<ProxyServer['scheme']>(inlineProxy?.scheme || 'http')
+// Local state for inline proxy - these must be $state because they're used with bind:value
+// Initialize with defaults, $effect will sync with prop values
+let inlineHost = $state('')
+let inlinePort = $state('')
+let inlineScheme = $state<ProxyServer['scheme']>('http')
+let inlineUsername = $state('')
+let inlinePassword = $state('')
+
+// Sync local state with inlineProxy prop when it changes
+$effect(() => {
+  inlineHost = inlineProxy?.host || ''
+  inlinePort = inlineProxy?.port || ''
+  inlineScheme = inlineProxy?.scheme || 'http'
+  inlineUsername = inlineProxy?.username || ''
+  inlinePassword = inlineProxy?.password || ''
+})
 
 // Input styles
 const selectClasses = inputVariants({ size: 'md' })
@@ -64,7 +78,7 @@ function handleTypeChange(newType: string) {
   } else if (type === 'existing') {
     onchange('existing', selectableProxies[0]?.id)
   } else if (type === 'inline') {
-    onchange('inline', undefined, { scheme: 'http', host: '', port: '' })
+    onchange('inline', undefined, { scheme: 'http', host: '', port: '', username: '', password: '' })
   }
 }
 
@@ -78,6 +92,8 @@ function handleInlineChange() {
     scheme: inlineScheme,
     host: inlineHost,
     port: inlinePort,
+    username: inlineUsername,
+    password: inlinePassword,
   })
 }
 </script>
@@ -193,6 +209,65 @@ function handleInlineChange() {
           >
         </div>
       </FlexGroup>
+
+      <!-- Authentication fields (Optional) -->
+      <div class="pt-3 mt-3 border-t border-slate-200 dark:border-slate-700">
+        <Text size="xs" weight="medium" classes="block text-slate-600 dark:text-slate-400 mb-2">
+          {I18nService.getMessage('authentication') || 'Authentication'} ({I18nService.getMessage(
+            'optional'
+          ) || 'Optional'})
+        </Text>
+        <FlexGroup direction="horizontal" childrenGap="sm">
+          <div class="flex-1">
+            <label
+              for="inline-username"
+              class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1"
+            >
+              {I18nService.getMessage('username')}
+            </label>
+            <input
+              id="inline-username"
+              type="text"
+              bind:value={inlineUsername}
+              onchange={handleInlineChange}
+              placeholder={I18nService.getMessage('usernamePlaceholder') || 'username'}
+              class={smallInputClasses}
+            >
+          </div>
+          <div class="flex-1">
+            <label
+              for="inline-password"
+              class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1"
+            >
+              {I18nService.getMessage('password')}
+            </label>
+            <div class="relative">
+              <input
+                id="inline-password"
+                type={showInlinePassword ? 'text' : 'password'}
+                bind:value={inlinePassword}
+                onchange={handleInlineChange}
+                placeholder={I18nService.getMessage('passwordPlaceholder') || '••••••••'}
+                class={smallInputClasses + ' pr-8'}
+              >
+              <button
+                type="button"
+                onclick={() => (showInlinePassword = !showInlinePassword)}
+                class="absolute right-1.5 top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors rounded"
+                aria-label={showInlinePassword
+                  ? I18nService.getMessage('hidePassword') || 'Hide password'
+                  : I18nService.getMessage('showPassword') || 'Show password'}
+              >
+                {#if showInlinePassword}
+                  <EyeOff class="w-3.5 h-3.5" />
+                {:else}
+                  <Eye class="w-3.5 h-3.5" />
+                {/if}
+              </button>
+            </div>
+          </div>
+        </FlexGroup>
+      </div>
     </div>
   {/if}
 </div>

@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "プロキシを横並びリストで表示"
+  },
+  "authentication": {
+    "message": "認証"
+  },
+  "optional": {
+    "message": "オプション"
+  },
+  "authStorageInfo": {
+    "message": "認証情報はローカルに暗号化されて保存されます"
+  },
+  "username": {
+    "message": "ユーザー名"
+  },
+  "usernamePlaceholder": {
+    "message": "ユーザー名"
+  },
+  "password": {
+    "message": "パスワード"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "パスワードを非表示"
+  },
+  "showPassword": {
+    "message": "パスワードを表示"
+  },
+  "diagnostics": {
+    "message": "診断"
+  },
+  "tabDiagnostics": {
+    "message": "診断"
+  },
+  "diagnosticsDesc": {
+    "message": "デバッグ用のエラーログと診断情報を表示"
+  },
+  "diagnosticsExported": {
+    "message": "診断情報のエクスポートに成功しました"
+  },
+  "diagnosticsExportFailed": {
+    "message": "診断情報のエクスポートに失敗しました"
+  },
+  "confirmClearLogs": {
+    "message": "すべての診断ログをクリアしますか？"
+  },
+  "diagnosticsCleared": {
+    "message": "診断情報のクリアに成功しました"
+  },
+  "diagnosticsClearFailed": {
+    "message": "診断情報のクリアに失敗しました"
+  },
+  "allLogsMarkedRead": {
+    "message": "すべてのログを既読としてマークしました"
+  },
+  "justNow": {
+    "message": "たった今"
+  },
+  "markAllRead": {
+    "message": "すべて既読にする"
+  },
+  "export": {
+    "message": "エクスポート"
+  },
+  "clearAll": {
+    "message": "すべてクリア"
+  },
+  "noErrors": {
+    "message": "エラーは検出されませんでした"
+  },
+  "noErrorsDesc": {
+    "message": "プロキシは正常に動作しています！"
+  },
+  "details": {
+    "message": "詳細"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "スタックトレース"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "このプロキシには認証が設定されています"
   }
 }

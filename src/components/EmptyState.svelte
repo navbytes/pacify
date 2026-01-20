@@ -46,7 +46,7 @@ let Icon = $derived(icon)
 
   {#if actionLabel && onAction}
     <div class={cn(flexPatterns.centerVertical, 'gap-3')}>
-      <Button color="primary" onclick={onAction}>
+      <Button color="primary" onclick={onAction} data-testid="empty-state-action-btn">
         {#snippet icon()}
           <Plus size={18} />
         {/snippet}
@@ -54,7 +54,7 @@ let Icon = $derived(icon)
       </Button>
 
       {#if secondaryActionLabel && onSecondaryAction}
-        <Button color="secondary" onclick={onSecondaryAction}>{secondaryActionLabel}</Button>
+        <Button color="secondary" onclick={onSecondaryAction} data-testid="empty-state-secondary-action-btn">{secondaryActionLabel}</Button>
       {/if}
     </div>
   {/if}

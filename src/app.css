@@ -380,3 +380,25 @@ body.modal-open {
 .grid > * {
   @apply transition-all duration-200;
 }
+
+/* Settings label utility */
+.settings-label {
+  @apply text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100;
+}
+
+/* Common grid layouts */
+.grid-responsive-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+.grid-responsive-3 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+}
+
+.grid-responsive-4 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4;
+}
+
+.grid-settings-cards {
+  @apply grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4;
+}

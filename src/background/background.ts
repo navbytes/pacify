@@ -13,6 +13,7 @@ import type {
 import { SettingsReader, SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
+import { diagnosticsService } from '@/services/DiagnosticsService'
 import { logger } from '@/services/LoggerService'
 import { PACScriptGenerator } from '@/services/PACScriptGenerator'
 
@@ -382,6 +383,15 @@ async function setProxySettings(proxy: ProxyConfig): Promise<void> {
     await updateBadge(badgeLabel || name, color)
   } catch (error) {
     logger.error('Error setting proxy:', error)
+    await diagnosticsService.logError(
+      'PROXY_SET_FAILED',
+      error instanceof Error ? error.message : 'Failed to set proxy configuration',
+      {
+        proxyName: proxy.name,
+        proxyId: proxy.id,
+        details: error instanceof Error ? error.stack : String(error),
+      }
+    )
   }
 }
 
@@ -395,6 +405,13 @@ async function clearProxySettings(): Promise<void> {
     await updateBadge(DEFAULT_BADGE_TEXT, DEFAULT_BADGE_COLOR)
   } catch (error) {
     logger.error('Error clearing proxy:', error)
+    await diagnosticsService.logError(
+      'PROXY_CLEAR_FAILED',
+      error instanceof Error ? error.message : 'Failed to clear proxy configuration',
+      {
+        details: error instanceof Error ? error.stack : String(error),
+      }
+    )
   }
 }
 
@@ -496,6 +513,16 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
 
     if (!response.ok) {
       logger.error(`Failed to fetch PAC script: HTTP ${response.status}`)
+      await diagnosticsService.logError(
+        'PAC_SCRIPT_FETCH_FAILED',
+        `Failed to fetch PAC script: HTTP ${response.status}`,
+        {
+          proxyName: config.name,
+          proxyId: config.id,
+          url: config.pacScript.url,
+          details: `HTTP ${response.status} ${response.statusText}`,
+        }
+      )
       return
     }
 
@@ -520,6 +547,19 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
     }
   } catch (error) {
     logger.error(`Error refreshing PAC script for config ${configId}:`, error)
+
+    // Get config name for diagnostic log
+    const config = configs.find(c => c.id === configId)
+    await diagnosticsService.logError(
+      'PAC_SCRIPT_REFRESH_FAILED',
+      error instanceof Error ? error.message : 'Failed to refresh PAC script',
+      {
+        proxyName: config?.name,
+        proxyId: configId,
+        url: config?.pacScript?.url,
+        details: error instanceof Error ? error.stack : String(error),
+      }
+    )
   }
 }
 

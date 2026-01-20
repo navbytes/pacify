@@ -3,11 +3,10 @@ import { onMount } from 'svelte'
 import { cubicOut } from 'svelte/easing'
 import { fade, slide } from 'svelte/transition'
 import type { ProxyConfig, ProxyMode, ProxyServer, ProxySettings } from '@/interfaces'
-import { ERROR_TYPES } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
-import { NotifyService } from '@/services/NotifyService'
 import { SettingsWriter } from '@/services/SettingsWriter'
+import { toastStore } from '@/stores/toastStore'
 import {
   flexPatterns,
   modalBackdropVariants,
@@ -37,6 +36,8 @@ const DEFAULT_PROXY_CONFIG: ProxyServer = {
   scheme: 'http',
   host: '',
   port: '',
+  username: '',
+  password: '',
 }
 
 // Basic Settings
@@ -121,13 +122,14 @@ async function handlePacRefresh() {
       await SettingsWriter.updatePACScript(updatedConfig)
     }
 
-    // Show success message (only logs to console in current implementation)
+    // Show success message
     const successMsg =
       I18nService.getMessage('pacScriptRefreshed') || 'PAC script refreshed successfully'
-    console.info(`[SUCCESS] ${successMsg}`)
+    toastStore.show(successMsg, 'success')
   } catch (error) {
     logger.error('Error refreshing PAC script:', error)
-    NotifyService.error(ERROR_TYPES.VALIDATION, error)
+    const errorMsg = I18nService.getMessage('pacScriptRefreshFailed') || 'Failed to refresh PAC script'
+    toastStore.show(errorMsg, 'error')
   }
 }
 
@@ -233,7 +235,6 @@ async function handleSubmit(event: Event) {
     logger.error('Error saving proxy configuration:', error)
     errorMessage =
       error instanceof Error ? error.message : I18nService.getMessage('invalidConfiguration')
-    NotifyService.error(ERROR_TYPES.VALIDATION, error)
   } finally {
     isSubmitting = false
   }
@@ -355,6 +356,7 @@ function handleKeydown(event: KeyboardEvent) {
               variant="minimal"
               aria-label="Close"
               classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              data-testid="modal-close-btn"
             >
               {#snippet icon()}
                 <X size={20} />
@@ -518,7 +520,7 @@ function handleKeydown(event: KeyboardEvent) {
           class="relative px-6 py-4 border-t border-slate-200/50 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50"
         >
           <div class="flex items-center justify-end gap-3">
-            <Button type="button" onclick={handleClose} color="secondary" classes="px-5">
+            <Button type="button" onclick={handleClose} color="secondary" classes="px-5" data-testid="modal-cancel-btn">
               {I18nService.getMessage('cancel')}
             </Button>
 
@@ -528,6 +530,7 @@ function handleKeydown(event: KeyboardEvent) {
               variant="gradient"
               gradient="blue"
               classes="px-6"
+              data-testid="modal-save-btn"
             >
               {#snippet icon()}
                 {#if isSubmitting}

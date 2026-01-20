@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "Afișează proxy-urile într-o listă orizontală"
+  },
+  "authentication": {
+    "message": "Autentificare"
+  },
+  "optional": {
+    "message": "Opțional"
+  },
+  "authStorageInfo": {
+    "message": "Acreditările sunt stocate local și criptate"
+  },
+  "username": {
+    "message": "Nume utilizator"
+  },
+  "usernamePlaceholder": {
+    "message": "nume utilizator"
+  },
+  "password": {
+    "message": "Parolă"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "Ascunde parola"
+  },
+  "showPassword": {
+    "message": "Arată parola"
+  },
+  "diagnostics": {
+    "message": "Diagnosticare"
+  },
+  "tabDiagnostics": {
+    "message": "Diagnosticare"
+  },
+  "diagnosticsDesc": {
+    "message": "Vizualizați jurnalele de erori și informațiile de diagnosticare pentru depanare"
+  },
+  "diagnosticsExported": {
+    "message": "Diagnosticare exportată cu succes"
+  },
+  "diagnosticsExportFailed": {
+    "message": "Exportarea diagnosticării a eșuat"
+  },
+  "confirmClearLogs": {
+    "message": "Ștergeți toate jurnalele de diagnosticare?"
+  },
+  "diagnosticsCleared": {
+    "message": "Diagnosticare ștearsă cu succes"
+  },
+  "diagnosticsClearFailed": {
+    "message": "Ștergerea diagnosticării a eșuat"
+  },
+  "allLogsMarkedRead": {
+    "message": "Toate jurnalele au fost marcate ca citite"
+  },
+  "justNow": {
+    "message": "Chiar acum"
+  },
+  "markAllRead": {
+    "message": "Marchează toate ca citite"
+  },
+  "export": {
+    "message": "Exportă"
+  },
+  "clearAll": {
+    "message": "Șterge tot"
+  },
+  "noErrors": {
+    "message": "Nu au fost detectate erori"
+  },
+  "noErrorsDesc": {
+    "message": "Proxy-urile tale funcționează bine!"
+  },
+  "details": {
+    "message": "Detalii"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "Urmărire stivă"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "Acest proxy are autentificare configurată"
   }
 }

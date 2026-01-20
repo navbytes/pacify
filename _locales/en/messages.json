@@ -875,5 +875,92 @@
   },
   "viewModeListDescription": {
     "message": "Display proxies in a horizontal list"
+  },
+  "authentication": {
+    "message": "Authentication"
+  },
+  "optional": {
+    "message": "Optional"
+  },
+  "authStorageInfo": {
+    "message": "Credentials are stored locally and encrypted"
+  },
+  "username": {
+    "message": "Username"
+  },
+  "usernamePlaceholder": {
+    "message": "username"
+  },
+  "password": {
+    "message": "Password"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "Hide password"
+  },
+  "showPassword": {
+    "message": "Show password"
+  },
+  "diagnostics": {
+    "message": "Diagnostics"
+  },
+  "tabDiagnostics": {
+    "message": "Diagnostics"
+  },
+  "diagnosticsDesc": {
+    "message": "View error logs and diagnostic information for debugging"
+  },
+  "diagnosticsExported": {
+    "message": "Diagnostics exported successfully"
+  },
+  "diagnosticsExportFailed": {
+    "message": "Failed to export diagnostics"
+  },
+  "confirmClearLogs": {
+    "message": "Clear all diagnostic logs?"
+  },
+  "diagnosticsCleared": {
+    "message": "Diagnostics cleared successfully"
+  },
+  "diagnosticsClearFailed": {
+    "message": "Failed to clear diagnostics"
+  },
+  "allLogsMarkedRead": {
+    "message": "All logs marked as read"
+  },
+  "justNow": {
+    "message": "Just now"
+  },
+  "markAllRead": {
+    "message": "Mark all read"
+  },
+  "export": {
+    "message": "Export"
+  },
+  "clearAll": {
+    "message": "Clear all"
+  },
+  "noErrors": {
+    "message": "No errors detected"
+  },
+  "noErrorsDesc": {
+    "message": "Your proxies are working fine!"
+  },
+  "details": {
+    "message": "Details"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "Stack Trace"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "This proxy has authentication configured"
   }
 }

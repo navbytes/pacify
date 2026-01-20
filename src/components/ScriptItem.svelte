@@ -11,7 +11,7 @@ import {
   scriptItemVariants,
 } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
-import { GripVertical, Pencil, ShieldCheck, Trash } from '@/utils/icons'
+import { GripVertical, Lock, Pencil, ShieldCheck, Trash } from '@/utils/icons'
 import {
   findAutoProxyReferences,
   getProxyDescription,
@@ -51,6 +51,38 @@ let showDeleteDialog = $state(false)
 let autoProxyRefs = $derived(
   proxy.id ? findAutoProxyReferences(proxy.id, settings.proxyConfigs) : []
 )
+
+// Check if proxy has authentication configured
+let hasAuthentication = $derived(() => {
+  // Check manual proxy rules
+  if (proxy.rules) {
+    const checkProxy = (p: typeof proxy.rules.singleProxy) =>
+      p && (p.username || p.password)
+
+    if (checkProxy(proxy.rules.singleProxy)) return true
+    if (checkProxy(proxy.rules.proxyForHttp)) return true
+    if (checkProxy(proxy.rules.proxyForHttps)) return true
+    if (checkProxy(proxy.rules.proxyForFtp)) return true
+    if (checkProxy(proxy.rules.fallbackProxy)) return true
+  }
+
+  // Check Auto-Proxy inline proxies
+  if (proxy.autoProxy) {
+    // Check rules with inline proxies
+    const hasAuthInRules = proxy.autoProxy.rules.some(rule =>
+      rule.inlineProxy && (rule.inlineProxy.username || rule.inlineProxy.password)
+    )
+    if (hasAuthInRules) return true
+
+    // Check fallback inline proxy
+    if (proxy.autoProxy.fallbackInlineProxy &&
+        (proxy.autoProxy.fallbackInlineProxy.username || proxy.autoProxy.fallbackInlineProxy.password)) {
+      return true
+    }
+  }
+
+  return false
+})
 
 // Generate delete confirmation message with Auto-Proxy warning if applicable
 let deleteMessage = $derived(() => {
@@ -220,6 +252,24 @@ async function handleScriptDelete() {
             >
               <ShieldCheck size={12} aria-hidden="true" />
               Active
+            </span>
+          {/if}
+
+          {#if hasAuthentication()}
+            <span
+              class={cn(
+                badgePatterns.base,
+                'font-medium border',
+                'bg-amber-50 dark:bg-amber-900/20',
+                'text-amber-700 dark:text-amber-300',
+                'border-amber-200 dark:border-amber-800',
+                'rounded-md'
+              )}
+              role="status"
+              aria-label="This proxy uses authentication"
+              title={I18nService.getMessage('proxyHasAuth') || 'Authentication configured'}
+            >
+              <Lock size={11} aria-hidden="true" />
             </span>
           {/if}
         </div>

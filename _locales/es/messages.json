@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "Mostrar proxies en lista horizontal"
+  },
+  "authentication": {
+    "message": "Autenticación"
+  },
+  "optional": {
+    "message": "Opcional"
+  },
+  "authStorageInfo": {
+    "message": "Las credenciales se almacenan localmente y cifradas"
+  },
+  "username": {
+    "message": "Nombre de usuario"
+  },
+  "usernamePlaceholder": {
+    "message": "nombre de usuario"
+  },
+  "password": {
+    "message": "Contraseña"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "Ocultar contraseña"
+  },
+  "showPassword": {
+    "message": "Mostrar contraseña"
+  },
+  "diagnostics": {
+    "message": "Diagnóstico"
+  },
+  "tabDiagnostics": {
+    "message": "Diagnóstico"
+  },
+  "diagnosticsDesc": {
+    "message": "Ver registros de errores e información de diagnóstico para depuración"
+  },
+  "diagnosticsExported": {
+    "message": "Diagnóstico exportado correctamente"
+  },
+  "diagnosticsExportFailed": {
+    "message": "Error al exportar diagnóstico"
+  },
+  "confirmClearLogs": {
+    "message": "¿Borrar todos los registros de diagnóstico?"
+  },
+  "diagnosticsCleared": {
+    "message": "Diagnóstico borrado correctamente"
+  },
+  "diagnosticsClearFailed": {
+    "message": "Error al borrar diagnóstico"
+  },
+  "allLogsMarkedRead": {
+    "message": "Todos los registros marcados como leídos"
+  },
+  "justNow": {
+    "message": "Justo ahora"
+  },
+  "markAllRead": {
+    "message": "Marcar todo como leído"
+  },
+  "export": {
+    "message": "Exportar"
+  },
+  "clearAll": {
+    "message": "Borrar todo"
+  },
+  "noErrors": {
+    "message": "No se detectaron errores"
+  },
+  "noErrorsDesc": {
+    "message": "¡Tus proxies funcionan correctamente!"
+  },
+  "details": {
+    "message": "Detalles"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "Seguimiento de pila"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "Este proxy tiene autenticación configurada"
   }
 }

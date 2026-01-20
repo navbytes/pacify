@@ -260,6 +260,7 @@ let selectableProxies = $derived(
           variant="minimal"
           aria-label={I18nService.getMessage('close')}
           classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+          data-testid="auto-proxy-close-btn"
         >
           {#snippet icon()}
             <X size={20} />
@@ -469,7 +470,7 @@ let selectableProxies = $derived(
           </div>
 
           <FlexGroup direction="horizontal" childrenGap="sm">
-            <Button color="secondary" onclick={handleClose}>
+            <Button color="secondary" onclick={handleClose} data-testid="auto-proxy-cancel-btn">
               {I18nService.getMessage('cancel')}
             </Button>
             <Button
@@ -477,6 +478,7 @@ let selectableProxies = $derived(
               disabled={isSubmitting || isAddingRule || !!editingRule}
               variant="gradient"
               gradient="orange"
+              data-testid="auto-proxy-save-btn"
             >
               {#snippet icon()}
                 <Save size={16} />

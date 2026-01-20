@@ -5,7 +5,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { keyboardShortcutCardVariants } from '@/utils/classPatterns'
 import { Keyboard } from '@/utils/icons'
 
-const styles = keyboardShortcutCardVariants({ color: 'indigo' })
+const styles = keyboardShortcutCardVariants({ color: 'slate' })
 
 const shortcuts = $derived([
   {

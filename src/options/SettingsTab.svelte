@@ -11,6 +11,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { StorageService } from '@/services/StorageService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
+import { settingsCardVariants } from '@/utils/classPatterns'
 import {
   Bell,
   BookOpen,
@@ -28,8 +29,20 @@ import {
   Star,
 } from '@/utils/icons'
 
+interface Props {
+  activeTab?: string
+}
+
+let { activeTab = $bindable() }: Props = $props()
+
 let settings = $derived($settingsStore)
 let notificationsEnabled = $state(true)
+
+// Card variants for different settings cards
+const blueCard = settingsCardVariants({ color: 'blue', size: 'md' })
+const greenCard = settingsCardVariants({ color: 'green', size: 'md' })
+const purpleCard = settingsCardVariants({ color: 'purple', size: 'md' })
+const amberCard = settingsCardVariants({ color: 'amber', size: 'md' })
 
 // Load notification preference on mount
 $effect(() => {
@@ -90,23 +103,17 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     />
 
     <!-- Grid layout for proxy behavior cards -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+    <div class="grid-settings-cards">
       <!-- Disable Proxy on Startup Card -->
-      <div
-        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-blue-200/50 dark:border-blue-800/30"
-      >
+      <div class="group {blueCard.wrapper()}">
         <!-- Background gradient -->
-        <div
-          class="absolute inset-0 bg-linear-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30 rounded-2xl overflow-hidden"
-        ></div>
+        <div class={blueCard.background()}></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 to-indigo-500"
-        ></div>
+        <div class={blueCard.accent()}></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -118,18 +125,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div
-                  class="relative w-12 h-12 bg-linear-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300"
-                >
+                <div class={blueCard.icon()}>
                   <Shield size={22} class="text-white" />
                 </div>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2">
-                  <label
-                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
-                    for="disableProxyOnStartupToggle"
-                  >
+                  <label class="settings-label" for="disableProxyOnStartupToggle">
                     {I18nService.getMessage('disableProxyOnStartup')}
                   </label>
                   <Tooltip text={I18nService.getMessage('tooltipDisableOnStartup')} position="top">
@@ -152,21 +154,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- Auto-reload toggle Card -->
-      <div
-        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-green-200/50 dark:border-green-800/30"
-      >
+      <div class="group {greenCard.wrapper()}">
         <!-- Background gradient -->
-        <div
-          class="absolute inset-0 bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 rounded-2xl overflow-hidden"
-        ></div>
+        <div class={greenCard.background()}></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-green-500 to-emerald-500"
-        ></div>
+        <div class={greenCard.accent()}></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -178,18 +174,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div
-                  class="relative w-12 h-12 bg-linear-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:scale-110 transition-transform duration-300"
-                >
+                <div class={greenCard.icon()}>
                   <RefreshCw size={22} class="text-white" />
                 </div>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2">
-                  <label
-                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
-                    for="autoReloadToggle"
-                  >
+                  <label class="settings-label" for="autoReloadToggle">
                     {I18nService.getMessage('autoReloadOnProxySwitch')}
                   </label>
                   <Tooltip text={I18nService.getMessage('tooltipAutoReload')} position="top">
@@ -212,21 +203,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- System Notifications Card -->
-      <div
-        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-purple-200/50 dark:border-purple-800/30"
-      >
+      <div class="group {purpleCard.wrapper()}">
         <!-- Background gradient -->
-        <div
-          class="absolute inset-0 bg-linear-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30 rounded-2xl overflow-hidden"
-        ></div>
+        <div class={purpleCard.background()}></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-purple-500 to-violet-500"
-        ></div>
+        <div class={purpleCard.accent()}></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -238,18 +223,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div
-                  class="relative w-12 h-12 bg-linear-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:scale-110 transition-transform duration-300"
-                >
+                <div class={purpleCard.icon()}>
                   <Bell size={22} class="text-white" />
                 </div>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2">
-                  <label
-                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
-                    for="notificationsToggle"
-                  >
+                  <label class="settings-label" for="notificationsToggle">
                     {I18nService.getMessage('systemNotifications')}
                   </label>
                   <Tooltip
@@ -275,21 +255,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- Show Quick Settings Card -->
-      <div
-        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-amber-200/50 dark:border-amber-800/30"
-      >
+      <div class="group {amberCard.wrapper()}">
         <!-- Background gradient -->
-        <div
-          class="absolute inset-0 bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30 rounded-2xl overflow-hidden"
-        ></div>
+        <div class={amberCard.background()}></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-amber-500 to-orange-500"
-        ></div>
+        <div class={amberCard.accent()}></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -301,18 +275,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div
-                  class="relative w-12 h-12 bg-linear-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/25 group-hover:scale-110 transition-transform duration-300"
-                >
+                <div class={amberCard.icon()}>
                   <Eye size={22} class="text-white" />
                 </div>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2">
-                  <label
-                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
-                    for="showQuickSettingsToggle"
-                  >
+                  <label class="settings-label" for="showQuickSettingsToggle">
                     {I18nService.getMessage('showQuickSettings')}
                   </label>
                   <Tooltip text={I18nService.getMessage('showQuickSettingsTooltip')} position="top">
@@ -343,7 +312,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       title={I18nService.getMessage('settingsDataManagement')}
       iconColor="purple"
     />
-    <BackupRestore onRestore={() => settingsStore.reloadSettings()} />
+    <BackupRestore
+      onRestore={async () => {
+        await settingsStore.reloadSettings()
+        // Switch to Proxy Configs tab to show the restored proxies
+        if (activeTab !== undefined) {
+          activeTab = 'proxy-configs'
+        }
+      }}
+    />
   </div>
 
   <!-- Keyboard Shortcuts Section -->
@@ -356,7 +333,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       title={I18nService.getMessage('feedbackAndRating') || 'Feedback & Rating'}
       iconColor="pink"
     />
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid-responsive-3">
       <!-- Rate Extension Card -->
       <LinkCard
         href="https://chromewebstore.google.com/detail/pacify-the-proxy-manager/kgepmkaldicdcljckhamnhkigddnbcbd/reviews"
@@ -388,7 +365,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       title={I18nService.getMessage('aboutHelpResources')}
       iconColor="purple"
     />
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid-responsive-4">
       <LinkCard
         href="https://github.com/navbytes/pacify"
         icon={Github}

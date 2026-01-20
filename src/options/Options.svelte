@@ -10,18 +10,21 @@ import Toast from '@/components/Toast.svelte'
 import type { ProxyConfig } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
+import { diagnosticsService } from '@/services/DiagnosticsService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
-import { Cable, Settings } from '@/utils/icons'
+import { Cable, Settings, Activity } from '@/utils/icons'
 import { isAutoProxy } from '@/utils/proxyModeHelpers'
 import ProxyConfigsTab from './ProxyConfigsTab.svelte'
 import SettingsTab from './SettingsTab.svelte'
+import DiagnosticsTab from './DiagnosticsTab.svelte'
 
 let showEditor = $state(false)
 let showAutoProxyEditor = $state(false)
 let editingScriptId = $state<string | null>(null)
 let settings = $derived($settingsStore)
 let activeTab = $state('proxy-configs')
+let unreadDiagnosticCount = $state(0)
 
 // Dynamic import for ProxyConfigModal - only load when needed
 // biome-ignore lint/suspicious/noExplicitAny: Dynamic Svelte component types need any for flexibility
@@ -34,6 +37,9 @@ let isLoadingAutoProxyModal = $state(false)
 onMount(() => {
   const init = async () => {
     await settingsStore.init()
+
+    // Load unread diagnostic count
+    unreadDiagnosticCount = await diagnosticsService.getUnreadCount()
 
     // Load saved active tab
     const saved = await chrome.storage.local.get('options.activeTab')
@@ -78,6 +84,15 @@ onMount(() => {
 $effect(() => {
   if (activeTab) {
     chrome.storage.local.set({ 'options.activeTab': activeTab })
+  }
+})
+
+// Refresh unread diagnostic count when switching to diagnostics tab
+$effect(() => {
+  if (activeTab === 'diagnostics') {
+    diagnosticsService.getUnreadCount().then(count => {
+      unreadDiagnosticCount = count
+    })
   }
 })
 
@@ -235,6 +250,9 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
             <TabList>
               <Tab id="proxy-configs" icon={Cable}>{I18nService.getMessage('tabProxyConfigs')}</Tab>
               <Tab id="settings" icon={Settings}>{I18nService.getMessage('tabSettings')}</Tab>
+              <Tab id="diagnostics" icon={Activity} badge={unreadDiagnosticCount > 0 ? unreadDiagnosticCount : undefined}>
+                {I18nService.getMessage('tabDiagnostics') || 'Diagnostics'}
+              </Tab>
             </TabList>
           </div>
         </div>
@@ -251,7 +269,12 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
 
     <!-- Tab 2: Settings -->
     <TabPanel id="settings">
-      <SettingsTab />
+      <SettingsTab bind:activeTab />
+    </TabPanel>
+
+    <!-- Tab 3: Diagnostics -->
+    <TabPanel id="diagnostics">
+      <DiagnosticsTab />
     </TabPanel>
   </Tabs>
 

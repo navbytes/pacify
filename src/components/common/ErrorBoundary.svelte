@@ -38,6 +38,7 @@ onMount(() => {
         hasError = false
         error = null
       }}
+      data-testid="error-boundary-retry-btn"
     >
       {I18nService.getMessage('errorBoundaryRetry')}
     </Button>

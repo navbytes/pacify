@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "Proxys in einer horizontalen Liste anzeigen"
+  },
+  "authentication": {
+    "message": "Authentifizierung"
+  },
+  "optional": {
+    "message": "Optional"
+  },
+  "authStorageInfo": {
+    "message": "Anmeldeinformationen werden lokal und verschlüsselt gespeichert"
+  },
+  "username": {
+    "message": "Benutzername"
+  },
+  "usernamePlaceholder": {
+    "message": "benutzername"
+  },
+  "password": {
+    "message": "Passwort"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "Passwort verbergen"
+  },
+  "showPassword": {
+    "message": "Passwort anzeigen"
+  },
+  "diagnostics": {
+    "message": "Diagnose"
+  },
+  "tabDiagnostics": {
+    "message": "Diagnose"
+  },
+  "diagnosticsDesc": {
+    "message": "Fehlerprotokolle und Diagnoseinformationen zur Fehlerbehebung anzeigen"
+  },
+  "diagnosticsExported": {
+    "message": "Diagnose erfolgreich exportiert"
+  },
+  "diagnosticsExportFailed": {
+    "message": "Export der Diagnose fehlgeschlagen"
+  },
+  "confirmClearLogs": {
+    "message": "Alle Diagnoseprotokolle löschen?"
+  },
+  "diagnosticsCleared": {
+    "message": "Diagnose erfolgreich gelöscht"
+  },
+  "diagnosticsClearFailed": {
+    "message": "Löschen der Diagnose fehlgeschlagen"
+  },
+  "allLogsMarkedRead": {
+    "message": "Alle Protokolle als gelesen markiert"
+  },
+  "justNow": {
+    "message": "Gerade eben"
+  },
+  "markAllRead": {
+    "message": "Alle als gelesen markieren"
+  },
+  "export": {
+    "message": "Exportieren"
+  },
+  "clearAll": {
+    "message": "Alle löschen"
+  },
+  "noErrors": {
+    "message": "Keine Fehler erkannt"
+  },
+  "noErrorsDesc": {
+    "message": "Ihre Proxys funktionieren einwandfrei!"
+  },
+  "details": {
+    "message": "Details"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "Stack-Trace"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "Für diesen Proxy ist die Authentifizierung konfiguriert"
   }
 }

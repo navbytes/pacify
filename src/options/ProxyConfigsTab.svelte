@@ -226,7 +226,7 @@ async function handleViewModeChange(mode: ViewMode) {
           text={I18nService.getMessage('addAutoProxyTooltip') || 'Create URL-based routing rules'}
           position="bottom"
         >
-          <Button variant="gradient" gradient="orange" onclick={onOpenAutoProxyEditor}>
+          <Button variant="gradient" gradient="orange" onclick={onOpenAutoProxyEditor} data-testid="add-auto-proxy-btn">
             {#snippet icon()}
               <GitBranch size={16} />
             {/snippet}
