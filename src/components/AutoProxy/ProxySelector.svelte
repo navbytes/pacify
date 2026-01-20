@@ -30,11 +30,12 @@ let {
 let selectableProxies = $derived(availableProxies.filter((p) => p.autoProxy === undefined))
 
 // Local state for inline proxy - these must be $state because they're used with bind:value
-let inlineHost = $state(inlineProxy?.host || '')
-let inlinePort = $state(inlineProxy?.port || '')
-let inlineScheme = $state<ProxyServer['scheme']>(inlineProxy?.scheme || 'http')
-let inlineUsername = $state(inlineProxy?.username || '')
-let inlinePassword = $state(inlineProxy?.password || '')
+// Initialize with defaults, $effect will sync with prop values
+let inlineHost = $state('')
+let inlinePort = $state('')
+let inlineScheme = $state<ProxyServer['scheme']>('http')
+let inlineUsername = $state('')
+let inlinePassword = $state('')
 
 // Sync local state with inlineProxy prop when it changes
 $effect(() => {
