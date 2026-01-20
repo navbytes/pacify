@@ -5,6 +5,93 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.28.0] - 2026-01-20
+
+### Added
+
+- **Proxy Authentication Support** 🔐
+  - Username and password fields for proxy server authentication
+  - Collapsible authentication section in Manual Proxy configuration
+    - Auto-expands when credentials are already configured
+    - Password visibility toggle with eye icon
+    - Responsive two-column layout for username/password fields
+    - Info banner explaining credential storage (encrypted in Chrome sync storage)
+  - Authentication support for Auto-Proxy inline proxy definitions
+    - Username and password inputs in inline proxy configuration
+    - Password visibility toggle for inline proxies
+  - Lock icon badge on proxy cards indicating authentication is configured
+    - Amber-colored badge automatically appears when credentials are detected
+    - Supports manual proxy rules (all protocols) and Auto-Proxy inline proxies
+    - Includes tooltip explaining authentication status
+  - Full TypeScript interface support with optional `username` and `password` fields
+
+- **Error Logging & Diagnostics System** 📊
+  - New `DiagnosticsService` for centralized error logging
+    - Three severity levels: error, warning, info
+    - Storage limits: 1000 entries or 30 days (whichever comes first)
+    - Read/unread tracking for new errors
+    - Export logs as JSON for debugging and support
+    - Auto-trim old entries based on age and count limits
+  - New Diagnostics tab in Options page
+    - Activity icon with badge count showing unread errors
+    - Comprehensive log entry display with expandable details
+    - Severity-based color coding (red/amber/blue icons)
+    - Relative timestamps ("2 minutes ago", "1 hour ago")
+    - Expandable log details showing:
+      - Full error messages
+      - Stack traces
+      - URLs
+      - Additional context (proxy name, ID, etc.)
+    - Actions: Export logs, Clear all logs, Mark all as read
+    - Empty state with positive messaging when no errors detected
+  - Diagnostic logging integrated in background service
+    - `PROXY_SET_FAILED` - Logs when proxy configuration fails
+    - `PROXY_CLEAR_FAILED` - Logs when clearing proxy fails
+    - `PAC_SCRIPT_FETCH_FAILED` - Logs HTTP errors when fetching PAC scripts
+    - `PAC_SCRIPT_REFRESH_FAILED` - Logs failures during auto-refresh
+    - All errors include proxy name, ID, URLs, and full stack traces
+
+### Changed
+
+- **ProxyServer Interface**
+  - Added optional `username` and `password` fields for authentication
+  - Maintains backward compatibility with existing configurations
+
+- **User Interface**
+  - Enhanced proxy cards with visual authentication indicator (lock icon)
+  - Improved Options page navigation with new Diagnostics tab
+  - Added badge notification system for unread diagnostic logs
+
+### Technical
+
+- **New Services**
+  - `DiagnosticsService` - Manages diagnostic logs with storage and persistence
+  - Chrome local storage integration for diagnostic log persistence
+
+- **New Components**
+  - `DiagnosticsTab.svelte` - Full diagnostic log viewer with export/clear functionality
+
+- **Enhanced Components**
+  - `ProxyInput.svelte` - Authentication section with password visibility toggle
+  - `ProxySelector.svelte` - Inline proxy authentication for Auto-Proxy rules
+  - `ScriptItem.svelte` - Lock icon badge detection and display
+
+- **TypeScript Enhancements**
+  - New `DiagnosticLogEntry` interface with severity, type, message, and metadata
+  - Updated `ProxyServer` interface with authentication fields
+
+- **Background Service Integration**
+  - Error logging at critical failure points
+  - Full context capture (proxy details, URLs, stack traces)
+  - Automatic log trimming based on age and count
+
+### Security
+
+- **Credential Storage**
+  - Proxy credentials stored encrypted in Chrome sync storage
+  - Automatic synchronization across user's Chrome browsers
+  - Clear UI messaging about credential storage location and encryption
+
 ## [1.27.0] - 2026-01-18
 
 ### Added
