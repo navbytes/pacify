@@ -92,6 +92,7 @@ function handleNameInput() {
       maxlength={MAX_NAME_LENGTH}
       class={inputVariants({ state: nameError && nameTouched ? 'error' : 'default', size: 'md' })}
       placeholder={I18nService.getMessage('enterConfigurationName')}
+      data-testid="config-name-input"
     >
     {#if nameError && nameTouched}
       <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">{nameError}</Text>
@@ -111,7 +112,7 @@ function handleNameInput() {
           <Text classes="relative inline-flex py-2 px-4">&nbsp;</Text>
         {/snippet}
         {#snippet input()}
-          <input type="color" bind:value={color}>
+          <input type="color" bind:value={color} data-testid="config-color-input">
         {/snippet}
       </LabelButton>
     </div>
@@ -142,6 +143,7 @@ function handleNameInput() {
       maxlength={MAX_BADGE_LENGTH}
       placeholder="Auto"
       class={inputVariants({ size: 'md' })}
+      data-testid="config-badge-input"
     >
     <!-- Badge Preview -->
     <div

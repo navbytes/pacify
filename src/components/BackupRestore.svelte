@@ -89,6 +89,7 @@ async function handleRestore(event: Event) {
           color="secondary"
           onclick={handleBackup}
           aria-label="Backup all proxy configurations and settings"
+          data-testid="backup-btn"
         >
           {#snippet icon()}
             <Download size={18} />
@@ -125,6 +126,7 @@ async function handleRestore(event: Event) {
           color="secondary"
           onclick={triggerFileInput}
           aria-label="Upload backup file to restore configurations"
+          data-testid="restore-btn"
         >
           {#snippet icon()}
             <Upload size={18} />
@@ -138,6 +140,7 @@ async function handleRestore(event: Event) {
           onchange={handleRestore}
           class="hidden"
           aria-label="Upload backup file to restore configurations"
+          data-testid="restore-file-input"
         >
         <Text as="p" size="xs" color="muted" classes="px-1">
           {I18nService.getMessage('restoreDescription')}

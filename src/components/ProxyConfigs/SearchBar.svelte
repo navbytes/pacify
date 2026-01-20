@@ -52,6 +52,7 @@ export function blur() {
       inputVariants({ state: 'default', size: 'md' }),
       'block pl-10 pr-10 py-2.5 rounded-lg transition-all duration-150'
     )}
+    data-testid="search-proxies-input"
   >
   {#if searchQuery}
     <button
@@ -59,6 +60,7 @@ export function blur() {
       onclick={handleClear}
       class={cn(styles.clearButton(), 'hover:text-slate-700 dark:hover:text-slate-300')}
       aria-label="Clear search"
+      data-testid="clear-search-btn"
     >
       <X size={18} class={cn(styles.icon(), 'hover:text-slate-600 dark:hover:text-slate-300')} />
     </button>

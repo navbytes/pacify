@@ -45,6 +45,7 @@ function getIcon(type: ToastType) {
         variant="minimal"
         aria-label={I18nService.getMessage('closeNotification') || 'Close notification'}
         classes="shrink-0 opacity-70 hover:opacity-100 min-h-11 min-w-11 hover:bg-white/20"
+        data-testid="toast-close-btn"
       >
         {#snippet icon()}
           <X size={16} aria-hidden="true" />

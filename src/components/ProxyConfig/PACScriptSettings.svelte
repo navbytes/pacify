@@ -219,6 +219,7 @@ onDestroy(async () => {
       onblur={handleUrlBlur}
       class={inputVariants({ state: urlError && urlTouched ? 'error' : 'default', size: 'md' })}
       placeholder={I18nService.getMessage('pacUrlPlaceholder') || 'http://example.com/proxy.pac'}
+      data-testid="pac-url-input"
     >
     {#if urlError && urlTouched}
       <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">{urlError}</Text>
@@ -241,6 +242,7 @@ onDestroy(async () => {
             id="updateInterval"
             bind:value={updateInterval}
             class={inputVariants({ state: 'default', size: 'md' })}
+            data-testid="pac-update-interval-select"
           >
             <option value={0}>{I18nService.getMessage('noAutoUpdate') || 'No auto-update'}</option>
             <option value={15}>15 {I18nService.getMessage('minutes') || 'minutes'}</option>
@@ -253,7 +255,7 @@ onDestroy(async () => {
           </select>
         </div>
         <div class="flex flex-col items-end gap-1" style="margin-top: 1.5rem;">
-          <Button color="primary" onclick={handleRefresh} disabled={isRefreshing}>
+          <Button color="primary" onclick={handleRefresh} disabled={isRefreshing} data-testid="pac-refresh-btn">
             {#if isRefreshing}
               {I18nService.getMessage('refreshing') || 'Refreshing...'}
             {:else}
@@ -279,16 +281,16 @@ onDestroy(async () => {
         <Text size="sm" weight="medium" classes="text-slate-700 dark:text-slate-300">
           {I18nService.getMessage('templates')}
         </Text>
-        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.empty)}>
+        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.empty)} data-testid="template-empty-btn">
           {I18nService.getMessage('emptyTemplate')}
         </Button>
-        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.basic)}>
+        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.basic)} data-testid="template-basic-btn">
           {I18nService.getMessage('basicTemplate')}
         </Button>
-        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.advanced)}>
+        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.advanced)} data-testid="template-advanced-btn">
           {I18nService.getMessage('advancedTemplate')}
         </Button>
-        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.pro)}>
+        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.pro)} data-testid="template-pro-btn">
           {I18nService.getMessage('proTemplate')}
         </Button>
       </FlexGroup>

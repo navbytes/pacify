@@ -112,13 +112,14 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
           onkeydown={handleKeydown}
           placeholder={I18nService.getMessage('testUrlPlaceholder') || 'Enter a URL to test (e.g., https://google.com)'}
           class="{formInputVariants({ state: 'cyan' })} pl-11"
+          data-testid="test-url-input"
         >
         <div
           class="absolute inset-0 rounded-xl bg-linear-to-r from-cyan-500 to-blue-500 opacity-0 group-focus-within:opacity-10 -z-10 blur transition-opacity duration-200"
         ></div>
       </div>
 
-      <Button onclick={handleTest} variant="gradient" gradient="cyan" classes="px-5 py-3">
+      <Button onclick={handleTest} variant="gradient" gradient="cyan" classes="px-5 py-3" data-testid="test-pattern-btn">
         {#snippet icon()}
           <Zap size={16} class={isAnimating ? 'animate-pulse' : ''} />
         {/snippet}

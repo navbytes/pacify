@@ -45,7 +45,7 @@ async function disableAllProxies() {
 
     <div class="flex items-center gap-1">
       <Tooltip text="Add new proxy" position="bottom">
-        <Button minimal color="primary" onclick={quickAddProxy}>
+        <Button minimal color="primary" onclick={quickAddProxy} data-testid="add-proxy-btn">
           {#snippet icon()}
             <Plus size={18} />
           {/snippet}
@@ -54,7 +54,7 @@ async function disableAllProxies() {
       </Tooltip>
 
       <Tooltip text={I18nService.getMessage('settings')} position="bottom">
-        <Button minimal color="secondary" onclick={openSettings}>
+        <Button minimal color="secondary" onclick={openSettings} data-testid="settings-btn">
           {#snippet icon()}
             <Settings size={18} />
           {/snippet}
@@ -103,7 +103,7 @@ async function disableAllProxies() {
         <!-- Always reserve space for the button to prevent layout shift -->
         <div class="shrink-0">
           {#if activeProxy}
-            <Button size="sm" color="secondary" onclick={disableAllProxies}>
+            <Button size="sm" color="secondary" onclick={disableAllProxies} data-testid="disable-proxy-btn">
               {#snippet icon()}
                 <Power size={14} />
               {/snippet}
