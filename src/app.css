@@ -380,3 +380,49 @@ body.modal-open {
 .grid > * {
   @apply transition-all duration-200;
 }
+
+/* Card Component Utilities */
+.card-container {
+  @apply group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
+}
+
+.card-container-sm {
+  @apply group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-md;
+}
+
+.card-bg-layer {
+  @apply absolute inset-0 bg-linear-to-br rounded-2xl overflow-hidden;
+}
+
+.card-bg-layer-sm {
+  @apply absolute inset-0 bg-linear-to-br;
+}
+
+.card-accent-top {
+  @apply absolute top-0 left-0 right-0 h-1 bg-linear-to-r;
+}
+
+.icon-container {
+  @apply relative w-12 h-12 bg-linear-to-br rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300;
+}
+
+.settings-label {
+  @apply text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100;
+}
+
+/* Common grid layouts */
+.grid-responsive-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+.grid-responsive-3 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+}
+
+.grid-responsive-4 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4;
+}
+
+.grid-settings-cards {
+  @apply grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4;
+}

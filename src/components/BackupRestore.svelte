@@ -60,23 +60,19 @@ async function handleRestore(event: Event) {
 }
 </script>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="grid-responsive-2">
   <!-- Backup Settings -->
-  <div
-    class="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-md border border-emerald-200/50 dark:border-emerald-800/30"
-  >
+  <div class="card-container-sm border border-emerald-200/50 dark:border-emerald-800/30">
     <!-- Background gradient -->
     <div
-      class="absolute inset-0 bg-linear-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30"
+      class="card-bg-layer-sm from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30"
     ></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div
-      class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500"
-    ></div>
+    <div class="card-accent-top from-emerald-500 to-teal-500"></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
@@ -99,21 +95,17 @@ async function handleRestore(event: Event) {
   </div>
 
   <!-- Restore Settings -->
-  <div
-    class="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-md border border-amber-200/50 dark:border-amber-800/30"
-  >
+  <div class="card-container-sm border border-amber-200/50 dark:border-amber-800/30">
     <!-- Background gradient -->
     <div
-      class="absolute inset-0 bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30"
+      class="card-bg-layer-sm from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30"
     ></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div
-      class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-amber-500 to-orange-500"
-    ></div>
+    <div class="card-accent-top from-amber-500 to-orange-500"></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">

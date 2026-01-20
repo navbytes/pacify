@@ -96,23 +96,19 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     />
 
     <!-- Grid layout for proxy behavior cards -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+    <div class="grid-settings-cards">
       <!-- Disable Proxy on Startup Card -->
-      <div
-        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-blue-200/50 dark:border-blue-800/30"
-      >
+      <div class="card-container border border-blue-200/50 dark:border-blue-800/30">
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30 rounded-2xl overflow-hidden"
+          class="card-bg-layer from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30"
         ></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 to-indigo-500"
-        ></div>
+        <div class="card-accent-top from-blue-500 to-indigo-500"></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -124,18 +120,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div
-                  class="relative w-12 h-12 bg-linear-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300"
-                >
+                <div class="icon-container from-blue-500 to-indigo-600 shadow-blue-500/25">
                   <Shield size={22} class="text-white" />
                 </div>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2">
-                  <label
-                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
-                    for="disableProxyOnStartupToggle"
-                  >
+                  <label class="settings-label" for="disableProxyOnStartupToggle">
                     {I18nService.getMessage('disableProxyOnStartup')}
                   </label>
                   <Tooltip text={I18nService.getMessage('tooltipDisableOnStartup')} position="top">
@@ -158,21 +149,17 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- Auto-reload toggle Card -->
-      <div
-        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-green-200/50 dark:border-green-800/30"
-      >
+      <div class="card-container border border-green-200/50 dark:border-green-800/30">
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 rounded-2xl overflow-hidden"
+          class="card-bg-layer from-green-50 to-emerald-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30"
         ></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-green-500 to-emerald-500"
-        ></div>
+        <div class="card-accent-top from-green-500 to-emerald-500"></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -184,18 +171,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div
-                  class="relative w-12 h-12 bg-linear-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:scale-110 transition-transform duration-300"
-                >
+                <div class="icon-container from-green-500 to-emerald-600 shadow-green-500/25">
                   <RefreshCw size={22} class="text-white" />
                 </div>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2">
-                  <label
-                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
-                    for="autoReloadToggle"
-                  >
+                  <label class="settings-label" for="autoReloadToggle">
                     {I18nService.getMessage('autoReloadOnProxySwitch')}
                   </label>
                   <Tooltip text={I18nService.getMessage('tooltipAutoReload')} position="top">
@@ -218,21 +200,17 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- System Notifications Card -->
-      <div
-        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-purple-200/50 dark:border-purple-800/30"
-      >
+      <div class="card-container border border-purple-200/50 dark:border-purple-800/30">
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30 rounded-2xl overflow-hidden"
+          class="card-bg-layer from-purple-50 to-violet-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30"
         ></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-purple-500 to-violet-500"
-        ></div>
+        <div class="card-accent-top from-purple-500 to-violet-500"></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -244,18 +222,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div
-                  class="relative w-12 h-12 bg-linear-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:scale-110 transition-transform duration-300"
-                >
+                <div class="icon-container from-purple-500 to-violet-600 shadow-purple-500/25">
                   <Bell size={22} class="text-white" />
                 </div>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2">
-                  <label
-                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
-                    for="notificationsToggle"
-                  >
+                  <label class="settings-label" for="notificationsToggle">
                     {I18nService.getMessage('systemNotifications')}
                   </label>
                   <Tooltip
@@ -281,21 +254,17 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- Show Quick Settings Card -->
-      <div
-        class="group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border border-amber-200/50 dark:border-amber-800/30"
-      >
+      <div class="card-container border border-amber-200/50 dark:border-amber-800/30">
         <!-- Background gradient -->
         <div
-          class="absolute inset-0 bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30 rounded-2xl overflow-hidden"
+          class="card-bg-layer from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30"
         ></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div
-          class="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-amber-500 to-orange-500"
-        ></div>
+        <div class="card-accent-top from-amber-500 to-orange-500"></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -307,18 +276,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div
-                  class="relative w-12 h-12 bg-linear-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/25 group-hover:scale-110 transition-transform duration-300"
-                >
+                <div class="icon-container from-amber-500 to-orange-600 shadow-amber-500/25">
                   <Eye size={22} class="text-white" />
                 </div>
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2">
-                  <label
-                    class="text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100"
-                    for="showQuickSettingsToggle"
-                  >
+                  <label class="settings-label" for="showQuickSettingsToggle">
                     {I18nService.getMessage('showQuickSettings')}
                   </label>
                   <Tooltip text={I18nService.getMessage('showQuickSettingsTooltip')} position="top">
@@ -370,7 +334,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       title={I18nService.getMessage('feedbackAndRating') || 'Feedback & Rating'}
       iconColor="pink"
     />
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid-responsive-3">
       <!-- Rate Extension Card -->
       <LinkCard
         href="https://chromewebstore.google.com/detail/pacify-the-proxy-manager/kgepmkaldicdcljckhamnhkigddnbcbd/reviews"
@@ -402,7 +366,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       title={I18nService.getMessage('aboutHelpResources')}
       iconColor="purple"
     />
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid-responsive-4">
       <LinkCard
         href="https://github.com/navbytes/pacify"
         icon={Github}
