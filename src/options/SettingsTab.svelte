@@ -98,7 +98,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     <!-- Grid layout for proxy behavior cards -->
     <div class="grid-settings-cards">
       <!-- Disable Proxy on Startup Card -->
-      <div class="card-container border border-blue-200/50 dark:border-blue-800/30">
+      <div class="group card-container border border-blue-200/50 dark:border-blue-800/30">
         <!-- Background gradient -->
         <div class="card-bg-layer card-bg-blue"></div>
 
@@ -147,7 +147,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- Auto-reload toggle Card -->
-      <div class="card-container border border-green-200/50 dark:border-green-800/30">
+      <div class="group card-container border border-green-200/50 dark:border-green-800/30">
         <!-- Background gradient -->
         <div class="card-bg-layer card-bg-green"></div>
 
@@ -196,7 +196,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- System Notifications Card -->
-      <div class="card-container border border-purple-200/50 dark:border-purple-800/30">
+      <div class="group card-container border border-purple-200/50 dark:border-purple-800/30">
         <!-- Background gradient -->
         <div class="card-bg-layer card-bg-purple"></div>
 
@@ -248,7 +248,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- Show Quick Settings Card -->
-      <div class="card-container border border-amber-200/50 dark:border-amber-800/30">
+      <div class="group card-container border border-amber-200/50 dark:border-amber-800/30">
         <!-- Background gradient -->
         <div class="card-bg-layer card-bg-amber"></div>
 

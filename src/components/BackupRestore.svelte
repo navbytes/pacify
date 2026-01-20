@@ -62,7 +62,7 @@ async function handleRestore(event: Event) {
 
 <div class="grid-responsive-2">
   <!-- Backup Settings -->
-  <div class="card-container-sm border border-emerald-200/50 dark:border-emerald-800/30">
+  <div class="group card-container-sm border border-emerald-200/50 dark:border-emerald-800/30">
     <!-- Background gradient -->
     <div class="card-bg-layer-sm card-bg-emerald"></div>
 
@@ -93,7 +93,7 @@ async function handleRestore(event: Event) {
   </div>
 
   <!-- Restore Settings -->
-  <div class="card-container-sm border border-amber-200/50 dark:border-amber-800/30">
+  <div class="group card-container-sm border border-amber-200/50 dark:border-amber-800/30">
     <!-- Background gradient -->
     <div class="card-bg-layer-sm card-bg-amber"></div>
 

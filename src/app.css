@@ -383,11 +383,11 @@ body.modal-open {
 
 /* Card Component Utilities */
 .card-container {
-  @apply group relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
+  @apply relative rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
 }
 
 .card-container-sm {
-  @apply group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-md;
+  @apply relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-md;
 }
 
 .card-bg-layer {
