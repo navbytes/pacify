@@ -7,24 +7,7 @@
 
 ## ✨ Key Features
 
-### 🆕 What's New (Recent Updates)
-
-**v1.26.0+ - Auto-Proxy Mode:** 🌟
-- **Automatic URL-based routing** - the most requested feature!
-- Visual rule editor with pattern matching
-- Support for domain, keyword, and wildcard patterns
-- Inline proxy definitions or reference existing proxies
-- Real-time pattern tester
-- Similar to Proxy SwitchyOmega's Auto Switch mode
-
-**Other Recent Highlights:**
-- View Modes: Grid and List layouts for proxy configurations
-- Unified Notifications: Chrome system notifications + in-app toasts
-- PAC Script Auto-Update: Configurable intervals (15min - 24hrs)
-- Modern Navigation: iOS/macOS-inspired button group tabs
-- Auto-Reload Toggle: Control browser refresh on proxy switch
-
-*See [CHANGELOG.md](CHANGELOG.md) for complete version history*
+> **📋 Latest Updates:** See [CHANGELOG.md](CHANGELOG.md) for recent changes and version history.
 
 ### 🔄 Quick Switch Mode
 
