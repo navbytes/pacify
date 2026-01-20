@@ -9,34 +9,22 @@
 
 ### 🆕 What's New (Recent Updates)
 
-**v1.27.0 - View Modes & Layout Flexibility:**
-- Grid and List view modes for proxy configurations
-- ViewModeSwitcher component for easy layout toggling
-- "Show Quick Settings" toggle to customize UI visibility
-- View mode preferences persist across sessions
+**v1.26.0+ - Auto-Proxy Mode:** 🌟
+- **Automatic URL-based routing** - the most requested feature!
+- Visual rule editor with pattern matching
+- Support for domain, keyword, and wildcard patterns
+- Inline proxy definitions or reference existing proxies
+- Real-time pattern tester
+- Similar to Proxy SwitchyOmega's Auto Switch mode
 
-**v1.25.0 - Unified Notifications:**
-- Integrated notification system with Chrome notifications and in-app toasts
-- User preference controls for notification types
-- Intelligent routing based on app context (foreground/background)
-- Support for success, error, warning, and info notifications
+**Other Recent Highlights:**
+- View Modes: Grid and List layouts for proxy configurations
+- Unified Notifications: Chrome system notifications + in-app toasts
+- PAC Script Auto-Update: Configurable intervals (15min - 24hrs)
+- Modern Navigation: iOS/macOS-inspired button group tabs
+- Auto-Reload Toggle: Control browser refresh on proxy switch
 
-**v1.24.0 - PAC Script Auto-Update:**
-- Configurable auto-update intervals for URL-based PAC scripts (15 min to 24 hours)
-- Manual "Refresh now" button for immediate updates
-- "Last fetched" timestamp display
-- Background service using Chrome alarms for periodic refreshes
-
-**v1.21.0 - Auto-Reload Control:**
-- Toggle to enable/disable automatic tab reload when switching proxies
-- Gives users control over browser behavior
-- Defaults to enabled for backward compatibility
-
-**v1.20.0 - Modern Navigation:**
-- iOS/macOS-inspired button group navigation (segmented control)
-- Inline toggle switches for quick proxy activation
-- Optimized popup layout (400px height)
-- Enhanced proxy cards with three-section layout
+*See [CHANGELOG.md](CHANGELOG.md) for complete version history*
 
 ### 🔄 Quick Switch Mode
 
@@ -45,10 +33,46 @@
 - **Visual Feedback**: Color-coded badges show active proxy at a glance
 - **Smart Toggle**: Enable/disable quick switch mode from the options page
 
+### 🤖 Auto-Proxy (Automatic URL-Based Routing)
+
+**Intelligent automatic proxy switching** based on URL patterns - no manual switching needed!
+
+**Key Features:**
+- **Pattern-Based Rules**: Define URL patterns that automatically route to specific proxies
+- **Multiple Match Types**:
+  - Domain matching (`*.example.com`, `example.com`)
+  - Keyword matching (contains text)
+  - Wildcard patterns for flexible routing
+- **Flexible Routing Options**:
+  - Route to existing proxy configurations
+  - Define inline proxy settings per-rule
+  - Direct connection (no proxy)
+  - Blackhole (block requests)
+- **Smart Fallback**: Configure default routing for URLs that don't match any rule
+- **Rule Management**:
+  - Enable/disable individual rules
+  - Drag-and-drop priority ordering
+  - Rule descriptions for documentation
+- **Pattern Tester**: Test URLs against your rules to preview routing behavior
+- **Visual Rule Editor**: Intuitive interface with color-coded rule cards
+
+**Common Use Cases:**
+- **Work vs Personal**: Route `*.company.com` through corporate proxy, everything else direct
+- **Geographic Routing**: Send `*.netflix.com` to US proxy, `*.bbc.co.uk` to UK proxy
+- **Service Isolation**: Different social media platforms through different proxies
+- **Development**: Route `*.local` and `192.168.*` directly, external sites through proxy
+
+**Technical Implementation:**
+- Powered by PAC (Proxy Auto-Configuration) script generation
+- Real-time rule compilation and validation
+- Optimized pattern matching for performance
+- Supports complex rule sets with hundreds of patterns
+
 ### 🎯 Comprehensive Proxy Support
 
-**All Chrome Proxy Modes:**
+**All Chrome Proxy Modes + Auto-Proxy:**
 
+- **Auto-Proxy Mode**: 🆕 Automatic URL-based routing with visual rule editor (see section above)
 - **System Proxy**: Inherit proxy settings from your operating system
 - **Direct Connection**: Bypass all proxies for direct internet access
 - **Auto-detect (WPAD)**: Automatically discover proxy settings using Web Proxy Auto-Discovery Protocol
@@ -328,6 +352,37 @@ bun run check
 3. **Drag** proxy configurations to the "Quick Switch Configs" section
 4. Click the **extension icon** to cycle through enabled proxies
 5. Badge shows active proxy name (first 3 letters)
+
+### Setting Up Auto-Proxy (Automatic Routing)
+
+1. Click **"Add Auto-Proxy"** button (orange button with branch icon)
+2. Configure **Basic Settings**:
+   - **Name**: Descriptive name (e.g., "Work Router")
+   - **Color**: Visual identifier
+   - **Badge Label**: 1-4 character label (optional)
+3. **Add Routing Rules**:
+   - Click **"Add Rule"** to create a new routing rule
+   - **Pattern**: URL pattern to match (e.g., `*.company.com`, `github.com`, `*.local`)
+   - **Match Type**: Choose domain, keyword, or wildcard matching
+   - **Route To**: Select destination (existing proxy, inline proxy, direct, or blackhole)
+   - **Description**: Optional note for the rule
+   - Enable/disable rules with toggle switch
+4. **Configure Fallback**:
+   - Set default routing for URLs that don't match any rule
+   - Options: direct, existing proxy, or inline proxy
+5. **Test Your Rules**:
+   - Use the Pattern Tester to verify routing
+   - Enter test URLs to see which rule/proxy they match
+6. **Reorder Rules** (optional):
+   - Drag rules to change priority
+   - Rules are evaluated top-to-bottom (first match wins)
+7. Click **"Save"** to activate
+
+**Example Configuration:**
+- Rule 1: `*.company.com` → Corporate Proxy
+- Rule 2: `*.github.com` → Direct Connection
+- Rule 3: `netflix.com` → US Proxy
+- Fallback: Direct Connection
 
 ### Writing PAC Scripts
 
