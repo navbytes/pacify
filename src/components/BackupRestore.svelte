@@ -1,7 +1,5 @@
 <script lang="ts">
-import { ALERT_TYPES, ERROR_TYPES } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
-import { NotifyService } from '@/services/NotifyService'
 import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
 import { Download, Upload } from '@/utils/icons'
@@ -22,10 +20,9 @@ async function handleBackup() {
   try {
     await SettingsWriter.backupSettings()
     toastStore.show(I18nService.getMessage('backupSuccess'), 'success')
-    NotifyService.alert(ALERT_TYPES.BACKUP_SUCCESS)
   } catch (error) {
     toastStore.show(I18nService.getMessage('backupFailed'), 'error')
-    NotifyService.error(ERROR_TYPES.BACKUP, error)
+    console.error('Backup error:', error)
   }
 }
 
@@ -49,12 +46,10 @@ async function handleRestore(event: Event) {
       if (input) {
         input.value = ''
       }
-
-      NotifyService.alert(ALERT_TYPES.RESTORE_SUCCESS)
     } catch (error) {
       const errorMessage = (error as Error).message || I18nService.getMessage('restoreFailed')
       toastStore.show(errorMessage, 'error')
-      NotifyService.alert(errorMessage)
+      console.error('Restore error:', error)
 
       // Clear the file input on error too
       if (input) {

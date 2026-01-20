@@ -2,10 +2,9 @@
 import { onDestroy, untrack } from 'svelte'
 import { scriptTemplates } from '@/constants/templates'
 import type { ICodeMirrorEditor } from '@/interfaces'
-import { ERROR_TYPES } from '@/interfaces'
 import { CodeMirror } from '@/services/CodeMirrorService'
 import { I18nService } from '@/services/i18n/i18nService'
-import { NotifyService } from '@/services/NotifyService'
+import { toastStore } from '@/stores/toastStore'
 import { checkboxLabelVariants, formLabelVariants, inputVariants } from '@/utils/classPatterns'
 import { defaultCodeMirrorOptions } from '@/utils/codemirror'
 import Button from '../Button.svelte'
@@ -181,7 +180,9 @@ async function createEditor() {
       }
     })
   } catch (error) {
-    NotifyService.error(ERROR_TYPES.EDITOR, error)
+    const errorMsg = I18nService.getMessage('editorInitFailed') || 'Failed to initialize code editor'
+    toastStore.show(errorMsg, 'error')
+    console.error('Editor initialization error:', error)
   } finally {
     isCreatingEditor = false
   }

@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Snippet } from 'svelte'
-import { type DropItem, ERROR_TYPES } from '@/interfaces'
+import type { DropItem } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
-import { NotifyService } from '@/services/NotifyService'
+import { toastStore } from '@/stores/toastStore'
 import { dragPatterns } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 
@@ -84,7 +84,8 @@ function handleDrop(event: DragEvent) {
       onDrop({ dataType, dataId })
     }
   } catch (error) {
-    NotifyService.error(ERROR_TYPES.DROP, error)
+    toastStore.show(I18nService.getMessage('dropError') || 'Failed to drop item', 'error')
+    console.error('Drop error:', error)
   }
 }
 </script>
