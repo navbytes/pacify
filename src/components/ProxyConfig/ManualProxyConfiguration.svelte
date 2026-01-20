@@ -10,6 +10,8 @@ interface ProxyServerSettings {
   scheme?: string
   host?: string
   port?: string
+  username?: string
+  password?: string
 }
 
 interface ProxySettings {
@@ -77,6 +79,8 @@ const checkboxStyles = checkboxLabelVariants()
           bind:scheme={proxySettings.singleProxy.scheme}
           bind:host={proxySettings.singleProxy.host}
           bind:port={proxySettings.singleProxy.port}
+          bind:username={proxySettings.singleProxy.username}
+          bind:password={proxySettings.singleProxy.password}
           testIdPrefix="single-proxy"
         />
       {/if}
@@ -95,6 +99,8 @@ const checkboxStyles = checkboxLabelVariants()
             bind:scheme={proxy.scheme}
             bind:host={proxy.host}
             bind:port={proxy.port}
+            bind:username={proxy.username}
+            bind:password={proxy.password}
             testIdPrefix={proxyType.toLowerCase()}
           />
         {/if}
