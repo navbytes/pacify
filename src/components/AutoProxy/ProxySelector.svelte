@@ -29,12 +29,23 @@ let {
 // Filter out Auto-Proxy configs from available proxies
 let selectableProxies = $derived(availableProxies.filter((p) => p.autoProxy === undefined))
 
-// Local state for inline proxy
-let inlineHost = $derived(inlineProxy?.host || '')
-let inlinePort = $derived(inlineProxy?.port || '')
-let inlineScheme = $derived<ProxyServer['scheme']>(inlineProxy?.scheme || 'http')
-let inlineUsername = $derived(inlineProxy?.username || '')
-let inlinePassword = $derived(inlineProxy?.password || '')
+// Local state for inline proxy - these must be $state because they're used with bind:value
+let inlineHost = $state('')
+let inlinePort = $state('')
+let inlineScheme = $state<ProxyServer['scheme']>('http')
+let inlineUsername = $state('')
+let inlinePassword = $state('')
+
+// Sync local state with inlineProxy prop when it changes
+$effect(() => {
+  if (inlineProxy) {
+    inlineHost = inlineProxy.host || ''
+    inlinePort = inlineProxy.port || ''
+    inlineScheme = inlineProxy.scheme || 'http'
+    inlineUsername = inlineProxy.username || ''
+    inlinePassword = inlineProxy.password || ''
+  }
+})
 
 // Input styles
 const selectClasses = inputVariants({ size: 'md' })
