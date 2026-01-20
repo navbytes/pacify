@@ -7,6 +7,37 @@
 
 ## ✨ Key Features
 
+### 🆕 What's New (Recent Updates)
+
+**v1.27.0 - View Modes & Layout Flexibility:**
+- Grid and List view modes for proxy configurations
+- ViewModeSwitcher component for easy layout toggling
+- "Show Quick Settings" toggle to customize UI visibility
+- View mode preferences persist across sessions
+
+**v1.25.0 - Unified Notifications:**
+- Integrated notification system with Chrome notifications and in-app toasts
+- User preference controls for notification types
+- Intelligent routing based on app context (foreground/background)
+- Support for success, error, warning, and info notifications
+
+**v1.24.0 - PAC Script Auto-Update:**
+- Configurable auto-update intervals for URL-based PAC scripts (15 min to 24 hours)
+- Manual "Refresh now" button for immediate updates
+- "Last fetched" timestamp display
+- Background service using Chrome alarms for periodic refreshes
+
+**v1.21.0 - Auto-Reload Control:**
+- Toggle to enable/disable automatic tab reload when switching proxies
+- Gives users control over browser behavior
+- Defaults to enabled for backward compatibility
+
+**v1.20.0 - Modern Navigation:**
+- iOS/macOS-inspired button group navigation (segmented control)
+- Inline toggle switches for quick proxy activation
+- Optimized popup layout (400px height)
+- Enhanced proxy cards with three-section layout
+
 ### 🔄 Quick Switch Mode
 
 - **One-Click Proxy Switching**: Click the extension icon to cycle through enabled proxy configurations
@@ -38,6 +69,10 @@ Powered by CodeMirror 6 (modern, lightweight code editor):
   - **Pro**: Enterprise-grade template with failover chains, time-based routing, geo-location handling, and security policies
 - **Theme Support**: Automatic dark/light mode switching based on system preferences
 - **Modern Architecture**: Built with CodeMirror 6's extensible plugin system
+- **URL-Based PAC Scripts**: Load PAC scripts from external URLs
+- **Auto-Update**: Configurable auto-update intervals (15 min to 24 hours) for URL-based scripts
+- **Manual Refresh**: "Refresh now" button to immediately fetch latest PAC script
+- **Last Fetched Timestamp**: Shows when script was last updated
 
 ### ⚙️ Manual Proxy Configuration
 
@@ -53,27 +88,40 @@ Powered by CodeMirror 6 (modern, lightweight code editor):
 
 ### 🎨 User Interface & Experience
 
-**Enhanced UX (v1.10.0):**
+**Modern Navigation & Layout:**
+
+- **Button Group Navigation**: iOS/macOS-inspired segmented control for tab switching
+- **View Mode Toggle**: Switch between grid and list layouts for proxy configurations
+- **Show Quick Settings**: Toggle visibility of Quick Switch section
+- **Responsive Design**: Optimized layouts for different screen sizes
+- **Enhanced Proxy Cards**: Three-section layout (Header, Content, Footer) with refined shadows and borders
+
+**Visual Feedback & Identification:**
 
 - **ACTIVE Badge**: Prominent green badge with ShieldCheck icon on enabled proxies for instant identification
-- **Tooltips**: Context-sensitive help tooltips on Quick Switch Mode, Disable on Startup, and keyboard shortcuts
+- **Color-Coded Proxies**: Assign colors to proxies for quick visual identification (8 color options)
+- **Badge Labels**: Customizable 1-4 character labels for proxy identification
+- **Real-Time Status**: Connection status banner shows active proxy
+- **Micro-Animations**: Subtle scale effects on cards (hover, active states)
+
+**Interaction Enhancements:**
+
+- **Tooltips**: Context-sensitive help tooltips throughout the interface
 - **Keyboard Shortcuts**:
-  - `Ctrl+N` / `Cmd+N` - Add new proxy configuration
+  - `Ctrl+N` / `Cmd+N` (Mac: `Cmd+N`) - Add new proxy configuration
   - `Escape` - Close modal dialogs
-- **Drag-and-Drop Animations**:
+  - Clear conflict handling to prevent shortcut interference
+- **Drag-and-Drop**:
   - Custom styled drag ghost with proxy color and shadow
   - Drop zone highlighting with blue border and background tint
   - Source item visual feedback (fade, scale, blue ring)
-- **Visual Hierarchy**:
-  - Color-coded section headers with icons (Zap, Cable, Database)
-  - Larger Total Proxies stat card for emphasis
-  - Green/Gray color coding on stats (active vs none)
-- **Micro-Animations**: Subtle scale effects on cards (hover, active states)
-- **Modern Design**: Clean, intuitive interface built with Tailwind CSS
+- **Inline Toggle Switches**: Quick proxy switching directly from configuration cards
+
+**Design System:**
+
+- **Modern UI**: Clean, intuitive interface built with Tailwind CSS 4
 - **Dark Mode Support**: Automatic dark theme based on system preferences
-- **Color-Coded Proxies**: Assign colors to proxies for quick visual identification (8 color options)
-- **Real-Time Status**: Connection status banner shows active proxy
-- **Responsive Layout**: Optimized for different screen sizes
+- **Visual Hierarchy**: Color-coded section headers with icons (Zap, Cable, Database)
 - **WCAG Compliance**:
   - Level AA: Keyboard navigation with focus-visible states
   - Level AAA: 44x44px minimum touch targets
@@ -88,13 +136,23 @@ Powered by CodeMirror 6 (modern, lightweight code editor):
 - **Import Validation**: Automatic validation when restoring from backup
 - **Cache Management**: Intelligent caching with invalidation support
 
+### 🔔 Notifications & Feedback
+
+- **Unified Notification System**: Chrome system notifications and in-app toast messages
+- **Intelligent Routing**: Automatic selection of notification type based on context (foreground/background)
+- **User Preferences**: Toggle system notifications on/off from Settings
+- **Multiple Types**: Success, error, warning, and info notifications
+- **Persistent Preferences**: Notification settings sync across devices
+- **In-App Toasts**: Non-intrusive toast notifications with auto-dismiss
+
 ### 🚀 Startup & Performance
 
 - **Startup Behavior Control**: Choose to disable proxy on browser launch
+- **Auto-Reload Toggle**: Enable/disable automatic page reload when switching proxies
 - **Smart Initialization**: Message queuing system prevents race conditions during startup
 - **Debounced Saves**: Optimized storage writes reduce unnecessary operations
 - **Mutex Locking**: Prevents concurrent proxy changes
-- **Active Tab Reload**: Automatically reload tabs when proxy changes (skips special Chrome pages)
+- **Conditional Tab Reload**: Intelligently reload tabs when proxy changes (skips special Chrome pages)
 
 ### 🔒 Privacy & Security
 
@@ -106,9 +164,10 @@ Powered by CodeMirror 6 (modern, lightweight code editor):
 
 ### 🌍 Internationalization
 
-- **Multi-Language Support**: i18n framework with locale-based messages
-- **Currently Available**: English (more languages can be added)
-- **Dynamic Loading**: Messages loaded based on browser locale
+- **Multi-Language Support**: Full i18n framework with locale-based messages
+- **12 Languages**: 100% i18n compliance with proper translations for all supported locales
+- **Dynamic Loading**: Messages loaded automatically based on browser locale
+- **Comprehensive Coverage**: All UI elements, tooltips, and messages fully translated
 
 ### 📊 Dashboard & Statistics
 
@@ -124,11 +183,12 @@ Powered by CodeMirror 6 (modern, lightweight code editor):
 - **Frontend**: Svelte 5 (with latest runes API)
 - **Language**: TypeScript 5.7+ (strict mode)
 - **Build Tool**: Vite 7 with code splitting
-- **Styling**: Tailwind CSS 4 with PostCSS
+- **Styling**: Tailwind CSS 4 with PostCSS, tailwind-variants for component styling
 - **Code Editor**: CodeMirror 6 (lightweight, modern)
-- **Icons**: Lucide Svelte
+- **Icons**: Lucide Svelte (tree-shaken with direct imports)
 - **Testing**: Bun Test + Playwright
-- **Code Quality**: Biome, Husky
+- **Code Quality**: Biome (Rust-based linting & formatting), Husky (git hooks)
+- **Runtime**: Bun (10x faster than Node.js)
 
 ### Project Structure
 
@@ -153,7 +213,9 @@ pacify/
 │   │   ├── i18n/            # Internationalization
 │   │   ├── CodeMirrorService.ts # CodeMirror editor integration
 │   │   ├── StorageService.ts # Settings persistence
-│   │   └── ScriptService.ts  # PAC script validation
+│   │   ├── ScriptService.ts  # PAC script validation
+│   │   ├── NotifyService.ts  # Notification system (toasts + Chrome notifications)
+│   │   └── LoggerService.ts  # Centralized logging
 │   ├── stores/              # Svelte stores (state management)
 │   │   ├── settingsStore.ts # Central app state
 │   │   ├── proxyStore.ts
@@ -173,10 +235,11 @@ pacify/
 ### Chrome Extension Architecture
 
 - **Manifest Version**: 3 (latest)
-- **Service Worker**: Event-driven background script with message queue
-- **Popup**: Lightweight proxy switcher (384px width)
-- **Options Page**: Full-featured settings with tabbed interface
-- **Permissions**: `proxy`, `storage` only
+- **Service Worker**: Event-driven background script with message queue and alarm-based auto-refresh
+- **Popup**: Lightweight proxy switcher (384px width, 400px height)
+- **Options Page**: Full-featured settings with modern button group navigation
+- **Permissions**: `proxy`, `storage`, `alarms`, `notifications`
+- **Background Tasks**: Automatic PAC script updates using Chrome alarms API
 
 ## 🚀 Getting Started
 
@@ -316,17 +379,23 @@ PACify requires minimal permissions:
 
 - **`proxy`**: To manage Chrome's proxy settings
 - **`storage`**: To save configurations locally and sync across devices
+- **`alarms`**: For background auto-refresh of URL-based PAC scripts
+- **`notifications`**: For system notifications when enabled in settings
 
-**No additional permissions** for network access, browsing history, or tabs data.
+**No permissions** for network access, browsing history, or tabs data beyond what's necessary for core functionality.
 
 ## 🔧 Configuration Options
 
 ### App Settings
 
-| Setting                  | Description                     | Default |
-| ------------------------ | ------------------------------- | ------- |
-| Quick Switch Mode        | Enable one-click proxy cycling  | `false` |
-| Disable Proxy on Startup | Clear proxy when browser starts | `false` |
+| Setting                    | Description                                    | Default |
+| -------------------------- | ---------------------------------------------- | ------- |
+| Quick Switch Mode          | Enable one-click proxy cycling                 | `false` |
+| Disable Proxy on Startup   | Clear proxy when browser starts                | `false` |
+| Auto-Reload on Switch      | Automatically reload tabs when changing proxies| `true`  |
+| System Notifications       | Enable Chrome system notifications             | `true`  |
+| Show Quick Settings        | Show/hide Quick Switch section in UI           | `true`  |
+| View Mode                  | Display proxy configs in grid or list layout   | `grid`  |
 
 ### Proxy Configuration Fields
 
@@ -340,11 +409,13 @@ PACify requires minimal permissions:
 
 ### PAC Script Fields
 
-| Field       | Description                                     |
-| ----------- | ----------------------------------------------- |
-| Script Data | JavaScript PAC script content                   |
-| Script URL  | External PAC script URL (alternative to inline) |
-| Mandatory   | Fail closed if PAC script fails                 |
+| Field           | Description                                                        |
+| --------------- | ------------------------------------------------------------------ |
+| Script Data     | JavaScript PAC script content (inline mode)                        |
+| Script URL      | External PAC script URL (alternative to inline)                    |
+| Update Interval | Auto-update frequency (15min - 24hrs) for URL-based scripts        |
+| Last Fetched    | Timestamp showing when URL-based script was last refreshed         |
+| Mandatory       | Fail closed if PAC script fails                                    |
 
 ### Manual Proxy Fields
 
@@ -356,6 +427,8 @@ PACify requires minimal permissions:
 | Bypass List | Domains/IPs to bypass proxy                    |
 
 ## 🧪 Testing
+
+**Test Suite Status:** 113 unit tests passing with comprehensive Chrome API mocks
 
 ### Unit Tests
 
@@ -370,6 +443,11 @@ bun run test:ui
 bun run test:coverage
 ```
 
+**Recent Improvements:**
+- Fixed test hanging issues with Chrome API mock timing
+- Comprehensive mocks for notifications, tabs, storage, and proxy APIs
+- Enhanced test infrastructure with proper singleton handling
+
 ### E2E Tests
 
 ```bash
@@ -383,6 +461,11 @@ bun run test:e2e:ui
 bun run test:e2e:smoke
 ```
 
+**Test Automation:**
+- Playwright-based E2E testing with data-testid attributes
+- Improved test reliability with proper element selectors
+- Smoke tests for critical user flows
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
@@ -395,10 +478,13 @@ Contributions are welcome! Please follow these steps:
 
 ### Development Guidelines
 
-- Follow TypeScript strict mode
-- Use Svelte 5 runes (avoid legacy stores in components)
-- Write tests for new features
+- Follow TypeScript strict mode with zero type errors
+- Use Svelte 5 runes API (avoid legacy stores in components)
+- Use Biome for linting and formatting (10x faster than ESLint/Prettier)
+- Write tests for new features (unit tests with Bun, E2E with Playwright)
 - Run `bun run lint` and `bun run format` before committing
+- Use `tailwind-variants` for component styling (replaced CVA)
+- Import Lucide icons directly (not from barrel exports) for better tree-shaking
 - Update documentation for significant changes
 
 ## 📜 License
@@ -429,9 +515,11 @@ Built with these amazing open-source projects:
 - [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
 - [CodeMirror 6](https://codemirror.net/) - Modern, lightweight code editor
 - [Vite](https://vitejs.dev/) - Next-generation build tool
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [tailwind-variants](https://www.tailwind-variants.org/) - Component styling library
 - [Lucide Icons](https://lucide.dev/) - Beautiful icon set
 - [Bun](https://bun.sh/) - Fast JavaScript runtime and package manager
+- [Biome](https://biomejs.dev/) - Rust-based linting and formatting
 - [Playwright](https://playwright.dev/) - Reliable E2E testing
 
 Special thanks to all contributors and the open-source community! 🙏
