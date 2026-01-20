@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "क्षैतिज सूची में प्रॉक्सी प्रदर्शित करें"
+  },
+  "authentication": {
+    "message": "प्रमाणीकरण"
+  },
+  "optional": {
+    "message": "वैकल्पिक"
+  },
+  "authStorageInfo": {
+    "message": "क्रेडेंशियल्स स्थानीय रूप से संग्रहीत और एन्क्रिप्ट किए गए हैं"
+  },
+  "username": {
+    "message": "उपयोगकर्ता नाम"
+  },
+  "usernamePlaceholder": {
+    "message": "उपयोगकर्ता नाम"
+  },
+  "password": {
+    "message": "पासवर्ड"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "पासवर्ड छुपाएं"
+  },
+  "showPassword": {
+    "message": "पासवर्ड दिखाएं"
+  },
+  "diagnostics": {
+    "message": "डायग्नोस्टिक्स"
+  },
+  "tabDiagnostics": {
+    "message": "डायग्नोस्टिक्स"
+  },
+  "diagnosticsDesc": {
+    "message": "डिबगिंग के लिए त्रुटि लॉग और डायग्नोस्टिक जानकारी देखें"
+  },
+  "diagnosticsExported": {
+    "message": "डायग्नोस्टिक्स सफलतापूर्वक निर्यात किए गए"
+  },
+  "diagnosticsExportFailed": {
+    "message": "डायग्नोस्टिक्स निर्यात करने में विफल"
+  },
+  "confirmClearLogs": {
+    "message": "सभी डायग्नोस्टिक लॉग साफ़ करें?"
+  },
+  "diagnosticsCleared": {
+    "message": "डायग्नोस्टिक्स सफलतापूर्वक साफ़ किए गए"
+  },
+  "diagnosticsClearFailed": {
+    "message": "डायग्नोस्टिक्स साफ़ करने में विफल"
+  },
+  "allLogsMarkedRead": {
+    "message": "सभी लॉग पढ़े हुए के रूप में चिह्नित"
+  },
+  "justNow": {
+    "message": "अभी-अभी"
+  },
+  "markAllRead": {
+    "message": "सभी को पढ़ा हुआ चिह्नित करें"
+  },
+  "export": {
+    "message": "निर्यात करें"
+  },
+  "clearAll": {
+    "message": "सभी साफ़ करें"
+  },
+  "noErrors": {
+    "message": "कोई त्रुटि नहीं पाई गई"
+  },
+  "noErrorsDesc": {
+    "message": "आपकी प्रॉक्सी ठीक काम कर रही हैं!"
+  },
+  "details": {
+    "message": "विवरण"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "स्टैक ट्रेस"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "इस प्रॉक्सी में प्रमाणीकरण कॉन्फ़िगर किया गया है"
   }
 }

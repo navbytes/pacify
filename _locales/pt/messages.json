@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "Exibir proxies em lista horizontal"
+  },
+  "authentication": {
+    "message": "Autenticação"
+  },
+  "optional": {
+    "message": "Opcional"
+  },
+  "authStorageInfo": {
+    "message": "As credenciais são armazenadas localmente e criptografadas"
+  },
+  "username": {
+    "message": "Nome de usuário"
+  },
+  "usernamePlaceholder": {
+    "message": "nome de usuário"
+  },
+  "password": {
+    "message": "Senha"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "Ocultar senha"
+  },
+  "showPassword": {
+    "message": "Mostrar senha"
+  },
+  "diagnostics": {
+    "message": "Diagnóstico"
+  },
+  "tabDiagnostics": {
+    "message": "Diagnóstico"
+  },
+  "diagnosticsDesc": {
+    "message": "Visualizar logs de erros e informações de diagnóstico para depuração"
+  },
+  "diagnosticsExported": {
+    "message": "Diagnóstico exportado com sucesso"
+  },
+  "diagnosticsExportFailed": {
+    "message": "Falha ao exportar diagnóstico"
+  },
+  "confirmClearLogs": {
+    "message": "Limpar todos os logs de diagnóstico?"
+  },
+  "diagnosticsCleared": {
+    "message": "Diagnóstico limpo com sucesso"
+  },
+  "diagnosticsClearFailed": {
+    "message": "Falha ao limpar diagnóstico"
+  },
+  "allLogsMarkedRead": {
+    "message": "Todos os logs marcados como lidos"
+  },
+  "justNow": {
+    "message": "Agora mesmo"
+  },
+  "markAllRead": {
+    "message": "Marcar tudo como lido"
+  },
+  "export": {
+    "message": "Exportar"
+  },
+  "clearAll": {
+    "message": "Limpar tudo"
+  },
+  "noErrors": {
+    "message": "Nenhum erro detectado"
+  },
+  "noErrorsDesc": {
+    "message": "Seus proxies estão funcionando bem!"
+  },
+  "details": {
+    "message": "Detalhes"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "Rastreamento de pilha"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "Este proxy tem autenticação configurada"
   }
 }

@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "Afficher les proxies dans une liste horizontale"
+  },
+  "authentication": {
+    "message": "Authentification"
+  },
+  "optional": {
+    "message": "Facultatif"
+  },
+  "authStorageInfo": {
+    "message": "Les identifiants sont stockés localement et chiffrés"
+  },
+  "username": {
+    "message": "Nom d'utilisateur"
+  },
+  "usernamePlaceholder": {
+    "message": "nom d'utilisateur"
+  },
+  "password": {
+    "message": "Mot de passe"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "Masquer le mot de passe"
+  },
+  "showPassword": {
+    "message": "Afficher le mot de passe"
+  },
+  "diagnostics": {
+    "message": "Diagnostics"
+  },
+  "tabDiagnostics": {
+    "message": "Diagnostics"
+  },
+  "diagnosticsDesc": {
+    "message": "Afficher les journaux d'erreurs et les informations de diagnostic pour le débogage"
+  },
+  "diagnosticsExported": {
+    "message": "Diagnostics exportés avec succès"
+  },
+  "diagnosticsExportFailed": {
+    "message": "Échec de l'exportation des diagnostics"
+  },
+  "confirmClearLogs": {
+    "message": "Effacer tous les journaux de diagnostic ?"
+  },
+  "diagnosticsCleared": {
+    "message": "Diagnostics effacés avec succès"
+  },
+  "diagnosticsClearFailed": {
+    "message": "Échec de l'effacement des diagnostics"
+  },
+  "allLogsMarkedRead": {
+    "message": "Tous les journaux marqués comme lus"
+  },
+  "justNow": {
+    "message": "À l'instant"
+  },
+  "markAllRead": {
+    "message": "Tout marquer comme lu"
+  },
+  "export": {
+    "message": "Exporter"
+  },
+  "clearAll": {
+    "message": "Tout effacer"
+  },
+  "noErrors": {
+    "message": "Aucune erreur détectée"
+  },
+  "noErrorsDesc": {
+    "message": "Vos proxies fonctionnent bien !"
+  },
+  "details": {
+    "message": "Détails"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "Trace de pile"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "Ce proxy a une authentification configurée"
   }
 }

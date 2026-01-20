@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "Отображать прокси в горизонтальном списке"
+  },
+  "authentication": {
+    "message": "Аутентификация"
+  },
+  "optional": {
+    "message": "Необязательно"
+  },
+  "authStorageInfo": {
+    "message": "Учетные данные хранятся локально и зашифрованы"
+  },
+  "username": {
+    "message": "Имя пользователя"
+  },
+  "usernamePlaceholder": {
+    "message": "имя пользователя"
+  },
+  "password": {
+    "message": "Пароль"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "Скрыть пароль"
+  },
+  "showPassword": {
+    "message": "Показать пароль"
+  },
+  "diagnostics": {
+    "message": "Диагностика"
+  },
+  "tabDiagnostics": {
+    "message": "Диагностика"
+  },
+  "diagnosticsDesc": {
+    "message": "Просмотр журналов ошибок и диагностической информации для отладки"
+  },
+  "diagnosticsExported": {
+    "message": "Диагностика успешно экспортирована"
+  },
+  "diagnosticsExportFailed": {
+    "message": "Не удалось экспортировать диагностику"
+  },
+  "confirmClearLogs": {
+    "message": "Очистить все журналы диагностики?"
+  },
+  "diagnosticsCleared": {
+    "message": "Диагностика успешно очищена"
+  },
+  "diagnosticsClearFailed": {
+    "message": "Не удалось очистить диагностику"
+  },
+  "allLogsMarkedRead": {
+    "message": "Все журналы отмечены как прочитанные"
+  },
+  "justNow": {
+    "message": "Только что"
+  },
+  "markAllRead": {
+    "message": "Отметить все как прочитанные"
+  },
+  "export": {
+    "message": "Экспорт"
+  },
+  "clearAll": {
+    "message": "Очистить все"
+  },
+  "noErrors": {
+    "message": "Ошибок не обнаружено"
+  },
+  "noErrorsDesc": {
+    "message": "Ваши прокси работают нормально!"
+  },
+  "details": {
+    "message": "Подробности"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "Трассировка стека"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "Для этого прокси настроена аутентификация"
   }
 }

@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "অনুভূমিক তালিকায় প্রক্সি প্রদর্শন করুন"
+  },
+  "authentication": {
+    "message": "প্রমাণীকরণ"
+  },
+  "optional": {
+    "message": "ঐচ্ছিক"
+  },
+  "authStorageInfo": {
+    "message": "শংসাপত্রগুলি স্থানীয়ভাবে এনক্রিপ্ট করে সংরক্ষিত হয়"
+  },
+  "username": {
+    "message": "ব্যবহারকারীর নাম"
+  },
+  "usernamePlaceholder": {
+    "message": "ব্যবহারকারীর নাম"
+  },
+  "password": {
+    "message": "পাসওয়ার্ড"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "পাসওয়ার্ড লুকান"
+  },
+  "showPassword": {
+    "message": "পাসওয়ার্ড দেখান"
+  },
+  "diagnostics": {
+    "message": "ডায়াগনস্টিকস"
+  },
+  "tabDiagnostics": {
+    "message": "ডায়াগনস্টিকস"
+  },
+  "diagnosticsDesc": {
+    "message": "ডিবাগিংয়ের জন্য ত্রুটি লগ এবং ডায়াগনস্টিক তথ্য দেখুন"
+  },
+  "diagnosticsExported": {
+    "message": "ডায়াগনস্টিকস সফলভাবে রপ্তানি হয়েছে"
+  },
+  "diagnosticsExportFailed": {
+    "message": "ডায়াগনস্টিকস রপ্তানি ব্যর্থ হয়েছে"
+  },
+  "confirmClearLogs": {
+    "message": "সমস্ত ডায়াগনস্টিক লগ মুছবেন?"
+  },
+  "diagnosticsCleared": {
+    "message": "ডায়াগনস্টিকস সফলভাবে মুছে ফেলা হয়েছে"
+  },
+  "diagnosticsClearFailed": {
+    "message": "ডায়াগনস্টিকস মুছতে ব্যর্থ হয়েছে"
+  },
+  "allLogsMarkedRead": {
+    "message": "সমস্ত লগ পঠিত হিসাবে চিহ্নিত"
+  },
+  "justNow": {
+    "message": "এইমাত্র"
+  },
+  "markAllRead": {
+    "message": "সব পঠিত চিহ্নিত করুন"
+  },
+  "export": {
+    "message": "রপ্তানি"
+  },
+  "clearAll": {
+    "message": "সব মুছুন"
+  },
+  "noErrors": {
+    "message": "কোনো ত্রুটি সনাক্ত করা যায়নি"
+  },
+  "noErrorsDesc": {
+    "message": "আপনার প্রক্সিগুলি ঠিকভাবে কাজ করছে!"
+  },
+  "details": {
+    "message": "বিস্তারিত"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "স্ট্যাক ট্রেস"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "এই প্রক্সিতে প্রমাণীকরণ কনফিগার করা আছে"
   }
 }

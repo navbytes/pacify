@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "以横向列表显示代理"
+  },
+  "authentication": {
+    "message": "身份验证"
+  },
+  "optional": {
+    "message": "可选"
+  },
+  "authStorageInfo": {
+    "message": "凭据已加密并存储在本地"
+  },
+  "username": {
+    "message": "用户名"
+  },
+  "usernamePlaceholder": {
+    "message": "用户名"
+  },
+  "password": {
+    "message": "密码"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "隐藏密码"
+  },
+  "showPassword": {
+    "message": "显示密码"
+  },
+  "diagnostics": {
+    "message": "诊断"
+  },
+  "tabDiagnostics": {
+    "message": "诊断"
+  },
+  "diagnosticsDesc": {
+    "message": "查看错误日志和诊断信息以进行调试"
+  },
+  "diagnosticsExported": {
+    "message": "诊断信息导出成功"
+  },
+  "diagnosticsExportFailed": {
+    "message": "导出诊断信息失败"
+  },
+  "confirmClearLogs": {
+    "message": "清除所有诊断日志？"
+  },
+  "diagnosticsCleared": {
+    "message": "诊断信息清除成功"
+  },
+  "diagnosticsClearFailed": {
+    "message": "清除诊断信息失败"
+  },
+  "allLogsMarkedRead": {
+    "message": "所有日志已标记为已读"
+  },
+  "justNow": {
+    "message": "刚刚"
+  },
+  "markAllRead": {
+    "message": "全部标记为已读"
+  },
+  "export": {
+    "message": "导出"
+  },
+  "clearAll": {
+    "message": "全部清除"
+  },
+  "noErrors": {
+    "message": "未检测到错误"
+  },
+  "noErrorsDesc": {
+    "message": "您的代理运行正常！"
+  },
+  "details": {
+    "message": "详情"
+  },
+  "url": {
+    "message": "网址"
+  },
+  "stackTrace": {
+    "message": "堆栈跟踪"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "此代理已配置身份验证"
   }
 }

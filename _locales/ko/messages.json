@@ -850,5 +850,92 @@
   },
   "viewModeListDescription": {
     "message": "프록시를 가로 목록으로 표시"
+  },
+  "authentication": {
+    "message": "인증"
+  },
+  "optional": {
+    "message": "선택 사항"
+  },
+  "authStorageInfo": {
+    "message": "자격 증명은 로컬에 암호화되어 저장됩니다"
+  },
+  "username": {
+    "message": "사용자 이름"
+  },
+  "usernamePlaceholder": {
+    "message": "사용자 이름"
+  },
+  "password": {
+    "message": "비밀번호"
+  },
+  "passwordPlaceholder": {
+    "message": "••••••••"
+  },
+  "hidePassword": {
+    "message": "비밀번호 숨기기"
+  },
+  "showPassword": {
+    "message": "비밀번호 표시"
+  },
+  "diagnostics": {
+    "message": "진단"
+  },
+  "tabDiagnostics": {
+    "message": "진단"
+  },
+  "diagnosticsDesc": {
+    "message": "디버깅을 위한 오류 로그 및 진단 정보 보기"
+  },
+  "diagnosticsExported": {
+    "message": "진단이 성공적으로 내보내졌습니다"
+  },
+  "diagnosticsExportFailed": {
+    "message": "진단 내보내기 실패"
+  },
+  "confirmClearLogs": {
+    "message": "모든 진단 로그를 지우시겠습니까?"
+  },
+  "diagnosticsCleared": {
+    "message": "진단이 성공적으로 지워졌습니다"
+  },
+  "diagnosticsClearFailed": {
+    "message": "진단 지우기 실패"
+  },
+  "allLogsMarkedRead": {
+    "message": "모든 로그를 읽음으로 표시했습니다"
+  },
+  "justNow": {
+    "message": "방금 전"
+  },
+  "markAllRead": {
+    "message": "모두 읽음으로 표시"
+  },
+  "export": {
+    "message": "내보내기"
+  },
+  "clearAll": {
+    "message": "모두 지우기"
+  },
+  "noErrors": {
+    "message": "오류가 감지되지 않았습니다"
+  },
+  "noErrorsDesc": {
+    "message": "프록시가 정상적으로 작동하고 있습니다!"
+  },
+  "details": {
+    "message": "세부 정보"
+  },
+  "url": {
+    "message": "URL"
+  },
+  "stackTrace": {
+    "message": "스택 추적"
+  },
+  "logId": {
+    "message": "ID"
+  },
+  "proxyHasAuth": {
+    "message": "이 프록시에는 인증이 구성되어 있습니다"
   }
 }
