@@ -11,6 +11,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { StorageService } from '@/services/StorageService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
+import { settingsCardVariants } from '@/utils/classPatterns'
 import {
   Bell,
   BookOpen,
@@ -36,6 +37,12 @@ let { activeTab = $bindable() }: Props = $props()
 
 let settings = $derived($settingsStore)
 let notificationsEnabled = $state(true)
+
+// Card variants for different settings cards
+const blueCard = settingsCardVariants({ color: 'blue', size: 'md' })
+const greenCard = settingsCardVariants({ color: 'green', size: 'md' })
+const purpleCard = settingsCardVariants({ color: 'purple', size: 'md' })
+const amberCard = settingsCardVariants({ color: 'amber', size: 'md' })
 
 // Load notification preference on mount
 $effect(() => {
@@ -98,15 +105,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     <!-- Grid layout for proxy behavior cards -->
     <div class="grid-settings-cards">
       <!-- Disable Proxy on Startup Card -->
-      <div class="group card-container border border-blue-200/50 dark:border-blue-800/30">
+      <div class="group {blueCard.wrapper()}">
         <!-- Background gradient -->
-        <div class="card-bg-layer card-bg-blue"></div>
+        <div class={blueCard.background()}></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div class="card-accent-top card-accent-blue"></div>
+        <div class={blueCard.accent()}></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -118,7 +125,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div class="icon-container icon-bg-blue">
+                <div class={blueCard.icon()}>
                   <Shield size={22} class="text-white" />
                 </div>
               </div>
@@ -147,15 +154,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- Auto-reload toggle Card -->
-      <div class="group card-container border border-green-200/50 dark:border-green-800/30">
+      <div class="group {greenCard.wrapper()}">
         <!-- Background gradient -->
-        <div class="card-bg-layer card-bg-green"></div>
+        <div class={greenCard.background()}></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div class="card-accent-top card-accent-green"></div>
+        <div class={greenCard.accent()}></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -167,7 +174,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div class="icon-container icon-bg-green">
+                <div class={greenCard.icon()}>
                   <RefreshCw size={22} class="text-white" />
                 </div>
               </div>
@@ -196,15 +203,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- System Notifications Card -->
-      <div class="group card-container border border-purple-200/50 dark:border-purple-800/30">
+      <div class="group {purpleCard.wrapper()}">
         <!-- Background gradient -->
-        <div class="card-bg-layer card-bg-purple"></div>
+        <div class={purpleCard.background()}></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div class="card-accent-top card-accent-purple"></div>
+        <div class={purpleCard.accent()}></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -216,7 +223,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div class="icon-container icon-bg-purple">
+                <div class={purpleCard.icon()}>
                   <Bell size={22} class="text-white" />
                 </div>
               </div>
@@ -248,15 +255,15 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       </div>
 
       <!-- Show Quick Settings Card -->
-      <div class="group card-container border border-amber-200/50 dark:border-amber-800/30">
+      <div class="group {amberCard.wrapper()}">
         <!-- Background gradient -->
-        <div class="card-bg-layer card-bg-amber"></div>
+        <div class={amberCard.background()}></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div class="card-accent-top card-accent-amber"></div>
+        <div class={amberCard.accent()}></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -268,7 +275,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div class="icon-container icon-bg-amber">
+                <div class={amberCard.icon()}>
                   <Eye size={22} class="text-white" />
                 </div>
               </div>

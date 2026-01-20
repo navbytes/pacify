@@ -2,6 +2,7 @@
 import { I18nService } from '@/services/i18n/i18nService'
 import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
+import { settingsCardVariants } from '@/utils/classPatterns'
 import { Download, Upload } from '@/utils/icons'
 import Button from './Button.svelte'
 import FlexGroup from './FlexGroup.svelte'
@@ -14,6 +15,10 @@ interface Props {
 let { onRestore }: Props = $props()
 
 let fileInputElement: HTMLInputElement | undefined = $state()
+
+// Card variants
+const emeraldCard = settingsCardVariants({ color: 'emerald', size: 'sm' })
+const amberCard = settingsCardVariants({ color: 'amber', size: 'sm' })
 
 // Handle the backup action
 async function handleBackup() {
@@ -62,15 +67,15 @@ async function handleRestore(event: Event) {
 
 <div class="grid-responsive-2">
   <!-- Backup Settings -->
-  <div class="group card-container-sm border border-emerald-200/50 dark:border-emerald-800/30">
+  <div class="group {emeraldCard.wrapper()}">
     <!-- Background gradient -->
-    <div class="card-bg-layer-sm card-bg-emerald"></div>
+    <div class={emeraldCard.background()}></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div class="card-accent-top card-accent-emerald"></div>
+    <div class={emeraldCard.accent()}></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
@@ -93,15 +98,15 @@ async function handleRestore(event: Event) {
   </div>
 
   <!-- Restore Settings -->
-  <div class="group card-container-sm border border-amber-200/50 dark:border-amber-800/30">
+  <div class="group {amberCard.wrapper()}">
     <!-- Background gradient -->
-    <div class="card-bg-layer-sm card-bg-amber"></div>
+    <div class={amberCard.background()}></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div class="card-accent-top card-accent-amber"></div>
+    <div class={amberCard.accent()}></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">

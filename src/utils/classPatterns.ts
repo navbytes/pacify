@@ -913,14 +913,6 @@ export const keyboardShortcutCardVariants = tv({
         accentBar: 'from-slate-400 via-slate-500 to-slate-400',
         kbd: 'bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200',
       },
-      indigo: {
-        wrapper: 'border-indigo-200/50 dark:border-indigo-800/30',
-        background:
-          'from-indigo-50 via-violet-50 to-purple-50 dark:from-indigo-950/30 dark:via-violet-950/30 dark:to-purple-950/30',
-        decorativeBlur: 'bg-linear-to-br from-indigo-400/20 to-violet-400/20',
-        accentBar: 'from-indigo-500 via-violet-500 to-purple-500',
-        kbd: 'bg-white dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300',
-      },
     },
   },
   defaultVariants: {
@@ -1323,5 +1315,78 @@ export const iconButtonVariants = tv({
   },
   defaultVariants: {
     active: false,
+  },
+})
+
+/**
+ * Settings card variants with color schemes for multi-part card components
+ * Used in SettingsTab and BackupRestore components
+ *
+ * @example
+ * const card = settingsCardVariants({ color: 'blue', size: 'md' })
+ * <div class={card.wrapper()}>
+ *   <div class={card.background()}></div>
+ *   <div class={card.accent()}></div>
+ *   <div class={card.icon()}>...</div>
+ * </div>
+ */
+export const settingsCardVariants = tv({
+  slots: {
+    wrapper:
+      'relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] border',
+    background: 'absolute inset-0 bg-linear-to-br',
+    accent: 'absolute top-0 left-0 right-0 h-1 bg-linear-to-r',
+    icon: 'relative w-12 h-12 bg-linear-to-br rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300',
+  },
+  variants: {
+    color: {
+      blue: {
+        wrapper: 'border-blue-200/50 dark:border-blue-800/30',
+        background:
+          'from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30',
+        accent: 'from-blue-500 to-indigo-500',
+        icon: 'from-blue-500 to-indigo-600 shadow-blue-500/25',
+      },
+      green: {
+        wrapper: 'border-green-200/50 dark:border-green-800/30',
+        background:
+          'from-green-50 to-emerald-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30',
+        accent: 'from-green-500 to-emerald-500',
+        icon: 'from-green-500 to-emerald-600 shadow-green-500/25',
+      },
+      purple: {
+        wrapper: 'border-purple-200/50 dark:border-purple-800/30',
+        background:
+          'from-purple-50 to-violet-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30',
+        accent: 'from-purple-500 to-violet-500',
+        icon: 'from-purple-500 to-violet-600 shadow-purple-500/25',
+      },
+      amber: {
+        wrapper: 'border-amber-200/50 dark:border-amber-800/30',
+        background:
+          'from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30',
+        accent: 'from-amber-500 to-orange-500',
+        icon: 'from-amber-500 to-orange-600 shadow-amber-500/25',
+      },
+      emerald: {
+        wrapper: 'border-emerald-200/50 dark:border-emerald-800/30',
+        background:
+          'from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30',
+        accent: 'from-emerald-500 to-teal-500',
+        icon: 'from-emerald-500 to-teal-600 shadow-emerald-500/25',
+      },
+    },
+    size: {
+      md: {
+        wrapper: 'hover:shadow-xl',
+      },
+      sm: {
+        wrapper: 'hover:shadow-md',
+      },
+    },
+  },
+  defaultVariants: {
+    color: 'blue',
+    size: 'md',
   },
 })
