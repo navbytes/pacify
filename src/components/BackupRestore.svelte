@@ -64,15 +64,13 @@ async function handleRestore(event: Event) {
   <!-- Backup Settings -->
   <div class="card-container-sm border border-emerald-200/50 dark:border-emerald-800/30">
     <!-- Background gradient -->
-    <div
-      class="card-bg-layer-sm from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30"
-    ></div>
+    <div class="card-bg-layer-sm card-bg-emerald"></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div class="card-accent-top from-emerald-500 to-teal-500"></div>
+    <div class="card-accent-top card-accent-emerald"></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
@@ -97,15 +95,13 @@ async function handleRestore(event: Event) {
   <!-- Restore Settings -->
   <div class="card-container-sm border border-amber-200/50 dark:border-amber-800/30">
     <!-- Background gradient -->
-    <div
-      class="card-bg-layer-sm from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30"
-    ></div>
+    <div class="card-bg-layer-sm card-bg-amber"></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div class="card-accent-top from-amber-500 to-orange-500"></div>
+    <div class="card-accent-top card-accent-amber"></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">

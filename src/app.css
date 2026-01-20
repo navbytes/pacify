@@ -410,6 +410,65 @@ body.modal-open {
   @apply text-base font-semibold cursor-pointer text-slate-800 dark:text-slate-100;
 }
 
+/* Card gradient color schemes */
+.card-bg-blue {
+  @apply from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30;
+}
+
+.card-bg-green {
+  @apply from-green-50 to-emerald-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30;
+}
+
+.card-bg-purple {
+  @apply from-purple-50 to-violet-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30;
+}
+
+.card-bg-amber {
+  @apply from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30;
+}
+
+.card-bg-emerald {
+  @apply from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30;
+}
+
+/* Card accent top color schemes */
+.card-accent-blue {
+  @apply from-blue-500 to-indigo-500;
+}
+
+.card-accent-green {
+  @apply from-green-500 to-emerald-500;
+}
+
+.card-accent-purple {
+  @apply from-purple-500 to-violet-500;
+}
+
+.card-accent-amber {
+  @apply from-amber-500 to-orange-500;
+}
+
+.card-accent-emerald {
+  @apply from-emerald-500 to-teal-500;
+}
+
+/* Icon container color schemes */
+.icon-bg-blue {
+  @apply from-blue-500 to-indigo-600 shadow-blue-500/25;
+}
+
+.icon-bg-green {
+  @apply from-green-500 to-emerald-600 shadow-green-500/25;
+}
+
+.icon-bg-purple {
+  @apply from-purple-500 to-violet-600 shadow-purple-500/25;
+}
+
+.icon-bg-amber {
+  @apply from-amber-500 to-orange-600 shadow-amber-500/25;
+}
+
 /* Common grid layouts */
 .grid-responsive-2 {
   @apply grid grid-cols-1 md:grid-cols-2 gap-4;

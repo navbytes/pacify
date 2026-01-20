@@ -100,15 +100,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       <!-- Disable Proxy on Startup Card -->
       <div class="card-container border border-blue-200/50 dark:border-blue-800/30">
         <!-- Background gradient -->
-        <div
-          class="card-bg-layer from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-violet-950/30"
-        ></div>
+        <div class="card-bg-layer card-bg-blue"></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div class="card-accent-top from-blue-500 to-indigo-500"></div>
+        <div class="card-accent-top card-accent-blue"></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -120,7 +118,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div class="icon-container from-blue-500 to-indigo-600 shadow-blue-500/25">
+                <div class="icon-container icon-bg-blue">
                   <Shield size={22} class="text-white" />
                 </div>
               </div>
@@ -151,15 +149,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       <!-- Auto-reload toggle Card -->
       <div class="card-container border border-green-200/50 dark:border-green-800/30">
         <!-- Background gradient -->
-        <div
-          class="card-bg-layer from-green-50 to-emerald-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30"
-        ></div>
+        <div class="card-bg-layer card-bg-green"></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div class="card-accent-top from-green-500 to-emerald-500"></div>
+        <div class="card-accent-top card-accent-green"></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -171,7 +167,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div class="icon-container from-green-500 to-emerald-600 shadow-green-500/25">
+                <div class="icon-container icon-bg-green">
                   <RefreshCw size={22} class="text-white" />
                 </div>
               </div>
@@ -202,15 +198,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       <!-- System Notifications Card -->
       <div class="card-container border border-purple-200/50 dark:border-purple-800/30">
         <!-- Background gradient -->
-        <div
-          class="card-bg-layer from-purple-50 to-violet-50 dark:from-purple-950/30 dark:via-violet-950/30 dark:to-fuchsia-950/30"
-        ></div>
+        <div class="card-bg-layer card-bg-purple"></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div class="card-accent-top from-purple-500 to-violet-500"></div>
+        <div class="card-accent-top card-accent-purple"></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -222,7 +216,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div class="icon-container from-purple-500 to-violet-600 shadow-purple-500/25">
+                <div class="icon-container icon-bg-purple">
                   <Bell size={22} class="text-white" />
                 </div>
               </div>
@@ -256,15 +250,13 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       <!-- Show Quick Settings Card -->
       <div class="card-container border border-amber-200/50 dark:border-amber-800/30">
         <!-- Background gradient -->
-        <div
-          class="card-bg-layer from-amber-50 to-orange-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30"
-        ></div>
+        <div class="card-bg-layer card-bg-amber"></div>
 
         <!-- Decorative elements -->
         <div></div>
 
         <!-- Top accent -->
-        <div class="card-accent-top from-amber-500 to-orange-500"></div>
+        <div class="card-accent-top card-accent-amber"></div>
 
         <div class="relative p-5">
           <FlexGroup
@@ -276,7 +268,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
             <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
               <div class="relative">
                 <div></div>
-                <div class="icon-container from-amber-500 to-orange-600 shadow-amber-500/25">
+                <div class="icon-container icon-bg-amber">
                   <Eye size={22} class="text-white" />
                 </div>
               </div>
