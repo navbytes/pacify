@@ -5,6 +5,16 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.28.1] - 2026-01-21
+
+### Fixed
+
+- **Legacy Proxy Configuration Compatibility** 🔧
+  - Fixed Svelte `props_invalid_value` error when editing proxy configurations created before version 1.28.0
+  - Legacy configurations (created before authentication feature) now properly initialize missing `username` and `password` fields with empty strings
+  - Ensures backward compatibility by merging existing proxy settings with default values on load
+  - Resolves issue where the proxy configuration modal would crash when editing older manual proxy configurations
+
 ## [1.28.0] - 2026-01-20
 
 ### Added
