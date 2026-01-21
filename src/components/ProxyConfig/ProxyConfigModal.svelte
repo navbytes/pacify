@@ -76,12 +76,13 @@ $effect(() => {
   lastFetched = proxyConfig?.pacScript?.lastFetched
 
   // Initialize manual proxy settings
+  // Merge existing configs with defaults to ensure all fields (including username/password) are present
   proxySettings = {
-    singleProxy: proxyConfig?.rules?.singleProxy || { ...DEFAULT_PROXY_CONFIG },
-    proxyForHttp: proxyConfig?.rules?.proxyForHttp || { ...DEFAULT_PROXY_CONFIG },
-    proxyForHttps: proxyConfig?.rules?.proxyForHttps || { ...DEFAULT_PROXY_CONFIG },
-    proxyForFtp: proxyConfig?.rules?.proxyForFtp || { ...DEFAULT_PROXY_CONFIG },
-    fallbackProxy: proxyConfig?.rules?.fallbackProxy || { ...DEFAULT_PROXY_CONFIG },
+    singleProxy: { ...DEFAULT_PROXY_CONFIG, ...proxyConfig?.rules?.singleProxy },
+    proxyForHttp: { ...DEFAULT_PROXY_CONFIG, ...proxyConfig?.rules?.proxyForHttp },
+    proxyForHttps: { ...DEFAULT_PROXY_CONFIG, ...proxyConfig?.rules?.proxyForHttps },
+    proxyForFtp: { ...DEFAULT_PROXY_CONFIG, ...proxyConfig?.rules?.proxyForFtp },
+    fallbackProxy: { ...DEFAULT_PROXY_CONFIG, ...proxyConfig?.rules?.fallbackProxy },
     bypassList: proxyConfig?.rules?.bypassList || [],
   }
   useSharedProxy = proxyConfig?.rules?.singleProxy !== undefined ? true : !proxyConfig?.rules
