@@ -3,11 +3,18 @@ import { onMount } from 'svelte'
 import Button from '@/components/Button.svelte'
 import Text from '@/components/Text.svelte'
 import type { DiagnosticLogEntry } from '@/interfaces/error'
-import { I18nService } from '@/services/i18n/i18nService'
 import { diagnosticsService } from '@/services/DiagnosticsService'
+import { I18nService } from '@/services/i18n/i18nService'
 import { toastStore } from '@/stores/toastStore'
-import { Download, Trash2, AlertCircle, AlertTriangle, Info, ChevronDown, CheckCheck } from '@/utils/icons'
-import { formLabelVariants, inputVariants } from '@/utils/classPatterns'
+import {
+  AlertCircle,
+  AlertTriangle,
+  CheckCheck,
+  ChevronDown,
+  Download,
+  Info,
+  Trash2,
+} from '@/utils/icons'
 
 let logs = $state<DiagnosticLogEntry[]>([])
 let expandedLogIds = $state<Set<string>>(new Set())
@@ -149,7 +156,7 @@ function formatTimestamp(timestamp: number): string {
   }
 
   // Show full date
-  return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
+  return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
 }
 </script>
 
@@ -200,7 +207,9 @@ function formatTimestamp(timestamp: number): string {
   {:else if logs.length === 0}
     <!-- Empty state -->
     <div class="flex flex-col items-center justify-center py-12 px-4 text-center">
-      <div class="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center mb-4">
+      <div
+        class="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center mb-4"
+      >
         <CheckCheck class="w-8 h-8 text-green-600 dark:text-green-400" />
       </div>
       <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">
@@ -248,12 +257,8 @@ function formatTimestamp(timestamp: number): string {
                 {/if}
               </div>
 
-              <p class="text-sm font-medium text-slate-900 dark:text-slate-100">
-                {log.type}
-              </p>
-              <p class="text-sm text-slate-700 dark:text-slate-300 mt-1">
-                {log.message}
-              </p>
+              <p class="text-sm font-medium text-slate-900 dark:text-slate-100">{log.type}</p>
+              <p class="text-sm text-slate-700 dark:text-slate-300 mt-1">{log.message}</p>
             </div>
 
             <!-- Expand icon -->
@@ -266,13 +271,24 @@ function formatTimestamp(timestamp: number): string {
 
           <!-- Expanded details -->
           {#if isExpanded}
-            <div class="px-4 pb-4 pl-12 space-y-3 border-t border-slate-200 dark:border-slate-700/50 pt-3">
+            <div
+              class="px-4 pb-4 pl-12 space-y-3 border-t border-slate-200 dark:border-slate-700/50 pt-3"
+            >
               {#if log.details}
                 <div>
-                  <Text as="p" size="xs" weight="medium" classes="text-slate-600 dark:text-slate-400 mb-1">
+                  <Text
+                    as="p"
+                    size="xs"
+                    weight="medium"
+                    classes="text-slate-600 dark:text-slate-400 mb-1"
+                  >
                     {I18nService.getMessage('details') || 'Details'}
                   </Text>
-                  <Text as="pre" size="xs" classes="text-slate-700 dark:text-slate-300 font-mono whitespace-pre-wrap bg-white/50 dark:bg-black/20 p-2 rounded">
+                  <Text
+                    as="pre"
+                    size="xs"
+                    classes="text-slate-700 dark:text-slate-300 font-mono whitespace-pre-wrap bg-white/50 dark:bg-black/20 p-2 rounded"
+                  >
                     {log.details}
                   </Text>
                 </div>
@@ -280,10 +296,19 @@ function formatTimestamp(timestamp: number): string {
 
               {#if log.url}
                 <div>
-                  <Text as="p" size="xs" weight="medium" classes="text-slate-600 dark:text-slate-400 mb-1">
+                  <Text
+                    as="p"
+                    size="xs"
+                    weight="medium"
+                    classes="text-slate-600 dark:text-slate-400 mb-1"
+                  >
                     {I18nService.getMessage('url') || 'URL'}
                   </Text>
-                  <Text as="p" size="xs" classes="text-slate-700 dark:text-slate-300 font-mono break-all">
+                  <Text
+                    as="p"
+                    size="xs"
+                    classes="text-slate-700 dark:text-slate-300 font-mono break-all"
+                  >
                     {log.url}
                   </Text>
                 </div>
@@ -291,10 +316,19 @@ function formatTimestamp(timestamp: number): string {
 
               {#if log.stack}
                 <div>
-                  <Text as="p" size="xs" weight="medium" classes="text-slate-600 dark:text-slate-400 mb-1">
+                  <Text
+                    as="p"
+                    size="xs"
+                    weight="medium"
+                    classes="text-slate-600 dark:text-slate-400 mb-1"
+                  >
                     {I18nService.getMessage('stackTrace') || 'Stack Trace'}
                   </Text>
-                  <Text as="pre" size="xs" classes="text-slate-700 dark:text-slate-300 font-mono whitespace-pre-wrap bg-white/50 dark:bg-black/20 p-2 rounded max-h-64 overflow-auto">
+                  <Text
+                    as="pre"
+                    size="xs"
+                    classes="text-slate-700 dark:text-slate-300 font-mono whitespace-pre-wrap bg-white/50 dark:bg-black/20 p-2 rounded max-h-64 overflow-auto"
+                  >
                     {log.stack}
                   </Text>
                 </div>

@@ -8,16 +8,16 @@ import Tabs from '@/components/Tabs/Tabs.svelte'
 import ThemeToggle from '@/components/ThemeToggle.svelte'
 import Toast from '@/components/Toast.svelte'
 import type { ProxyConfig } from '@/interfaces'
+import { diagnosticsService } from '@/services/DiagnosticsService'
 import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
-import { diagnosticsService } from '@/services/DiagnosticsService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
-import { Cable, Settings, Activity } from '@/utils/icons'
+import { Activity, Cable, Settings } from '@/utils/icons'
 import { isAutoProxy } from '@/utils/proxyModeHelpers'
+import DiagnosticsTab from './DiagnosticsTab.svelte'
 import ProxyConfigsTab from './ProxyConfigsTab.svelte'
 import SettingsTab from './SettingsTab.svelte'
-import DiagnosticsTab from './DiagnosticsTab.svelte'
 
 let showEditor = $state(false)
 let showAutoProxyEditor = $state(false)
@@ -90,9 +90,14 @@ $effect(() => {
 // Refresh unread diagnostic count when switching to diagnostics tab
 $effect(() => {
   if (activeTab === 'diagnostics') {
-    diagnosticsService.getUnreadCount().then(count => {
-      unreadDiagnosticCount = count
-    })
+    diagnosticsService
+      .getUnreadCount()
+      .then((count) => {
+        unreadDiagnosticCount = count
+      })
+      .catch((error) => {
+        logger.error('Failed to get unread diagnostic count:', error)
+      })
   }
 })
 
@@ -250,7 +255,11 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
             <TabList>
               <Tab id="proxy-configs" icon={Cable}>{I18nService.getMessage('tabProxyConfigs')}</Tab>
               <Tab id="settings" icon={Settings}>{I18nService.getMessage('tabSettings')}</Tab>
-              <Tab id="diagnostics" icon={Activity} badge={unreadDiagnosticCount > 0 ? unreadDiagnosticCount : undefined}>
+              <Tab
+                id="diagnostics"
+                icon={Activity}
+                badge={unreadDiagnosticCount > 0 ? unreadDiagnosticCount : undefined}
+              >
                 {I18nService.getMessage('tabDiagnostics') || 'Diagnostics'}
               </Tab>
             </TabList>

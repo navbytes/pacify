@@ -28,6 +28,13 @@ let isInitialized = false
 let listenersRegistered = false
 
 /**
+ * Initialization retry configuration
+ */
+const INIT_MAX_RETRIES = 3
+const INIT_BASE_DELAY = 5000 // 5 seconds
+let initRetryCount = 0
+
+/**
  * Message queue for handling messages that arrive during initialization
  */
 interface QueuedMessage {
@@ -152,8 +159,27 @@ async function initialize(): Promise<void> {
     await processMessageQueue()
   } catch (error) {
     logger.error('Initialization error:', error)
-    // Use a safer error handling approach for service workers
-    setTimeout(initialize, 5000)
+
+    // Use exponential backoff with max retries
+    if (initRetryCount < INIT_MAX_RETRIES) {
+      initRetryCount++
+      const delay = INIT_BASE_DELAY * 2 ** (initRetryCount - 1)
+      logger.info(
+        `Retrying initialization in ${delay}ms (attempt ${initRetryCount}/${INIT_MAX_RETRIES})`
+      )
+      setTimeout(initialize, delay)
+    } else {
+      logger.error(
+        `Failed to initialize after ${INIT_MAX_RETRIES} attempts. Background service may not work correctly.`
+      )
+      await diagnosticsService.logError(
+        'INITIALIZATION_FAILED',
+        `Failed to initialize background service after ${INIT_MAX_RETRIES} attempts`,
+        {
+          details: error instanceof Error ? error.stack : String(error),
+        }
+      )
+    }
   }
 }
 
@@ -549,14 +575,15 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
     logger.error(`Error refreshing PAC script for config ${configId}:`, error)
 
     // Get config name for diagnostic log
-    const config = configs.find(c => c.id === configId)
+    const settings = await safeGetSettings()
+    const configForLog = settings?.proxyConfigs.find((c) => c.id === configId)
     await diagnosticsService.logError(
       'PAC_SCRIPT_REFRESH_FAILED',
       error instanceof Error ? error.message : 'Failed to refresh PAC script',
       {
-        proxyName: config?.name,
+        proxyName: configForLog?.name,
         proxyId: configId,
-        url: config?.pacScript?.url,
+        url: configForLog?.pacScript?.url,
         details: error instanceof Error ? error.stack : String(error),
       }
     )
