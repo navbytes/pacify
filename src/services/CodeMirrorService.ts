@@ -34,6 +34,9 @@ export class CodeMirror {
   private static themeChangeListeners = new Set<(theme: 'light' | 'dark') => void>()
   private static themeCompartments = new WeakMap<EditorView, Compartment>()
   private static readonly themeCleanupFunctions = new WeakMap<EditorView, () => void>()
+  // Store global theme listener for cleanup
+  private static globalThemeHandler: ((e: MediaQueryListEvent) => void) | null = null
+  private static globalMediaQuery: MediaQueryList | null = null
 
   /**
    * Initializes CodeMirror with system theme detection
@@ -44,16 +47,16 @@ export class CodeMirror {
 
     // Set up system theme change listener
     if (window.matchMedia) {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      this.globalMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
-      const handleThemeChange = (e: MediaQueryListEvent) => {
+      this.globalThemeHandler = (e: MediaQueryListEvent) => {
         const newTheme = e.matches ? 'dark' : 'light'
         this.themeChangeListeners.forEach((listener) => {
           listener(newTheme)
         })
       }
 
-      mediaQuery.addEventListener('change', handleThemeChange)
+      this.globalMediaQuery.addEventListener('change', this.globalThemeHandler)
     }
 
     this.hasInitialized = true
@@ -372,6 +375,24 @@ export class CodeMirror {
    */
   static getCurrentTheme(): 'light' | 'dark' {
     return getSystemTheme()
+  }
+
+  /**
+   * Cleanup global resources (useful for testing and preventing memory leaks)
+   */
+  static cleanup(): void {
+    // Remove global theme listener
+    if (CodeMirror.globalMediaQuery && CodeMirror.globalThemeHandler) {
+      CodeMirror.globalMediaQuery.removeEventListener('change', CodeMirror.globalThemeHandler)
+      CodeMirror.globalMediaQuery = null
+      CodeMirror.globalThemeHandler = null
+    }
+
+    // Clear all theme change listeners
+    CodeMirror.themeChangeListeners.clear()
+
+    // Reset initialization flag
+    CodeMirror.hasInitialized = false
   }
 }
 

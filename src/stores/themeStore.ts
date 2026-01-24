@@ -30,6 +30,10 @@ function applyTheme(theme: Theme) {
 function createThemeStore() {
   const { subscribe, set } = writable<Theme>('system')
 
+  // Store references for cleanup
+  let mediaQuery: MediaQueryList | null = null
+  let themeChangeHandler: ((e: MediaQueryListEvent) => void) | null = null
+
   // Load theme from storage on initialization
   async function initialize() {
     try {
@@ -47,15 +51,16 @@ function createThemeStore() {
 
   // Listen for system theme changes (only in browser contexts)
   if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    mediaQuery.addEventListener('change', () => {
+    mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    themeChangeHandler = () => {
       // Re-apply theme when system preference changes
       subscribe((currentTheme) => {
         if (currentTheme === 'system') {
           applyTheme('system')
         }
       })()
-    })
+    }
+    mediaQuery.addEventListener('change', themeChangeHandler)
   }
 
   return {
@@ -71,6 +76,14 @@ function createThemeStore() {
       }
     },
     initialize,
+    // Cleanup function to remove event listener (useful for testing and SSR)
+    cleanup: () => {
+      if (mediaQuery && themeChangeHandler) {
+        mediaQuery.removeEventListener('change', themeChangeHandler)
+        mediaQuery = null
+        themeChangeHandler = null
+      }
+    },
   }
 }
 

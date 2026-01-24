@@ -20,6 +20,8 @@ interface EmbeddedPACScript {
  */
 // biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class PACScriptGenerator {
+  // Maximum allowed pattern length to prevent ReDoS attacks
+  private static readonly MAX_PATTERN_LENGTH = 1000
   /**
    * Generate a complete PAC script from an Auto-Proxy configuration
    */
@@ -279,8 +281,18 @@ ${extractedBody}
    * Generate condition for regex patterns
    */
   private static generateRegexCondition(pattern: string): string {
-    // Escape the pattern for use in JavaScript regex constructor
-    const escapedPattern = pattern.replaceAll('\\', '\\\\')
+    // Truncate pattern if too long (safety check - should be caught by validation)
+    const safePattern = pattern.slice(0, PACScriptGenerator.MAX_PATTERN_LENGTH)
+
+    // Escape the pattern for use in JavaScript string literal
+    // Must escape: backslashes, quotes, newlines, and other special chars
+    const escapedPattern = safePattern
+      .replaceAll('\\', '\\\\')
+      .replaceAll('"', '\\"')
+      .replaceAll('\n', '\\n')
+      .replaceAll('\r', '\\r')
+      .replaceAll('\t', '\\t')
+
     return `new RegExp("${escapedPattern}").test(host)`
   }
 
@@ -428,6 +440,14 @@ ${extractedBody}
   }
 
   private static validateRegexPattern(pattern: string): { valid: boolean; error?: string } {
+    // Check pattern length to prevent ReDoS attacks
+    if (pattern.length > PACScriptGenerator.MAX_PATTERN_LENGTH) {
+      return {
+        valid: false,
+        error: `Pattern too long (max ${PACScriptGenerator.MAX_PATTERN_LENGTH} characters)`,
+      }
+    }
+
     try {
       new RegExp(pattern)
       return { valid: true }
@@ -531,6 +551,10 @@ ${extractedBody}
         return host === pattern
       case 'regex':
         try {
+          // Skip patterns that are too long to prevent ReDoS
+          if (pattern.length > PACScriptGenerator.MAX_PATTERN_LENGTH) {
+            return false
+          }
           return new RegExp(pattern).test(host)
         } catch {
           return false

@@ -366,16 +366,14 @@ describe('SettingsWriter', () => {
       const file = new File(['{}'], 'invalid.json', { type: 'application/json' })
 
       await expect(SettingsWriter.restoreSettings(file)).rejects.toThrow(
-        'Failed to restore settings'
+        'Invalid settings: proxyConfigs must be an array'
       )
     })
 
     test('throws error for non-JSON file content', async () => {
       const file = new File(['not json'], 'invalid.json', { type: 'application/json' })
 
-      await expect(SettingsWriter.restoreSettings(file)).rejects.toThrow(
-        'Failed to restore settings'
-      )
+      await expect(SettingsWriter.restoreSettings(file)).rejects.toThrow('Invalid JSON format')
     })
 
     test('restores valid settings file', async () => {
