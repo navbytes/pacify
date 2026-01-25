@@ -891,36 +891,6 @@ export const errorContainerVariants = tv({
 })
 
 /**
- * Keyboard shortcut card variants
- */
-export const keyboardShortcutCardVariants = tv({
-  slots: {
-    wrapper:
-      'group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border',
-    background: 'absolute inset-0 bg-linear-to-br',
-    decorativeBlur: 'absolute -top-10 -right-10 w-24 h-24 rounded-full blur-2xl',
-    accentBar: 'absolute top-0 left-0 right-0 h-1 bg-linear-to-r',
-    content: 'relative p-4 flex flex-col items-center text-center gap-3',
-    kbd: 'px-3 py-1.5 text-sm font-mono font-semibold rounded-lg shadow-sm',
-  },
-  variants: {
-    color: {
-      slate: {
-        wrapper: 'border-slate-200/50 dark:border-slate-700/30',
-        background:
-          'from-slate-50 via-slate-100 to-slate-50 dark:from-slate-800/50 dark:via-slate-800/30 dark:to-slate-800/50',
-        decorativeBlur: 'bg-linear-to-br from-slate-400/10 to-slate-500/10',
-        accentBar: 'from-slate-400 via-slate-500 to-slate-400',
-        kbd: 'bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200',
-      },
-    },
-  },
-  defaultVariants: {
-    color: 'slate',
-  },
-})
-
-/**
  * Search input container variants
  */
 export const searchInputVariants = tv({

@@ -937,5 +937,218 @@
   },
   "proxyHasAuth": {
     "message": "このプロキシには認証が設定されています"
+  },
+  "settingsFileTooLarge": {
+    "message": "設定ファイルが大きすぎます。最大サイズは$1KBです。",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "無効なファイル形式です。JSONファイルを選択してください。"
+  },
+  "invalidJsonFormat": {
+    "message": "無効なJSON形式です。"
+  },
+  "settingsMustBeObject": {
+    "message": "設定は有効なオブジェクトである必要があります。"
+  },
+  "invalidProxyConfigsArray": {
+    "message": "無効な設定: proxyConfigsは配列である必要があります。"
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "無効な設定: quickSwitchEnabledはブール値である必要があります。"
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "無効な設定: disableProxyOnStartupはブール値である必要があります。"
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "無効な設定: autoReloadOnProxySwitchはブール値である必要があります。"
+  },
+  "invalidActiveScriptId": {
+    "message": "無効な設定: activeScriptIdは文字列またはnullである必要があります。"
+  },
+  "invalidProxyConfiguration": {
+    "message": "無効なプロキシ設定です。"
+  },
+  "proxyMustHaveName": {
+    "message": "各プロキシには有効な名前が必要です。"
+  },
+  "proxyMustHaveMode": {
+    "message": "各プロキシには有効なモードが必要です。"
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "設定の復元に失敗しました。ファイル形式を確認してください。"
+  },
+  "noActiveProxy": {
+    "message": "なし"
+  },
+  "configuredProxies": {
+    "message": "設定済みプロキシ"
+  },
+  "storageUsed": {
+    "message": "使用中のストレージ"
+  },
+  "extensionVersion": {
+    "message": "拡張機能のバージョン"
+  },
+  "logsCount": {
+    "message": "アクティビティログ"
+  },
+  "activityLog": {
+    "message": "アクティビティログ"
+  },
+  "pacScriptValid": {
+    "message": "PACスクリプトは有効です"
+  },
+  "pacScriptError": {
+    "message": "PACスクリプトにエラーがあります。構文を確認してください。"
+  },
+  "invalidPacScript": {
+    "message": "無効なPACスクリプトです。有効なFindProxyForURL関数が含まれていることを確認してください。"
+  },
+  "pacFetchFailed": {
+    "message": "URLからPACスクリプトの取得に失敗しました。URLとネットワーク接続を確認してください。"
+  },
+  "proxyPermissionDenied": {
+    "message": "権限が拒否されました。拡張機能に必要な権限がない可能性があります。"
+  },
+  "proxyControlledByOther": {
+    "message": "プロキシ設定は別の拡張機能によって制御されています。"
+  },
+  "proxyManagedByPolicy": {
+    "message": "プロキシ設定は組織のポリシーによって管理されています。"
+  },
+  "invalidProxyHost": {
+    "message": "無効なプロキシホストアドレスです。サーバー設定を確認してください。"
+  },
+  "invalidProxyPort": {
+    "message": "無効なプロキシポートです。有効なポート番号（1-65535）を入力してください。"
+  },
+  "proxyTimeout": {
+    "message": "接続がタイムアウトしました。プロキシサーバーに到達できない可能性があります。"
+  },
+  "proxySettingsFailed": {
+    "message": "プロキシ設定の適用に失敗しました。"
+  },
+  "onboardingWelcomeTitle": {
+    "message": "PACifyへようこそ"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome用のモダンなプロキシマネージャーです。プロキシ設定を簡単に構成、切り替え、管理できます。"
+  },
+  "onboardingFeaturesTitle": {
+    "message": "強力な機能"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "プロキシを効果的に管理するために必要なすべてが揃っています。"
+  },
+  "onboardingFeatureProxies": {
+    "message": "複数のプロキシプロファイル"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "異なるプロキシ設定を瞬時に作成し、切り替えることができます。"
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "自動プロキシルール"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "スマートなルーティングルールでURLパターンに基づいてトラフィックをルーティングします。"
+  },
+  "onboardingFeaturePAC": {
+    "message": "PACスクリプトサポート"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "高度なプロキシ設定にカスタムPACスクリプトを使用できます。"
+  },
+  "onboardingShortcutsTitle": {
+    "message": "キーボードショートカット"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "キーボードショートカットでより速く作業できます。"
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "新しいプロキシを作成"
+  },
+  "onboardingShortcutSearch": {
+    "message": "プロキシを検索"
+  },
+  "onboardingShortcutClose": {
+    "message": "モーダルを閉じる"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "準備完了！"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "最初のプロキシ設定を作成して開始するか、設定を探索してください。"
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "最初のプロキシを作成"
+  },
+  "onboardingExploreSettings": {
+    "message": "設定を探索"
+  },
+  "previous": {
+    "message": "前へ"
+  },
+  "next": {
+    "message": "次へ"
+  },
+  "skipTour": {
+    "message": "ツアーをスキップ"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "これらのショートカットを使用してより速く作業"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "一般"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "ナビゲーション"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "プロキシリスト"
+  },
+  "shortcutNewProxy": {
+    "message": "新しいプロキシ設定を作成"
+  },
+  "shortcutSearch": {
+    "message": "検索を開く"
+  },
+  "shortcutCloseModal": {
+    "message": "現在のモーダルを閉じる"
+  },
+  "shortcutShowHelp": {
+    "message": "キーボードショートカットを表示"
+  },
+  "shortcutNextElement": {
+    "message": "次の要素に移動"
+  },
+  "shortcutPrevElement": {
+    "message": "前の要素に移動"
+  },
+  "shortcutActivate": {
+    "message": "フォーカスした要素を有効化"
+  },
+  "shortcutToggle": {
+    "message": "スイッチとチェックボックスを切り替え"
+  },
+  "shortcutNavigateList": {
+    "message": "プロキシリストをナビゲート"
+  },
+  "shortcutActivateProxy": {
+    "message": "選択したプロキシを有効化"
+  },
+  "shortcutEditProxy": {
+    "message": "選択したプロキシを編集"
+  },
+  "shortcutDeleteProxy": {
+    "message": "選択したプロキシを削除"
+  },
+  "shortcutsTip": {
+    "message": "どこでも ? を押すとこのヘルプが表示されます"
   }
 }

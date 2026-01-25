@@ -16,6 +16,7 @@ import { browserService } from '@/services/chrome/BrowserService'
 import { diagnosticsService } from '@/services/DiagnosticsService'
 import { logger } from '@/services/LoggerService'
 import { PACScriptGenerator } from '@/services/PACScriptGenerator'
+import { parseProxyError } from '@/utils/errorHandling'
 
 /**
  * Flag to track if the background worker is fully initialized
@@ -26,6 +27,13 @@ let isInitialized = false
  * Flag to track if event listeners have been registered
  */
 let listenersRegistered = false
+
+/**
+ * Initialization retry configuration
+ */
+const INIT_MAX_RETRIES = 3
+const INIT_BASE_DELAY = 5000 // 5 seconds
+let initRetryCount = 0
 
 /**
  * Message queue for handling messages that arrive during initialization
@@ -123,9 +131,15 @@ async function initialize(): Promise<void> {
       })
 
       // Listen for extension installation or update events
-      browserService.runtime.onInstalled.addListener(async () => {
+      browserService.runtime.onInstalled.addListener(async (details) => {
         logger.info('Extension installed/updated - initializing proxy settings and badge')
         await initializeProxySettings()
+
+        // Set first-run flag for new installations to trigger onboarding
+        if (details.reason === 'install') {
+          await chrome.storage.local.set({ 'pacify.showOnboarding': true })
+          logger.info('First installation detected - onboarding flag set')
+        }
       })
 
       // Listen for alarms (for PAC script auto-refresh)
@@ -152,8 +166,27 @@ async function initialize(): Promise<void> {
     await processMessageQueue()
   } catch (error) {
     logger.error('Initialization error:', error)
-    // Use a safer error handling approach for service workers
-    setTimeout(initialize, 5000)
+
+    // Use exponential backoff with max retries
+    if (initRetryCount < INIT_MAX_RETRIES) {
+      initRetryCount++
+      const delay = INIT_BASE_DELAY * 2 ** (initRetryCount - 1)
+      logger.info(
+        `Retrying initialization in ${delay}ms (attempt ${initRetryCount}/${INIT_MAX_RETRIES})`
+      )
+      setTimeout(initialize, delay)
+    } else {
+      logger.error(
+        `Failed to initialize after ${INIT_MAX_RETRIES} attempts. Background service may not work correctly.`
+      )
+      await diagnosticsService.logError(
+        'INITIALIZATION_FAILED',
+        `Failed to initialize background service after ${INIT_MAX_RETRIES} attempts`,
+        {
+          details: error instanceof Error ? error.stack : String(error),
+        }
+      )
+    }
   }
 }
 
@@ -381,17 +414,31 @@ async function setProxySettings(proxy: ProxyConfig): Promise<void> {
     await ChromeService.setProxy(proxyToApply, autoReload)
     const { name, color, badgeLabel } = proxy
     await updateBadge(badgeLabel || name, color)
-  } catch (error) {
-    logger.error('Error setting proxy:', error)
-    await diagnosticsService.logError(
-      'PROXY_SET_FAILED',
-      error instanceof Error ? error.message : 'Failed to set proxy configuration',
+
+    // Log successful proxy activation
+    await diagnosticsService.logInfo(
+      'PROXY_ACTIVATED',
+      `Proxy "${proxy.name}" activated successfully`,
       {
         proxyName: proxy.name,
         proxyId: proxy.id,
-        details: error instanceof Error ? error.stack : String(error),
+        details: `Mode: ${proxy.mode}${proxy.autoProxy ? ' (Auto-Proxy)' : ''}`,
       }
     )
+  } catch (error) {
+    logger.error('Error setting proxy:', error)
+
+    // Parse error for user-friendly message
+    const { fallback } = parseProxyError(error)
+
+    await diagnosticsService.logError('PROXY_SET_FAILED', fallback, {
+      proxyName: proxy.name,
+      proxyId: proxy.id,
+      details: error instanceof Error ? error.stack : String(error),
+    })
+
+    // Re-throw to propagate to caller
+    throw error
   }
 }
 
@@ -403,15 +450,22 @@ async function clearProxySettings(): Promise<void> {
 
     await ChromeService.clearProxy(autoReload)
     await updateBadge(DEFAULT_BADGE_TEXT, DEFAULT_BADGE_COLOR)
+
+    // Log successful proxy deactivation
+    await diagnosticsService.logInfo(
+      'PROXY_DEACTIVATED',
+      'Proxy deactivated - using direct connection',
+      {}
+    )
   } catch (error) {
     logger.error('Error clearing proxy:', error)
-    await diagnosticsService.logError(
-      'PROXY_CLEAR_FAILED',
-      error instanceof Error ? error.message : 'Failed to clear proxy configuration',
-      {
-        details: error instanceof Error ? error.stack : String(error),
-      }
-    )
+
+    // Parse error for user-friendly message
+    const { fallback } = parseProxyError(error)
+
+    await diagnosticsService.logError('PROXY_CLEAR_FAILED', fallback, {
+      details: error instanceof Error ? error.stack : String(error),
+    })
   }
 }
 
@@ -545,18 +599,30 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
     if (config.isActive) {
       await setProxySettings(updatedConfig)
     }
+
+    // Log successful PAC script refresh
+    await diagnosticsService.logInfo(
+      'PAC_SCRIPT_REFRESHED',
+      `PAC script "${config.name}" refreshed successfully`,
+      {
+        proxyName: config.name,
+        proxyId: config.id,
+        url: config.pacScript.url,
+      }
+    )
   } catch (error) {
     logger.error(`Error refreshing PAC script for config ${configId}:`, error)
 
     // Get config name for diagnostic log
-    const config = configs.find(c => c.id === configId)
+    const settings = await safeGetSettings()
+    const configForLog = settings?.proxyConfigs.find((c) => c.id === configId)
     await diagnosticsService.logError(
       'PAC_SCRIPT_REFRESH_FAILED',
       error instanceof Error ? error.message : 'Failed to refresh PAC script',
       {
-        proxyName: config?.name,
+        proxyName: configForLog?.name,
         proxyId: configId,
-        url: config?.pacScript?.url,
+        url: configForLog?.pacScript?.url,
         details: error instanceof Error ? error.stack : String(error),
       }
     )

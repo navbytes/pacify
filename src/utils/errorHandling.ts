@@ -7,6 +7,85 @@ import { NotificationService } from '@/services/NotificationService'
 export type ErrorHandler = (error: unknown) => void
 
 /**
+ * Chrome proxy error patterns and their user-friendly messages
+ */
+const PROXY_ERROR_PATTERNS: Array<{ pattern: RegExp; messageKey: string; fallback: string }> = [
+  {
+    pattern: /PAC.*script.*error|FindProxyForURL/i,
+    messageKey: 'pacScriptError',
+    fallback: 'PAC script contains errors. Please check the script syntax.',
+  },
+  {
+    pattern: /invalid.*pac|pac.*invalid/i,
+    messageKey: 'invalidPacScript',
+    fallback: 'Invalid PAC script. Please ensure it contains a valid FindProxyForURL function.',
+  },
+  {
+    pattern: /failed.*fetch|fetch.*failed|network.*error/i,
+    messageKey: 'pacFetchFailed',
+    fallback: 'Failed to fetch PAC script from URL. Please check the URL and network connection.',
+  },
+  {
+    pattern: /permission|not.*allowed|access.*denied/i,
+    messageKey: 'proxyPermissionDenied',
+    fallback: 'Permission denied. The extension may not have the required permissions.',
+  },
+  {
+    pattern: /controlled.*by.*other|another.*extension/i,
+    messageKey: 'proxyControlledByOther',
+    fallback: 'Proxy settings are controlled by another extension.',
+  },
+  {
+    pattern: /policy|managed|enterprise/i,
+    messageKey: 'proxyManagedByPolicy',
+    fallback: "Proxy settings are managed by your organization's policy.",
+  },
+  {
+    pattern: /invalid.*host|host.*invalid|bad.*address/i,
+    messageKey: 'invalidProxyHost',
+    fallback: 'Invalid proxy host address. Please check the server configuration.',
+  },
+  {
+    pattern: /invalid.*port|port.*invalid|bad.*port/i,
+    messageKey: 'invalidProxyPort',
+    fallback: 'Invalid proxy port. Please enter a valid port number (1-65535).',
+  },
+  {
+    pattern: /timeout|timed.*out/i,
+    messageKey: 'proxyTimeout',
+    fallback: 'Connection timed out. The proxy server may be unreachable.',
+  },
+]
+
+/**
+ * Parses a Chrome proxy error and returns a user-friendly message
+ *
+ * @param error - The error from Chrome proxy API
+ * @returns Object with messageKey for i18n and fallback message
+ */
+export function parseProxyError(error: unknown): { messageKey: string; fallback: string } {
+  const errorMessage =
+    error instanceof Error
+      ? error.message
+      : typeof error === 'object' && error !== null && 'message' in error
+        ? String((error as { message: unknown }).message)
+        : String(error)
+
+  // Check against known error patterns
+  for (const { pattern, messageKey, fallback } of PROXY_ERROR_PATTERNS) {
+    if (pattern.test(errorMessage)) {
+      return { messageKey, fallback }
+    }
+  }
+
+  // Generic fallback
+  return {
+    messageKey: 'proxySettingsFailed',
+    fallback: `Failed to apply proxy settings: ${errorMessage}`,
+  }
+}
+
+/**
  * Creates a function that wraps an async operation with error handling
  *
  * @param operation - The async operation to execute

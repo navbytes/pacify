@@ -937,5 +937,218 @@
   },
   "proxyHasAuth": {
     "message": "इस प्रॉक्सी में प्रमाणीकरण कॉन्फ़िगर किया गया है"
+  },
+  "settingsFileTooLarge": {
+    "message": "सेटिंग्स फ़ाइल बहुत बड़ी है। अधिकतम आकार $1KB है।",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "अमान्य फ़ाइल प्रकार। कृपया JSON फ़ाइल चुनें।"
+  },
+  "invalidJsonFormat": {
+    "message": "अमान्य JSON प्रारूप।"
+  },
+  "settingsMustBeObject": {
+    "message": "सेटिंग्स एक वैध ऑब्जेक्ट होनी चाहिए।"
+  },
+  "invalidProxyConfigsArray": {
+    "message": "अमान्य सेटिंग्स: proxyConfigs एक array होना चाहिए।"
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "अमान्य सेटिंग्स: quickSwitchEnabled एक बूलियन होना चाहिए।"
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "अमान्य सेटिंग्स: disableProxyOnStartup एक बूलियन होना चाहिए।"
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "अमान्य सेटिंग्स: autoReloadOnProxySwitch एक बूलियन होना चाहिए।"
+  },
+  "invalidActiveScriptId": {
+    "message": "अमान्य सेटिंग्स: activeScriptId एक स्ट्रिंग या null होना चाहिए।"
+  },
+  "invalidProxyConfiguration": {
+    "message": "अमान्य प्रॉक्सी कॉन्फ़िगरेशन।"
+  },
+  "proxyMustHaveName": {
+    "message": "प्रत्येक प्रॉक्सी का एक वैध नाम होना चाहिए।"
+  },
+  "proxyMustHaveMode": {
+    "message": "प्रत्येक प्रॉक्सी का एक वैध मोड होना चाहिए।"
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "सेटिंग्स पुनर्स्थापित करने में विफल। कृपया फ़ाइल प्रारूप जांचें।"
+  },
+  "noActiveProxy": {
+    "message": "कोई नहीं"
+  },
+  "configuredProxies": {
+    "message": "कॉन्फ़िगर किए गए प्रॉक्सी"
+  },
+  "storageUsed": {
+    "message": "उपयोग किया गया स्टोरेज"
+  },
+  "extensionVersion": {
+    "message": "एक्सटेंशन संस्करण"
+  },
+  "logsCount": {
+    "message": "गतिविधि लॉग"
+  },
+  "activityLog": {
+    "message": "गतिविधि लॉग"
+  },
+  "pacScriptValid": {
+    "message": "PAC स्क्रिप्ट मान्य है"
+  },
+  "pacScriptError": {
+    "message": "PAC स्क्रिप्ट में त्रुटियां हैं। कृपया स्क्रिप्ट सिंटैक्स की जांच करें।"
+  },
+  "invalidPacScript": {
+    "message": "अमान्य PAC स्क्रिप्ट। कृपया सुनिश्चित करें कि इसमें वैध FindProxyForURL फ़ंक्शन है।"
+  },
+  "pacFetchFailed": {
+    "message": "URL से PAC स्क्रिप्ट प्राप्त करने में विफल। कृपया URL और नेटवर्क कनेक्शन की जांच करें।"
+  },
+  "proxyPermissionDenied": {
+    "message": "अनुमति अस्वीकृत। एक्सटेंशन के पास आवश्यक अनुमतियां नहीं हो सकती हैं।"
+  },
+  "proxyControlledByOther": {
+    "message": "प्रॉक्सी सेटिंग्स किसी अन्य एक्सटेंशन द्वारा नियंत्रित हैं।"
+  },
+  "proxyManagedByPolicy": {
+    "message": "प्रॉक्सी सेटिंग्स आपके संगठन की नीति द्वारा प्रबंधित हैं।"
+  },
+  "invalidProxyHost": {
+    "message": "अमान्य प्रॉक्सी होस्ट पता। कृपया सर्वर कॉन्फ़िगरेशन की जांच करें।"
+  },
+  "invalidProxyPort": {
+    "message": "अमान्य प्रॉक्सी पोर्ट। कृपया एक वैध पोर्ट नंबर (1-65535) दर्ज करें।"
+  },
+  "proxyTimeout": {
+    "message": "कनेक्शन समय समाप्त। प्रॉक्सी सर्वर पहुंच योग्य नहीं हो सकता है।"
+  },
+  "proxySettingsFailed": {
+    "message": "प्रॉक्सी सेटिंग्स लागू करने में विफल।"
+  },
+  "onboardingWelcomeTitle": {
+    "message": "PACify में आपका स्वागत है"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome के लिए आधुनिक प्रॉक्सी प्रबंधक। अपनी प्रॉक्सी सेटिंग्स को आसानी से कॉन्फ़िगर, स्विच और प्रबंधित करें।"
+  },
+  "onboardingFeaturesTitle": {
+    "message": "शक्तिशाली सुविधाएँ"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "अपने प्रॉक्सी को प्रभावी ढंग से प्रबंधित करने के लिए आपको जो कुछ भी चाहिए।"
+  },
+  "onboardingFeatureProxies": {
+    "message": "एकाधिक प्रॉक्सी प्रोफ़ाइल"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "विभिन्न प्रॉक्सी कॉन्फ़िगरेशन को तुरंत बनाएं और स्विच करें।"
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "ऑटो-प्रॉक्सी नियम"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "स्मार्ट रूटिंग नियमों के साथ URL पैटर्न के आधार पर ट्रैफ़िक रूट करें।"
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC स्क्रिप्ट सपोर्ट"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "उन्नत प्रॉक्सी कॉन्फ़िगरेशन के लिए कस्टम PAC स्क्रिप्ट का उपयोग करें।"
+  },
+  "onboardingShortcutsTitle": {
+    "message": "कीबोर्ड शॉर्टकट"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "कीबोर्ड शॉर्टकट के साथ तेज़ी से काम करें।"
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "नया प्रॉक्सी बनाएं"
+  },
+  "onboardingShortcutSearch": {
+    "message": "प्रॉक्सी खोजें"
+  },
+  "onboardingShortcutClose": {
+    "message": "मोडल बंद करें"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "सब तैयार!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "शुरू करने के लिए अपना पहला प्रॉक्सी कॉन्फ़िगरेशन बनाएं, या सेटिंग्स का पता लगाएं।"
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "पहला प्रॉक्सी बनाएं"
+  },
+  "onboardingExploreSettings": {
+    "message": "सेटिंग्स एक्सप्लोर करें"
+  },
+  "previous": {
+    "message": "पिछला"
+  },
+  "next": {
+    "message": "अगला"
+  },
+  "skipTour": {
+    "message": "टूर छोड़ें"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "तेज़ी से काम करने के लिए इन शॉर्टकट का उपयोग करें"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "सामान्य"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "नेविगेशन"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "प्रॉक्सी सूची"
+  },
+  "shortcutNewProxy": {
+    "message": "नया प्रॉक्सी कॉन्फ़िगरेशन बनाएं"
+  },
+  "shortcutSearch": {
+    "message": "खोज खोलें"
+  },
+  "shortcutCloseModal": {
+    "message": "वर्तमान मोडल बंद करें"
+  },
+  "shortcutShowHelp": {
+    "message": "कीबोर्ड शॉर्टकट दिखाएं"
+  },
+  "shortcutNextElement": {
+    "message": "अगले तत्व पर जाएं"
+  },
+  "shortcutPrevElement": {
+    "message": "पिछले तत्व पर जाएं"
+  },
+  "shortcutActivate": {
+    "message": "फ़ोकस किए गए तत्व को सक्रिय करें"
+  },
+  "shortcutToggle": {
+    "message": "स्विच और चेकबॉक्स टॉगल करें"
+  },
+  "shortcutNavigateList": {
+    "message": "प्रॉक्सी सूची में नेविगेट करें"
+  },
+  "shortcutActivateProxy": {
+    "message": "चयनित प्रॉक्सी सक्रिय करें"
+  },
+  "shortcutEditProxy": {
+    "message": "चयनित प्रॉक्सी संपादित करें"
+  },
+  "shortcutDeleteProxy": {
+    "message": "चयनित प्रॉक्सी हटाएं"
+  },
+  "shortcutsTip": {
+    "message": "इस सहायता को दिखाने के लिए कहीं भी ? दबाएं"
   }
 }

@@ -962,5 +962,248 @@
   },
   "proxyHasAuth": {
     "message": "This proxy has authentication configured"
+  },
+  "settingsFileTooLarge": {
+    "message": "Settings file too large. Maximum size is $1KB.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "Invalid file type. Please select a JSON file."
+  },
+  "invalidJsonFormat": {
+    "message": "Invalid JSON format."
+  },
+  "settingsMustBeObject": {
+    "message": "Settings must be a valid object."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "Invalid settings: proxyConfigs must be an array."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "Invalid settings: quickSwitchEnabled must be a boolean."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "Invalid settings: disableProxyOnStartup must be a boolean."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "Invalid settings: autoReloadOnProxySwitch must be a boolean."
+  },
+  "invalidActiveScriptId": {
+    "message": "Invalid settings: activeScriptId must be a string or null."
+  },
+  "invalidProxyConfiguration": {
+    "message": "Invalid proxy configuration."
+  },
+  "proxyMustHaveName": {
+    "message": "Each proxy must have a valid name."
+  },
+  "proxyMustHaveMode": {
+    "message": "Each proxy must have a valid mode."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "Failed to restore settings. Please check the file format."
+  },
+  "noActiveProxy": {
+    "message": "None"
+  },
+  "configuredProxies": {
+    "message": "Configured Proxies"
+  },
+  "storageUsed": {
+    "message": "Storage Used"
+  },
+  "extensionVersion": {
+    "message": "Extension Version"
+  },
+  "logsCount": {
+    "message": "Activity Logs"
+  },
+  "activityLog": {
+    "message": "Activity Log"
+  },
+  "pacScriptValid": {
+    "message": "PAC script is valid"
+  },
+  "pacScriptError": {
+    "message": "PAC script contains errors. Please check the script syntax."
+  },
+  "invalidPacScript": {
+    "message": "Invalid PAC script. Please ensure it contains a valid FindProxyForURL function."
+  },
+  "pacFetchFailed": {
+    "message": "Failed to fetch PAC script from URL. Please check the URL and network connection."
+  },
+  "proxyPermissionDenied": {
+    "message": "Permission denied. The extension may not have the required permissions."
+  },
+  "proxyControlledByOther": {
+    "message": "Proxy settings are controlled by another extension."
+  },
+  "proxyManagedByPolicy": {
+    "message": "Proxy settings are managed by your organization's policy."
+  },
+  "invalidProxyHost": {
+    "message": "Invalid proxy host address. Please check the server configuration."
+  },
+  "invalidProxyPort": {
+    "message": "Invalid proxy port. Please enter a valid port number (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Connection timed out. The proxy server may be unreachable."
+  },
+  "proxySettingsFailed": {
+    "message": "Failed to apply proxy settings."
+  },
+  "onboardingWelcomeTitle": {
+    "message": "Welcome to PACify"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "The modern proxy manager for Chrome. Configure, switch, and manage your proxy settings with ease."
+  },
+  "onboardingFeaturesTitle": {
+    "message": "Powerful Features"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "Everything you need to manage your proxies effectively."
+  },
+  "onboardingFeatureProxies": {
+    "message": "Multiple Proxy Profiles"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "Create and switch between different proxy configurations instantly."
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "Auto-Proxy Rules"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "Route traffic based on URL patterns with smart routing rules."
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC Script Support"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "Use custom PAC scripts for advanced proxy configuration."
+  },
+  "onboardingShortcutsTitle": {
+    "message": "Keyboard Shortcuts"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "Work faster with keyboard shortcuts."
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "Create new proxy"
+  },
+  "onboardingShortcutSearch": {
+    "message": "Search proxies"
+  },
+  "onboardingShortcutClose": {
+    "message": "Close modal"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "You're All Set!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "Create your first proxy configuration to get started, or explore the settings."
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "Create First Proxy"
+  },
+  "onboardingExploreSettings": {
+    "message": "Explore Settings"
+  },
+  "previous": {
+    "message": "Previous"
+  },
+  "next": {
+    "message": "Next"
+  },
+  "skipTour": {
+    "message": "Skip Tour"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "Use these shortcuts to work faster"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "General"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "Navigation"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "Proxy List"
+  },
+  "shortcutNewProxy": {
+    "message": "Create new proxy configuration"
+  },
+  "shortcutSearch": {
+    "message": "Open search"
+  },
+  "shortcutCloseModal": {
+    "message": "Close current modal"
+  },
+  "shortcutShowHelp": {
+    "message": "Show keyboard shortcuts"
+  },
+  "shortcutNextElement": {
+    "message": "Move to next element"
+  },
+  "shortcutPrevElement": {
+    "message": "Move to previous element"
+  },
+  "shortcutActivate": {
+    "message": "Activate focused element"
+  },
+  "shortcutToggle": {
+    "message": "Toggle switches and checkboxes"
+  },
+  "shortcutNavigateList": {
+    "message": "Navigate through proxy list"
+  },
+  "shortcutActivateProxy": {
+    "message": "Activate selected proxy"
+  },
+  "shortcutEditProxy": {
+    "message": "Edit selected proxy"
+  },
+  "shortcutDeleteProxy": {
+    "message": "Delete selected proxy"
+  },
+  "shortcutsTip": {
+    "message": "Press ? anywhere to show this help"
+  },
+  "privacyPolicy": {
+    "message": "Privacy Policy"
+  },
+  "privacyPolicyTitle": {
+    "message": "Privacy Policy"
+  },
+  "privacyIntro": {
+    "message": "Your privacy is important to us. This policy explains how PACify handles your data."
+  },
+  "privacyLastUpdated": {
+    "message": "Last updated"
+  },
+  "privacyDataCollection": {
+    "message": "Data Collection"
+  },
+  "privacyDataStorage": {
+    "message": "Data Storage"
+  },
+  "privacyNetworkRequests": {
+    "message": "Network Requests"
+  },
+  "privacyPermissions": {
+    "message": "Permissions Used"
+  },
+  "privacyContact": {
+    "message": "If you have any questions about this privacy policy, please open an issue on our GitHub repository."
+  },
+  "backToSettings": {
+    "message": "Back to Settings"
   }
 }

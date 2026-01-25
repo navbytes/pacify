@@ -937,5 +937,218 @@
   },
   "proxyHasAuth": {
     "message": "此代理已配置身份验证"
+  },
+  "settingsFileTooLarge": {
+    "message": "设置文件太大。最大大小为$1KB。",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "无效的文件类型。请选择JSON文件。"
+  },
+  "invalidJsonFormat": {
+    "message": "无效的JSON格式。"
+  },
+  "settingsMustBeObject": {
+    "message": "设置必须是有效的对象。"
+  },
+  "invalidProxyConfigsArray": {
+    "message": "无效的设置：proxyConfigs必须是数组。"
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "无效的设置：quickSwitchEnabled必须是布尔值。"
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "无效的设置：disableProxyOnStartup必须是布尔值。"
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "无效的设置：autoReloadOnProxySwitch必须是布尔值。"
+  },
+  "invalidActiveScriptId": {
+    "message": "无效的设置：activeScriptId必须是字符串或null。"
+  },
+  "invalidProxyConfiguration": {
+    "message": "无效的代理配置。"
+  },
+  "proxyMustHaveName": {
+    "message": "每个代理必须有有效的名称。"
+  },
+  "proxyMustHaveMode": {
+    "message": "每个代理必须有有效的模式。"
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "恢复设置失败。请检查文件格式。"
+  },
+  "noActiveProxy": {
+    "message": "无"
+  },
+  "configuredProxies": {
+    "message": "已配置的代理"
+  },
+  "storageUsed": {
+    "message": "已用存储"
+  },
+  "extensionVersion": {
+    "message": "扩展版本"
+  },
+  "logsCount": {
+    "message": "活动日志"
+  },
+  "activityLog": {
+    "message": "活动日志"
+  },
+  "pacScriptValid": {
+    "message": "PAC脚本有效"
+  },
+  "pacScriptError": {
+    "message": "PAC脚本包含错误。请检查脚本语法。"
+  },
+  "invalidPacScript": {
+    "message": "无效的PAC脚本。请确保包含有效的FindProxyForURL函数。"
+  },
+  "pacFetchFailed": {
+    "message": "无法从URL获取PAC脚本。请检查URL和网络连接。"
+  },
+  "proxyPermissionDenied": {
+    "message": "权限被拒绝。扩展可能没有所需的权限。"
+  },
+  "proxyControlledByOther": {
+    "message": "代理设置由另一个扩展控制。"
+  },
+  "proxyManagedByPolicy": {
+    "message": "代理设置由组织策略管理。"
+  },
+  "invalidProxyHost": {
+    "message": "无效的代理主机地址。请检查服务器配置。"
+  },
+  "invalidProxyPort": {
+    "message": "无效的代理端口。请输入有效的端口号（1-65535）。"
+  },
+  "proxyTimeout": {
+    "message": "连接超时。代理服务器可能无法访问。"
+  },
+  "proxySettingsFailed": {
+    "message": "应用代理设置失败。"
+  },
+  "onboardingWelcomeTitle": {
+    "message": "欢迎使用 PACify"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome 的现代代理管理器。轻松配置、切换和管理您的代理设置。"
+  },
+  "onboardingFeaturesTitle": {
+    "message": "强大功能"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "有效管理代理所需的一切。"
+  },
+  "onboardingFeatureProxies": {
+    "message": "多个代理配置文件"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "即时创建和切换不同的代理配置。"
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "自动代理规则"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "使用智能路由规则根据 URL 模式路由流量。"
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC 脚本支持"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "使用自定义 PAC 脚本进行高级代理配置。"
+  },
+  "onboardingShortcutsTitle": {
+    "message": "键盘快捷键"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "使用键盘快捷键更快地工作。"
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "创建新代理"
+  },
+  "onboardingShortcutSearch": {
+    "message": "搜索代理"
+  },
+  "onboardingShortcutClose": {
+    "message": "关闭弹窗"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "一切就绪！"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "创建您的第一个代理配置以开始使用，或探索设置。"
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "创建第一个代理"
+  },
+  "onboardingExploreSettings": {
+    "message": "探索设置"
+  },
+  "previous": {
+    "message": "上一步"
+  },
+  "next": {
+    "message": "下一步"
+  },
+  "skipTour": {
+    "message": "跳过导览"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "使用这些快捷键更快地工作"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "常规"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "导航"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "代理列表"
+  },
+  "shortcutNewProxy": {
+    "message": "创建新代理配置"
+  },
+  "shortcutSearch": {
+    "message": "打开搜索"
+  },
+  "shortcutCloseModal": {
+    "message": "关闭当前弹窗"
+  },
+  "shortcutShowHelp": {
+    "message": "显示键盘快捷键"
+  },
+  "shortcutNextElement": {
+    "message": "移动到下一个元素"
+  },
+  "shortcutPrevElement": {
+    "message": "移动到上一个元素"
+  },
+  "shortcutActivate": {
+    "message": "激活焦点元素"
+  },
+  "shortcutToggle": {
+    "message": "切换开关和复选框"
+  },
+  "shortcutNavigateList": {
+    "message": "浏览代理列表"
+  },
+  "shortcutActivateProxy": {
+    "message": "激活选中的代理"
+  },
+  "shortcutEditProxy": {
+    "message": "编辑选中的代理"
+  },
+  "shortcutDeleteProxy": {
+    "message": "删除选中的代理"
+  },
+  "shortcutsTip": {
+    "message": "在任何位置按 ? 显示此帮助"
   }
 }

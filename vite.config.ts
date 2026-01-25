@@ -69,6 +69,41 @@ function copyAssets() {
   }
 }
 
+// Plugin to flatten HTML output to root level
+function flattenHtmlOutput() {
+  return {
+    name: 'flatten-html-output',
+    enforce: 'post' as const,
+    generateBundle(_options: unknown, bundle: Record<string, { fileName: string; type: string; source?: string }>) {
+      // Move HTML files from nested directories to root
+      const htmlMoves: Record<string, string> = {
+        'src/popup/popup.html': 'popup.html',
+        'src/options/options.html': 'options.html',
+        'src/privacy/privacy.html': 'privacy.html',
+      }
+
+      for (const [oldPath, newPath] of Object.entries(htmlMoves)) {
+        if (bundle[oldPath]) {
+          const htmlFile = bundle[oldPath]
+          // Update internal script/link references
+          if (htmlFile.type === 'asset' && typeof htmlFile.source === 'string') {
+            // Update relative paths in HTML to account for new location
+            htmlFile.source = htmlFile.source
+              .replace(/\.\.\/app\.css/g, 'assets/app.css')
+              .replace(/\.\/[a-z]+\.(ts|js)/g, (match) => {
+                const name = match.match(/\.\/([a-z]+)\./)?.[1]
+                return name ? `assets/${name}.js` : match
+              })
+          }
+          htmlFile.fileName = newPath
+          bundle[newPath] = htmlFile
+          delete bundle[oldPath]
+        }
+      }
+    },
+  }
+}
+
 // Helper to setup development environment
 function setupDevEnvironment() {
   return {
@@ -153,7 +188,11 @@ export default defineConfig(({ command, mode }) => {
   const isDevelopment = mode === 'development'
 
   return {
-    plugins: [svelte(), isProduction ? copyAssets() : setupDevEnvironment()],
+    plugins: [
+      svelte(),
+      isProduction ? copyAssets() : setupDevEnvironment(),
+      isProduction ? flattenHtmlOutput() : null,
+    ].filter(Boolean),
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
@@ -178,6 +217,7 @@ export default defineConfig(({ command, mode }) => {
         input: {
           popup: resolve(__dirname, 'src/popup/popup.html'),
           options: resolve(__dirname, 'src/options/options.html'),
+          privacy: resolve(__dirname, 'src/privacy/privacy.html'),
           background: resolve(__dirname, 'src/background/background.ts'),
         },
         output: {

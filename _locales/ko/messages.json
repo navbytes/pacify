@@ -937,5 +937,218 @@
   },
   "proxyHasAuth": {
     "message": "이 프록시에는 인증이 구성되어 있습니다"
+  },
+  "settingsFileTooLarge": {
+    "message": "설정 파일이 너무 큽니다. 최대 크기는 $1KB입니다.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "잘못된 파일 형식입니다. JSON 파일을 선택하세요."
+  },
+  "invalidJsonFormat": {
+    "message": "잘못된 JSON 형식입니다."
+  },
+  "settingsMustBeObject": {
+    "message": "설정은 유효한 객체여야 합니다."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "잘못된 설정: proxyConfigs는 배열이어야 합니다."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "잘못된 설정: quickSwitchEnabled는 불리언이어야 합니다."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "잘못된 설정: disableProxyOnStartup은 불리언이어야 합니다."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "잘못된 설정: autoReloadOnProxySwitch는 불리언이어야 합니다."
+  },
+  "invalidActiveScriptId": {
+    "message": "잘못된 설정: activeScriptId는 문자열 또는 null이어야 합니다."
+  },
+  "invalidProxyConfiguration": {
+    "message": "잘못된 프록시 구성입니다."
+  },
+  "proxyMustHaveName": {
+    "message": "각 프록시에는 유효한 이름이 있어야 합니다."
+  },
+  "proxyMustHaveMode": {
+    "message": "각 프록시에는 유효한 모드가 있어야 합니다."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "설정 복원에 실패했습니다. 파일 형식을 확인하세요."
+  },
+  "noActiveProxy": {
+    "message": "없음"
+  },
+  "configuredProxies": {
+    "message": "구성된 프록시"
+  },
+  "storageUsed": {
+    "message": "사용된 저장 공간"
+  },
+  "extensionVersion": {
+    "message": "확장 프로그램 버전"
+  },
+  "logsCount": {
+    "message": "활동 로그"
+  },
+  "activityLog": {
+    "message": "활동 로그"
+  },
+  "pacScriptValid": {
+    "message": "PAC 스크립트가 유효합니다"
+  },
+  "pacScriptError": {
+    "message": "PAC 스크립트에 오류가 있습니다. 스크립트 구문을 확인하세요."
+  },
+  "invalidPacScript": {
+    "message": "잘못된 PAC 스크립트입니다. 유효한 FindProxyForURL 함수가 포함되어 있는지 확인하세요."
+  },
+  "pacFetchFailed": {
+    "message": "URL에서 PAC 스크립트를 가져오지 못했습니다. URL과 네트워크 연결을 확인하세요."
+  },
+  "proxyPermissionDenied": {
+    "message": "권한이 거부되었습니다. 확장 프로그램에 필요한 권한이 없을 수 있습니다."
+  },
+  "proxyControlledByOther": {
+    "message": "프록시 설정이 다른 확장 프로그램에 의해 제어되고 있습니다."
+  },
+  "proxyManagedByPolicy": {
+    "message": "프록시 설정이 조직의 정책에 의해 관리됩니다."
+  },
+  "invalidProxyHost": {
+    "message": "잘못된 프록시 호스트 주소입니다. 서버 구성을 확인하세요."
+  },
+  "invalidProxyPort": {
+    "message": "잘못된 프록시 포트입니다. 유효한 포트 번호(1-65535)를 입력하세요."
+  },
+  "proxyTimeout": {
+    "message": "연결 시간이 초과되었습니다. 프록시 서버에 연결할 수 없을 수 있습니다."
+  },
+  "proxySettingsFailed": {
+    "message": "프록시 설정을 적용하지 못했습니다."
+  },
+  "onboardingWelcomeTitle": {
+    "message": "PACify에 오신 것을 환영합니다"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome용 최신 프록시 관리자입니다. 프록시 설정을 쉽게 구성, 전환 및 관리하세요."
+  },
+  "onboardingFeaturesTitle": {
+    "message": "강력한 기능"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "프록시를 효과적으로 관리하는 데 필요한 모든 것."
+  },
+  "onboardingFeatureProxies": {
+    "message": "다중 프록시 프로필"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "다양한 프록시 구성을 즉시 생성하고 전환합니다."
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "자동 프록시 규칙"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "스마트 라우팅 규칙으로 URL 패턴에 따라 트래픽을 라우팅합니다."
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC 스크립트 지원"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "고급 프록시 구성을 위해 사용자 정의 PAC 스크립트를 사용하세요."
+  },
+  "onboardingShortcutsTitle": {
+    "message": "키보드 단축키"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "키보드 단축키로 더 빠르게 작업하세요."
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "새 프록시 생성"
+  },
+  "onboardingShortcutSearch": {
+    "message": "프록시 검색"
+  },
+  "onboardingShortcutClose": {
+    "message": "모달 닫기"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "준비 완료!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "첫 번째 프록시 구성을 생성하여 시작하거나 설정을 탐색하세요."
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "첫 번째 프록시 생성"
+  },
+  "onboardingExploreSettings": {
+    "message": "설정 탐색"
+  },
+  "previous": {
+    "message": "이전"
+  },
+  "next": {
+    "message": "다음"
+  },
+  "skipTour": {
+    "message": "투어 건너뛰기"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "이 단축키를 사용하여 더 빠르게 작업하세요"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "일반"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "탐색"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "프록시 목록"
+  },
+  "shortcutNewProxy": {
+    "message": "새 프록시 구성 만들기"
+  },
+  "shortcutSearch": {
+    "message": "검색 열기"
+  },
+  "shortcutCloseModal": {
+    "message": "현재 모달 닫기"
+  },
+  "shortcutShowHelp": {
+    "message": "키보드 단축키 표시"
+  },
+  "shortcutNextElement": {
+    "message": "다음 요소로 이동"
+  },
+  "shortcutPrevElement": {
+    "message": "이전 요소로 이동"
+  },
+  "shortcutActivate": {
+    "message": "포커스된 요소 활성화"
+  },
+  "shortcutToggle": {
+    "message": "스위치 및 체크박스 전환"
+  },
+  "shortcutNavigateList": {
+    "message": "프록시 목록 탐색"
+  },
+  "shortcutActivateProxy": {
+    "message": "선택한 프록시 활성화"
+  },
+  "shortcutEditProxy": {
+    "message": "선택한 프록시 편집"
+  },
+  "shortcutDeleteProxy": {
+    "message": "선택한 프록시 삭제"
+  },
+  "shortcutsTip": {
+    "message": "어디서든 ?를 눌러 이 도움말을 표시하세요"
   }
 }

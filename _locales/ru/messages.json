@@ -937,5 +937,218 @@
   },
   "proxyHasAuth": {
     "message": "Для этого прокси настроена аутентификация"
+  },
+  "settingsFileTooLarge": {
+    "message": "Файл настроек слишком большой. Максимальный размер $1КБ.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "Неверный тип файла. Пожалуйста, выберите JSON файл."
+  },
+  "invalidJsonFormat": {
+    "message": "Неверный формат JSON."
+  },
+  "settingsMustBeObject": {
+    "message": "Настройки должны быть допустимым объектом."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "Неверные настройки: proxyConfigs должен быть массивом."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "Неверные настройки: quickSwitchEnabled должен быть логическим значением."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "Неверные настройки: disableProxyOnStartup должен быть логическим значением."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "Неверные настройки: autoReloadOnProxySwitch должен быть логическим значением."
+  },
+  "invalidActiveScriptId": {
+    "message": "Неверные настройки: activeScriptId должен быть строкой или null."
+  },
+  "invalidProxyConfiguration": {
+    "message": "Неверная конфигурация прокси."
+  },
+  "proxyMustHaveName": {
+    "message": "Каждый прокси должен иметь допустимое имя."
+  },
+  "proxyMustHaveMode": {
+    "message": "Каждый прокси должен иметь допустимый режим."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "Не удалось восстановить настройки. Пожалуйста, проверьте формат файла."
+  },
+  "noActiveProxy": {
+    "message": "Нет"
+  },
+  "configuredProxies": {
+    "message": "Настроенные прокси"
+  },
+  "storageUsed": {
+    "message": "Использовано хранилище"
+  },
+  "extensionVersion": {
+    "message": "Версия расширения"
+  },
+  "logsCount": {
+    "message": "Журналы активности"
+  },
+  "activityLog": {
+    "message": "Журнал активности"
+  },
+  "pacScriptValid": {
+    "message": "PAC-скрипт действителен"
+  },
+  "pacScriptError": {
+    "message": "PAC-скрипт содержит ошибки. Пожалуйста, проверьте синтаксис скрипта."
+  },
+  "invalidPacScript": {
+    "message": "Недействительный PAC-скрипт. Убедитесь, что он содержит действительную функцию FindProxyForURL."
+  },
+  "pacFetchFailed": {
+    "message": "Не удалось получить PAC-скрипт по URL. Проверьте URL и сетевое подключение."
+  },
+  "proxyPermissionDenied": {
+    "message": "Доступ запрещен. У расширения может не быть необходимых разрешений."
+  },
+  "proxyControlledByOther": {
+    "message": "Настройки прокси контролируются другим расширением."
+  },
+  "proxyManagedByPolicy": {
+    "message": "Настройки прокси управляются политикой вашей организации."
+  },
+  "invalidProxyHost": {
+    "message": "Недействительный адрес хоста прокси. Проверьте конфигурацию сервера."
+  },
+  "invalidProxyPort": {
+    "message": "Недействительный порт прокси. Введите действительный номер порта (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Время ожидания подключения истекло. Прокси-сервер может быть недоступен."
+  },
+  "proxySettingsFailed": {
+    "message": "Не удалось применить настройки прокси."
+  },
+  "onboardingWelcomeTitle": {
+    "message": "Добро пожаловать в PACify"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Современный менеджер прокси для Chrome. Легко настраивайте, переключайте и управляйте настройками прокси."
+  },
+  "onboardingFeaturesTitle": {
+    "message": "Мощные функции"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "Все, что нужно для эффективного управления прокси."
+  },
+  "onboardingFeatureProxies": {
+    "message": "Несколько профилей прокси"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "Мгновенно создавайте и переключайтесь между различными конфигурациями прокси."
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "Правила авто-прокси"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "Маршрутизируйте трафик на основе URL-шаблонов с помощью умных правил маршрутизации."
+  },
+  "onboardingFeaturePAC": {
+    "message": "Поддержка PAC-скриптов"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "Используйте пользовательские PAC-скрипты для расширенной настройки прокси."
+  },
+  "onboardingShortcutsTitle": {
+    "message": "Горячие клавиши"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "Работайте быстрее с помощью горячих клавиш."
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "Создать новый прокси"
+  },
+  "onboardingShortcutSearch": {
+    "message": "Поиск прокси"
+  },
+  "onboardingShortcutClose": {
+    "message": "Закрыть окно"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "Всё готово!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "Создайте свою первую конфигурацию прокси, чтобы начать, или изучите настройки."
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "Создать первый прокси"
+  },
+  "onboardingExploreSettings": {
+    "message": "Изучить настройки"
+  },
+  "previous": {
+    "message": "Назад"
+  },
+  "next": {
+    "message": "Далее"
+  },
+  "skipTour": {
+    "message": "Пропустить тур"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "Используйте эти сочетания клавиш для ускорения работы"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "Общие"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "Навигация"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "Список прокси"
+  },
+  "shortcutNewProxy": {
+    "message": "Создать новую конфигурацию прокси"
+  },
+  "shortcutSearch": {
+    "message": "Открыть поиск"
+  },
+  "shortcutCloseModal": {
+    "message": "Закрыть текущее окно"
+  },
+  "shortcutShowHelp": {
+    "message": "Показать горячие клавиши"
+  },
+  "shortcutNextElement": {
+    "message": "Перейти к следующему элементу"
+  },
+  "shortcutPrevElement": {
+    "message": "Перейти к предыдущему элементу"
+  },
+  "shortcutActivate": {
+    "message": "Активировать выделенный элемент"
+  },
+  "shortcutToggle": {
+    "message": "Переключить переключатели и флажки"
+  },
+  "shortcutNavigateList": {
+    "message": "Навигация по списку прокси"
+  },
+  "shortcutActivateProxy": {
+    "message": "Активировать выбранный прокси"
+  },
+  "shortcutEditProxy": {
+    "message": "Редактировать выбранный прокси"
+  },
+  "shortcutDeleteProxy": {
+    "message": "Удалить выбранный прокси"
+  },
+  "shortcutsTip": {
+    "message": "Нажмите ? в любом месте для показа этой справки"
   }
 }

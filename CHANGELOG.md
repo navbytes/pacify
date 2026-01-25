@@ -5,6 +5,90 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.29.0] - 2026-01-25
+
+### Added
+
+- **First-Run Onboarding Flow** 🎉
+  - Multi-step welcome tutorial for new users
+  - Step 1: Welcome message introducing PACify
+  - Step 2: Feature highlights (Multiple Profiles, Auto-Proxy Rules, PAC Script Support)
+  - Step 3: Keyboard shortcuts overview
+  - Step 4: Get started with "Create First Proxy" or "Explore Settings" options
+  - Progress indicator and step navigation
+  - Stored completion status to show only on first install
+  - Full i18n support for all 12 languages
+
+- **Keyboard Shortcuts Help Modal** ⌨️
+  - Press `?` anywhere to show keyboard shortcuts
+  - New keyboard icon button in options header
+  - Organized into groups: General, Navigation, Proxy List
+  - Platform-aware key display (⌘ on Mac, Ctrl on others)
+  - Accessible modal with proper ARIA labels
+  - Full i18n support for all shortcut descriptions
+
+- **Privacy Policy Page** 🔒
+  - Dedicated privacy policy page at `/privacy.html`
+  - Sections: Data Collection, Data Storage, Network Requests, Permissions
+  - Clear explanation that no data is collected or transmitted
+  - Link added to Settings → Help & Resources section
+  - Professional design matching extension theme
+  - Full i18n support for privacy content
+
+- **Enhanced Diagnostics Tab** 📊
+  - System Status Panel showing:
+    - Active proxy name and status
+    - Total configured proxies count
+    - Storage usage (used/total bytes)
+    - Extension version
+  - Info-level logging for successful proxy operations
+  - PAC script validation connected to editor UI
+  - Inline validation error display with icons
+  - User-friendly Chrome API error messages
+
+### Changed
+
+- **Simplified Extension URLs** 🔗
+  - URLs now use root-level paths for cleaner appearance
+  - `popup.html` instead of `src/popup/popup.html`
+  - `options.html` instead of `src/options/options.html`
+  - `privacy.html` instead of `src/privacy/privacy.html`
+  - Added Vite plugin to flatten HTML output during build
+
+- **Improved Accessibility**
+  - Focus management for all modals
+  - Keyboard navigation with ? shortcut
+  - ARIA labels on interactive elements
+  - Input detection to prevent shortcuts while typing
+
+### Fixed
+
+- **Security & Stability**
+  - Fixed ReDoS vulnerability in PAC script pattern matching (max 1000 chars)
+  - Fixed memory leak in toast notification timeouts
+  - Fixed memory leak in theme store media query listener
+  - Added initialization retry limit with exponential backoff
+  - Added comprehensive input validation for settings restore
+
+### Technical
+
+- **New Components**
+  - `OnboardingModal.svelte` - Multi-step first-run tutorial
+  - `KeyboardShortcutsModal.svelte` - Keyboard shortcuts help
+  - `Privacy.svelte` - Privacy policy page
+
+- **New Utilities**
+  - `parseProxyError()` - User-friendly Chrome API error messages
+  - `flattenHtmlOutput()` - Vite plugin for URL simplification
+
+- **Browser Interface Updates**
+  - `onInstalled` listener now receives installation details
+  - Supports detecting fresh installs vs. updates
+
+- **i18n Additions**
+  - 60+ new localization keys across all 12 languages
+  - Onboarding, keyboard shortcuts, privacy, and diagnostics strings
+
 ## [1.28.1] - 2026-01-21
 
 ### Fixed

@@ -268,7 +268,7 @@ export class BrowserService implements BrowserAPI {
       if (params && Object.keys(params).length > 0) {
         // Build URL with query parameters
         const queryString = new URLSearchParams(params).toString()
-        const optionsUrl = `${chrome.runtime.getURL('src/options/options.html')}?${queryString}`
+        const optionsUrl = `${chrome.runtime.getURL('options.html')}?${queryString}`
         chrome.tabs.create({ url: optionsUrl })
       } else {
         chrome.runtime.openOptionsPage()
@@ -318,10 +318,14 @@ export class BrowserService implements BrowserAPI {
     },
 
     onInstalled: {
-      addListener: (callback: () => void): void => {
+      addListener: (
+        callback: (details: { reason: string; previousVersion?: string }) => void
+      ): void => {
         chrome.runtime.onInstalled.addListener(callback)
       },
-      removeListener: (callback: () => void): void => {
+      removeListener: (
+        callback: (details: { reason: string; previousVersion?: string }) => void
+      ): void => {
         chrome.runtime.onInstalled.removeListener(callback)
       },
     },

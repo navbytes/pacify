@@ -2,7 +2,6 @@
 import BackupRestore from '@/components/BackupRestore.svelte'
 import FlexGroup from '@/components/FlexGroup.svelte'
 import LinkCard from '@/components/LinkCard.svelte'
-import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
 import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
 import Text from '@/components/Text.svelte'
 import ToggleSwitch from '@/components/ToggleSwitch.svelte'
@@ -23,6 +22,7 @@ import {
   Heart,
   HelpCircle,
   Lightbulb,
+  Lock,
   MessageSquare,
   RefreshCw,
   Shield,
@@ -323,9 +323,6 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     />
   </div>
 
-  <!-- Keyboard Shortcuts Section -->
-  <KeyboardShortcutsCard />
-
   <!-- Feedback & Rating Section -->
   <div>
     <SectionHeader
@@ -389,6 +386,12 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         icon={BookOpen}
         label={I18nService.getMessage('aboutDocumentation')}
         color="green"
+      />
+      <LinkCard
+        href="/privacy.html"
+        icon={Lock}
+        label={I18nService.getMessage('privacyPolicy') || 'Privacy Policy'}
+        color="purple"
       />
     </div>
   </div>

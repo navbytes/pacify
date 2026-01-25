@@ -4,9 +4,11 @@ import { scriptTemplates } from '@/constants/templates'
 import type { ICodeMirrorEditor } from '@/interfaces'
 import { CodeMirror } from '@/services/CodeMirrorService'
 import { I18nService } from '@/services/i18n/i18nService'
+import { ScriptService } from '@/services/ScriptService'
 import { toastStore } from '@/stores/toastStore'
 import { checkboxLabelVariants, formLabelVariants, inputVariants } from '@/utils/classPatterns'
 import { defaultCodeMirrorOptions } from '@/utils/codemirror'
+import { AlertCircle, CheckCircle } from '@/utils/icons'
 import Button from '../Button.svelte'
 import FlexGroup from '../FlexGroup.svelte'
 import Text from '../Text.svelte'
@@ -23,6 +25,7 @@ interface Props {
   updateInterval?: number
   lastFetched?: number
   onRefresh?: () => Promise<void>
+  isScriptValid?: boolean
 }
 
 let {
@@ -32,7 +35,13 @@ let {
   updateInterval = $bindable(0),
   lastFetched = $bindable(undefined),
   onRefresh = undefined,
+  isScriptValid = $bindable(true),
 }: Props = $props()
+
+// Keep the parent's isScriptValid in sync with our validation state
+$effect(() => {
+  isScriptValid = scriptValidation.isValid
+})
 
 let editor: ICodeMirrorEditor | null = null
 let editorContainer = $state<HTMLElement>()
@@ -41,6 +50,27 @@ let urlError = $state('')
 let urlTouched = $state(false)
 let isRefreshing = $state(false)
 let isCreatingEditor = false // Flag to prevent concurrent editor creation
+
+// PAC script validation state
+let scriptValidation = $state<{ isValid: boolean; errorMessage: string | null }>({
+  isValid: true,
+  errorMessage: null,
+})
+
+// Validate PAC script when content changes (debounced via effect)
+$effect(() => {
+  // Only validate if not using URL (inline script)
+  if (!pacUrl && editorContent) {
+    const result = ScriptService.validatePACScript(editorContent)
+    scriptValidation = {
+      isValid: result.isValid,
+      errorMessage: result.errorMessage || null,
+    }
+  } else if (pacUrl) {
+    // When using URL, mark as valid (we can't validate remote scripts)
+    scriptValidation = { isValid: true, errorMessage: null }
+  }
+})
 
 // Format last fetched time
 let lastFetchedText = $derived.by(() => {
@@ -180,7 +210,8 @@ async function createEditor() {
       }
     })
   } catch (error) {
-    const errorMsg = I18nService.getMessage('editorInitFailed') || 'Failed to initialize code editor'
+    const errorMsg =
+      I18nService.getMessage('editorInitFailed') || 'Failed to initialize code editor'
     toastStore.show(errorMsg, 'error')
     console.error('Editor initialization error:', error)
   } finally {
@@ -256,7 +287,12 @@ onDestroy(async () => {
           </select>
         </div>
         <div class="flex flex-col items-end gap-1" style="margin-top: 1.5rem;">
-          <Button color="primary" onclick={handleRefresh} disabled={isRefreshing} data-testid="pac-refresh-btn">
+          <Button
+            color="primary"
+            onclick={handleRefresh}
+            disabled={isRefreshing}
+            data-testid="pac-refresh-btn"
+          >
             {#if isRefreshing}
               {I18nService.getMessage('refreshing') || 'Refreshing...'}
             {:else}
@@ -282,16 +318,36 @@ onDestroy(async () => {
         <Text size="sm" weight="medium" classes="text-slate-700 dark:text-slate-300">
           {I18nService.getMessage('templates')}
         </Text>
-        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.empty)} data-testid="template-empty-btn">
+        <Button
+          minimal
+          color="primary"
+          onclick={() => setTemplate(scriptTemplates.empty)}
+          data-testid="template-empty-btn"
+        >
           {I18nService.getMessage('emptyTemplate')}
         </Button>
-        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.basic)} data-testid="template-basic-btn">
+        <Button
+          minimal
+          color="primary"
+          onclick={() => setTemplate(scriptTemplates.basic)}
+          data-testid="template-basic-btn"
+        >
           {I18nService.getMessage('basicTemplate')}
         </Button>
-        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.advanced)} data-testid="template-advanced-btn">
+        <Button
+          minimal
+          color="primary"
+          onclick={() => setTemplate(scriptTemplates.advanced)}
+          data-testid="template-advanced-btn"
+        >
           {I18nService.getMessage('advancedTemplate')}
         </Button>
-        <Button minimal color="primary" onclick={() => setTemplate(scriptTemplates.pro)} data-testid="template-pro-btn">
+        <Button
+          minimal
+          color="primary"
+          onclick={() => setTemplate(scriptTemplates.pro)}
+          data-testid="template-pro-btn"
+        >
           {I18nService.getMessage('proTemplate')}
         </Button>
       </FlexGroup>
@@ -303,9 +359,28 @@ onDestroy(async () => {
     <div
       id="editorContainer"
       bind:this={editorContainer}
-      class="border border-slate-300 dark:border-slate-600 rounded-md overflow-hidden"
+      class="border rounded-md overflow-hidden {!pacUrl && !scriptValidation.isValid ? 'border-red-400 dark:border-red-600' : 'border-slate-300 dark:border-slate-600'}"
       style="height: {editorHeight}"
     ></div>
+
+    <!-- Validation Status -->
+    {#if !pacUrl}
+      <div class="mt-2">
+        {#if scriptValidation.isValid}
+          <div class="flex items-center gap-2 text-green-600 dark:text-green-400">
+            <CheckCircle class="w-4 h-4" />
+            <Text as="span" size="xs">
+              {I18nService.getMessage('pacScriptValid') || 'PAC script is valid'}
+            </Text>
+          </div>
+        {:else if scriptValidation.errorMessage}
+          <div class="flex items-start gap-2 text-red-600 dark:text-red-400">
+            <AlertCircle class="w-4 h-4 shrink-0 mt-0.5" />
+            <Text as="span" size="xs">{scriptValidation.errorMessage}</Text>
+          </div>
+        {/if}
+      </div>
+    {/if}
   </div>
 
   {#snippet checkboxArea()}

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extName__",
-  "version": "1.28.1",
+  "version": "1.29.0",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
   "permissions": ["proxy", "storage", "tabs", "notifications", "alarms"],
@@ -11,7 +11,7 @@
     "type": "module"
   },
   "action": {
-    "default_popup": "src/popup/popup.html",
+    "default_popup": "popup.html",
     "chrome_style": false,
     "default_icon": {
       "16": "icons/icon16.png",
@@ -19,7 +19,7 @@
       "128": "icons/icon128.png"
     }
   },
-  "options_page": "src/options/options.html",
+  "options_page": "options.html",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

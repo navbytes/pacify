@@ -1,5 +1,5 @@
 <script lang="ts">
-type TextElement = 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label'
+type TextElement = 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label' | 'pre'
 
 import type { Snippet } from 'svelte'
 import { textVariants } from '@/utils/classPatterns'
@@ -62,6 +62,8 @@ const combinedClasses = $derived(
   <h6 class={combinedClasses} {id}>{@render children?.()}</h6>
 {:else if as === 'label'}
   <label class={combinedClasses} {id}>{@render children?.()}</label>
+{:else if as === 'pre'}
+  <pre class={combinedClasses} {id}>{@render children?.()}</pre>
 {:else}
   <span class={combinedClasses} {id}> {@render children?.()} </span>
 {/if}

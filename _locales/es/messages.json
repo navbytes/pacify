@@ -937,5 +937,218 @@
   },
   "proxyHasAuth": {
     "message": "Este proxy tiene autenticación configurada"
+  },
+  "settingsFileTooLarge": {
+    "message": "Archivo de configuración demasiado grande. Tamaño máximo es $1KB.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "Tipo de archivo no válido. Por favor seleccione un archivo JSON."
+  },
+  "invalidJsonFormat": {
+    "message": "Formato JSON no válido."
+  },
+  "settingsMustBeObject": {
+    "message": "La configuración debe ser un objeto válido."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "Configuración inválida: proxyConfigs debe ser un array."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "Configuración inválida: quickSwitchEnabled debe ser un booleano."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "Configuración inválida: disableProxyOnStartup debe ser un booleano."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "Configuración inválida: autoReloadOnProxySwitch debe ser un booleano."
+  },
+  "invalidActiveScriptId": {
+    "message": "Configuración inválida: activeScriptId debe ser una cadena o null."
+  },
+  "invalidProxyConfiguration": {
+    "message": "Configuración de proxy no válida."
+  },
+  "proxyMustHaveName": {
+    "message": "Cada proxy debe tener un nombre válido."
+  },
+  "proxyMustHaveMode": {
+    "message": "Cada proxy debe tener un modo válido."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "Error al restaurar la configuración. Por favor verifique el formato del archivo."
+  },
+  "noActiveProxy": {
+    "message": "Ninguno"
+  },
+  "configuredProxies": {
+    "message": "Proxies configurados"
+  },
+  "storageUsed": {
+    "message": "Almacenamiento utilizado"
+  },
+  "extensionVersion": {
+    "message": "Versión de la extensión"
+  },
+  "logsCount": {
+    "message": "Registros de actividad"
+  },
+  "activityLog": {
+    "message": "Registro de actividad"
+  },
+  "pacScriptValid": {
+    "message": "El script PAC es válido"
+  },
+  "pacScriptError": {
+    "message": "El script PAC contiene errores. Por favor revise la sintaxis del script."
+  },
+  "invalidPacScript": {
+    "message": "Script PAC inválido. Asegúrese de que contenga una función FindProxyForURL válida."
+  },
+  "pacFetchFailed": {
+    "message": "Error al obtener el script PAC desde la URL. Verifique la URL y la conexión de red."
+  },
+  "proxyPermissionDenied": {
+    "message": "Permiso denegado. La extensión puede no tener los permisos necesarios."
+  },
+  "proxyControlledByOther": {
+    "message": "La configuración del proxy está controlada por otra extensión."
+  },
+  "proxyManagedByPolicy": {
+    "message": "La configuración del proxy está administrada por la política de su organización."
+  },
+  "invalidProxyHost": {
+    "message": "Dirección de host de proxy inválida. Verifique la configuración del servidor."
+  },
+  "invalidProxyPort": {
+    "message": "Puerto de proxy inválido. Ingrese un número de puerto válido (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Tiempo de conexión agotado. El servidor proxy puede no estar accesible."
+  },
+  "proxySettingsFailed": {
+    "message": "Error al aplicar la configuración del proxy."
+  },
+  "onboardingWelcomeTitle": {
+    "message": "Bienvenido a PACify"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "El administrador de proxy moderno para Chrome. Configure, cambie y administre su configuración de proxy con facilidad."
+  },
+  "onboardingFeaturesTitle": {
+    "message": "Funciones Potentes"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "Todo lo que necesita para administrar sus proxies de manera efectiva."
+  },
+  "onboardingFeatureProxies": {
+    "message": "Múltiples Perfiles de Proxy"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "Cree y cambie entre diferentes configuraciones de proxy al instante."
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "Reglas de Auto-Proxy"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "Enrute el tráfico basado en patrones de URL con reglas de enrutamiento inteligentes."
+  },
+  "onboardingFeaturePAC": {
+    "message": "Soporte de Scripts PAC"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "Use scripts PAC personalizados para configuración avanzada de proxy."
+  },
+  "onboardingShortcutsTitle": {
+    "message": "Atajos de Teclado"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "Trabaje más rápido con atajos de teclado."
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "Crear nuevo proxy"
+  },
+  "onboardingShortcutSearch": {
+    "message": "Buscar proxies"
+  },
+  "onboardingShortcutClose": {
+    "message": "Cerrar modal"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "¡Todo Listo!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "Cree su primera configuración de proxy para comenzar, o explore la configuración."
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "Crear Primer Proxy"
+  },
+  "onboardingExploreSettings": {
+    "message": "Explorar Configuración"
+  },
+  "previous": {
+    "message": "Anterior"
+  },
+  "next": {
+    "message": "Siguiente"
+  },
+  "skipTour": {
+    "message": "Saltar Tour"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "Use estos atajos para trabajar más rápido"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "General"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "Navegación"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "Lista de Proxies"
+  },
+  "shortcutNewProxy": {
+    "message": "Crear nueva configuración de proxy"
+  },
+  "shortcutSearch": {
+    "message": "Abrir búsqueda"
+  },
+  "shortcutCloseModal": {
+    "message": "Cerrar modal actual"
+  },
+  "shortcutShowHelp": {
+    "message": "Mostrar atajos de teclado"
+  },
+  "shortcutNextElement": {
+    "message": "Mover al siguiente elemento"
+  },
+  "shortcutPrevElement": {
+    "message": "Mover al elemento anterior"
+  },
+  "shortcutActivate": {
+    "message": "Activar elemento enfocado"
+  },
+  "shortcutToggle": {
+    "message": "Alternar interruptores y casillas"
+  },
+  "shortcutNavigateList": {
+    "message": "Navegar por la lista de proxies"
+  },
+  "shortcutActivateProxy": {
+    "message": "Activar proxy seleccionado"
+  },
+  "shortcutEditProxy": {
+    "message": "Editar proxy seleccionado"
+  },
+  "shortcutDeleteProxy": {
+    "message": "Eliminar proxy seleccionado"
+  },
+  "shortcutsTip": {
+    "message": "Presione ? en cualquier lugar para mostrar esta ayuda"
   }
 }

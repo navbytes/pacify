@@ -371,7 +371,7 @@ export function createBasicExtensions(options: CodeMirrorOptions): Extension[] {
     extensions.push(
       EditorView.theme({
         '.cm-placeholder': {
-          color: theme.isDark ? '#858585' : '#999999',
+          color: isDarkTheme ? '#858585' : '#999999',
           fontStyle: 'italic',
         },
       })
