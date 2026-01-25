@@ -392,7 +392,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         color="green"
       />
       <LinkCard
-        href="/src/privacy/privacy.html"
+        href="/privacy.html"
         icon={Lock}
         label={I18nService.getMessage('privacyPolicy') || 'Privacy Policy'}
         color="purple"

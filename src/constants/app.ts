@@ -14,7 +14,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
 export const DEFAULT_BADGE_COLOR = '#303030'
 export const DEFAULT_BADGE_TEXT = 'OFF'
 export const POPUP_DISABLED = ''
-export const POPUP_ENABLED = 'src/popup/popup.html'
+export const POPUP_ENABLED = 'popup.html'
 
 export const TEST_URLS: string[] = ['https://google.com']
 

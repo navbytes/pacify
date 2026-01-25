@@ -137,7 +137,7 @@ export class ChromeService {
     if (params && Object.keys(params).length > 0) {
       // Build URL with query parameters
       const queryString = new URLSearchParams(params).toString()
-      const optionsUrl = `${ChromeService.browser.runtime.getURL('src/options/options.html')}?${queryString}`
+      const optionsUrl = `${ChromeService.browser.runtime.getURL('options.html')}?${queryString}`
       ChromeService.browser.tabs.create({ url: optionsUrl })
     } else {
       ChromeService.browser.runtime.openOptionsPage()

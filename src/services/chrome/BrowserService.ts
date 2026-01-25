@@ -268,7 +268,7 @@ export class BrowserService implements BrowserAPI {
       if (params && Object.keys(params).length > 0) {
         // Build URL with query parameters
         const queryString = new URLSearchParams(params).toString()
-        const optionsUrl = `${chrome.runtime.getURL('src/options/options.html')}?${queryString}`
+        const optionsUrl = `${chrome.runtime.getURL('options.html')}?${queryString}`
         chrome.tabs.create({ url: optionsUrl })
       } else {
         chrome.runtime.openOptionsPage()
