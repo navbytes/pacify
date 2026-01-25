@@ -1,15 +1,17 @@
 <script lang="ts">
 import ThemeToggle from '@/components/ThemeToggle.svelte'
-import { I18nService } from '@/services/i18n/i18nService'
 import { cn } from '@/utils/cn'
 import { Globe, Lock, Shield, ShieldCheck } from '@/utils/icons'
 import { colors } from '@/utils/theme'
 
 function getMessage(key: string, fallback: string): string {
-  return I18nService.getMessage(key) || fallback
+  // Use chrome.i18n directly - it returns empty string if key not found
+  // I18nService returns the key name as fallback which breaks our fallback logic
+  const message = chrome.i18n.getMessage(key)
+  return message || fallback
 }
 
-const lastUpdated = '2024-01-25'
+const lastUpdated = '2026-01-25'
 
 interface Section {
   icon: typeof Shield
