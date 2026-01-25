@@ -2,7 +2,6 @@
 import BackupRestore from '@/components/BackupRestore.svelte'
 import FlexGroup from '@/components/FlexGroup.svelte'
 import LinkCard from '@/components/LinkCard.svelte'
-import KeyboardShortcutsCard from '@/components/ProxyConfigs/KeyboardShortcutsCard.svelte'
 import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
 import Text from '@/components/Text.svelte'
 import ToggleSwitch from '@/components/ToggleSwitch.svelte'
@@ -323,9 +322,6 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       }}
     />
   </div>
-
-  <!-- Keyboard Shortcuts Section -->
-  <KeyboardShortcutsCard />
 
   <!-- Feedback & Rating Section -->
   <div>
