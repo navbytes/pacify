@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "Einstellungen konnten nicht wiederhergestellt werden. Bitte überprüfen Sie das Dateiformat."
+  },
+  "noActiveProxy": {
+    "message": "Keiner"
+  },
+  "configuredProxies": {
+    "message": "Konfigurierte Proxys"
+  },
+  "storageUsed": {
+    "message": "Speichernutzung"
+  },
+  "extensionVersion": {
+    "message": "Erweiterungsversion"
+  },
+  "logsCount": {
+    "message": "Aktivitätsprotokolle"
+  },
+  "activityLog": {
+    "message": "Aktivitätsprotokoll"
+  },
+  "pacScriptValid": {
+    "message": "PAC-Skript ist gültig"
+  },
+  "pacScriptError": {
+    "message": "PAC-Skript enthält Fehler. Bitte überprüfen Sie die Syntax."
+  },
+  "invalidPacScript": {
+    "message": "Ungültiges PAC-Skript. Stellen Sie sicher, dass es eine gültige FindProxyForURL-Funktion enthält."
+  },
+  "pacFetchFailed": {
+    "message": "PAC-Skript konnte nicht von URL abgerufen werden. Bitte überprüfen Sie URL und Netzwerkverbindung."
+  },
+  "proxyPermissionDenied": {
+    "message": "Berechtigung verweigert. Die Erweiterung hat möglicherweise nicht die erforderlichen Berechtigungen."
+  },
+  "proxyControlledByOther": {
+    "message": "Proxy-Einstellungen werden von einer anderen Erweiterung gesteuert."
+  },
+  "proxyManagedByPolicy": {
+    "message": "Proxy-Einstellungen werden von der Richtlinie Ihrer Organisation verwaltet."
+  },
+  "invalidProxyHost": {
+    "message": "Ungültige Proxy-Host-Adresse. Bitte überprüfen Sie die Serverkonfiguration."
+  },
+  "invalidProxyPort": {
+    "message": "Ungültiger Proxy-Port. Bitte geben Sie eine gültige Portnummer ein (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Zeitüberschreitung. Der Proxy-Server ist möglicherweise nicht erreichbar."
+  },
+  "proxySettingsFailed": {
+    "message": "Proxy-Einstellungen konnten nicht angewendet werden."
   }
 }

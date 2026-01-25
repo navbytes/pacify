@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "Не удалось восстановить настройки. Пожалуйста, проверьте формат файла."
+  },
+  "noActiveProxy": {
+    "message": "Нет"
+  },
+  "configuredProxies": {
+    "message": "Настроенные прокси"
+  },
+  "storageUsed": {
+    "message": "Использовано хранилище"
+  },
+  "extensionVersion": {
+    "message": "Версия расширения"
+  },
+  "logsCount": {
+    "message": "Журналы активности"
+  },
+  "activityLog": {
+    "message": "Журнал активности"
+  },
+  "pacScriptValid": {
+    "message": "PAC-скрипт действителен"
+  },
+  "pacScriptError": {
+    "message": "PAC-скрипт содержит ошибки. Пожалуйста, проверьте синтаксис скрипта."
+  },
+  "invalidPacScript": {
+    "message": "Недействительный PAC-скрипт. Убедитесь, что он содержит действительную функцию FindProxyForURL."
+  },
+  "pacFetchFailed": {
+    "message": "Не удалось получить PAC-скрипт по URL. Проверьте URL и сетевое подключение."
+  },
+  "proxyPermissionDenied": {
+    "message": "Доступ запрещен. У расширения может не быть необходимых разрешений."
+  },
+  "proxyControlledByOther": {
+    "message": "Настройки прокси контролируются другим расширением."
+  },
+  "proxyManagedByPolicy": {
+    "message": "Настройки прокси управляются политикой вашей организации."
+  },
+  "invalidProxyHost": {
+    "message": "Недействительный адрес хоста прокси. Проверьте конфигурацию сервера."
+  },
+  "invalidProxyPort": {
+    "message": "Недействительный порт прокси. Введите действительный номер порта (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Время ожидания подключения истекло. Прокси-сервер может быть недоступен."
+  },
+  "proxySettingsFailed": {
+    "message": "Не удалось применить настройки прокси."
   }
 }

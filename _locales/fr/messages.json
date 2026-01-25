@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "Échec de la restauration des paramètres. Veuillez vérifier le format du fichier."
+  },
+  "noActiveProxy": {
+    "message": "Aucun"
+  },
+  "configuredProxies": {
+    "message": "Proxys configurés"
+  },
+  "storageUsed": {
+    "message": "Stockage utilisé"
+  },
+  "extensionVersion": {
+    "message": "Version de l'extension"
+  },
+  "logsCount": {
+    "message": "Journaux d'activité"
+  },
+  "activityLog": {
+    "message": "Journal d'activité"
+  },
+  "pacScriptValid": {
+    "message": "Le script PAC est valide"
+  },
+  "pacScriptError": {
+    "message": "Le script PAC contient des erreurs. Veuillez vérifier la syntaxe du script."
+  },
+  "invalidPacScript": {
+    "message": "Script PAC invalide. Assurez-vous qu'il contient une fonction FindProxyForURL valide."
+  },
+  "pacFetchFailed": {
+    "message": "Échec de la récupération du script PAC depuis l'URL. Vérifiez l'URL et la connexion réseau."
+  },
+  "proxyPermissionDenied": {
+    "message": "Permission refusée. L'extension peut ne pas avoir les autorisations requises."
+  },
+  "proxyControlledByOther": {
+    "message": "Les paramètres proxy sont contrôlés par une autre extension."
+  },
+  "proxyManagedByPolicy": {
+    "message": "Les paramètres proxy sont gérés par la politique de votre organisation."
+  },
+  "invalidProxyHost": {
+    "message": "Adresse d'hôte proxy invalide. Vérifiez la configuration du serveur."
+  },
+  "invalidProxyPort": {
+    "message": "Port proxy invalide. Veuillez entrer un numéro de port valide (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Délai de connexion dépassé. Le serveur proxy peut être inaccessible."
+  },
+  "proxySettingsFailed": {
+    "message": "Échec de l'application des paramètres proxy."
   }
 }

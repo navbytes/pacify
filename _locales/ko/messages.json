@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "설정 복원에 실패했습니다. 파일 형식을 확인하세요."
+  },
+  "noActiveProxy": {
+    "message": "없음"
+  },
+  "configuredProxies": {
+    "message": "구성된 프록시"
+  },
+  "storageUsed": {
+    "message": "사용된 저장 공간"
+  },
+  "extensionVersion": {
+    "message": "확장 프로그램 버전"
+  },
+  "logsCount": {
+    "message": "활동 로그"
+  },
+  "activityLog": {
+    "message": "활동 로그"
+  },
+  "pacScriptValid": {
+    "message": "PAC 스크립트가 유효합니다"
+  },
+  "pacScriptError": {
+    "message": "PAC 스크립트에 오류가 있습니다. 스크립트 구문을 확인하세요."
+  },
+  "invalidPacScript": {
+    "message": "잘못된 PAC 스크립트입니다. 유효한 FindProxyForURL 함수가 포함되어 있는지 확인하세요."
+  },
+  "pacFetchFailed": {
+    "message": "URL에서 PAC 스크립트를 가져오지 못했습니다. URL과 네트워크 연결을 확인하세요."
+  },
+  "proxyPermissionDenied": {
+    "message": "권한이 거부되었습니다. 확장 프로그램에 필요한 권한이 없을 수 있습니다."
+  },
+  "proxyControlledByOther": {
+    "message": "프록시 설정이 다른 확장 프로그램에 의해 제어되고 있습니다."
+  },
+  "proxyManagedByPolicy": {
+    "message": "프록시 설정이 조직의 정책에 의해 관리됩니다."
+  },
+  "invalidProxyHost": {
+    "message": "잘못된 프록시 호스트 주소입니다. 서버 구성을 확인하세요."
+  },
+  "invalidProxyPort": {
+    "message": "잘못된 프록시 포트입니다. 유효한 포트 번호(1-65535)를 입력하세요."
+  },
+  "proxyTimeout": {
+    "message": "연결 시간이 초과되었습니다. 프록시 서버에 연결할 수 없을 수 있습니다."
+  },
+  "proxySettingsFailed": {
+    "message": "프록시 설정을 적용하지 못했습니다."
   }
 }

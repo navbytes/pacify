@@ -3,16 +3,22 @@ import { onMount } from 'svelte'
 import Button from '@/components/Button.svelte'
 import Text from '@/components/Text.svelte'
 import type { DiagnosticLogEntry } from '@/interfaces/error'
+import type { ProxyConfig } from '@/interfaces/settings'
 import { diagnosticsService } from '@/services/DiagnosticsService'
 import { I18nService } from '@/services/i18n/i18nService'
+import { SettingsReader } from '@/services/SettingsReader'
 import { toastStore } from '@/stores/toastStore'
 import {
+  Activity,
   AlertCircle,
   AlertTriangle,
   CheckCheck,
   ChevronDown,
   Download,
+  HardDrive,
   Info,
+  Server,
+  Shield,
   Trash2,
 } from '@/utils/icons'
 
@@ -20,10 +26,57 @@ let logs = $state<DiagnosticLogEntry[]>([])
 let expandedLogIds = $state<Set<string>>(new Set())
 let isLoading = $state(true)
 
+// System status state
+let activeProxy = $state<ProxyConfig | null>(null)
+let totalProxies = $state(0)
+let storageUsage = $state<{ used: number; total: number } | null>(null)
+let extensionVersion = $state('')
+
 onMount(async () => {
-  await loadLogs()
+  await Promise.all([loadLogs(), loadSystemStatus()])
   isLoading = false
 })
+
+async function loadSystemStatus() {
+  try {
+    // Load settings
+    const settings = await SettingsReader.getSettings()
+    totalProxies = settings.proxyConfigs.length
+    activeProxy = settings.proxyConfigs.find((p) => p.isActive) || null
+
+    // Get extension version
+    const manifest = chrome.runtime.getManifest()
+    extensionVersion = manifest.version
+
+    // Get storage usage
+    if (chrome.storage.local.getBytesInUse) {
+      const bytesUsed = await chrome.storage.local.getBytesInUse(null)
+      storageUsage = {
+        used: bytesUsed,
+        total: chrome.storage.local.QUOTA_BYTES || 5242880, // 5MB default
+      }
+    }
+  } catch (error) {
+    console.error('Failed to load system status:', error)
+  }
+}
+
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
+}
+
+function getProxyModeLabel(mode: string): string {
+  const labels: Record<string, string> = {
+    direct: I18nService.getMessage('modeDirect') || 'Direct',
+    auto_detect: I18nService.getMessage('modeAutoDetect') || 'Auto-detect',
+    pac_script: I18nService.getMessage('modePacScript') || 'PAC Script',
+    fixed_servers: I18nService.getMessage('modeManual') || 'Manual',
+    system: I18nService.getMessage('modeSystem') || 'System',
+  }
+  return labels[mode] || mode
+}
 
 async function loadLogs() {
   logs = await diagnosticsService.getLogs()
@@ -197,6 +250,142 @@ function formatTimestamp(timestamp: number): string {
         </Button>
       {/if}
     </div>
+  </div>
+
+  <!-- System Status Panel -->
+  <div class="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- Active Proxy Status -->
+    <div
+      class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4"
+    >
+      <div class="flex items-center gap-3 mb-2">
+        <div
+          class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"
+        >
+          <Shield class="w-5 h-5 text-blue-600 dark:text-blue-400" />
+        </div>
+        <div>
+          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+            {I18nService.getMessage('activeProxy') || 'Active Proxy'}
+          </Text>
+          <Text as="p" size="sm" weight="semibold" classes="text-slate-900 dark:text-slate-100">
+            {#if activeProxy}
+              {activeProxy.name}
+            {:else}
+              {I18nService.getMessage('noActiveProxy') || 'None'}
+            {/if}
+          </Text>
+        </div>
+      </div>
+      {#if activeProxy}
+        <div class="mt-2 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+          <Text as="span" size="xs" classes="text-slate-600 dark:text-slate-400">
+            {getProxyModeLabel(activeProxy.mode)}
+          </Text>
+        </div>
+      {:else}
+        <div class="mt-2 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+          <Text as="span" size="xs" classes="text-slate-600 dark:text-slate-400">
+            {I18nService.getMessage('directConnection') || 'Direct connection'}
+          </Text>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Proxy Count -->
+    <div
+      class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4"
+    >
+      <div class="flex items-center gap-3 mb-2">
+        <div
+          class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center"
+        >
+          <Server class="w-5 h-5 text-purple-600 dark:text-purple-400" />
+        </div>
+        <div>
+          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+            {I18nService.getMessage('configuredProxies') || 'Configured Proxies'}
+          </Text>
+          <Text as="p" size="sm" weight="semibold" classes="text-slate-900 dark:text-slate-100">
+            {totalProxies}
+          </Text>
+        </div>
+      </div>
+    </div>
+
+    <!-- Storage Usage -->
+    <div
+      class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4"
+    >
+      <div class="flex items-center gap-3 mb-2">
+        <div
+          class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center"
+        >
+          <HardDrive class="w-5 h-5 text-amber-600 dark:text-amber-400" />
+        </div>
+        <div>
+          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+            {I18nService.getMessage('storageUsed') || 'Storage Used'}
+          </Text>
+          <Text as="p" size="sm" weight="semibold" classes="text-slate-900 dark:text-slate-100">
+            {#if storageUsage}
+              {formatBytes(storageUsage.used)}
+            {:else}
+              --
+            {/if}
+          </Text>
+        </div>
+      </div>
+      {#if storageUsage}
+        <div class="mt-2">
+          <div class="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div
+              class="h-full bg-amber-500 rounded-full transition-all"
+              style="width: {Math.min((storageUsage.used / storageUsage.total) * 100, 100)}%"
+            ></div>
+          </div>
+          <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-400">
+            {((storageUsage.used / storageUsage.total) * 100).toFixed(1)}% of
+            {formatBytes(storageUsage.total)}
+          </Text>
+        </div>
+      {/if}
+    </div>
+
+    <!-- Extension Info -->
+    <div
+      class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4"
+    >
+      <div class="flex items-center gap-3 mb-2">
+        <div
+          class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center"
+        >
+          <Activity class="w-5 h-5 text-green-600 dark:text-green-400" />
+        </div>
+        <div>
+          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+            {I18nService.getMessage('extensionVersion') || 'Extension Version'}
+          </Text>
+          <Text as="p" size="sm" weight="semibold" classes="text-slate-900 dark:text-slate-100">
+            v{extensionVersion}
+          </Text>
+        </div>
+      </div>
+      <div class="mt-2">
+        <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+          {I18nService.getMessage('logsCount') || 'Activity Logs'}: {logs.length}
+        </Text>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity Log Section Header -->
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      {I18nService.getMessage('activityLog') || 'Activity Log'}
+    </h3>
   </div>
 
   <!-- Loading state -->

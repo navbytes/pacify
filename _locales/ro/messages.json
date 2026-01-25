@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "Restaurarea setărilor a eșuat. Vă rugăm să verificați formatul fișierului."
+  },
+  "noActiveProxy": {
+    "message": "Niciunul"
+  },
+  "configuredProxies": {
+    "message": "Proxy-uri configurate"
+  },
+  "storageUsed": {
+    "message": "Stocare utilizată"
+  },
+  "extensionVersion": {
+    "message": "Versiunea extensiei"
+  },
+  "logsCount": {
+    "message": "Jurnale de activitate"
+  },
+  "activityLog": {
+    "message": "Jurnal de activitate"
+  },
+  "pacScriptValid": {
+    "message": "Scriptul PAC este valid"
+  },
+  "pacScriptError": {
+    "message": "Scriptul PAC conține erori. Vă rugăm să verificați sintaxa scriptului."
+  },
+  "invalidPacScript": {
+    "message": "Script PAC invalid. Asigurați-vă că conține o funcție FindProxyForURL validă."
+  },
+  "pacFetchFailed": {
+    "message": "Nu s-a putut obține scriptul PAC de la URL. Verificați URL-ul și conexiunea la rețea."
+  },
+  "proxyPermissionDenied": {
+    "message": "Permisiune refuzată. Este posibil ca extensia să nu aibă permisiunile necesare."
+  },
+  "proxyControlledByOther": {
+    "message": "Setările proxy sunt controlate de o altă extensie."
+  },
+  "proxyManagedByPolicy": {
+    "message": "Setările proxy sunt gestionate de politica organizației dvs."
+  },
+  "invalidProxyHost": {
+    "message": "Adresă de gazdă proxy invalidă. Verificați configurația serverului."
+  },
+  "invalidProxyPort": {
+    "message": "Port proxy invalid. Introduceți un număr de port valid (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Conexiunea a expirat. Serverul proxy poate fi inaccesibil."
+  },
+  "proxySettingsFailed": {
+    "message": "Nu s-au putut aplica setările proxy."
   }
 }

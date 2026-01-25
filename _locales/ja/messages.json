@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "設定の復元に失敗しました。ファイル形式を確認してください。"
+  },
+  "noActiveProxy": {
+    "message": "なし"
+  },
+  "configuredProxies": {
+    "message": "設定済みプロキシ"
+  },
+  "storageUsed": {
+    "message": "使用中のストレージ"
+  },
+  "extensionVersion": {
+    "message": "拡張機能のバージョン"
+  },
+  "logsCount": {
+    "message": "アクティビティログ"
+  },
+  "activityLog": {
+    "message": "アクティビティログ"
+  },
+  "pacScriptValid": {
+    "message": "PACスクリプトは有効です"
+  },
+  "pacScriptError": {
+    "message": "PACスクリプトにエラーがあります。構文を確認してください。"
+  },
+  "invalidPacScript": {
+    "message": "無効なPACスクリプトです。有効なFindProxyForURL関数が含まれていることを確認してください。"
+  },
+  "pacFetchFailed": {
+    "message": "URLからPACスクリプトの取得に失敗しました。URLとネットワーク接続を確認してください。"
+  },
+  "proxyPermissionDenied": {
+    "message": "権限が拒否されました。拡張機能に必要な権限がない可能性があります。"
+  },
+  "proxyControlledByOther": {
+    "message": "プロキシ設定は別の拡張機能によって制御されています。"
+  },
+  "proxyManagedByPolicy": {
+    "message": "プロキシ設定は組織のポリシーによって管理されています。"
+  },
+  "invalidProxyHost": {
+    "message": "無効なプロキシホストアドレスです。サーバー設定を確認してください。"
+  },
+  "invalidProxyPort": {
+    "message": "無効なプロキシポートです。有効なポート番号（1-65535）を入力してください。"
+  },
+  "proxyTimeout": {
+    "message": "接続がタイムアウトしました。プロキシサーバーに到達できない可能性があります。"
+  },
+  "proxySettingsFailed": {
+    "message": "プロキシ設定の適用に失敗しました。"
   }
 }

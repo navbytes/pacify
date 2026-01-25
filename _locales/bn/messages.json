@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "সেটিংস পুনরুদ্ধার করতে ব্যর্থ। অনুগ্রহ করে ফাইল ফরম্যাট পরীক্ষা করুন।"
+  },
+  "noActiveProxy": {
+    "message": "কোনোটি নয়"
+  },
+  "configuredProxies": {
+    "message": "কনফিগার করা প্রক্সি"
+  },
+  "storageUsed": {
+    "message": "ব্যবহৃত স্টোরেজ"
+  },
+  "extensionVersion": {
+    "message": "এক্সটেনশন সংস্করণ"
+  },
+  "logsCount": {
+    "message": "অ্যাক্টিভিটি লগ"
+  },
+  "activityLog": {
+    "message": "অ্যাক্টিভিটি লগ"
+  },
+  "pacScriptValid": {
+    "message": "PAC স্ক্রিপ্ট বৈধ"
+  },
+  "pacScriptError": {
+    "message": "PAC স্ক্রিপ্টে ত্রুটি রয়েছে। অনুগ্রহ করে স্ক্রিপ্ট সিনট্যাক্স পরীক্ষা করুন।"
+  },
+  "invalidPacScript": {
+    "message": "অবৈধ PAC স্ক্রিপ্ট। অনুগ্রহ করে নিশ্চিত করুন যে এতে একটি বৈধ FindProxyForURL ফাংশন রয়েছে।"
+  },
+  "pacFetchFailed": {
+    "message": "URL থেকে PAC স্ক্রিপ্ট আনতে ব্যর্থ। অনুগ্রহ করে URL এবং নেটওয়ার্ক সংযোগ পরীক্ষা করুন।"
+  },
+  "proxyPermissionDenied": {
+    "message": "অনুমতি প্রত্যাখ্যাত। এক্সটেনশনে প্রয়োজনীয় অনুমতি নাও থাকতে পারে।"
+  },
+  "proxyControlledByOther": {
+    "message": "প্রক্সি সেটিংস অন্য একটি এক্সটেনশন দ্বারা নিয়ন্ত্রিত।"
+  },
+  "proxyManagedByPolicy": {
+    "message": "প্রক্সি সেটিংস আপনার প্রতিষ্ঠানের নীতি দ্বারা পরিচালিত।"
+  },
+  "invalidProxyHost": {
+    "message": "অবৈধ প্রক্সি হোস্ট ঠিকানা। অনুগ্রহ করে সার্ভার কনফিগারেশন পরীক্ষা করুন।"
+  },
+  "invalidProxyPort": {
+    "message": "অবৈধ প্রক্সি পোর্ট। অনুগ্রহ করে একটি বৈধ পোর্ট নম্বর (1-65535) লিখুন।"
+  },
+  "proxyTimeout": {
+    "message": "সংযোগের সময় শেষ। প্রক্সি সার্ভার অ্যাক্সেসযোগ্য নাও হতে পারে।"
+  },
+  "proxySettingsFailed": {
+    "message": "প্রক্সি সেটিংস প্রয়োগ করতে ব্যর্থ।"
   }
 }

@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "恢复设置失败。请检查文件格式。"
+  },
+  "noActiveProxy": {
+    "message": "无"
+  },
+  "configuredProxies": {
+    "message": "已配置的代理"
+  },
+  "storageUsed": {
+    "message": "已用存储"
+  },
+  "extensionVersion": {
+    "message": "扩展版本"
+  },
+  "logsCount": {
+    "message": "活动日志"
+  },
+  "activityLog": {
+    "message": "活动日志"
+  },
+  "pacScriptValid": {
+    "message": "PAC脚本有效"
+  },
+  "pacScriptError": {
+    "message": "PAC脚本包含错误。请检查脚本语法。"
+  },
+  "invalidPacScript": {
+    "message": "无效的PAC脚本。请确保包含有效的FindProxyForURL函数。"
+  },
+  "pacFetchFailed": {
+    "message": "无法从URL获取PAC脚本。请检查URL和网络连接。"
+  },
+  "proxyPermissionDenied": {
+    "message": "权限被拒绝。扩展可能没有所需的权限。"
+  },
+  "proxyControlledByOther": {
+    "message": "代理设置由另一个扩展控制。"
+  },
+  "proxyManagedByPolicy": {
+    "message": "代理设置由组织策略管理。"
+  },
+  "invalidProxyHost": {
+    "message": "无效的代理主机地址。请检查服务器配置。"
+  },
+  "invalidProxyPort": {
+    "message": "无效的代理端口。请输入有效的端口号（1-65535）。"
+  },
+  "proxyTimeout": {
+    "message": "连接超时。代理服务器可能无法访问。"
+  },
+  "proxySettingsFailed": {
+    "message": "应用代理设置失败。"
   }
 }

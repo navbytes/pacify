@@ -1007,5 +1007,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "Failed to restore settings. Please check the file format."
+  },
+  "noActiveProxy": {
+    "message": "None"
+  },
+  "configuredProxies": {
+    "message": "Configured Proxies"
+  },
+  "storageUsed": {
+    "message": "Storage Used"
+  },
+  "extensionVersion": {
+    "message": "Extension Version"
+  },
+  "logsCount": {
+    "message": "Activity Logs"
+  },
+  "activityLog": {
+    "message": "Activity Log"
+  },
+  "pacScriptValid": {
+    "message": "PAC script is valid"
+  },
+  "pacScriptError": {
+    "message": "PAC script contains errors. Please check the script syntax."
+  },
+  "invalidPacScript": {
+    "message": "Invalid PAC script. Please ensure it contains a valid FindProxyForURL function."
+  },
+  "pacFetchFailed": {
+    "message": "Failed to fetch PAC script from URL. Please check the URL and network connection."
+  },
+  "proxyPermissionDenied": {
+    "message": "Permission denied. The extension may not have the required permissions."
+  },
+  "proxyControlledByOther": {
+    "message": "Proxy settings are controlled by another extension."
+  },
+  "proxyManagedByPolicy": {
+    "message": "Proxy settings are managed by your organization's policy."
+  },
+  "invalidProxyHost": {
+    "message": "Invalid proxy host address. Please check the server configuration."
+  },
+  "invalidProxyPort": {
+    "message": "Invalid proxy port. Please enter a valid port number (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Connection timed out. The proxy server may be unreachable."
+  },
+  "proxySettingsFailed": {
+    "message": "Failed to apply proxy settings."
   }
 }

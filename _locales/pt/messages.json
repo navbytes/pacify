@@ -982,5 +982,56 @@
   },
   "failedToRestoreSettingsGeneric": {
     "message": "Falha ao restaurar configurações. Por favor verifique o formato do arquivo."
+  },
+  "noActiveProxy": {
+    "message": "Nenhum"
+  },
+  "configuredProxies": {
+    "message": "Proxies configurados"
+  },
+  "storageUsed": {
+    "message": "Armazenamento utilizado"
+  },
+  "extensionVersion": {
+    "message": "Versão da extensão"
+  },
+  "logsCount": {
+    "message": "Registros de atividade"
+  },
+  "activityLog": {
+    "message": "Registro de atividade"
+  },
+  "pacScriptValid": {
+    "message": "O script PAC é válido"
+  },
+  "pacScriptError": {
+    "message": "O script PAC contém erros. Por favor verifique a sintaxe do script."
+  },
+  "invalidPacScript": {
+    "message": "Script PAC inválido. Certifique-se de que contém uma função FindProxyForURL válida."
+  },
+  "pacFetchFailed": {
+    "message": "Falha ao obter o script PAC da URL. Verifique a URL e a conexão de rede."
+  },
+  "proxyPermissionDenied": {
+    "message": "Permissão negada. A extensão pode não ter as permissões necessárias."
+  },
+  "proxyControlledByOther": {
+    "message": "As configurações de proxy são controladas por outra extensão."
+  },
+  "proxyManagedByPolicy": {
+    "message": "As configurações de proxy são gerenciadas pela política da sua organização."
+  },
+  "invalidProxyHost": {
+    "message": "Endereço de host de proxy inválido. Verifique a configuração do servidor."
+  },
+  "invalidProxyPort": {
+    "message": "Porta de proxy inválida. Insira um número de porta válido (1-65535)."
+  },
+  "proxyTimeout": {
+    "message": "Tempo de conexão esgotado. O servidor proxy pode estar inacessível."
+  },
+  "proxySettingsFailed": {
+    "message": "Falha ao aplicar as configurações de proxy."
   }
 }
