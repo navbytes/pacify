@@ -1033,5 +1033,122 @@
   },
   "proxySettingsFailed": {
     "message": "Nu s-au putut aplica setările proxy."
+  },
+  "onboardingWelcomeTitle": {
+    "message": "Bine ați venit la PACify"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Managerul modern de proxy pentru Chrome. Configurați, comutați și gestionați setările proxy cu ușurință."
+  },
+  "onboardingFeaturesTitle": {
+    "message": "Funcții Puternice"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "Tot ce aveți nevoie pentru a gestiona eficient proxy-urile."
+  },
+  "onboardingFeatureProxies": {
+    "message": "Profiluri Multiple de Proxy"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "Creați și comutați instantaneu între diferite configurații de proxy."
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "Reguli Auto-Proxy"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "Direcționați traficul pe baza modelelor URL cu reguli de rutare inteligente."
+  },
+  "onboardingFeaturePAC": {
+    "message": "Suport Scripturi PAC"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "Utilizați scripturi PAC personalizate pentru configurarea avansată a proxy-ului."
+  },
+  "onboardingShortcutsTitle": {
+    "message": "Comenzi Rapide de la Tastatură"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "Lucrați mai rapid cu comenzile rapide de la tastatură."
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "Creați proxy nou"
+  },
+  "onboardingShortcutSearch": {
+    "message": "Căutați proxy-uri"
+  },
+  "onboardingShortcutClose": {
+    "message": "Închideți fereastra"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "Totul e Pregătit!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "Creați prima configurație de proxy pentru a începe sau explorați setările."
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "Creați Primul Proxy"
+  },
+  "onboardingExploreSettings": {
+    "message": "Explorați Setările"
+  },
+  "previous": {
+    "message": "Anterior"
+  },
+  "next": {
+    "message": "Următor"
+  },
+  "skipTour": {
+    "message": "Săriți Turul"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "Folosiți aceste comenzi rapide pentru a lucra mai repede"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "General"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "Navigare"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "Lista de Proxy-uri"
+  },
+  "shortcutNewProxy": {
+    "message": "Creați o nouă configurație de proxy"
+  },
+  "shortcutSearch": {
+    "message": "Deschideți căutarea"
+  },
+  "shortcutCloseModal": {
+    "message": "Închideți fereastra curentă"
+  },
+  "shortcutShowHelp": {
+    "message": "Afișați comenzile rapide de la tastatură"
+  },
+  "shortcutNextElement": {
+    "message": "Treceți la elementul următor"
+  },
+  "shortcutPrevElement": {
+    "message": "Treceți la elementul anterior"
+  },
+  "shortcutActivate": {
+    "message": "Activați elementul focalizat"
+  },
+  "shortcutToggle": {
+    "message": "Comutați întrerupătoarele și casetele de selectare"
+  },
+  "shortcutNavigateList": {
+    "message": "Navigați prin lista de proxy-uri"
+  },
+  "shortcutActivateProxy": {
+    "message": "Activați proxy-ul selectat"
+  },
+  "shortcutEditProxy": {
+    "message": "Editați proxy-ul selectat"
+  },
+  "shortcutDeleteProxy": {
+    "message": "Ștergeți proxy-ul selectat"
+  },
+  "shortcutsTip": {
+    "message": "Apăsați ? oriunde pentru a afișa acest ajutor"
   }
 }

@@ -318,10 +318,14 @@ export class BrowserService implements BrowserAPI {
     },
 
     onInstalled: {
-      addListener: (callback: () => void): void => {
+      addListener: (
+        callback: (details: { reason: string; previousVersion?: string }) => void
+      ): void => {
         chrome.runtime.onInstalled.addListener(callback)
       },
-      removeListener: (callback: () => void): void => {
+      removeListener: (
+        callback: (details: { reason: string; previousVersion?: string }) => void
+      ): void => {
         chrome.runtime.onInstalled.removeListener(callback)
       },
     },

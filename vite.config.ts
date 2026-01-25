@@ -178,6 +178,7 @@ export default defineConfig(({ command, mode }) => {
         input: {
           popup: resolve(__dirname, 'src/popup/popup.html'),
           options: resolve(__dirname, 'src/options/options.html'),
+          privacy: resolve(__dirname, 'src/privacy/privacy.html'),
           background: resolve(__dirname, 'src/background/background.ts'),
         },
         output: {

@@ -1033,5 +1033,122 @@
   },
   "proxySettingsFailed": {
     "message": "Не удалось применить настройки прокси."
+  },
+  "onboardingWelcomeTitle": {
+    "message": "Добро пожаловать в PACify"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Современный менеджер прокси для Chrome. Легко настраивайте, переключайте и управляйте настройками прокси."
+  },
+  "onboardingFeaturesTitle": {
+    "message": "Мощные функции"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "Все, что нужно для эффективного управления прокси."
+  },
+  "onboardingFeatureProxies": {
+    "message": "Несколько профилей прокси"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "Мгновенно создавайте и переключайтесь между различными конфигурациями прокси."
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "Правила авто-прокси"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "Маршрутизируйте трафик на основе URL-шаблонов с помощью умных правил маршрутизации."
+  },
+  "onboardingFeaturePAC": {
+    "message": "Поддержка PAC-скриптов"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "Используйте пользовательские PAC-скрипты для расширенной настройки прокси."
+  },
+  "onboardingShortcutsTitle": {
+    "message": "Горячие клавиши"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "Работайте быстрее с помощью горячих клавиш."
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "Создать новый прокси"
+  },
+  "onboardingShortcutSearch": {
+    "message": "Поиск прокси"
+  },
+  "onboardingShortcutClose": {
+    "message": "Закрыть окно"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "Всё готово!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "Создайте свою первую конфигурацию прокси, чтобы начать, или изучите настройки."
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "Создать первый прокси"
+  },
+  "onboardingExploreSettings": {
+    "message": "Изучить настройки"
+  },
+  "previous": {
+    "message": "Назад"
+  },
+  "next": {
+    "message": "Далее"
+  },
+  "skipTour": {
+    "message": "Пропустить тур"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "Используйте эти сочетания клавиш для ускорения работы"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "Общие"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "Навигация"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "Список прокси"
+  },
+  "shortcutNewProxy": {
+    "message": "Создать новую конфигурацию прокси"
+  },
+  "shortcutSearch": {
+    "message": "Открыть поиск"
+  },
+  "shortcutCloseModal": {
+    "message": "Закрыть текущее окно"
+  },
+  "shortcutShowHelp": {
+    "message": "Показать горячие клавиши"
+  },
+  "shortcutNextElement": {
+    "message": "Перейти к следующему элементу"
+  },
+  "shortcutPrevElement": {
+    "message": "Перейти к предыдущему элементу"
+  },
+  "shortcutActivate": {
+    "message": "Активировать выделенный элемент"
+  },
+  "shortcutToggle": {
+    "message": "Переключить переключатели и флажки"
+  },
+  "shortcutNavigateList": {
+    "message": "Навигация по списку прокси"
+  },
+  "shortcutActivateProxy": {
+    "message": "Активировать выбранный прокси"
+  },
+  "shortcutEditProxy": {
+    "message": "Редактировать выбранный прокси"
+  },
+  "shortcutDeleteProxy": {
+    "message": "Удалить выбранный прокси"
+  },
+  "shortcutsTip": {
+    "message": "Нажмите ? в любом месте для показа этой справки"
   }
 }

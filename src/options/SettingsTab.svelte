@@ -23,6 +23,7 @@ import {
   Heart,
   HelpCircle,
   Lightbulb,
+  Lock,
   MessageSquare,
   RefreshCw,
   Shield,
@@ -389,6 +390,12 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         icon={BookOpen}
         label={I18nService.getMessage('aboutDocumentation')}
         color="green"
+      />
+      <LinkCard
+        href="/src/privacy/privacy.html"
+        icon={Lock}
+        label={I18nService.getMessage('privacyPolicy') || 'Privacy Policy'}
+        color="purple"
       />
     </div>
   </div>

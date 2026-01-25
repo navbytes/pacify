@@ -1033,5 +1033,122 @@
   },
   "proxySettingsFailed": {
     "message": "프록시 설정을 적용하지 못했습니다."
+  },
+  "onboardingWelcomeTitle": {
+    "message": "PACify에 오신 것을 환영합니다"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome용 최신 프록시 관리자입니다. 프록시 설정을 쉽게 구성, 전환 및 관리하세요."
+  },
+  "onboardingFeaturesTitle": {
+    "message": "강력한 기능"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "프록시를 효과적으로 관리하는 데 필요한 모든 것."
+  },
+  "onboardingFeatureProxies": {
+    "message": "다중 프록시 프로필"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "다양한 프록시 구성을 즉시 생성하고 전환합니다."
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "자동 프록시 규칙"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "스마트 라우팅 규칙으로 URL 패턴에 따라 트래픽을 라우팅합니다."
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC 스크립트 지원"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "고급 프록시 구성을 위해 사용자 정의 PAC 스크립트를 사용하세요."
+  },
+  "onboardingShortcutsTitle": {
+    "message": "키보드 단축키"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "키보드 단축키로 더 빠르게 작업하세요."
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "새 프록시 생성"
+  },
+  "onboardingShortcutSearch": {
+    "message": "프록시 검색"
+  },
+  "onboardingShortcutClose": {
+    "message": "모달 닫기"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "준비 완료!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "첫 번째 프록시 구성을 생성하여 시작하거나 설정을 탐색하세요."
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "첫 번째 프록시 생성"
+  },
+  "onboardingExploreSettings": {
+    "message": "설정 탐색"
+  },
+  "previous": {
+    "message": "이전"
+  },
+  "next": {
+    "message": "다음"
+  },
+  "skipTour": {
+    "message": "투어 건너뛰기"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "이 단축키를 사용하여 더 빠르게 작업하세요"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "일반"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "탐색"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "프록시 목록"
+  },
+  "shortcutNewProxy": {
+    "message": "새 프록시 구성 만들기"
+  },
+  "shortcutSearch": {
+    "message": "검색 열기"
+  },
+  "shortcutCloseModal": {
+    "message": "현재 모달 닫기"
+  },
+  "shortcutShowHelp": {
+    "message": "키보드 단축키 표시"
+  },
+  "shortcutNextElement": {
+    "message": "다음 요소로 이동"
+  },
+  "shortcutPrevElement": {
+    "message": "이전 요소로 이동"
+  },
+  "shortcutActivate": {
+    "message": "포커스된 요소 활성화"
+  },
+  "shortcutToggle": {
+    "message": "스위치 및 체크박스 전환"
+  },
+  "shortcutNavigateList": {
+    "message": "프록시 목록 탐색"
+  },
+  "shortcutActivateProxy": {
+    "message": "선택한 프록시 활성화"
+  },
+  "shortcutEditProxy": {
+    "message": "선택한 프록시 편집"
+  },
+  "shortcutDeleteProxy": {
+    "message": "선택한 프록시 삭제"
+  },
+  "shortcutsTip": {
+    "message": "어디서든 ?를 눌러 이 도움말을 표시하세요"
   }
 }

@@ -1033,5 +1033,122 @@
   },
   "proxySettingsFailed": {
     "message": "应用代理设置失败。"
+  },
+  "onboardingWelcomeTitle": {
+    "message": "欢迎使用 PACify"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome 的现代代理管理器。轻松配置、切换和管理您的代理设置。"
+  },
+  "onboardingFeaturesTitle": {
+    "message": "强大功能"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "有效管理代理所需的一切。"
+  },
+  "onboardingFeatureProxies": {
+    "message": "多个代理配置文件"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "即时创建和切换不同的代理配置。"
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "自动代理规则"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "使用智能路由规则根据 URL 模式路由流量。"
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC 脚本支持"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "使用自定义 PAC 脚本进行高级代理配置。"
+  },
+  "onboardingShortcutsTitle": {
+    "message": "键盘快捷键"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "使用键盘快捷键更快地工作。"
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "创建新代理"
+  },
+  "onboardingShortcutSearch": {
+    "message": "搜索代理"
+  },
+  "onboardingShortcutClose": {
+    "message": "关闭弹窗"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "一切就绪！"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "创建您的第一个代理配置以开始使用，或探索设置。"
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "创建第一个代理"
+  },
+  "onboardingExploreSettings": {
+    "message": "探索设置"
+  },
+  "previous": {
+    "message": "上一步"
+  },
+  "next": {
+    "message": "下一步"
+  },
+  "skipTour": {
+    "message": "跳过导览"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "使用这些快捷键更快地工作"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "常规"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "导航"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "代理列表"
+  },
+  "shortcutNewProxy": {
+    "message": "创建新代理配置"
+  },
+  "shortcutSearch": {
+    "message": "打开搜索"
+  },
+  "shortcutCloseModal": {
+    "message": "关闭当前弹窗"
+  },
+  "shortcutShowHelp": {
+    "message": "显示键盘快捷键"
+  },
+  "shortcutNextElement": {
+    "message": "移动到下一个元素"
+  },
+  "shortcutPrevElement": {
+    "message": "移动到上一个元素"
+  },
+  "shortcutActivate": {
+    "message": "激活焦点元素"
+  },
+  "shortcutToggle": {
+    "message": "切换开关和复选框"
+  },
+  "shortcutNavigateList": {
+    "message": "浏览代理列表"
+  },
+  "shortcutActivateProxy": {
+    "message": "激活选中的代理"
+  },
+  "shortcutEditProxy": {
+    "message": "编辑选中的代理"
+  },
+  "shortcutDeleteProxy": {
+    "message": "删除选中的代理"
+  },
+  "shortcutsTip": {
+    "message": "在任何位置按 ? 显示此帮助"
   }
 }

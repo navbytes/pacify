@@ -98,8 +98,8 @@ export interface RuntimeAPI {
     removeListener(callback: () => void): void
   }
   onInstalled: {
-    addListener(callback: () => void): void
-    removeListener(callback: () => void): void
+    addListener(callback: (details: { reason: string; previousVersion?: string }) => void): void
+    removeListener(callback: (details: { reason: string; previousVersion?: string }) => void): void
   }
   lastError?: {
     message: string

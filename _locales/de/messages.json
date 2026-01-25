@@ -1033,5 +1033,122 @@
   },
   "proxySettingsFailed": {
     "message": "Proxy-Einstellungen konnten nicht angewendet werden."
+  },
+  "onboardingWelcomeTitle": {
+    "message": "Willkommen bei PACify"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Der moderne Proxy-Manager für Chrome. Konfigurieren, wechseln und verwalten Sie Ihre Proxy-Einstellungen mit Leichtigkeit."
+  },
+  "onboardingFeaturesTitle": {
+    "message": "Leistungsstarke Funktionen"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "Alles, was Sie brauchen, um Ihre Proxys effektiv zu verwalten."
+  },
+  "onboardingFeatureProxies": {
+    "message": "Mehrere Proxy-Profile"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "Erstellen und wechseln Sie sofort zwischen verschiedenen Proxy-Konfigurationen."
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "Auto-Proxy-Regeln"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "Leiten Sie den Datenverkehr basierend auf URL-Mustern mit intelligenten Routing-Regeln."
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC-Skript-Unterstützung"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "Verwenden Sie benutzerdefinierte PAC-Skripte für erweiterte Proxy-Konfigurationen."
+  },
+  "onboardingShortcutsTitle": {
+    "message": "Tastaturkürzel"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "Arbeiten Sie schneller mit Tastaturkürzeln."
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "Neuen Proxy erstellen"
+  },
+  "onboardingShortcutSearch": {
+    "message": "Proxys durchsuchen"
+  },
+  "onboardingShortcutClose": {
+    "message": "Modal schließen"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "Alles bereit!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "Erstellen Sie Ihre erste Proxy-Konfiguration, um zu beginnen, oder erkunden Sie die Einstellungen."
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "Ersten Proxy erstellen"
+  },
+  "onboardingExploreSettings": {
+    "message": "Einstellungen erkunden"
+  },
+  "previous": {
+    "message": "Zurück"
+  },
+  "next": {
+    "message": "Weiter"
+  },
+  "skipTour": {
+    "message": "Tour überspringen"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "Verwenden Sie diese Tastenkürzel für schnelleres Arbeiten"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "Allgemein"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "Navigation"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "Proxy-Liste"
+  },
+  "shortcutNewProxy": {
+    "message": "Neue Proxy-Konfiguration erstellen"
+  },
+  "shortcutSearch": {
+    "message": "Suche öffnen"
+  },
+  "shortcutCloseModal": {
+    "message": "Aktuelles Modal schließen"
+  },
+  "shortcutShowHelp": {
+    "message": "Tastaturkürzel anzeigen"
+  },
+  "shortcutNextElement": {
+    "message": "Zum nächsten Element wechseln"
+  },
+  "shortcutPrevElement": {
+    "message": "Zum vorherigen Element wechseln"
+  },
+  "shortcutActivate": {
+    "message": "Fokussiertes Element aktivieren"
+  },
+  "shortcutToggle": {
+    "message": "Schalter und Kontrollkästchen umschalten"
+  },
+  "shortcutNavigateList": {
+    "message": "Durch Proxy-Liste navigieren"
+  },
+  "shortcutActivateProxy": {
+    "message": "Ausgewählten Proxy aktivieren"
+  },
+  "shortcutEditProxy": {
+    "message": "Ausgewählten Proxy bearbeiten"
+  },
+  "shortcutDeleteProxy": {
+    "message": "Ausgewählten Proxy löschen"
+  },
+  "shortcutsTip": {
+    "message": "Drücken Sie ? um diese Hilfe anzuzeigen"
   }
 }

@@ -1033,5 +1033,122 @@
   },
   "proxySettingsFailed": {
     "message": "プロキシ設定の適用に失敗しました。"
+  },
+  "onboardingWelcomeTitle": {
+    "message": "PACifyへようこそ"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome用のモダンなプロキシマネージャーです。プロキシ設定を簡単に構成、切り替え、管理できます。"
+  },
+  "onboardingFeaturesTitle": {
+    "message": "強力な機能"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "プロキシを効果的に管理するために必要なすべてが揃っています。"
+  },
+  "onboardingFeatureProxies": {
+    "message": "複数のプロキシプロファイル"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "異なるプロキシ設定を瞬時に作成し、切り替えることができます。"
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "自動プロキシルール"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "スマートなルーティングルールでURLパターンに基づいてトラフィックをルーティングします。"
+  },
+  "onboardingFeaturePAC": {
+    "message": "PACスクリプトサポート"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "高度なプロキシ設定にカスタムPACスクリプトを使用できます。"
+  },
+  "onboardingShortcutsTitle": {
+    "message": "キーボードショートカット"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "キーボードショートカットでより速く作業できます。"
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "新しいプロキシを作成"
+  },
+  "onboardingShortcutSearch": {
+    "message": "プロキシを検索"
+  },
+  "onboardingShortcutClose": {
+    "message": "モーダルを閉じる"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "準備完了！"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "最初のプロキシ設定を作成して開始するか、設定を探索してください。"
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "最初のプロキシを作成"
+  },
+  "onboardingExploreSettings": {
+    "message": "設定を探索"
+  },
+  "previous": {
+    "message": "前へ"
+  },
+  "next": {
+    "message": "次へ"
+  },
+  "skipTour": {
+    "message": "ツアーをスキップ"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "これらのショートカットを使用してより速く作業"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "一般"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "ナビゲーション"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "プロキシリスト"
+  },
+  "shortcutNewProxy": {
+    "message": "新しいプロキシ設定を作成"
+  },
+  "shortcutSearch": {
+    "message": "検索を開く"
+  },
+  "shortcutCloseModal": {
+    "message": "現在のモーダルを閉じる"
+  },
+  "shortcutShowHelp": {
+    "message": "キーボードショートカットを表示"
+  },
+  "shortcutNextElement": {
+    "message": "次の要素に移動"
+  },
+  "shortcutPrevElement": {
+    "message": "前の要素に移動"
+  },
+  "shortcutActivate": {
+    "message": "フォーカスした要素を有効化"
+  },
+  "shortcutToggle": {
+    "message": "スイッチとチェックボックスを切り替え"
+  },
+  "shortcutNavigateList": {
+    "message": "プロキシリストをナビゲート"
+  },
+  "shortcutActivateProxy": {
+    "message": "選択したプロキシを有効化"
+  },
+  "shortcutEditProxy": {
+    "message": "選択したプロキシを編集"
+  },
+  "shortcutDeleteProxy": {
+    "message": "選択したプロキシを削除"
+  },
+  "shortcutsTip": {
+    "message": "どこでも ? を押すとこのヘルプが表示されます"
   }
 }

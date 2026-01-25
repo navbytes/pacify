@@ -1033,5 +1033,122 @@
   },
   "proxySettingsFailed": {
     "message": "प्रॉक्सी सेटिंग्स लागू करने में विफल।"
+  },
+  "onboardingWelcomeTitle": {
+    "message": "PACify में आपका स्वागत है"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome के लिए आधुनिक प्रॉक्सी प्रबंधक। अपनी प्रॉक्सी सेटिंग्स को आसानी से कॉन्फ़िगर, स्विच और प्रबंधित करें।"
+  },
+  "onboardingFeaturesTitle": {
+    "message": "शक्तिशाली सुविधाएँ"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "अपने प्रॉक्सी को प्रभावी ढंग से प्रबंधित करने के लिए आपको जो कुछ भी चाहिए।"
+  },
+  "onboardingFeatureProxies": {
+    "message": "एकाधिक प्रॉक्सी प्रोफ़ाइल"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "विभिन्न प्रॉक्सी कॉन्फ़िगरेशन को तुरंत बनाएं और स्विच करें।"
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "ऑटो-प्रॉक्सी नियम"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "स्मार्ट रूटिंग नियमों के साथ URL पैटर्न के आधार पर ट्रैफ़िक रूट करें।"
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC स्क्रिप्ट सपोर्ट"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "उन्नत प्रॉक्सी कॉन्फ़िगरेशन के लिए कस्टम PAC स्क्रिप्ट का उपयोग करें।"
+  },
+  "onboardingShortcutsTitle": {
+    "message": "कीबोर्ड शॉर्टकट"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "कीबोर्ड शॉर्टकट के साथ तेज़ी से काम करें।"
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "नया प्रॉक्सी बनाएं"
+  },
+  "onboardingShortcutSearch": {
+    "message": "प्रॉक्सी खोजें"
+  },
+  "onboardingShortcutClose": {
+    "message": "मोडल बंद करें"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "सब तैयार!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "शुरू करने के लिए अपना पहला प्रॉक्सी कॉन्फ़िगरेशन बनाएं, या सेटिंग्स का पता लगाएं।"
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "पहला प्रॉक्सी बनाएं"
+  },
+  "onboardingExploreSettings": {
+    "message": "सेटिंग्स एक्सप्लोर करें"
+  },
+  "previous": {
+    "message": "पिछला"
+  },
+  "next": {
+    "message": "अगला"
+  },
+  "skipTour": {
+    "message": "टूर छोड़ें"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "तेज़ी से काम करने के लिए इन शॉर्टकट का उपयोग करें"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "सामान्य"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "नेविगेशन"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "प्रॉक्सी सूची"
+  },
+  "shortcutNewProxy": {
+    "message": "नया प्रॉक्सी कॉन्फ़िगरेशन बनाएं"
+  },
+  "shortcutSearch": {
+    "message": "खोज खोलें"
+  },
+  "shortcutCloseModal": {
+    "message": "वर्तमान मोडल बंद करें"
+  },
+  "shortcutShowHelp": {
+    "message": "कीबोर्ड शॉर्टकट दिखाएं"
+  },
+  "shortcutNextElement": {
+    "message": "अगले तत्व पर जाएं"
+  },
+  "shortcutPrevElement": {
+    "message": "पिछले तत्व पर जाएं"
+  },
+  "shortcutActivate": {
+    "message": "फ़ोकस किए गए तत्व को सक्रिय करें"
+  },
+  "shortcutToggle": {
+    "message": "स्विच और चेकबॉक्स टॉगल करें"
+  },
+  "shortcutNavigateList": {
+    "message": "प्रॉक्सी सूची में नेविगेट करें"
+  },
+  "shortcutActivateProxy": {
+    "message": "चयनित प्रॉक्सी सक्रिय करें"
+  },
+  "shortcutEditProxy": {
+    "message": "चयनित प्रॉक्सी संपादित करें"
+  },
+  "shortcutDeleteProxy": {
+    "message": "चयनित प्रॉक्सी हटाएं"
+  },
+  "shortcutsTip": {
+    "message": "इस सहायता को दिखाने के लिए कहीं भी ? दबाएं"
   }
 }

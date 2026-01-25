@@ -1,6 +1,8 @@
 <script lang="ts">
 import type { Component } from 'svelte'
 import { onMount } from 'svelte'
+import KeyboardShortcutsModal from '@/components/KeyboardShortcutsModal.svelte'
+import OnboardingModal from '@/components/Onboarding/OnboardingModal.svelte'
 import Tab from '@/components/Tabs/Tab.svelte'
 import TabList from '@/components/Tabs/TabList.svelte'
 import TabPanel from '@/components/Tabs/TabPanel.svelte'
@@ -13,7 +15,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
-import { Activity, Cable, Settings } from '@/utils/icons'
+import { Activity, Cable, Keyboard, Settings } from '@/utils/icons'
 import { isAutoProxy } from '@/utils/proxyModeHelpers'
 import DiagnosticsTab from './DiagnosticsTab.svelte'
 import ProxyConfigsTab from './ProxyConfigsTab.svelte'
@@ -21,6 +23,8 @@ import SettingsTab from './SettingsTab.svelte'
 
 let showEditor = $state(false)
 let showAutoProxyEditor = $state(false)
+let showOnboarding = $state(false)
+let showKeyboardShortcuts = $state(false)
 let editingScriptId = $state<string | null>(null)
 let settings = $derived($settingsStore)
 let activeTab = $state('proxy-configs')
@@ -47,6 +51,12 @@ onMount(() => {
       activeTab = saved['options.activeTab']
     }
 
+    // Check if we should show onboarding (first run)
+    const onboardingData = await chrome.storage.local.get('pacify.showOnboarding')
+    if (onboardingData['pacify.showOnboarding'] === true) {
+      showOnboarding = true
+    }
+
     // Check if we should auto-open the editor (from popup quick add)
     const params = new URLSearchParams(window.location.search)
     if (params.get('action') === 'create') {
@@ -61,15 +71,35 @@ onMount(() => {
 
   // Keyboard shortcuts
   const handleKeydown = (e: KeyboardEvent) => {
+    // Don't trigger shortcuts when typing in inputs
+    const target = e.target as HTMLElement
+    const isInput =
+      target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
+
     // Ctrl+N or Cmd+N to add new proxy (only on Proxy Configs tab)
     if ((e.ctrlKey || e.metaKey) && e.key === 'n' && activeTab === 'proxy-configs') {
       e.preventDefault()
       openEditor()
     }
-    // Escape to close modal
-    if (e.key === 'Escape' && showEditor) {
+
+    // ? to show keyboard shortcuts (not in inputs)
+    if (e.key === '?' && !isInput && !showEditor && !showAutoProxyEditor && !showOnboarding) {
       e.preventDefault()
-      showEditor = false
+      showKeyboardShortcuts = true
+    }
+
+    // Escape to close modals (priority order)
+    if (e.key === 'Escape') {
+      if (showKeyboardShortcuts) {
+        e.preventDefault()
+        showKeyboardShortcuts = false
+      } else if (showEditor) {
+        e.preventDefault()
+        showEditor = false
+      } else if (showAutoProxyEditor) {
+        e.preventDefault()
+        showAutoProxyEditor = false
+      }
     }
   }
 
@@ -199,6 +229,17 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
       toastStore.show(I18nService.getMessage('failedToSaveProxy'), 'error')
     })
 }
+
+async function handleOnboardingComplete() {
+  // Mark onboarding as complete
+  await chrome.storage.local.set({ 'pacify.showOnboarding': false })
+  showOnboarding = false
+}
+
+function handleOnboardingCreateProxy() {
+  // Open the proxy editor after onboarding
+  openEditor()
+}
 </script>
 
 <div id="options-container" class="container mx-auto max-w-7xl px-4" role="region">
@@ -248,6 +289,17 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
                 Active
               </div>
             {/if}
+
+            <!-- Keyboard Shortcuts Button -->
+            <button
+              type="button"
+              onclick={() => (showKeyboardShortcuts = true)}
+              class="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              aria-label={I18nService.getMessage('keyboardShortcuts') || 'Keyboard Shortcuts'}
+              title={I18nService.getMessage('keyboardShortcuts') || 'Keyboard Shortcuts'}
+            >
+              <Keyboard size={20} />
+            </button>
 
             <!-- Theme Toggle -->
             <ThemeToggle />
@@ -397,6 +449,19 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
       </div>
     {/if}
   {/if}
+
+  <!-- Onboarding Modal -->
+  <OnboardingModal
+    bind:open={showOnboarding}
+    onComplete={handleOnboardingComplete}
+    onCreateProxy={handleOnboardingCreateProxy}
+  />
+
+  <!-- Keyboard Shortcuts Modal -->
+  <KeyboardShortcutsModal
+    bind:open={showKeyboardShortcuts}
+    onClose={() => (showKeyboardShortcuts = false)}
+  />
 
   <!-- Toast Notifications -->
   <Toast />

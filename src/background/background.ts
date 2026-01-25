@@ -131,9 +131,15 @@ async function initialize(): Promise<void> {
       })
 
       // Listen for extension installation or update events
-      browserService.runtime.onInstalled.addListener(async () => {
+      browserService.runtime.onInstalled.addListener(async (details) => {
         logger.info('Extension installed/updated - initializing proxy settings and badge')
         await initializeProxySettings()
+
+        // Set first-run flag for new installations to trigger onboarding
+        if (details.reason === 'install') {
+          await chrome.storage.local.set({ 'pacify.showOnboarding': true })
+          logger.info('First installation detected - onboarding flag set')
+        }
       })
 
       // Listen for alarms (for PAC script auto-refresh)

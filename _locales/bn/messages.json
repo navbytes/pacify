@@ -1033,5 +1033,122 @@
   },
   "proxySettingsFailed": {
     "message": "প্রক্সি সেটিংস প্রয়োগ করতে ব্যর্থ।"
+  },
+  "onboardingWelcomeTitle": {
+    "message": "PACify-তে স্বাগতম"
+  },
+  "onboardingWelcomeDescription": {
+    "message": "Chrome-এর জন্য আধুনিক প্রক্সি ম্যানেজার। সহজেই আপনার প্রক্সি সেটিংস কনফিগার, পরিবর্তন এবং পরিচালনা করুন।"
+  },
+  "onboardingFeaturesTitle": {
+    "message": "শক্তিশালী বৈশিষ্ট্য"
+  },
+  "onboardingFeaturesDescription": {
+    "message": "আপনার প্রক্সিগুলি কার্যকরভাবে পরিচালনা করতে যা কিছু প্রয়োজন।"
+  },
+  "onboardingFeatureProxies": {
+    "message": "একাধিক প্রক্সি প্রোফাইল"
+  },
+  "onboardingFeatureProxiesDesc": {
+    "message": "বিভিন্ন প্রক্সি কনফিগারেশন তাৎক্ষণিকভাবে তৈরি করুন এবং পরিবর্তন করুন।"
+  },
+  "onboardingFeatureAutoProxy": {
+    "message": "অটো-প্রক্সি নিয়ম"
+  },
+  "onboardingFeatureAutoProxyDesc": {
+    "message": "স্মার্ট রাউটিং নিয়মের সাথে URL প্যাটার্নের উপর ভিত্তি করে ট্রাফিক রাউট করুন।"
+  },
+  "onboardingFeaturePAC": {
+    "message": "PAC স্ক্রিপ্ট সাপোর্ট"
+  },
+  "onboardingFeaturePACDesc": {
+    "message": "উন্নত প্রক্সি কনফিগারেশনের জন্য কাস্টম PAC স্ক্রিপ্ট ব্যবহার করুন।"
+  },
+  "onboardingShortcutsTitle": {
+    "message": "কীবোর্ড শর্টকাট"
+  },
+  "onboardingShortcutsDescription": {
+    "message": "কীবোর্ড শর্টকাট দিয়ে দ্রুত কাজ করুন।"
+  },
+  "onboardingShortcutNewProxy": {
+    "message": "নতুন প্রক্সি তৈরি করুন"
+  },
+  "onboardingShortcutSearch": {
+    "message": "প্রক্সি অনুসন্ধান করুন"
+  },
+  "onboardingShortcutClose": {
+    "message": "মোডাল বন্ধ করুন"
+  },
+  "onboardingGetStartedTitle": {
+    "message": "সব প্রস্তুত!"
+  },
+  "onboardingGetStartedDescription": {
+    "message": "শুরু করতে আপনার প্রথম প্রক্সি কনফিগারেশন তৈরি করুন, অথবা সেটিংস অন্বেষণ করুন।"
+  },
+  "onboardingCreateFirstProxy": {
+    "message": "প্রথম প্রক্সি তৈরি করুন"
+  },
+  "onboardingExploreSettings": {
+    "message": "সেটিংস অন্বেষণ করুন"
+  },
+  "previous": {
+    "message": "পূর্ববর্তী"
+  },
+  "next": {
+    "message": "পরবর্তী"
+  },
+  "skipTour": {
+    "message": "ট্যুর এড়িয়ে যান"
+  },
+  "keyboardShortcutsDescription": {
+    "message": "দ্রুত কাজ করতে এই শর্টকাটগুলি ব্যবহার করুন"
+  },
+  "shortcutsGroupGeneral": {
+    "message": "সাধারণ"
+  },
+  "shortcutsGroupNavigation": {
+    "message": "নেভিগেশন"
+  },
+  "shortcutsGroupProxyList": {
+    "message": "প্রক্সি তালিকা"
+  },
+  "shortcutNewProxy": {
+    "message": "নতুন প্রক্সি কনফিগারেশন তৈরি করুন"
+  },
+  "shortcutSearch": {
+    "message": "অনুসন্ধান খুলুন"
+  },
+  "shortcutCloseModal": {
+    "message": "বর্তমান মোডাল বন্ধ করুন"
+  },
+  "shortcutShowHelp": {
+    "message": "কীবোর্ড শর্টকাট দেখান"
+  },
+  "shortcutNextElement": {
+    "message": "পরবর্তী উপাদানে যান"
+  },
+  "shortcutPrevElement": {
+    "message": "পূর্ববর্তী উপাদানে যান"
+  },
+  "shortcutActivate": {
+    "message": "ফোকাসকৃত উপাদান সক্রিয় করুন"
+  },
+  "shortcutToggle": {
+    "message": "সুইচ এবং চেকবক্স টগল করুন"
+  },
+  "shortcutNavigateList": {
+    "message": "প্রক্সি তালিকায় নেভিগেট করুন"
+  },
+  "shortcutActivateProxy": {
+    "message": "নির্বাচিত প্রক্সি সক্রিয় করুন"
+  },
+  "shortcutEditProxy": {
+    "message": "নির্বাচিত প্রক্সি সম্পাদনা করুন"
+  },
+  "shortcutDeleteProxy": {
+    "message": "নির্বাচিত প্রক্সি মুছুন"
+  },
+  "shortcutsTip": {
+    "message": "এই সাহায্য দেখাতে যেকোনো জায়গায় ? চাপুন"
   }
 }
