@@ -937,5 +937,50 @@
   },
   "proxyHasAuth": {
     "message": "此代理已配置身份验证"
+  },
+  "settingsFileTooLarge": {
+    "message": "设置文件太大。最大大小为$1KB。",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "无效的文件类型。请选择JSON文件。"
+  },
+  "invalidJsonFormat": {
+    "message": "无效的JSON格式。"
+  },
+  "settingsMustBeObject": {
+    "message": "设置必须是有效的对象。"
+  },
+  "invalidProxyConfigsArray": {
+    "message": "无效的设置：proxyConfigs必须是数组。"
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "无效的设置：quickSwitchEnabled必须是布尔值。"
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "无效的设置：disableProxyOnStartup必须是布尔值。"
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "无效的设置：autoReloadOnProxySwitch必须是布尔值。"
+  },
+  "invalidActiveScriptId": {
+    "message": "无效的设置：activeScriptId必须是字符串或null。"
+  },
+  "invalidProxyConfiguration": {
+    "message": "无效的代理配置。"
+  },
+  "proxyMustHaveName": {
+    "message": "每个代理必须有有效的名称。"
+  },
+  "proxyMustHaveMode": {
+    "message": "每个代理必须有有效的模式。"
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "恢复设置失败。请检查文件格式。"
   }
 }

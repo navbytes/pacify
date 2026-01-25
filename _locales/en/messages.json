@@ -962,5 +962,50 @@
   },
   "proxyHasAuth": {
     "message": "This proxy has authentication configured"
+  },
+  "settingsFileTooLarge": {
+    "message": "Settings file too large. Maximum size is $1KB.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "Invalid file type. Please select a JSON file."
+  },
+  "invalidJsonFormat": {
+    "message": "Invalid JSON format."
+  },
+  "settingsMustBeObject": {
+    "message": "Settings must be a valid object."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "Invalid settings: proxyConfigs must be an array."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "Invalid settings: quickSwitchEnabled must be a boolean."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "Invalid settings: disableProxyOnStartup must be a boolean."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "Invalid settings: autoReloadOnProxySwitch must be a boolean."
+  },
+  "invalidActiveScriptId": {
+    "message": "Invalid settings: activeScriptId must be a string or null."
+  },
+  "invalidProxyConfiguration": {
+    "message": "Invalid proxy configuration."
+  },
+  "proxyMustHaveName": {
+    "message": "Each proxy must have a valid name."
+  },
+  "proxyMustHaveMode": {
+    "message": "Each proxy must have a valid mode."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "Failed to restore settings. Please check the file format."
   }
 }

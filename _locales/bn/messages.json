@@ -937,5 +937,50 @@
   },
   "proxyHasAuth": {
     "message": "এই প্রক্সিতে প্রমাণীকরণ কনফিগার করা আছে"
+  },
+  "settingsFileTooLarge": {
+    "message": "সেটিংস ফাইল খুব বড়। সর্বোচ্চ আকার $1KB।",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "অবৈধ ফাইল প্রকার। অনুগ্রহ করে একটি JSON ফাইল নির্বাচন করুন।"
+  },
+  "invalidJsonFormat": {
+    "message": "অবৈধ JSON ফরম্যাট।"
+  },
+  "settingsMustBeObject": {
+    "message": "সেটিংস একটি বৈধ অবজেক্ট হতে হবে।"
+  },
+  "invalidProxyConfigsArray": {
+    "message": "অবৈধ সেটিংস: proxyConfigs একটি অ্যারে হতে হবে।"
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "অবৈধ সেটিংস: quickSwitchEnabled একটি বুলিয়ান হতে হবে।"
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "অবৈধ সেটিংস: disableProxyOnStartup একটি বুলিয়ান হতে হবে।"
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "অবৈধ সেটিংস: autoReloadOnProxySwitch একটি বুলিয়ান হতে হবে।"
+  },
+  "invalidActiveScriptId": {
+    "message": "অবৈধ সেটিংস: activeScriptId একটি স্ট্রিং বা null হতে হবে।"
+  },
+  "invalidProxyConfiguration": {
+    "message": "অবৈধ প্রক্সি কনফিগারেশন।"
+  },
+  "proxyMustHaveName": {
+    "message": "প্রতিটি প্রক্সির একটি বৈধ নাম থাকতে হবে।"
+  },
+  "proxyMustHaveMode": {
+    "message": "প্রতিটি প্রক্সির একটি বৈধ মোড থাকতে হবে।"
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "সেটিংস পুনরুদ্ধার করতে ব্যর্থ। অনুগ্রহ করে ফাইল ফরম্যাট পরীক্ষা করুন।"
   }
 }

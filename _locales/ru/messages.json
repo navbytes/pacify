@@ -937,5 +937,50 @@
   },
   "proxyHasAuth": {
     "message": "Для этого прокси настроена аутентификация"
+  },
+  "settingsFileTooLarge": {
+    "message": "Файл настроек слишком большой. Максимальный размер $1КБ.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "Неверный тип файла. Пожалуйста, выберите JSON файл."
+  },
+  "invalidJsonFormat": {
+    "message": "Неверный формат JSON."
+  },
+  "settingsMustBeObject": {
+    "message": "Настройки должны быть допустимым объектом."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "Неверные настройки: proxyConfigs должен быть массивом."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "Неверные настройки: quickSwitchEnabled должен быть логическим значением."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "Неверные настройки: disableProxyOnStartup должен быть логическим значением."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "Неверные настройки: autoReloadOnProxySwitch должен быть логическим значением."
+  },
+  "invalidActiveScriptId": {
+    "message": "Неверные настройки: activeScriptId должен быть строкой или null."
+  },
+  "invalidProxyConfiguration": {
+    "message": "Неверная конфигурация прокси."
+  },
+  "proxyMustHaveName": {
+    "message": "Каждый прокси должен иметь допустимое имя."
+  },
+  "proxyMustHaveMode": {
+    "message": "Каждый прокси должен иметь допустимый режим."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "Не удалось восстановить настройки. Пожалуйста, проверьте формат файла."
   }
 }

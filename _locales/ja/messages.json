@@ -937,5 +937,50 @@
   },
   "proxyHasAuth": {
     "message": "このプロキシには認証が設定されています"
+  },
+  "settingsFileTooLarge": {
+    "message": "設定ファイルが大きすぎます。最大サイズは$1KBです。",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "無効なファイル形式です。JSONファイルを選択してください。"
+  },
+  "invalidJsonFormat": {
+    "message": "無効なJSON形式です。"
+  },
+  "settingsMustBeObject": {
+    "message": "設定は有効なオブジェクトである必要があります。"
+  },
+  "invalidProxyConfigsArray": {
+    "message": "無効な設定: proxyConfigsは配列である必要があります。"
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "無効な設定: quickSwitchEnabledはブール値である必要があります。"
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "無効な設定: disableProxyOnStartupはブール値である必要があります。"
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "無効な設定: autoReloadOnProxySwitchはブール値である必要があります。"
+  },
+  "invalidActiveScriptId": {
+    "message": "無効な設定: activeScriptIdは文字列またはnullである必要があります。"
+  },
+  "invalidProxyConfiguration": {
+    "message": "無効なプロキシ設定です。"
+  },
+  "proxyMustHaveName": {
+    "message": "各プロキシには有効な名前が必要です。"
+  },
+  "proxyMustHaveMode": {
+    "message": "各プロキシには有効なモードが必要です。"
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "設定の復元に失敗しました。ファイル形式を確認してください。"
   }
 }

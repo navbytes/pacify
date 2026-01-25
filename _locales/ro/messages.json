@@ -937,5 +937,50 @@
   },
   "proxyHasAuth": {
     "message": "Acest proxy are autentificare configurată"
+  },
+  "settingsFileTooLarge": {
+    "message": "Fișierul de setări este prea mare. Dimensiunea maximă este $1KB.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "Tip de fișier invalid. Vă rugăm să selectați un fișier JSON."
+  },
+  "invalidJsonFormat": {
+    "message": "Format JSON invalid."
+  },
+  "settingsMustBeObject": {
+    "message": "Setările trebuie să fie un obiect valid."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "Setări invalide: proxyConfigs trebuie să fie un array."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "Setări invalide: quickSwitchEnabled trebuie să fie un boolean."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "Setări invalide: disableProxyOnStartup trebuie să fie un boolean."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "Setări invalide: autoReloadOnProxySwitch trebuie să fie un boolean."
+  },
+  "invalidActiveScriptId": {
+    "message": "Setări invalide: activeScriptId trebuie să fie un șir sau null."
+  },
+  "invalidProxyConfiguration": {
+    "message": "Configurație proxy invalidă."
+  },
+  "proxyMustHaveName": {
+    "message": "Fiecare proxy trebuie să aibă un nume valid."
+  },
+  "proxyMustHaveMode": {
+    "message": "Fiecare proxy trebuie să aibă un mod valid."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "Restaurarea setărilor a eșuat. Vă rugăm să verificați formatul fișierului."
   }
 }

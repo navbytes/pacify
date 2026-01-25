@@ -1,4 +1,5 @@
 import type { AppSettings, ProxyConfig } from '@/interfaces'
+import { I18nService } from './i18n/i18nService'
 import { SettingsReader } from './SettingsReader'
 import { StorageService } from './StorageService'
 
@@ -91,13 +92,13 @@ export class SettingsWriter {
     // Validate file size to prevent DoS
     if (file.size > MAX_SETTINGS_FILE_SIZE) {
       throw new Error(
-        `Settings file too large. Maximum size is ${MAX_SETTINGS_FILE_SIZE / 1024}KB.`
+        I18nService.getMessage('settingsFileTooLarge', String(MAX_SETTINGS_FILE_SIZE / 1024))
       )
     }
 
     // Validate file type
     if (file.type && file.type !== 'application/json' && !file.name.endsWith('.json')) {
-      throw new Error('Invalid file type. Please select a JSON file.')
+      throw new Error(I18nService.getMessage('invalidFileType'))
     }
 
     try {
@@ -108,34 +109,34 @@ export class SettingsWriter {
       try {
         settings = JSON.parse(fileContent)
       } catch {
-        throw new Error('Invalid JSON format.')
+        throw new Error(I18nService.getMessage('invalidJsonFormat'))
       }
 
       // Comprehensive validation of settings structure
       if (!settings || typeof settings !== 'object') {
-        throw new Error('Settings must be a valid object.')
+        throw new Error(I18nService.getMessage('settingsMustBeObject'))
       }
 
       if (!Array.isArray(settings.proxyConfigs)) {
-        throw new Error('Invalid settings: proxyConfigs must be an array.')
+        throw new Error(I18nService.getMessage('invalidProxyConfigsArray'))
       }
 
       if (typeof settings.quickSwitchEnabled !== 'boolean') {
-        throw new Error('Invalid settings: quickSwitchEnabled must be a boolean.')
+        throw new Error(I18nService.getMessage('invalidQuickSwitchEnabled'))
       }
 
       if (
         settings.disableProxyOnStartup !== undefined &&
         typeof settings.disableProxyOnStartup !== 'boolean'
       ) {
-        throw new Error('Invalid settings: disableProxyOnStartup must be a boolean.')
+        throw new Error(I18nService.getMessage('invalidDisableProxyOnStartup'))
       }
 
       if (
         settings.autoReloadOnProxySwitch !== undefined &&
         typeof settings.autoReloadOnProxySwitch !== 'boolean'
       ) {
-        throw new Error('Invalid settings: autoReloadOnProxySwitch must be a boolean.')
+        throw new Error(I18nService.getMessage('invalidAutoReloadOnProxySwitch'))
       }
 
       if (
@@ -143,19 +144,19 @@ export class SettingsWriter {
         settings.activeScriptId !== null &&
         typeof settings.activeScriptId !== 'string'
       ) {
-        throw new Error('Invalid settings: activeScriptId must be a string or null.')
+        throw new Error(I18nService.getMessage('invalidActiveScriptId'))
       }
 
       // Validate each proxy config
       for (const config of settings.proxyConfigs) {
         if (!config || typeof config !== 'object') {
-          throw new Error('Invalid proxy configuration.')
+          throw new Error(I18nService.getMessage('invalidProxyConfiguration'))
         }
         if (typeof config.name !== 'string' || !config.name.trim()) {
-          throw new Error('Each proxy must have a valid name.')
+          throw new Error(I18nService.getMessage('proxyMustHaveName'))
         }
         if (typeof config.mode !== 'string') {
-          throw new Error('Each proxy must have a valid mode.')
+          throw new Error(I18nService.getMessage('proxyMustHaveMode'))
         }
       }
 
@@ -170,7 +171,7 @@ export class SettingsWriter {
       if (error instanceof Error && error.message) {
         throw error
       }
-      throw new Error('Failed to restore settings. Please check the file format.')
+      throw new Error(I18nService.getMessage('failedToRestoreSettingsGeneric'))
     }
   }
 }

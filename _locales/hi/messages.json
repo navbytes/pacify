@@ -937,5 +937,50 @@
   },
   "proxyHasAuth": {
     "message": "इस प्रॉक्सी में प्रमाणीकरण कॉन्फ़िगर किया गया है"
+  },
+  "settingsFileTooLarge": {
+    "message": "सेटिंग्स फ़ाइल बहुत बड़ी है। अधिकतम आकार $1KB है।",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "अमान्य फ़ाइल प्रकार। कृपया JSON फ़ाइल चुनें।"
+  },
+  "invalidJsonFormat": {
+    "message": "अमान्य JSON प्रारूप।"
+  },
+  "settingsMustBeObject": {
+    "message": "सेटिंग्स एक वैध ऑब्जेक्ट होनी चाहिए।"
+  },
+  "invalidProxyConfigsArray": {
+    "message": "अमान्य सेटिंग्स: proxyConfigs एक array होना चाहिए।"
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "अमान्य सेटिंग्स: quickSwitchEnabled एक बूलियन होना चाहिए।"
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "अमान्य सेटिंग्स: disableProxyOnStartup एक बूलियन होना चाहिए।"
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "अमान्य सेटिंग्स: autoReloadOnProxySwitch एक बूलियन होना चाहिए।"
+  },
+  "invalidActiveScriptId": {
+    "message": "अमान्य सेटिंग्स: activeScriptId एक स्ट्रिंग या null होना चाहिए।"
+  },
+  "invalidProxyConfiguration": {
+    "message": "अमान्य प्रॉक्सी कॉन्फ़िगरेशन।"
+  },
+  "proxyMustHaveName": {
+    "message": "प्रत्येक प्रॉक्सी का एक वैध नाम होना चाहिए।"
+  },
+  "proxyMustHaveMode": {
+    "message": "प्रत्येक प्रॉक्सी का एक वैध मोड होना चाहिए।"
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "सेटिंग्स पुनर्स्थापित करने में विफल। कृपया फ़ाइल प्रारूप जांचें।"
   }
 }

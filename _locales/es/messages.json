@@ -937,5 +937,50 @@
   },
   "proxyHasAuth": {
     "message": "Este proxy tiene autenticación configurada"
+  },
+  "settingsFileTooLarge": {
+    "message": "Archivo de configuración demasiado grande. Tamaño máximo es $1KB.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "Tipo de archivo no válido. Por favor seleccione un archivo JSON."
+  },
+  "invalidJsonFormat": {
+    "message": "Formato JSON no válido."
+  },
+  "settingsMustBeObject": {
+    "message": "La configuración debe ser un objeto válido."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "Configuración inválida: proxyConfigs debe ser un array."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "Configuración inválida: quickSwitchEnabled debe ser un booleano."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "Configuración inválida: disableProxyOnStartup debe ser un booleano."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "Configuración inválida: autoReloadOnProxySwitch debe ser un booleano."
+  },
+  "invalidActiveScriptId": {
+    "message": "Configuración inválida: activeScriptId debe ser una cadena o null."
+  },
+  "invalidProxyConfiguration": {
+    "message": "Configuración de proxy no válida."
+  },
+  "proxyMustHaveName": {
+    "message": "Cada proxy debe tener un nombre válido."
+  },
+  "proxyMustHaveMode": {
+    "message": "Cada proxy debe tener un modo válido."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "Error al restaurar la configuración. Por favor verifique el formato del archivo."
   }
 }

@@ -937,5 +937,50 @@
   },
   "proxyHasAuth": {
     "message": "이 프록시에는 인증이 구성되어 있습니다"
+  },
+  "settingsFileTooLarge": {
+    "message": "설정 파일이 너무 큽니다. 최대 크기는 $1KB입니다.",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1024"
+      }
+    }
+  },
+  "invalidFileType": {
+    "message": "잘못된 파일 형식입니다. JSON 파일을 선택하세요."
+  },
+  "invalidJsonFormat": {
+    "message": "잘못된 JSON 형식입니다."
+  },
+  "settingsMustBeObject": {
+    "message": "설정은 유효한 객체여야 합니다."
+  },
+  "invalidProxyConfigsArray": {
+    "message": "잘못된 설정: proxyConfigs는 배열이어야 합니다."
+  },
+  "invalidQuickSwitchEnabled": {
+    "message": "잘못된 설정: quickSwitchEnabled는 불리언이어야 합니다."
+  },
+  "invalidDisableProxyOnStartup": {
+    "message": "잘못된 설정: disableProxyOnStartup은 불리언이어야 합니다."
+  },
+  "invalidAutoReloadOnProxySwitch": {
+    "message": "잘못된 설정: autoReloadOnProxySwitch는 불리언이어야 합니다."
+  },
+  "invalidActiveScriptId": {
+    "message": "잘못된 설정: activeScriptId는 문자열 또는 null이어야 합니다."
+  },
+  "invalidProxyConfiguration": {
+    "message": "잘못된 프록시 구성입니다."
+  },
+  "proxyMustHaveName": {
+    "message": "각 프록시에는 유효한 이름이 있어야 합니다."
+  },
+  "proxyMustHaveMode": {
+    "message": "각 프록시에는 유효한 모드가 있어야 합니다."
+  },
+  "failedToRestoreSettingsGeneric": {
+    "message": "설정 복원에 실패했습니다. 파일 형식을 확인하세요."
   }
 }
