@@ -1299,3 +1299,225 @@ Week 7-8 (Phase 3 continued + Phase 4):
 | 4.1 | Proxy Chains | PARTIAL | Failover only, not true chaining |
 | 4.2 | DNS-over-HTTPS | LIMITED | No API for DoH; guidance + DNS prefetch only |
 | 4.3 | Proxy Auth Vault | PARTIAL | MV3 blocks onAuthRequired; storage only |
+
+---
+
+## Revenue Model
+
+### Context
+
+- Chrome Web Store Payments (CWS Payments) was **fully shut down in February 2021**. There is no built-in payment mechanism. All monetization must use external services.
+- SwitchyOmega had zero monetization → was abandoned → removed from Chrome Web Store in June 2024. This is the outcome to avoid.
+- FoxyProxy uses the free extension as a funnel to a paid proxy/VPN subscription service (~$217k/year revenue).
+- The extension already has GitHub Sponsors link (`https://github.com/sponsors/navbytes`) and Chrome Web Store review links in the Settings tab.
+
+### Recommended Model: Freemium + Tiered Pricing
+
+#### Free Tier (Core - attract users, build reviews)
+
+Everything the extension does today, plus:
+- Up to **5 proxy configurations**
+- Basic proxy modes (Direct, System, Manual, PAC Script)
+- Quick switch (up to 3 configs)
+- Light/dark theme
+- Backup/restore (own format only)
+- 1 Auto-Proxy profile with up to 10 rules
+- Community support (GitHub Issues)
+
+#### Pro Tier ($4.99/month or $39.99/year)
+
+All Free features, plus:
+- **Unlimited** proxy configurations
+- **Unlimited** Auto-Proxy rules
+- Proxy schedules (time-based auto-switching)
+- Proxy failover chains
+- Import from SwitchyOmega / FoxyProxy
+- Export to PAC file
+- Shareable config links
+- Config versioning / undo (50 snapshots)
+- Traffic stats dashboard
+- Rule hit counters
+- PAC script linting & debugging
+- IP leak test
+- WebRTC leak protection
+- DNS prefetch control
+- Badge icon customization
+- External config sync (JSON/YAML URL)
+- Priority support
+
+#### Team Tier ($8/seat/month, minimum 5 seats)
+
+All Pro features, plus:
+- Shared proxy configurations across team members
+- Centralized admin dashboard (web-based)
+- Team management (invite/remove members)
+- Shared Auto-Proxy rule sets
+- Config templates pushed to all members
+- External config sync (for centralized corporate proxy management)
+- Audit log (who changed what, when)
+- Volume discount (20+ seats: $6/seat, 50+ seats: $5/seat)
+
+#### Enterprise Tier (Custom pricing, contact sales)
+
+All Team features, plus:
+- SSO/SAML integration
+- Chrome Enterprise managed deployment
+- Custom SLA and uptime guarantees
+- Dedicated support channel
+- Custom feature development
+- Compliance reporting
+- On-premise config sync server support
+- White-labeling options
+
+### Free → Pro Feature Gate Strategy
+
+The key is making the free tier genuinely useful while creating natural upgrade moments:
+
+| Trigger Point | What Happens | Pro Pitch |
+|---|---|---|
+| User creates 6th proxy config | Soft block with upgrade modal | "Manage unlimited proxies with Pro" |
+| User adds 11th Auto-Proxy rule | Soft block with upgrade modal | "Unlimited routing rules with Pro" |
+| User tries Import from SwitchyOmega | Feature locked, shows preview | "Migrate all your configs in one click" |
+| User tries Schedule/Failover Chain | Feature locked | "Automate proxy switching with Pro" |
+| User opens Traffic Stats | Shows 7-day sample, then locked | "Full traffic analytics with Pro" |
+| User tries Config Versioning | Shows last 3 snapshots, then locked | "Full history & undo with Pro" |
+| User clicks IP Leak Test | Works once, then locked | "Continuous leak monitoring with Pro" |
+
+**Important**: Never lock security-critical features that are free elsewhere (basic proxy switching, manual proxy config). The upgrade wall should feel like "you get more power" not "basic functionality is held hostage."
+
+### Payment Integration
+
+#### Recommended: ExtensionPay (Phase 1) → Stripe Direct (Phase 2)
+
+**Phase 1 — ExtensionPay** (fastest time-to-revenue):
+- No upfront costs, no monthly fees, no revenue share (only Stripe processing fees: ~2.9% + $0.30)
+- Handles login, subscription management, payment processing
+- Open-source client library: `ExtPay` npm package
+- Supports monthly, quarterly, yearly plans
+- Free trials supported
+- Works across Chrome, Firefox, Edge
+- Setup time: ~1 day
+
+Integration:
+```typescript
+// src/services/PaymentService.ts
+import ExtPay from 'extpay'
+
+const extpay = ExtPay('pacify-proxy-manager')  // your ExtensionPay ID
+
+export async function checkPaidStatus(): Promise<boolean> {
+  const user = await extpay.getUser()
+  return user.paid
+}
+
+export function openPaymentPage(): void {
+  extpay.openPaymentPage()
+}
+
+export function openTrialPage(): void {
+  extpay.openTrialPage({ days: 14 })
+}
+```
+
+**Phase 2 — Stripe Direct** (when Team/Enterprise tiers launch):
+- Build a lightweight backend (Bun + Hono or similar)
+- Stripe Checkout for payment
+- Stripe Customer Portal for subscription management
+- Webhook handler for subscription events
+- JWT-based license tokens stored in `chrome.storage.sync`
+- Team/org management API
+- Admin dashboard for team tier
+
+### Additional Revenue Streams
+
+#### 1. Affiliate Partnerships (compliant with June 2025 policy)
+
+**Strategy**: "Recommended Proxy Providers" section in Settings tab
+
+- Partner with 2-3 reputable proxy/VPN providers (NordVPN, TorGuard, etc.)
+- Show only when relevant (user has no proxy configured, or clicks "Find a Provider")
+- Require explicit user click — never auto-inject
+- Full disclosure: "PACify earns a commission. This doesn't affect your price."
+- Typical payout: $10-120 per conversion
+
+**Implementation**:
+- Add a "Proxy Providers" card in SettingsTab or a dedicated section
+- Each provider: logo, brief description, "Visit" button with affiliate link
+- Track clicks via diagnostics (no external analytics)
+
+**Revenue estimate**: With 10,000+ users and 1-2% click-through: $500-$3,000/month
+
+#### 2. Donations & Sponsorships (already partially in place)
+
+Current: GitHub Sponsors link exists. Expand to:
+- **Buy Me a Coffee** / **Ko-fi** link alongside GitHub Sponsors
+- Sponsor tiers on GitHub:
+  - $5/month: Name in supporters list
+  - $25/month: Logo in extension settings + README
+  - $100/month: Priority feature requests + direct support channel
+- **Open Collective** for transparent community funding
+
+**Revenue estimate**: Supplementary — $100-$1,000/month depending on community size
+
+#### 3. Companion Proxy Service (long-term, FoxyProxy model)
+
+Once the user base is large enough (50,000+ users):
+- Launch a branded proxy/VPN service ("PACify Proxy")
+- Pre-configured one-click setup within the extension
+- Competitive pricing with tight extension integration
+- Differentiator: the extension already manages proxies; adding your own service is a natural fit
+
+**Revenue estimate**: $5-15/user/month, potentially the largest revenue stream
+
+### Revenue Projections
+
+| Milestone | Users | Free | Pro ($5/mo) | Team ($8/seat) | Monthly Revenue |
+|---|---|---|---|---|---|
+| Launch | 1,000 | 950 | 50 (5%) | 0 | $250 |
+| 6 months | 5,000 | 4,500 | 400 (8%) | 100 seats | $2,800 |
+| 1 year | 15,000 | 13,000 | 1,500 (10%) | 500 seats | $11,500 |
+| 2 years | 50,000 | 42,000 | 5,000 (10%) | 3,000 seats | $49,000 |
+
+*Assumes 5-10% conversion rate (industry average for well-executed freemium). Team tier revenue is additive. Excludes affiliate and donation revenue.*
+
+### Implementation Phases
+
+**Revenue Phase 1** (alongside feature Phase 1-2):
+1. Integrate ExtensionPay
+2. Define free/pro feature boundaries
+3. Build `PaymentService.ts` + `UpgradeModal.svelte`
+4. Add subtle upgrade prompts at gate points
+5. Add 14-day free trial for Pro
+6. Add Buy Me a Coffee / Ko-fi links
+
+**Revenue Phase 2** (alongside feature Phase 3):
+1. Add compliant affiliate partnerships section
+2. Set up GitHub Sponsors tiers
+3. Track conversion metrics
+
+**Revenue Phase 3** (alongside feature Phase 4):
+1. Build lightweight backend for Team tier
+2. Stripe Direct integration
+3. Team management dashboard
+4. Enterprise inquiry form
+
+### What to Avoid
+
+| Anti-Pattern | Why |
+|---|---|
+| Ads in the extension | Degrades UX, low revenue, may violate CWS policies |
+| Selling user data | Policy violation, trust destruction, legal risk |
+| Background affiliate injection | Banned since June 2025 (PayPal Honey scandal) |
+| License key friction | Users hate entering keys; login-based is better |
+| Paywalling basic proxy features | Creates resentment; free alternatives exist |
+| Selling to acquirers | Common predatory practice — acquirers often inject malware/adware |
+| Zero monetization | Leads to abandonment (SwitchyOmega), others exploit your work (uBlock Origin) |
+
+### Pricing Psychology
+
+- **Annual discount**: $39.99/year vs $4.99/month ($59.88/year) = 33% savings — drives annual commitments
+- **14-day free trial**: Reduces friction; users experience Pro before paying
+- **"Pro" badge**: Show a subtle Pro badge on premium features in the UI so free users see what they're missing
+- **Upgrade at moment of need**: Gate features when users actually try to use them, not with aggressive popups
+- **Transparent pricing page**: In-extension pricing comparison table (Free vs Pro vs Team)
+- **Student/OSS discount**: 50% off for students and open-source maintainers (goodwill + word-of-mouth)
