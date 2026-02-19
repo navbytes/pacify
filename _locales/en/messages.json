@@ -1205,5 +1205,47 @@
   },
   "backToSettings": {
     "message": "Back to Settings"
+  },
+  "importSwitchyOmega": {
+    "message": "Import from SwitchyOmega"
+  },
+  "importSwitchyOmegaDescription": {
+    "message": "Import proxy profiles from a SwitchyOmega .bak or .json backup"
+  },
+  "switchyOmegaImportSuccess": {
+    "message": "Imported $1 proxy configurations from SwitchyOmega",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "switchyOmegaImportFailed": {
+    "message": "Failed to import SwitchyOmega backup"
+  },
+  "invalidSwitchyOmegaFormat": {
+    "message": "Invalid SwitchyOmega backup format. Please check the file."
+  },
+  "importFileTooLarge": {
+    "message": "Import file is too large (max 5MB)."
+  },
+  "noProfilesFound": {
+    "message": "No proxy profiles found in the backup file."
+  },
+  "buyMeACoffee": {
+    "message": "Buy Me a Coffee"
+  },
+  "newsletterSignup": {
+    "message": "Stay Updated"
+  },
+  "newsletterDescription": {
+    "message": "Get notified about new features and updates"
+  },
+  "onboardingFeatureImport": {
+    "message": "Import from SwitchyOmega"
+  },
+  "onboardingFeatureImportDesc": {
+    "message": "Easily migrate your proxy profiles from SwitchyOmega backups."
   }
 }

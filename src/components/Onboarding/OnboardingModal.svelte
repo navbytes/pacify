@@ -2,7 +2,17 @@
 import { I18nService } from '@/services/i18n/i18nService'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
-import { Cable, Check, Globe, Keyboard, Route, Settings, Shield, Zap } from '@/utils/icons'
+import {
+  Cable,
+  Check,
+  FileText,
+  Globe,
+  Keyboard,
+  Route,
+  Settings,
+  Shield,
+  Zap,
+} from '@/utils/icons'
 import { colors, transitions } from '@/utils/theme'
 import Button from '../Button.svelte'
 import Text from '../Text.svelte'
@@ -56,6 +66,13 @@ const steps = [
         titleFallback: 'PAC Script Support',
         descKey: 'onboardingFeaturePACDesc',
         descFallback: 'Use custom PAC scripts for advanced proxy configuration.',
+      },
+      {
+        icon: FileText,
+        titleKey: 'onboardingFeatureImport',
+        titleFallback: 'Import from SwitchyOmega',
+        descKey: 'onboardingFeatureImportDesc',
+        descFallback: 'Easily migrate your proxy profiles from SwitchyOmega backups.',
       },
     ],
   },

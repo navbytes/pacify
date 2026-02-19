@@ -16,6 +16,7 @@ import {
   BookOpen,
   Bug,
   CircleQuestionMark,
+  Coffee,
   Database,
   Eye,
   Github,
@@ -23,6 +24,7 @@ import {
   HelpCircle,
   Lightbulb,
   Lock,
+  Mail,
   MessageSquare,
   RefreshCw,
   Shield,
@@ -330,7 +332,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       title={I18nService.getMessage('feedbackAndRating') || 'Feedback & Rating'}
       iconColor="pink"
     />
-    <div class="grid-responsive-3">
+    <div class="grid-responsive-4">
       <!-- Rate Extension Card -->
       <LinkCard
         href="https://chromewebstore.google.com/detail/pacify-the-proxy-manager/kgepmkaldicdcljckhamnhkigddnbcbd/reviews"
@@ -345,12 +347,19 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         label={I18nService.getMessage('leaveReview') || 'Leave a Review'}
         color="blue"
       />
-      <!-- Support Project Card -->
+      <!-- GitHub Sponsors Card -->
       <LinkCard
         href="https://github.com/sponsors/navbytes"
         icon={Heart}
         label={I18nService.getMessage('supportProject') || 'Support Project'}
         color="pink"
+      />
+      <!-- Buy Me a Coffee Card -->
+      <LinkCard
+        href="https://buymeacoffee.com/navbytes"
+        icon={Coffee}
+        label={I18nService.getMessage('buyMeACoffee') || 'Buy Me a Coffee'}
+        color="orange"
       />
     </div>
   </div>
@@ -392,6 +401,12 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         icon={Lock}
         label={I18nService.getMessage('privacyPolicy') || 'Privacy Policy'}
         color="purple"
+      />
+      <LinkCard
+        href="https://github.com/navbytes/pacify/issues/new?labels=newsletter&title=Subscribe+me+to+updates&body=I%27d+like+to+receive+updates+about+PACify.+My+email%3A+"
+        icon={Mail}
+        label={I18nService.getMessage('newsletterSignup') || 'Stay Updated'}
+        color="orange"
       />
     </div>
   </div>
