@@ -8,6 +8,8 @@ export interface AppSettings {
   proxyConfigs: ProxyConfig[]
   disableProxyOnStartup: boolean
   autoReloadOnProxySwitch: boolean
+  webRTCProtection: boolean
+  temporaryBypasses: string[]
 }
 
 export interface Settings {

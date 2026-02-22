@@ -8,6 +8,8 @@ export const DEFAULT_SETTINGS: AppSettings = {
   proxyConfigs: [],
   disableProxyOnStartup: false,
   autoReloadOnProxySwitch: true,
+  webRTCProtection: false,
+  temporaryBypasses: [],
 }
 
 // Constants for default values

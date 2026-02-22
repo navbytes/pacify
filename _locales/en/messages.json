@@ -1247,5 +1247,56 @@
   },
   "onboardingFeatureImportDesc": {
     "message": "Easily migrate your proxy profiles from SwitchyOmega backups."
+  },
+  "webRTCProtection": {
+    "message": "Prevent WebRTC IP Leak"
+  },
+  "webRTCProtectionDescription": {
+    "message": "Blocks WebRTC from revealing your real IP address while a proxy is active"
+  },
+  "webRTCProtectionTooltip": {
+    "message": "Prevents your real IP from leaking through WebRTC when using a proxy"
+  },
+  "webRTCProtectionEnabled": {
+    "message": "WebRTC leak protection enabled"
+  },
+  "webRTCProtectionDisabled": {
+    "message": "WebRTC leak protection disabled"
+  },
+  "customizeShortcuts": {
+    "message": "Customize Shortcuts"
+  },
+  "shortcutQuickSwitch": {
+    "message": "Alt+Shift+P: Quick switch to next proxy"
+  },
+  "shortcutDisableProxy": {
+    "message": "Alt+Shift+O: Disable proxy (direct connection)"
+  },
+  "shortcutOmnibox": {
+    "message": "Type \"px\" in the address bar to search and switch proxies"
+  },
+  "exportAsPAC": {
+    "message": "Export as PAC"
+  },
+  "exportPACSuccess": {
+    "message": "Exported proxy configuration as PAC file"
+  },
+  "exportPACFailed": {
+    "message": "Failed to export PAC file"
+  },
+  "bypassCurrentSite": {
+    "message": "Bypass proxy for this site"
+  },
+  "siteAlreadyBypassed": {
+    "message": "This site is already bypassed"
+  },
+  "siteBypassAdded": {
+    "message": "Proxy bypassed for this site"
+  },
+  "bypassNotSupported": {
+    "message": "Bypass is only available for manual proxy mode"
+  },
+  "bypassFailed": {
+    "message": "Failed to bypass proxy for this site"
   }
 }

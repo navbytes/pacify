@@ -8,7 +8,8 @@ import Tooltip from '@/components/Tooltip.svelte'
 import { ChromeService } from '@/services/chrome'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
-import { Cable, Plus, Power, Settings } from '@/utils/icons'
+import { toastStore } from '@/stores/toastStore'
+import { Cable, Plus, Power, Settings, ShieldOff } from '@/utils/icons'
 
 let settings = $derived($settingsStore)
 let activeProxy = $derived(settings.proxyConfigs?.find((p) => p.isActive) || null)
@@ -30,6 +31,55 @@ function quickAddProxy() {
 async function disableAllProxies() {
   if (activeProxy?.id) {
     await settingsStore.setProxy(activeProxy.id, false)
+  }
+}
+
+// 1.7: Bypass proxy for current site
+async function bypassCurrentSite() {
+  if (!activeProxy) return
+
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+    if (!tab?.url) return
+
+    const hostname = new URL(tab.url).hostname
+    if (!hostname) return
+
+    // Add to bypass list for fixed_servers mode
+    if (activeProxy.mode === 'fixed_servers' && activeProxy.rules) {
+      const currentBypass = activeProxy.rules.bypassList || []
+      if (currentBypass.includes(hostname) || currentBypass.includes(`*.${hostname}`)) {
+        toastStore.show(
+          I18nService.getMessage('siteAlreadyBypassed') || `${hostname} is already bypassed`,
+          'info'
+        )
+        return
+      }
+
+      const updatedBypass = [...currentBypass, hostname]
+      await settingsStore.updatePACScript(
+        {
+          ...activeProxy,
+          rules: { ...activeProxy.rules, bypassList: updatedBypass },
+        },
+        activeProxy.id || null
+      )
+      toastStore.show(
+        I18nService.getMessage('siteBypassAdded') || `Bypassing proxy for ${hostname}`,
+        'success'
+      )
+    } else {
+      toastStore.show(
+        I18nService.getMessage('bypassNotSupported') ||
+          'Bypass is only available for manual proxy mode',
+        'warning'
+      )
+    }
+  } catch {
+    toastStore.show(
+      I18nService.getMessage('bypassFailed') || 'Failed to bypass proxy for this site',
+      'error'
+    )
   }
 }
 </script>
@@ -101,9 +151,24 @@ async function disableAllProxies() {
         </div>
 
         <!-- Always reserve space for the button to prevent layout shift -->
-        <div class="shrink-0">
+        <div class="shrink-0 flex items-center gap-1.5">
           {#if activeProxy}
-            <Button size="sm" color="secondary" onclick={disableAllProxies} data-testid="disable-proxy-btn">
+            <Tooltip
+              text={I18nService.getMessage('bypassCurrentSite') || 'Bypass proxy for this site'}
+              position="top"
+            >
+              <Button size="sm" color="secondary" minimal onclick={bypassCurrentSite}>
+                {#snippet icon()}
+                  <ShieldOff size={14} />
+                {/snippet}
+              </Button>
+            </Tooltip>
+            <Button
+              size="sm"
+              color="secondary"
+              onclick={disableAllProxies}
+              data-testid="disable-proxy-btn"
+            >
               {#snippet icon()}
                 <Power size={14} />
               {/snippet}

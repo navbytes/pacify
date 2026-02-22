@@ -1,5 +1,23 @@
 # PACify Enhancement Implementation Plan
 
+## Implementation Status
+
+| # | Feature | Status | Notes |
+|---|---------|--------|-------|
+| 1.1 | Keyboard Shortcut for Quick Switch | **DONE** | `Alt+Shift+P` (quick switch), `Alt+Shift+O` (disable) via `chrome.commands` |
+| 1.2 | WebRTC Leak Protection | **DONE** | `chrome.privacy.network.webRTCIPHandlingPolicy` toggle in Settings |
+| 1.3 | Export to PAC File | **DONE** | "Export as PAC" button on each proxy card (fixed_servers, pac_script, auto-proxy) |
+| 1.4 | Chrome Omnibox Integration | **DONE** | Type `px` in address bar to search/switch proxies, `px off` to disable |
+| 1.5 | Notification Actions | **DONE** | Undo/Settings buttons, previous proxy tracking for undo |
+| 1.6 | Badge Customization | DEFERRED | Needs precomputed icon assets; existing badge works well |
+| 1.7 | Bypass Proxy for Current Site | **DONE** | Shield-off button in popup footer, adds hostname to bypass list |
+| 2.1–2.7 | Phase 2 Core Features | PLANNED | |
+| 3.1 | Import from Other Extensions | **DONE** | SwitchyOmega importer (FixedProfile, PacProfile, SwitchProfile) with 14 tests |
+| 3.2–3.5 | Phase 3 remaining | PLANNED | |
+| 4.1–4.3 | Phase 4 Power User | PLANNED | |
+| — | Buy Me a Coffee | **DONE** | Added alongside GitHub Sponsors in Settings |
+| — | Newsletter/Stay Updated | **DONE** | Link card in Help & Resources + onboarding mention |
+
 ## Table of Contents
 
 - [Executive Summary](#executive-summary)

@@ -20,8 +20,10 @@ import {
   Database,
   Eye,
   Github,
+  Globe,
   Heart,
   HelpCircle,
+  Keyboard,
   Lightbulb,
   Lock,
   Mail,
@@ -45,6 +47,7 @@ const blueCard = settingsCardVariants({ color: 'blue', size: 'md' })
 const greenCard = settingsCardVariants({ color: 'green', size: 'md' })
 const purpleCard = settingsCardVariants({ color: 'purple', size: 'md' })
 const amberCard = settingsCardVariants({ color: 'amber', size: 'md' })
+const emeraldCard = settingsCardVariants({ color: 'emerald', size: 'md' })
 
 // Load notification preference on mount
 $effect(() => {
@@ -90,6 +93,22 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     checked
       ? I18nService.getMessage('showQuickSettingsEnabled')
       : I18nService.getMessage('showQuickSettingsDisabled'),
+    'success'
+  )
+}
+
+async function handleWebRTCProtectionToggle(checked: boolean) {
+  await settingsStore.updateSettings({ webRTCProtection: checked })
+  // Also apply immediately via background message
+  try {
+    await chrome.runtime.sendMessage({ type: 'WEBRTC_TOGGLE', enabled: checked })
+  } catch {
+    // Background will pick it up on next init
+  }
+  toastStore.show(
+    checked
+      ? I18nService.getMessage('webRTCProtectionEnabled') || 'WebRTC leak protection enabled'
+      : I18nService.getMessage('webRTCProtectionDisabled') || 'WebRTC leak protection disabled',
     'success'
   )
 }
@@ -304,6 +323,80 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
           </FlexGroup>
         </div>
       </div>
+      <!-- WebRTC Leak Protection Card -->
+      <div class="group {emeraldCard.wrapper()}">
+        <div class={emeraldCard.background()}></div>
+        <div></div>
+        <div class={emeraldCard.accent()}></div>
+
+        <div class="relative p-5">
+          <FlexGroup
+            direction="horizontal"
+            childrenGap="lg"
+            alignItems="center"
+            justifyContent="between"
+          >
+            <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
+              <div class="relative">
+                <div></div>
+                <div class={emeraldCard.icon()}>
+                  <Globe size={22} class="text-white" />
+                </div>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <label class="settings-label" for="webrtcProtectionToggle">
+                    {I18nService.getMessage('webRTCProtection') || 'Prevent WebRTC IP Leak'}
+                  </label>
+                  <Tooltip
+                    text={I18nService.getMessage('webRTCProtectionTooltip') || 'Prevents your real IP from leaking through WebRTC when using a proxy'}
+                    position="top"
+                  >
+                    <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+                  </Tooltip>
+                </div>
+                <Text as="p" size="sm" color="muted" classes="mt-1">
+                  {I18nService.getMessage('webRTCProtectionDescription') || 'Blocks WebRTC from revealing your real IP address while a proxy is active'}
+                </Text>
+              </div>
+            </FlexGroup>
+            <ToggleSwitch
+              id="webrtcProtectionToggle"
+              checked={settings.webRTCProtection}
+              onchange={handleWebRTCProtectionToggle}
+              aria-label="Toggle WebRTC leak protection"
+            />
+          </FlexGroup>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Section -->
+  <div>
+    <SectionHeader
+      icon={Keyboard}
+      title={I18nService.getMessage('keyboardShortcuts') || 'Keyboard Shortcuts'}
+      iconColor="purple"
+    />
+    <div class="grid-responsive-3">
+      <LinkCard
+        href="chrome://extensions/shortcuts"
+        icon={Keyboard}
+        label={I18nService.getMessage('customizeShortcuts') || 'Customize Shortcuts'}
+        color="blue"
+      />
+    </div>
+    <div class="mt-3 px-1">
+      <Text as="p" size="sm" color="muted">
+        {I18nService.getMessage('shortcutQuickSwitch') || 'Alt+Shift+P: Quick switch to next proxy'}
+      </Text>
+      <Text as="p" size="sm" color="muted" classes="mt-1">
+        {I18nService.getMessage('shortcutDisableProxy') || 'Alt+Shift+O: Disable proxy (direct connection)'}
+      </Text>
+      <Text as="p" size="sm" color="muted" classes="mt-1">
+        {I18nService.getMessage('shortcutOmnibox') || 'Type "px" in the address bar to search and switch proxies'}
+      </Text>
     </div>
   </div>
 
