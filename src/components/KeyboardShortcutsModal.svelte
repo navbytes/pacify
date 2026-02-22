@@ -1,10 +1,17 @@
 <script lang="ts">
+import { onMount } from 'svelte'
+import { fade } from 'svelte/transition'
 import { I18nService } from '@/services/i18n/i18nService'
-import { flexPatterns, modalVariants } from '@/utils/classPatterns'
+import {
+  flexPatterns,
+  modalBackdropVariants,
+  modalGlassmorphismVariants,
+} from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Keyboard, X } from '@/utils/icons'
-import { colors } from '@/utils/theme'
+import AnimatedIconBadge from './AnimatedIconBadge.svelte'
 import Button from './Button.svelte'
+import ModalDecorations from './ModalDecorations.svelte'
 import Text from './Text.svelte'
 
 interface Props {
@@ -130,16 +137,56 @@ function getMessage(key: string, fallback: string): string {
   return I18nService.getMessage(key) || fallback
 }
 
-function handleBackdropClick(e: MouseEvent) {
-  if (e.target === e.currentTarget) {
-    onClose()
+// Animation state
+let isVisible = $state(false)
+let modalRef = $state<HTMLDivElement>()
+let previouslyFocusedElement: HTMLElement | null = null
+
+onMount(() => {
+  // Store the previously focused element
+  previouslyFocusedElement = document.activeElement as HTMLElement
+
+  // Lock body scroll
+  document.body.classList.add('modal-open')
+
+  // Trigger entrance animation
+  requestAnimationFrame(() => {
+    isVisible = true
+  })
+
+  return () => {
+    // Unlock body scroll
+    document.body.classList.remove('modal-open')
+    // Return focus when modal closes
+    previouslyFocusedElement?.focus()
   }
+})
+
+function handleClose() {
+  isVisible = false
+  setTimeout(onClose, 200)
 }
 
-function handleKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape') {
-    e.preventDefault()
-    onClose()
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') {
+    handleClose()
+  }
+
+  // Trap focus within modal
+  if (event.key === 'Tab' && modalRef) {
+    const focusableElements = modalRef.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements[0] as HTMLElement
+    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault()
+      lastElement?.focus()
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault()
+      firstElement?.focus()
+    }
   }
 }
 
@@ -153,121 +200,142 @@ function formatKey(key: string): string {
 }
 </script>
 
+<svelte:window on:keydown={handleKeydown} />
+
 {#if open}
   <div
-    class={cn(modalVariants.overlay(), flexPatterns.center)}
-    onclick={handleBackdropClick}
-    onkeydown={handleKeydown}
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="shortcuts-title"
-    tabindex="-1"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4"
+    role="presentation"
+    transition:fade={{ duration: 200 }}
   >
-    <div class={cn(modalVariants.content({ size: 'lg' }), 'mx-4 animate-scale-in')}>
-      <!-- Header -->
-      <div class={cn(modalVariants.header(), 'items-start justify-between')}>
-        <div class={cn(flexPatterns.start, 'gap-3')}>
-          <div
-            class={cn(
-              'shrink-0 w-10 h-10 rounded-full flex items-center justify-center',
-              'bg-blue-100 dark:bg-blue-900/30'
-            )}
-          >
-            <Keyboard size={20} class="text-blue-600 dark:text-blue-400" />
+    <!-- Backdrop with blur and gradient -->
+    <div
+      class="absolute inset-0 transition-all duration-300"
+      class:opacity-100={isVisible}
+      class:opacity-0={!isVisible}
+      onclick={handleClose}
+      onkeydown={(e) => e.key === 'Escape' && handleClose()}
+      role="button"
+      tabindex="-1"
+      aria-label="Close modal"
+    >
+      <div class={modalBackdropVariants()}></div>
+    </div>
+
+    <!-- Modal Content -->
+    <div
+      bind:this={modalRef}
+      class="relative w-full max-w-2xl max-h-[90vh] overflow-hidden transition-all duration-300"
+      class:scale-100={isVisible}
+      class:opacity-100={isVisible}
+      class:scale-95={!isVisible}
+      class:opacity-0={!isVisible}
+      role="dialog"
+      aria-labelledby="shortcuts-title"
+      aria-modal="true"
+    >
+      <!-- Glassmorphism container -->
+      <div class={modalGlassmorphismVariants()}>
+        <!-- Modal decorations -->
+        <ModalDecorations
+          accentGradient="tealBlue"
+          decorations={[
+          { position: 'topRight', color: 'tealCyan' },
+          { position: 'bottomLeft', color: 'bluePurple' },
+        ]}
+        />
+
+        <!-- Header -->
+        <div class="relative px-6 py-5 border-b border-slate-200/50 dark:border-slate-700/50">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <AnimatedIconBadge icon={Keyboard} />
+              <div>
+                <h2
+                  id="shortcuts-title"
+                  class="text-xl font-bold text-slate-800 dark:text-slate-100"
+                >
+                  {getMessage('keyboardShortcuts', 'Keyboard Shortcuts')}
+                </h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                  {getMessage('keyboardShortcutsDescription', 'Use these shortcuts to work faster')}
+                </p>
+              </div>
+            </div>
+
+            <Button
+              onclick={handleClose}
+              color="ghost"
+              variant="minimal"
+              aria-label={getMessage('close', 'Close')}
+              classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+            >
+              {#snippet icon()}
+                <X size={20} />
+              {/snippet}
+            </Button>
           </div>
-          <div>
-            <h2 id="shortcuts-title" class={cn('text-lg font-semibold', colors.text.default)}>
-              {getMessage('keyboardShortcuts', 'Keyboard Shortcuts')}
-            </h2>
+        </div>
+
+        <!-- Body -->
+        <div class="px-6 py-5 overflow-y-auto max-h-[calc(90vh-200px)]">
+          <div class="grid gap-6 md:grid-cols-2">
+            {#each shortcutGroups as group}
+              <div>
+                <Text
+                  as="h3"
+                  weight="semibold"
+                  size="sm"
+                  classes="mb-3 uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                >
+                  {getMessage(group.titleKey, group.titleFallback)}
+                </Text>
+                <div class="space-y-2">
+                  {#each group.shortcuts as shortcut}
+                    <div class={cn(flexPatterns.between, 'gap-4 py-2')}>
+                      <Text as="span" color="muted" size="sm">
+                        {getMessage(shortcut.descriptionKey, shortcut.descriptionFallback)}
+                      </Text>
+                      <div class={cn(flexPatterns.centerVertical, 'gap-1 shrink-0')}>
+                        {#each shortcut.keys as key, i}
+                          {#if i > 0}
+                            <span class="text-slate-400 text-xs">+</span>
+                          {/if}
+                          <kbd
+                            class={cn(
+                              'px-2 py-1 text-xs font-mono font-semibold rounded',
+                              'bg-slate-100 dark:bg-slate-700',
+                              'border border-slate-300 dark:border-slate-600',
+                              'text-slate-700 dark:text-slate-300',
+                              'shadow-sm'
+                            )}
+                          >
+                            {formatKey(key)}
+                          </kbd>
+                        {/each}
+                      </div>
+                    </div>
+                  {/each}
+                </div>
+              </div>
+            {/each}
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div
+          class="relative px-6 py-4 border-t border-slate-200/50 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50"
+        >
+          <div class="flex flex-col items-center gap-1">
             <Text as="p" color="muted" size="sm">
-              {getMessage('keyboardShortcutsDescription', 'Use these shortcuts to work faster')}
+              {getMessage('shortcutsTip', 'Press ? anywhere to show this help')}
+            </Text>
+            <Text as="p" color="muted" size="xs">
+              {getMessage('customizeShortcutsHint', 'Browser-wide shortcuts can be customized at chrome://extensions/shortcuts')}
             </Text>
           </div>
         </div>
-        <Button
-          onclick={onClose}
-          color="ghost"
-          variant="minimal"
-          aria-label={getMessage('close', 'Close')}
-          classes="p-2 min-w-[40px] min-h-[40px]"
-        >
-          {#snippet icon()}
-            <X size={20} />
-          {/snippet}
-        </Button>
-      </div>
-
-      <!-- Body -->
-      <div class={cn(modalVariants.body(), 'max-h-[60vh] overflow-y-auto')}>
-        <div class="grid gap-6 md:grid-cols-2">
-          {#each shortcutGroups as group}
-            <div>
-              <Text
-                as="h3"
-                weight="semibold"
-                size="sm"
-                classes="mb-3 uppercase tracking-wider text-slate-500 dark:text-slate-400"
-              >
-                {getMessage(group.titleKey, group.titleFallback)}
-              </Text>
-              <div class="space-y-2">
-                {#each group.shortcuts as shortcut}
-                  <div class={cn(flexPatterns.between, 'gap-4 py-2')}>
-                    <Text as="span" color="muted" size="sm">
-                      {getMessage(shortcut.descriptionKey, shortcut.descriptionFallback)}
-                    </Text>
-                    <div class={cn(flexPatterns.centerVertical, 'gap-1 shrink-0')}>
-                      {#each shortcut.keys as key, i}
-                        {#if i > 0}
-                          <span class="text-slate-400 text-xs">+</span>
-                        {/if}
-                        <kbd
-                          class={cn(
-                            'px-2 py-1 text-xs font-mono font-semibold rounded',
-                            'bg-slate-100 dark:bg-slate-700',
-                            'border border-slate-300 dark:border-slate-600',
-                            'text-slate-700 dark:text-slate-300',
-                            'shadow-sm'
-                          )}
-                        >
-                          {formatKey(key)}
-                        </kbd>
-                      {/each}
-                    </div>
-                  </div>
-                {/each}
-              </div>
-            </div>
-          {/each}
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class={cn(modalVariants.footer(), 'flex-col items-center gap-1')}>
-        <Text as="p" color="muted" size="sm">
-          {getMessage('shortcutsTip', 'Press ? anywhere to show this help')}
-        </Text>
-        <Text as="p" color="muted" size="xs">
-          {getMessage('customizeShortcutsHint', 'Browser-wide shortcuts can be customized at chrome://extensions/shortcuts')}
-        </Text>
       </div>
     </div>
   </div>
 {/if}
-
-<style>
-@keyframes scale-in {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.animate-scale-in {
-  animation: scale-in 0.2s ease-out;
-}
-</style>
