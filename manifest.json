@@ -27,17 +27,11 @@
   },
   "commands": {
     "quick-switch": {
-      "suggested_key": {
-        "default": "Alt+Shift+P",
-        "mac": "MacCtrl+Shift+P"
-      },
+      "suggested_key": { "default": "Alt+Shift+P" },
       "description": "Quick switch to next proxy"
     },
     "disable-proxy": {
-      "suggested_key": {
-        "default": "Alt+Shift+O",
-        "mac": "MacCtrl+Shift+O"
-      },
+      "suggested_key": { "default": "Alt+Shift+O" },
       "description": "Disable proxy (direct connection)"
     }
   },

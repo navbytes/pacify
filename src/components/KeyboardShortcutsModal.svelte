@@ -38,22 +38,18 @@ const isMac =
     navigator.platform?.includes('Mac') ||
     /Macintosh/.test(navigator.userAgent))
 
-// Mac uses MacCtrl (physical Control key) for browser-wide shortcuts
-// Windows/Linux use Alt
-const browserShortcutModifier = isMac ? 'MacCtrl' : 'Alt'
-
 const shortcutGroups: ShortcutGroup[] = [
   {
     titleKey: 'shortcutsGroupBrowser',
     titleFallback: 'Browser-Wide',
     shortcuts: [
       {
-        keys: [browserShortcutModifier, 'Shift', 'P'],
+        keys: ['Alt', 'Shift', 'P'],
         descriptionKey: 'shortcutQuickSwitch',
         descriptionFallback: 'Quick switch to next proxy',
       },
       {
-        keys: [browserShortcutModifier, 'Shift', 'O'],
+        keys: ['Alt', 'Shift', 'O'],
         descriptionKey: 'shortcutDisableProxy',
         descriptionFallback: 'Disable proxy (direct connection)',
       },
@@ -203,7 +199,6 @@ function handleKeydown(event: KeyboardEvent) {
 
 function formatKey(key: string): string {
   if (key === 'Ctrl') return isMac ? '\u2318' : 'Ctrl'
-  if (key === 'MacCtrl') return '\u2303'
   if (key === 'Alt') return isMac ? '\u2325' : 'Alt'
   if (key === 'Shift') return '\u21E7'
   if (key === 'Delete') return isMac ? '\u232B' : 'Delete'

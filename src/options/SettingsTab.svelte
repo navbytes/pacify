@@ -55,7 +55,7 @@ const isMac =
   ((navigator as any).userAgentData?.platform === 'macOS' ||
     navigator.platform?.includes('Mac') ||
     /Macintosh/.test(navigator.userAgent))
-const shortcutModifierDisplay = isMac ? '\u2303' : 'Alt'
+const shortcutModifierDisplay = isMac ? '\u2325' : 'Alt'
 
 // Load notification preference on mount
 $effect(() => {
