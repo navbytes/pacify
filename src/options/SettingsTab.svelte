@@ -49,6 +49,10 @@ const purpleCard = settingsCardVariants({ color: 'purple', size: 'md' })
 const amberCard = settingsCardVariants({ color: 'amber', size: 'md' })
 const emeraldCard = settingsCardVariants({ color: 'emerald', size: 'md' })
 
+// Platform-aware shortcut modifier display
+const isMac = typeof navigator !== 'undefined' && navigator.platform.includes('Mac')
+const shortcutModifierDisplay = isMac ? '\u2303' : 'Alt'
+
 // Load notification preference on mount
 $effect(() => {
   StorageService.getPreferences().then((prefs) => {
@@ -389,10 +393,12 @@ async function handleWebRTCProtectionToggle(checked: boolean) {
     </div>
     <div class="mt-3 px-1">
       <Text as="p" size="sm" color="muted">
-        {I18nService.getMessage('shortcutQuickSwitch') || 'Alt+Shift+P: Quick switch to next proxy'}
+        {shortcutModifierDisplay}+{isMac ? '\u21E7' : 'Shift'}+P:
+        {I18nService.getMessage('shortcutQuickSwitch') || 'Quick switch to next proxy'}
       </Text>
       <Text as="p" size="sm" color="muted" classes="mt-1">
-        {I18nService.getMessage('shortcutDisableProxy') || 'Alt+Shift+O: Disable proxy (direct connection)'}
+        {shortcutModifierDisplay}+{isMac ? '\u21E7' : 'Shift'}+O:
+        {I18nService.getMessage('shortcutDisableProxy') || 'Disable proxy (direct connection)'}
       </Text>
       <Text as="p" size="sm" color="muted" classes="mt-1">
         {I18nService.getMessage('shortcutOmnibox') || 'Type "px" in the address bar to search and switch proxies'}

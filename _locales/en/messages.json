@@ -1273,10 +1273,10 @@
     "message": "Customize Shortcuts"
   },
   "shortcutQuickSwitch": {
-    "message": "Alt+Shift+P: Quick switch to next proxy"
+    "message": "Quick switch to next proxy"
   },
   "shortcutDisableProxy": {
-    "message": "Alt+Shift+O: Disable proxy (direct connection)"
+    "message": "Disable proxy (direct connection)"
   },
   "shortcutOmnibox": {
     "message": "Type \"px\" in the address bar to search and switch proxies"
