@@ -50,7 +50,11 @@ const amberCard = settingsCardVariants({ color: 'amber', size: 'md' })
 const emeraldCard = settingsCardVariants({ color: 'emerald', size: 'md' })
 
 // Platform-aware shortcut modifier display
-const isMac = typeof navigator !== 'undefined' && navigator.platform.includes('Mac')
+const isMac =
+  typeof navigator !== 'undefined' &&
+  ((navigator as any).userAgentData?.platform === 'macOS' ||
+    navigator.platform?.includes('Mac') ||
+    /Macintosh/.test(navigator.userAgent))
 const shortcutModifierDisplay = isMac ? '\u2303' : 'Alt'
 
 // Load notification preference on mount

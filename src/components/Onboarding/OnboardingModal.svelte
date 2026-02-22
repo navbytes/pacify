@@ -165,6 +165,21 @@ function handleKeydown(e: KeyboardEvent) {
   }
 }
 
+// Platform detection for shortcut display
+const isMac =
+  typeof navigator !== 'undefined' &&
+  ((navigator as any).userAgentData?.platform === 'macOS' ||
+    navigator.platform?.includes('Mac') ||
+    /Macintosh/.test(navigator.userAgent))
+
+function formatShortcut(shortcut: string): string {
+  if (!isMac) return shortcut
+  return shortcut
+    .replace(/Ctrl\+/g, '\u2318')
+    .replace(/Alt\+/g, '\u2325')
+    .replace(/Shift\+/g, '\u21E7')
+}
+
 const step = $derived(steps[currentStep])
 const StepIcon = $derived(step.icon)
 const isLastStep = $derived(currentStep === steps.length - 1)
@@ -268,7 +283,7 @@ const isFirstStep = $derived(currentStep === 0)
                       colors.text.default
                     )}
                   >
-                    {feature.shortcut}
+                    {formatShortcut(feature.shortcut)}
                   </div>
                 {/if}
                 <div>

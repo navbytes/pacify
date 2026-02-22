@@ -32,7 +32,11 @@ interface ShortcutGroup {
 }
 
 // Use Cmd on Mac, Ctrl on other platforms
-const isMac = typeof navigator !== 'undefined' && navigator.platform.includes('Mac')
+const isMac =
+  typeof navigator !== 'undefined' &&
+  ((navigator as any).userAgentData?.platform === 'macOS' ||
+    navigator.platform?.includes('Mac') ||
+    /Macintosh/.test(navigator.userAgent))
 
 // Mac uses MacCtrl (physical Control key) for browser-wide shortcuts
 // Windows/Linux use Alt
