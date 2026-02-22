@@ -26,6 +26,27 @@ interface ShortcutGroup {
 
 const shortcutGroups: ShortcutGroup[] = [
   {
+    titleKey: 'shortcutsGroupBrowser',
+    titleFallback: 'Browser-Wide',
+    shortcuts: [
+      {
+        keys: ['Alt', 'Shift', 'P'],
+        descriptionKey: 'shortcutQuickSwitch',
+        descriptionFallback: 'Quick switch to next proxy',
+      },
+      {
+        keys: ['Alt', 'Shift', 'O'],
+        descriptionKey: 'shortcutDisableProxy',
+        descriptionFallback: 'Disable proxy (direct connection)',
+      },
+      {
+        keys: ['px'],
+        descriptionKey: 'shortcutOmnibox',
+        descriptionFallback: 'Type "px" in address bar to search proxies',
+      },
+    ],
+  },
+  {
     titleKey: 'shortcutsGroupGeneral',
     titleFallback: 'General',
     shortcuts: [
@@ -178,7 +199,7 @@ function formatKey(key: string): string {
 
       <!-- Body -->
       <div class={cn(modalVariants.body(), 'max-h-[60vh] overflow-y-auto')}>
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-2">
           {#each shortcutGroups as group}
             <div>
               <Text
@@ -222,9 +243,12 @@ function formatKey(key: string): string {
       </div>
 
       <!-- Footer -->
-      <div class={cn(modalVariants.footer(), 'justify-center')}>
+      <div class={cn(modalVariants.footer(), 'flex-col items-center gap-1')}>
         <Text as="p" color="muted" size="sm">
           {getMessage('shortcutsTip', 'Press ? anywhere to show this help')}
+        </Text>
+        <Text as="p" color="muted" size="xs">
+          {getMessage('customizeShortcutsHint', 'Browser-wide shortcuts can be customized at chrome://extensions/shortcuts')}
         </Text>
       </div>
     </div>

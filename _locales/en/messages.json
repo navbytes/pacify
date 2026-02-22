@@ -1128,6 +1128,9 @@
   "keyboardShortcutsDescription": {
     "message": "Use these shortcuts to work faster"
   },
+  "shortcutsGroupBrowser": {
+    "message": "Browser-Wide"
+  },
   "shortcutsGroupGeneral": {
     "message": "General"
   },
@@ -1175,6 +1178,9 @@
   },
   "shortcutsTip": {
     "message": "Press ? anywhere to show this help"
+  },
+  "customizeShortcutsHint": {
+    "message": "Browser-wide shortcuts can be customized at chrome://extensions/shortcuts"
   },
   "privacyPolicy": {
     "message": "Privacy Policy"
