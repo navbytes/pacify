@@ -16,13 +16,17 @@ import {
   BookOpen,
   Bug,
   CircleQuestionMark,
+  Coffee,
   Database,
   Eye,
   Github,
+  Globe,
   Heart,
   HelpCircle,
+  Keyboard,
   Lightbulb,
   Lock,
+  Mail,
   MessageSquare,
   RefreshCw,
   Shield,
@@ -43,6 +47,15 @@ const blueCard = settingsCardVariants({ color: 'blue', size: 'md' })
 const greenCard = settingsCardVariants({ color: 'green', size: 'md' })
 const purpleCard = settingsCardVariants({ color: 'purple', size: 'md' })
 const amberCard = settingsCardVariants({ color: 'amber', size: 'md' })
+const emeraldCard = settingsCardVariants({ color: 'emerald', size: 'md' })
+
+// Platform-aware shortcut modifier display
+const isMac =
+  typeof navigator !== 'undefined' &&
+  ((navigator as any).userAgentData?.platform === 'macOS' ||
+    navigator.platform?.includes('Mac') ||
+    /Macintosh/.test(navigator.userAgent))
+const shortcutModifierDisplay = isMac ? '\u2325' : 'Alt'
 
 // Load notification preference on mount
 $effect(() => {
@@ -88,6 +101,22 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     checked
       ? I18nService.getMessage('showQuickSettingsEnabled')
       : I18nService.getMessage('showQuickSettingsDisabled'),
+    'success'
+  )
+}
+
+async function handleWebRTCProtectionToggle(checked: boolean) {
+  await settingsStore.updateSettings({ webRTCProtection: checked })
+  // Also apply immediately via background message
+  try {
+    await chrome.runtime.sendMessage({ type: 'WEBRTC_TOGGLE', enabled: checked })
+  } catch {
+    // Background will pick it up on next init
+  }
+  toastStore.show(
+    checked
+      ? I18nService.getMessage('webRTCProtectionEnabled') || 'WebRTC leak protection enabled'
+      : I18nService.getMessage('webRTCProtectionDisabled') || 'WebRTC leak protection disabled',
     'success'
   )
 }
@@ -302,6 +331,82 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
           </FlexGroup>
         </div>
       </div>
+      <!-- WebRTC Leak Protection Card -->
+      <div class="group {emeraldCard.wrapper()}">
+        <div class={emeraldCard.background()}></div>
+        <div></div>
+        <div class={emeraldCard.accent()}></div>
+
+        <div class="relative p-5">
+          <FlexGroup
+            direction="horizontal"
+            childrenGap="lg"
+            alignItems="center"
+            justifyContent="between"
+          >
+            <FlexGroup alignItems="start" childrenGap="sm" classes="flex-1">
+              <div class="relative">
+                <div></div>
+                <div class={emeraldCard.icon()}>
+                  <Globe size={22} class="text-white" />
+                </div>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <label class="settings-label" for="webrtcProtectionToggle">
+                    {I18nService.getMessage('webRTCProtection') || 'Prevent WebRTC IP Leak'}
+                  </label>
+                  <Tooltip
+                    text={I18nService.getMessage('webRTCProtectionTooltip') || 'Prevents your real IP from leaking through WebRTC when using a proxy'}
+                    position="top"
+                  >
+                    <CircleQuestionMark size={16} class="text-slate-400 dark:text-slate-500" />
+                  </Tooltip>
+                </div>
+                <Text as="p" size="sm" color="muted" classes="mt-1">
+                  {I18nService.getMessage('webRTCProtectionDescription') || 'Blocks WebRTC from revealing your real IP address while a proxy is active'}
+                </Text>
+              </div>
+            </FlexGroup>
+            <ToggleSwitch
+              id="webrtcProtectionToggle"
+              checked={settings.webRTCProtection}
+              onchange={handleWebRTCProtectionToggle}
+              aria-label="Toggle WebRTC leak protection"
+            />
+          </FlexGroup>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Section -->
+  <div>
+    <SectionHeader
+      icon={Keyboard}
+      title={I18nService.getMessage('keyboardShortcuts') || 'Keyboard Shortcuts'}
+      iconColor="purple"
+    />
+    <div class="grid-responsive-3">
+      <LinkCard
+        href="chrome://extensions/shortcuts"
+        icon={Keyboard}
+        label={I18nService.getMessage('customizeShortcuts') || 'Customize Shortcuts'}
+        color="blue"
+      />
+    </div>
+    <div class="mt-3 px-1">
+      <Text as="p" size="sm" color="muted">
+        {shortcutModifierDisplay}+{isMac ? '\u21E7' : 'Shift'}+P:
+        {I18nService.getMessage('shortcutQuickSwitch') || 'Quick switch to next proxy'}
+      </Text>
+      <Text as="p" size="sm" color="muted" classes="mt-1">
+        {shortcutModifierDisplay}+{isMac ? '\u21E7' : 'Shift'}+O:
+        {I18nService.getMessage('shortcutDisableProxy') || 'Disable proxy (direct connection)'}
+      </Text>
+      <Text as="p" size="sm" color="muted" classes="mt-1">
+        {I18nService.getMessage('shortcutOmnibox') || 'Type "px" in the address bar to search and switch proxies'}
+      </Text>
     </div>
   </div>
 
@@ -330,7 +435,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       title={I18nService.getMessage('feedbackAndRating') || 'Feedback & Rating'}
       iconColor="pink"
     />
-    <div class="grid-responsive-3">
+    <div class="grid-responsive-4">
       <!-- Rate Extension Card -->
       <LinkCard
         href="https://chromewebstore.google.com/detail/pacify-the-proxy-manager/kgepmkaldicdcljckhamnhkigddnbcbd/reviews"
@@ -345,12 +450,19 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         label={I18nService.getMessage('leaveReview') || 'Leave a Review'}
         color="blue"
       />
-      <!-- Support Project Card -->
+      <!-- GitHub Sponsors Card -->
       <LinkCard
         href="https://github.com/sponsors/navbytes"
         icon={Heart}
         label={I18nService.getMessage('supportProject') || 'Support Project'}
         color="pink"
+      />
+      <!-- Buy Me a Coffee Card -->
+      <LinkCard
+        href="https://buymeacoffee.com/navbytes"
+        icon={Coffee}
+        label={I18nService.getMessage('buyMeACoffee') || 'Buy Me a Coffee'}
+        color="orange"
       />
     </div>
   </div>
@@ -392,6 +504,12 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         icon={Lock}
         label={I18nService.getMessage('privacyPolicy') || 'Privacy Policy'}
         color="purple"
+      />
+      <LinkCard
+        href="https://github.com/navbytes/pacify/issues/new?labels=newsletter&title=Subscribe+me+to+updates&body=I%27d+like+to+receive+updates+about+PACify.+My+email%3A+"
+        icon={Mail}
+        label={I18nService.getMessage('newsletterSignup') || 'Stay Updated'}
+        color="orange"
       />
     </div>
   </div>

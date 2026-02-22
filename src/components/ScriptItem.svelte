@@ -2,6 +2,7 @@
 import ToggleSwitch from '@/components/ToggleSwitch.svelte'
 import type { ListViewType, ProxyConfig, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
+import { PACScriptGenerator } from '@/services/PACScriptGenerator'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
 import {
@@ -11,7 +12,7 @@ import {
   scriptItemVariants,
 } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
-import { GripVertical, Lock, Pencil, ShieldCheck, Trash } from '@/utils/icons'
+import { Download, GripVertical, Lock, Pencil, ShieldCheck, Trash } from '@/utils/icons'
 import {
   findAutoProxyReferences,
   getProxyDescription,
@@ -56,8 +57,7 @@ let autoProxyRefs = $derived(
 let hasAuthentication = $derived(() => {
   // Check manual proxy rules
   if (proxy.rules) {
-    const checkProxy = (p: typeof proxy.rules.singleProxy) =>
-      p && (p.username || p.password)
+    const checkProxy = (p: typeof proxy.rules.singleProxy) => p && (p.username || p.password)
 
     if (checkProxy(proxy.rules.singleProxy)) return true
     if (checkProxy(proxy.rules.proxyForHttp)) return true
@@ -69,14 +69,16 @@ let hasAuthentication = $derived(() => {
   // Check Auto-Proxy inline proxies
   if (proxy.autoProxy) {
     // Check rules with inline proxies
-    const hasAuthInRules = proxy.autoProxy.rules.some(rule =>
-      rule.inlineProxy && (rule.inlineProxy.username || rule.inlineProxy.password)
+    const hasAuthInRules = proxy.autoProxy.rules.some(
+      (rule) => rule.inlineProxy && (rule.inlineProxy.username || rule.inlineProxy.password)
     )
     if (hasAuthInRules) return true
 
     // Check fallback inline proxy
-    if (proxy.autoProxy.fallbackInlineProxy &&
-        (proxy.autoProxy.fallbackInlineProxy.username || proxy.autoProxy.fallbackInlineProxy.password)) {
+    if (
+      proxy.autoProxy.fallbackInlineProxy &&
+      (proxy.autoProxy.fallbackInlineProxy.username || proxy.autoProxy.fallbackInlineProxy.password)
+    ) {
       return true
     }
   }
@@ -135,6 +137,35 @@ async function handleScriptDelete() {
   await settingsStore.deletePACScript(proxy.id)
   const message = I18nService.getMessage('proxyDeleted', proxy.name)
   toastStore.show(message, 'success')
+}
+
+// 1.3: Export proxy config as PAC file
+let canExportPAC = $derived(
+  proxy.mode === 'pac_script' || proxy.mode === 'fixed_servers' || !!proxy.autoProxy
+)
+
+function exportAsPAC() {
+  try {
+    const pacContent = PACScriptGenerator.exportAsFile(proxy, settings.proxyConfigs)
+    const blob = new Blob([pacContent], { type: 'application/x-ns-proxy-autoconfig' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${proxy.name.replace(/[^a-zA-Z0-9-_]/g, '_')}.pac`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+    toastStore.show(
+      I18nService.getMessage('exportPACSuccess') || `Exported "${proxy.name}" as PAC file`,
+      'success'
+    )
+  } catch (error) {
+    toastStore.show(
+      I18nService.getMessage('exportPACFailed') || 'Failed to export PAC file',
+      'error'
+    )
+  }
 }
 </script>
 
@@ -344,6 +375,21 @@ async function handleScriptDelete() {
             <span class="text-sm font-medium">Edit</span>
           </Button>
 
+          {#if canExportPAC}
+            <Button
+              color="secondary"
+              minimal
+              onclick={exportAsPAC}
+              aria-label={I18nService.getMessage('exportAsPAC') || `Export ${proxy.name} as PAC file`}
+              classes="hover:bg-emerald-50 dark:hover:bg-emerald-950/20 transition-all hover:scale-105"
+            >
+              {#snippet icon()}
+                <Download size={16} />
+              {/snippet}
+              <span class="text-sm font-medium">PAC</span>
+            </Button>
+          {/if}
+
           <Button
             color="error"
             minimal
@@ -389,6 +435,20 @@ async function handleScriptDelete() {
               {/snippet}
               <span class="text-sm font-medium">Edit</span>
             </Button>
+            {#if canExportPAC}
+              <Button
+                color="secondary"
+                minimal
+                onclick={exportAsPAC}
+                aria-label={I18nService.getMessage('exportAsPAC') || `Export ${proxy.name} as PAC file`}
+                classes="hover:bg-emerald-50 dark:hover:bg-emerald-950/20 transition-all hover:scale-105"
+              >
+                {#snippet icon()}
+                  <Download size={16} />
+                {/snippet}
+                <span class="text-sm font-medium">PAC</span>
+              </Button>
+            {/if}
             <Button
               color="error"
               minimal

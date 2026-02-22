@@ -1128,6 +1128,9 @@
   "keyboardShortcutsDescription": {
     "message": "Use these shortcuts to work faster"
   },
+  "shortcutsGroupBrowser": {
+    "message": "Browser-Wide"
+  },
   "shortcutsGroupGeneral": {
     "message": "General"
   },
@@ -1176,6 +1179,9 @@
   "shortcutsTip": {
     "message": "Press ? anywhere to show this help"
   },
+  "customizeShortcutsHint": {
+    "message": "Browser-wide shortcuts can be customized at chrome://extensions/shortcuts"
+  },
   "privacyPolicy": {
     "message": "Privacy Policy"
   },
@@ -1205,5 +1211,98 @@
   },
   "backToSettings": {
     "message": "Back to Settings"
+  },
+  "importSwitchyOmega": {
+    "message": "Import from SwitchyOmega"
+  },
+  "importSwitchyOmegaDescription": {
+    "message": "Import proxy profiles from a SwitchyOmega .bak or .json backup"
+  },
+  "switchyOmegaImportSuccess": {
+    "message": "Imported $1 proxy configurations from SwitchyOmega",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "switchyOmegaImportFailed": {
+    "message": "Failed to import SwitchyOmega backup"
+  },
+  "invalidSwitchyOmegaFormat": {
+    "message": "Invalid SwitchyOmega backup format. Please check the file."
+  },
+  "importFileTooLarge": {
+    "message": "Import file is too large (max 5MB)."
+  },
+  "noProfilesFound": {
+    "message": "No proxy profiles found in the backup file."
+  },
+  "buyMeACoffee": {
+    "message": "Buy Me a Coffee"
+  },
+  "newsletterSignup": {
+    "message": "Stay Updated"
+  },
+  "newsletterDescription": {
+    "message": "Get notified about new features and updates"
+  },
+  "onboardingFeatureImport": {
+    "message": "Import from SwitchyOmega"
+  },
+  "onboardingFeatureImportDesc": {
+    "message": "Easily migrate your proxy profiles from SwitchyOmega backups."
+  },
+  "webRTCProtection": {
+    "message": "Prevent WebRTC IP Leak"
+  },
+  "webRTCProtectionDescription": {
+    "message": "Blocks WebRTC from revealing your real IP address while a proxy is active"
+  },
+  "webRTCProtectionTooltip": {
+    "message": "Prevents your real IP from leaking through WebRTC when using a proxy"
+  },
+  "webRTCProtectionEnabled": {
+    "message": "WebRTC leak protection enabled"
+  },
+  "webRTCProtectionDisabled": {
+    "message": "WebRTC leak protection disabled"
+  },
+  "customizeShortcuts": {
+    "message": "Customize Shortcuts"
+  },
+  "shortcutQuickSwitch": {
+    "message": "Quick switch to next proxy"
+  },
+  "shortcutDisableProxy": {
+    "message": "Disable proxy (direct connection)"
+  },
+  "shortcutOmnibox": {
+    "message": "Type \"px\" in the address bar to search and switch proxies"
+  },
+  "exportAsPAC": {
+    "message": "Export as PAC"
+  },
+  "exportPACSuccess": {
+    "message": "Exported proxy configuration as PAC file"
+  },
+  "exportPACFailed": {
+    "message": "Failed to export PAC file"
+  },
+  "bypassCurrentSite": {
+    "message": "Bypass proxy for this site"
+  },
+  "siteAlreadyBypassed": {
+    "message": "This site is already bypassed"
+  },
+  "siteBypassAdded": {
+    "message": "Proxy bypassed for this site"
+  },
+  "bypassNotSupported": {
+    "message": "Bypass is only available for manual proxy mode"
+  },
+  "bypassFailed": {
+    "message": "Failed to bypass proxy for this site"
   }
 }

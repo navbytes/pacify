@@ -4,7 +4,7 @@
   "version": "1.29.0",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
-  "permissions": ["proxy", "storage", "tabs", "notifications", "alarms"],
+  "permissions": ["proxy", "storage", "tabs", "notifications", "alarms", "privacy"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "assets/background.js",
@@ -24,5 +24,18 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
+  },
+  "commands": {
+    "quick-switch": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Quick switch to next proxy"
+    },
+    "disable-proxy": {
+      "suggested_key": { "default": "Alt+Shift+O" },
+      "description": "Disable proxy (direct connection)"
+    }
+  },
+  "omnibox": {
+    "keyword": "px"
   }
 }

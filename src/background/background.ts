@@ -145,6 +145,16 @@ async function initialize(): Promise<void> {
       // Listen for alarms (for PAC script auto-refresh)
       chrome.alarms.onAlarm.addListener(handleAlarm)
 
+      // 1.1: Listen for keyboard shortcuts (chrome.commands)
+      chrome.commands.onCommand.addListener(handleCommand)
+
+      // 1.4: Listen for omnibox input (type "px" in address bar)
+      chrome.omnibox.onInputChanged.addListener(handleOmniboxInput)
+      chrome.omnibox.onInputEntered.addListener(handleOmniboxEntered)
+
+      // 1.5: Listen for notification button clicks
+      chrome.notifications.onButtonClicked.addListener(handleNotificationButton)
+
       listenersRegistered = true
       logger.info('Event listeners registered')
     }
@@ -157,6 +167,9 @@ async function initialize(): Promise<void> {
 
     // Set up PAC script auto-refresh alarms
     await setupPacRefreshAlarms()
+
+    // 1.2: Apply WebRTC leak protection if enabled
+    await applyWebRTCProtection()
 
     // Mark as fully initialized
     isInitialized = true
@@ -411,6 +424,12 @@ async function setProxySettings(proxy: ProxyConfig): Promise<void> {
       logger.info('Generated PAC script for Auto-Proxy config:', proxy.name)
     }
 
+    // 1.5: Track previous proxy for undo
+    if (settings) {
+      const currentActive = settings.proxyConfigs.find((s) => s.isActive)
+      previousActiveProxyId = currentActive?.id || null
+    }
+
     await ChromeService.setProxy(proxyToApply, autoReload)
     const { name, color, badgeLabel } = proxy
     await updateBadge(badgeLabel || name, color)
@@ -626,6 +645,157 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
         details: error instanceof Error ? error.stack : String(error),
       }
     )
+  }
+}
+
+// --- 1.1: Keyboard Shortcut Handler ---
+
+async function handleCommand(command: string): Promise<void> {
+  try {
+    switch (command) {
+      case 'quick-switch':
+        await handleActionClick()
+        break
+      case 'disable-proxy':
+        await clearProxySettings()
+        // Also update settings to mark all scripts inactive
+        {
+          const settings = await safeGetSettings()
+          if (settings) {
+            const hasActive = settings.proxyConfigs.some((s) => s.isActive)
+            if (hasActive) {
+              const updated = settings.proxyConfigs.map((s) => ({ ...s, isActive: false }))
+              await SettingsWriter.updateAllScripts(updated)
+            }
+          }
+        }
+        break
+    }
+  } catch (error) {
+    logger.error('Error handling command:', error)
+  }
+}
+
+// --- 1.2: WebRTC Leak Protection ---
+
+async function applyWebRTCProtection(): Promise<void> {
+  try {
+    const settings = await safeGetSettings()
+    if (!settings) return
+
+    const policy = settings.webRTCProtection ? 'disable_non_proxied_udp' : 'default'
+    await chrome.privacy.network.webRTCIPHandlingPolicy.set({ value: policy })
+    logger.info(`WebRTC IP handling policy set to: ${policy}`)
+  } catch (error) {
+    logger.error('Error setting WebRTC protection:', error)
+  }
+}
+
+// --- 1.4: Omnibox Integration ---
+
+async function handleOmniboxInput(
+  text: string,
+  suggest: (suggestions: chrome.omnibox.SuggestResult[]) => void
+): Promise<void> {
+  try {
+    const settings = await safeGetSettings()
+    if (!settings) return
+
+    const query = text.toLowerCase().trim()
+    const suggestions: chrome.omnibox.SuggestResult[] = []
+
+    // Special commands
+    if ('off'.startsWith(query) || 'direct'.startsWith(query)) {
+      suggestions.push({
+        content: 'off',
+        description: 'Disable proxy (direct connection)',
+      })
+    }
+
+    // Match proxy names
+    for (const config of settings.proxyConfigs) {
+      if (config.name.toLowerCase().includes(query)) {
+        suggestions.push({
+          content: config.name,
+          description: `Switch to <match>${config.name}</match> <dim>(${config.mode})</dim>`,
+        })
+      }
+    }
+
+    suggest(suggestions.slice(0, 5))
+  } catch (error) {
+    logger.error('Omnibox input error:', error)
+  }
+}
+
+async function handleOmniboxEntered(text: string): Promise<void> {
+  try {
+    const input = text.trim().toLowerCase()
+
+    if (input === 'off' || input === 'direct') {
+      await clearProxySettings()
+      const settings = await safeGetSettings()
+      if (settings) {
+        const updated = settings.proxyConfigs.map((s) => ({ ...s, isActive: false }))
+        await SettingsWriter.updateAllScripts(updated)
+      }
+      return
+    }
+
+    const settings = await safeGetSettings()
+    if (!settings) return
+
+    // Find matching proxy (case-insensitive)
+    const match = settings.proxyConfigs.find((c) => c.name.toLowerCase() === input)
+
+    if (match) {
+      const updatedScripts = settings.proxyConfigs.map((s) => ({
+        ...s,
+        isActive: s.id === match.id,
+      }))
+      await SettingsWriter.updateAllScripts(updatedScripts)
+      await handleProxyUpdate(match)
+    }
+  } catch (error) {
+    logger.error('Omnibox enter error:', error)
+  }
+}
+
+// --- 1.5: Notification Actions ---
+
+/**
+ * Track the previous proxy state for "undo" notification button
+ */
+let previousActiveProxyId: string | null = null
+
+async function handleNotificationButton(
+  notificationId: string,
+  buttonIndex: number
+): Promise<void> {
+  try {
+    if (buttonIndex === 0 && previousActiveProxyId) {
+      // "Undo" button: restore previous proxy
+      const settings = await safeGetSettings()
+      if (!settings) return
+
+      const previousProxy = settings.proxyConfigs.find((c) => c.id === previousActiveProxyId)
+      if (previousProxy) {
+        const updatedScripts = settings.proxyConfigs.map((s) => ({
+          ...s,
+          isActive: s.id === previousProxy.id,
+        }))
+        await SettingsWriter.updateAllScripts(updatedScripts)
+        await setProxySettings(previousProxy)
+      }
+    } else if (buttonIndex === 1) {
+      // "Settings" button: open options page
+      chrome.runtime.openOptionsPage()
+    }
+
+    // Clear the notification
+    chrome.notifications.clear(notificationId)
+  } catch (error) {
+    logger.error('Error handling notification button:', error)
   }
 }
 

@@ -613,4 +613,83 @@ ${extractedBody}
 
     return true
   }
+
+  /**
+   * Export a ProxyConfig as a downloadable PAC file
+   */
+  static exportAsFile(config: ProxyConfig, allProxies: ProxyConfig[]): string {
+    const header = `// PAC Script exported from PACify\n// Config: ${config.name}\n// Date: ${new Date().toISOString()}\n\n`
+
+    if (config.autoProxy) {
+      return header + PACScriptGenerator.generate(config.autoProxy, allProxies)
+    }
+
+    if (config.pacScript?.data) {
+      return header + config.pacScript.data
+    }
+
+    // For fixed_servers mode, generate a simple PAC script
+    if (config.mode === 'fixed_servers' && config.rules) {
+      return header + PACScriptGenerator.generateFixedServersPAC(config)
+    }
+
+    return `${header}function FindProxyForURL(url, host) {\n  return "DIRECT";\n}\n`
+  }
+
+  /**
+   * Generate a PAC script from a fixed_servers proxy config
+   */
+  private static generateFixedServersPAC(config: ProxyConfig): string {
+    const rules = config.rules
+    if (!rules) return 'function FindProxyForURL(url, host) {\n  return "DIRECT";\n}\n'
+
+    const lines: string[] = []
+    lines.push('function FindProxyForURL(url, host) {')
+
+    // Bypass list
+    if (rules.bypassList?.length) {
+      lines.push('  // Bypass list')
+      for (const bypass of rules.bypassList) {
+        if (bypass === '<local>') {
+          lines.push('  if (isPlainHostName(host)) return "DIRECT";')
+        } else if (bypass.includes('/')) {
+          lines.push(
+            `  if (isInNet(host, "${bypass.split('/')[0]}", "${bypass}")) return "DIRECT";`
+          )
+        } else {
+          lines.push(`  if (shExpMatch(host, "${bypass}")) return "DIRECT";`)
+        }
+      }
+      lines.push('')
+    }
+
+    // Proxy rules
+    if (rules.singleProxy) {
+      lines.push(`  return "${PACScriptGenerator.formatProxyString(rules.singleProxy)}";`)
+    } else {
+      if (rules.proxyForHttp) {
+        lines.push(
+          `  if (url.substring(0, 5) === "http:") return "${PACScriptGenerator.formatProxyString(rules.proxyForHttp)}";`
+        )
+      }
+      if (rules.proxyForHttps) {
+        lines.push(
+          `  if (url.substring(0, 6) === "https:") return "${PACScriptGenerator.formatProxyString(rules.proxyForHttps)}";`
+        )
+      }
+      if (rules.proxyForFtp) {
+        lines.push(
+          `  if (url.substring(0, 4) === "ftp:") return "${PACScriptGenerator.formatProxyString(rules.proxyForFtp)}";`
+        )
+      }
+      if (rules.fallbackProxy) {
+        lines.push(`  return "${PACScriptGenerator.formatProxyString(rules.fallbackProxy)}";`)
+      } else {
+        lines.push('  return "DIRECT";')
+      }
+    }
+
+    lines.push('}')
+    return `${lines.join('\n')}\n`
+  }
 }

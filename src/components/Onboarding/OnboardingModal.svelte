@@ -2,7 +2,17 @@
 import { I18nService } from '@/services/i18n/i18nService'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
-import { Cable, Check, Globe, Keyboard, Route, Settings, Shield, Zap } from '@/utils/icons'
+import {
+  Cable,
+  Check,
+  FileText,
+  Globe,
+  Keyboard,
+  Route,
+  Settings,
+  Shield,
+  Zap,
+} from '@/utils/icons'
 import { colors, transitions } from '@/utils/theme'
 import Button from '../Button.svelte'
 import Text from '../Text.svelte'
@@ -56,6 +66,13 @@ const steps = [
         titleFallback: 'PAC Script Support',
         descKey: 'onboardingFeaturePACDesc',
         descFallback: 'Use custom PAC scripts for advanced proxy configuration.',
+      },
+      {
+        icon: FileText,
+        titleKey: 'onboardingFeatureImport',
+        titleFallback: 'Import from SwitchyOmega',
+        descKey: 'onboardingFeatureImportDesc',
+        descFallback: 'Easily migrate your proxy profiles from SwitchyOmega backups.',
       },
     ],
   },
@@ -146,6 +163,21 @@ function handleKeydown(e: KeyboardEvent) {
   } else if (e.key === 'ArrowLeft' && currentStep > 0) {
     prevStep()
   }
+}
+
+// Platform detection for shortcut display
+const isMac =
+  typeof navigator !== 'undefined' &&
+  ((navigator as any).userAgentData?.platform === 'macOS' ||
+    navigator.platform?.includes('Mac') ||
+    /Macintosh/.test(navigator.userAgent))
+
+function formatShortcut(shortcut: string): string {
+  if (!isMac) return shortcut
+  return shortcut
+    .replace(/Ctrl\+/g, '\u2318')
+    .replace(/Alt\+/g, '\u2325')
+    .replace(/Shift\+/g, '\u21E7')
 }
 
 const step = $derived(steps[currentStep])
@@ -251,7 +283,7 @@ const isFirstStep = $derived(currentStep === 0)
                       colors.text.default
                     )}
                   >
-                    {feature.shortcut}
+                    {formatShortcut(feature.shortcut)}
                   </div>
                 {/if}
                 <div>
