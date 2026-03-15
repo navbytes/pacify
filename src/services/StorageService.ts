@@ -33,7 +33,7 @@ export class StorageService {
           this.storeScriptData(scriptId, config.pacScript.data)
 
           // Replace script data with a reference
-          return {
+          config = {
             ...config,
             pacScript: {
               ...config.pacScript,
@@ -41,6 +41,38 @@ export class StorageService {
             },
           }
         }
+
+        // Strip subscription cachedRules from sync storage (too large) and store in local storage
+        if (config.autoProxy?.subscriptions) {
+          const configId = config.id || crypto.randomUUID()
+          const subsWithRules = config.autoProxy.subscriptions.filter(
+            (s) => s.cachedRules && s.cachedRules.length > 0
+          )
+
+          if (subsWithRules.length > 0) {
+            // Store all cached rules in local storage keyed by config ID
+            const cachedRulesMap: Record<string, string[]> = {}
+            for (const sub of subsWithRules) {
+              if (sub.cachedRules) {
+                cachedRulesMap[sub.id] = sub.cachedRules
+              }
+            }
+            this.storeSubscriptionRules(configId, cachedRulesMap)
+          }
+
+          // Strip cachedRules from the sync copy
+          config = {
+            ...config,
+            autoProxy: {
+              ...config.autoProxy,
+              subscriptions: config.autoProxy.subscriptions.map((sub) => {
+                const { cachedRules: _, ...subWithoutRules } = sub
+                return subWithoutRules
+              }),
+            },
+          }
+        }
+
         return config
       }),
     }
@@ -70,7 +102,7 @@ export class StorageService {
       const baseSettings: AppSettings =
         (data.settings as AppSettings | undefined) || DEFAULT_SETTINGS
 
-      // Resolve any script references
+      // Resolve any script references and restore subscription cached rules
       const resolvedSettings: AppSettings = {
         ...baseSettings,
         proxyConfigs: await Promise.all(
@@ -79,7 +111,7 @@ export class StorageService {
               const scriptId = config.pacScript.data.replace('__REF_', '').replace('__', '')
               const scriptData = await this.getScriptData(scriptId)
 
-              return {
+              config = {
                 ...config,
                 pacScript: {
                   ...config.pacScript,
@@ -87,6 +119,24 @@ export class StorageService {
                 },
               }
             }
+
+            // Restore subscription cachedRules from local storage
+            if (config.autoProxy?.subscriptions && config.id) {
+              const cachedRulesMap = await this.getSubscriptionRules(config.id)
+              if (cachedRulesMap) {
+                config = {
+                  ...config,
+                  autoProxy: {
+                    ...config.autoProxy,
+                    subscriptions: config.autoProxy.subscriptions.map((sub) => ({
+                      ...sub,
+                      cachedRules: cachedRulesMap[sub.id] || sub.cachedRules,
+                    })),
+                  },
+                }
+              }
+            }
+
             return config
           })
         ),
@@ -110,6 +160,28 @@ export class StorageService {
       await browserService.storage.local.set({ [`script_${scriptId}`]: data })
     },
     ERROR_TYPES.SAVE_SCRIPT
+  )
+
+  /**
+   * Stores subscription cached rules in local storage
+   */
+  private static storeSubscriptionRules = withErrorHandling(
+    async (configId: string, rulesMap: Record<string, string[]>): Promise<void> => {
+      await browserService.storage.local.set({ [`sub_rules_${configId}`]: rulesMap })
+    },
+    ERROR_TYPES.SAVE_SCRIPT
+  )
+
+  /**
+   * Retrieves subscription cached rules from local storage
+   */
+  private static getSubscriptionRules = withErrorHandlingAndFallback(
+    async (configId: string): Promise<Record<string, string[]> | null> => {
+      const data = await browserService.storage.local.get(`sub_rules_${configId}`)
+      return (data[`sub_rules_${configId}`] as Record<string, string[]> | undefined) || null
+    },
+    ERROR_TYPES.FETCH_SETTINGS,
+    null
   )
 
   /**

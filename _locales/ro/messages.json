@@ -1150,5 +1150,71 @@
   },
   "shortcutsTip": {
     "message": "Apăsați ? oriunde pentru a afișa acest ajutor"
+  },
+  "subscriptions": { "message": "Abonamente" },
+  "subscriptionsDescription": {
+    "message": "Importați reguli din liste de domenii la distanță"
+  },
+  "addSubscription": { "message": "Adăugați abonament" },
+  "subscriptionName": { "message": "Nume" },
+  "subscriptionNamePlaceholder": { "message": "ex., GFWList, Ad Domains" },
+  "subscriptionNameRequired": {
+    "message": "Numele abonamentului este obligatoriu"
+  },
+  "subscriptionUrl": { "message": "URL" },
+  "subscriptionUrlRequired": {
+    "message": "URL-ul abonamentului este obligatoriu"
+  },
+  "subscriptionUrlInvalid": {
+    "message": "Vă rugăm să introduceți un URL valid"
+  },
+  "subscriptionFormat": { "message": "Format" },
+  "subscriptionInterval": { "message": "Actualizare automată" },
+  "subscriptionFetching": { "message": "Se preia..." },
+  "subscriptionFetchFailed": { "message": "Nu s-a putut prelua abonamentul" },
+  "subscriptionNoRules": { "message": "Nu s-au găsit reguli în abonament" },
+  "noSubscriptions": { "message": "Fără abonamente" },
+  "noSubscriptionsDescription": {
+    "message": "Abonați-vă la liste de domenii la distanță pentru a importa automat reguli proxy din URL-uri precum GFWList sau liste de domenii personalizate"
+  },
+  "refreshSubscription": { "message": "Actualizează" },
+  "editSubscription": { "message": "Editați abonamentul" },
+  "saveSubscription": { "message": "Salvați modificările" },
+  "deleteSubscription": { "message": "Ștergeți abonamentul" },
+  "deleteSubscriptionTitle": { "message": "Ștergeți abonamentul" },
+  "deleteSubscriptionMessage": {
+    "message": "Sigur doriți să ștergeți abonamentul \"$1\"?",
+    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
+  },
+  "rules": { "message": "reguli" },
+  "fromSubscriptions": { "message": "din abonamente" },
+  "never": { "message": "Niciodată" },
+  "minutesAgo": {
+    "message": "$1 min în urmă",
+    "placeholders": { "1": { "content": "$1", "example": "5" } }
+  },
+  "hoursAgo": {
+    "message": "$1h în urmă",
+    "placeholders": { "1": { "content": "$1", "example": "2" } }
+  },
+  "formatAuto": { "message": "Detectare automată" },
+  "formatAbp": { "message": "ABP / GFWList" },
+  "formatDomains": { "message": "Listă de domenii" },
+  "intervalManual": { "message": "Doar manual" },
+  "intervalMinutes": {
+    "message": "La fiecare $1 min",
+    "placeholders": { "1": { "content": "$1", "example": "30" } }
+  },
+  "intervalHour": {
+    "message": "La fiecare $1 oră",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
+  },
+  "intervalHours": {
+    "message": "La fiecare $1 ore",
+    "placeholders": { "1": { "content": "$1", "example": "6" } }
+  },
+  "intervalDay": {
+    "message": "La fiecare $1 zi",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
   }
 }

@@ -7,6 +7,14 @@ import type {
 } from '@/interfaces/browser'
 
 /**
+ * Converts chrome.runtime.lastError (a plain object) into a proper Error instance.
+ */
+function chromeLastError(): Error {
+  const msg = chrome.runtime.lastError?.message || 'Unknown Chrome error'
+  return new Error(msg)
+}
+
+/**
  * BrowserService provides a unified interface for browser-specific APIs
  * This implementation uses Chrome APIs, but can be replaced with other browser implementations
  */
@@ -28,7 +36,7 @@ export class BrowserService implements BrowserAPI {
 
           chrome.notifications.create(id, chromeOptions, (notificationId) => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               resolve(notificationId)
             }
@@ -44,7 +52,7 @@ export class BrowserService implements BrowserAPI {
         try {
           chrome.notifications.getAll((notifications) => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               // Cast to the expected type
               resolve(notifications as Record<string, boolean>)
@@ -61,7 +69,7 @@ export class BrowserService implements BrowserAPI {
         try {
           chrome.notifications.clear(id, (wasCleared) => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               resolve(wasCleared)
             }
@@ -81,7 +89,7 @@ export class BrowserService implements BrowserAPI {
           try {
             chrome.storage.sync.get(keys, (result) => {
               if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError)
+                reject(chromeLastError())
               } else {
                 resolve(result)
               }
@@ -97,7 +105,7 @@ export class BrowserService implements BrowserAPI {
           try {
             chrome.storage.sync.set(items, () => {
               if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError)
+                reject(chromeLastError())
               } else {
                 resolve()
               }
@@ -113,7 +121,7 @@ export class BrowserService implements BrowserAPI {
           try {
             chrome.storage.sync.getBytesInUse(keys, (bytesInUse) => {
               if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError)
+                reject(chromeLastError())
               } else {
                 resolve(bytesInUse)
               }
@@ -133,7 +141,7 @@ export class BrowserService implements BrowserAPI {
           try {
             chrome.storage.local.get(keys, (result) => {
               if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError)
+                reject(chromeLastError())
               } else {
                 resolve(result)
               }
@@ -149,7 +157,7 @@ export class BrowserService implements BrowserAPI {
           try {
             chrome.storage.local.set(items, () => {
               if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError)
+                reject(chromeLastError())
               } else {
                 resolve()
               }
@@ -165,7 +173,7 @@ export class BrowserService implements BrowserAPI {
           try {
             chrome.storage.local.getBytesInUse(keys, (bytesInUse) => {
               if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError)
+                reject(chromeLastError())
               } else {
                 resolve(bytesInUse)
               }
@@ -187,7 +195,7 @@ export class BrowserService implements BrowserAPI {
         try {
           chrome.action.setBadgeText(details, () => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               resolve()
             }
@@ -203,7 +211,7 @@ export class BrowserService implements BrowserAPI {
         try {
           chrome.action.setBadgeBackgroundColor(details, () => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               resolve()
             }
@@ -219,7 +227,7 @@ export class BrowserService implements BrowserAPI {
         try {
           chrome.action.setPopup(details, () => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               resolve()
             }
@@ -253,7 +261,7 @@ export class BrowserService implements BrowserAPI {
         try {
           chrome.runtime.sendMessage(message, (response) => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               resolve(response)
             }
@@ -346,7 +354,7 @@ export class BrowserService implements BrowserAPI {
         try {
           chrome.tabs.query(queryInfo, (tabs) => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               resolve(tabs as unknown as Tab[])
             }
@@ -363,7 +371,7 @@ export class BrowserService implements BrowserAPI {
           if (tabId) {
             chrome.tabs.reload(tabId, {}, () => {
               if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError)
+                reject(chromeLastError())
               } else {
                 resolve()
               }
@@ -371,7 +379,7 @@ export class BrowserService implements BrowserAPI {
           } else {
             chrome.tabs.reload(() => {
               if (chrome.runtime.lastError) {
-                reject(chrome.runtime.lastError)
+                reject(chromeLastError())
               } else {
                 resolve()
               }
@@ -388,7 +396,7 @@ export class BrowserService implements BrowserAPI {
         try {
           chrome.tabs.create(createProperties, (tab) => {
             if (chrome.runtime.lastError) {
-              reject(chrome.runtime.lastError)
+              reject(chromeLastError())
             } else {
               resolve(tab as unknown as Tab)
             }

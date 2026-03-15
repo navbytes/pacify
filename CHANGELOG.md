@@ -5,6 +5,12 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.30.0] - 2026-03-15
+
+### Added
+
+- Support for Subscription lists like gfwlist
+
 ## [1.29.0] - 2026-01-25
 
 ### Added

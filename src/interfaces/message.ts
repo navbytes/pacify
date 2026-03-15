@@ -1,6 +1,11 @@
 import type { ProxyConfig } from './settings'
 
-export type BackgroundMessageType = 'SET_PROXY' | 'CLEAR_PROXY' | 'SCRIPT_UPDATE' | 'QUICK_SWITCH'
+export type BackgroundMessageType =
+  | 'SET_PROXY'
+  | 'CLEAR_PROXY'
+  | 'SCRIPT_UPDATE'
+  | 'QUICK_SWITCH'
+  | 'REFRESH_SUBSCRIPTION'
 
 export interface BaseMessage {
   type: BackgroundMessageType
@@ -25,11 +30,18 @@ export interface ClearProxyMessage extends BaseMessage {
   type: 'CLEAR_PROXY'
 }
 
+export interface RefreshSubscriptionMessage extends BaseMessage {
+  type: 'REFRESH_SUBSCRIPTION'
+  proxyId: string
+  subscriptionId: string
+}
+
 export type BackgroundMessage =
   | QuickSwitchMessage
   | SetProxyMessage
   | SetProxyQuickSwitchMessage
   | ClearProxyMessage
+  | RefreshSubscriptionMessage
 
 export interface BackgroundMessageResponse {
   success: boolean

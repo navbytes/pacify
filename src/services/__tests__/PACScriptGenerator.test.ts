@@ -527,6 +527,182 @@ describe('PACScriptGenerator', () => {
     })
   })
 
+  describe('subscription integration', () => {
+    test('generates PAC script with subscription domain sets', () => {
+      const config: AutoProxyConfig = {
+        rules: [],
+        subscriptions: [
+          {
+            id: 'sub-1',
+            name: 'Test List',
+            url: 'https://example.com/list.txt',
+            format: 'auto',
+            enabled: true,
+            proxyType: 'direct',
+            updateInterval: 60,
+            ruleCount: 2,
+            cachedRules: ['blocked.com', 'evil.org'],
+          },
+        ],
+        fallbackType: 'direct',
+      }
+
+      const result = PACScriptGenerator.generate(config, [])
+
+      expect(result).toContain('_subDomains_0')
+      expect(result).toContain('"blocked.com"')
+      expect(result).toContain('"evil.org"')
+      expect(result).toContain('return "DIRECT"')
+    })
+
+    test('skips disabled subscriptions', () => {
+      const config: AutoProxyConfig = {
+        rules: [],
+        subscriptions: [
+          {
+            id: 'sub-1',
+            name: 'Disabled',
+            url: 'https://example.com/list.txt',
+            format: 'auto',
+            enabled: false,
+            proxyType: 'direct',
+            updateInterval: 60,
+            ruleCount: 1,
+            cachedRules: ['should-not-appear.com'],
+          },
+        ],
+        fallbackType: 'direct',
+      }
+
+      const result = PACScriptGenerator.generate(config, [])
+
+      expect(result).not.toContain('should-not-appear.com')
+      expect(result).not.toContain('_subDomains_')
+    })
+
+    test('skips subscriptions with empty cached rules', () => {
+      const config: AutoProxyConfig = {
+        rules: [],
+        subscriptions: [
+          {
+            id: 'sub-1',
+            name: 'Empty',
+            url: 'https://example.com/list.txt',
+            format: 'auto',
+            enabled: true,
+            proxyType: 'direct',
+            updateInterval: 60,
+            ruleCount: 0,
+            cachedRules: [],
+          },
+        ],
+        fallbackType: 'direct',
+      }
+
+      const result = PACScriptGenerator.generate(config, [])
+
+      expect(result).not.toContain('_subDomains_')
+    })
+
+    test('generates correct proxy string for subscription with existing proxy', () => {
+      const proxy = createProxyConfig({
+        id: 'my-proxy',
+        rules: { singleProxy: { scheme: 'http', host: 'proxy.local', port: '8080' } },
+      })
+
+      const config: AutoProxyConfig = {
+        rules: [],
+        subscriptions: [
+          {
+            id: 'sub-1',
+            name: 'Test',
+            url: 'https://example.com/list.txt',
+            format: 'auto',
+            enabled: true,
+            proxyType: 'existing',
+            proxyId: 'my-proxy',
+            updateInterval: 60,
+            ruleCount: 1,
+            cachedRules: ['blocked.com'],
+          },
+        ],
+        fallbackType: 'direct',
+      }
+
+      const result = PACScriptGenerator.generate(config, [proxy])
+
+      expect(result).toContain('PROXY proxy.local:8080')
+    })
+
+    test('combines manual rules and subscription rules', () => {
+      const config: AutoProxyConfig = {
+        rules: [createRule({ pattern: '*.manual.com', proxyType: 'direct' })],
+        subscriptions: [
+          {
+            id: 'sub-1',
+            name: 'Test',
+            url: 'https://example.com/list.txt',
+            format: 'auto',
+            enabled: true,
+            proxyType: 'direct',
+            updateInterval: 60,
+            ruleCount: 1,
+            cachedRules: ['subscribed.com'],
+          },
+        ],
+        fallbackType: 'direct',
+      }
+
+      const result = PACScriptGenerator.generate(config, [])
+
+      // Manual rules should appear first
+      expect(result).toContain('shExpMatch(host, "*.manual.com")')
+      // Subscription domains should appear after
+      expect(result).toContain('"subscribed.com"')
+    })
+
+    test('handles multiple subscriptions', () => {
+      const config: AutoProxyConfig = {
+        rules: [],
+        subscriptions: [
+          {
+            id: 'sub-1',
+            name: 'List 1',
+            url: 'https://example.com/list1.txt',
+            format: 'auto',
+            enabled: true,
+            proxyType: 'direct',
+            updateInterval: 60,
+            ruleCount: 1,
+            cachedRules: ['list1.com'],
+          },
+          {
+            id: 'sub-2',
+            name: 'List 2',
+            url: 'https://example.com/list2.txt',
+            format: 'auto',
+            enabled: true,
+            proxyType: 'inline',
+            inlineProxy: { scheme: 'socks5', host: 'socks.local', port: '1080' },
+            updateInterval: 60,
+            ruleCount: 1,
+            cachedRules: ['list2.com'],
+          },
+        ],
+        fallbackType: 'direct',
+      }
+
+      const result = PACScriptGenerator.generate(config, [])
+
+      expect(result).toContain('_subDomains_0')
+      expect(result).toContain('_subDomains_1')
+      expect(result).toContain('"list1.com"')
+      expect(result).toContain('"list2.com"')
+      expect(result).toContain('DIRECT')
+      expect(result).toContain('SOCKS5 socks.local:1080')
+    })
+  })
+
   describe('edge cases', () => {
     test('handles missing proxy reference gracefully', () => {
       const config: AutoProxyConfig = {

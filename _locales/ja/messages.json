@@ -1150,5 +1150,69 @@
   },
   "shortcutsTip": {
     "message": "どこでも ? を押すとこのヘルプが表示されます"
+  },
+  "subscriptions": { "message": "サブスクリプション" },
+  "subscriptionsDescription": {
+    "message": "リモートドメインリストからルールをインポート"
+  },
+  "addSubscription": { "message": "サブスクリプションを追加" },
+  "subscriptionName": { "message": "名前" },
+  "subscriptionNamePlaceholder": { "message": "例：GFWList、広告ドメイン" },
+  "subscriptionNameRequired": { "message": "サブスクリプション名は必須です" },
+  "subscriptionUrl": { "message": "URL" },
+  "subscriptionUrlRequired": { "message": "サブスクリプションURLは必須です" },
+  "subscriptionUrlInvalid": { "message": "有効なURLを入力してください" },
+  "subscriptionFormat": { "message": "形式" },
+  "subscriptionInterval": { "message": "自動更新" },
+  "subscriptionFetching": { "message": "取得中..." },
+  "subscriptionFetchFailed": {
+    "message": "サブスクリプションの取得に失敗しました"
+  },
+  "subscriptionNoRules": {
+    "message": "サブスクリプションにルールが見つかりません"
+  },
+  "noSubscriptions": { "message": "サブスクリプションがありません" },
+  "noSubscriptionsDescription": {
+    "message": "リモートドメインリストをサブスクライブして、GFWListやカスタムドメインリストなどのURLからプロキシルールを自動的にインポートします"
+  },
+  "refreshSubscription": { "message": "更新" },
+  "editSubscription": { "message": "サブスクリプションを編集" },
+  "saveSubscription": { "message": "変更を保存" },
+  "deleteSubscription": { "message": "サブスクリプションを削除" },
+  "deleteSubscriptionTitle": { "message": "サブスクリプションを削除" },
+  "deleteSubscriptionMessage": {
+    "message": "サブスクリプション \"$1\" を削除してもよろしいですか？",
+    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
+  },
+  "rules": { "message": "ルール" },
+  "fromSubscriptions": { "message": "サブスクリプションから" },
+  "never": { "message": "しない" },
+  "minutesAgo": {
+    "message": "$1 分前",
+    "placeholders": { "1": { "content": "$1", "example": "5" } }
+  },
+  "hoursAgo": {
+    "message": "$1 時間前",
+    "placeholders": { "1": { "content": "$1", "example": "2" } }
+  },
+  "formatAuto": { "message": "自動検出" },
+  "formatAbp": { "message": "ABP / GFWList" },
+  "formatDomains": { "message": "ドメインリスト" },
+  "intervalManual": { "message": "手動のみ" },
+  "intervalMinutes": {
+    "message": "$1 分ごと",
+    "placeholders": { "1": { "content": "$1", "example": "30" } }
+  },
+  "intervalHour": {
+    "message": "$1 時間ごと",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
+  },
+  "intervalHours": {
+    "message": "$1 時間ごと",
+    "placeholders": { "1": { "content": "$1", "example": "6" } }
+  },
+  "intervalDay": {
+    "message": "$1 日ごと",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
   }
 }

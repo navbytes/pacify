@@ -52,9 +52,30 @@ export interface AutoProxyRule {
   description?: string
 }
 
+// Supported subscription formats for remote rule lists
+export type SubscriptionFormat = 'auto' | 'abp' | 'domains'
+
+// A remote rule list subscription
+export interface AutoProxySubscription {
+  id: string
+  name: string
+  url: string
+  format: SubscriptionFormat
+  enabled: boolean
+  proxyType: AutoProxyRouteType
+  proxyId?: string // When proxyType === 'existing'
+  inlineProxy?: ProxyServer // When proxyType === 'inline'
+  updateInterval: number // in minutes (0 = manual only)
+  lastUpdated?: number // timestamp of last successful fetch
+  lastError?: string // last fetch error message
+  ruleCount?: number // number of rules parsed from last fetch
+  cachedRules?: string[] // cached parsed domain/pattern list
+}
+
 // Configuration for an Auto-Proxy (URL-based routing)
 export interface AutoProxyConfig {
   rules: AutoProxyRule[]
+  subscriptions?: AutoProxySubscription[]
   fallbackType: AutoProxyRouteType
   fallbackProxyId?: string // When fallbackType === 'existing'
   fallbackInlineProxy?: ProxyServer // When fallbackType === 'inline'
