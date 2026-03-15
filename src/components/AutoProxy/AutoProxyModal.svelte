@@ -5,6 +5,7 @@ import type {
   AutoProxyConfig,
   AutoProxyRouteType,
   AutoProxyRule,
+  AutoProxySubscription,
   ProxyConfig,
   ProxyServer,
 } from '@/interfaces/settings'
@@ -27,6 +28,7 @@ import AutoProxyRuleEditor from './AutoProxyRuleEditor.svelte'
 import AutoProxyRuleList from './AutoProxyRuleList.svelte'
 import FallbackConfig from './FallbackConfig.svelte'
 import PatternTester from './PatternTester.svelte'
+import SubscriptionList from './SubscriptionList.svelte'
 
 interface Props {
   proxyConfig?: ProxyConfig
@@ -49,6 +51,7 @@ let rules = $state<AutoProxyRule[]>([])
 let fallbackType = $state<AutoProxyRouteType>('direct')
 let fallbackProxyId = $state<string | undefined>(undefined)
 let fallbackInlineProxy = $state<ProxyServer | undefined>(undefined)
+let subscriptions = $state<AutoProxySubscription[]>([])
 
 // Initialize state from proxyConfig
 $effect(() => {
@@ -57,6 +60,7 @@ $effect(() => {
   badgeLabel = proxyConfig?.badgeLabel || ''
   isActive = proxyConfig?.isActive || false
   rules = proxyConfig?.autoProxy?.rules || []
+  subscriptions = proxyConfig?.autoProxy?.subscriptions || []
   fallbackType = proxyConfig?.autoProxy?.fallbackType || 'direct'
   fallbackProxyId = proxyConfig?.autoProxy?.fallbackProxyId
   fallbackInlineProxy = proxyConfig?.autoProxy?.fallbackInlineProxy
@@ -145,6 +149,10 @@ function handleReorderRules(newRules: AutoProxyRule[]) {
   rules = newRules
 }
 
+function handleSubscriptionsUpdate(newSubscriptions: AutoProxySubscription[]) {
+  subscriptions = newSubscriptions
+}
+
 function handleFallbackChange(
   newFallbackType: AutoProxyRouteType,
   newFallbackProxyId?: string,
@@ -163,7 +171,8 @@ async function handleSubmit() {
     return
   }
 
-  if (rules.length === 0) {
+  const enabledSubscriptions = subscriptions.filter((s) => s.enabled && (s.ruleCount || 0) > 0)
+  if (rules.length === 0 && enabledSubscriptions.length === 0) {
     errorMessage = I18nService.getMessage('atLeastOneRule')
     return
   }
@@ -173,6 +182,7 @@ async function handleSubmit() {
   try {
     const autoProxyConfig: AutoProxyConfig = {
       rules,
+      subscriptions: subscriptions.length > 0 ? subscriptions : undefined,
       fallbackType,
       fallbackProxyId,
       fallbackInlineProxy,
@@ -427,6 +437,13 @@ let selectableProxies = $derived(
           onReorderRules={handleReorderRules}
         />
 
+        <!-- Subscriptions -->
+        <SubscriptionList
+          {subscriptions}
+          availableProxies={selectableProxies}
+          onUpdate={handleSubscriptionsUpdate}
+        />
+
         <!-- Fallback Configuration -->
         <FallbackConfig
           {fallbackType}
@@ -464,9 +481,14 @@ let selectableProxies = $derived(
           <!-- Rule count badge -->
           <div class={ruleCountBadgeVariants({ color: 'slate' })}>
             <Route size={14} />
-            <span
-              >{I18nService.getMessage('rulesConfigured', [String(rules.length), rules.length === 1 ? I18nService.getMessage('ruleSingular') : I18nService.getMessage('rulePlural')])}</span
-            >
+            <span>
+              {I18nService.getMessage('rulesConfigured', [String(rules.length), rules.length === 1 ? I18nService.getMessage('ruleSingular') : I18nService.getMessage('rulePlural')])}
+              {#if subscriptions.length > 0}
+                {' + '}
+                {subscriptions.filter(s => s.enabled).reduce((sum, s) => sum + (s.ruleCount || 0), 0)}
+                {I18nService.getMessage('fromSubscriptions')}
+              {/if}
+            </span>
           </div>
 
           <FlexGroup direction="horizontal" childrenGap="sm">

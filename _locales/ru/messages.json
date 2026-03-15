@@ -1150,5 +1150,65 @@
   },
   "shortcutsTip": {
     "message": "Нажмите ? в любом месте для показа этой справки"
+  },
+  "subscriptions": { "message": "Подписки" },
+  "subscriptionsDescription": {
+    "message": "Импорт правил из удаленных списков доменов"
+  },
+  "addSubscription": { "message": "Добавить подписку" },
+  "subscriptionName": { "message": "Название" },
+  "subscriptionNamePlaceholder": { "message": "например, GFWList, Ad Domains" },
+  "subscriptionNameRequired": { "message": "Необходимо название подписки" },
+  "subscriptionUrl": { "message": "URL" },
+  "subscriptionUrlRequired": { "message": "Необходим URL подписки" },
+  "subscriptionUrlInvalid": { "message": "Пожалуйста, введите правильный URL" },
+  "subscriptionFormat": { "message": "Формат" },
+  "subscriptionInterval": { "message": "Автообновление" },
+  "subscriptionFetching": { "message": "Получение..." },
+  "subscriptionFetchFailed": { "message": "Не удалось получить подписку" },
+  "subscriptionNoRules": { "message": "В подписке не найдено правил" },
+  "noSubscriptions": { "message": "Нет подписок" },
+  "noSubscriptionsDescription": {
+    "message": "Подпишитесь на удаленные списки доменов для автоматического импорта правил прокси из URL-адресов, таких как GFWList или пользовательские списки доменов"
+  },
+  "refreshSubscription": { "message": "Обновить" },
+  "editSubscription": { "message": "Редактировать подписку" },
+  "saveSubscription": { "message": "Сохранить изменения" },
+  "deleteSubscription": { "message": "Удалить подписку" },
+  "deleteSubscriptionTitle": { "message": "Удалить подписку" },
+  "deleteSubscriptionMessage": {
+    "message": "Вы уверены, что хотите удалить подписку \"$1\"?",
+    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
+  },
+  "rules": { "message": "правила" },
+  "fromSubscriptions": { "message": "из подписок" },
+  "never": { "message": "Никогда" },
+  "minutesAgo": {
+    "message": "$1 мин назад",
+    "placeholders": { "1": { "content": "$1", "example": "5" } }
+  },
+  "hoursAgo": {
+    "message": "$1 ч назад",
+    "placeholders": { "1": { "content": "$1", "example": "2" } }
+  },
+  "formatAuto": { "message": "Автоопределение" },
+  "formatAbp": { "message": "ABP / GFWList" },
+  "formatDomains": { "message": "Список доменов" },
+  "intervalManual": { "message": "Только вручную" },
+  "intervalMinutes": {
+    "message": "Каждые $1 мин",
+    "placeholders": { "1": { "content": "$1", "example": "30" } }
+  },
+  "intervalHour": {
+    "message": "Каждый $1 час",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
+  },
+  "intervalHours": {
+    "message": "Каждые $1 ч",
+    "placeholders": { "1": { "content": "$1", "example": "6" } }
+  },
+  "intervalDay": {
+    "message": "Каждый $1 день",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
   }
 }

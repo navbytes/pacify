@@ -1150,5 +1150,65 @@
   },
   "shortcutsTip": {
     "message": "어디서든 ?를 눌러 이 도움말을 표시하세요"
+  },
+  "subscriptions": { "message": "구독" },
+  "subscriptionsDescription": {
+    "message": "원격 도메인 목록에서 규칙 가져오기"
+  },
+  "addSubscription": { "message": "구독 추가" },
+  "subscriptionName": { "message": "이름" },
+  "subscriptionNamePlaceholder": { "message": "예: GFWList, 광고 도메인" },
+  "subscriptionNameRequired": { "message": "구독 이름이 필요합니다" },
+  "subscriptionUrl": { "message": "URL" },
+  "subscriptionUrlRequired": { "message": "구독 URL이 필요합니다" },
+  "subscriptionUrlInvalid": { "message": "유효한 URL을 입력하세요" },
+  "subscriptionFormat": { "message": "형식" },
+  "subscriptionInterval": { "message": "자동 새로고침" },
+  "subscriptionFetching": { "message": "가져오는 중..." },
+  "subscriptionFetchFailed": { "message": "구독을 가져오지 못했습니다" },
+  "subscriptionNoRules": { "message": "구독에서 규칙을 찾을 수 없습니다" },
+  "noSubscriptions": { "message": "구독 없음" },
+  "noSubscriptionsDescription": {
+    "message": "원격 도메인 목록을 구독하여 GFWList 또는 사용자 정의 도메인 목록과 같은 URL에서 프록시 규칙을 자동으로 가져옵니다"
+  },
+  "refreshSubscription": { "message": "새로고침" },
+  "editSubscription": { "message": "구독 편집" },
+  "saveSubscription": { "message": "변경 사항 저장" },
+  "deleteSubscription": { "message": "구독 삭제" },
+  "deleteSubscriptionTitle": { "message": "구독 삭제" },
+  "deleteSubscriptionMessage": {
+    "message": "구독 \"$1\"을(를) 삭제하시겠습니까?",
+    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
+  },
+  "rules": { "message": "규칙" },
+  "fromSubscriptions": { "message": "구독에서" },
+  "never": { "message": "안 함" },
+  "minutesAgo": {
+    "message": "$1분 전",
+    "placeholders": { "1": { "content": "$1", "example": "5" } }
+  },
+  "hoursAgo": {
+    "message": "$1시간 전",
+    "placeholders": { "1": { "content": "$1", "example": "2" } }
+  },
+  "formatAuto": { "message": "자동 감지" },
+  "formatAbp": { "message": "ABP / GFWList" },
+  "formatDomains": { "message": "도메인 목록" },
+  "intervalManual": { "message": "수동만" },
+  "intervalMinutes": {
+    "message": "$1분마다",
+    "placeholders": { "1": { "content": "$1", "example": "30" } }
+  },
+  "intervalHour": {
+    "message": "$1시간마다",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
+  },
+  "intervalHours": {
+    "message": "$1시간마다",
+    "placeholders": { "1": { "content": "$1", "example": "6" } }
+  },
+  "intervalDay": {
+    "message": "$1일마다",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
   }
 }

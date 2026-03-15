@@ -10,12 +10,14 @@ import type {
   ProxyConfig,
   SetProxyMessage,
 } from '@/interfaces'
+import type { AutoProxySubscription } from '@/interfaces/settings'
 import { SettingsReader, SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
 import { diagnosticsService } from '@/services/DiagnosticsService'
 import { logger } from '@/services/LoggerService'
 import { PACScriptGenerator } from '@/services/PACScriptGenerator'
+import { SubscriptionParser } from '@/services/SubscriptionParser'
 import { parseProxyError } from '@/utils/errorHandling'
 
 /**
@@ -69,6 +71,12 @@ const messageHandlers: Record<
   SCRIPT_UPDATE: async () => {
     // Re-setup PAC refresh alarms when scripts are updated
     await setupPacRefreshAlarms()
+    await setupSubscriptionRefreshAlarms()
+  },
+  REFRESH_SUBSCRIPTION: async (message?: BackgroundMessage) => {
+    if (!message) return
+    const { proxyId, subscriptionId } = message as import('@/interfaces').RefreshSubscriptionMessage
+    await refreshSubscription(proxyId, subscriptionId)
   },
 }
 
@@ -157,6 +165,9 @@ async function initialize(): Promise<void> {
 
     // Set up PAC script auto-refresh alarms
     await setupPacRefreshAlarms()
+
+    // Set up subscription auto-refresh alarms
+    await setupSubscriptionRefreshAlarms()
 
     // Mark as fully initialized
     isInitialized = true
@@ -536,6 +547,11 @@ async function setupPacRefreshAlarms(): Promise<void> {
  * Handles alarm events for PAC script auto-refresh
  */
 async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
+  if (alarm.name.startsWith('sub-refresh-')) {
+    await handleSubscriptionAlarm(alarm)
+    return
+  }
+
   if (!alarm.name.startsWith('pac-refresh-')) return
 
   const configId = alarm.name.replace('pac-refresh-', '')
@@ -625,6 +641,164 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
         url: configForLog?.pacScript?.url,
         details: error instanceof Error ? error.stack : String(error),
       }
+    )
+  }
+}
+
+/**
+ * Sets up alarms for auto-refreshing subscription rule lists
+ */
+async function setupSubscriptionRefreshAlarms(): Promise<void> {
+  try {
+    const settings = await safeGetSettings()
+    if (!settings) return
+
+    // Clear all existing subscription refresh alarms
+    const alarms = await chrome.alarms.getAll()
+    for (const alarm of alarms) {
+      if (alarm.name.startsWith('sub-refresh-')) {
+        await chrome.alarms.clear(alarm.name)
+      }
+    }
+
+    // Set up alarms for each subscription with auto-refresh enabled
+    for (const config of settings.proxyConfigs) {
+      if (!config.autoProxy?.subscriptions) continue
+
+      for (const sub of config.autoProxy.subscriptions) {
+        if (sub.enabled && sub.updateInterval > 0) {
+          const alarmName = `sub-refresh-${config.id}__${sub.id}`
+          await chrome.alarms.create(alarmName, {
+            periodInMinutes: sub.updateInterval,
+          })
+        }
+      }
+    }
+  } catch (error) {
+    logger.error('Error setting up subscription refresh alarms:', error)
+  }
+}
+
+/**
+ * Handles alarm events for subscription auto-refresh
+ */
+async function handleSubscriptionAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
+  // Alarm name format: sub-refresh-{proxyId}__{subscriptionId}
+  const payload = alarm.name.replace('sub-refresh-', '')
+  const separatorIndex = payload.indexOf('__')
+  if (separatorIndex < 0) return
+
+  const proxyId = payload.slice(0, separatorIndex)
+  const subscriptionId = payload.slice(separatorIndex + 2)
+
+  await refreshSubscription(proxyId, subscriptionId)
+}
+
+/**
+ * Refresh a single subscription by fetching its URL and updating cached rules
+ */
+async function refreshSubscription(proxyId: string, subscriptionId: string): Promise<void> {
+  try {
+    const settings = await safeGetSettings()
+    if (!settings) return
+
+    const config = settings.proxyConfigs.find((c) => c.id === proxyId)
+    if (!config?.autoProxy?.subscriptions) {
+      logger.warn(`Config ${proxyId} not found or has no subscriptions`)
+      return
+    }
+
+    const sub = config.autoProxy.subscriptions.find((s) => s.id === subscriptionId)
+    if (!sub) {
+      logger.warn(`Subscription ${subscriptionId} not found in config ${proxyId}`)
+      return
+    }
+
+    // Check if enough time has passed since last update
+    if (sub.lastUpdated && sub.updateInterval > 0) {
+      const intervalMs = sub.updateInterval * 60 * 1000
+      if (Date.now() - sub.lastUpdated < intervalMs * 0.9) {
+        return
+      }
+    }
+
+    logger.info(`Refreshing subscription "${sub.name}" from ${sub.url}`)
+
+    const parsed = await SubscriptionParser.fetchAndParse(sub.url, sub.format)
+
+    // Update the subscription with new cached rules
+    const updatedSub: AutoProxySubscription = {
+      ...sub,
+      cachedRules: parsed.domains,
+      ruleCount: parsed.domains.length,
+      lastUpdated: Date.now(),
+      lastError: undefined,
+    }
+
+    const updatedSubscriptions = config.autoProxy.subscriptions.map((s) =>
+      s.id === subscriptionId ? updatedSub : s
+    )
+
+    const updatedConfig: ProxyConfig = {
+      ...config,
+      autoProxy: {
+        ...config.autoProxy,
+        subscriptions: updatedSubscriptions,
+      },
+    }
+
+    await SettingsWriter.updatePACScript(updatedConfig)
+
+    // If this is the active proxy, regenerate and re-apply PAC script
+    if (config.isActive) {
+      const freshSettings = await safeGetSettings()
+      if (freshSettings) {
+        const freshConfig = freshSettings.proxyConfigs.find((c) => c.id === proxyId)
+        if (freshConfig?.autoProxy) {
+          await setProxySettings(freshConfig)
+        }
+      }
+    }
+
+    await diagnosticsService.logInfo(
+      'SUBSCRIPTION_REFRESHED',
+      `Subscription "${sub.name}" refreshed: ${parsed.domains.length} rules`,
+      { proxyName: config.name, proxyId, subscriptionId, url: sub.url }
+    )
+  } catch (error) {
+    logger.error(`Error refreshing subscription ${subscriptionId}:`, error)
+
+    // Update subscription with error
+    try {
+      const settings = await safeGetSettings()
+      if (!settings) return
+
+      const config = settings.proxyConfigs.find((c) => c.id === proxyId)
+      if (!config?.autoProxy?.subscriptions) return
+
+      const updatedSubscriptions = config.autoProxy.subscriptions.map((s) =>
+        s.id === subscriptionId
+          ? { ...s, lastError: error instanceof Error ? error.message : 'Failed to refresh' }
+          : s
+      )
+
+      const updatedConfig: ProxyConfig = {
+        ...config,
+        autoProxy: {
+          ...config.autoProxy,
+          subscriptions: updatedSubscriptions,
+        },
+      }
+
+      await SettingsWriter.updatePACScript(updatedConfig)
+    } catch {
+      // Ignore errors when updating error state
+    }
+
+    await diagnosticsService.logError(
+      'SUBSCRIPTION_REFRESH_FAILED',
+      error instanceof Error ? error.message : 'Failed to refresh subscription',
+      { proxyId, subscriptionId }
     )
   }
 }

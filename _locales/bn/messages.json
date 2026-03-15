@@ -1150,5 +1150,67 @@
   },
   "shortcutsTip": {
     "message": "এই সাহায্য দেখাতে যেকোনো জায়গায় ? চাপুন"
+  },
+  "subscriptions": { "message": "সাবস্ক্রিপশন" },
+  "subscriptionsDescription": {
+    "message": "দূরবর্তী ডোমেন তালিকা থেকে নিয়ম আমদানি করুন"
+  },
+  "addSubscription": { "message": "সাবস্ক্রিপশন যোগ করুন" },
+  "subscriptionName": { "message": "নাম" },
+  "subscriptionNamePlaceholder": { "message": "যেমন, GFWList, Ad Domains" },
+  "subscriptionNameRequired": { "message": "সাবস্ক্রিপশনের নাম প্রয়োজন" },
+  "subscriptionUrl": { "message": "URL" },
+  "subscriptionUrlRequired": { "message": "সাবস্ক্রিপশন URL প্রয়োজন" },
+  "subscriptionUrlInvalid": { "message": "অনুগ্রহ করে একটি বৈধ URL লিখুন" },
+  "subscriptionFormat": { "message": "ফরম্যাট" },
+  "subscriptionInterval": { "message": "স্বয়ংক্রিয়-রিফ্রেশ" },
+  "subscriptionFetching": { "message": "আনা হচ্ছে..." },
+  "subscriptionFetchFailed": { "message": "সাবস্ক্রিপশন আনতে ব্যর্থ" },
+  "subscriptionNoRules": {
+    "message": "সাবস্ক্রিপশনে কোনো নিয়ম পাওয়া যায়নি"
+  },
+  "noSubscriptions": { "message": "কোনো সাবস্ক্রিপশন নেই" },
+  "noSubscriptionsDescription": {
+    "message": "GFWList বা কাস্টম ডোমেন তালিকার মতো URL থেকে স্বয়ংক্রিয়ভাবে প্রক্সি নিয়ম আমদানি করতে দূরবর্তী ডোমেন তালিকায় সাবস্ক্রাইব করুন"
+  },
+  "refreshSubscription": { "message": "রিফ্রেশ করুন" },
+  "editSubscription": { "message": "সাবস্ক্রিপশন সম্পাদনা করুন" },
+  "saveSubscription": { "message": "পরিবর্তন সংরক্ষণ করুন" },
+  "deleteSubscription": { "message": "সাবস্ক্রিপশন মুছুন" },
+  "deleteSubscriptionTitle": { "message": "সাবস্ক্রিপশন মুছুন" },
+  "deleteSubscriptionMessage": {
+    "message": "আপনি কি নিশ্চিত যে \"$1\" সাবস্ক্রিপশন মুছে ফেলতে চান?",
+    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
+  },
+  "rules": { "message": "নিয়ম" },
+  "fromSubscriptions": { "message": "সাবস্ক্রিপশন থেকে" },
+  "never": { "message": "কখনও না" },
+  "minutesAgo": {
+    "message": "$1 মিনিট আগে",
+    "placeholders": { "1": { "content": "$1", "example": "5" } }
+  },
+  "hoursAgo": {
+    "message": "$1 ঘন্টা আগে",
+    "placeholders": { "1": { "content": "$1", "example": "2" } }
+  },
+  "formatAuto": { "message": "স্বয়ংক্রিয়-সনাক্তকরণ" },
+  "formatAbp": { "message": "ABP / GFWList" },
+  "formatDomains": { "message": "ডোমেন তালিকা" },
+  "intervalManual": { "message": "শুধুমাত্র ম্যানুয়াল" },
+  "intervalMinutes": {
+    "message": "প্রতি $1 মিনিট",
+    "placeholders": { "1": { "content": "$1", "example": "30" } }
+  },
+  "intervalHour": {
+    "message": "প্রতি $1 ঘন্টা",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
+  },
+  "intervalHours": {
+    "message": "প্রতি $1 ঘন্টা",
+    "placeholders": { "1": { "content": "$1", "example": "6" } }
+  },
+  "intervalDay": {
+    "message": "প্রতি $1 দিন",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
   }
 }

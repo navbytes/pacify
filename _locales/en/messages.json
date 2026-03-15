@@ -1205,5 +1205,152 @@
   },
   "backToSettings": {
     "message": "Back to Settings"
+  },
+  "subscriptions": {
+    "message": "Subscriptions"
+  },
+  "subscriptionsDescription": {
+    "message": "Import rules from remote domain lists"
+  },
+  "addSubscription": {
+    "message": "Add Subscription"
+  },
+  "subscriptionName": {
+    "message": "Name"
+  },
+  "subscriptionNamePlaceholder": {
+    "message": "e.g., GFWList, Ad Domains"
+  },
+  "subscriptionNameRequired": {
+    "message": "Subscription name is required"
+  },
+  "subscriptionUrl": {
+    "message": "URL"
+  },
+  "subscriptionUrlRequired": {
+    "message": "Subscription URL is required"
+  },
+  "subscriptionUrlInvalid": {
+    "message": "Please enter a valid URL"
+  },
+  "subscriptionFormat": {
+    "message": "Format"
+  },
+  "subscriptionInterval": {
+    "message": "Auto-refresh"
+  },
+  "subscriptionFetching": {
+    "message": "Fetching..."
+  },
+  "subscriptionFetchFailed": {
+    "message": "Failed to fetch subscription"
+  },
+  "subscriptionNoRules": {
+    "message": "No rules found in the subscription"
+  },
+  "noSubscriptions": {
+    "message": "No subscriptions"
+  },
+  "noSubscriptionsDescription": {
+    "message": "Subscribe to remote domain lists to automatically import proxy rules from URLs like GFWList or custom domain lists"
+  },
+  "refreshSubscription": {
+    "message": "Refresh"
+  },
+  "editSubscription": {
+    "message": "Edit subscription"
+  },
+  "saveSubscription": {
+    "message": "Save Changes"
+  },
+  "deleteSubscription": {
+    "message": "Delete subscription"
+  },
+  "deleteSubscriptionTitle": {
+    "message": "Delete Subscription"
+  },
+  "deleteSubscriptionMessage": {
+    "message": "Are you sure you want to delete the subscription \"$1\"?",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "GFWList"
+      }
+    }
+  },
+  "rules": {
+    "message": "rules"
+  },
+  "fromSubscriptions": {
+    "message": "from subscriptions"
+  },
+  "never": {
+    "message": "Never"
+  },
+  "minutesAgo": {
+    "message": "$1 min ago",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": {
+    "message": "$1h ago",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "formatAuto": {
+    "message": "Auto-detect"
+  },
+  "formatAbp": {
+    "message": "ABP / GFWList"
+  },
+  "formatDomains": {
+    "message": "Domain list"
+  },
+  "intervalManual": {
+    "message": "Manual only"
+  },
+  "intervalMinutes": {
+    "message": "Every $1 min",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "30"
+      }
+    }
+  },
+  "intervalHour": {
+    "message": "Every $1 hour",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "intervalHours": {
+    "message": "Every $1 hours",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "6"
+      }
+    }
+  },
+  "intervalDay": {
+    "message": "Every $1 day",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   }
 }

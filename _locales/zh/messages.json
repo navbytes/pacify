@@ -1150,5 +1150,63 @@
   },
   "shortcutsTip": {
     "message": "在任何位置按 ? 显示此帮助"
+  },
+  "subscriptions": { "message": "订阅" },
+  "subscriptionsDescription": { "message": "从远程域名列表导入规则" },
+  "addSubscription": { "message": "添加订阅" },
+  "subscriptionName": { "message": "名称" },
+  "subscriptionNamePlaceholder": { "message": "例如：GFWList、广告域名" },
+  "subscriptionNameRequired": { "message": "订阅名称为必填项" },
+  "subscriptionUrl": { "message": "URL" },
+  "subscriptionUrlRequired": { "message": "订阅URL为必填项" },
+  "subscriptionUrlInvalid": { "message": "请输入有效的URL" },
+  "subscriptionFormat": { "message": "格式" },
+  "subscriptionInterval": { "message": "自动刷新" },
+  "subscriptionFetching": { "message": "获取中..." },
+  "subscriptionFetchFailed": { "message": "获取订阅失败" },
+  "subscriptionNoRules": { "message": "订阅中未找到规则" },
+  "noSubscriptions": { "message": "没有订阅" },
+  "noSubscriptionsDescription": {
+    "message": "订阅远程域名列表，自动从GFWList或自定义域名列表等URL导入代理规则"
+  },
+  "refreshSubscription": { "message": "刷新" },
+  "editSubscription": { "message": "编辑订阅" },
+  "saveSubscription": { "message": "保存更改" },
+  "deleteSubscription": { "message": "删除订阅" },
+  "deleteSubscriptionTitle": { "message": "删除订阅" },
+  "deleteSubscriptionMessage": {
+    "message": "确定要删除订阅 \"$1\" 吗？",
+    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
+  },
+  "rules": { "message": "规则" },
+  "fromSubscriptions": { "message": "来自订阅" },
+  "never": { "message": "从不" },
+  "minutesAgo": {
+    "message": "$1 分钟前",
+    "placeholders": { "1": { "content": "$1", "example": "5" } }
+  },
+  "hoursAgo": {
+    "message": "$1 小时前",
+    "placeholders": { "1": { "content": "$1", "example": "2" } }
+  },
+  "formatAuto": { "message": "自动检测" },
+  "formatAbp": { "message": "ABP / GFWList" },
+  "formatDomains": { "message": "域名列表" },
+  "intervalManual": { "message": "仅手动" },
+  "intervalMinutes": {
+    "message": "每 $1 分钟",
+    "placeholders": { "1": { "content": "$1", "example": "30" } }
+  },
+  "intervalHour": {
+    "message": "每 $1 小时",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
+  },
+  "intervalHours": {
+    "message": "每 $1 小时",
+    "placeholders": { "1": { "content": "$1", "example": "6" } }
+  },
+  "intervalDay": {
+    "message": "每 $1 天",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
   }
 }

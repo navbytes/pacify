@@ -42,6 +42,9 @@ export class PACScriptGenerator {
       .map((rule) => PACScriptGenerator.generateRuleCondition(rule, allProxies, embeddedScripts))
       .filter((condition) => condition !== null)
 
+    // Generate subscription domain sets and conditions
+    const subscriptionBlocks = PACScriptGenerator.generateSubscriptionBlocks(config, allProxies)
+
     // Generate fallback
     const fallbackStatement = PACScriptGenerator.generateFallbackStatement(
       config,
@@ -52,10 +55,65 @@ export class PACScriptGenerator {
     // Build the final PAC script
     const embeddedFunctions = embeddedScripts.map((es) => es.scriptBody).join('\n\n')
 
-    return `${embeddedFunctions}${embeddedFunctions ? '\n\n' : ''}function FindProxyForURL(url, host) {
-${ruleConditions.map((c) => `  ${c}`).join('\n')}
+    const allPreamble = [embeddedFunctions, subscriptionBlocks.domainSets]
+      .filter(Boolean)
+      .join('\n\n')
+
+    const allConditions = [...ruleConditions, ...subscriptionBlocks.conditions]
+
+    return `${allPreamble}${allPreamble ? '\n\n' : ''}function FindProxyForURL(url, host) {
+${allConditions.map((c) => `  ${c}`).join('\n')}
   ${fallbackStatement}
 }`
+  }
+
+  /**
+   * Generate domain set variables and match conditions for enabled subscriptions
+   */
+  private static generateSubscriptionBlocks(
+    config: AutoProxyConfig,
+    allProxies: ProxyConfig[]
+  ): { domainSets: string; conditions: string[] } {
+    const enabledSubs = (config.subscriptions || []).filter(
+      (sub) => sub.enabled && sub.cachedRules && sub.cachedRules.length > 0
+    )
+
+    if (enabledSubs.length === 0) {
+      return { domainSets: '', conditions: [] }
+    }
+
+    const domainSetParts: string[] = []
+    const conditions: string[] = []
+
+    for (let i = 0; i < enabledSubs.length; i++) {
+      const sub = enabledSubs[i]
+      const varName = `_subDomains_${i}`
+      const domains = sub.cachedRules || []
+
+      // Build a Set of domains for O(1) lookup
+      const domainList = domains.map((d) => `"${d}"`).join(',')
+      domainSetParts.push(
+        `// Subscription: ${sub.name}\nvar ${varName} = new Set([${domainList}]);`
+      )
+
+      // Generate the matching function - check exact domain and parent domains
+      const proxyString = PACScriptGenerator.getProxyString(
+        sub.proxyType,
+        sub.proxyId,
+        sub.inlineProxy,
+        allProxies
+      )
+
+      // Check the host itself and strip subdomains progressively
+      conditions.push(
+        `if ((function(h,s){while(h){if(s.has(h))return true;var i=h.indexOf(".");if(i<0)break;h=h.substr(i+1);}return false;})(host,${varName})) return "${proxyString}";`
+      )
+    }
+
+    return {
+      domainSets: domainSetParts.join('\n\n'),
+      conditions,
+    }
   }
 
   /**

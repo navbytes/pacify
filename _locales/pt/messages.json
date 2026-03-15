@@ -1150,5 +1150,67 @@
   },
   "shortcutsTip": {
     "message": "Pressione ? em qualquer lugar para mostrar esta ajuda"
+  },
+  "subscriptions": { "message": "Assinaturas" },
+  "subscriptionsDescription": {
+    "message": "Importar regras de listas de domínios remotas"
+  },
+  "addSubscription": { "message": "Adicionar assinatura" },
+  "subscriptionName": { "message": "Nome" },
+  "subscriptionNamePlaceholder": { "message": "ex., GFWList, Ad Domains" },
+  "subscriptionNameRequired": { "message": "Nome da assinatura é obrigatório" },
+  "subscriptionUrl": { "message": "URL" },
+  "subscriptionUrlRequired": { "message": "URL da assinatura é obrigatório" },
+  "subscriptionUrlInvalid": { "message": "Por favor, insira uma URL válida" },
+  "subscriptionFormat": { "message": "Formato" },
+  "subscriptionInterval": { "message": "Atualização automática" },
+  "subscriptionFetching": { "message": "Buscando..." },
+  "subscriptionFetchFailed": { "message": "Falha ao buscar assinatura" },
+  "subscriptionNoRules": {
+    "message": "Nenhuma regra encontrada na assinatura"
+  },
+  "noSubscriptions": { "message": "Sem assinaturas" },
+  "noSubscriptionsDescription": {
+    "message": "Assine listas de domínios remotas para importar automaticamente regras de proxy de URLs como GFWList ou listas de domínios personalizadas"
+  },
+  "refreshSubscription": { "message": "Atualizar" },
+  "editSubscription": { "message": "Editar assinatura" },
+  "saveSubscription": { "message": "Salvar alterações" },
+  "deleteSubscription": { "message": "Excluir assinatura" },
+  "deleteSubscriptionTitle": { "message": "Excluir assinatura" },
+  "deleteSubscriptionMessage": {
+    "message": "Tem certeza de que deseja excluir a assinatura \"$1\"?",
+    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
+  },
+  "rules": { "message": "regras" },
+  "fromSubscriptions": { "message": "de assinaturas" },
+  "never": { "message": "Nunca" },
+  "minutesAgo": {
+    "message": "$1 min atrás",
+    "placeholders": { "1": { "content": "$1", "example": "5" } }
+  },
+  "hoursAgo": {
+    "message": "$1h atrás",
+    "placeholders": { "1": { "content": "$1", "example": "2" } }
+  },
+  "formatAuto": { "message": "Detectar automaticamente" },
+  "formatAbp": { "message": "ABP / GFWList" },
+  "formatDomains": { "message": "Lista de domínios" },
+  "intervalManual": { "message": "Apenas manual" },
+  "intervalMinutes": {
+    "message": "A cada $1 min",
+    "placeholders": { "1": { "content": "$1", "example": "30" } }
+  },
+  "intervalHour": {
+    "message": "A cada $1 hora",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
+  },
+  "intervalHours": {
+    "message": "A cada $1 horas",
+    "placeholders": { "1": { "content": "$1", "example": "6" } }
+  },
+  "intervalDay": {
+    "message": "A cada $1 dia",
+    "placeholders": { "1": { "content": "$1", "example": "1" } }
   }
 }

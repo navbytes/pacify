@@ -1150,5 +1150,152 @@
   },
   "shortcutsTip": {
     "message": "Drücken Sie ? um diese Hilfe anzuzeigen"
+  },
+  "subscriptions": {
+    "message": "Abonnements"
+  },
+  "subscriptionsDescription": {
+    "message": "Regeln aus entfernten Domain-Listen importieren"
+  },
+  "addSubscription": {
+    "message": "Abonnement hinzufügen"
+  },
+  "subscriptionName": {
+    "message": "Name"
+  },
+  "subscriptionNamePlaceholder": {
+    "message": "z.B. GFWList, Werbe-Domains"
+  },
+  "subscriptionNameRequired": {
+    "message": "Abonnementname ist erforderlich"
+  },
+  "subscriptionUrl": {
+    "message": "URL"
+  },
+  "subscriptionUrlRequired": {
+    "message": "Abonnement-URL ist erforderlich"
+  },
+  "subscriptionUrlInvalid": {
+    "message": "Bitte geben Sie eine gültige URL ein"
+  },
+  "subscriptionFormat": {
+    "message": "Format"
+  },
+  "subscriptionInterval": {
+    "message": "Automatische Aktualisierung"
+  },
+  "subscriptionFetching": {
+    "message": "Wird abgerufen..."
+  },
+  "subscriptionFetchFailed": {
+    "message": "Abonnement konnte nicht abgerufen werden"
+  },
+  "subscriptionNoRules": {
+    "message": "Keine Regeln im Abonnement gefunden"
+  },
+  "noSubscriptions": {
+    "message": "Keine Abonnements"
+  },
+  "noSubscriptionsDescription": {
+    "message": "Abonnieren Sie entfernte Domain-Listen, um automatisch Proxy-Regeln von URLs wie GFWList oder benutzerdefinierten Domain-Listen zu importieren"
+  },
+  "refreshSubscription": {
+    "message": "Aktualisieren"
+  },
+  "editSubscription": {
+    "message": "Abonnement bearbeiten"
+  },
+  "saveSubscription": {
+    "message": "Änderungen speichern"
+  },
+  "deleteSubscription": {
+    "message": "Abonnement löschen"
+  },
+  "deleteSubscriptionTitle": {
+    "message": "Abonnement löschen"
+  },
+  "deleteSubscriptionMessage": {
+    "message": "Möchten Sie das Abonnement \"$1\" wirklich löschen?",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "GFWList"
+      }
+    }
+  },
+  "rules": {
+    "message": "Regeln"
+  },
+  "fromSubscriptions": {
+    "message": "aus Abonnements"
+  },
+  "never": {
+    "message": "Niemals"
+  },
+  "minutesAgo": {
+    "message": "vor $1 Min",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": {
+    "message": "vor $1h",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "formatAuto": {
+    "message": "Automatisch erkennen"
+  },
+  "formatAbp": {
+    "message": "ABP / GFWList"
+  },
+  "formatDomains": {
+    "message": "Domain-Liste"
+  },
+  "intervalManual": {
+    "message": "Nur manuell"
+  },
+  "intervalMinutes": {
+    "message": "Alle $1 Min",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "30"
+      }
+    }
+  },
+  "intervalHour": {
+    "message": "Alle $1 Stunde",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
+  },
+  "intervalHours": {
+    "message": "Alle $1 Stunden",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "6"
+      }
+    }
+  },
+  "intervalDay": {
+    "message": "Alle $1 Tag",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   }
 }

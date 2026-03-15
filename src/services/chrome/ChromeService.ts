@@ -29,7 +29,9 @@ export class ChromeService {
       return new Promise((resolve, reject) => {
         this.browser.proxy.settings.set(details, async () => {
           if (this.browser.runtime.lastError) {
-            return reject(this.browser.runtime.lastError)
+            return reject(
+              new Error(this.browser.runtime.lastError?.message || 'Unknown Chrome error')
+            )
           }
 
           // Reload active tab to apply proxy changes if enabled
@@ -55,7 +57,9 @@ export class ChromeService {
     return new Promise((resolve, reject) => {
       this.browser.proxy.settings.clear({}, async () => {
         if (this.browser.runtime.lastError) {
-          return reject(this.browser.runtime.lastError)
+          return reject(
+            new Error(this.browser.runtime.lastError?.message || 'Unknown Chrome error')
+          )
         }
 
         // Reload active tab to apply proxy changes if enabled
@@ -99,7 +103,9 @@ export class ChromeService {
       return new Promise((resolve, reject) => {
         this.browser.proxy.settings.get({}, (config) => {
           if (this.browser.runtime.lastError) {
-            return reject(this.browser.runtime.lastError)
+            return reject(
+              new Error(this.browser.runtime.lastError?.message || 'Unknown Chrome error')
+            )
           }
           resolve(config as unknown as chrome.types.ChromeSettingGetDetails)
         })
