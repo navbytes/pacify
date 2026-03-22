@@ -128,7 +128,7 @@ function handleKeydown(event: KeyboardEvent, index: number) {
                 'bg-linear-to-r from-blue-500 to-purple-500 text-white shadow-md shadow-blue-500/20'
             )
           : cn(
-              'text-slate-600 dark:text-slate-400',
+              'text-slate-600 dark:text-slate-300',
               'hover:text-slate-900 dark:hover:text-white',
               'hover:bg-slate-200/50 dark:hover:bg-slate-700/50'
             )

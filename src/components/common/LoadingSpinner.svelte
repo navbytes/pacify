@@ -10,6 +10,6 @@ interface Props {
 let { size = 'md', color = 'text-blue-500' }: Props = $props()
 </script>
 
-<div class="flex justify-center items-center">
+<div class="flex justify-center items-center" role="status" aria-label="Loading">
   <div class={cn(loadingSpinnerVariants({ size }), color)}></div>
 </div>

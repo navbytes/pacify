@@ -13,7 +13,6 @@ import {
 import { cn } from '@/utils/cn'
 import { GripVertical, Lock, Pencil, ShieldCheck, Trash } from '@/utils/icons'
 import {
-  findAutoProxyReferences,
   getProxyDescription,
   getProxyModeColor,
   getProxyModeIcon,
@@ -31,6 +30,7 @@ interface Props {
   onScriptEdit: (scriptId: string) => void
   disableDrag?: boolean
   viewMode?: ViewMode
+  autoProxyRefMap?: Map<string, { configName: string; ruleCount: number }[]>
 }
 
 let {
@@ -40,6 +40,7 @@ let {
   dragType = $bindable(),
   disableDrag = false,
   viewMode = 'grid',
+  autoProxyRefMap,
 }: Props = $props()
 
 let settings = $derived($settingsStore)
@@ -48,16 +49,14 @@ let ModeIcon = $derived(getProxyModeIcon(proxy.mode, proxy))
 let modeLabel = $derived(getProxyModeLabel(proxy.mode, proxy))
 let proxyDesc = $derived(getProxyDescription(proxy.mode, proxy))
 let showDeleteDialog = $state(false)
-let autoProxyRefs = $derived(
-  proxy.id ? findAutoProxyReferences(proxy.id, settings.proxyConfigs) : []
-)
+// Use pre-computed map from parent (O(1) lookup) instead of per-item search (O(n))
+let autoProxyRefs = $derived(proxy.id && autoProxyRefMap ? autoProxyRefMap.get(proxy.id) || [] : [])
 
 // Check if proxy has authentication configured
 let hasAuthentication = $derived(() => {
   // Check manual proxy rules
   if (proxy.rules) {
-    const checkProxy = (p: typeof proxy.rules.singleProxy) =>
-      p && (p.username || p.password)
+    const checkProxy = (p: typeof proxy.rules.singleProxy) => p && (p.username || p.password)
 
     if (checkProxy(proxy.rules.singleProxy)) return true
     if (checkProxy(proxy.rules.proxyForHttp)) return true
@@ -69,14 +68,16 @@ let hasAuthentication = $derived(() => {
   // Check Auto-Proxy inline proxies
   if (proxy.autoProxy) {
     // Check rules with inline proxies
-    const hasAuthInRules = proxy.autoProxy.rules.some(rule =>
-      rule.inlineProxy && (rule.inlineProxy.username || rule.inlineProxy.password)
+    const hasAuthInRules = proxy.autoProxy.rules.some(
+      (rule) => rule.inlineProxy && (rule.inlineProxy.username || rule.inlineProxy.password)
     )
     if (hasAuthInRules) return true
 
     // Check fallback inline proxy
-    if (proxy.autoProxy.fallbackInlineProxy &&
-        (proxy.autoProxy.fallbackInlineProxy.username || proxy.autoProxy.fallbackInlineProxy.password)) {
+    if (
+      proxy.autoProxy.fallbackInlineProxy &&
+      (proxy.autoProxy.fallbackInlineProxy.username || proxy.autoProxy.fallbackInlineProxy.password)
+    ) {
       return true
     }
   }
@@ -298,7 +299,7 @@ async function handleScriptDelete() {
             class={cn(
               badgePatterns.base,
               'self-start font-medium border rounded-lg shadow-sm backdrop-blur-sm',
-              'transition-all duration-200 hover:scale-105',
+              'transition-all duration-200 hover:shadow-md',
               modeColors.bg,
               modeColors.text,
               modeColors.border
@@ -336,7 +337,7 @@ async function handleScriptDelete() {
             minimal
             onclick={() => openEditor(proxy.id)}
             aria-label={I18nService.getMessage('editConfiguration', proxy.name)}
-            classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all hover:scale-105"
+            classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all hover:shadow-md"
           >
             {#snippet icon()}
               <Pencil size={16} />
@@ -349,7 +350,7 @@ async function handleScriptDelete() {
             minimal
             onclick={confirmDelete}
             aria-label={I18nService.getMessage('deleteConfiguration', proxy.name)}
-            classes="hover:bg-red-50 dark:hover:bg-red-950/20 transition-all hover:scale-105"
+            classes="hover:bg-red-50 dark:hover:bg-red-950/20 transition-all hover:shadow-md"
             data-testid={`delete-proxy-button-${proxy.id}`}
           >
             {#snippet icon()}
@@ -382,7 +383,7 @@ async function handleScriptDelete() {
               minimal
               onclick={() => openEditor(proxy.id)}
               aria-label={I18nService.getMessage('editConfiguration', proxy.name)}
-              classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all hover:scale-105"
+              classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all hover:shadow-md"
             >
               {#snippet icon()}
                 <Pencil size={16} />
@@ -394,7 +395,7 @@ async function handleScriptDelete() {
               minimal
               onclick={confirmDelete}
               aria-label={I18nService.getMessage('deleteConfiguration', proxy.name)}
-              classes="hover:bg-red-50 dark:hover:bg-red-950/20 transition-all hover:scale-105"
+              classes="hover:bg-red-50 dark:hover:bg-red-950/20 transition-all hover:shadow-md"
               data-testid={`delete-proxy-button-${proxy.id}`}
             >
               {#snippet icon()}

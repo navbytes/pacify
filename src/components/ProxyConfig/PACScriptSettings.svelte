@@ -257,7 +257,7 @@ onDestroy(async () => {
       <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">{urlError}</Text>
     {/if}
     {#if pacUrl && !urlError}
-      <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-400">
+      <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-300">
         {I18nService.getMessage('pacUrlHelp') || 'PAC script will be loaded from this URL'}
       </Text>
     {/if}
@@ -300,7 +300,7 @@ onDestroy(async () => {
             {/if}
           </Button>
           {#if lastFetchedText}
-            <Text size="xs" classes="text-slate-500 dark:text-slate-400">
+            <Text size="xs" classes="text-slate-500 dark:text-slate-300">
               {I18nService.getMessage('lastFetched') || 'Last fetched'}: {lastFetchedText}
             </Text>
           {/if}

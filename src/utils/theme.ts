@@ -63,7 +63,7 @@ export const colors = {
 
   text: {
     default: 'text-slate-900 dark:text-white',
-    muted: 'text-slate-600 dark:text-slate-400',
+    muted: 'text-slate-600 dark:text-slate-300',
     subtle: 'text-slate-500 dark:text-slate-500',
     inverse: 'text-white dark:text-slate-900',
   },
@@ -76,8 +76,8 @@ export const colors = {
 
   // Icon/decorative colors
   icon: {
-    default: 'text-slate-600 dark:text-slate-400',
-    muted: 'text-slate-400 dark:text-slate-600',
+    default: 'text-slate-600 dark:text-slate-300',
+    muted: 'text-slate-400 dark:text-slate-500',
     primary: 'text-blue-600 dark:text-blue-400',
   },
 

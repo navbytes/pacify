@@ -121,7 +121,7 @@ const checkboxStyles = checkboxLabelVariants()
       placeholder={I18nService.getMessage('bypassListPlaceholder') ||
         '*.example.com\n192.168.1.0/24\nlocalhost'}
     ></textarea>
-    <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-400">
+    <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-300">
       {I18nService.getMessage('bypassListHelp') ||
         'Enter one address per line. Supports wildcards (*), CIDR notation, and exact matches.'}
     </Text>

@@ -53,7 +53,7 @@ export interface AutoProxyRule {
 }
 
 // Supported subscription formats for remote rule lists
-export type SubscriptionFormat = 'auto' | 'abp' | 'domains'
+export type SubscriptionFormat = 'auto' | 'abp' | 'domains' | 'surge' | 'clash'
 
 // A remote rule list subscription
 export interface AutoProxySubscription {

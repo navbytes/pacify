@@ -54,11 +54,15 @@ function createThemeStore() {
     mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     themeChangeHandler = () => {
       // Re-apply theme when system preference changes
-      subscribe((currentTheme) => {
-        if (currentTheme === 'system') {
-          applyTheme('system')
-        }
-      })()
+      // Read current value directly without creating a new subscription
+      let currentTheme: Theme = 'system'
+      const unsubscribe = subscribe((value) => {
+        currentTheme = value
+      })
+      unsubscribe()
+      if (currentTheme === 'system') {
+        applyTheme('system')
+      }
     }
     mediaQuery.addEventListener('change', themeChangeHandler)
   }

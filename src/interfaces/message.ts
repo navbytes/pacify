@@ -6,6 +6,7 @@ export type BackgroundMessageType =
   | 'SCRIPT_UPDATE'
   | 'QUICK_SWITCH'
   | 'REFRESH_SUBSCRIPTION'
+  | 'FETCH_SUBSCRIPTION'
 
 export interface BaseMessage {
   type: BackgroundMessageType
@@ -21,7 +22,7 @@ export interface SetProxyMessage extends BaseMessage {
   proxy: ProxyConfig
 }
 
-export interface SetProxyQuickSwitchMessage extends BaseMessage {
+export interface ScriptUpdateMessage extends BaseMessage {
   type: 'SCRIPT_UPDATE'
   scriptId: string
 }
@@ -36,12 +37,19 @@ export interface RefreshSubscriptionMessage extends BaseMessage {
   subscriptionId: string
 }
 
+export interface FetchSubscriptionMessage extends BaseMessage {
+  type: 'FETCH_SUBSCRIPTION'
+  url: string
+  format: string
+}
+
 export type BackgroundMessage =
   | QuickSwitchMessage
   | SetProxyMessage
-  | SetProxyQuickSwitchMessage
+  | ScriptUpdateMessage
   | ClearProxyMessage
   | RefreshSubscriptionMessage
+  | FetchSubscriptionMessage
 
 export interface BackgroundMessageResponse {
   success: boolean

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { GitBranch, Route, Save, Settings, Sparkles, X } from 'lucide-svelte'
-import { onMount } from 'svelte'
+import { onMount, tick } from 'svelte'
 import type {
   AutoProxyConfig,
   AutoProxyRouteType,
@@ -168,12 +168,22 @@ async function handleSubmit() {
 
   if (!name.trim()) {
     errorMessage = I18nService.getMessage('nameRequired')
+    tick().then(() => {
+      document
+        .querySelector('[data-error-message]')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
     return
   }
 
   const enabledSubscriptions = subscriptions.filter((s) => s.enabled && (s.ruleCount || 0) > 0)
   if (rules.length === 0 && enabledSubscriptions.length === 0) {
     errorMessage = I18nService.getMessage('atLeastOneRule')
+    tick().then(() => {
+      document
+        .querySelector('[data-error-message]')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
     return
   }
 
@@ -202,6 +212,11 @@ async function handleSubmit() {
   } catch (error) {
     console.error('Error saving Auto-Proxy config:', error)
     errorMessage = error instanceof Error ? error.message : I18nService.getMessage('failedToSave')
+    tick().then(() => {
+      document
+        .querySelector('[data-error-message]')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
   } finally {
     isSubmitting = false
   }
@@ -257,7 +272,7 @@ let selectableProxies = $derived(
             <h2 id="auto-proxy-title" class="text-xl font-bold text-slate-900 dark:text-white">
               {proxyConfig ? I18nService.getMessage('editAutoProxy') : I18nService.getMessage('createAutoProxy')}
             </h2>
-            <p class="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mt-0.5">
+            <p class="text-sm text-slate-500 dark:text-slate-300 flex items-center gap-1.5 mt-0.5">
               <Route size={14} />
               {I18nService.getMessage('autoProxySubtitle')}
             </p>
@@ -300,7 +315,7 @@ let selectableProxies = $derived(
             <div class="flex items-center justify-between mb-1">
               <label
                 for="name"
-                class="block text-sm font-medium text-slate-600 dark:text-slate-400"
+                class="block text-sm font-medium text-slate-600 dark:text-slate-300"
               >
                 {I18nService.getMessage('configurationName')}
                 <span class="text-orange-500">*</span>
@@ -324,7 +339,7 @@ let selectableProxies = $derived(
 
           <!-- Color Picker -->
           <div class="space-y-2">
-            <Text size="sm" weight="medium" classes="block text-slate-600 dark:text-slate-400">
+            <Text size="sm" weight="medium" classes="block text-slate-600 dark:text-slate-300">
               {I18nService.getMessage('color')}
               <span class="text-orange-500">*</span>
             </Text>
@@ -348,7 +363,7 @@ let selectableProxies = $derived(
 
           <!-- Active Toggle -->
           <div class="space-y-2">
-            <Text size="sm" weight="medium" classes="block text-slate-600 dark:text-slate-400">
+            <Text size="sm" weight="medium" classes="block text-slate-600 dark:text-slate-300">
               {I18nService.getMessage('active')}
             </Text>
             <ToggleSwitch bind:checked={isActive} />
@@ -360,7 +375,7 @@ let selectableProxies = $derived(
           <div class="flex items-center justify-between mb-1">
             <label
               for="badgeLabel"
-              class="block text-sm font-medium text-slate-600 dark:text-slate-400"
+              class="block text-sm font-medium text-slate-600 dark:text-slate-300"
             >
               {I18nService.getMessage('badgeLabel')}
               <span class="text-xs text-slate-500 ml-1">(Optional)</span>
@@ -461,7 +476,7 @@ let selectableProxies = $derived(
 
       <!-- Error Message -->
       {#if errorMessage}
-        <div class={redSection.wrapper()}>
+        <div class={redSection.wrapper()} data-error-message>
           <div class={redSection.background()}></div>
           <div class={redSection.accentBar()}></div>
           <div class="relative p-4 {redSection.content()}">

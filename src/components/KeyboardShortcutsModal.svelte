@@ -185,7 +185,7 @@ function formatKey(key: string): string {
                 as="h3"
                 weight="semibold"
                 size="sm"
-                classes="mb-3 uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                classes="mb-3 uppercase tracking-wider text-slate-500 dark:text-slate-300"
               >
                 {getMessage(group.titleKey, group.titleFallback)}
               </Text>

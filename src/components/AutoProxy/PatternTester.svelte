@@ -119,7 +119,13 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
         ></div>
       </div>
 
-      <Button onclick={handleTest} variant="gradient" gradient="cyan" classes="px-5 py-3" data-testid="test-pattern-btn">
+      <Button
+        onclick={handleTest}
+        variant="gradient"
+        gradient="cyan"
+        classes="px-5 py-3"
+        data-testid="test-pattern-btn"
+      >
         {#snippet icon()}
           <Zap size={16} class={isAnimating ? 'animate-pulse' : ''} />
         {/snippet}
@@ -158,7 +164,7 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
                   </div>
 
                   <div class="flex items-center gap-2 flex-wrap text-sm">
-                    <span class="text-slate-600 dark:text-slate-400"
+                    <span class="text-slate-600 dark:text-slate-300"
                       >{I18nService.getMessage('ruleLabel')}</span
                     >
                     <code
@@ -193,7 +199,7 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
                 <!-- Info icon -->
                 <div class="shrink-0">
                   <div class="p-2 rounded-full bg-slate-200 dark:bg-slate-700">
-                    <XCircle size={20} class="text-slate-500 dark:text-slate-400" />
+                    <XCircle size={20} class="text-slate-500 dark:text-slate-300" />
                   </div>
                 </div>
 
@@ -202,7 +208,7 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
                   <span class="text-base font-semibold text-slate-700 dark:text-slate-300">
                     {I18nService.getMessage('noPatternMatch') || 'No pattern matches'}
                   </span>
-                  <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                  <p class="text-sm text-slate-500 dark:text-slate-300 mt-1">
                     {I18nService.getMessage('useFallback') || 'Fallback behavior will be used for this URL'}
                   </p>
                 </div>
@@ -216,7 +222,7 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
       <div
         class="mt-4 p-4 rounded-xl border border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/30"
       >
-        <p class="text-sm text-center text-slate-500 dark:text-slate-400">
+        <p class="text-sm text-center text-slate-500 dark:text-slate-300">
           {I18nService.getMessage('testPatternHelp')}
         </p>
       </div>

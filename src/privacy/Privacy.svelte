@@ -94,7 +94,7 @@ We only request permissions that are essential for the extension to function.`,
             >
               {getMessage('privacyPolicyTitle', 'Privacy Policy')}
             </h1>
-            <p class="text-sm text-slate-500 dark:text-slate-400">PACify Proxy Manager</p>
+            <p class="text-sm text-slate-500 dark:text-slate-300">PACify Proxy Manager</p>
           </div>
         </div>
         <ThemeToggle />

@@ -17,16 +17,43 @@ export interface ParsedSubscription {
  */
 // biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern
 export class SubscriptionParser {
+  private static readonly TITLE_REGEX = /^[!#]\s*Title:\s*(.+)/i
+  private static readonly HOME_REGEX = /^[!#]\s*Homepage:\s*(.+)/i
+  private static readonly MODIFIED_REGEX = /^[!#]\s*Last modified:\s*(.+)/i
+  private static readonly PLAIN_DOMAIN_REGEX = /^\.?[\w][\w.-]*\.\w{2,}$/
+
   /**
    * Fetch and parse a subscription URL
    */
   static async fetchAndParse(url: string, format: SubscriptionFormat): Promise<ParsedSubscription> {
-    const response = await fetch(url)
+    // Use a non-browser User-Agent to avoid bot protection systems (e.g., Anubis)
+    // that challenge requests with "Mozilla" in the UA string.
+    // This is the same approach used by curl, wget, and package managers.
+    const response = await fetch(url, {
+      signal: AbortSignal.timeout(15_000),
+      headers: { 'User-Agent': 'PACify/1.31' },
+    })
     if (!response.ok) {
       throw new Error(`Failed to fetch subscription: HTTP ${response.status}`)
     }
 
     const rawText = await response.text()
+
+    // Detect HTML responses (e.g., from proxy login pages, firewalls, bot challenges)
+    const trimmedStart = rawText.trimStart().slice(0, 200).toLowerCase()
+    if (trimmedStart.startsWith('<!doctype') || trimmedStart.startsWith('<html')) {
+      // Check specifically for Anubis bot protection
+      if (rawText.includes('anubis') || rawText.includes('not a bot')) {
+        throw new Error(
+          'This server uses bot protection (Anubis) that blocks automated requests. ' +
+            'Try using a mirror URL, or paste the rule list content directly.'
+        )
+      }
+      throw new Error(
+        'The URL returned an HTML page instead of a rule list. Check the URL or your network connection.'
+      )
+    }
+
     return SubscriptionParser.parse(rawText, format)
   }
 
@@ -42,6 +69,10 @@ export class SubscriptionParser {
     switch (detectedFormat) {
       case 'abp':
         return SubscriptionParser.parseABP(text)
+      case 'surge':
+        return SubscriptionParser.parseSurge(text)
+      case 'clash':
+        return SubscriptionParser.parseClash(text)
       case 'domains':
         return SubscriptionParser.parseDomainList(text)
       default:
@@ -86,8 +117,8 @@ export class SubscriptionParser {
   /**
    * Auto-detect the format of a rule list
    */
-  private static detectFormat(text: string): 'abp' | 'domains' {
-    const lines = text.split('\n').slice(0, 20) // Check first 20 lines
+  private static detectFormat(text: string): 'abp' | 'domains' | 'surge' | 'clash' {
+    const lines = text.split('\n').slice(0, 30) // Check first 30 lines
 
     // ABP format markers
     if (lines.some((l) => l.startsWith('[Adblock') || l.startsWith('[AutoProxy'))) {
@@ -97,6 +128,36 @@ export class SubscriptionParser {
     // ABP-style rules
     if (lines.some((l) => l.startsWith('||') || l.startsWith('@@') || l.startsWith('!'))) {
       return 'abp'
+    }
+
+    // Clash format: YAML-style payload list
+    if (lines.some((l) => l.trimStart().startsWith('payload:'))) {
+      return 'clash'
+    }
+
+    // Clash-style entries (- 'domain' or - DOMAIN,domain)
+    if (
+      lines.some((l) => {
+        const t = l.trim()
+        return t.startsWith("- '") || t.startsWith('- "') || t.startsWith('- DOMAIN')
+      })
+    ) {
+      return 'clash'
+    }
+
+    // Surge format markers
+    if (
+      lines.some((l) => {
+        const t = l.trim()
+        return (
+          t.startsWith('DOMAIN,') ||
+          t.startsWith('DOMAIN-SUFFIX,') ||
+          t.startsWith('DOMAIN-KEYWORD,') ||
+          t.startsWith('[Rule]')
+        )
+      })
+    ) {
+      return 'surge'
     }
 
     return 'domains'
@@ -128,14 +189,14 @@ export class SubscriptionParser {
 
       // Parse metadata from comments
       if (line.startsWith('!') || line.startsWith('#')) {
-        const titleMatch = line.match(/^[!#]\s*Title:\s*(.+)/i)
-        if (titleMatch) metadata.title = titleMatch[1].trim()
+        const titleMatch = line.match(SubscriptionParser.TITLE_REGEX)
+        if (titleMatch) metadata.title = titleMatch[1].trim().slice(0, 200)
 
-        const homeMatch = line.match(/^[!#]\s*Homepage:\s*(.+)/i)
-        if (homeMatch) metadata.homepage = homeMatch[1].trim()
+        const homeMatch = line.match(SubscriptionParser.HOME_REGEX)
+        if (homeMatch) metadata.homepage = homeMatch[1].trim().slice(0, 500)
 
-        const modifiedMatch = line.match(/^[!#]\s*Last modified:\s*(.+)/i)
-        if (modifiedMatch) metadata.lastModified = modifiedMatch[1].trim()
+        const modifiedMatch = line.match(SubscriptionParser.MODIFIED_REGEX)
+        if (modifiedMatch) metadata.lastModified = modifiedMatch[1].trim().slice(0, 100)
 
         continue
       }
@@ -175,7 +236,7 @@ export class SubscriptionParser {
         }
       }
       // .domain.com or domain.com (plain domain entries common in some lists)
-      else if (/^\.?[\w][\w.-]*\.\w{2,}$/.test(line)) {
+      else if (SubscriptionParser.PLAIN_DOMAIN_REGEX.test(line)) {
         domain = line.startsWith('.') ? line.slice(1) : line
       }
 
@@ -231,12 +292,121 @@ export class SubscriptionParser {
   }
 
   /**
+   * Parse Surge-style rule list
+   *
+   * Supported rule types:
+   * - DOMAIN,example.com       -> exact domain
+   * - DOMAIN-SUFFIX,example.com -> domain suffix (acts like wildcard)
+   * - DOMAIN-KEYWORD,example    -> keyword (skipped - not a domain)
+   * - IP-CIDR,1.2.3.0/24       -> IP range (skipped)
+   * - [Rule], [Header], etc.   -> section headers (skipped)
+   * - # or // comments         -> skipped
+   */
+  private static parseSurge(text: string): ParsedSubscription {
+    const lines = text.split('\n')
+    const domains: string[] = []
+    const seen = new Set<string>()
+
+    for (const rawLine of lines) {
+      const line = rawLine.trim()
+
+      if (!line || line.startsWith('#') || line.startsWith('//') || line.startsWith('[')) continue
+
+      const domain = SubscriptionParser.extractSurgeRuleDomain(line)
+
+      if (domain && SubscriptionParser.isValidDomain(domain) && !seen.has(domain)) {
+        seen.add(domain)
+        domains.push(domain)
+      }
+    }
+
+    return { domains }
+  }
+
+  /**
+   * Parse Clash-style rule list (YAML payload format)
+   *
+   * Supported formats:
+   * - payload:
+   *   - DOMAIN,example.com
+   *   - DOMAIN-SUFFIX,example.com
+   *   - '+.example.com'          -> domain suffix shorthand
+   *   - '.example.com'           -> domain suffix shorthand
+   *   - 'example.com'            -> exact domain
+   */
+  private static parseClash(text: string): ParsedSubscription {
+    const lines = text.split('\n')
+    const domains: string[] = []
+    const seen = new Set<string>()
+
+    for (const rawLine of lines) {
+      const line = rawLine.trim()
+
+      if (!line || line === 'payload:' || line.startsWith('#')) continue
+
+      // Strip YAML list prefix
+      let entry = line
+      if (entry.startsWith('- ')) {
+        entry = entry.slice(2).trim()
+      }
+
+      // Strip surrounding quotes
+      if (
+        (entry.startsWith("'") && entry.endsWith("'")) ||
+        (entry.startsWith('"') && entry.endsWith('"'))
+      ) {
+        entry = entry.slice(1, -1)
+      }
+
+      let domain: string | null = null
+
+      // Clash-specific shorthand: +.example.com or .example.com
+      if (entry.startsWith('+.')) {
+        domain = entry.slice(2)
+      } else if (entry.startsWith('.')) {
+        domain = entry.slice(1)
+      }
+      // Surge-style entries within Clash lists
+      else if (entry.startsWith('DOMAIN,') || entry.startsWith('DOMAIN-SUFFIX,')) {
+        domain = SubscriptionParser.extractSurgeRuleDomain(entry)
+      }
+      // Plain domain entry
+      else if (/^[\w][\w.-]*\.\w{2,}$/.test(entry)) {
+        domain = entry
+      }
+
+      if (domain && SubscriptionParser.isValidDomain(domain) && !seen.has(domain)) {
+        seen.add(domain)
+        domains.push(domain)
+      }
+    }
+
+    return { domains }
+  }
+
+  /**
+   * Extract domain from a Surge-style rule line (DOMAIN, or DOMAIN-SUFFIX,).
+   * Shared between Surge and Clash parsers.
+   */
+  private static extractSurgeRuleDomain(entry: string): string | null {
+    if (entry.startsWith('DOMAIN,')) {
+      return entry.slice('DOMAIN,'.length).split(',')[0].trim()
+    }
+    if (entry.startsWith('DOMAIN-SUFFIX,')) {
+      return entry.slice('DOMAIN-SUFFIX,'.length).split(',')[0].trim()
+    }
+    return null
+  }
+
+  /**
    * Validate a domain string
    */
   private static isValidDomain(domain: string): boolean {
     // Basic domain validation
     if (domain.length === 0 || domain.length > 253) return false
     if (domain.includes(' ') || domain.includes('\t')) return false
+    // Reject characters that could enable JS injection when interpolated into PAC scripts
+    if (/["'\\<>`]/.test(domain)) return false
     // Must contain at least one dot and only valid chars
     return /^[\w][\w.-]*\.\w{2,}$/.test(domain)
   }

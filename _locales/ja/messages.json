@@ -1,1218 +1,438 @@
 {
-  "extName": {
-    "message": "PACify | プロキシマネージャー"
-  },
-  "extDescription": {
-    "message": "Chrome用の完全なプロキシマネージャー。PACスクリプト、手動プロキシ、システム設定の作成、編集、切り替えが簡単に行えます。"
-  },
-  "basicSettings": {
-    "message": "基本設定"
-  },
-  "proxyMode": {
-    "message": "プロキシモード"
-  },
-  "systemProxy": {
-    "message": "オペレーティングシステムのプロキシ設定を使用します。"
-  },
-  "directMode": {
-    "message": "直接接続"
-  },
-  "directModeHelp": {
-    "message": "ダイレクトモードでは、すべての接続がプロキシを介さず直接作成されます。"
-  },
-  "autoDetectMode": {
-    "message": "自動設定URL"
-  },
-  "autoDetectModeHelp": {
-    "message": "自動検出モードでは、ChromeがWPADプロトコルを使用してプロキシ設定を自動的に検索してダウンロードします。"
-  },
-  "deleteConfirm": {
-    "message": "このスクリプトを削除してもよろしいですか？"
-  },
-  "toggleProxyHint": {
-    "message": "スイッチをクリックしてプロキシを切り替えます。"
-  },
-  "systemMode": {
-    "message": "システム"
-  },
-  "pacScriptMode": {
-    "message": "PACスクリプト"
-  },
-  "manualMode": {
-    "message": "手動設定"
-  },
-  "addNewScript": {
-    "message": "新規スクリプトを追加"
-  },
-  "quickSwitchMode": {
-    "message": "クイックスイッチモード"
-  },
-  "quickSwitchDescription": {
-    "message": "ポップアップからプロキシ設定を素早く切り替えることができます"
-  },
-  "settings": {
-    "message": "設定"
-  },
-  "nameRequired": {
-    "message": "名前は必須です"
-  },
-  "proxyConfiguration": {
-    "message": "プロキシ設定"
-  },
-  "cancel": {
-    "message": "キャンセル"
-  },
-  "saveConfiguration": {
-    "message": "設定を保存"
-  },
-  "saving": {
-    "message": "保存中..."
-  },
-  "noScriptsAvailable": {
-    "message": "利用可能なPACスクリプトがありません。最初のスクリプトを追加して始めましょう。"
-  },
-  "noQuickSwitchScripts": {
-    "message": "クイックスイッチスクリプトが設定されていません。クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。"
-  },
-  "noScriptsAvailableOptions": {
-    "message": "利用可能なスクリプトがありません。「新規スクリプトを追加」をクリックして最初のPACスクリプトを作成してください。"
-  },
-  "backupSettings": {
-    "message": "設定をバックアップ"
-  },
-  "restoreSettings": {
-    "message": "設定を復元"
-  },
-  "useSameProxy": {
-    "message": "すべてのプロトコルに同じプロキシサーバーを使用する"
-  },
-  "proxyServer": {
-    "message": "プロキシサーバー"
-  },
-  "httpProxy": {
-    "message": "HTTPプロキシ"
-  },
-  "httpsProxy": {
-    "message": "HTTPSプロキシ"
-  },
-  "ftpProxy": {
-    "message": "FTPプロキシ"
-  },
-  "fallbackProxy": {
-    "message": "フォールバックプロキシ"
-  },
-  "bypassList": {
-    "message": "バイパスリスト"
-  },
-  "pacScriptUrl": {
-    "message": "PACスクリプトURL"
-  },
-  "pacScript": {
-    "message": "PACスクリプト"
-  },
-  "templates": {
-    "message": "テンプレート:"
-  },
-  "emptyTemplate": {
-    "message": "空"
-  },
-  "basicTemplate": {
-    "message": "基本"
-  },
-  "proTemplate": {
-    "message": "プロ"
-  },
-  "advancedTemplate": {
-    "message": "高度"
-  },
-  "mandatoryPacScript": {
-    "message": "必須PACスクリプト（ダイレクトへのフォールバックを防止）"
-  },
-  "dropToAddQuickScripts": {
-    "message": "クイックスクリプトに追加するにはここにドロップ"
-  },
-  "dropToRemoveQuickScripts": {
-    "message": "クイックスクリプトから削除するにはここにドロップ"
-  },
-  "quickPacScripts": {
-    "message": "クイックスイッチ設定"
-  },
-  "allProxyConfigs": {
-    "message": "すべてのプロキシ設定"
-  },
-  "dragScriptsHere": {
-    "message": "クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。クイックスイッチを使うと拡張機能アイコンをクリックするだけでプロキシを切り替えられます。"
-  },
-  "colorRequired": {
-    "message": "色は必須です"
-  },
-  "configurationName": {
-    "message": "設定名"
-  },
-  "color": {
-    "message": "色"
-  },
-  "badgeLabel": {
-    "message": "バッジラベル"
-  },
-  "badgeLabelHelp": {
-    "message": "拡張機能アイコンのカスタムテキスト（最大4文字）。空にすると自動生成されます。"
-  },
-  "active": {
-    "message": "アクティブ"
-  },
-  "host": {
-    "message": "ホスト"
-  },
-  "port": {
-    "message": "ポート"
-  },
-  "enterConfigurationName": {
-    "message": "設定名を入力してください"
-  },
-  "disableProxyOnStartup": {
-    "message": "起動時にプロキシを無効にする"
-  },
-  "disableProxyOnStartupDescription": {
-    "message": "ブラウザ起動時に毎回プロキシを無効にして開始"
-  },
-  "autoReloadOnProxySwitch": {
-    "message": "プロキシ切り替え時に自動的にページを再読み込み"
-  },
-  "autoReloadOnProxySwitchDescription": {
-    "message": "プロキシを切り替える際にアクティブなタブを自動的に再読み込み"
-  },
-  "tooltipAutoReload": {
-    "message": "有効にすると、プロキシ設定の変更後に現在のページが再読み込みされ、変更が即座に適用されます"
-  },
-  "invalidConfiguration": {
-    "message": "無効な設定"
-  },
-  "syncStorage": {
-    "message": "同期ストレージ"
-  },
-  "localStorage": {
-    "message": "ローカルストレージ"
-  },
-  "dropTarget": {
-    "message": "ドロップ対象"
-  },
-  "tabProxyConfigs": {
-    "message": "プロキシ設定"
-  },
-  "tabSettings": {
-    "message": "設定"
-  },
-  "tabAbout": {
-    "message": "について"
-  },
-  "settingsProxyBehavior": {
-    "message": "プロキシの動作"
-  },
-  "settingsDataManagement": {
-    "message": "データ管理"
-  },
-  "aboutVersion": {
-    "message": "バージョン"
-  },
-  "aboutHelpResources": {
-    "message": "ヘルプとリソース"
-  },
-  "aboutExtensionInfo": {
-    "message": "拡張機能情報"
-  },
-  "aboutDiagnostics": {
-    "message": "診断"
-  },
-  "aboutViewOnGithub": {
-    "message": "GitHubで表示"
-  },
-  "aboutReportIssue": {
-    "message": "問題を報告"
-  },
-  "aboutDocumentation": {
-    "message": "ドキュメント"
-  },
-  "aboutFeatureRequest": {
-    "message": "機能をリクエスト"
-  },
-  "feedbackAndRating": {
-    "message": "フィードバックと評価"
-  },
-  "rateExtension": {
-    "message": "拡張機能を評価"
-  },
-  "leaveReview": {
-    "message": "レビューを残す"
-  },
-  "supportProject": {
-    "message": "プロジェクトを支援"
-  },
-  "statusConnected": {
-    "message": "接続済み"
-  },
-  "statusDisconnected": {
-    "message": "アクティブなプロキシなし"
-  },
-  "footerActiveProxy": {
-    "message": "トグルをクリックしてプロキシを無効にします"
-  },
-  "footerSelectProxy": {
-    "message": "接続するプロキシを選択してください"
-  },
-  "proxyEnabled": {
-    "message": "プロキシ \"$1\" が有効になりました"
-  },
-  "proxyDisabled": {
-    "message": "プロキシ \"$1\" が無効になりました"
-  },
-  "proxyDeleted": {
-    "message": "プロキシ \"$1\" を正常に削除しました"
-  },
-  "toggleProxyOn": {
-    "message": "プロキシ $1 を有効にする"
-  },
-  "toggleProxyOff": {
-    "message": "プロキシ $1 を無効にする"
-  },
-  "editConfiguration": {
-    "message": "$1 設定を編集"
-  },
-  "deleteConfiguration": {
-    "message": "$1 設定を削除"
-  },
-  "deleteProxyTitle": {
-    "message": "プロキシ設定を削除"
-  },
-  "deleteProxyMessage": {
-    "message": "\"$1\" を削除してもよろしいですか？この操作は元に戻せません。"
-  },
-  "delete": {
-    "message": "削除"
-  },
-  "backupSuccess": {
-    "message": "設定のバックアップが完了しました"
-  },
-  "backupFailed": {
-    "message": "設定のバックアップに失敗しました"
-  },
-  "restoreSuccess": {
-    "message": "設定の復元が完了しました"
-  },
-  "restoreFailed": {
-    "message": "設定の復元に失敗しました"
-  },
-  "backupDescription": {
-    "message": "すべてのプロキシ設定と環境設定をJSONファイルとしてダウンロード"
-  },
-  "restoreDescription": {
-    "message": "バックアップファイルをアップロードして設定を復元"
-  },
-  "errorBoundaryTitle": {
-    "message": "問題が発生しました"
-  },
-  "errorBoundaryRetry": {
-    "message": "再試行"
-  },
-  "closeNotification": {
-    "message": "通知を閉じる"
-  },
-  "closeDialog": {
-    "message": "ダイアログを閉じる"
-  },
-  "confirm": {
-    "message": "確認"
-  },
-  "quickSwitchEnabled": {
-    "message": "クイックスイッチモードが有効になりました"
-  },
-  "quickSwitchDisabled": {
-    "message": "クイックスイッチモードが無効になりました"
-  },
-  "proxyDisabledOnStartup": {
-    "message": "ブラウザ起動時にプロキシが無効になります"
-  },
-  "proxyPersistOnStartup": {
-    "message": "ブラウザ起動時にプロキシの状態が保持されます"
-  },
-  "proxyUpdated": {
-    "message": "プロキシ \"$1\" の更新が完了しました"
-  },
-  "proxyCreated": {
-    "message": "プロキシ \"$1\" の作成が完了しました"
-  },
-  "quickSwitchEnabledStatus": {
-    "message": "✓ 有効 – 拡張機能アイコンをクリックして素早く切り替え"
-  },
-  "quickSwitchConfigsTitle": {
-    "message": "クイックスイッチ設定"
-  },
-  "quickSwitchConfigsDescription": {
-    "message": "ポップアップでワンクリックアクセスするにはプロキシをここにドラッグ"
-  },
-  "allProxyConfigsTitle": {
-    "message": "すべてのプロキシ設定"
-  },
-  "allProxyConfigsDescription": {
-    "message": "すべてのプロキシ設定を管理"
-  },
-  "quickStatsTitle": {
-    "message": "クイック統計"
-  },
-  "totalProxies": {
-    "message": "プロキシ総数"
-  },
-  "quickSwitch": {
-    "message": "クイックスイッチ"
-  },
-  "activeProxy": {
-    "message": "アクティブなプロキシ"
-  },
-  "lastUsed": {
-    "message": "最終使用"
-  },
-  "none": {
-    "message": "なし"
-  },
-  "versionLabel": {
-    "message": "バージョン:"
-  },
-  "extensionDescription": {
-    "message": "PAC（Proxy Auto-Config）スクリプトを管理するChrome拡張機能"
-  },
-  "bypassListPlaceholder": {
-    "message": "1行に1つのパターンを入力:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
-  },
-  "pacUrlPlaceholder": {
-    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
-  },
-  "noProxiesTitle": {
-    "message": "利用可能なプロキシがありません"
-  },
-  "noQuickSwitchTitle": {
-    "message": "クイックスイッチプロキシがありません"
-  },
-  "noProxyConfigsTitle": {
-    "message": "プロキシ設定がありません"
-  },
-  "addFirstProxyAction": {
-    "message": "最初のプロキシを追加"
-  },
-  "offButton": {
-    "message": "オフ"
-  },
-  "tooltipQuickSwitchMode": {
-    "message": "設定を開かずにポップアップからお気に入りのプロキシに即座にアクセス"
-  },
-  "tooltipDisableOnStartup": {
-    "message": "Chrome起動時にプロキシが自動的に有効にならないようにします"
-  },
-  "tooltipDragToQuickSwitch": {
-    "message": "プロキシカードをここにドラッグしてクイックスイッチに追加し、素早くアクセス"
-  },
-  "tooltipDragToRemove": {
-    "message": "クイックスイッチプロキシをここにドラッグしてポップアップから削除"
-  },
-  "tooltipKeyboardShortcut": {
-    "message": "Ctrl+N（MacではCmd+N）を押して新しいプロキシを素早く追加"
-  },
-  "invalidHost": {
-    "message": "無効なホスト名またはIPアドレス"
-  },
-  "invalidPort": {
-    "message": "ポートは1から65535の間である必要があります"
-  },
-  "invalidUrl": {
-    "message": "有効なURLを入力してください"
-  },
-  "invalidPacUrlProtocol": {
-    "message": "PAC URLはhttp://、https://、またはfile://プロトコルを使用する必要があります"
-  },
-  "pacUrlWarning": {
-    "message": "PACファイルは通常.pacで終わります"
-  },
-  "bypassListHelp": {
-    "message": "1行に1つのアドレスを入力してください。ワイルドカード(*)とIP範囲(CIDR表記)を使用できます。"
-  },
-  "nameTooLong": {
-    "message": "名前は50文字以内にする必要があります"
-  },
-  "nameTooShort": {
-    "message": "名前は最低1文字必要です"
-  },
-  "hostPlaceholder": {
-    "message": "proxy.example.com"
-  },
-  "portPlaceholder": {
-    "message": "8080"
-  },
-  "scheme": {
-    "message": "スキーム"
-  },
-  "noProxiesYet": {
-    "message": "まだプロキシ設定がありません"
-  },
-  "noProxiesDescription": {
-    "message": "ブラウザがインターネットに接続する方法を制御するために、最初のプロキシ設定を作成して開始しましょう。"
-  },
-  "getStarted": {
-    "message": "始める"
-  },
-  "quickSwitchEmptyHint": {
-    "message": "ポップアップから素早くアクセスするには、プロキシ設定をここにドラッグしてください"
-  },
-  "quickSwitchEmptySubHint": {
-    "message": "ここに追加されたプロキシは、ワンクリック切り替えのためにポップアップに表示されます"
-  },
-  "pacUrlHelp": {
-    "message": "PACスクリプトはこのURLから読み込まれます"
-  },
-  "keyboardShortcuts": {
-    "message": "キーボードショートカット"
-  },
-  "keyboardShortcutFocusSearch": {
-    "message": "検索にフォーカス"
-  },
-  "keyboardShortcutNewProxy": {
-    "message": "新しいプロキシ"
-  },
-  "keyboardShortcutClearSearch": {
-    "message": "検索をクリア"
-  },
-  "keyboardShortcutToggleProxy": {
-    "message": "プロキシを切り替え 1-9"
-  },
-  "searchProxiesPlaceholder": {
-    "message": "プロキシを検索... (Ctrl+K)"
-  },
-  "keyboardShortcutCtrlCmdK": {
-    "message": "Ctrl/Cmd+K"
-  },
-  "keyboardShortcutCtrlCmdN": {
-    "message": "Ctrl/Cmd+N"
-  },
-  "keyboardShortcutEscape": {
-    "message": "Escape"
-  },
-  "keyboardShortcutNumbers": {
-    "message": "1-9"
-  },
-  "keyboardShortcutsNote": {
-    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
-  },
-  "keyboardShortcutQuickSwitchOnly": {
-    "message": "Only works for proxies in the Quick Switch section"
-  },
-  "updateInterval": {
-    "message": "自動更新間隔"
-  },
-  "noAutoUpdate": {
-    "message": "自動更新なし"
-  },
-  "minutes": {
-    "message": "分"
-  },
-  "hour": {
-    "message": "時間"
-  },
-  "hours": {
-    "message": "時間"
-  },
-  "refreshNow": {
-    "message": "今すぐ更新"
-  },
-  "refreshing": {
-    "message": "更新中..."
-  },
-  "lastFetched": {
-    "message": "最終取得"
-  },
-  "pacScriptRefreshed": {
-    "message": "PACスクリプトが正常に更新されました"
-  },
-  "autoReloadEnabled": {
-    "message": "Auto-reload enabled"
-  },
-  "autoReloadDisabled": {
-    "message": "Auto-reload disabled"
-  },
-  "systemNotifications": {
-    "message": "System Notifications"
-  },
-  "systemNotificationsEnabled": {
-    "message": "System notifications enabled"
-  },
-  "systemNotificationsDisabled": {
-    "message": "System notifications disabled"
-  },
-  "systemNotificationsTooltip": {
-    "message": "Enable Chrome notifications for background events"
-  },
-  "systemNotificationsDescription": {
-    "message": "Show system notifications for proxy switches and errors"
-  },
-  "errorFailedToLoadSettings": {
-    "message": "Failed to load settings"
-  },
-  "errorFailedToSetProxy": {
-    "message": "Failed to set proxy configuration"
-  },
-  "errorFailedToClearProxy": {
-    "message": "Failed to clear proxy configuration"
-  },
-  "errorFailedToDeleteScript": {
-    "message": "Failed to delete script"
-  },
-  "proxySwitched": {
-    "message": "Proxy Switched"
-  },
-  "proxySwitchedTo": {
-    "message": "Switched to \"$1\""
-  },
-  "proxySwitchedToForHost": {
-    "message": "Switched to \"$1\" for $2"
-  },
-  "proxyError": {
-    "message": "Proxy Error"
-  },
-  "proxyErrorMessage": {
-    "message": "Failed to use \"$1\": $2"
-  },
-  "pacScriptPreview": {
-    "message": "PAC Script Preview (Read-only)"
-  },
-  "pacScriptFetchError": {
-    "message": "Failed to fetch PAC script from URL"
-  },
-  "addAutoProxy": {
-    "message": "オートプロキシを追加"
-  },
-  "addAutoProxyTooltip": {
-    "message": "URLベースのルーティングルールを作成"
-  },
-  "autoProxyMode": {
-    "message": "オートプロキシ"
-  },
-  "autoProxyRulesCount": {
-    "message": "$1件のルール"
-  },
-  "createAutoProxy": {
-    "message": "オートプロキシを作成"
-  },
-  "editAutoProxy": {
-    "message": "オートプロキシを編集"
-  },
-  "autoProxyCreated": {
-    "message": "オートプロキシ \"$1\" を作成しました"
-  },
-  "autoProxyUpdated": {
-    "message": "オートプロキシ \"$1\" を更新しました"
-  },
-  "autoProxyDeleted": {
-    "message": "オートプロキシ \"$1\" を削除しました"
-  },
-  "autoProxyNamePlaceholder": {
-    "message": "例: ワークルーティング、スプリットトンネル"
-  },
-  "addRule": {
-    "message": "ルールを追加"
-  },
-  "editRule": {
-    "message": "ルールを編集"
-  },
-  "deleteRule": {
-    "message": "ルールを削除"
-  },
-  "saveRule": {
-    "message": "ルールを保存"
-  },
-  "cancelRule": {
-    "message": "キャンセル"
-  },
-  "urlPattern": {
-    "message": "URLパターン"
-  },
-  "patternType": {
-    "message": "パターンタイプ"
-  },
-  "wildcardPattern": {
-    "message": "ワイルドカード"
-  },
-  "regexPattern": {
-    "message": "正規表現"
-  },
-  "exactMatch": {
-    "message": "完全一致"
-  },
-  "cidrPattern": {
-    "message": "CIDR (IP範囲)"
-  },
-  "selectProxy": {
-    "message": "プロキシを選択"
-  },
-  "defineInline": {
-    "message": "インラインで定義"
-  },
-  "directConnection": {
-    "message": "直接接続"
-  },
-  "fallbackBehavior": {
-    "message": "フォールバック動作"
-  },
-  "fallbackDescription": {
-    "message": "URLに一致するルールがない場合に適用されます"
-  },
-  "testPattern": {
-    "message": "パターンをテスト"
-  },
-  "testUrl": {
-    "message": "テストURL"
-  },
-  "testUrlPlaceholder": {
-    "message": "ルールに対してテストするURLを入力"
-  },
-  "patternMatches": {
-    "message": "パターンが一致しました！"
-  },
-  "noPatternMatch": {
-    "message": "一致するパターンがありません - フォールバックが使用されます"
-  },
-  "ruleEnabled": {
-    "message": "ルール有効"
-  },
-  "ruleDisabled": {
-    "message": "ルール無効"
-  },
-  "routingRules": {
-    "message": "ルーティングルール"
-  },
-  "noRulesYet": {
-    "message": "まだルールが定義されていません"
-  },
-  "noRulesDescription": {
-    "message": "URLを異なるプロキシにルーティングする方法を定義するルールを追加してください"
-  },
-  "atLeastOneRule": {
-    "message": "少なくとも1つのルールが必要です"
-  },
-  "failedToSave": {
-    "message": "設定の保存に失敗しました"
-  },
-  "proxyType": {
-    "message": "プロキシタイプ"
-  },
-  "noProxiesAvailable": {
-    "message": "利用可能なプロキシがありません"
-  },
-  "name": {
-    "message": "名前"
-  },
-  "ruleDescription": {
-    "message": "説明（オプション）"
-  },
-  "ruleDescriptionPlaceholder": {
-    "message": "例: すべてのGoogleトラフィックをルーティング"
-  },
-  "patternPlaceholder": {
-    "message": "例: *.google.com"
-  },
-  "wildcardHelp": {
-    "message": "任意の文字に一致させるには * を使用します。例: *.example.com"
-  },
-  "regexHelp": {
-    "message": "JavaScript正規表現構文を使用します。例: ^https?://.*\\.example\\.com"
-  },
-  "exactHelp": {
-    "message": "正確なホスト名に一致させます。例: www.example.com"
-  },
-  "cidrHelp": {
-    "message": "IP範囲にはCIDR表記を使用します。例: 192.168.1.0/24"
-  },
-  "invalidPattern": {
-    "message": "無効なパターン"
-  },
-  "patternRequired": {
-    "message": "パターンは必須です"
-  },
-  "saveChanges": {
-    "message": "変更を保存"
-  },
-  "autoProxyReferenceWarning": {
-    "message": "このプロキシは以下のオートプロキシ設定で使用されています:"
-  },
-  "autoProxyRefSingular": {
-    "message": "1ルール"
-  },
-  "autoProxyRefPlural": {
-    "message": "$1ルール",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
-  },
-  "autoProxyDeleteConsequence": {
-    "message": "このプロキシを削除すると、これらのルールは自動的に削除されます。"
-  },
-  "orphanedProxyWarning": {
-    "message": "参照されているプロキシは削除されました。別のプロキシを選択してください。"
-  },
-  "matchedRule": {
-    "message": "一致したルール"
-  },
-  "useFallback": {
-    "message": "フォールバックを使用"
-  },
-  "dragToReorder": {
-    "message": "ドラッグしてルールを並べ替え"
-  },
-  "failedToSaveProxy": {
-    "message": "プロキシ設定の保存に失敗しました"
-  },
-  "autoProxySubtitle": {
-    "message": "URLベースのスマートなトラフィックルーティング"
-  },
-  "close": {
-    "message": "閉じる"
-  },
-  "ruleSingular": {
-    "message": "ルール"
-  },
-  "rulePlural": {
-    "message": "ルール"
-  },
-  "rulesConfigured": {
-    "message": "$1 $2 設定済み"
-  },
-  "ruleActiveDescription": {
-    "message": "設定が有効な場合、このルールはアクティブになります"
-  },
-  "ruleSkippedDescription": {
-    "message": "このルールはスキップされます"
-  },
-  "matchTypeWildcard": {
-    "message": "ワイルドカード"
-  },
-  "matchTypeExact": {
-    "message": "完全一致"
-  },
-  "matchTypeRegex": {
-    "message": "正規表現"
-  },
-  "matchTypeCidr": {
-    "message": "CIDR"
-  },
-  "referencedProxyDeleted": {
-    "message": "プロキシが削除されました"
-  },
-  "testPatternHint": {
-    "message": "ルールが正しく機能するか確認してください"
-  },
-  "testButton": {
-    "message": "テスト"
-  },
-  "ruleLabel": {
-    "message": "ルール："
-  },
-  "testPatternHelp": {
-    "message": "上にURLを入力し、テストをクリックして一致するルールを確認してください"
-  },
-  "proxyModePacScript": {
-    "message": "（PACスクリプト）"
-  },
-  "proxyModeSystem": {
-    "message": "（システム）"
-  },
-  "proxyModeDirect": {
-    "message": "（ダイレクト）"
-  },
-  "proxyModeAutoDetect": {
-    "message": "（自動検出）"
-  },
-  "toggleSearch": {
-    "message": "検索を切り替え"
-  },
-  "hideSearch": {
-    "message": "検索を非表示"
-  },
-  "viewMode": {
-    "message": "表示モード"
-  },
-  "viewModeGrid": {
-    "message": "グリッド表示"
-  },
-  "viewModeList": {
-    "message": "リスト表示"
-  },
-  "viewModeGridDescription": {
-    "message": "プロキシをカードグリッドレイアウトで表示"
-  },
-  "viewModeListDescription": {
-    "message": "プロキシを横並びリストで表示"
-  },
-  "authentication": {
-    "message": "認証"
-  },
-  "optional": {
-    "message": "オプション"
-  },
-  "authStorageInfo": {
-    "message": "認証情報はローカルに暗号化されて保存されます"
-  },
-  "username": {
-    "message": "ユーザー名"
-  },
-  "usernamePlaceholder": {
-    "message": "ユーザー名"
-  },
-  "password": {
-    "message": "パスワード"
-  },
-  "passwordPlaceholder": {
-    "message": "••••••••"
-  },
-  "hidePassword": {
-    "message": "パスワードを非表示"
-  },
-  "showPassword": {
-    "message": "パスワードを表示"
-  },
-  "diagnostics": {
-    "message": "診断"
-  },
-  "tabDiagnostics": {
-    "message": "診断"
-  },
-  "diagnosticsDesc": {
-    "message": "デバッグ用のエラーログと診断情報を表示"
-  },
-  "diagnosticsExported": {
-    "message": "診断情報のエクスポートに成功しました"
-  },
-  "diagnosticsExportFailed": {
-    "message": "診断情報のエクスポートに失敗しました"
-  },
-  "confirmClearLogs": {
-    "message": "すべての診断ログをクリアしますか？"
-  },
-  "diagnosticsCleared": {
-    "message": "診断情報のクリアに成功しました"
-  },
-  "diagnosticsClearFailed": {
-    "message": "診断情報のクリアに失敗しました"
-  },
-  "allLogsMarkedRead": {
-    "message": "すべてのログを既読としてマークしました"
-  },
-  "justNow": {
-    "message": "たった今"
-  },
-  "markAllRead": {
-    "message": "すべて既読にする"
-  },
-  "export": {
-    "message": "エクスポート"
-  },
-  "clearAll": {
-    "message": "すべてクリア"
-  },
-  "noErrors": {
-    "message": "エラーは検出されませんでした"
-  },
-  "noErrorsDesc": {
-    "message": "プロキシは正常に動作しています！"
-  },
-  "details": {
-    "message": "詳細"
-  },
-  "url": {
-    "message": "URL"
-  },
-  "stackTrace": {
-    "message": "スタックトレース"
-  },
-  "logId": {
-    "message": "ID"
-  },
-  "proxyHasAuth": {
-    "message": "このプロキシには認証が設定されています"
-  },
-  "settingsFileTooLarge": {
-    "message": "設定ファイルが大きすぎます。最大サイズは$1KBです。",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "1024"
-      }
-    }
-  },
-  "invalidFileType": {
-    "message": "無効なファイル形式です。JSONファイルを選択してください。"
-  },
-  "invalidJsonFormat": {
-    "message": "無効なJSON形式です。"
-  },
-  "settingsMustBeObject": {
-    "message": "設定は有効なオブジェクトである必要があります。"
-  },
-  "invalidProxyConfigsArray": {
-    "message": "無効な設定: proxyConfigsは配列である必要があります。"
-  },
-  "invalidQuickSwitchEnabled": {
-    "message": "無効な設定: quickSwitchEnabledはブール値である必要があります。"
-  },
-  "invalidDisableProxyOnStartup": {
-    "message": "無効な設定: disableProxyOnStartupはブール値である必要があります。"
-  },
-  "invalidAutoReloadOnProxySwitch": {
-    "message": "無効な設定: autoReloadOnProxySwitchはブール値である必要があります。"
-  },
-  "invalidActiveScriptId": {
-    "message": "無効な設定: activeScriptIdは文字列またはnullである必要があります。"
-  },
-  "invalidProxyConfiguration": {
-    "message": "無効なプロキシ設定です。"
-  },
-  "proxyMustHaveName": {
-    "message": "各プロキシには有効な名前が必要です。"
-  },
-  "proxyMustHaveMode": {
-    "message": "各プロキシには有効なモードが必要です。"
-  },
-  "failedToRestoreSettingsGeneric": {
-    "message": "設定の復元に失敗しました。ファイル形式を確認してください。"
-  },
-  "noActiveProxy": {
-    "message": "なし"
-  },
-  "configuredProxies": {
-    "message": "設定済みプロキシ"
-  },
-  "storageUsed": {
-    "message": "使用中のストレージ"
-  },
-  "extensionVersion": {
-    "message": "拡張機能のバージョン"
-  },
-  "logsCount": {
-    "message": "アクティビティログ"
-  },
-  "activityLog": {
-    "message": "アクティビティログ"
-  },
-  "pacScriptValid": {
-    "message": "PACスクリプトは有効です"
-  },
-  "pacScriptError": {
-    "message": "PACスクリプトにエラーがあります。構文を確認してください。"
-  },
-  "invalidPacScript": {
-    "message": "無効なPACスクリプトです。有効なFindProxyForURL関数が含まれていることを確認してください。"
-  },
-  "pacFetchFailed": {
-    "message": "URLからPACスクリプトの取得に失敗しました。URLとネットワーク接続を確認してください。"
-  },
-  "proxyPermissionDenied": {
-    "message": "権限が拒否されました。拡張機能に必要な権限がない可能性があります。"
-  },
-  "proxyControlledByOther": {
-    "message": "プロキシ設定は別の拡張機能によって制御されています。"
-  },
-  "proxyManagedByPolicy": {
-    "message": "プロキシ設定は組織のポリシーによって管理されています。"
-  },
-  "invalidProxyHost": {
-    "message": "無効なプロキシホストアドレスです。サーバー設定を確認してください。"
-  },
-  "invalidProxyPort": {
-    "message": "無効なプロキシポートです。有効なポート番号（1-65535）を入力してください。"
-  },
-  "proxyTimeout": {
-    "message": "接続がタイムアウトしました。プロキシサーバーに到達できない可能性があります。"
-  },
-  "proxySettingsFailed": {
-    "message": "プロキシ設定の適用に失敗しました。"
-  },
-  "onboardingWelcomeTitle": {
-    "message": "PACifyへようこそ"
-  },
-  "onboardingWelcomeDescription": {
-    "message": "Chrome用のモダンなプロキシマネージャーです。プロキシ設定を簡単に構成、切り替え、管理できます。"
-  },
-  "onboardingFeaturesTitle": {
-    "message": "強力な機能"
-  },
-  "onboardingFeaturesDescription": {
-    "message": "プロキシを効果的に管理するために必要なすべてが揃っています。"
-  },
-  "onboardingFeatureProxies": {
-    "message": "複数のプロキシプロファイル"
-  },
-  "onboardingFeatureProxiesDesc": {
-    "message": "異なるプロキシ設定を瞬時に作成し、切り替えることができます。"
-  },
-  "onboardingFeatureAutoProxy": {
-    "message": "自動プロキシルール"
-  },
-  "onboardingFeatureAutoProxyDesc": {
-    "message": "スマートなルーティングルールでURLパターンに基づいてトラフィックをルーティングします。"
-  },
-  "onboardingFeaturePAC": {
-    "message": "PACスクリプトサポート"
-  },
-  "onboardingFeaturePACDesc": {
-    "message": "高度なプロキシ設定にカスタムPACスクリプトを使用できます。"
-  },
-  "onboardingShortcutsTitle": {
-    "message": "キーボードショートカット"
-  },
-  "onboardingShortcutsDescription": {
-    "message": "キーボードショートカットでより速く作業できます。"
-  },
-  "onboardingShortcutNewProxy": {
-    "message": "新しいプロキシを作成"
-  },
-  "onboardingShortcutSearch": {
-    "message": "プロキシを検索"
-  },
-  "onboardingShortcutClose": {
-    "message": "モーダルを閉じる"
-  },
-  "onboardingGetStartedTitle": {
-    "message": "準備完了！"
-  },
-  "onboardingGetStartedDescription": {
-    "message": "最初のプロキシ設定を作成して開始するか、設定を探索してください。"
-  },
-  "onboardingCreateFirstProxy": {
-    "message": "最初のプロキシを作成"
-  },
-  "onboardingExploreSettings": {
-    "message": "設定を探索"
-  },
-  "previous": {
-    "message": "前へ"
-  },
-  "next": {
-    "message": "次へ"
-  },
-  "skipTour": {
-    "message": "ツアーをスキップ"
-  },
-  "keyboardShortcutsDescription": {
-    "message": "これらのショートカットを使用してより速く作業"
-  },
-  "shortcutsGroupGeneral": {
-    "message": "一般"
-  },
-  "shortcutsGroupNavigation": {
-    "message": "ナビゲーション"
-  },
-  "shortcutsGroupProxyList": {
-    "message": "プロキシリスト"
-  },
-  "shortcutNewProxy": {
-    "message": "新しいプロキシ設定を作成"
-  },
-  "shortcutSearch": {
-    "message": "検索を開く"
-  },
-  "shortcutCloseModal": {
-    "message": "現在のモーダルを閉じる"
-  },
-  "shortcutShowHelp": {
-    "message": "キーボードショートカットを表示"
-  },
-  "shortcutNextElement": {
-    "message": "次の要素に移動"
-  },
-  "shortcutPrevElement": {
-    "message": "前の要素に移動"
-  },
-  "shortcutActivate": {
-    "message": "フォーカスした要素を有効化"
-  },
-  "shortcutToggle": {
-    "message": "スイッチとチェックボックスを切り替え"
-  },
-  "shortcutNavigateList": {
-    "message": "プロキシリストをナビゲート"
-  },
-  "shortcutActivateProxy": {
-    "message": "選択したプロキシを有効化"
-  },
-  "shortcutEditProxy": {
-    "message": "選択したプロキシを編集"
-  },
-  "shortcutDeleteProxy": {
-    "message": "選択したプロキシを削除"
-  },
-  "shortcutsTip": {
-    "message": "どこでも ? を押すとこのヘルプが表示されます"
-  },
-  "subscriptions": { "message": "サブスクリプション" },
-  "subscriptionsDescription": {
-    "message": "リモートドメインリストからルールをインポート"
-  },
-  "addSubscription": { "message": "サブスクリプションを追加" },
-  "subscriptionName": { "message": "名前" },
-  "subscriptionNamePlaceholder": { "message": "例：GFWList、広告ドメイン" },
-  "subscriptionNameRequired": { "message": "サブスクリプション名は必須です" },
-  "subscriptionUrl": { "message": "URL" },
-  "subscriptionUrlRequired": { "message": "サブスクリプションURLは必須です" },
-  "subscriptionUrlInvalid": { "message": "有効なURLを入力してください" },
-  "subscriptionFormat": { "message": "形式" },
-  "subscriptionInterval": { "message": "自動更新" },
-  "subscriptionFetching": { "message": "取得中..." },
-  "subscriptionFetchFailed": {
-    "message": "サブスクリプションの取得に失敗しました"
-  },
-  "subscriptionNoRules": {
-    "message": "サブスクリプションにルールが見つかりません"
-  },
-  "noSubscriptions": { "message": "サブスクリプションがありません" },
-  "noSubscriptionsDescription": {
-    "message": "リモートドメインリストをサブスクライブして、GFWListやカスタムドメインリストなどのURLからプロキシルールを自動的にインポートします"
-  },
-  "refreshSubscription": { "message": "更新" },
-  "editSubscription": { "message": "サブスクリプションを編集" },
-  "saveSubscription": { "message": "変更を保存" },
-  "deleteSubscription": { "message": "サブスクリプションを削除" },
-  "deleteSubscriptionTitle": { "message": "サブスクリプションを削除" },
-  "deleteSubscriptionMessage": {
-    "message": "サブスクリプション \"$1\" を削除してもよろしいですか？",
-    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
-  },
-  "rules": { "message": "ルール" },
-  "fromSubscriptions": { "message": "サブスクリプションから" },
-  "never": { "message": "しない" },
-  "minutesAgo": {
-    "message": "$1 分前",
-    "placeholders": { "1": { "content": "$1", "example": "5" } }
-  },
-  "hoursAgo": {
-    "message": "$1 時間前",
-    "placeholders": { "1": { "content": "$1", "example": "2" } }
-  },
-  "formatAuto": { "message": "自動検出" },
-  "formatAbp": { "message": "ABP / GFWList" },
-  "formatDomains": { "message": "ドメインリスト" },
-  "intervalManual": { "message": "手動のみ" },
-  "intervalMinutes": {
-    "message": "$1 分ごと",
-    "placeholders": { "1": { "content": "$1", "example": "30" } }
-  },
-  "intervalHour": {
-    "message": "$1 時間ごと",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  },
-  "intervalHours": {
-    "message": "$1 時間ごと",
-    "placeholders": { "1": { "content": "$1", "example": "6" } }
-  },
-  "intervalDay": {
-    "message": "$1 日ごと",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  }
+  "extName": {"message":"PACify | プロキシマネージャー"},
+  "extDescription": {"message":"Chrome用の完全なプロキシマネージャー。PACスクリプト、手動プロキシ、システム設定の作成、編集、切り替えが簡単に行えます。"},
+  "basicSettings": {"message":"基本設定"},
+  "proxyMode": {"message":"プロキシモード"},
+  "systemProxy": {"message":"オペレーティングシステムのプロキシ設定を使用します。"},
+  "directMode": {"message":"直接接続"},
+  "directModeHelp": {"message":"ダイレクトモードでは、すべての接続がプロキシを介さず直接作成されます。"},
+  "autoDetectMode": {"message":"自動設定URL"},
+  "autoDetectModeHelp": {"message":"自動検出モードでは、ChromeがWPADプロトコルを使用してプロキシ設定を自動的に検索してダウンロードします。"},
+  "deleteConfirm": {"message":"このスクリプトを削除してもよろしいですか？"},
+  "toggleProxyHint": {"message":"スイッチをクリックしてプロキシを切り替えます。"},
+  "systemMode": {"message":"システム"},
+  "pacScriptMode": {"message":"PACスクリプト"},
+  "manualMode": {"message":"手動設定"},
+  "addNewScript": {"message":"新規スクリプトを追加"},
+  "quickSwitchMode": {"message":"クイックスイッチモード"},
+  "quickSwitchDescription": {"message":"ポップアップからプロキシ設定を素早く切り替えることができます"},
+  "settings": {"message":"設定"},
+  "nameRequired": {"message":"名前は必須です"},
+  "proxyConfiguration": {"message":"プロキシ設定"},
+  "cancel": {"message":"キャンセル"},
+  "saveConfiguration": {"message":"設定を保存"},
+  "saving": {"message":"保存中..."},
+  "noScriptsAvailable": {"message":"利用可能なPACスクリプトがありません。最初のスクリプトを追加して始めましょう。"},
+  "noQuickSwitchScripts": {"message":"クイックスイッチスクリプトが設定されていません。クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。"},
+  "noScriptsAvailableOptions": {"message":"利用可能なスクリプトがありません。「新規スクリプトを追加」をクリックして最初のPACスクリプトを作成してください。"},
+  "backupSettings": {"message":"設定をバックアップ"},
+  "restoreSettings": {"message":"設定を復元"},
+  "useSameProxy": {"message":"すべてのプロトコルに同じプロキシサーバーを使用する"},
+  "proxyServer": {"message":"プロキシサーバー"},
+  "httpProxy": {"message":"HTTPプロキシ"},
+  "httpsProxy": {"message":"HTTPSプロキシ"},
+  "ftpProxy": {"message":"FTPプロキシ"},
+  "fallbackProxy": {"message":"フォールバックプロキシ"},
+  "bypassList": {"message":"バイパスリスト"},
+  "pacScriptUrl": {"message":"PACスクリプトURL"},
+  "pacScript": {"message":"PACスクリプト"},
+  "templates": {"message":"テンプレート:"},
+  "emptyTemplate": {"message":"空"},
+  "basicTemplate": {"message":"基本"},
+  "proTemplate": {"message":"プロ"},
+  "advancedTemplate": {"message":"高度"},
+  "mandatoryPacScript": {"message":"必須PACスクリプト（ダイレクトへのフォールバックを防止）"},
+  "dropToAddQuickScripts": {"message":"クイックスクリプトに追加するにはここにドロップ"},
+  "dropToRemoveQuickScripts": {"message":"クイックスクリプトから削除するにはここにドロップ"},
+  "quickPacScripts": {"message":"クイックスイッチ設定"},
+  "allProxyConfigs": {"message":"すべてのプロキシ設定"},
+  "dragScriptsHere": {"message":"クイックスイッチを有効にするにはスクリプトをここにドラッグしてください。クイックスイッチを使うと拡張機能アイコンをクリックするだけでプロキシを切り替えられます。"},
+  "colorRequired": {"message":"色は必須です"},
+  "configurationName": {"message":"設定名"},
+  "color": {"message":"色"},
+  "badgeLabel": {"message":"バッジラベル"},
+  "badgeLabelHelp": {"message":"拡張機能アイコンのカスタムテキスト（最大4文字）。空にすると自動生成されます。"},
+  "active": {"message":"アクティブ"},
+  "host": {"message":"ホスト"},
+  "port": {"message":"ポート"},
+  "enterConfigurationName": {"message":"設定名を入力してください"},
+  "disableProxyOnStartup": {"message":"起動時にプロキシを無効にする"},
+  "disableProxyOnStartupDescription": {"message":"ブラウザ起動時に毎回プロキシを無効にして開始"},
+  "autoReloadOnProxySwitch": {"message":"プロキシ切り替え時に自動的にページを再読み込み"},
+  "autoReloadOnProxySwitchDescription": {"message":"プロキシを切り替える際にアクティブなタブを自動的に再読み込み"},
+  "tooltipAutoReload": {"message":"有効にすると、プロキシ設定の変更後に現在のページが再読み込みされ、変更が即座に適用されます"},
+  "invalidConfiguration": {"message":"無効な設定"},
+  "syncStorage": {"message":"同期ストレージ"},
+  "localStorage": {"message":"ローカルストレージ"},
+  "dropTarget": {"message":"ドロップ対象"},
+  "tabProxyConfigs": {"message":"プロキシ設定"},
+  "tabSettings": {"message":"設定"},
+  "tabAbout": {"message":"について"},
+  "settingsProxyBehavior": {"message":"プロキシの動作"},
+  "settingsDataManagement": {"message":"データ管理"},
+  "aboutVersion": {"message":"バージョン"},
+  "aboutHelpResources": {"message":"ヘルプとリソース"},
+  "aboutExtensionInfo": {"message":"拡張機能情報"},
+  "aboutDiagnostics": {"message":"診断"},
+  "aboutViewOnGithub": {"message":"GitHubで表示"},
+  "aboutReportIssue": {"message":"問題を報告"},
+  "aboutDocumentation": {"message":"ドキュメント"},
+  "aboutFeatureRequest": {"message":"機能をリクエスト"},
+  "feedbackAndRating": {"message":"フィードバックと評価"},
+  "rateExtension": {"message":"拡張機能を評価"},
+  "leaveReview": {"message":"レビューを残す"},
+  "supportProject": {"message":"プロジェクトを支援"},
+  "statusConnected": {"message":"接続済み"},
+  "statusDisconnected": {"message":"アクティブなプロキシなし"},
+  "footerActiveProxy": {"message":"トグルをクリックしてプロキシを無効にします"},
+  "footerSelectProxy": {"message":"接続するプロキシを選択してください"},
+  "proxyEnabled": {"message":"プロキシ \"$1\" が有効になりました"},
+  "proxyDisabled": {"message":"プロキシ \"$1\" が無効になりました"},
+  "proxyDeleted": {"message":"プロキシ \"$1\" を正常に削除しました"},
+  "toggleProxyOn": {"message":"プロキシ $1 を有効にする"},
+  "toggleProxyOff": {"message":"プロキシ $1 を無効にする"},
+  "editConfiguration": {"message":"$1 設定を編集"},
+  "deleteConfiguration": {"message":"$1 設定を削除"},
+  "deleteProxyTitle": {"message":"プロキシ設定を削除"},
+  "deleteProxyMessage": {"message":"\"$1\" を削除してもよろしいですか？この操作は元に戻せません。"},
+  "delete": {"message":"削除"},
+  "backupSuccess": {"message":"設定のバックアップが完了しました"},
+  "backupFailed": {"message":"設定のバックアップに失敗しました"},
+  "restoreSuccess": {"message":"設定の復元が完了しました"},
+  "restoreFailed": {"message":"設定の復元に失敗しました"},
+  "backupDescription": {"message":"すべてのプロキシ設定と環境設定をJSONファイルとしてダウンロード"},
+  "restoreDescription": {"message":"バックアップファイルをアップロードして設定を復元"},
+  "errorBoundaryTitle": {"message":"問題が発生しました"},
+  "errorBoundaryRetry": {"message":"再試行"},
+  "closeNotification": {"message":"通知を閉じる"},
+  "closeDialog": {"message":"ダイアログを閉じる"},
+  "confirm": {"message":"確認"},
+  "quickSwitchEnabled": {"message":"クイックスイッチモードが有効になりました"},
+  "quickSwitchDisabled": {"message":"クイックスイッチモードが無効になりました"},
+  "proxyDisabledOnStartup": {"message":"ブラウザ起動時にプロキシが無効になります"},
+  "proxyPersistOnStartup": {"message":"ブラウザ起動時にプロキシの状態が保持されます"},
+  "proxyUpdated": {"message":"プロキシ \"$1\" の更新が完了しました"},
+  "proxyCreated": {"message":"プロキシ \"$1\" の作成が完了しました"},
+  "quickSwitchEnabledStatus": {"message":"✓ 有効 – 拡張機能アイコンをクリックして素早く切り替え"},
+  "quickSwitchConfigsTitle": {"message":"クイックスイッチ設定"},
+  "quickSwitchConfigsDescription": {"message":"ポップアップでワンクリックアクセスするにはプロキシをここにドラッグ"},
+  "allProxyConfigsTitle": {"message":"すべてのプロキシ設定"},
+  "allProxyConfigsDescription": {"message":"すべてのプロキシ設定を管理"},
+  "quickStatsTitle": {"message":"クイック統計"},
+  "totalProxies": {"message":"プロキシ総数"},
+  "quickSwitch": {"message":"クイックスイッチ"},
+  "activeProxy": {"message":"アクティブなプロキシ"},
+  "lastUsed": {"message":"最終使用"},
+  "none": {"message":"なし"},
+  "versionLabel": {"message":"バージョン:"},
+  "extensionDescription": {"message":"PAC（Proxy Auto-Config）スクリプトを管理するChrome拡張機能"},
+  "bypassListPlaceholder": {"message":"1行に1つのパターンを入力:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"},
+  "pacUrlPlaceholder": {"message":"https://nav-proxy.vercel.app/api/proxyman.pac"},
+  "noProxiesTitle": {"message":"利用可能なプロキシがありません"},
+  "noQuickSwitchTitle": {"message":"クイックスイッチプロキシがありません"},
+  "noProxyConfigsTitle": {"message":"プロキシ設定がありません"},
+  "addFirstProxyAction": {"message":"最初のプロキシを追加"},
+  "offButton": {"message":"オフ"},
+  "tooltipQuickSwitchMode": {"message":"設定を開かずにポップアップからお気に入りのプロキシに即座にアクセス"},
+  "tooltipDisableOnStartup": {"message":"Chrome起動時にプロキシが自動的に有効にならないようにします"},
+  "tooltipDragToQuickSwitch": {"message":"プロキシカードをここにドラッグしてクイックスイッチに追加し、素早くアクセス"},
+  "tooltipDragToRemove": {"message":"クイックスイッチプロキシをここにドラッグしてポップアップから削除"},
+  "tooltipKeyboardShortcut": {"message":"Ctrl+N（MacではCmd+N）を押して新しいプロキシを素早く追加"},
+  "invalidHost": {"message":"無効なホスト名またはIPアドレス"},
+  "invalidPort": {"message":"ポートは1から65535の間である必要があります"},
+  "invalidUrl": {"message":"有効なURLを入力してください"},
+  "invalidPacUrlProtocol": {"message":"PAC URLはhttp://、https://、またはfile://プロトコルを使用する必要があります"},
+  "pacUrlWarning": {"message":"PACファイルは通常.pacで終わります"},
+  "bypassListHelp": {"message":"1行に1つのアドレスを入力してください。ワイルドカード(*)とIP範囲(CIDR表記)を使用できます。"},
+  "nameTooLong": {"message":"名前は50文字以内にする必要があります"},
+  "nameTooShort": {"message":"名前は最低1文字必要です"},
+  "hostPlaceholder": {"message":"proxy.example.com"},
+  "portPlaceholder": {"message":"8080"},
+  "scheme": {"message":"スキーム"},
+  "noProxiesYet": {"message":"まだプロキシ設定がありません"},
+  "noProxiesDescription": {"message":"ブラウザがインターネットに接続する方法を制御するために、最初のプロキシ設定を作成して開始しましょう。"},
+  "getStarted": {"message":"始める"},
+  "quickSwitchEmptyHint": {"message":"ポップアップから素早くアクセスするには、プロキシ設定をここにドラッグしてください"},
+  "quickSwitchEmptySubHint": {"message":"ここに追加されたプロキシは、ワンクリック切り替えのためにポップアップに表示されます"},
+  "pacUrlHelp": {"message":"PACスクリプトはこのURLから読み込まれます"},
+  "keyboardShortcuts": {"message":"キーボードショートカット"},
+  "keyboardShortcutFocusSearch": {"message":"検索にフォーカス"},
+  "keyboardShortcutNewProxy": {"message":"新しいプロキシ"},
+  "keyboardShortcutClearSearch": {"message":"検索をクリア"},
+  "keyboardShortcutToggleProxy": {"message":"プロキシを切り替え 1-9"},
+  "searchProxiesPlaceholder": {"message":"プロキシを検索... (Ctrl+K)"},
+  "keyboardShortcutCtrlCmdK": {"message":"Ctrl/Cmd+K"},
+  "keyboardShortcutCtrlCmdN": {"message":"Ctrl/Cmd+N"},
+  "keyboardShortcutEscape": {"message":"Escape"},
+  "keyboardShortcutNumbers": {"message":"1-9"},
+  "keyboardShortcutsNote": {"message":"Note: Some shortcuts may conflict with browser or OS shortcuts"},
+  "keyboardShortcutQuickSwitchOnly": {"message":"Only works for proxies in the Quick Switch section"},
+  "updateInterval": {"message":"自動更新間隔"},
+  "noAutoUpdate": {"message":"自動更新なし"},
+  "minutes": {"message":"分"},
+  "hour": {"message":"時間"},
+  "hours": {"message":"時間"},
+  "refreshNow": {"message":"今すぐ更新"},
+  "refreshing": {"message":"更新中..."},
+  "lastFetched": {"message":"最終取得"},
+  "pacScriptRefreshed": {"message":"PACスクリプトが正常に更新されました"},
+  "autoReloadEnabled": {"message":"Auto-reload enabled"},
+  "autoReloadDisabled": {"message":"Auto-reload disabled"},
+  "systemNotifications": {"message":"System Notifications"},
+  "systemNotificationsEnabled": {"message":"System notifications enabled"},
+  "systemNotificationsDisabled": {"message":"System notifications disabled"},
+  "systemNotificationsTooltip": {"message":"Enable Chrome notifications for background events"},
+  "systemNotificationsDescription": {"message":"Show system notifications for proxy switches and errors"},
+  "errorFailedToLoadSettings": {"message":"Failed to load settings"},
+  "errorFailedToSetProxy": {"message":"Failed to set proxy configuration"},
+  "errorFailedToClearProxy": {"message":"Failed to clear proxy configuration"},
+  "errorFailedToDeleteScript": {"message":"Failed to delete script"},
+  "proxySwitched": {"message":"Proxy Switched"},
+  "proxySwitchedTo": {"message":"Switched to \"$1\""},
+  "proxySwitchedToForHost": {"message":"Switched to \"$1\" for $2"},
+  "proxyError": {"message":"Proxy Error"},
+  "proxyErrorMessage": {"message":"Failed to use \"$1\": $2"},
+  "pacScriptPreview": {"message":"PAC Script Preview (Read-only)"},
+  "pacScriptFetchError": {"message":"Failed to fetch PAC script from URL"},
+  "addAutoProxy": {"message":"オートプロキシを追加"},
+  "addAutoProxyTooltip": {"message":"URLベースのルーティングルールを作成"},
+  "autoProxyMode": {"message":"オートプロキシ"},
+  "autoProxyRulesCount": {"message":"$1件のルール"},
+  "createAutoProxy": {"message":"オートプロキシを作成"},
+  "editAutoProxy": {"message":"オートプロキシを編集"},
+  "autoProxyCreated": {"message":"オートプロキシ \"$1\" を作成しました"},
+  "autoProxyUpdated": {"message":"オートプロキシ \"$1\" を更新しました"},
+  "autoProxyDeleted": {"message":"オートプロキシ \"$1\" を削除しました"},
+  "autoProxyNamePlaceholder": {"message":"例: ワークルーティング、スプリットトンネル"},
+  "addRule": {"message":"ルールを追加"},
+  "editRule": {"message":"ルールを編集"},
+  "deleteRule": {"message":"ルールを削除"},
+  "saveRule": {"message":"ルールを保存"},
+  "cancelRule": {"message":"キャンセル"},
+  "urlPattern": {"message":"URLパターン"},
+  "patternType": {"message":"パターンタイプ"},
+  "wildcardPattern": {"message":"ワイルドカード"},
+  "regexPattern": {"message":"正規表現"},
+  "exactMatch": {"message":"完全一致"},
+  "cidrPattern": {"message":"CIDR (IP範囲)"},
+  "selectProxy": {"message":"プロキシを選択"},
+  "defineInline": {"message":"インラインで定義"},
+  "directConnection": {"message":"直接接続"},
+  "fallbackBehavior": {"message":"フォールバック動作"},
+  "fallbackDescription": {"message":"URLに一致するルールがない場合に適用されます"},
+  "testPattern": {"message":"パターンをテスト"},
+  "testUrl": {"message":"テストURL"},
+  "testUrlPlaceholder": {"message":"ルールに対してテストするURLを入力"},
+  "patternMatches": {"message":"パターンが一致しました！"},
+  "noPatternMatch": {"message":"一致するパターンがありません - フォールバックが使用されます"},
+  "ruleEnabled": {"message":"ルール有効"},
+  "ruleDisabled": {"message":"ルール無効"},
+  "routingRules": {"message":"ルーティングルール"},
+  "noRulesYet": {"message":"まだルールが定義されていません"},
+  "noRulesDescription": {"message":"URLを異なるプロキシにルーティングする方法を定義するルールを追加してください"},
+  "atLeastOneRule": {"message":"少なくとも1つのルールが必要です"},
+  "failedToSave": {"message":"設定の保存に失敗しました"},
+  "proxyType": {"message":"プロキシタイプ"},
+  "noProxiesAvailable": {"message":"利用可能なプロキシがありません"},
+  "name": {"message":"名前"},
+  "ruleDescription": {"message":"説明（オプション）"},
+  "ruleDescriptionPlaceholder": {"message":"例: すべてのGoogleトラフィックをルーティング"},
+  "patternPlaceholder": {"message":"例: *.google.com"},
+  "wildcardHelp": {"message":"任意の文字に一致させるには * を使用します。例: *.example.com"},
+  "regexHelp": {"message":"JavaScript正規表現構文を使用します。例: ^https?://.*\\.example\\.com"},
+  "exactHelp": {"message":"正確なホスト名に一致させます。例: www.example.com"},
+  "cidrHelp": {"message":"IP範囲にはCIDR表記を使用します。例: 192.168.1.0/24"},
+  "invalidPattern": {"message":"無効なパターン"},
+  "patternRequired": {"message":"パターンは必須です"},
+  "saveChanges": {"message":"変更を保存"},
+  "autoProxyReferenceWarning": {"message":"このプロキシは以下のオートプロキシ設定で使用されています:"},
+  "autoProxyRefSingular": {"message":"1ルール"},
+  "autoProxyRefPlural": {"message":"$1ルール","placeholders":{"1":{"content":"$1","example":"3"}}},
+  "autoProxyDeleteConsequence": {"message":"このプロキシを削除すると、これらのルールは自動的に削除されます。"},
+  "orphanedProxyWarning": {"message":"参照されているプロキシは削除されました。別のプロキシを選択してください。"},
+  "matchedRule": {"message":"一致したルール"},
+  "useFallback": {"message":"フォールバックを使用"},
+  "dragToReorder": {"message":"ドラッグしてルールを並べ替え"},
+  "failedToSaveProxy": {"message":"プロキシ設定の保存に失敗しました"},
+  "autoProxySubtitle": {"message":"URLベースのスマートなトラフィックルーティング"},
+  "close": {"message":"閉じる"},
+  "ruleSingular": {"message":"ルール"},
+  "rulePlural": {"message":"ルール"},
+  "rulesConfigured": {"message":"$1 $2 設定済み"},
+  "ruleActiveDescription": {"message":"設定が有効な場合、このルールはアクティブになります"},
+  "ruleSkippedDescription": {"message":"このルールはスキップされます"},
+  "matchTypeWildcard": {"message":"ワイルドカード"},
+  "matchTypeExact": {"message":"完全一致"},
+  "matchTypeRegex": {"message":"正規表現"},
+  "matchTypeCidr": {"message":"CIDR"},
+  "referencedProxyDeleted": {"message":"プロキシが削除されました"},
+  "testPatternHint": {"message":"ルールが正しく機能するか確認してください"},
+  "testButton": {"message":"テスト"},
+  "ruleLabel": {"message":"ルール："},
+  "testPatternHelp": {"message":"上にURLを入力し、テストをクリックして一致するルールを確認してください"},
+  "proxyModePacScript": {"message":"（PACスクリプト）"},
+  "proxyModeSystem": {"message":"（システム）"},
+  "proxyModeDirect": {"message":"（ダイレクト）"},
+  "proxyModeAutoDetect": {"message":"（自動検出）"},
+  "toggleSearch": {"message":"検索を切り替え"},
+  "hideSearch": {"message":"検索を非表示"},
+  "viewMode": {"message":"表示モード"},
+  "viewModeGrid": {"message":"グリッド表示"},
+  "viewModeList": {"message":"リスト表示"},
+  "viewModeGridDescription": {"message":"プロキシをカードグリッドレイアウトで表示"},
+  "viewModeListDescription": {"message":"プロキシを横並びリストで表示"},
+  "authentication": {"message":"認証"},
+  "optional": {"message":"オプション"},
+  "authStorageInfo": {"message":"認証情報はローカルに暗号化されて保存されます"},
+  "username": {"message":"ユーザー名"},
+  "usernamePlaceholder": {"message":"ユーザー名"},
+  "password": {"message":"パスワード"},
+  "passwordPlaceholder": {"message":"••••••••"},
+  "hidePassword": {"message":"パスワードを非表示"},
+  "showPassword": {"message":"パスワードを表示"},
+  "diagnostics": {"message":"診断"},
+  "tabDiagnostics": {"message":"診断"},
+  "diagnosticsDesc": {"message":"デバッグ用のエラーログと診断情報を表示"},
+  "diagnosticsExported": {"message":"診断情報のエクスポートに成功しました"},
+  "diagnosticsExportFailed": {"message":"診断情報のエクスポートに失敗しました"},
+  "confirmClearLogs": {"message":"すべての診断ログをクリアしますか？"},
+  "diagnosticsCleared": {"message":"診断情報のクリアに成功しました"},
+  "diagnosticsClearFailed": {"message":"診断情報のクリアに失敗しました"},
+  "allLogsMarkedRead": {"message":"すべてのログを既読としてマークしました"},
+  "justNow": {"message":"たった今"},
+  "markAllRead": {"message":"すべて既読にする"},
+  "export": {"message":"エクスポート"},
+  "clearAll": {"message":"すべてクリア"},
+  "noErrors": {"message":"エラーは検出されませんでした"},
+  "noErrorsDesc": {"message":"プロキシは正常に動作しています！"},
+  "details": {"message":"詳細"},
+  "url": {"message":"URL"},
+  "stackTrace": {"message":"スタックトレース"},
+  "logId": {"message":"ID"},
+  "proxyHasAuth": {"message":"このプロキシには認証が設定されています"},
+  "settingsFileTooLarge": {"message":"設定ファイルが大きすぎます。最大サイズは$1KBです。","placeholders":{"1":{"content":"$1","example":"1024"}}},
+  "invalidFileType": {"message":"無効なファイル形式です。JSONファイルを選択してください。"},
+  "invalidJsonFormat": {"message":"無効なJSON形式です。"},
+  "settingsMustBeObject": {"message":"設定は有効なオブジェクトである必要があります。"},
+  "invalidProxyConfigsArray": {"message":"無効な設定: proxyConfigsは配列である必要があります。"},
+  "invalidQuickSwitchEnabled": {"message":"無効な設定: quickSwitchEnabledはブール値である必要があります。"},
+  "invalidDisableProxyOnStartup": {"message":"無効な設定: disableProxyOnStartupはブール値である必要があります。"},
+  "invalidAutoReloadOnProxySwitch": {"message":"無効な設定: autoReloadOnProxySwitchはブール値である必要があります。"},
+  "invalidActiveScriptId": {"message":"無効な設定: activeScriptIdは文字列またはnullである必要があります。"},
+  "invalidProxyConfiguration": {"message":"無効なプロキシ設定です。"},
+  "proxyMustHaveName": {"message":"各プロキシには有効な名前が必要です。"},
+  "proxyMustHaveMode": {"message":"各プロキシには有効なモードが必要です。"},
+  "failedToRestoreSettingsGeneric": {"message":"設定の復元に失敗しました。ファイル形式を確認してください。"},
+  "noActiveProxy": {"message":"なし"},
+  "configuredProxies": {"message":"設定済みプロキシ"},
+  "storageUsed": {"message":"使用中のストレージ"},
+  "extensionVersion": {"message":"拡張機能のバージョン"},
+  "logsCount": {"message":"アクティビティログ"},
+  "activityLog": {"message":"アクティビティログ"},
+  "pacScriptValid": {"message":"PACスクリプトは有効です"},
+  "pacScriptError": {"message":"PACスクリプトにエラーがあります。構文を確認してください。"},
+  "invalidPacScript": {"message":"無効なPACスクリプトです。有効なFindProxyForURL関数が含まれていることを確認してください。"},
+  "pacFetchFailed": {"message":"URLからPACスクリプトの取得に失敗しました。URLとネットワーク接続を確認してください。"},
+  "proxyPermissionDenied": {"message":"権限が拒否されました。拡張機能に必要な権限がない可能性があります。"},
+  "proxyControlledByOther": {"message":"プロキシ設定は別の拡張機能によって制御されています。"},
+  "proxyManagedByPolicy": {"message":"プロキシ設定は組織のポリシーによって管理されています。"},
+  "invalidProxyHost": {"message":"無効なプロキシホストアドレスです。サーバー設定を確認してください。"},
+  "invalidProxyPort": {"message":"無効なプロキシポートです。有効なポート番号（1-65535）を入力してください。"},
+  "proxyTimeout": {"message":"接続がタイムアウトしました。プロキシサーバーに到達できない可能性があります。"},
+  "proxySettingsFailed": {"message":"プロキシ設定の適用に失敗しました。"},
+  "onboardingWelcomeTitle": {"message":"PACifyへようこそ"},
+  "onboardingWelcomeDescription": {"message":"Chrome用のモダンなプロキシマネージャーです。プロキシ設定を簡単に構成、切り替え、管理できます。"},
+  "onboardingFeaturesTitle": {"message":"強力な機能"},
+  "onboardingFeaturesDescription": {"message":"プロキシを効果的に管理するために必要なすべてが揃っています。"},
+  "onboardingFeatureProxies": {"message":"複数のプロキシプロファイル"},
+  "onboardingFeatureProxiesDesc": {"message":"異なるプロキシ設定を瞬時に作成し、切り替えることができます。"},
+  "onboardingFeatureAutoProxy": {"message":"自動プロキシルール"},
+  "onboardingFeatureAutoProxyDesc": {"message":"スマートなルーティングルールでURLパターンに基づいてトラフィックをルーティングします。"},
+  "onboardingFeaturePAC": {"message":"PACスクリプトサポート"},
+  "onboardingFeaturePACDesc": {"message":"高度なプロキシ設定にカスタムPACスクリプトを使用できます。"},
+  "onboardingShortcutsTitle": {"message":"キーボードショートカット"},
+  "onboardingShortcutsDescription": {"message":"キーボードショートカットでより速く作業できます。"},
+  "onboardingShortcutNewProxy": {"message":"新しいプロキシを作成"},
+  "onboardingShortcutSearch": {"message":"プロキシを検索"},
+  "onboardingShortcutClose": {"message":"モーダルを閉じる"},
+  "onboardingGetStartedTitle": {"message":"準備完了！"},
+  "onboardingGetStartedDescription": {"message":"最初のプロキシ設定を作成して開始するか、設定を探索してください。"},
+  "onboardingCreateFirstProxy": {"message":"最初のプロキシを作成"},
+  "onboardingExploreSettings": {"message":"設定を探索"},
+  "previous": {"message":"前へ"},
+  "next": {"message":"次へ"},
+  "skipTour": {"message":"ツアーをスキップ"},
+  "keyboardShortcutsDescription": {"message":"これらのショートカットを使用してより速く作業"},
+  "shortcutsGroupGeneral": {"message":"一般"},
+  "shortcutsGroupNavigation": {"message":"ナビゲーション"},
+  "shortcutsGroupProxyList": {"message":"プロキシリスト"},
+  "shortcutNewProxy": {"message":"新しいプロキシ設定を作成"},
+  "shortcutSearch": {"message":"検索を開く"},
+  "shortcutCloseModal": {"message":"現在のモーダルを閉じる"},
+  "shortcutShowHelp": {"message":"キーボードショートカットを表示"},
+  "shortcutNextElement": {"message":"次の要素に移動"},
+  "shortcutPrevElement": {"message":"前の要素に移動"},
+  "shortcutActivate": {"message":"フォーカスした要素を有効化"},
+  "shortcutToggle": {"message":"スイッチとチェックボックスを切り替え"},
+  "shortcutNavigateList": {"message":"プロキシリストをナビゲート"},
+  "shortcutActivateProxy": {"message":"選択したプロキシを有効化"},
+  "shortcutEditProxy": {"message":"選択したプロキシを編集"},
+  "shortcutDeleteProxy": {"message":"選択したプロキシを削除"},
+  "shortcutsTip": {"message":"どこでも ? を押すとこのヘルプが表示されます"},
+  "subscriptions": {"message":"サブスクリプション"},
+  "subscriptionsDescription": {"message":"リモートドメインリストからルールをインポート"},
+  "addSubscription": {"message":"サブスクリプションを追加"},
+  "subscriptionName": {"message":"名前"},
+  "subscriptionNamePlaceholder": {"message":"例：GFWList、広告ドメイン"},
+  "subscriptionNameRequired": {"message":"サブスクリプション名は必須です"},
+  "subscriptionUrl": {"message":"URL"},
+  "subscriptionUrlRequired": {"message":"サブスクリプションURLは必須です"},
+  "subscriptionUrlInvalid": {"message":"有効なURLを入力してください"},
+  "subscriptionFormat": {"message":"形式"},
+  "subscriptionInterval": {"message":"自動更新"},
+  "subscriptionFetching": {"message":"取得中..."},
+  "subscriptionFetchFailed": {"message":"サブスクリプションの取得に失敗しました"},
+  "subscriptionNoRules": {"message":"サブスクリプションにルールが見つかりません"},
+  "noSubscriptions": {"message":"サブスクリプションがありません"},
+  "noSubscriptionsDescription": {"message":"リモートドメインリストをサブスクライブして、GFWListやカスタムドメインリストなどのURLからプロキシルールを自動的にインポートします"},
+  "refreshSubscription": {"message":"更新"},
+  "editSubscription": {"message":"サブスクリプションを編集"},
+  "saveSubscription": {"message":"変更を保存"},
+  "deleteSubscription": {"message":"サブスクリプションを削除"},
+  "deleteSubscriptionTitle": {"message":"サブスクリプションを削除"},
+  "deleteSubscriptionMessage": {"message":"サブスクリプション \"$1\" を削除してもよろしいですか？","placeholders":{"1":{"content":"$1","example":"GFWList"}}},
+  "rules": {"message":"ルール"},
+  "fromSubscriptions": {"message":"サブスクリプションから"},
+  "never": {"message":"しない"},
+  "minutesAgo": {"message":"$1 分前","placeholders":{"1":{"content":"$1","example":"5"}}},
+  "hoursAgo": {"message":"$1 時間前","placeholders":{"1":{"content":"$1","example":"2"}}},
+  "formatAuto": {"message":"自動検出"},
+  "formatAbp": {"message":"ABP / GFWList"},
+  "formatDomains": {"message":"ドメインリスト"},
+  "formatSurge": {"message":"Surge / Shadowrocket"},
+  "formatClash": {"message":"Clash / Mihomo"},
+  "intervalManual": {"message":"手動のみ"},
+  "intervalMinutes": {"message":"$1 分ごと","placeholders":{"1":{"content":"$1","example":"30"}}},
+  "intervalHour": {"message":"$1 時間ごと","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "intervalHours": {"message":"$1 時間ごと","placeholders":{"1":{"content":"$1","example":"6"}}},
+  "intervalDay": {"message":"$1 日ごと","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "showQuickSettings": {"message":"クイック設定を表示"},
+  "showQuickSettingsDescription": {"message":"プロキシ設定ページにクイック設定セクションを表示"},
+  "showQuickSettingsEnabled": {"message":"クイック設定セクションが表示されました"},
+  "showQuickSettingsDisabled": {"message":"クイック設定セクションが非表示になりました"},
+  "showQuickSettingsTooltip": {"message":"無効にすると、プロキシ設定ページからクイック切替セクションが非表示になります"},
+  "privacyPolicy": {"message":"プライバシーポリシー"},
+  "privacyPolicyTitle": {"message":"プライバシーポリシー"},
+  "privacyIntro": {"message":"お客様のプライバシーは重要です。このポリシーでは、PACify がデータをどのように扱うかを説明します。"},
+  "privacyLastUpdated": {"message":"最終更新"},
+  "privacyDataCollection": {"message":"データ収集"},
+  "privacyDataStorage": {"message":"データ保存"},
+  "privacyNetworkRequests": {"message":"ネットワークリクエスト"},
+  "privacyPermissions": {"message":"使用する権限"},
+  "privacyContact": {"message":"このプライバシーポリシーについてご質問がある場合は、GitHub リポジトリで Issue を作成してください。"},
+  "httpWarning": {"message":"このURLはHTTPを使用しています。プロキシルールが傍受される可能性があります。可能な限りHTTPSを使用してください。"},
+  "save": {"message":"保存"},
+  "editProxy": {"message":"プロキシを編集"},
+  "proxyActivated": {"message":"プロキシ '$1' が有効になりました","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
+  "proxyDeactivated": {"message":"プロキシが無効になりました"}
 }

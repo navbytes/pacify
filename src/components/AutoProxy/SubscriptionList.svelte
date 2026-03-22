@@ -20,7 +20,7 @@ import type {
   SubscriptionFormat,
 } from '@/interfaces/settings'
 import { I18nService } from '@/services/i18n/i18nService'
-import { SubscriptionParser } from '@/services/SubscriptionParser'
+import type { ParsedSubscription } from '@/services/SubscriptionParser'
 import {
   emptyStateCardVariants,
   formInputVariants,
@@ -58,9 +58,32 @@ let formProxyId = $state<string | undefined>(undefined)
 let formInlineProxy = $state<ProxyServer | undefined>(undefined)
 let formUpdateInterval = $state(60) // default 60 minutes
 let formError = $state('')
+let formWarning = $state('')
 let formLoading = $state(false)
 
 let isEditing = $derived(editingId !== null)
+
+/**
+ * Fetch and parse a subscription via the background service worker.
+ * The background script has full network access (host_permissions),
+ * while extension pages may have restricted fetch in MV3.
+ */
+async function fetchSubscriptionViaBackground(
+  url: string,
+  format: SubscriptionFormat
+): Promise<ParsedSubscription> {
+  const response = (await chrome.runtime.sendMessage({
+    type: 'FETCH_SUBSCRIPTION',
+    url,
+    format,
+  })) as { success: boolean; data?: ParsedSubscription; error?: string }
+
+  if (!response?.success) {
+    throw new Error(response?.error || I18nService.getMessage('subscriptionFetchFailed'))
+  }
+
+  return response.data as ParsedSubscription
+}
 
 const cyanIconBadge = gradientIconBadgeVariants({ color: 'cyan' })
 const emptyState = emptyStateCardVariants({ color: 'slate' })
@@ -115,6 +138,7 @@ function handleProxyChange(
 
 async function handleAdd() {
   formError = ''
+  formWarning = ''
 
   if (!formName.trim()) {
     formError = I18nService.getMessage('subscriptionNameRequired')
@@ -127,11 +151,19 @@ async function handleAdd() {
   }
 
   // Validate URL
+  let parsedUrl: URL
   try {
-    new URL(formUrl.trim())
+    parsedUrl = new URL(formUrl.trim())
   } catch {
     formError = I18nService.getMessage('subscriptionUrlInvalid')
     return
+  }
+
+  // Warn about HTTP URLs (MITM risk)
+  if (parsedUrl.protocol === 'http:') {
+    formWarning =
+      I18nService.getMessage('httpWarning') ||
+      'This URL uses HTTP. Your proxy rules could be intercepted. Use HTTPS when possible.'
   }
 
   // When editing, check if URL or format changed — only re-fetch if so
@@ -147,7 +179,7 @@ async function handleAdd() {
     formLoading = true
 
     try {
-      const parsed = await SubscriptionParser.fetchAndParse(formUrl.trim(), formFormat)
+      const parsed = await fetchSubscriptionViaBackground(formUrl.trim(), formFormat)
 
       if (parsed.domains.length === 0) {
         formError = I18nService.getMessage('subscriptionNoRules')
@@ -220,7 +252,7 @@ async function handleRefresh(sub: AutoProxySubscription) {
   refreshingIds = newRefreshing
 
   try {
-    const parsed = await SubscriptionParser.fetchAndParse(sub.url, sub.format)
+    const parsed = await fetchSubscriptionViaBackground(sub.url, sub.format)
 
     onUpdate(
       subscriptions.map((s) =>
@@ -267,6 +299,8 @@ const formatOptions: { value: SubscriptionFormat; label: string }[] = [
   { value: 'auto', label: I18nService.getMessage('formatAuto') },
   { value: 'abp', label: I18nService.getMessage('formatAbp') },
   { value: 'domains', label: I18nService.getMessage('formatDomains') },
+  { value: 'surge', label: I18nService.getMessage('formatSurge') },
+  { value: 'clash', label: I18nService.getMessage('formatClash') },
 ]
 
 const intervalOptions: { value: number; label: string }[] = [
@@ -327,7 +361,7 @@ const intervalOptions: { value: number; label: string }[] = [
           <div>
             <label
               for="sub-name"
-              class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1"
+              class="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1"
             >
               {I18nService.getMessage('subscriptionName')}
               <span class="text-cyan-500">*</span>
@@ -346,7 +380,7 @@ const intervalOptions: { value: number; label: string }[] = [
           <div>
             <label
               for="sub-url"
-              class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1"
+              class="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1"
             >
               {I18nService.getMessage('subscriptionUrl')}
               <span class="text-cyan-500">*</span>
@@ -366,7 +400,7 @@ const intervalOptions: { value: number; label: string }[] = [
             <div>
               <label
                 for="sub-format"
-                class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1"
+                class="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1"
               >
                 {I18nService.getMessage('subscriptionFormat')}
               </label>
@@ -384,7 +418,7 @@ const intervalOptions: { value: number; label: string }[] = [
             <div>
               <label
                 for="sub-interval"
-                class="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1"
+                class="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-1"
               >
                 {I18nService.getMessage('subscriptionInterval')}
               </label>
@@ -402,7 +436,7 @@ const intervalOptions: { value: number; label: string }[] = [
 
           <!-- Proxy Selection -->
           <div>
-            <Text weight="medium" size="sm" classes="text-slate-600 dark:text-slate-400 mb-2 block">
+            <Text weight="medium" size="sm" classes="text-slate-600 dark:text-slate-300 mb-2 block">
               {I18nService.getMessage('routeTo')}
             </Text>
             <div class={sectionInnerContentVariants({ color: 'cyan' })}>
@@ -415,6 +449,16 @@ const intervalOptions: { value: number; label: string }[] = [
               />
             </div>
           </div>
+
+          <!-- Warning (e.g., HTTP URL) -->
+          {#if formWarning}
+            <div
+              class="flex items-center gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800"
+            >
+              <AlertCircle size={16} class="text-amber-500 shrink-0" />
+              <Text size="sm" classes="text-amber-600 dark:text-amber-400">{formWarning}</Text>
+            </div>
+          {/if}
 
           <!-- Error -->
           {#if formError}
@@ -465,7 +509,7 @@ const intervalOptions: { value: number; label: string }[] = [
         {@const isRefreshing = refreshingIds.has(sub.id)}
         <div
           role="listitem"
-          class="group relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.01]"
+          class="group relative overflow-hidden rounded-xl transition-all duration-300 hover:shadow-md"
           class:opacity-50={!sub.enabled}
         >
           <!-- Background -->
@@ -514,7 +558,7 @@ const intervalOptions: { value: number; label: string }[] = [
                 </div>
 
                 <div class="flex items-center gap-3 mt-1">
-                  <code class="text-xs text-slate-500 dark:text-slate-400 truncate max-w-[300px]">
+                  <code class="text-xs text-slate-500 dark:text-slate-300 truncate max-w-[300px]">
                     {sub.url}
                   </code>
                 </div>

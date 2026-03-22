@@ -143,7 +143,7 @@ export const buttonVariants = tv({
       class: cn(
         'justify-center text-slate-700 hover:text-slate-900',
         'hover:bg-slate-200 border border-transparent hover:border-slate-300',
-        'dark:text-slate-400 dark:hover:text-slate-300',
+        'dark:text-slate-300 dark:hover:text-slate-200',
         'dark:hover:bg-slate-800 dark:hover:border-slate-700'
       ),
     },
@@ -408,7 +408,7 @@ export const tabVariants = tv({
     active: {
       true: 'text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow-sm',
       false:
-        'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50',
+        'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50',
     },
     disabled: {
       true: 'opacity-50 cursor-not-allowed hover:!text-slate-500 hover:!bg-transparent dark:hover:!text-slate-400',
@@ -783,7 +783,7 @@ export const labelButtonVariants = tv({
     {
       intent: 'secondary',
       variant: 'minimal',
-      class: 'text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-500',
+      class: 'text-slate-500 hover:text-slate-600 dark:text-slate-300 dark:hover:text-slate-200',
     },
     {
       intent: 'success',
@@ -1280,7 +1280,7 @@ export const iconButtonVariants = tv({
     active: {
       true: 'bg-linear-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 text-blue-600 dark:text-blue-400 shadow-md focus-visible:ring-blue-500/50',
       false:
-        'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 hover:shadow-md focus-visible:ring-slate-500/50',
+        'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 hover:shadow-md focus-visible:ring-slate-500/50',
     },
   },
   defaultVariants: {

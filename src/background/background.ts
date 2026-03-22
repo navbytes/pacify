@@ -7,10 +7,11 @@ import {
 import type {
   BackgroundMessage,
   BackgroundMessageType,
+  FetchSubscriptionMessage,
   ProxyConfig,
   SetProxyMessage,
 } from '@/interfaces'
-import type { AutoProxySubscription } from '@/interfaces/settings'
+import type { AutoProxySubscription, SubscriptionFormat } from '@/interfaces/settings'
 import { SettingsReader, SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
@@ -51,9 +52,9 @@ const messageQueue: QueuedMessage[] = []
 /**
  * Message handler map for processing different types of background messages
  */
-const messageHandlers: Record<
-  BackgroundMessageType,
-  (message?: BackgroundMessage) => Promise<void>
+// FETCH_SUBSCRIPTION is handled separately in handleRuntimeMessageInternal
+const messageHandlers: Partial<
+  Record<BackgroundMessageType, (message?: BackgroundMessage) => Promise<void>>
 > = {
   QUICK_SWITCH: async () => {
     // Invalidate cache to ensure we read fresh settings
@@ -179,13 +180,16 @@ async function initialize(): Promise<void> {
     logger.error('Initialization error:', error)
 
     // Use exponential backoff with max retries
+    // chrome.alarms is used instead of setTimeout because setTimeout is unreliable
+    // in MV3 service workers — timers are lost when the worker is terminated.
     if (initRetryCount < INIT_MAX_RETRIES) {
       initRetryCount++
       const delay = INIT_BASE_DELAY * 2 ** (initRetryCount - 1)
+      const delayInMinutes = Math.max(delay / 60000, 0.1) // chrome.alarms minimum is ~6 seconds
       logger.info(
         `Retrying initialization in ${delay}ms (attempt ${initRetryCount}/${INIT_MAX_RETRIES})`
       )
-      setTimeout(initialize, delay)
+      chrome.alarms.create('init-retry', { delayInMinutes })
     } else {
       logger.error(
         `Failed to initialize after ${INIT_MAX_RETRIES} attempts. Background service may not work correctly.`
@@ -228,9 +232,31 @@ function handleRuntimeMessage(
  */
 async function handleRuntimeMessageInternal(
   message: BackgroundMessage,
-  _sender: chrome.runtime.MessageSender,
+  sender: chrome.runtime.MessageSender,
   sendResponse: (response?: unknown) => void
 ): Promise<void> {
+  // Defense-in-depth: only accept messages from our own extension
+  if (sender.id !== chrome.runtime.id) {
+    sendResponse({ success: false, error: 'Unauthorized sender' })
+    return
+  }
+
+  // FETCH_SUBSCRIPTION needs to return data, handle it separately
+  if (message.type === 'FETCH_SUBSCRIPTION') {
+    try {
+      const { url, format } = message as FetchSubscriptionMessage
+      const parsed = await SubscriptionParser.fetchAndParse(url, format as SubscriptionFormat)
+      sendResponse({ success: true, data: parsed })
+    } catch (error) {
+      logger.error('Error fetching subscription:', error)
+      sendResponse({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to fetch subscription',
+      })
+    }
+    return
+  }
+
   const handler = messageHandlers[message.type]
   if (handler) {
     try {
@@ -279,8 +305,14 @@ async function handleActionClick(): Promise<void> {
       return
     }
 
-    const updatedScripts = updateScriptsActiveStatus(scripts, nextScript)
-    await SettingsWriter.updateAllScripts(updatedScripts)
+    // Atomically update both activeScriptId and isActive flags to prevent desync
+    const currentSettings = await SettingsReader.getSettings()
+    currentSettings.activeScriptId = nextScript?.id ?? null
+    currentSettings.proxyConfigs = currentSettings.proxyConfigs.map((s) => ({
+      ...s,
+      isActive: s.id === currentSettings.activeScriptId,
+    }))
+    await SettingsWriter.saveSettings(currentSettings)
 
     await handleProxyUpdate(nextScript)
   } catch (error) {
@@ -293,29 +325,16 @@ async function handleActionClick(): Promise<void> {
 }
 
 /**
- * Updates scripts' active status based on the next script
- */
-function updateScriptsActiveStatus(
-  scripts: ProxyConfig[],
-  nextScript: ProxyConfig | null
-): ProxyConfig[] {
-  return scripts.map((script) => ({
-    ...script,
-    isActive: nextScript?.id === script.id,
-  }))
-}
-
-/**
  * Handles proxy updates based on the next script
  */
 async function handleProxyUpdate(nextScript: ProxyConfig | null): Promise<void> {
   if (nextScript) {
-    await messageHandlers.SET_PROXY({
+    await messageHandlers.SET_PROXY?.({
       type: 'SET_PROXY',
       proxy: nextScript,
     })
   } else {
-    await messageHandlers.CLEAR_PROXY()
+    await messageHandlers.CLEAR_PROXY?.()
   }
 }
 
@@ -547,6 +566,11 @@ async function setupPacRefreshAlarms(): Promise<void> {
  * Handles alarm events for PAC script auto-refresh
  */
 async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
+  if (alarm.name === 'init-retry') {
+    await initialize()
+    return
+  }
+
   if (alarm.name.startsWith('sub-refresh-')) {
     await handleSubscriptionAlarm(alarm)
     return
@@ -578,8 +602,11 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
       return
     }
 
-    // Fetch the PAC script
-    const response = await fetch(config.pacScript.url)
+    // Fetch the PAC script (15s timeout to prevent service worker hang)
+    const response = await fetch(config.pacScript.url, {
+      signal: AbortSignal.timeout(15_000),
+      headers: { 'User-Agent': 'PACify/1.31' },
+    })
 
     if (!response.ok) {
       logger.error(`Failed to fetch PAC script: HTTP ${response.status}`)
@@ -750,20 +777,20 @@ async function refreshSubscription(proxyId: string, subscriptionId: string): Pro
     await SettingsWriter.updatePACScript(updatedConfig)
 
     // If this is the active proxy, regenerate and re-apply PAC script
-    if (config.isActive) {
-      const freshSettings = await safeGetSettings()
-      if (freshSettings) {
-        const freshConfig = freshSettings.proxyConfigs.find((c) => c.id === proxyId)
-        if (freshConfig?.autoProxy) {
-          await setProxySettings(freshConfig)
-        }
-      }
+    // Use the updatedConfig directly instead of re-reading from storage
+    if (config.isActive && updatedConfig.autoProxy) {
+      await setProxySettings(updatedConfig)
     }
 
     await diagnosticsService.logInfo(
       'SUBSCRIPTION_REFRESHED',
       `Subscription "${sub.name}" refreshed: ${parsed.domains.length} rules`,
-      { proxyName: config.name, proxyId, subscriptionId, url: sub.url }
+      {
+        proxyName: config.name,
+        proxyId,
+        details: `subscriptionId: ${subscriptionId}`,
+        url: sub.url,
+      }
     )
   } catch (error) {
     logger.error(`Error refreshing subscription ${subscriptionId}:`, error)
@@ -798,7 +825,7 @@ async function refreshSubscription(proxyId: string, subscriptionId: string): Pro
     await diagnosticsService.logError(
       'SUBSCRIPTION_REFRESH_FAILED',
       error instanceof Error ? error.message : 'Failed to refresh subscription',
-      { proxyId, subscriptionId }
+      { proxyId, details: `subscriptionId: ${subscriptionId}` }
     )
   }
 }

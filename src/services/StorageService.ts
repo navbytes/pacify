@@ -2,7 +2,9 @@
 
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import { type AppSettings, ERROR_TYPES, type Settings } from '@/interfaces'
+import type { ProxyServer } from '@/interfaces/settings'
 import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
+import { CredentialService } from './CredentialService'
 import { browserService } from './chrome/BrowserService'
 
 // Size limit for storing in sync storage (Chrome limit is 8KB per item)
@@ -13,19 +15,77 @@ export class StorageService {
   // Cache for settings to reduce storage reads
   private static settingsCache: AppSettings | null = null
   private static lastSettingsUpdate: number = 0
-  private static readonly CACHE_TIMEOUT = 5000 // 5 seconds cache timeout
+  private static readonly CACHE_TIMEOUT = 30000 // 30 seconds cache timeout
 
   /**
    * Saves settings to the appropriate storage area based on size
    */
+  /**
+   * Strip username/password from a ProxyServer for safe sync storage
+   */
+  private static stripCredentials(server: ProxyServer | undefined): ProxyServer | undefined {
+    if (!server) return server
+    const { username: _, password: __, ...safe } = server
+    return safe as ProxyServer
+  }
+
+  /**
+   * Extract credentials from all proxy servers in a config
+   */
+  private static extractCredentials(
+    config: AppSettings['proxyConfigs'][0]
+  ): Record<string, { username: string; password: string }> {
+    const creds: Record<string, { username: string; password: string }> = {}
+    const servers: Record<string, ProxyServer | undefined> = {
+      singleProxy: config.rules?.singleProxy,
+      proxyForHttp: config.rules?.proxyForHttp,
+      proxyForHttps: config.rules?.proxyForHttps,
+      proxyForFtp: config.rules?.proxyForFtp,
+      fallbackProxy: config.rules?.fallbackProxy,
+    }
+    for (const [key, server] of Object.entries(servers)) {
+      if (server?.username || server?.password) {
+        creds[key] = { username: server.username || '', password: server.password || '' }
+      }
+    }
+    return creds
+  }
+
   static saveSettings = withErrorHandling(async (settings: AppSettings): Promise<void> => {
-    // Clone settings to avoid modifying the original - use JSON parse/stringify to handle undefined values
+    // Clone settings to avoid modifying the original.
+    // JSON roundtrip is required — structuredClone throws DOMException
+    // on Svelte 5's reactive $state Proxy objects passed from components.
     const settingsCopy: AppSettings = JSON.parse(JSON.stringify(settings))
+
+    // Extract and save credentials separately (encrypted, local-only)
+    for (const config of settingsCopy.proxyConfigs) {
+      if (config.id) {
+        const creds = this.extractCredentials(config)
+        if (Object.keys(creds).length > 0) {
+          await CredentialService.saveCredentials(config.id, creds)
+        }
+      }
+    }
 
     // Store base settings in sync storage
     const baseSettings: AppSettings = {
       ...settingsCopy,
       proxyConfigs: settingsCopy.proxyConfigs.map((config) => {
+        // Strip credentials from sync storage — they are stored encrypted in local storage
+        if (config.rules) {
+          config = {
+            ...config,
+            rules: {
+              ...config.rules,
+              singleProxy: this.stripCredentials(config.rules.singleProxy),
+              proxyForHttp: this.stripCredentials(config.rules.proxyForHttp),
+              proxyForHttps: this.stripCredentials(config.rules.proxyForHttps),
+              proxyForFtp: this.stripCredentials(config.rules.proxyForFtp),
+              fallbackProxy: this.stripCredentials(config.rules.fallbackProxy),
+            },
+          }
+        }
+
         // If PAC script data is large, we'll store it separately
         if (config.pacScript?.data && config.pacScript.data.length > SYNC_SIZE_LIMIT) {
           const scriptId = config.id || crypto.randomUUID()
@@ -117,6 +177,31 @@ export class StorageService {
                   ...config.pacScript,
                   data: scriptData || '',
                 },
+              }
+            }
+
+            // Restore credentials from encrypted local storage
+            if (config.id) {
+              const creds = await CredentialService.loadCredentials(config.id)
+              if (creds && config.rules) {
+                const restoreServer = (
+                  server: ProxyServer | undefined,
+                  key: string
+                ): ProxyServer | undefined => {
+                  if (!server || !creds[key]) return server
+                  return { ...server, username: creds[key].username, password: creds[key].password }
+                }
+                config = {
+                  ...config,
+                  rules: {
+                    ...config.rules,
+                    singleProxy: restoreServer(config.rules.singleProxy, 'singleProxy'),
+                    proxyForHttp: restoreServer(config.rules.proxyForHttp, 'proxyForHttp'),
+                    proxyForHttps: restoreServer(config.rules.proxyForHttps, 'proxyForHttps'),
+                    proxyForFtp: restoreServer(config.rules.proxyForFtp, 'proxyForFtp'),
+                    fallbackProxy: restoreServer(config.rules.fallbackProxy, 'fallbackProxy'),
+                  },
+                }
               }
             }
 

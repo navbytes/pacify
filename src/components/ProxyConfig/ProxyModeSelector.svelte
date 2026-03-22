@@ -34,7 +34,7 @@ function handleModeChange(value: string) {
     justifyContent="start"
     classes="mb-2"
   >
-    <Server size={20} class="text-slate-600 dark:text-slate-400" />
+    <Server size={20} class="text-slate-600 dark:text-slate-300" />
     <Text size="sm" weight="medium" classes="text-slate-700 dark:text-slate-300">
       {I18nService.getMessage('proxyMode')}
     </Text>

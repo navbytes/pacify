@@ -259,7 +259,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
               >
                 <Icon
                   size={14}
-                  class={isSelected ? 'text-white' : 'text-slate-500 dark:text-slate-400'}
+                  class={isSelected ? 'text-white' : 'text-slate-500 dark:text-slate-300'}
                 />
               </div>
               <div>
@@ -393,7 +393,13 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
 
   <!-- Actions -->
   <div class="flex items-center justify-end gap-3 pt-2">
-    <Button color="secondary" onclick={onCancel} type="button" classes="px-6" data-testid="rule-cancel-btn">
+    <Button
+      color="secondary"
+      onclick={onCancel}
+      type="button"
+      classes="px-6"
+      data-testid="rule-cancel-btn"
+    >
       {I18nService.getMessage('cancel')}
     </Button>
 

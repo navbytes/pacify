@@ -210,6 +210,146 @@ google.com
     })
   })
 
+  describe('parse Surge format', () => {
+    test('parses DOMAIN and DOMAIN-SUFFIX rules', () => {
+      const text = `[Rule]
+DOMAIN,google.com
+DOMAIN-SUFFIX,youtube.com
+DOMAIN-KEYWORD,facebook
+IP-CIDR,91.108.0.0/16,Proxy
+FINAL,DIRECT
+`
+      const result = SubscriptionParser.parse(text, 'surge')
+
+      expect(result.domains).toContain('google.com')
+      expect(result.domains).toContain('youtube.com')
+      expect(result.domains).not.toContain('facebook')
+      expect(result.domains).toHaveLength(2)
+    })
+
+    test('handles rules with policy group suffix', () => {
+      const text = `DOMAIN,api.example.com,Proxy
+DOMAIN-SUFFIX,cdn.example.com,DIRECT
+`
+      const result = SubscriptionParser.parse(text, 'surge')
+
+      expect(result.domains).toContain('api.example.com')
+      expect(result.domains).toContain('cdn.example.com')
+    })
+
+    test('skips comments and section headers', () => {
+      const text = `# Proxy rules
+[Rule]
+// Another comment
+DOMAIN,valid.com
+`
+      const result = SubscriptionParser.parse(text, 'surge')
+
+      expect(result.domains).toEqual(['valid.com'])
+    })
+
+    test('deduplicates domains', () => {
+      const text = `DOMAIN,dup.com
+DOMAIN-SUFFIX,dup.com
+`
+      const result = SubscriptionParser.parse(text, 'surge')
+
+      expect(result.domains).toEqual(['dup.com'])
+    })
+  })
+
+  describe('parse Clash format', () => {
+    test('parses YAML payload with quoted domains', () => {
+      const text = `payload:
+  - '+.google.com'
+  - '.youtube.com'
+  - 'twitter.com'
+`
+      const result = SubscriptionParser.parse(text, 'clash')
+
+      expect(result.domains).toContain('google.com')
+      expect(result.domains).toContain('youtube.com')
+      expect(result.domains).toContain('twitter.com')
+    })
+
+    test('parses DOMAIN and DOMAIN-SUFFIX entries', () => {
+      const text = `payload:
+  - DOMAIN,api.example.com
+  - DOMAIN-SUFFIX,cdn.example.com
+`
+      const result = SubscriptionParser.parse(text, 'clash')
+
+      expect(result.domains).toContain('api.example.com')
+      expect(result.domains).toContain('cdn.example.com')
+    })
+
+    test('handles double-quoted entries', () => {
+      const text = `payload:
+  - "+.example.com"
+  - "test.org"
+`
+      const result = SubscriptionParser.parse(text, 'clash')
+
+      expect(result.domains).toContain('example.com')
+      expect(result.domains).toContain('test.org')
+    })
+
+    test('skips invalid entries and comments', () => {
+      const text = `# Rule provider
+payload:
+  - '+.valid.com'
+  - 'not a domain!'
+  - DOMAIN-KEYWORD,partial
+`
+      const result = SubscriptionParser.parse(text, 'clash')
+
+      expect(result.domains).toEqual(['valid.com'])
+    })
+
+    test('deduplicates domains', () => {
+      const text = `payload:
+  - '+.dup.com'
+  - DOMAIN-SUFFIX,dup.com
+`
+      const result = SubscriptionParser.parse(text, 'clash')
+
+      expect(result.domains).toEqual(['dup.com'])
+    })
+  })
+
+  describe('auto format detection', () => {
+    test('detects Surge format', () => {
+      const text = `DOMAIN,google.com
+DOMAIN-SUFFIX,youtube.com
+`
+      const result = SubscriptionParser.parse(text, 'auto')
+
+      expect(result.domains).toContain('google.com')
+      expect(result.domains).toContain('youtube.com')
+    })
+
+    test('detects Clash format from payload header', () => {
+      const text = `payload:
+  - '+.google.com'
+  - '+.youtube.com'
+`
+      const result = SubscriptionParser.parse(text, 'auto')
+
+      expect(result.domains).toContain('google.com')
+      expect(result.domains).toContain('youtube.com')
+    })
+
+    test('detects Clash format from list entries', () => {
+      const text = `- '+.google.com'
+- DOMAIN,youtube.com
+`
+      const result = SubscriptionParser.parse(text, 'auto')
+
+      expect(result.domains).toContain('google.com')
+      expect(result.domains).toContain('youtube.com')
+    })
+  })
+
   describe('domainsToWildcardPatterns', () => {
     test('converts domains to wildcard patterns', () => {
       const domains = ['example.com', 'google.com']

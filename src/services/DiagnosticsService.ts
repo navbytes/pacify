@@ -40,7 +40,7 @@ class DiagnosticsService {
     // Trim to max entries and age
     const trimmedLogs = logs
       .slice(0, MAX_LOG_ENTRIES)
-      .filter(log => Date.now() - log.timestamp < MAX_LOG_AGE_MS)
+      .filter((log) => Date.now() - log.timestamp < MAX_LOG_AGE_MS)
 
     await chrome.storage.local.set({ [STORAGE_KEY]: trimmedLogs })
   }
@@ -58,7 +58,7 @@ class DiagnosticsService {
    */
   async getUnreadCount(): Promise<number> {
     const logs = await this.getLogs()
-    return logs.filter(log => !log.read).length
+    return logs.filter((log) => !log.read).length
   }
 
   /**
@@ -66,9 +66,7 @@ class DiagnosticsService {
    */
   async markAsRead(logIds: string[]): Promise<void> {
     const logs = await this.getLogs()
-    const updatedLogs = logs.map(log =>
-      logIds.includes(log.id) ? { ...log, read: true } : log
-    )
+    const updatedLogs = logs.map((log) => (logIds.includes(log.id) ? { ...log, read: true } : log))
     await chrome.storage.local.set({ [STORAGE_KEY]: updatedLogs })
   }
 
@@ -77,7 +75,7 @@ class DiagnosticsService {
    */
   async markAllAsRead(): Promise<void> {
     const logs = await this.getLogs()
-    const updatedLogs = logs.map(log => ({ ...log, read: true }))
+    const updatedLogs = logs.map((log) => ({ ...log, read: true }))
     await chrome.storage.local.set({ [STORAGE_KEY]: updatedLogs })
   }
 

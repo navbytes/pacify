@@ -1,1214 +1,438 @@
 {
-  "extName": {
-    "message": "PACify | प्रॉक्सी प्रबंधक"
-  },
-  "extDescription": {
-    "message": "Chrome के लिए पूर्ण प्रॉक्सी प्रबंधक। PAC स्क्रिप्ट, मैनुअल प्रॉक्सी और सिस्टम कॉन्फिगरेशन के बीच आसानी से बनाएं, संपादित करें और स्विच करें।"
-  },
-  "basicSettings": {
-    "message": "मूल सेटिंग्स"
-  },
-  "proxyMode": {
-    "message": "प्रॉक्सी मोड"
-  },
-  "systemProxy": {
-    "message": "ऑपरेटिंग सिस्टम से प्रॉक्सी सेटिंग्स का उपयोग करें।"
-  },
-  "directMode": {
-    "message": "डायरेक्ट"
-  },
-  "directModeHelp": {
-    "message": "डायरेक्ट मोड में सभी कनेक्शन बिना किसी प्रॉक्सी के सीधे बनाए जाते हैं।"
-  },
-  "autoDetectMode": {
-    "message": "ऑटो-कॉन्फिग URL"
-  },
-  "autoDetectModeHelp": {
-    "message": "ऑटो-डिटेक्ट मोड में, Chrome स्वचालित रूप से WPAD प्रोटोकॉल का उपयोग करके प्रॉक्सी सेटिंग्स खोजेगा और डाउनलोड करेगा।"
-  },
-  "deleteConfirm": {
-    "message": "क्या आप वाकई इस स्क्रिप्ट को हटाना चाहते हैं?"
-  },
-  "toggleProxyHint": {
-    "message": "स्विच पर क्लिक करके प्रॉक्सी टॉगल करें।"
-  },
-  "systemMode": {
-    "message": "सिस्टम"
-  },
-  "pacScriptMode": {
-    "message": "PAC स्क्रिप्ट"
-  },
-  "manualMode": {
-    "message": "मैनुअल कॉन्फिगरेशन"
-  },
-  "addNewScript": {
-    "message": "नई स्क्रिप्ट जोड़ें"
-  },
-  "quickSwitchMode": {
-    "message": "त्वरित स्विच मोड"
-  },
-  "quickSwitchDescription": {
-    "message": "पॉपअप से प्रॉक्सी कॉन्फ़िगरेशन के बीच त्वरित स्विचिंग सक्षम करें"
-  },
-  "settings": {
-    "message": "सेटिंग्स"
-  },
-  "nameRequired": {
-    "message": "नाम आवश्यक है"
-  },
-  "proxyConfiguration": {
-    "message": "प्रॉक्सी कॉन्फिगरेशन"
-  },
-  "cancel": {
-    "message": "रद्द करें"
-  },
-  "saveConfiguration": {
-    "message": "कॉन्फिगरेशन सहेजें"
-  },
-  "saving": {
-    "message": "सहेज रहा है..."
-  },
-  "noScriptsAvailable": {
-    "message": "कोई PAC स्क्रिप्ट उपलब्ध नहीं है। आरंभ करने के लिए अपनी पहली स्क्रिप्ट जोड़ें।"
-  },
-  "noQuickSwitchScripts": {
-    "message": "कोई त्वरित स्विच स्क्रिप्ट कॉन्फ़िगर नहीं की गई है। त्वरित स्विचिंग सक्षम करने के लिए स्क्रिप्ट यहां खींचें।"
-  },
-  "noScriptsAvailableOptions": {
-    "message": "कोई स्क्रिप्ट उपलब्ध नहीं है। अपनी पहली PAC स्क्रिप्ट बनाने के लिए \"नई स्क्रिप्ट जोड़ें\" पर क्लिक करें।"
-  },
-  "backupSettings": {
-    "message": "बैकअप सेटिंग्स"
-  },
-  "restoreSettings": {
-    "message": "सेटिंग्स रिस्टोर करें"
-  },
-  "useSameProxy": {
-    "message": "सभी प्रोटोकॉल के लिए एक ही प्रॉक्सी सर्वर का उपयोग करें"
-  },
-  "proxyServer": {
-    "message": "प्रॉक्सी सर्वर"
-  },
-  "httpProxy": {
-    "message": "HTTP प्रॉक्सी"
-  },
-  "httpsProxy": {
-    "message": "HTTPS प्रॉक्सी"
-  },
-  "ftpProxy": {
-    "message": "FTP प्रॉक्सी"
-  },
-  "fallbackProxy": {
-    "message": "फॉलबैक प्रॉक्सी"
-  },
-  "bypassList": {
-    "message": "बायपास सूची"
-  },
-  "pacScriptUrl": {
-    "message": "PAC स्क्रिप्ट URL"
-  },
-  "pacScript": {
-    "message": "PAC स्क्रिप्ट"
-  },
-  "templates": {
-    "message": "टेम्पलेट्स:"
-  },
-  "emptyTemplate": {
-    "message": "खाली"
-  },
-  "basicTemplate": {
-    "message": "बेसिक"
-  },
-  "proTemplate": {
-    "message": "प्रो"
-  },
-  "advancedTemplate": {
-    "message": "उन्नत"
-  },
-  "mandatoryPacScript": {
-    "message": "अनिवार्य PAC स्क्रिप्ट (डायरेक्ट पर फॉलबैक को रोकें)"
-  },
-  "dropToAddQuickScripts": {
-    "message": "त्वरित स्क्रिप्ट में जोड़ने के लिए यहां ड्रॉप करें"
-  },
-  "dropToRemoveQuickScripts": {
-    "message": "त्वरित स्क्रिप्ट से हटाने के लिए यहां ड्रॉप करें"
-  },
-  "quickPacScripts": {
-    "message": "त्वरित स्विच कॉन्फ़िगरेशन"
-  },
-  "allProxyConfigs": {
-    "message": "सभी प्रॉक्सी कॉन्फ़िगरेशन"
-  },
-  "dragScriptsHere": {
-    "message": "त्वरित स्विचिंग सक्षम करने के लिए स्क्रिप्ट यहां खींचें। त्वरित स्विच आपको एक्सटेंशन आइकन पर क्लिक करके प्रॉक्सी स्विच करने की अनुमति देता है।"
-  },
-  "colorRequired": {
-    "message": "रंग आवश्यक है"
-  },
-  "configurationName": {
-    "message": "कॉन्फिगरेशन नाम"
-  },
-  "color": {
-    "message": "रंग"
-  },
-  "badgeLabel": {
-    "message": "बैज लेबल"
-  },
-  "badgeLabelHelp": {
-    "message": "एक्सटेंशन आइकन के लिए कस्टम टेक्स्ट (अधिकतम 4 वर्ण)। स्वचालित उत्पन्न करने के लिए खाली छोड़ दें।"
-  },
-  "active": {
-    "message": "सक्रिय"
-  },
-  "host": {
-    "message": "होस्ट"
-  },
-  "port": {
-    "message": "पोर्ट"
-  },
-  "enterConfigurationName": {
-    "message": "कॉन्फिगरेशन नाम दर्ज करें"
-  },
-  "disableProxyOnStartup": {
-    "message": "स्टार्टअप पर प्रॉक्सी अक्षम करें"
-  },
-  "disableProxyOnStartupDescription": {
-    "message": "हर बार ब्राउज़र लॉन्च होने पर प्रॉक्सी अक्षम के साथ शुरू करें"
-  },
-  "autoReloadOnProxySwitch": {
-    "message": "प्रॉक्सी बदलने पर पेज को स्वचालित रूप से रीलोड करें"
-  },
-  "autoReloadOnProxySwitchDescription": {
-    "message": "प्रॉक्सी बदलते समय सक्रिय टैब को स्वचालित रूप से रीलोड करें"
-  },
-  "tooltipAutoReload": {
-    "message": "सक्षम होने पर, परिवर्तनों को तुरंत लागू करने के लिए प्रॉक्सी सेटिंग्स बदलने के बाद वर्तमान पेज रीलोड हो जाएगा"
-  },
-  "invalidConfiguration": {
-    "message": "अमान्य कॉन्फिगरेशन"
-  },
-  "syncStorage": {
-    "message": "सिंक स्टोरेज"
-  },
-  "localStorage": {
-    "message": "स्थानीय स्टोरेज"
-  },
-  "dropTarget": {
-    "message": "ड्रॉप लक्ष्य"
-  },
-  "tabProxyConfigs": {
-    "message": "प्रॉक्सी कॉन्फ़िगरेशन"
-  },
-  "tabSettings": {
-    "message": "सेटिंग्स"
-  },
-  "tabAbout": {
-    "message": "के बारे में"
-  },
-  "settingsProxyBehavior": {
-    "message": "प्रॉक्सी व्यवहार"
-  },
-  "settingsDataManagement": {
-    "message": "डेटा प्रबंधन"
-  },
-  "aboutVersion": {
-    "message": "संस्करण"
-  },
-  "aboutHelpResources": {
-    "message": "सहायता और संसाधन"
-  },
-  "aboutExtensionInfo": {
-    "message": "एक्सटेंशन जानकारी"
-  },
-  "aboutDiagnostics": {
-    "message": "निदान"
-  },
-  "aboutViewOnGithub": {
-    "message": "GitHub पर देखें"
-  },
-  "aboutReportIssue": {
-    "message": "समस्या रिपोर्ट करें"
-  },
-  "aboutDocumentation": {
-    "message": "दस्तावेज़ीकरण"
-  },
-  "aboutFeatureRequest": {
-    "message": "सुविधा का अनुरोध करें"
-  },
-  "feedbackAndRating": {
-    "message": "प्रतिक्रिया और रेटिंग"
-  },
-  "rateExtension": {
-    "message": "एक्सटेंशन रेट करें"
-  },
-  "leaveReview": {
-    "message": "समीक्षा दें"
-  },
-  "supportProject": {
-    "message": "परियोजना का समर्थन करें"
-  },
-  "statusConnected": {
-    "message": "कनेक्ट किया गया"
-  },
-  "statusDisconnected": {
-    "message": "कोई सक्रिय प्रॉक्सी नहीं"
-  },
-  "footerActiveProxy": {
-    "message": "प्रॉक्सी अक्षम करने के लिए टॉगल पर क्लिक करें"
-  },
-  "footerSelectProxy": {
-    "message": "कनेक्ट करने के लिए प्रॉक्सी चुनें"
-  },
-  "proxyEnabled": {
-    "message": "प्रॉक्सी \"$1\" सक्षम की गई"
-  },
-  "proxyDisabled": {
-    "message": "प्रॉक्सी \"$1\" अक्षम की गई"
-  },
-  "proxyDeleted": {
-    "message": "प्रॉक्सी \"$1\" सफलतापूर्वक हटाई गई"
-  },
-  "toggleProxyOn": {
-    "message": "प्रॉक्सी $1 को सक्षम करें"
-  },
-  "toggleProxyOff": {
-    "message": "प्रॉक्सी $1 को अक्षम करें"
-  },
-  "editConfiguration": {
-    "message": "कॉन्फ़िगरेशन $1 संपादित करें"
-  },
-  "deleteConfiguration": {
-    "message": "कॉन्फ़िगरेशन $1 हटाएं"
-  },
-  "deleteProxyTitle": {
-    "message": "प्रॉक्सी कॉन्फ़िगरेशन हटाएं"
-  },
-  "deleteProxyMessage": {
-    "message": "क्या आप वाकई \"$1\" को हटाना चाहते हैं? इस कार्य को पूर्ववत नहीं किया जा सकता।"
-  },
-  "delete": {
-    "message": "हटाएं"
-  },
-  "backupSuccess": {
-    "message": "सेटिंग्स सफलतापूर्वक बैकअप की गईं"
-  },
-  "backupFailed": {
-    "message": "सेटिंग्स बैकअप करने में विफल"
-  },
-  "restoreSuccess": {
-    "message": "सेटिंग्स सफलतापूर्वक रिस्टोर की गईं"
-  },
-  "restoreFailed": {
-    "message": "सेटिंग्स रिस्टोर करने में विफल"
-  },
-  "backupDescription": {
-    "message": "सभी प्रॉक्सी कॉन्फ़िगरेशन और प्राथमिकताओं को JSON फ़ाइल के रूप में डाउनलोड करें"
-  },
-  "restoreDescription": {
-    "message": "कॉन्फ़िगरेशन को रिस्टोर करने के लिए बैकअप फ़ाइल अपलोड करें"
-  },
-  "errorBoundaryTitle": {
-    "message": "कुछ गलत हो गया"
-  },
-  "errorBoundaryRetry": {
-    "message": "पुनः प्रयास करें"
-  },
-  "closeNotification": {
-    "message": "सूचना बंद करें"
-  },
-  "closeDialog": {
-    "message": "डायलॉग बंद करें"
-  },
-  "confirm": {
-    "message": "पुष्टि करें"
-  },
-  "quickSwitchEnabled": {
-    "message": "त्वरित स्विच मोड सक्षम किया गया"
-  },
-  "quickSwitchDisabled": {
-    "message": "त्वरित स्विच मोड अक्षम किया गया"
-  },
-  "proxyDisabledOnStartup": {
-    "message": "ब्राउज़र स्टार्टअप पर प्रॉक्सी अक्षम कर दी जाएगी"
-  },
-  "proxyPersistOnStartup": {
-    "message": "ब्राउज़र स्टार्टअप पर प्रॉक्सी स्थिति बनी रहेगी"
-  },
-  "proxyUpdated": {
-    "message": "प्रॉक्सी \"$1\" सफलतापूर्वक अपडेट की गई"
-  },
-  "proxyCreated": {
-    "message": "प्रॉक्सी \"$1\" सफलतापूर्वक बनाई गई"
-  },
-  "quickSwitchEnabledStatus": {
-    "message": "✓ सक्षम – तेजी से स्विच करने के लिए एक्सटेंशन आइकन पर क्लिक करें"
-  },
-  "quickSwitchConfigsTitle": {
-    "message": "त्वरित स्विच कॉन्फ़िगरेशन"
-  },
-  "quickSwitchConfigsDescription": {
-    "message": "पॉपअप में एक-क्लिक एक्सेस के लिए प्रॉक्सी यहां खींचें"
-  },
-  "allProxyConfigsTitle": {
-    "message": "सभी प्रॉक्सी कॉन्फ़िगरेशन"
-  },
-  "allProxyConfigsDescription": {
-    "message": "अपने सभी प्रॉक्सी कॉन्फ़िगरेशन को प्रबंधित करें"
-  },
-  "quickStatsTitle": {
-    "message": "त्वरित आंकड़े"
-  },
-  "totalProxies": {
-    "message": "कुल प्रॉक्सी"
-  },
-  "quickSwitch": {
-    "message": "त्वरित स्विच"
-  },
-  "activeProxy": {
-    "message": "सक्रिय प्रॉक्सी"
-  },
-  "lastUsed": {
-    "message": "अंतिम उपयोग"
-  },
-  "none": {
-    "message": "कोई नहीं"
-  },
-  "versionLabel": {
-    "message": "संस्करण:"
-  },
-  "extensionDescription": {
-    "message": "PAC (Proxy Auto-Config) स्क्रिप्ट प्रबंधित करने के लिए Chrome एक्सटेंशन"
-  },
-  "bypassListPlaceholder": {
-    "message": "प्रति लाइन एक पैटर्न दर्ज करें:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
-  },
-  "pacUrlPlaceholder": {
-    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
-  },
-  "noProxiesTitle": {
-    "message": "कोई प्रॉक्सी उपलब्ध नहीं"
-  },
-  "noQuickSwitchTitle": {
-    "message": "कोई त्वरित स्विच प्रॉक्सी नहीं"
-  },
-  "noProxyConfigsTitle": {
-    "message": "कोई प्रॉक्सी कॉन्फ़िगरेशन नहीं"
-  },
-  "addFirstProxyAction": {
-    "message": "अपनी पहली प्रॉक्सी जोड़ें"
-  },
-  "offButton": {
-    "message": "बंद"
-  },
-  "tooltipQuickSwitchMode": {
-    "message": "सेटिंग खोले बिना पॉपअप से पसंदीदा प्रॉक्सी तक तुरंत पहुंचें"
-  },
-  "tooltipDisableOnStartup": {
-    "message": "यह सुनिश्चित करता है कि Chrome शुरू होने पर प्रॉक्सी स्वतः सक्षम न हों"
-  },
-  "tooltipDragToQuickSwitch": {
-    "message": "तेज़ पहुंच के लिए प्रॉक्सी कार्ड को यहां खींचें ताकि उन्हें त्वरित स्विच में जोड़ा जा सके"
-  },
-  "tooltipDragToRemove": {
-    "message": "पॉपअप से हटाने के लिए त्वरित स्विच प्रॉक्सी को यहां खींचें"
-  },
-  "tooltipKeyboardShortcut": {
-    "message": "तेज़ी से नई प्रॉक्सी जोड़ने के लिए Ctrl+N (Mac पर Cmd+N) दबाएं"
-  },
-  "invalidHost": {
-    "message": "अमान्य होस्टनाम या IP पता"
-  },
-  "invalidPort": {
-    "message": "पोर्ट 1 से 65535 के बीच होना चाहिए"
-  },
-  "invalidUrl": {
-    "message": "कृपया एक मान्य URL दर्ज करें"
-  },
-  "invalidPacUrlProtocol": {
-    "message": "PAC URL को http://, https://, या file:// प्रोटोकॉल का उपयोग करना चाहिए"
-  },
-  "pacUrlWarning": {
-    "message": "PAC फाइलें आम तौर पर .pac के साथ समाप्त होती हैं"
-  },
-  "bypassListHelp": {
-    "message": "प्रति पंक्ति एक पता दर्ज करें। आप वाइल्डकार्ड (*) और IP रेंज (CIDR नोटेशन) का उपयोग कर सकते हैं।"
-  },
-  "nameTooLong": {
-    "message": "नाम 50 वर्णों या उससे कम होना चाहिए"
-  },
-  "nameTooShort": {
-    "message": "नाम कम से कम 1 वर्ण का होना चाहिए"
-  },
-  "hostPlaceholder": {
-    "message": "proxy.example.com"
-  },
-  "portPlaceholder": {
-    "message": "8080"
-  },
-  "scheme": {
-    "message": "स्कीम"
-  },
-  "noProxiesYet": {
-    "message": "अभी तक कोई प्रॉक्सी कॉन्फ़िगरेशन नहीं"
-  },
-  "noProxiesDescription": {
-    "message": "अपने ब्राउज़र के इंटरनेट से कनेक्ट होने के तरीके को नियंत्रित करने के लिए अपना पहला प्रॉक्सी कॉन्फ़िगरेशन बनाकर शुरुआत करें।"
-  },
-  "getStarted": {
-    "message": "शुरू करें"
-  },
-  "quickSwitchEmptyHint": {
-    "message": "पॉपअप से त्वरित पहुंच के लिए प्रॉक्सी कॉन्फ़िगरेशन यहां खींचें"
-  },
-  "quickSwitchEmptySubHint": {
-    "message": "यहां जोड़े गए प्रॉक्सी एक-क्लिक स्विचिंग के लिए पॉपअप में दिखाई देंगे"
-  },
-  "pacUrlHelp": {
-    "message": "PAC स्क्रिप्ट इस URL से लोड की जाएगी"
-  },
-  "keyboardShortcuts": {
-    "message": "कीबोर्ड शॉर्टकट"
-  },
-  "keyboardShortcutFocusSearch": {
-    "message": "खोज पर फ़ोकस करें"
-  },
-  "keyboardShortcutNewProxy": {
-    "message": "नया प्रॉक्सी"
-  },
-  "keyboardShortcutClearSearch": {
-    "message": "खोज साफ़ करें"
-  },
-  "keyboardShortcutToggleProxy": {
-    "message": "प्रॉक्सी टॉगल करें 1-9"
-  },
-  "searchProxiesPlaceholder": {
-    "message": "प्रॉक्सी खोजें... (Ctrl+K)"
-  },
-  "keyboardShortcutCtrlCmdK": {
-    "message": "Ctrl/Cmd+K"
-  },
-  "keyboardShortcutCtrlCmdN": {
-    "message": "Ctrl/Cmd+N"
-  },
-  "keyboardShortcutEscape": {
-    "message": "Escape"
-  },
-  "keyboardShortcutNumbers": {
-    "message": "1-9"
-  },
-  "keyboardShortcutsNote": {
-    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
-  },
-  "keyboardShortcutQuickSwitchOnly": {
-    "message": "Only works for proxies in the Quick Switch section"
-  },
-  "updateInterval": {
-    "message": "स्वचालित-अपडेट अंतराल"
-  },
-  "noAutoUpdate": {
-    "message": "कोई स्वचालित-अपडेट नहीं"
-  },
-  "minutes": {
-    "message": "मिनट"
-  },
-  "hour": {
-    "message": "घंटा"
-  },
-  "hours": {
-    "message": "घंटे"
-  },
-  "refreshNow": {
-    "message": "अभी रिफ्रेश करें"
-  },
-  "refreshing": {
-    "message": "रिफ्रेश हो रहा है..."
-  },
-  "lastFetched": {
-    "message": "अंतिम बार प्राप्त किया गया"
-  },
-  "pacScriptRefreshed": {
-    "message": "PAC स्क्रिप्ट सफलतापूर्वक रिफ्रेश की गई"
-  },
-  "autoReloadEnabled": {
-    "message": "Auto-reload enabled"
-  },
-  "autoReloadDisabled": {
-    "message": "Auto-reload disabled"
-  },
-  "systemNotifications": {
-    "message": "System Notifications"
-  },
-  "systemNotificationsEnabled": {
-    "message": "System notifications enabled"
-  },
-  "systemNotificationsDisabled": {
-    "message": "System notifications disabled"
-  },
-  "systemNotificationsTooltip": {
-    "message": "Enable Chrome notifications for background events"
-  },
-  "systemNotificationsDescription": {
-    "message": "Show system notifications for proxy switches and errors"
-  },
-  "errorFailedToLoadSettings": {
-    "message": "Failed to load settings"
-  },
-  "errorFailedToSetProxy": {
-    "message": "Failed to set proxy configuration"
-  },
-  "errorFailedToClearProxy": {
-    "message": "Failed to clear proxy configuration"
-  },
-  "errorFailedToDeleteScript": {
-    "message": "Failed to delete script"
-  },
-  "proxySwitched": {
-    "message": "Proxy Switched"
-  },
-  "proxySwitchedTo": {
-    "message": "Switched to \"$1\""
-  },
-  "proxySwitchedToForHost": {
-    "message": "Switched to \"$1\" for $2"
-  },
-  "proxyError": {
-    "message": "Proxy Error"
-  },
-  "proxyErrorMessage": {
-    "message": "Failed to use \"$1\": $2"
-  },
-  "pacScriptPreview": {
-    "message": "PAC Script Preview (Read-only)"
-  },
-  "pacScriptFetchError": {
-    "message": "Failed to fetch PAC script from URL"
-  },
-  "addAutoProxy": {
-    "message": "ऑटो-प्रॉक्सी जोड़ें"
-  },
-  "addAutoProxyTooltip": {
-    "message": "URL-आधारित रूटिंग नियम बनाएं"
-  },
-  "autoProxyMode": {
-    "message": "ऑटो-प्रॉक्सी"
-  },
-  "autoProxyRulesCount": {
-    "message": "$1 नियम"
-  },
-  "createAutoProxy": {
-    "message": "ऑटो-प्रॉक्सी बनाएं"
-  },
-  "editAutoProxy": {
-    "message": "ऑटो-प्रॉक्सी संपादित करें"
-  },
-  "autoProxyCreated": {
-    "message": "ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक बनाया गया"
-  },
-  "autoProxyUpdated": {
-    "message": "ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक अपडेट किया गया"
-  },
-  "autoProxyDeleted": {
-    "message": "ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक हटाया गया"
-  },
-  "autoProxyNamePlaceholder": {
-    "message": "जैसे, कार्य रूटिंग, स्प्लिट टनल"
-  },
-  "addRule": {
-    "message": "नियम जोड़ें"
-  },
-  "editRule": {
-    "message": "नियम संपादित करें"
-  },
-  "deleteRule": {
-    "message": "नियम हटाएं"
-  },
-  "saveRule": {
-    "message": "नियम सहेजें"
-  },
-  "cancelRule": {
-    "message": "रद्द करें"
-  },
-  "urlPattern": {
-    "message": "URL पैटर्न"
-  },
-  "patternType": {
-    "message": "पैटर्न प्रकार"
-  },
-  "wildcardPattern": {
-    "message": "वाइल्डकार्ड"
-  },
-  "regexPattern": {
-    "message": "रेजेक्स"
-  },
-  "exactMatch": {
-    "message": "सटीक मिलान"
-  },
-  "cidrPattern": {
-    "message": "CIDR (IP रेंज)"
-  },
-  "selectProxy": {
-    "message": "प्रॉक्सी चुनें"
-  },
-  "defineInline": {
-    "message": "इनलाइन परिभाषित करें"
-  },
-  "directConnection": {
-    "message": "सीधा कनेक्शन"
-  },
-  "fallbackBehavior": {
-    "message": "फ़ॉलबैक व्यवहार"
-  },
-  "fallbackDescription": {
-    "message": "जब कोई नियम URL से मेल नहीं खाता तो लागू होता है"
-  },
-  "testPattern": {
-    "message": "पैटर्न परीक्षण करें"
-  },
-  "testUrl": {
-    "message": "परीक्षण URL"
-  },
-  "testUrlPlaceholder": {
-    "message": "नियमों के विरुद्ध परीक्षण करने के लिए URL दर्ज करें"
-  },
-  "patternMatches": {
-    "message": "पैटर्न मेल खाता है!"
-  },
-  "noPatternMatch": {
-    "message": "कोई पैटर्न मेल नहीं खाता - फ़ॉलबैक का उपयोग किया जाएगा"
-  },
-  "ruleEnabled": {
-    "message": "नियम सक्षम"
-  },
-  "ruleDisabled": {
-    "message": "नियम अक्षम"
-  },
-  "routingRules": {
-    "message": "रूटिंग नियम"
-  },
-  "noRulesYet": {
-    "message": "अभी तक कोई नियम परिभाषित नहीं"
-  },
-  "noRulesDescription": {
-    "message": "URL को विभिन्न प्रॉक्सी पर कैसे रूट किया जाए यह परिभाषित करने के लिए नियम जोड़ें"
-  },
-  "atLeastOneRule": {
-    "message": "कम से कम एक नियम आवश्यक है"
-  },
-  "failedToSave": {
-    "message": "कॉन्फ़िगरेशन सहेजने में विफल"
-  },
-  "proxyType": {
-    "message": "प्रॉक्सी प्रकार"
-  },
-  "noProxiesAvailable": {
-    "message": "कोई प्रॉक्सी उपलब्ध नहीं"
-  },
-  "name": {
-    "message": "नाम"
-  },
-  "ruleDescription": {
-    "message": "विवरण (वैकल्पिक)"
-  },
-  "ruleDescriptionPlaceholder": {
-    "message": "जैसे, सभी Google ट्रैफ़िक रूट करें"
-  },
-  "patternPlaceholder": {
-    "message": "जैसे, *.google.com"
-  },
-  "wildcardHelp": {
-    "message": "किसी भी वर्ण से मिलान करने के लिए * का उपयोग करें। उदाहरण: *.example.com"
-  },
-  "regexHelp": {
-    "message": "JavaScript रेजेक्स सिंटैक्स का उपयोग करें। उदाहरण: ^https?://.*\\.example\\.com"
-  },
-  "exactHelp": {
-    "message": "सटीक होस्टनाम का मिलान करें। उदाहरण: www.example.com"
-  },
-  "cidrHelp": {
-    "message": "IP रेंज के लिए CIDR नोटेशन का उपयोग करें। उदाहरण: 192.168.1.0/24"
-  },
-  "invalidPattern": {
-    "message": "अमान्य पैटर्न"
-  },
-  "patternRequired": {
-    "message": "पैटर्न आवश्यक है"
-  },
-  "saveChanges": {
-    "message": "परिवर्तन सहेजें"
-  },
-  "autoProxyReferenceWarning": {
-    "message": "यह प्रॉक्सी निम्नलिखित ऑटो-प्रॉक्सी कॉन्फ़िगरेशन द्वारा उपयोग किया जाता है:"
-  },
-  "autoProxyRefSingular": {
-    "message": "1 नियम"
-  },
-  "autoProxyRefPlural": {
-    "message": "$1 नियम",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
-  },
-  "autoProxyDeleteConsequence": {
-    "message": "जब आप इस प्रॉक्सी को हटाएंगे तो ये नियम स्वचालित रूप से हटा दिए जाएंगे।"
-  },
-  "orphanedProxyWarning": {
-    "message": "संदर्भित प्रॉक्सी हटा दिया गया है। कृपया एक अलग प्रॉक्सी चुनें।"
-  },
-  "matchedRule": {
-    "message": "मेल खाता नियम"
-  },
-  "useFallback": {
-    "message": "फ़ॉलबैक का उपयोग करें"
-  },
-  "dragToReorder": {
-    "message": "नियमों को पुनर्व्यवस्थित करने के लिए खींचें"
-  },
-  "failedToSaveProxy": {
-    "message": "प्रॉक्सी कॉन्फ़िगरेशन सहेजने में विफल"
-  },
-  "autoProxySubtitle": {
-    "message": "URL-आधारित स्मार्ट ट्रैफ़िक रूटिंग"
-  },
-  "close": {
-    "message": "बंद करें"
-  },
-  "ruleSingular": {
-    "message": "नियम"
-  },
-  "rulePlural": {
-    "message": "नियम"
-  },
-  "rulesConfigured": {
-    "message": "$1 $2 कॉन्फ़िगर किए गए"
-  },
-  "ruleActiveDescription": {
-    "message": "कॉन्फ़िगरेशन सक्षम होने पर यह नियम सक्रिय होगा"
-  },
-  "ruleSkippedDescription": {
-    "message": "यह नियम छोड़ दिया जाएगा"
-  },
-  "matchTypeWildcard": {
-    "message": "वाइल्डकार्ड"
-  },
-  "matchTypeExact": {
-    "message": "सटीक"
-  },
-  "matchTypeRegex": {
-    "message": "रेगेक्स"
-  },
-  "matchTypeCidr": {
-    "message": "CIDR"
-  },
-  "referencedProxyDeleted": {
-    "message": "प्रॉक्सी हटा दी गई"
-  },
-  "testPatternHint": {
-    "message": "सत्यापित करें कि आपके नियम सही ढंग से काम कर रहे हैं"
-  },
-  "testButton": {
-    "message": "परीक्षण"
-  },
-  "ruleLabel": {
-    "message": "नियम:"
-  },
-  "testPatternHelp": {
-    "message": "ऊपर URL दर्ज करें और परीक्षण पर क्लिक करें यह देखने के लिए कि कौन सा नियम मेल खाता है"
-  },
-  "proxyModePacScript": {
-    "message": "(PAC स्क्रिप्ट)"
-  },
-  "proxyModeSystem": {
-    "message": "(सिस्टम)"
-  },
-  "proxyModeDirect": {
-    "message": "(डायरेक्ट)"
-  },
-  "proxyModeAutoDetect": {
-    "message": "(ऑटो-डिटेक्ट)"
-  },
-  "toggleSearch": {
-    "message": "खोज टॉगल करें"
-  },
-  "hideSearch": {
-    "message": "खोज छुपाएं"
-  },
-  "viewMode": {
-    "message": "देखने का तरीका"
-  },
-  "viewModeGrid": {
-    "message": "ग्रिड दृश्य"
-  },
-  "viewModeList": {
-    "message": "सूची दृश्य"
-  },
-  "viewModeGridDescription": {
-    "message": "कार्ड ग्रिड लेआउट में प्रॉक्सी प्रदर्शित करें"
-  },
-  "viewModeListDescription": {
-    "message": "क्षैतिज सूची में प्रॉक्सी प्रदर्शित करें"
-  },
-  "authentication": {
-    "message": "प्रमाणीकरण"
-  },
-  "optional": {
-    "message": "वैकल्पिक"
-  },
-  "authStorageInfo": {
-    "message": "क्रेडेंशियल्स स्थानीय रूप से संग्रहीत और एन्क्रिप्ट किए गए हैं"
-  },
-  "username": {
-    "message": "उपयोगकर्ता नाम"
-  },
-  "usernamePlaceholder": {
-    "message": "उपयोगकर्ता नाम"
-  },
-  "password": {
-    "message": "पासवर्ड"
-  },
-  "passwordPlaceholder": {
-    "message": "••••••••"
-  },
-  "hidePassword": {
-    "message": "पासवर्ड छुपाएं"
-  },
-  "showPassword": {
-    "message": "पासवर्ड दिखाएं"
-  },
-  "diagnostics": {
-    "message": "डायग्नोस्टिक्स"
-  },
-  "tabDiagnostics": {
-    "message": "डायग्नोस्टिक्स"
-  },
-  "diagnosticsDesc": {
-    "message": "डिबगिंग के लिए त्रुटि लॉग और डायग्नोस्टिक जानकारी देखें"
-  },
-  "diagnosticsExported": {
-    "message": "डायग्नोस्टिक्स सफलतापूर्वक निर्यात किए गए"
-  },
-  "diagnosticsExportFailed": {
-    "message": "डायग्नोस्टिक्स निर्यात करने में विफल"
-  },
-  "confirmClearLogs": {
-    "message": "सभी डायग्नोस्टिक लॉग साफ़ करें?"
-  },
-  "diagnosticsCleared": {
-    "message": "डायग्नोस्टिक्स सफलतापूर्वक साफ़ किए गए"
-  },
-  "diagnosticsClearFailed": {
-    "message": "डायग्नोस्टिक्स साफ़ करने में विफल"
-  },
-  "allLogsMarkedRead": {
-    "message": "सभी लॉग पढ़े हुए के रूप में चिह्नित"
-  },
-  "justNow": {
-    "message": "अभी-अभी"
-  },
-  "markAllRead": {
-    "message": "सभी को पढ़ा हुआ चिह्नित करें"
-  },
-  "export": {
-    "message": "निर्यात करें"
-  },
-  "clearAll": {
-    "message": "सभी साफ़ करें"
-  },
-  "noErrors": {
-    "message": "कोई त्रुटि नहीं पाई गई"
-  },
-  "noErrorsDesc": {
-    "message": "आपकी प्रॉक्सी ठीक काम कर रही हैं!"
-  },
-  "details": {
-    "message": "विवरण"
-  },
-  "url": {
-    "message": "URL"
-  },
-  "stackTrace": {
-    "message": "स्टैक ट्रेस"
-  },
-  "logId": {
-    "message": "ID"
-  },
-  "proxyHasAuth": {
-    "message": "इस प्रॉक्सी में प्रमाणीकरण कॉन्फ़िगर किया गया है"
-  },
-  "settingsFileTooLarge": {
-    "message": "सेटिंग्स फ़ाइल बहुत बड़ी है। अधिकतम आकार $1KB है।",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "1024"
-      }
-    }
-  },
-  "invalidFileType": {
-    "message": "अमान्य फ़ाइल प्रकार। कृपया JSON फ़ाइल चुनें।"
-  },
-  "invalidJsonFormat": {
-    "message": "अमान्य JSON प्रारूप।"
-  },
-  "settingsMustBeObject": {
-    "message": "सेटिंग्स एक वैध ऑब्जेक्ट होनी चाहिए।"
-  },
-  "invalidProxyConfigsArray": {
-    "message": "अमान्य सेटिंग्स: proxyConfigs एक array होना चाहिए।"
-  },
-  "invalidQuickSwitchEnabled": {
-    "message": "अमान्य सेटिंग्स: quickSwitchEnabled एक बूलियन होना चाहिए।"
-  },
-  "invalidDisableProxyOnStartup": {
-    "message": "अमान्य सेटिंग्स: disableProxyOnStartup एक बूलियन होना चाहिए।"
-  },
-  "invalidAutoReloadOnProxySwitch": {
-    "message": "अमान्य सेटिंग्स: autoReloadOnProxySwitch एक बूलियन होना चाहिए।"
-  },
-  "invalidActiveScriptId": {
-    "message": "अमान्य सेटिंग्स: activeScriptId एक स्ट्रिंग या null होना चाहिए।"
-  },
-  "invalidProxyConfiguration": {
-    "message": "अमान्य प्रॉक्सी कॉन्फ़िगरेशन।"
-  },
-  "proxyMustHaveName": {
-    "message": "प्रत्येक प्रॉक्सी का एक वैध नाम होना चाहिए।"
-  },
-  "proxyMustHaveMode": {
-    "message": "प्रत्येक प्रॉक्सी का एक वैध मोड होना चाहिए।"
-  },
-  "failedToRestoreSettingsGeneric": {
-    "message": "सेटिंग्स पुनर्स्थापित करने में विफल। कृपया फ़ाइल प्रारूप जांचें।"
-  },
-  "noActiveProxy": {
-    "message": "कोई नहीं"
-  },
-  "configuredProxies": {
-    "message": "कॉन्फ़िगर किए गए प्रॉक्सी"
-  },
-  "storageUsed": {
-    "message": "उपयोग किया गया स्टोरेज"
-  },
-  "extensionVersion": {
-    "message": "एक्सटेंशन संस्करण"
-  },
-  "logsCount": {
-    "message": "गतिविधि लॉग"
-  },
-  "activityLog": {
-    "message": "गतिविधि लॉग"
-  },
-  "pacScriptValid": {
-    "message": "PAC स्क्रिप्ट मान्य है"
-  },
-  "pacScriptError": {
-    "message": "PAC स्क्रिप्ट में त्रुटियां हैं। कृपया स्क्रिप्ट सिंटैक्स की जांच करें।"
-  },
-  "invalidPacScript": {
-    "message": "अमान्य PAC स्क्रिप्ट। कृपया सुनिश्चित करें कि इसमें वैध FindProxyForURL फ़ंक्शन है।"
-  },
-  "pacFetchFailed": {
-    "message": "URL से PAC स्क्रिप्ट प्राप्त करने में विफल। कृपया URL और नेटवर्क कनेक्शन की जांच करें।"
-  },
-  "proxyPermissionDenied": {
-    "message": "अनुमति अस्वीकृत। एक्सटेंशन के पास आवश्यक अनुमतियां नहीं हो सकती हैं।"
-  },
-  "proxyControlledByOther": {
-    "message": "प्रॉक्सी सेटिंग्स किसी अन्य एक्सटेंशन द्वारा नियंत्रित हैं।"
-  },
-  "proxyManagedByPolicy": {
-    "message": "प्रॉक्सी सेटिंग्स आपके संगठन की नीति द्वारा प्रबंधित हैं।"
-  },
-  "invalidProxyHost": {
-    "message": "अमान्य प्रॉक्सी होस्ट पता। कृपया सर्वर कॉन्फ़िगरेशन की जांच करें।"
-  },
-  "invalidProxyPort": {
-    "message": "अमान्य प्रॉक्सी पोर्ट। कृपया एक वैध पोर्ट नंबर (1-65535) दर्ज करें।"
-  },
-  "proxyTimeout": {
-    "message": "कनेक्शन समय समाप्त। प्रॉक्सी सर्वर पहुंच योग्य नहीं हो सकता है।"
-  },
-  "proxySettingsFailed": {
-    "message": "प्रॉक्सी सेटिंग्स लागू करने में विफल।"
-  },
-  "onboardingWelcomeTitle": {
-    "message": "PACify में आपका स्वागत है"
-  },
-  "onboardingWelcomeDescription": {
-    "message": "Chrome के लिए आधुनिक प्रॉक्सी प्रबंधक। अपनी प्रॉक्सी सेटिंग्स को आसानी से कॉन्फ़िगर, स्विच और प्रबंधित करें।"
-  },
-  "onboardingFeaturesTitle": {
-    "message": "शक्तिशाली सुविधाएँ"
-  },
-  "onboardingFeaturesDescription": {
-    "message": "अपने प्रॉक्सी को प्रभावी ढंग से प्रबंधित करने के लिए आपको जो कुछ भी चाहिए।"
-  },
-  "onboardingFeatureProxies": {
-    "message": "एकाधिक प्रॉक्सी प्रोफ़ाइल"
-  },
-  "onboardingFeatureProxiesDesc": {
-    "message": "विभिन्न प्रॉक्सी कॉन्फ़िगरेशन को तुरंत बनाएं और स्विच करें।"
-  },
-  "onboardingFeatureAutoProxy": {
-    "message": "ऑटो-प्रॉक्सी नियम"
-  },
-  "onboardingFeatureAutoProxyDesc": {
-    "message": "स्मार्ट रूटिंग नियमों के साथ URL पैटर्न के आधार पर ट्रैफ़िक रूट करें।"
-  },
-  "onboardingFeaturePAC": {
-    "message": "PAC स्क्रिप्ट सपोर्ट"
-  },
-  "onboardingFeaturePACDesc": {
-    "message": "उन्नत प्रॉक्सी कॉन्फ़िगरेशन के लिए कस्टम PAC स्क्रिप्ट का उपयोग करें।"
-  },
-  "onboardingShortcutsTitle": {
-    "message": "कीबोर्ड शॉर्टकट"
-  },
-  "onboardingShortcutsDescription": {
-    "message": "कीबोर्ड शॉर्टकट के साथ तेज़ी से काम करें।"
-  },
-  "onboardingShortcutNewProxy": {
-    "message": "नया प्रॉक्सी बनाएं"
-  },
-  "onboardingShortcutSearch": {
-    "message": "प्रॉक्सी खोजें"
-  },
-  "onboardingShortcutClose": {
-    "message": "मोडल बंद करें"
-  },
-  "onboardingGetStartedTitle": {
-    "message": "सब तैयार!"
-  },
-  "onboardingGetStartedDescription": {
-    "message": "शुरू करने के लिए अपना पहला प्रॉक्सी कॉन्फ़िगरेशन बनाएं, या सेटिंग्स का पता लगाएं।"
-  },
-  "onboardingCreateFirstProxy": {
-    "message": "पहला प्रॉक्सी बनाएं"
-  },
-  "onboardingExploreSettings": {
-    "message": "सेटिंग्स एक्सप्लोर करें"
-  },
-  "previous": {
-    "message": "पिछला"
-  },
-  "next": {
-    "message": "अगला"
-  },
-  "skipTour": {
-    "message": "टूर छोड़ें"
-  },
-  "keyboardShortcutsDescription": {
-    "message": "तेज़ी से काम करने के लिए इन शॉर्टकट का उपयोग करें"
-  },
-  "shortcutsGroupGeneral": {
-    "message": "सामान्य"
-  },
-  "shortcutsGroupNavigation": {
-    "message": "नेविगेशन"
-  },
-  "shortcutsGroupProxyList": {
-    "message": "प्रॉक्सी सूची"
-  },
-  "shortcutNewProxy": {
-    "message": "नया प्रॉक्सी कॉन्फ़िगरेशन बनाएं"
-  },
-  "shortcutSearch": {
-    "message": "खोज खोलें"
-  },
-  "shortcutCloseModal": {
-    "message": "वर्तमान मोडल बंद करें"
-  },
-  "shortcutShowHelp": {
-    "message": "कीबोर्ड शॉर्टकट दिखाएं"
-  },
-  "shortcutNextElement": {
-    "message": "अगले तत्व पर जाएं"
-  },
-  "shortcutPrevElement": {
-    "message": "पिछले तत्व पर जाएं"
-  },
-  "shortcutActivate": {
-    "message": "फ़ोकस किए गए तत्व को सक्रिय करें"
-  },
-  "shortcutToggle": {
-    "message": "स्विच और चेकबॉक्स टॉगल करें"
-  },
-  "shortcutNavigateList": {
-    "message": "प्रॉक्सी सूची में नेविगेट करें"
-  },
-  "shortcutActivateProxy": {
-    "message": "चयनित प्रॉक्सी सक्रिय करें"
-  },
-  "shortcutEditProxy": {
-    "message": "चयनित प्रॉक्सी संपादित करें"
-  },
-  "shortcutDeleteProxy": {
-    "message": "चयनित प्रॉक्सी हटाएं"
-  },
-  "shortcutsTip": {
-    "message": "इस सहायता को दिखाने के लिए कहीं भी ? दबाएं"
-  },
-  "subscriptions": { "message": "सदस्यता" },
-  "subscriptionsDescription": {
-    "message": "दूरस्थ डोमेन सूचियों से नियम आयात करें"
-  },
-  "addSubscription": { "message": "सदस्यता जोड़ें" },
-  "subscriptionName": { "message": "नाम" },
-  "subscriptionNamePlaceholder": { "message": "जैसे, GFWList, Ad Domains" },
-  "subscriptionNameRequired": { "message": "सदस्यता नाम आवश्यक है" },
-  "subscriptionUrl": { "message": "URL" },
-  "subscriptionUrlRequired": { "message": "सदस्यता URL आवश्यक है" },
-  "subscriptionUrlInvalid": { "message": "कृपया एक मान्य URL दर्ज करें" },
-  "subscriptionFormat": { "message": "प्रारूप" },
-  "subscriptionInterval": { "message": "स्वचालित-रिफ्रेश" },
-  "subscriptionFetching": { "message": "प्राप्त कर रहा है..." },
-  "subscriptionFetchFailed": { "message": "सदस्यता प्राप्त करने में विफल" },
-  "subscriptionNoRules": { "message": "सदस्यता में कोई नियम नहीं मिला" },
-  "noSubscriptions": { "message": "कोई सदस्यता नहीं" },
-  "noSubscriptionsDescription": {
-    "message": "GFWList या कस्टम डोमेन सूचियों जैसे URL से प्रॉक्सी नियमों को स्वचालित रूप से आयात करने के लिए दूरस्थ डोमेन सूचियों की सदस्यता लें"
-  },
-  "refreshSubscription": { "message": "रिफ्रेश करें" },
-  "editSubscription": { "message": "सदस्यता संपादित करें" },
-  "saveSubscription": { "message": "परिवर्तन सहेजें" },
-  "deleteSubscription": { "message": "सदस्यता हटाएं" },
-  "deleteSubscriptionTitle": { "message": "सदस्यता हटाएं" },
-  "deleteSubscriptionMessage": {
-    "message": "क्या आप वाकई \"$1\" सदस्यता को हटाना चाहते हैं?",
-    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
-  },
-  "rules": { "message": "नियम" },
-  "fromSubscriptions": { "message": "सदस्यताओं से" },
-  "never": { "message": "कभी नहीं" },
-  "minutesAgo": {
-    "message": "$1 मिनट पहले",
-    "placeholders": { "1": { "content": "$1", "example": "5" } }
-  },
-  "hoursAgo": {
-    "message": "$1 घंटे पहले",
-    "placeholders": { "1": { "content": "$1", "example": "2" } }
-  },
-  "formatAuto": { "message": "स्वचालित-पहचान" },
-  "formatAbp": { "message": "ABP / GFWList" },
-  "formatDomains": { "message": "डोमेन सूची" },
-  "intervalManual": { "message": "केवल मैनुअल" },
-  "intervalMinutes": {
-    "message": "हर $1 मिनट",
-    "placeholders": { "1": { "content": "$1", "example": "30" } }
-  },
-  "intervalHour": {
-    "message": "हर $1 घंटा",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  },
-  "intervalHours": {
-    "message": "हर $1 घंटे",
-    "placeholders": { "1": { "content": "$1", "example": "6" } }
-  },
-  "intervalDay": {
-    "message": "हर $1 दिन",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  }
+  "extName": {"message":"PACify | प्रॉक्सी प्रबंधक"},
+  "extDescription": {"message":"Chrome के लिए पूर्ण प्रॉक्सी प्रबंधक। PAC स्क्रिप्ट, मैनुअल प्रॉक्सी और सिस्टम कॉन्फिगरेशन के बीच आसानी से बनाएं, संपादित करें और स्विच करें।"},
+  "basicSettings": {"message":"मूल सेटिंग्स"},
+  "proxyMode": {"message":"प्रॉक्सी मोड"},
+  "systemProxy": {"message":"ऑपरेटिंग सिस्टम से प्रॉक्सी सेटिंग्स का उपयोग करें।"},
+  "directMode": {"message":"डायरेक्ट"},
+  "directModeHelp": {"message":"डायरेक्ट मोड में सभी कनेक्शन बिना किसी प्रॉक्सी के सीधे बनाए जाते हैं।"},
+  "autoDetectMode": {"message":"ऑटो-कॉन्फिग URL"},
+  "autoDetectModeHelp": {"message":"ऑटो-डिटेक्ट मोड में, Chrome स्वचालित रूप से WPAD प्रोटोकॉल का उपयोग करके प्रॉक्सी सेटिंग्स खोजेगा और डाउनलोड करेगा।"},
+  "deleteConfirm": {"message":"क्या आप वाकई इस स्क्रिप्ट को हटाना चाहते हैं?"},
+  "toggleProxyHint": {"message":"स्विच पर क्लिक करके प्रॉक्सी टॉगल करें।"},
+  "systemMode": {"message":"सिस्टम"},
+  "pacScriptMode": {"message":"PAC स्क्रिप्ट"},
+  "manualMode": {"message":"मैनुअल कॉन्फिगरेशन"},
+  "addNewScript": {"message":"नई स्क्रिप्ट जोड़ें"},
+  "quickSwitchMode": {"message":"त्वरित स्विच मोड"},
+  "quickSwitchDescription": {"message":"पॉपअप से प्रॉक्सी कॉन्फ़िगरेशन के बीच त्वरित स्विचिंग सक्षम करें"},
+  "settings": {"message":"सेटिंग्स"},
+  "nameRequired": {"message":"नाम आवश्यक है"},
+  "proxyConfiguration": {"message":"प्रॉक्सी कॉन्फिगरेशन"},
+  "cancel": {"message":"रद्द करें"},
+  "saveConfiguration": {"message":"कॉन्फिगरेशन सहेजें"},
+  "saving": {"message":"सहेज रहा है..."},
+  "noScriptsAvailable": {"message":"कोई PAC स्क्रिप्ट उपलब्ध नहीं है। आरंभ करने के लिए अपनी पहली स्क्रिप्ट जोड़ें।"},
+  "noQuickSwitchScripts": {"message":"कोई त्वरित स्विच स्क्रिप्ट कॉन्फ़िगर नहीं की गई है। त्वरित स्विचिंग सक्षम करने के लिए स्क्रिप्ट यहां खींचें।"},
+  "noScriptsAvailableOptions": {"message":"कोई स्क्रिप्ट उपलब्ध नहीं है। अपनी पहली PAC स्क्रिप्ट बनाने के लिए \"नई स्क्रिप्ट जोड़ें\" पर क्लिक करें।"},
+  "backupSettings": {"message":"बैकअप सेटिंग्स"},
+  "restoreSettings": {"message":"सेटिंग्स रिस्टोर करें"},
+  "useSameProxy": {"message":"सभी प्रोटोकॉल के लिए एक ही प्रॉक्सी सर्वर का उपयोग करें"},
+  "proxyServer": {"message":"प्रॉक्सी सर्वर"},
+  "httpProxy": {"message":"HTTP प्रॉक्सी"},
+  "httpsProxy": {"message":"HTTPS प्रॉक्सी"},
+  "ftpProxy": {"message":"FTP प्रॉक्सी"},
+  "fallbackProxy": {"message":"फॉलबैक प्रॉक्सी"},
+  "bypassList": {"message":"बायपास सूची"},
+  "pacScriptUrl": {"message":"PAC स्क्रिप्ट URL"},
+  "pacScript": {"message":"PAC स्क्रिप्ट"},
+  "templates": {"message":"टेम्पलेट्स:"},
+  "emptyTemplate": {"message":"खाली"},
+  "basicTemplate": {"message":"बेसिक"},
+  "proTemplate": {"message":"प्रो"},
+  "advancedTemplate": {"message":"उन्नत"},
+  "mandatoryPacScript": {"message":"अनिवार्य PAC स्क्रिप्ट (डायरेक्ट पर फॉलबैक को रोकें)"},
+  "dropToAddQuickScripts": {"message":"त्वरित स्क्रिप्ट में जोड़ने के लिए यहां ड्रॉप करें"},
+  "dropToRemoveQuickScripts": {"message":"त्वरित स्क्रिप्ट से हटाने के लिए यहां ड्रॉप करें"},
+  "quickPacScripts": {"message":"त्वरित स्विच कॉन्फ़िगरेशन"},
+  "allProxyConfigs": {"message":"सभी प्रॉक्सी कॉन्फ़िगरेशन"},
+  "dragScriptsHere": {"message":"त्वरित स्विचिंग सक्षम करने के लिए स्क्रिप्ट यहां खींचें। त्वरित स्विच आपको एक्सटेंशन आइकन पर क्लिक करके प्रॉक्सी स्विच करने की अनुमति देता है।"},
+  "colorRequired": {"message":"रंग आवश्यक है"},
+  "configurationName": {"message":"कॉन्फिगरेशन नाम"},
+  "color": {"message":"रंग"},
+  "badgeLabel": {"message":"बैज लेबल"},
+  "badgeLabelHelp": {"message":"एक्सटेंशन आइकन के लिए कस्टम टेक्स्ट (अधिकतम 4 वर्ण)। स्वचालित उत्पन्न करने के लिए खाली छोड़ दें।"},
+  "active": {"message":"सक्रिय"},
+  "host": {"message":"होस्ट"},
+  "port": {"message":"पोर्ट"},
+  "enterConfigurationName": {"message":"कॉन्फिगरेशन नाम दर्ज करें"},
+  "disableProxyOnStartup": {"message":"स्टार्टअप पर प्रॉक्सी अक्षम करें"},
+  "disableProxyOnStartupDescription": {"message":"हर बार ब्राउज़र लॉन्च होने पर प्रॉक्सी अक्षम के साथ शुरू करें"},
+  "autoReloadOnProxySwitch": {"message":"प्रॉक्सी बदलने पर पेज को स्वचालित रूप से रीलोड करें"},
+  "autoReloadOnProxySwitchDescription": {"message":"प्रॉक्सी बदलते समय सक्रिय टैब को स्वचालित रूप से रीलोड करें"},
+  "tooltipAutoReload": {"message":"सक्षम होने पर, परिवर्तनों को तुरंत लागू करने के लिए प्रॉक्सी सेटिंग्स बदलने के बाद वर्तमान पेज रीलोड हो जाएगा"},
+  "invalidConfiguration": {"message":"अमान्य कॉन्फिगरेशन"},
+  "syncStorage": {"message":"सिंक स्टोरेज"},
+  "localStorage": {"message":"स्थानीय स्टोरेज"},
+  "dropTarget": {"message":"ड्रॉप लक्ष्य"},
+  "tabProxyConfigs": {"message":"प्रॉक्सी कॉन्फ़िगरेशन"},
+  "tabSettings": {"message":"सेटिंग्स"},
+  "tabAbout": {"message":"के बारे में"},
+  "settingsProxyBehavior": {"message":"प्रॉक्सी व्यवहार"},
+  "settingsDataManagement": {"message":"डेटा प्रबंधन"},
+  "aboutVersion": {"message":"संस्करण"},
+  "aboutHelpResources": {"message":"सहायता और संसाधन"},
+  "aboutExtensionInfo": {"message":"एक्सटेंशन जानकारी"},
+  "aboutDiagnostics": {"message":"निदान"},
+  "aboutViewOnGithub": {"message":"GitHub पर देखें"},
+  "aboutReportIssue": {"message":"समस्या रिपोर्ट करें"},
+  "aboutDocumentation": {"message":"दस्तावेज़ीकरण"},
+  "aboutFeatureRequest": {"message":"सुविधा का अनुरोध करें"},
+  "feedbackAndRating": {"message":"प्रतिक्रिया और रेटिंग"},
+  "rateExtension": {"message":"एक्सटेंशन रेट करें"},
+  "leaveReview": {"message":"समीक्षा दें"},
+  "supportProject": {"message":"परियोजना का समर्थन करें"},
+  "statusConnected": {"message":"कनेक्ट किया गया"},
+  "statusDisconnected": {"message":"कोई सक्रिय प्रॉक्सी नहीं"},
+  "footerActiveProxy": {"message":"प्रॉक्सी अक्षम करने के लिए टॉगल पर क्लिक करें"},
+  "footerSelectProxy": {"message":"कनेक्ट करने के लिए प्रॉक्सी चुनें"},
+  "proxyEnabled": {"message":"प्रॉक्सी \"$1\" सक्षम की गई"},
+  "proxyDisabled": {"message":"प्रॉक्सी \"$1\" अक्षम की गई"},
+  "proxyDeleted": {"message":"प्रॉक्सी \"$1\" सफलतापूर्वक हटाई गई"},
+  "toggleProxyOn": {"message":"प्रॉक्सी $1 को सक्षम करें"},
+  "toggleProxyOff": {"message":"प्रॉक्सी $1 को अक्षम करें"},
+  "editConfiguration": {"message":"कॉन्फ़िगरेशन $1 संपादित करें"},
+  "deleteConfiguration": {"message":"कॉन्फ़िगरेशन $1 हटाएं"},
+  "deleteProxyTitle": {"message":"प्रॉक्सी कॉन्फ़िगरेशन हटाएं"},
+  "deleteProxyMessage": {"message":"क्या आप वाकई \"$1\" को हटाना चाहते हैं? इस कार्य को पूर्ववत नहीं किया जा सकता।"},
+  "delete": {"message":"हटाएं"},
+  "backupSuccess": {"message":"सेटिंग्स सफलतापूर्वक बैकअप की गईं"},
+  "backupFailed": {"message":"सेटिंग्स बैकअप करने में विफल"},
+  "restoreSuccess": {"message":"सेटिंग्स सफलतापूर्वक रिस्टोर की गईं"},
+  "restoreFailed": {"message":"सेटिंग्स रिस्टोर करने में विफल"},
+  "backupDescription": {"message":"सभी प्रॉक्सी कॉन्फ़िगरेशन और प्राथमिकताओं को JSON फ़ाइल के रूप में डाउनलोड करें"},
+  "restoreDescription": {"message":"कॉन्फ़िगरेशन को रिस्टोर करने के लिए बैकअप फ़ाइल अपलोड करें"},
+  "errorBoundaryTitle": {"message":"कुछ गलत हो गया"},
+  "errorBoundaryRetry": {"message":"पुनः प्रयास करें"},
+  "closeNotification": {"message":"सूचना बंद करें"},
+  "closeDialog": {"message":"डायलॉग बंद करें"},
+  "confirm": {"message":"पुष्टि करें"},
+  "quickSwitchEnabled": {"message":"त्वरित स्विच मोड सक्षम किया गया"},
+  "quickSwitchDisabled": {"message":"त्वरित स्विच मोड अक्षम किया गया"},
+  "proxyDisabledOnStartup": {"message":"ब्राउज़र स्टार्टअप पर प्रॉक्सी अक्षम कर दी जाएगी"},
+  "proxyPersistOnStartup": {"message":"ब्राउज़र स्टार्टअप पर प्रॉक्सी स्थिति बनी रहेगी"},
+  "proxyUpdated": {"message":"प्रॉक्सी \"$1\" सफलतापूर्वक अपडेट की गई"},
+  "proxyCreated": {"message":"प्रॉक्सी \"$1\" सफलतापूर्वक बनाई गई"},
+  "quickSwitchEnabledStatus": {"message":"✓ सक्षम – तेजी से स्विच करने के लिए एक्सटेंशन आइकन पर क्लिक करें"},
+  "quickSwitchConfigsTitle": {"message":"त्वरित स्विच कॉन्फ़िगरेशन"},
+  "quickSwitchConfigsDescription": {"message":"पॉपअप में एक-क्लिक एक्सेस के लिए प्रॉक्सी यहां खींचें"},
+  "allProxyConfigsTitle": {"message":"सभी प्रॉक्सी कॉन्फ़िगरेशन"},
+  "allProxyConfigsDescription": {"message":"अपने सभी प्रॉक्सी कॉन्फ़िगरेशन को प्रबंधित करें"},
+  "quickStatsTitle": {"message":"त्वरित आंकड़े"},
+  "totalProxies": {"message":"कुल प्रॉक्सी"},
+  "quickSwitch": {"message":"त्वरित स्विच"},
+  "activeProxy": {"message":"सक्रिय प्रॉक्सी"},
+  "lastUsed": {"message":"अंतिम उपयोग"},
+  "none": {"message":"कोई नहीं"},
+  "versionLabel": {"message":"संस्करण:"},
+  "extensionDescription": {"message":"PAC (Proxy Auto-Config) स्क्रिप्ट प्रबंधित करने के लिए Chrome एक्सटेंशन"},
+  "bypassListPlaceholder": {"message":"प्रति लाइन एक पैटर्न दर्ज करें:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"},
+  "pacUrlPlaceholder": {"message":"https://nav-proxy.vercel.app/api/proxyman.pac"},
+  "noProxiesTitle": {"message":"कोई प्रॉक्सी उपलब्ध नहीं"},
+  "noQuickSwitchTitle": {"message":"कोई त्वरित स्विच प्रॉक्सी नहीं"},
+  "noProxyConfigsTitle": {"message":"कोई प्रॉक्सी कॉन्फ़िगरेशन नहीं"},
+  "addFirstProxyAction": {"message":"अपनी पहली प्रॉक्सी जोड़ें"},
+  "offButton": {"message":"बंद"},
+  "tooltipQuickSwitchMode": {"message":"सेटिंग खोले बिना पॉपअप से पसंदीदा प्रॉक्सी तक तुरंत पहुंचें"},
+  "tooltipDisableOnStartup": {"message":"यह सुनिश्चित करता है कि Chrome शुरू होने पर प्रॉक्सी स्वतः सक्षम न हों"},
+  "tooltipDragToQuickSwitch": {"message":"तेज़ पहुंच के लिए प्रॉक्सी कार्ड को यहां खींचें ताकि उन्हें त्वरित स्विच में जोड़ा जा सके"},
+  "tooltipDragToRemove": {"message":"पॉपअप से हटाने के लिए त्वरित स्विच प्रॉक्सी को यहां खींचें"},
+  "tooltipKeyboardShortcut": {"message":"तेज़ी से नई प्रॉक्सी जोड़ने के लिए Ctrl+N (Mac पर Cmd+N) दबाएं"},
+  "invalidHost": {"message":"अमान्य होस्टनाम या IP पता"},
+  "invalidPort": {"message":"पोर्ट 1 से 65535 के बीच होना चाहिए"},
+  "invalidUrl": {"message":"कृपया एक मान्य URL दर्ज करें"},
+  "invalidPacUrlProtocol": {"message":"PAC URL को http://, https://, या file:// प्रोटोकॉल का उपयोग करना चाहिए"},
+  "pacUrlWarning": {"message":"PAC फाइलें आम तौर पर .pac के साथ समाप्त होती हैं"},
+  "bypassListHelp": {"message":"प्रति पंक्ति एक पता दर्ज करें। आप वाइल्डकार्ड (*) और IP रेंज (CIDR नोटेशन) का उपयोग कर सकते हैं।"},
+  "nameTooLong": {"message":"नाम 50 वर्णों या उससे कम होना चाहिए"},
+  "nameTooShort": {"message":"नाम कम से कम 1 वर्ण का होना चाहिए"},
+  "hostPlaceholder": {"message":"proxy.example.com"},
+  "portPlaceholder": {"message":"8080"},
+  "scheme": {"message":"स्कीम"},
+  "noProxiesYet": {"message":"अभी तक कोई प्रॉक्सी कॉन्फ़िगरेशन नहीं"},
+  "noProxiesDescription": {"message":"अपने ब्राउज़र के इंटरनेट से कनेक्ट होने के तरीके को नियंत्रित करने के लिए अपना पहला प्रॉक्सी कॉन्फ़िगरेशन बनाकर शुरुआत करें।"},
+  "getStarted": {"message":"शुरू करें"},
+  "quickSwitchEmptyHint": {"message":"पॉपअप से त्वरित पहुंच के लिए प्रॉक्सी कॉन्फ़िगरेशन यहां खींचें"},
+  "quickSwitchEmptySubHint": {"message":"यहां जोड़े गए प्रॉक्सी एक-क्लिक स्विचिंग के लिए पॉपअप में दिखाई देंगे"},
+  "pacUrlHelp": {"message":"PAC स्क्रिप्ट इस URL से लोड की जाएगी"},
+  "keyboardShortcuts": {"message":"कीबोर्ड शॉर्टकट"},
+  "keyboardShortcutFocusSearch": {"message":"खोज पर फ़ोकस करें"},
+  "keyboardShortcutNewProxy": {"message":"नया प्रॉक्सी"},
+  "keyboardShortcutClearSearch": {"message":"खोज साफ़ करें"},
+  "keyboardShortcutToggleProxy": {"message":"प्रॉक्सी टॉगल करें 1-9"},
+  "searchProxiesPlaceholder": {"message":"प्रॉक्सी खोजें... (Ctrl+K)"},
+  "keyboardShortcutCtrlCmdK": {"message":"Ctrl/Cmd+K"},
+  "keyboardShortcutCtrlCmdN": {"message":"Ctrl/Cmd+N"},
+  "keyboardShortcutEscape": {"message":"Escape"},
+  "keyboardShortcutNumbers": {"message":"1-9"},
+  "keyboardShortcutsNote": {"message":"Note: Some shortcuts may conflict with browser or OS shortcuts"},
+  "keyboardShortcutQuickSwitchOnly": {"message":"Only works for proxies in the Quick Switch section"},
+  "updateInterval": {"message":"स्वचालित-अपडेट अंतराल"},
+  "noAutoUpdate": {"message":"कोई स्वचालित-अपडेट नहीं"},
+  "minutes": {"message":"मिनट"},
+  "hour": {"message":"घंटा"},
+  "hours": {"message":"घंटे"},
+  "refreshNow": {"message":"अभी रिफ्रेश करें"},
+  "refreshing": {"message":"रिफ्रेश हो रहा है..."},
+  "lastFetched": {"message":"अंतिम बार प्राप्त किया गया"},
+  "pacScriptRefreshed": {"message":"PAC स्क्रिप्ट सफलतापूर्वक रिफ्रेश की गई"},
+  "autoReloadEnabled": {"message":"Auto-reload enabled"},
+  "autoReloadDisabled": {"message":"Auto-reload disabled"},
+  "systemNotifications": {"message":"System Notifications"},
+  "systemNotificationsEnabled": {"message":"System notifications enabled"},
+  "systemNotificationsDisabled": {"message":"System notifications disabled"},
+  "systemNotificationsTooltip": {"message":"Enable Chrome notifications for background events"},
+  "systemNotificationsDescription": {"message":"Show system notifications for proxy switches and errors"},
+  "errorFailedToLoadSettings": {"message":"Failed to load settings"},
+  "errorFailedToSetProxy": {"message":"Failed to set proxy configuration"},
+  "errorFailedToClearProxy": {"message":"Failed to clear proxy configuration"},
+  "errorFailedToDeleteScript": {"message":"Failed to delete script"},
+  "proxySwitched": {"message":"Proxy Switched"},
+  "proxySwitchedTo": {"message":"Switched to \"$1\""},
+  "proxySwitchedToForHost": {"message":"Switched to \"$1\" for $2"},
+  "proxyError": {"message":"Proxy Error"},
+  "proxyErrorMessage": {"message":"Failed to use \"$1\": $2"},
+  "pacScriptPreview": {"message":"PAC Script Preview (Read-only)"},
+  "pacScriptFetchError": {"message":"Failed to fetch PAC script from URL"},
+  "addAutoProxy": {"message":"ऑटो-प्रॉक्सी जोड़ें"},
+  "addAutoProxyTooltip": {"message":"URL-आधारित रूटिंग नियम बनाएं"},
+  "autoProxyMode": {"message":"ऑटो-प्रॉक्सी"},
+  "autoProxyRulesCount": {"message":"$1 नियम"},
+  "createAutoProxy": {"message":"ऑटो-प्रॉक्सी बनाएं"},
+  "editAutoProxy": {"message":"ऑटो-प्रॉक्सी संपादित करें"},
+  "autoProxyCreated": {"message":"ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक बनाया गया"},
+  "autoProxyUpdated": {"message":"ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक अपडेट किया गया"},
+  "autoProxyDeleted": {"message":"ऑटो-प्रॉक्सी \"$1\" सफलतापूर्वक हटाया गया"},
+  "autoProxyNamePlaceholder": {"message":"जैसे, कार्य रूटिंग, स्प्लिट टनल"},
+  "addRule": {"message":"नियम जोड़ें"},
+  "editRule": {"message":"नियम संपादित करें"},
+  "deleteRule": {"message":"नियम हटाएं"},
+  "saveRule": {"message":"नियम सहेजें"},
+  "cancelRule": {"message":"रद्द करें"},
+  "urlPattern": {"message":"URL पैटर्न"},
+  "patternType": {"message":"पैटर्न प्रकार"},
+  "wildcardPattern": {"message":"वाइल्डकार्ड"},
+  "regexPattern": {"message":"रेजेक्स"},
+  "exactMatch": {"message":"सटीक मिलान"},
+  "cidrPattern": {"message":"CIDR (IP रेंज)"},
+  "selectProxy": {"message":"प्रॉक्सी चुनें"},
+  "defineInline": {"message":"इनलाइन परिभाषित करें"},
+  "directConnection": {"message":"सीधा कनेक्शन"},
+  "fallbackBehavior": {"message":"फ़ॉलबैक व्यवहार"},
+  "fallbackDescription": {"message":"जब कोई नियम URL से मेल नहीं खाता तो लागू होता है"},
+  "testPattern": {"message":"पैटर्न परीक्षण करें"},
+  "testUrl": {"message":"परीक्षण URL"},
+  "testUrlPlaceholder": {"message":"नियमों के विरुद्ध परीक्षण करने के लिए URL दर्ज करें"},
+  "patternMatches": {"message":"पैटर्न मेल खाता है!"},
+  "noPatternMatch": {"message":"कोई पैटर्न मेल नहीं खाता - फ़ॉलबैक का उपयोग किया जाएगा"},
+  "ruleEnabled": {"message":"नियम सक्षम"},
+  "ruleDisabled": {"message":"नियम अक्षम"},
+  "routingRules": {"message":"रूटिंग नियम"},
+  "noRulesYet": {"message":"अभी तक कोई नियम परिभाषित नहीं"},
+  "noRulesDescription": {"message":"URL को विभिन्न प्रॉक्सी पर कैसे रूट किया जाए यह परिभाषित करने के लिए नियम जोड़ें"},
+  "atLeastOneRule": {"message":"कम से कम एक नियम आवश्यक है"},
+  "failedToSave": {"message":"कॉन्फ़िगरेशन सहेजने में विफल"},
+  "proxyType": {"message":"प्रॉक्सी प्रकार"},
+  "noProxiesAvailable": {"message":"कोई प्रॉक्सी उपलब्ध नहीं"},
+  "name": {"message":"नाम"},
+  "ruleDescription": {"message":"विवरण (वैकल्पिक)"},
+  "ruleDescriptionPlaceholder": {"message":"जैसे, सभी Google ट्रैफ़िक रूट करें"},
+  "patternPlaceholder": {"message":"जैसे, *.google.com"},
+  "wildcardHelp": {"message":"किसी भी वर्ण से मिलान करने के लिए * का उपयोग करें। उदाहरण: *.example.com"},
+  "regexHelp": {"message":"JavaScript रेजेक्स सिंटैक्स का उपयोग करें। उदाहरण: ^https?://.*\\.example\\.com"},
+  "exactHelp": {"message":"सटीक होस्टनाम का मिलान करें। उदाहरण: www.example.com"},
+  "cidrHelp": {"message":"IP रेंज के लिए CIDR नोटेशन का उपयोग करें। उदाहरण: 192.168.1.0/24"},
+  "invalidPattern": {"message":"अमान्य पैटर्न"},
+  "patternRequired": {"message":"पैटर्न आवश्यक है"},
+  "saveChanges": {"message":"परिवर्तन सहेजें"},
+  "autoProxyReferenceWarning": {"message":"यह प्रॉक्सी निम्नलिखित ऑटो-प्रॉक्सी कॉन्फ़िगरेशन द्वारा उपयोग किया जाता है:"},
+  "autoProxyRefSingular": {"message":"1 नियम"},
+  "autoProxyRefPlural": {"message":"$1 नियम","placeholders":{"1":{"content":"$1","example":"3"}}},
+  "autoProxyDeleteConsequence": {"message":"जब आप इस प्रॉक्सी को हटाएंगे तो ये नियम स्वचालित रूप से हटा दिए जाएंगे।"},
+  "orphanedProxyWarning": {"message":"संदर्भित प्रॉक्सी हटा दिया गया है। कृपया एक अलग प्रॉक्सी चुनें।"},
+  "matchedRule": {"message":"मेल खाता नियम"},
+  "useFallback": {"message":"फ़ॉलबैक का उपयोग करें"},
+  "dragToReorder": {"message":"नियमों को पुनर्व्यवस्थित करने के लिए खींचें"},
+  "failedToSaveProxy": {"message":"प्रॉक्सी कॉन्फ़िगरेशन सहेजने में विफल"},
+  "autoProxySubtitle": {"message":"URL-आधारित स्मार्ट ट्रैफ़िक रूटिंग"},
+  "close": {"message":"बंद करें"},
+  "ruleSingular": {"message":"नियम"},
+  "rulePlural": {"message":"नियम"},
+  "rulesConfigured": {"message":"$1 $2 कॉन्फ़िगर किए गए"},
+  "ruleActiveDescription": {"message":"कॉन्फ़िगरेशन सक्षम होने पर यह नियम सक्रिय होगा"},
+  "ruleSkippedDescription": {"message":"यह नियम छोड़ दिया जाएगा"},
+  "matchTypeWildcard": {"message":"वाइल्डकार्ड"},
+  "matchTypeExact": {"message":"सटीक"},
+  "matchTypeRegex": {"message":"रेगेक्स"},
+  "matchTypeCidr": {"message":"CIDR"},
+  "referencedProxyDeleted": {"message":"प्रॉक्सी हटा दी गई"},
+  "testPatternHint": {"message":"सत्यापित करें कि आपके नियम सही ढंग से काम कर रहे हैं"},
+  "testButton": {"message":"परीक्षण"},
+  "ruleLabel": {"message":"नियम:"},
+  "testPatternHelp": {"message":"ऊपर URL दर्ज करें और परीक्षण पर क्लिक करें यह देखने के लिए कि कौन सा नियम मेल खाता है"},
+  "proxyModePacScript": {"message":"(PAC स्क्रिप्ट)"},
+  "proxyModeSystem": {"message":"(सिस्टम)"},
+  "proxyModeDirect": {"message":"(डायरेक्ट)"},
+  "proxyModeAutoDetect": {"message":"(ऑटो-डिटेक्ट)"},
+  "toggleSearch": {"message":"खोज टॉगल करें"},
+  "hideSearch": {"message":"खोज छुपाएं"},
+  "viewMode": {"message":"देखने का तरीका"},
+  "viewModeGrid": {"message":"ग्रिड दृश्य"},
+  "viewModeList": {"message":"सूची दृश्य"},
+  "viewModeGridDescription": {"message":"कार्ड ग्रिड लेआउट में प्रॉक्सी प्रदर्शित करें"},
+  "viewModeListDescription": {"message":"क्षैतिज सूची में प्रॉक्सी प्रदर्शित करें"},
+  "authentication": {"message":"प्रमाणीकरण"},
+  "optional": {"message":"वैकल्पिक"},
+  "authStorageInfo": {"message":"क्रेडेंशियल्स स्थानीय रूप से संग्रहीत और एन्क्रिप्ट किए गए हैं"},
+  "username": {"message":"उपयोगकर्ता नाम"},
+  "usernamePlaceholder": {"message":"उपयोगकर्ता नाम"},
+  "password": {"message":"पासवर्ड"},
+  "passwordPlaceholder": {"message":"••••••••"},
+  "hidePassword": {"message":"पासवर्ड छुपाएं"},
+  "showPassword": {"message":"पासवर्ड दिखाएं"},
+  "diagnostics": {"message":"डायग्नोस्टिक्स"},
+  "tabDiagnostics": {"message":"डायग्नोस्टिक्स"},
+  "diagnosticsDesc": {"message":"डिबगिंग के लिए त्रुटि लॉग और डायग्नोस्टिक जानकारी देखें"},
+  "diagnosticsExported": {"message":"डायग्नोस्टिक्स सफलतापूर्वक निर्यात किए गए"},
+  "diagnosticsExportFailed": {"message":"डायग्नोस्टिक्स निर्यात करने में विफल"},
+  "confirmClearLogs": {"message":"सभी डायग्नोस्टिक लॉग साफ़ करें?"},
+  "diagnosticsCleared": {"message":"डायग्नोस्टिक्स सफलतापूर्वक साफ़ किए गए"},
+  "diagnosticsClearFailed": {"message":"डायग्नोस्टिक्स साफ़ करने में विफल"},
+  "allLogsMarkedRead": {"message":"सभी लॉग पढ़े हुए के रूप में चिह्नित"},
+  "justNow": {"message":"अभी-अभी"},
+  "markAllRead": {"message":"सभी को पढ़ा हुआ चिह्नित करें"},
+  "export": {"message":"निर्यात करें"},
+  "clearAll": {"message":"सभी साफ़ करें"},
+  "noErrors": {"message":"कोई त्रुटि नहीं पाई गई"},
+  "noErrorsDesc": {"message":"आपकी प्रॉक्सी ठीक काम कर रही हैं!"},
+  "details": {"message":"विवरण"},
+  "url": {"message":"URL"},
+  "stackTrace": {"message":"स्टैक ट्रेस"},
+  "logId": {"message":"ID"},
+  "proxyHasAuth": {"message":"इस प्रॉक्सी में प्रमाणीकरण कॉन्फ़िगर किया गया है"},
+  "settingsFileTooLarge": {"message":"सेटिंग्स फ़ाइल बहुत बड़ी है। अधिकतम आकार $1KB है।","placeholders":{"1":{"content":"$1","example":"1024"}}},
+  "invalidFileType": {"message":"अमान्य फ़ाइल प्रकार। कृपया JSON फ़ाइल चुनें।"},
+  "invalidJsonFormat": {"message":"अमान्य JSON प्रारूप।"},
+  "settingsMustBeObject": {"message":"सेटिंग्स एक वैध ऑब्जेक्ट होनी चाहिए।"},
+  "invalidProxyConfigsArray": {"message":"अमान्य सेटिंग्स: proxyConfigs एक array होना चाहिए।"},
+  "invalidQuickSwitchEnabled": {"message":"अमान्य सेटिंग्स: quickSwitchEnabled एक बूलियन होना चाहिए।"},
+  "invalidDisableProxyOnStartup": {"message":"अमान्य सेटिंग्स: disableProxyOnStartup एक बूलियन होना चाहिए।"},
+  "invalidAutoReloadOnProxySwitch": {"message":"अमान्य सेटिंग्स: autoReloadOnProxySwitch एक बूलियन होना चाहिए।"},
+  "invalidActiveScriptId": {"message":"अमान्य सेटिंग्स: activeScriptId एक स्ट्रिंग या null होना चाहिए।"},
+  "invalidProxyConfiguration": {"message":"अमान्य प्रॉक्सी कॉन्फ़िगरेशन।"},
+  "proxyMustHaveName": {"message":"प्रत्येक प्रॉक्सी का एक वैध नाम होना चाहिए।"},
+  "proxyMustHaveMode": {"message":"प्रत्येक प्रॉक्सी का एक वैध मोड होना चाहिए।"},
+  "failedToRestoreSettingsGeneric": {"message":"सेटिंग्स पुनर्स्थापित करने में विफल। कृपया फ़ाइल प्रारूप जांचें।"},
+  "noActiveProxy": {"message":"कोई नहीं"},
+  "configuredProxies": {"message":"कॉन्फ़िगर किए गए प्रॉक्सी"},
+  "storageUsed": {"message":"उपयोग किया गया स्टोरेज"},
+  "extensionVersion": {"message":"एक्सटेंशन संस्करण"},
+  "logsCount": {"message":"गतिविधि लॉग"},
+  "activityLog": {"message":"गतिविधि लॉग"},
+  "pacScriptValid": {"message":"PAC स्क्रिप्ट मान्य है"},
+  "pacScriptError": {"message":"PAC स्क्रिप्ट में त्रुटियां हैं। कृपया स्क्रिप्ट सिंटैक्स की जांच करें।"},
+  "invalidPacScript": {"message":"अमान्य PAC स्क्रिप्ट। कृपया सुनिश्चित करें कि इसमें वैध FindProxyForURL फ़ंक्शन है।"},
+  "pacFetchFailed": {"message":"URL से PAC स्क्रिप्ट प्राप्त करने में विफल। कृपया URL और नेटवर्क कनेक्शन की जांच करें।"},
+  "proxyPermissionDenied": {"message":"अनुमति अस्वीकृत। एक्सटेंशन के पास आवश्यक अनुमतियां नहीं हो सकती हैं।"},
+  "proxyControlledByOther": {"message":"प्रॉक्सी सेटिंग्स किसी अन्य एक्सटेंशन द्वारा नियंत्रित हैं।"},
+  "proxyManagedByPolicy": {"message":"प्रॉक्सी सेटिंग्स आपके संगठन की नीति द्वारा प्रबंधित हैं।"},
+  "invalidProxyHost": {"message":"अमान्य प्रॉक्सी होस्ट पता। कृपया सर्वर कॉन्फ़िगरेशन की जांच करें।"},
+  "invalidProxyPort": {"message":"अमान्य प्रॉक्सी पोर्ट। कृपया एक वैध पोर्ट नंबर (1-65535) दर्ज करें।"},
+  "proxyTimeout": {"message":"कनेक्शन समय समाप्त। प्रॉक्सी सर्वर पहुंच योग्य नहीं हो सकता है।"},
+  "proxySettingsFailed": {"message":"प्रॉक्सी सेटिंग्स लागू करने में विफल।"},
+  "onboardingWelcomeTitle": {"message":"PACify में आपका स्वागत है"},
+  "onboardingWelcomeDescription": {"message":"Chrome के लिए आधुनिक प्रॉक्सी प्रबंधक। अपनी प्रॉक्सी सेटिंग्स को आसानी से कॉन्फ़िगर, स्विच और प्रबंधित करें।"},
+  "onboardingFeaturesTitle": {"message":"शक्तिशाली सुविधाएँ"},
+  "onboardingFeaturesDescription": {"message":"अपने प्रॉक्सी को प्रभावी ढंग से प्रबंधित करने के लिए आपको जो कुछ भी चाहिए।"},
+  "onboardingFeatureProxies": {"message":"एकाधिक प्रॉक्सी प्रोफ़ाइल"},
+  "onboardingFeatureProxiesDesc": {"message":"विभिन्न प्रॉक्सी कॉन्फ़िगरेशन को तुरंत बनाएं और स्विच करें।"},
+  "onboardingFeatureAutoProxy": {"message":"ऑटो-प्रॉक्सी नियम"},
+  "onboardingFeatureAutoProxyDesc": {"message":"स्मार्ट रूटिंग नियमों के साथ URL पैटर्न के आधार पर ट्रैफ़िक रूट करें।"},
+  "onboardingFeaturePAC": {"message":"PAC स्क्रिप्ट सपोर्ट"},
+  "onboardingFeaturePACDesc": {"message":"उन्नत प्रॉक्सी कॉन्फ़िगरेशन के लिए कस्टम PAC स्क्रिप्ट का उपयोग करें।"},
+  "onboardingShortcutsTitle": {"message":"कीबोर्ड शॉर्टकट"},
+  "onboardingShortcutsDescription": {"message":"कीबोर्ड शॉर्टकट के साथ तेज़ी से काम करें।"},
+  "onboardingShortcutNewProxy": {"message":"नया प्रॉक्सी बनाएं"},
+  "onboardingShortcutSearch": {"message":"प्रॉक्सी खोजें"},
+  "onboardingShortcutClose": {"message":"मोडल बंद करें"},
+  "onboardingGetStartedTitle": {"message":"सब तैयार!"},
+  "onboardingGetStartedDescription": {"message":"शुरू करने के लिए अपना पहला प्रॉक्सी कॉन्फ़िगरेशन बनाएं, या सेटिंग्स का पता लगाएं।"},
+  "onboardingCreateFirstProxy": {"message":"पहला प्रॉक्सी बनाएं"},
+  "onboardingExploreSettings": {"message":"सेटिंग्स एक्सप्लोर करें"},
+  "previous": {"message":"पिछला"},
+  "next": {"message":"अगला"},
+  "skipTour": {"message":"टूर छोड़ें"},
+  "keyboardShortcutsDescription": {"message":"तेज़ी से काम करने के लिए इन शॉर्टकट का उपयोग करें"},
+  "shortcutsGroupGeneral": {"message":"सामान्य"},
+  "shortcutsGroupNavigation": {"message":"नेविगेशन"},
+  "shortcutsGroupProxyList": {"message":"प्रॉक्सी सूची"},
+  "shortcutNewProxy": {"message":"नया प्रॉक्सी कॉन्फ़िगरेशन बनाएं"},
+  "shortcutSearch": {"message":"खोज खोलें"},
+  "shortcutCloseModal": {"message":"वर्तमान मोडल बंद करें"},
+  "shortcutShowHelp": {"message":"कीबोर्ड शॉर्टकट दिखाएं"},
+  "shortcutNextElement": {"message":"अगले तत्व पर जाएं"},
+  "shortcutPrevElement": {"message":"पिछले तत्व पर जाएं"},
+  "shortcutActivate": {"message":"फ़ोकस किए गए तत्व को सक्रिय करें"},
+  "shortcutToggle": {"message":"स्विच और चेकबॉक्स टॉगल करें"},
+  "shortcutNavigateList": {"message":"प्रॉक्सी सूची में नेविगेट करें"},
+  "shortcutActivateProxy": {"message":"चयनित प्रॉक्सी सक्रिय करें"},
+  "shortcutEditProxy": {"message":"चयनित प्रॉक्सी संपादित करें"},
+  "shortcutDeleteProxy": {"message":"चयनित प्रॉक्सी हटाएं"},
+  "shortcutsTip": {"message":"इस सहायता को दिखाने के लिए कहीं भी ? दबाएं"},
+  "subscriptions": {"message":"सदस्यता"},
+  "subscriptionsDescription": {"message":"दूरस्थ डोमेन सूचियों से नियम आयात करें"},
+  "addSubscription": {"message":"सदस्यता जोड़ें"},
+  "subscriptionName": {"message":"नाम"},
+  "subscriptionNamePlaceholder": {"message":"जैसे, GFWList, Ad Domains"},
+  "subscriptionNameRequired": {"message":"सदस्यता नाम आवश्यक है"},
+  "subscriptionUrl": {"message":"URL"},
+  "subscriptionUrlRequired": {"message":"सदस्यता URL आवश्यक है"},
+  "subscriptionUrlInvalid": {"message":"कृपया एक मान्य URL दर्ज करें"},
+  "subscriptionFormat": {"message":"प्रारूप"},
+  "subscriptionInterval": {"message":"स्वचालित-रिफ्रेश"},
+  "subscriptionFetching": {"message":"प्राप्त कर रहा है..."},
+  "subscriptionFetchFailed": {"message":"सदस्यता प्राप्त करने में विफल"},
+  "subscriptionNoRules": {"message":"सदस्यता में कोई नियम नहीं मिला"},
+  "noSubscriptions": {"message":"कोई सदस्यता नहीं"},
+  "noSubscriptionsDescription": {"message":"GFWList या कस्टम डोमेन सूचियों जैसे URL से प्रॉक्सी नियमों को स्वचालित रूप से आयात करने के लिए दूरस्थ डोमेन सूचियों की सदस्यता लें"},
+  "refreshSubscription": {"message":"रिफ्रेश करें"},
+  "editSubscription": {"message":"सदस्यता संपादित करें"},
+  "saveSubscription": {"message":"परिवर्तन सहेजें"},
+  "deleteSubscription": {"message":"सदस्यता हटाएं"},
+  "deleteSubscriptionTitle": {"message":"सदस्यता हटाएं"},
+  "deleteSubscriptionMessage": {"message":"क्या आप वाकई \"$1\" सदस्यता को हटाना चाहते हैं?","placeholders":{"1":{"content":"$1","example":"GFWList"}}},
+  "rules": {"message":"नियम"},
+  "fromSubscriptions": {"message":"सदस्यताओं से"},
+  "never": {"message":"कभी नहीं"},
+  "minutesAgo": {"message":"$1 मिनट पहले","placeholders":{"1":{"content":"$1","example":"5"}}},
+  "hoursAgo": {"message":"$1 घंटे पहले","placeholders":{"1":{"content":"$1","example":"2"}}},
+  "formatAuto": {"message":"स्वचालित-पहचान"},
+  "formatAbp": {"message":"ABP / GFWList"},
+  "formatDomains": {"message":"डोमेन सूची"},
+  "formatSurge": {"message":"Surge / Shadowrocket"},
+  "formatClash": {"message":"Clash / Mihomo"},
+  "intervalManual": {"message":"केवल मैनुअल"},
+  "intervalMinutes": {"message":"हर $1 मिनट","placeholders":{"1":{"content":"$1","example":"30"}}},
+  "intervalHour": {"message":"हर $1 घंटा","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "intervalHours": {"message":"हर $1 घंटे","placeholders":{"1":{"content":"$1","example":"6"}}},
+  "intervalDay": {"message":"हर $1 दिन","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "showQuickSettings": {"message":"त्वरित सेटिंग्स दिखाएं"},
+  "showQuickSettingsDescription": {"message":"प्रॉक्सी कॉन्फ़िग पेज पर त्वरित सेटिंग्स अनुभाग प्रदर्शित करें"},
+  "showQuickSettingsEnabled": {"message":"त्वरित सेटिंग्स अनुभाग अब दिखाई दे रहा है"},
+  "showQuickSettingsDisabled": {"message":"त्वरित सेटिंग्स अनुभाग अब छिपा हुआ है"},
+  "showQuickSettingsTooltip": {"message":"अक्षम होने पर, प्रॉक्सी कॉन्फ़िग पेज से त्वरित स्विच अनुभाग छिपा दिया जाएगा"},
+  "privacyPolicy": {"message":"गोपनीयता नीति"},
+  "privacyPolicyTitle": {"message":"गोपनीयता नीति"},
+  "privacyIntro": {"message":"आपकी गोपनीयता हमारे लिए महत्वपूर्ण है। यह नीति बताती है कि PACify आपके डेटा को कैसे संभालता है।"},
+  "privacyLastUpdated": {"message":"अंतिम अपडेट"},
+  "privacyDataCollection": {"message":"डेटा संग्रह"},
+  "privacyDataStorage": {"message":"डेटा भंडारण"},
+  "privacyNetworkRequests": {"message":"नेटवर्क अनुरोध"},
+  "privacyPermissions": {"message":"उपयोग की गई अनुमतियां"},
+  "privacyContact": {"message":"यदि आपके पास इस गोपनीयता नीति के बारे में कोई प्रश्न हैं, तो कृपया हमारे GitHub रिपॉजिटरी पर एक issue खोलें।"},
+  "httpWarning": {"message":"यह URL HTTP का उपयोग करता है। आपके प्रॉक्सी नियमों को इंटरसेप्ट किया जा सकता है। जब संभव हो HTTPS का उपयोग करें।"},
+  "save": {"message":"सहेजें"},
+  "editProxy": {"message":"प्रॉक्सी संपादित करें"},
+  "proxyActivated": {"message":"प्रॉक्सी '$1' सक्रिय किया गया","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
+  "proxyDeactivated": {"message":"प्रॉक्सी निष्क्रिय किया गया"}
 }

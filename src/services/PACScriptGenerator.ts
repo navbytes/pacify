@@ -22,6 +22,21 @@ interface EmbeddedPACScript {
 export class PACScriptGenerator {
   // Maximum allowed pattern length to prevent ReDoS attacks
   private static readonly MAX_PATTERN_LENGTH = 1000
+
+  /**
+   * Escape a string for safe interpolation into a JavaScript string literal.
+   * Prevents injection via domain names, proxy strings, subscription names, etc.
+   */
+  private static escapeJSString(s: string): string {
+    return s
+      .replace(/\\/g, '\\\\')
+      .replace(/"/g, '\\"')
+      .replace(/'/g, "\\'")
+      .replace(/\n/g, '\\n')
+      .replace(/\r/g, '\\r')
+      .replace(/\t/g, '\\t')
+      .replace(/</g, '\\x3c')
+  }
   /**
    * Generate a complete PAC script from an Auto-Proxy configuration
    */
@@ -90,10 +105,10 @@ ${allConditions.map((c) => `  ${c}`).join('\n')}
       const varName = `_subDomains_${i}`
       const domains = sub.cachedRules || []
 
-      // Build a Set of domains for O(1) lookup
-      const domainList = domains.map((d) => `"${d}"`).join(',')
+      // Build a Set of domains for O(1) lookup — escape each domain to prevent JS injection
+      const domainList = domains.map((d) => `"${PACScriptGenerator.escapeJSString(d)}"`).join(',')
       domainSetParts.push(
-        `// Subscription: ${sub.name}\nvar ${varName} = new Set([${domainList}]);`
+        `// Subscription: ${PACScriptGenerator.escapeJSString(sub.name)}\nvar ${varName} = new Set([${domainList}]);`
       )
 
       // Generate the matching function - check exact domain and parent domains
@@ -106,7 +121,7 @@ ${allConditions.map((c) => `  ${c}`).join('\n')}
 
       // Check the host itself and strip subdomains progressively
       conditions.push(
-        `if ((function(h,s){while(h){if(s.has(h))return true;var i=h.indexOf(".");if(i<0)break;h=h.substr(i+1);}return false;})(host,${varName})) return "${proxyString}";`
+        `if ((function(h,s){while(h){if(s.has(h))return true;var i=h.indexOf(".");if(i<0)break;h=h.substr(i+1);}return false;})(host,${varName})) return "${PACScriptGenerator.escapeJSString(proxyString)}";`
       )
     }
 
@@ -219,12 +234,33 @@ ${extractedBody}
     let braceCount = 1
     let endIndex = startIndex
 
-    // Find the matching closing brace
+    // Find the matching closing brace, skipping braces inside string literals
+    let inString: string | null = null // tracks quote char: ' " or `
     for (let i = startIndex; i < pacScript.length && braceCount > 0; i++) {
-      if (pacScript[i] === '{') {
-        braceCount++
-      } else if (pacScript[i] === '}') {
-        braceCount--
+      const ch = pacScript[i]
+      const prev = i > 0 ? pacScript[i - 1] : ''
+
+      if (inString) {
+        // Check for end of string (unescaped matching quote)
+        if (ch === inString && prev !== '\\') {
+          inString = null
+        }
+      } else {
+        // Check for start of string
+        if (ch === '"' || ch === "'" || ch === '`') {
+          inString = ch
+        } else if (ch === '/' && i + 1 < pacScript.length) {
+          // Skip single-line comments
+          if (pacScript[i + 1] === '/') {
+            const nl = pacScript.indexOf('\n', i)
+            i = nl === -1 ? pacScript.length : nl
+            continue
+          }
+        } else if (ch === '{') {
+          braceCount++
+        } else if (ch === '}') {
+          braceCount--
+        }
       }
       endIndex = i
     }
@@ -269,7 +305,7 @@ ${extractedBody}
       rule.inlineProxy,
       allProxies
     )
-    return `if (${matchCondition}) return "${proxyString}";`
+    return `if (${matchCondition}) return "${PACScriptGenerator.escapeJSString(proxyString)}";`
   }
 
   /**
@@ -295,7 +331,7 @@ ${extractedBody}
       config.fallbackInlineProxy,
       allProxies
     )
-    return `return "${fallbackProxy}";`
+    return `return "${PACScriptGenerator.escapeJSString(fallbackProxy)}";`
   }
 
   /**
@@ -325,14 +361,14 @@ ${extractedBody}
   private static generateWildcardCondition(pattern: string): string {
     // Convert wildcard pattern to shExpMatch format
     // shExpMatch uses shell-style wildcards: * matches any characters, ? matches single char
-    return `shExpMatch(host, "${pattern}")`
+    return `shExpMatch(host, "${PACScriptGenerator.escapeJSString(pattern)}")`
   }
 
   /**
    * Generate condition for exact hostname match
    */
   private static generateExactCondition(pattern: string): string {
-    return `host === "${pattern}"`
+    return `host === "${PACScriptGenerator.escapeJSString(pattern)}"`
   }
 
   /**

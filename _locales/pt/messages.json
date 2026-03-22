@@ -1,1216 +1,438 @@
 {
-  "extName": {
-    "message": "PACify | Gerenciador de Proxy"
-  },
-  "extDescription": {
-    "message": "Gerenciador completo de proxy para Chrome. Crie, edite e alterne facilmente entre scripts PAC, proxies manuais e configurações de sistema."
-  },
-  "basicSettings": {
-    "message": "Configurações Básicas"
-  },
-  "proxyMode": {
-    "message": "Modo de Proxy"
-  },
-  "systemProxy": {
-    "message": "Usar configurações de proxy do sistema operacional."
-  },
-  "directMode": {
-    "message": "Direto"
-  },
-  "directModeHelp": {
-    "message": "No modo direto, todas as conexões são criadas diretamente, sem qualquer proxy envolvido."
-  },
-  "autoDetectMode": {
-    "message": "URL de auto-configuração"
-  },
-  "autoDetectModeHelp": {
-    "message": "No modo de detecção automática, o Chrome procurará e baixará automaticamente as configurações de proxy usando o protocolo WPAD."
-  },
-  "deleteConfirm": {
-    "message": "Tem certeza de que deseja excluir este script?"
-  },
-  "toggleProxyHint": {
-    "message": "Alternar proxy clicando no interruptor."
-  },
-  "systemMode": {
-    "message": "Sistema"
-  },
-  "pacScriptMode": {
-    "message": "Script PAC"
-  },
-  "manualMode": {
-    "message": "Configuração Manual"
-  },
-  "addNewScript": {
-    "message": "Adicionar Novo Script"
-  },
-  "quickSwitchMode": {
-    "message": "Modo de Alternância Rápida"
-  },
-  "quickSwitchDescription": {
-    "message": "Ativar alternância rápida entre configurações de proxy a partir do popup"
-  },
-  "settings": {
-    "message": "Configurações"
-  },
-  "nameRequired": {
-    "message": "Nome é obrigatório"
-  },
-  "proxyConfiguration": {
-    "message": "Configuração de Proxy"
-  },
-  "cancel": {
-    "message": "Cancelar"
-  },
-  "saveConfiguration": {
-    "message": "Salvar Configuração"
-  },
-  "saving": {
-    "message": "Salvando..."
-  },
-  "noScriptsAvailable": {
-    "message": "Nenhum script PAC disponível. Adicione seu primeiro script para começar."
-  },
-  "noQuickSwitchScripts": {
-    "message": "Nenhum script de alternância rápida configurado. Arraste scripts aqui para ativar a alternância rápida."
-  },
-  "noScriptsAvailableOptions": {
-    "message": "Nenhum script disponível. Clique em \"Adicionar Novo Script\" para criar seu primeiro script PAC."
-  },
-  "backupSettings": {
-    "message": "Fazer Backup das Configurações"
-  },
-  "restoreSettings": {
-    "message": "Restaurar Configurações"
-  },
-  "useSameProxy": {
-    "message": "Usar o mesmo servidor de proxy para todos os protocolos"
-  },
-  "proxyServer": {
-    "message": "Servidor de Proxy"
-  },
-  "httpProxy": {
-    "message": "Proxy HTTP"
-  },
-  "httpsProxy": {
-    "message": "Proxy HTTPS"
-  },
-  "ftpProxy": {
-    "message": "Proxy FTP"
-  },
-  "fallbackProxy": {
-    "message": "Proxy de Fallback"
-  },
-  "bypassList": {
-    "message": "Lista de Bypass"
-  },
-  "pacScriptUrl": {
-    "message": "URL do Script PAC"
-  },
-  "pacScript": {
-    "message": "Script PAC"
-  },
-  "templates": {
-    "message": "Modelos:"
-  },
-  "emptyTemplate": {
-    "message": "Vazio"
-  },
-  "basicTemplate": {
-    "message": "Básico"
-  },
-  "proTemplate": {
-    "message": "Pro"
-  },
-  "advancedTemplate": {
-    "message": "Avançado"
-  },
-  "mandatoryPacScript": {
-    "message": "Script PAC obrigatório (impede o fallback para modo direto)"
-  },
-  "dropToAddQuickScripts": {
-    "message": "Solte aqui para adicionar aos scripts rápidos"
-  },
-  "dropToRemoveQuickScripts": {
-    "message": "Solte aqui para remover dos scripts rápidos"
-  },
-  "quickPacScripts": {
-    "message": "Configurações de troca rápida"
-  },
-  "allProxyConfigs": {
-    "message": "Todas as configurações de proxy"
-  },
-  "dragScriptsHere": {
-    "message": "Arraste scripts aqui para ativar a alternância rápida. A alternância rápida permite alternar o proxy clicando no ícone da extensão."
-  },
-  "colorRequired": {
-    "message": "Cor é obrigatória"
-  },
-  "configurationName": {
-    "message": "Nome da Configuração"
-  },
-  "color": {
-    "message": "Cor"
-  },
-  "badgeLabel": {
-    "message": "Etiqueta do emblema"
-  },
-  "badgeLabelHelp": {
-    "message": "Texto personalizado para o ícone da extensão (máx. 4 caracteres). Deixe vazio para geração automática."
-  },
-  "active": {
-    "message": "Ativo"
-  },
-  "host": {
-    "message": "Host"
-  },
-  "port": {
-    "message": "Porta"
-  },
-  "enterConfigurationName": {
-    "message": "Digite o nome da configuração"
-  },
-  "disableProxyOnStartup": {
-    "message": "Desabilitar proxy na inicialização"
-  },
-  "disableProxyOnStartupDescription": {
-    "message": "Iniciar com o proxy desabilitado cada vez que o navegador for iniciado"
-  },
-  "autoReloadOnProxySwitch": {
-    "message": "Recarregar página automaticamente ao trocar proxy"
-  },
-  "autoReloadOnProxySwitchDescription": {
-    "message": "Recarregar automaticamente a aba ativa ao trocar de proxy"
-  },
-  "tooltipAutoReload": {
-    "message": "Quando ativado, a página atual será recarregada após alterar as configurações do proxy para aplicar as mudanças imediatamente"
-  },
-  "invalidConfiguration": {
-    "message": "Configuração inválida"
-  },
-  "syncStorage": {
-    "message": "Armazenamento sincronizado"
-  },
-  "localStorage": {
-    "message": "Armazenamento local"
-  },
-  "dropTarget": {
-    "message": "Alvo de soltar"
-  },
-  "tabProxyConfigs": {
-    "message": "Configurações de proxy"
-  },
-  "tabSettings": {
-    "message": "Configurações"
-  },
-  "tabAbout": {
-    "message": "Sobre"
-  },
-  "settingsProxyBehavior": {
-    "message": "Comportamento do proxy"
-  },
-  "settingsDataManagement": {
-    "message": "Gerenciamento de dados"
-  },
-  "aboutVersion": {
-    "message": "Versão"
-  },
-  "aboutHelpResources": {
-    "message": "Ajuda e recursos"
-  },
-  "aboutExtensionInfo": {
-    "message": "Informações da extensão"
-  },
-  "aboutDiagnostics": {
-    "message": "Diagnósticos"
-  },
-  "aboutViewOnGithub": {
-    "message": "Ver no GitHub"
-  },
-  "aboutReportIssue": {
-    "message": "Relatar um problema"
-  },
-  "aboutDocumentation": {
-    "message": "Documentação"
-  },
-  "aboutFeatureRequest": {
-    "message": "Solicitar um recurso"
-  },
-  "feedbackAndRating": {
-    "message": "Feedback e Avaliação"
-  },
-  "rateExtension": {
-    "message": "Avaliar Extensão"
-  },
-  "leaveReview": {
-    "message": "Deixar uma Avaliação"
-  },
-  "supportProject": {
-    "message": "Apoiar Projeto"
-  },
-  "statusConnected": {
-    "message": "Conectado"
-  },
-  "statusDisconnected": {
-    "message": "Nenhum proxy ativo"
-  },
-  "footerActiveProxy": {
-    "message": "Clique no interruptor para desabilitar o proxy"
-  },
-  "footerSelectProxy": {
-    "message": "Selecione um proxy para conectar"
-  },
-  "proxyEnabled": {
-    "message": "Proxy \"$1\" habilitado"
-  },
-  "proxyDisabled": {
-    "message": "Proxy \"$1\" desabilitado"
-  },
-  "proxyDeleted": {
-    "message": "Proxy \"$1\" excluído com sucesso"
-  },
-  "toggleProxyOn": {
-    "message": "Ativar proxy $1"
-  },
-  "toggleProxyOff": {
-    "message": "Desativar proxy $1"
-  },
-  "editConfiguration": {
-    "message": "Editar configuração $1"
-  },
-  "deleteConfiguration": {
-    "message": "Excluir configuração $1"
-  },
-  "deleteProxyTitle": {
-    "message": "Excluir configuração de proxy"
-  },
-  "deleteProxyMessage": {
-    "message": "Tem certeza de que deseja excluir \"$1\"? Esta ação não pode ser desfeita."
-  },
-  "delete": {
-    "message": "Excluir"
-  },
-  "backupSuccess": {
-    "message": "Configurações copiadas com sucesso"
-  },
-  "backupFailed": {
-    "message": "Falha ao fazer backup das configurações"
-  },
-  "restoreSuccess": {
-    "message": "Configurações restauradas com sucesso"
-  },
-  "restoreFailed": {
-    "message": "Falha ao restaurar configurações"
-  },
-  "backupDescription": {
-    "message": "Baixar todas as configurações de proxy e preferências como arquivo JSON"
-  },
-  "restoreDescription": {
-    "message": "Carregar um arquivo de backup para restaurar configurações"
-  },
-  "errorBoundaryTitle": {
-    "message": "Algo deu errado"
-  },
-  "errorBoundaryRetry": {
-    "message": "Tentar novamente"
-  },
-  "closeNotification": {
-    "message": "Fechar notificação"
-  },
-  "closeDialog": {
-    "message": "Fechar diálogo"
-  },
-  "confirm": {
-    "message": "Confirmar"
-  },
-  "quickSwitchEnabled": {
-    "message": "Modo de alternância rápida ativado"
-  },
-  "quickSwitchDisabled": {
-    "message": "Modo de alternância rápida desativado"
-  },
-  "proxyDisabledOnStartup": {
-    "message": "O proxy será desabilitado na inicialização do navegador"
-  },
-  "proxyPersistOnStartup": {
-    "message": "O estado do proxy persistirá na inicialização do navegador"
-  },
-  "proxyUpdated": {
-    "message": "Proxy \"$1\" atualizado com sucesso"
-  },
-  "proxyCreated": {
-    "message": "Proxy \"$1\" criado com sucesso"
-  },
-  "quickSwitchEnabledStatus": {
-    "message": "✓ Ativado – Clique no ícone da extensão para alternar rapidamente"
-  },
-  "quickSwitchConfigsTitle": {
-    "message": "Configurações de alternância rápida"
-  },
-  "quickSwitchConfigsDescription": {
-    "message": "Arraste proxies aqui para acesso com um clique no popup"
-  },
-  "allProxyConfigsTitle": {
-    "message": "Todas as configurações de proxy"
-  },
-  "allProxyConfigsDescription": {
-    "message": "Gerencie todas as suas configurações de proxy"
-  },
-  "quickStatsTitle": {
-    "message": "Estatísticas rápidas"
-  },
-  "totalProxies": {
-    "message": "Total de proxies"
-  },
-  "quickSwitch": {
-    "message": "Alternância rápida"
-  },
-  "activeProxy": {
-    "message": "Proxy ativo"
-  },
-  "lastUsed": {
-    "message": "Último uso"
-  },
-  "none": {
-    "message": "Nenhum"
-  },
-  "versionLabel": {
-    "message": "Versão:"
-  },
-  "extensionDescription": {
-    "message": "Extensão do Chrome para gerenciar scripts PAC (Proxy Auto-Config)"
-  },
-  "bypassListPlaceholder": {
-    "message": "Digite um padrão por linha:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
-  },
-  "pacUrlPlaceholder": {
-    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
-  },
-  "noProxiesTitle": {
-    "message": "Nenhum proxy disponível"
-  },
-  "noQuickSwitchTitle": {
-    "message": "Nenhum proxy de alternância rápida"
-  },
-  "noProxyConfigsTitle": {
-    "message": "Nenhuma configuração de proxy"
-  },
-  "addFirstProxyAction": {
-    "message": "Adicionar seu primeiro proxy"
-  },
-  "offButton": {
-    "message": "DESLIGADO"
-  },
-  "tooltipQuickSwitchMode": {
-    "message": "Acesse proxies favoritos instantaneamente no popup sem abrir as configurações"
-  },
-  "tooltipDisableOnStartup": {
-    "message": "Isso garante que os proxies não sejam ativados automaticamente quando o Chrome inicia"
-  },
-  "tooltipDragToQuickSwitch": {
-    "message": "Arraste cartões de proxy aqui para adicioná-los à Alternância Rápida para acesso mais rápido"
-  },
-  "tooltipDragToRemove": {
-    "message": "Arraste proxies de Alternância Rápida aqui para removê-los do popup"
-  },
-  "tooltipKeyboardShortcut": {
-    "message": "Pressione Ctrl+N (Cmd+N no Mac) para adicionar rapidamente um novo proxy"
-  },
-  "invalidHost": {
-    "message": "Nome de host ou endereço IP inválido"
-  },
-  "invalidPort": {
-    "message": "A porta deve estar entre 1 e 65535"
-  },
-  "invalidUrl": {
-    "message": "Por favor, insira uma URL válida"
-  },
-  "invalidPacUrlProtocol": {
-    "message": "A URL PAC deve usar o protocolo http://, https:// ou file://"
-  },
-  "pacUrlWarning": {
-    "message": "Os arquivos PAC normalmente terminam com .pac"
-  },
-  "bypassListHelp": {
-    "message": "Digite um endereço por linha. Você pode usar curingas (*) e intervalos de IP (notação CIDR)."
-  },
-  "nameTooLong": {
-    "message": "O nome deve ter 50 caracteres ou menos"
-  },
-  "nameTooShort": {
-    "message": "O nome deve ter pelo menos 1 caractere"
-  },
-  "hostPlaceholder": {
-    "message": "proxy.example.com"
-  },
-  "portPlaceholder": {
-    "message": "8080"
-  },
-  "scheme": {
-    "message": "Esquema"
-  },
-  "noProxiesYet": {
-    "message": "Nenhuma configuração de proxy ainda"
-  },
-  "noProxiesDescription": {
-    "message": "Comece criando sua primeira configuração de proxy para controlar como seu navegador se conecta à internet."
-  },
-  "getStarted": {
-    "message": "Começar"
-  },
-  "quickSwitchEmptyHint": {
-    "message": "Arraste configurações de proxy aqui para acesso rápido no popup"
-  },
-  "quickSwitchEmptySubHint": {
-    "message": "Proxies adicionados aqui aparecerão no popup para alternância com um clique"
-  },
-  "pacUrlHelp": {
-    "message": "O script PAC será carregado a partir desta URL"
-  },
-  "keyboardShortcuts": {
-    "message": "Atalhos de teclado"
-  },
-  "keyboardShortcutFocusSearch": {
-    "message": "Focar pesquisa"
-  },
-  "keyboardShortcutNewProxy": {
-    "message": "Novo proxy"
-  },
-  "keyboardShortcutClearSearch": {
-    "message": "Limpar pesquisa"
-  },
-  "keyboardShortcutToggleProxy": {
-    "message": "Alternar proxy 1-9"
-  },
-  "searchProxiesPlaceholder": {
-    "message": "Pesquisar proxies... (Ctrl+K)"
-  },
-  "keyboardShortcutCtrlCmdK": {
-    "message": "Ctrl/Cmd+K"
-  },
-  "keyboardShortcutCtrlCmdN": {
-    "message": "Ctrl/Cmd+N"
-  },
-  "keyboardShortcutEscape": {
-    "message": "Escape"
-  },
-  "keyboardShortcutNumbers": {
-    "message": "1-9"
-  },
-  "keyboardShortcutsNote": {
-    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
-  },
-  "keyboardShortcutQuickSwitchOnly": {
-    "message": "Only works for proxies in the Quick Switch section"
-  },
-  "updateInterval": {
-    "message": "Intervalo de atualização automática"
-  },
-  "noAutoUpdate": {
-    "message": "Sem atualização automática"
-  },
-  "minutes": {
-    "message": "minutos"
-  },
-  "hour": {
-    "message": "hora"
-  },
-  "hours": {
-    "message": "horas"
-  },
-  "refreshNow": {
-    "message": "Atualizar agora"
-  },
-  "refreshing": {
-    "message": "Atualizando..."
-  },
-  "lastFetched": {
-    "message": "Última busca"
-  },
-  "pacScriptRefreshed": {
-    "message": "Script PAC atualizado com sucesso"
-  },
-  "autoReloadEnabled": {
-    "message": "Auto-reload enabled"
-  },
-  "autoReloadDisabled": {
-    "message": "Auto-reload disabled"
-  },
-  "systemNotifications": {
-    "message": "System Notifications"
-  },
-  "systemNotificationsEnabled": {
-    "message": "System notifications enabled"
-  },
-  "systemNotificationsDisabled": {
-    "message": "System notifications disabled"
-  },
-  "systemNotificationsTooltip": {
-    "message": "Enable Chrome notifications for background events"
-  },
-  "systemNotificationsDescription": {
-    "message": "Show system notifications for proxy switches and errors"
-  },
-  "errorFailedToLoadSettings": {
-    "message": "Failed to load settings"
-  },
-  "errorFailedToSetProxy": {
-    "message": "Failed to set proxy configuration"
-  },
-  "errorFailedToClearProxy": {
-    "message": "Failed to clear proxy configuration"
-  },
-  "errorFailedToDeleteScript": {
-    "message": "Failed to delete script"
-  },
-  "proxySwitched": {
-    "message": "Proxy Switched"
-  },
-  "proxySwitchedTo": {
-    "message": "Switched to \"$1\""
-  },
-  "proxySwitchedToForHost": {
-    "message": "Switched to \"$1\" for $2"
-  },
-  "proxyError": {
-    "message": "Proxy Error"
-  },
-  "proxyErrorMessage": {
-    "message": "Failed to use \"$1\": $2"
-  },
-  "pacScriptPreview": {
-    "message": "PAC Script Preview (Read-only)"
-  },
-  "pacScriptFetchError": {
-    "message": "Failed to fetch PAC script from URL"
-  },
-  "addAutoProxy": {
-    "message": "Adicionar Auto-Proxy"
-  },
-  "addAutoProxyTooltip": {
-    "message": "Criar regras de roteamento baseadas em URL"
-  },
-  "autoProxyMode": {
-    "message": "Auto-Proxy"
-  },
-  "autoProxyRulesCount": {
-    "message": "$1 regras"
-  },
-  "createAutoProxy": {
-    "message": "Criar Auto-Proxy"
-  },
-  "editAutoProxy": {
-    "message": "Editar Auto-Proxy"
-  },
-  "autoProxyCreated": {
-    "message": "Auto-Proxy \"$1\" criado com sucesso"
-  },
-  "autoProxyUpdated": {
-    "message": "Auto-Proxy \"$1\" atualizado com sucesso"
-  },
-  "autoProxyDeleted": {
-    "message": "Auto-Proxy \"$1\" excluído com sucesso"
-  },
-  "autoProxyNamePlaceholder": {
-    "message": "ex., Roteamento de trabalho, Split Tunnel"
-  },
-  "addRule": {
-    "message": "Adicionar regra"
-  },
-  "editRule": {
-    "message": "Editar regra"
-  },
-  "deleteRule": {
-    "message": "Excluir regra"
-  },
-  "saveRule": {
-    "message": "Salvar regra"
-  },
-  "cancelRule": {
-    "message": "Cancelar"
-  },
-  "urlPattern": {
-    "message": "Padrão de URL"
-  },
-  "patternType": {
-    "message": "Tipo de padrão"
-  },
-  "wildcardPattern": {
-    "message": "Curinga"
-  },
-  "regexPattern": {
-    "message": "Regex"
-  },
-  "exactMatch": {
-    "message": "Correspondência exata"
-  },
-  "cidrPattern": {
-    "message": "CIDR (Faixa de IP)"
-  },
-  "selectProxy": {
-    "message": "Selecionar proxy"
-  },
-  "defineInline": {
-    "message": "Definir inline"
-  },
-  "directConnection": {
-    "message": "Conexão direta"
-  },
-  "fallbackBehavior": {
-    "message": "Comportamento de fallback"
-  },
-  "fallbackDescription": {
-    "message": "Aplicado quando nenhuma regra corresponde à URL"
-  },
-  "testPattern": {
-    "message": "Testar padrão"
-  },
-  "testUrl": {
-    "message": "URL de teste"
-  },
-  "testUrlPlaceholder": {
-    "message": "Insira uma URL para testar contra as regras"
-  },
-  "patternMatches": {
-    "message": "O padrão corresponde!"
-  },
-  "noPatternMatch": {
-    "message": "Nenhum padrão corresponde - o fallback será usado"
-  },
-  "ruleEnabled": {
-    "message": "Regra habilitada"
-  },
-  "ruleDisabled": {
-    "message": "Regra desabilitada"
-  },
-  "routingRules": {
-    "message": "Regras de roteamento"
-  },
-  "noRulesYet": {
-    "message": "Nenhuma regra definida ainda"
-  },
-  "noRulesDescription": {
-    "message": "Adicione regras para definir como as URLs serão roteadas para diferentes proxies"
-  },
-  "atLeastOneRule": {
-    "message": "Pelo menos uma regra é necessária"
-  },
-  "failedToSave": {
-    "message": "Falha ao salvar a configuração"
-  },
-  "proxyType": {
-    "message": "Tipo de proxy"
-  },
-  "noProxiesAvailable": {
-    "message": "Nenhum proxy disponível"
-  },
-  "name": {
-    "message": "Nome"
-  },
-  "ruleDescription": {
-    "message": "Descrição (opcional)"
-  },
-  "ruleDescriptionPlaceholder": {
-    "message": "ex., Rotear todo o tráfego do Google"
-  },
-  "patternPlaceholder": {
-    "message": "ex., *.google.com"
-  },
-  "wildcardHelp": {
-    "message": "Use * para corresponder a qualquer caractere. Exemplo: *.example.com"
-  },
-  "regexHelp": {
-    "message": "Use sintaxe de regex JavaScript. Exemplo: ^https?://.*\\.example\\.com"
-  },
-  "exactHelp": {
-    "message": "Corresponde ao nome de host exato. Exemplo: www.example.com"
-  },
-  "cidrHelp": {
-    "message": "Use notação CIDR para faixas de IP. Exemplo: 192.168.1.0/24"
-  },
-  "invalidPattern": {
-    "message": "Padrão inválido"
-  },
-  "patternRequired": {
-    "message": "O padrão é obrigatório"
-  },
-  "saveChanges": {
-    "message": "Salvar alterações"
-  },
-  "autoProxyReferenceWarning": {
-    "message": "Este proxy é utilizado pelas seguintes configurações de Auto-Proxy:"
-  },
-  "autoProxyRefSingular": {
-    "message": "1 regra"
-  },
-  "autoProxyRefPlural": {
-    "message": "$1 regras",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
-  },
-  "autoProxyDeleteConsequence": {
-    "message": "Estas regras serão automaticamente removidas quando você excluir este proxy."
-  },
-  "orphanedProxyWarning": {
-    "message": "O proxy referenciado foi excluído. Por favor, selecione um proxy diferente."
-  },
-  "matchedRule": {
-    "message": "Regra correspondente"
-  },
-  "useFallback": {
-    "message": "Usar fallback"
-  },
-  "dragToReorder": {
-    "message": "Arraste para reordenar as regras"
-  },
-  "failedToSaveProxy": {
-    "message": "Falha ao salvar a configuração do proxy"
-  },
-  "autoProxySubtitle": {
-    "message": "Roteamento de tráfego inteligente baseado em URL"
-  },
-  "close": {
-    "message": "Fechar"
-  },
-  "ruleSingular": {
-    "message": "regra"
-  },
-  "rulePlural": {
-    "message": "regras"
-  },
-  "rulesConfigured": {
-    "message": "$1 $2 configuradas"
-  },
-  "ruleActiveDescription": {
-    "message": "Esta regra estará ativa quando a configuração estiver habilitada"
-  },
-  "ruleSkippedDescription": {
-    "message": "Esta regra será ignorada"
-  },
-  "matchTypeWildcard": {
-    "message": "Curinga"
-  },
-  "matchTypeExact": {
-    "message": "Exato"
-  },
-  "matchTypeRegex": {
-    "message": "Regex"
-  },
-  "matchTypeCidr": {
-    "message": "CIDR"
-  },
-  "referencedProxyDeleted": {
-    "message": "Proxy excluído"
-  },
-  "testPatternHint": {
-    "message": "Verifique se suas regras funcionam corretamente"
-  },
-  "testButton": {
-    "message": "Testar"
-  },
-  "ruleLabel": {
-    "message": "Regra:"
-  },
-  "testPatternHelp": {
-    "message": "Digite uma URL acima e clique em Testar para ver qual regra corresponde"
-  },
-  "proxyModePacScript": {
-    "message": "(Script PAC)"
-  },
-  "proxyModeSystem": {
-    "message": "(Sistema)"
-  },
-  "proxyModeDirect": {
-    "message": "(Direto)"
-  },
-  "proxyModeAutoDetect": {
-    "message": "(Detecção automática)"
-  },
-  "toggleSearch": {
-    "message": "Alternar pesquisa"
-  },
-  "hideSearch": {
-    "message": "Ocultar pesquisa"
-  },
-  "viewMode": {
-    "message": "Modo de visualização"
-  },
-  "viewModeGrid": {
-    "message": "Visualização em grade"
-  },
-  "viewModeList": {
-    "message": "Visualização em lista"
-  },
-  "viewModeGridDescription": {
-    "message": "Exibir proxies em layout de grade de cartões"
-  },
-  "viewModeListDescription": {
-    "message": "Exibir proxies em lista horizontal"
-  },
-  "authentication": {
-    "message": "Autenticação"
-  },
-  "optional": {
-    "message": "Opcional"
-  },
-  "authStorageInfo": {
-    "message": "As credenciais são armazenadas localmente e criptografadas"
-  },
-  "username": {
-    "message": "Nome de usuário"
-  },
-  "usernamePlaceholder": {
-    "message": "nome de usuário"
-  },
-  "password": {
-    "message": "Senha"
-  },
-  "passwordPlaceholder": {
-    "message": "••••••••"
-  },
-  "hidePassword": {
-    "message": "Ocultar senha"
-  },
-  "showPassword": {
-    "message": "Mostrar senha"
-  },
-  "diagnostics": {
-    "message": "Diagnóstico"
-  },
-  "tabDiagnostics": {
-    "message": "Diagnóstico"
-  },
-  "diagnosticsDesc": {
-    "message": "Visualizar logs de erros e informações de diagnóstico para depuração"
-  },
-  "diagnosticsExported": {
-    "message": "Diagnóstico exportado com sucesso"
-  },
-  "diagnosticsExportFailed": {
-    "message": "Falha ao exportar diagnóstico"
-  },
-  "confirmClearLogs": {
-    "message": "Limpar todos os logs de diagnóstico?"
-  },
-  "diagnosticsCleared": {
-    "message": "Diagnóstico limpo com sucesso"
-  },
-  "diagnosticsClearFailed": {
-    "message": "Falha ao limpar diagnóstico"
-  },
-  "allLogsMarkedRead": {
-    "message": "Todos os logs marcados como lidos"
-  },
-  "justNow": {
-    "message": "Agora mesmo"
-  },
-  "markAllRead": {
-    "message": "Marcar tudo como lido"
-  },
-  "export": {
-    "message": "Exportar"
-  },
-  "clearAll": {
-    "message": "Limpar tudo"
-  },
-  "noErrors": {
-    "message": "Nenhum erro detectado"
-  },
-  "noErrorsDesc": {
-    "message": "Seus proxies estão funcionando bem!"
-  },
-  "details": {
-    "message": "Detalhes"
-  },
-  "url": {
-    "message": "URL"
-  },
-  "stackTrace": {
-    "message": "Rastreamento de pilha"
-  },
-  "logId": {
-    "message": "ID"
-  },
-  "proxyHasAuth": {
-    "message": "Este proxy tem autenticação configurada"
-  },
-  "settingsFileTooLarge": {
-    "message": "Arquivo de configurações muito grande. Tamanho máximo é $1KB.",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "1024"
-      }
-    }
-  },
-  "invalidFileType": {
-    "message": "Tipo de arquivo inválido. Por favor selecione um arquivo JSON."
-  },
-  "invalidJsonFormat": {
-    "message": "Formato JSON inválido."
-  },
-  "settingsMustBeObject": {
-    "message": "As configurações devem ser um objeto válido."
-  },
-  "invalidProxyConfigsArray": {
-    "message": "Configurações inválidas: proxyConfigs deve ser um array."
-  },
-  "invalidQuickSwitchEnabled": {
-    "message": "Configurações inválidas: quickSwitchEnabled deve ser um booleano."
-  },
-  "invalidDisableProxyOnStartup": {
-    "message": "Configurações inválidas: disableProxyOnStartup deve ser um booleano."
-  },
-  "invalidAutoReloadOnProxySwitch": {
-    "message": "Configurações inválidas: autoReloadOnProxySwitch deve ser um booleano."
-  },
-  "invalidActiveScriptId": {
-    "message": "Configurações inválidas: activeScriptId deve ser uma string ou null."
-  },
-  "invalidProxyConfiguration": {
-    "message": "Configuração de proxy inválida."
-  },
-  "proxyMustHaveName": {
-    "message": "Cada proxy deve ter um nome válido."
-  },
-  "proxyMustHaveMode": {
-    "message": "Cada proxy deve ter um modo válido."
-  },
-  "failedToRestoreSettingsGeneric": {
-    "message": "Falha ao restaurar configurações. Por favor verifique o formato do arquivo."
-  },
-  "noActiveProxy": {
-    "message": "Nenhum"
-  },
-  "configuredProxies": {
-    "message": "Proxies configurados"
-  },
-  "storageUsed": {
-    "message": "Armazenamento utilizado"
-  },
-  "extensionVersion": {
-    "message": "Versão da extensão"
-  },
-  "logsCount": {
-    "message": "Registros de atividade"
-  },
-  "activityLog": {
-    "message": "Registro de atividade"
-  },
-  "pacScriptValid": {
-    "message": "O script PAC é válido"
-  },
-  "pacScriptError": {
-    "message": "O script PAC contém erros. Por favor verifique a sintaxe do script."
-  },
-  "invalidPacScript": {
-    "message": "Script PAC inválido. Certifique-se de que contém uma função FindProxyForURL válida."
-  },
-  "pacFetchFailed": {
-    "message": "Falha ao obter o script PAC da URL. Verifique a URL e a conexão de rede."
-  },
-  "proxyPermissionDenied": {
-    "message": "Permissão negada. A extensão pode não ter as permissões necessárias."
-  },
-  "proxyControlledByOther": {
-    "message": "As configurações de proxy são controladas por outra extensão."
-  },
-  "proxyManagedByPolicy": {
-    "message": "As configurações de proxy são gerenciadas pela política da sua organização."
-  },
-  "invalidProxyHost": {
-    "message": "Endereço de host de proxy inválido. Verifique a configuração do servidor."
-  },
-  "invalidProxyPort": {
-    "message": "Porta de proxy inválida. Insira um número de porta válido (1-65535)."
-  },
-  "proxyTimeout": {
-    "message": "Tempo de conexão esgotado. O servidor proxy pode estar inacessível."
-  },
-  "proxySettingsFailed": {
-    "message": "Falha ao aplicar as configurações de proxy."
-  },
-  "onboardingWelcomeTitle": {
-    "message": "Bem-vindo ao PACify"
-  },
-  "onboardingWelcomeDescription": {
-    "message": "O gerenciador de proxy moderno para Chrome. Configure, alterne e gerencie suas configurações de proxy com facilidade."
-  },
-  "onboardingFeaturesTitle": {
-    "message": "Recursos Poderosos"
-  },
-  "onboardingFeaturesDescription": {
-    "message": "Tudo o que você precisa para gerenciar seus proxies de forma eficaz."
-  },
-  "onboardingFeatureProxies": {
-    "message": "Múltiplos Perfis de Proxy"
-  },
-  "onboardingFeatureProxiesDesc": {
-    "message": "Crie e alterne entre diferentes configurações de proxy instantaneamente."
-  },
-  "onboardingFeatureAutoProxy": {
-    "message": "Regras de Auto-Proxy"
-  },
-  "onboardingFeatureAutoProxyDesc": {
-    "message": "Roteie o tráfego com base em padrões de URL com regras de roteamento inteligentes."
-  },
-  "onboardingFeaturePAC": {
-    "message": "Suporte a Scripts PAC"
-  },
-  "onboardingFeaturePACDesc": {
-    "message": "Use scripts PAC personalizados para configuração avançada de proxy."
-  },
-  "onboardingShortcutsTitle": {
-    "message": "Atalhos de Teclado"
-  },
-  "onboardingShortcutsDescription": {
-    "message": "Trabalhe mais rápido com atalhos de teclado."
-  },
-  "onboardingShortcutNewProxy": {
-    "message": "Criar novo proxy"
-  },
-  "onboardingShortcutSearch": {
-    "message": "Pesquisar proxies"
-  },
-  "onboardingShortcutClose": {
-    "message": "Fechar modal"
-  },
-  "onboardingGetStartedTitle": {
-    "message": "Tudo Pronto!"
-  },
-  "onboardingGetStartedDescription": {
-    "message": "Crie sua primeira configuração de proxy para começar, ou explore as configurações."
-  },
-  "onboardingCreateFirstProxy": {
-    "message": "Criar Primeiro Proxy"
-  },
-  "onboardingExploreSettings": {
-    "message": "Explorar Configurações"
-  },
-  "previous": {
-    "message": "Anterior"
-  },
-  "next": {
-    "message": "Próximo"
-  },
-  "skipTour": {
-    "message": "Pular Tour"
-  },
-  "keyboardShortcutsDescription": {
-    "message": "Use estes atalhos para trabalhar mais rápido"
-  },
-  "shortcutsGroupGeneral": {
-    "message": "Geral"
-  },
-  "shortcutsGroupNavigation": {
-    "message": "Navegação"
-  },
-  "shortcutsGroupProxyList": {
-    "message": "Lista de Proxies"
-  },
-  "shortcutNewProxy": {
-    "message": "Criar nova configuração de proxy"
-  },
-  "shortcutSearch": {
-    "message": "Abrir pesquisa"
-  },
-  "shortcutCloseModal": {
-    "message": "Fechar modal atual"
-  },
-  "shortcutShowHelp": {
-    "message": "Mostrar atalhos de teclado"
-  },
-  "shortcutNextElement": {
-    "message": "Mover para o próximo elemento"
-  },
-  "shortcutPrevElement": {
-    "message": "Mover para o elemento anterior"
-  },
-  "shortcutActivate": {
-    "message": "Ativar elemento focado"
-  },
-  "shortcutToggle": {
-    "message": "Alternar interruptores e caixas de seleção"
-  },
-  "shortcutNavigateList": {
-    "message": "Navegar pela lista de proxies"
-  },
-  "shortcutActivateProxy": {
-    "message": "Ativar proxy selecionado"
-  },
-  "shortcutEditProxy": {
-    "message": "Editar proxy selecionado"
-  },
-  "shortcutDeleteProxy": {
-    "message": "Excluir proxy selecionado"
-  },
-  "shortcutsTip": {
-    "message": "Pressione ? em qualquer lugar para mostrar esta ajuda"
-  },
-  "subscriptions": { "message": "Assinaturas" },
-  "subscriptionsDescription": {
-    "message": "Importar regras de listas de domínios remotas"
-  },
-  "addSubscription": { "message": "Adicionar assinatura" },
-  "subscriptionName": { "message": "Nome" },
-  "subscriptionNamePlaceholder": { "message": "ex., GFWList, Ad Domains" },
-  "subscriptionNameRequired": { "message": "Nome da assinatura é obrigatório" },
-  "subscriptionUrl": { "message": "URL" },
-  "subscriptionUrlRequired": { "message": "URL da assinatura é obrigatório" },
-  "subscriptionUrlInvalid": { "message": "Por favor, insira uma URL válida" },
-  "subscriptionFormat": { "message": "Formato" },
-  "subscriptionInterval": { "message": "Atualização automática" },
-  "subscriptionFetching": { "message": "Buscando..." },
-  "subscriptionFetchFailed": { "message": "Falha ao buscar assinatura" },
-  "subscriptionNoRules": {
-    "message": "Nenhuma regra encontrada na assinatura"
-  },
-  "noSubscriptions": { "message": "Sem assinaturas" },
-  "noSubscriptionsDescription": {
-    "message": "Assine listas de domínios remotas para importar automaticamente regras de proxy de URLs como GFWList ou listas de domínios personalizadas"
-  },
-  "refreshSubscription": { "message": "Atualizar" },
-  "editSubscription": { "message": "Editar assinatura" },
-  "saveSubscription": { "message": "Salvar alterações" },
-  "deleteSubscription": { "message": "Excluir assinatura" },
-  "deleteSubscriptionTitle": { "message": "Excluir assinatura" },
-  "deleteSubscriptionMessage": {
-    "message": "Tem certeza de que deseja excluir a assinatura \"$1\"?",
-    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
-  },
-  "rules": { "message": "regras" },
-  "fromSubscriptions": { "message": "de assinaturas" },
-  "never": { "message": "Nunca" },
-  "minutesAgo": {
-    "message": "$1 min atrás",
-    "placeholders": { "1": { "content": "$1", "example": "5" } }
-  },
-  "hoursAgo": {
-    "message": "$1h atrás",
-    "placeholders": { "1": { "content": "$1", "example": "2" } }
-  },
-  "formatAuto": { "message": "Detectar automaticamente" },
-  "formatAbp": { "message": "ABP / GFWList" },
-  "formatDomains": { "message": "Lista de domínios" },
-  "intervalManual": { "message": "Apenas manual" },
-  "intervalMinutes": {
-    "message": "A cada $1 min",
-    "placeholders": { "1": { "content": "$1", "example": "30" } }
-  },
-  "intervalHour": {
-    "message": "A cada $1 hora",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  },
-  "intervalHours": {
-    "message": "A cada $1 horas",
-    "placeholders": { "1": { "content": "$1", "example": "6" } }
-  },
-  "intervalDay": {
-    "message": "A cada $1 dia",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  }
+  "extName": {"message":"PACify | Gerenciador de Proxy"},
+  "extDescription": {"message":"Gerenciador completo de proxy para Chrome. Crie, edite e alterne facilmente entre scripts PAC, proxies manuais e configurações de sistema."},
+  "basicSettings": {"message":"Configurações Básicas"},
+  "proxyMode": {"message":"Modo de Proxy"},
+  "systemProxy": {"message":"Usar configurações de proxy do sistema operacional."},
+  "directMode": {"message":"Direto"},
+  "directModeHelp": {"message":"No modo direto, todas as conexões são criadas diretamente, sem qualquer proxy envolvido."},
+  "autoDetectMode": {"message":"URL de auto-configuração"},
+  "autoDetectModeHelp": {"message":"No modo de detecção automática, o Chrome procurará e baixará automaticamente as configurações de proxy usando o protocolo WPAD."},
+  "deleteConfirm": {"message":"Tem certeza de que deseja excluir este script?"},
+  "toggleProxyHint": {"message":"Alternar proxy clicando no interruptor."},
+  "systemMode": {"message":"Sistema"},
+  "pacScriptMode": {"message":"Script PAC"},
+  "manualMode": {"message":"Configuração Manual"},
+  "addNewScript": {"message":"Adicionar Novo Script"},
+  "quickSwitchMode": {"message":"Modo de Alternância Rápida"},
+  "quickSwitchDescription": {"message":"Ativar alternância rápida entre configurações de proxy a partir do popup"},
+  "settings": {"message":"Configurações"},
+  "nameRequired": {"message":"Nome é obrigatório"},
+  "proxyConfiguration": {"message":"Configuração de Proxy"},
+  "cancel": {"message":"Cancelar"},
+  "saveConfiguration": {"message":"Salvar Configuração"},
+  "saving": {"message":"Salvando..."},
+  "noScriptsAvailable": {"message":"Nenhum script PAC disponível. Adicione seu primeiro script para começar."},
+  "noQuickSwitchScripts": {"message":"Nenhum script de alternância rápida configurado. Arraste scripts aqui para ativar a alternância rápida."},
+  "noScriptsAvailableOptions": {"message":"Nenhum script disponível. Clique em \"Adicionar Novo Script\" para criar seu primeiro script PAC."},
+  "backupSettings": {"message":"Fazer Backup das Configurações"},
+  "restoreSettings": {"message":"Restaurar Configurações"},
+  "useSameProxy": {"message":"Usar o mesmo servidor de proxy para todos os protocolos"},
+  "proxyServer": {"message":"Servidor de Proxy"},
+  "httpProxy": {"message":"Proxy HTTP"},
+  "httpsProxy": {"message":"Proxy HTTPS"},
+  "ftpProxy": {"message":"Proxy FTP"},
+  "fallbackProxy": {"message":"Proxy de Fallback"},
+  "bypassList": {"message":"Lista de Bypass"},
+  "pacScriptUrl": {"message":"URL do Script PAC"},
+  "pacScript": {"message":"Script PAC"},
+  "templates": {"message":"Modelos:"},
+  "emptyTemplate": {"message":"Vazio"},
+  "basicTemplate": {"message":"Básico"},
+  "proTemplate": {"message":"Pro"},
+  "advancedTemplate": {"message":"Avançado"},
+  "mandatoryPacScript": {"message":"Script PAC obrigatório (impede o fallback para modo direto)"},
+  "dropToAddQuickScripts": {"message":"Solte aqui para adicionar aos scripts rápidos"},
+  "dropToRemoveQuickScripts": {"message":"Solte aqui para remover dos scripts rápidos"},
+  "quickPacScripts": {"message":"Configurações de troca rápida"},
+  "allProxyConfigs": {"message":"Todas as configurações de proxy"},
+  "dragScriptsHere": {"message":"Arraste scripts aqui para ativar a alternância rápida. A alternância rápida permite alternar o proxy clicando no ícone da extensão."},
+  "colorRequired": {"message":"Cor é obrigatória"},
+  "configurationName": {"message":"Nome da Configuração"},
+  "color": {"message":"Cor"},
+  "badgeLabel": {"message":"Etiqueta do emblema"},
+  "badgeLabelHelp": {"message":"Texto personalizado para o ícone da extensão (máx. 4 caracteres). Deixe vazio para geração automática."},
+  "active": {"message":"Ativo"},
+  "host": {"message":"Host"},
+  "port": {"message":"Porta"},
+  "enterConfigurationName": {"message":"Digite o nome da configuração"},
+  "disableProxyOnStartup": {"message":"Desabilitar proxy na inicialização"},
+  "disableProxyOnStartupDescription": {"message":"Iniciar com o proxy desabilitado cada vez que o navegador for iniciado"},
+  "autoReloadOnProxySwitch": {"message":"Recarregar página automaticamente ao trocar proxy"},
+  "autoReloadOnProxySwitchDescription": {"message":"Recarregar automaticamente a aba ativa ao trocar de proxy"},
+  "tooltipAutoReload": {"message":"Quando ativado, a página atual será recarregada após alterar as configurações do proxy para aplicar as mudanças imediatamente"},
+  "invalidConfiguration": {"message":"Configuração inválida"},
+  "syncStorage": {"message":"Armazenamento sincronizado"},
+  "localStorage": {"message":"Armazenamento local"},
+  "dropTarget": {"message":"Alvo de soltar"},
+  "tabProxyConfigs": {"message":"Configurações de proxy"},
+  "tabSettings": {"message":"Configurações"},
+  "tabAbout": {"message":"Sobre"},
+  "settingsProxyBehavior": {"message":"Comportamento do proxy"},
+  "settingsDataManagement": {"message":"Gerenciamento de dados"},
+  "aboutVersion": {"message":"Versão"},
+  "aboutHelpResources": {"message":"Ajuda e recursos"},
+  "aboutExtensionInfo": {"message":"Informações da extensão"},
+  "aboutDiagnostics": {"message":"Diagnósticos"},
+  "aboutViewOnGithub": {"message":"Ver no GitHub"},
+  "aboutReportIssue": {"message":"Relatar um problema"},
+  "aboutDocumentation": {"message":"Documentação"},
+  "aboutFeatureRequest": {"message":"Solicitar um recurso"},
+  "feedbackAndRating": {"message":"Feedback e Avaliação"},
+  "rateExtension": {"message":"Avaliar Extensão"},
+  "leaveReview": {"message":"Deixar uma Avaliação"},
+  "supportProject": {"message":"Apoiar Projeto"},
+  "statusConnected": {"message":"Conectado"},
+  "statusDisconnected": {"message":"Nenhum proxy ativo"},
+  "footerActiveProxy": {"message":"Clique no interruptor para desabilitar o proxy"},
+  "footerSelectProxy": {"message":"Selecione um proxy para conectar"},
+  "proxyEnabled": {"message":"Proxy \"$1\" habilitado"},
+  "proxyDisabled": {"message":"Proxy \"$1\" desabilitado"},
+  "proxyDeleted": {"message":"Proxy \"$1\" excluído com sucesso"},
+  "toggleProxyOn": {"message":"Ativar proxy $1"},
+  "toggleProxyOff": {"message":"Desativar proxy $1"},
+  "editConfiguration": {"message":"Editar configuração $1"},
+  "deleteConfiguration": {"message":"Excluir configuração $1"},
+  "deleteProxyTitle": {"message":"Excluir configuração de proxy"},
+  "deleteProxyMessage": {"message":"Tem certeza de que deseja excluir \"$1\"? Esta ação não pode ser desfeita."},
+  "delete": {"message":"Excluir"},
+  "backupSuccess": {"message":"Configurações copiadas com sucesso"},
+  "backupFailed": {"message":"Falha ao fazer backup das configurações"},
+  "restoreSuccess": {"message":"Configurações restauradas com sucesso"},
+  "restoreFailed": {"message":"Falha ao restaurar configurações"},
+  "backupDescription": {"message":"Baixar todas as configurações de proxy e preferências como arquivo JSON"},
+  "restoreDescription": {"message":"Carregar um arquivo de backup para restaurar configurações"},
+  "errorBoundaryTitle": {"message":"Algo deu errado"},
+  "errorBoundaryRetry": {"message":"Tentar novamente"},
+  "closeNotification": {"message":"Fechar notificação"},
+  "closeDialog": {"message":"Fechar diálogo"},
+  "confirm": {"message":"Confirmar"},
+  "quickSwitchEnabled": {"message":"Modo de alternância rápida ativado"},
+  "quickSwitchDisabled": {"message":"Modo de alternância rápida desativado"},
+  "proxyDisabledOnStartup": {"message":"O proxy será desabilitado na inicialização do navegador"},
+  "proxyPersistOnStartup": {"message":"O estado do proxy persistirá na inicialização do navegador"},
+  "proxyUpdated": {"message":"Proxy \"$1\" atualizado com sucesso"},
+  "proxyCreated": {"message":"Proxy \"$1\" criado com sucesso"},
+  "quickSwitchEnabledStatus": {"message":"✓ Ativado – Clique no ícone da extensão para alternar rapidamente"},
+  "quickSwitchConfigsTitle": {"message":"Configurações de alternância rápida"},
+  "quickSwitchConfigsDescription": {"message":"Arraste proxies aqui para acesso com um clique no popup"},
+  "allProxyConfigsTitle": {"message":"Todas as configurações de proxy"},
+  "allProxyConfigsDescription": {"message":"Gerencie todas as suas configurações de proxy"},
+  "quickStatsTitle": {"message":"Estatísticas rápidas"},
+  "totalProxies": {"message":"Total de proxies"},
+  "quickSwitch": {"message":"Alternância rápida"},
+  "activeProxy": {"message":"Proxy ativo"},
+  "lastUsed": {"message":"Último uso"},
+  "none": {"message":"Nenhum"},
+  "versionLabel": {"message":"Versão:"},
+  "extensionDescription": {"message":"Extensão do Chrome para gerenciar scripts PAC (Proxy Auto-Config)"},
+  "bypassListPlaceholder": {"message":"Digite um padrão por linha:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"},
+  "pacUrlPlaceholder": {"message":"https://nav-proxy.vercel.app/api/proxyman.pac"},
+  "noProxiesTitle": {"message":"Nenhum proxy disponível"},
+  "noQuickSwitchTitle": {"message":"Nenhum proxy de alternância rápida"},
+  "noProxyConfigsTitle": {"message":"Nenhuma configuração de proxy"},
+  "addFirstProxyAction": {"message":"Adicionar seu primeiro proxy"},
+  "offButton": {"message":"DESLIGADO"},
+  "tooltipQuickSwitchMode": {"message":"Acesse proxies favoritos instantaneamente no popup sem abrir as configurações"},
+  "tooltipDisableOnStartup": {"message":"Isso garante que os proxies não sejam ativados automaticamente quando o Chrome inicia"},
+  "tooltipDragToQuickSwitch": {"message":"Arraste cartões de proxy aqui para adicioná-los à Alternância Rápida para acesso mais rápido"},
+  "tooltipDragToRemove": {"message":"Arraste proxies de Alternância Rápida aqui para removê-los do popup"},
+  "tooltipKeyboardShortcut": {"message":"Pressione Ctrl+N (Cmd+N no Mac) para adicionar rapidamente um novo proxy"},
+  "invalidHost": {"message":"Nome de host ou endereço IP inválido"},
+  "invalidPort": {"message":"A porta deve estar entre 1 e 65535"},
+  "invalidUrl": {"message":"Por favor, insira uma URL válida"},
+  "invalidPacUrlProtocol": {"message":"A URL PAC deve usar o protocolo http://, https:// ou file://"},
+  "pacUrlWarning": {"message":"Os arquivos PAC normalmente terminam com .pac"},
+  "bypassListHelp": {"message":"Digite um endereço por linha. Você pode usar curingas (*) e intervalos de IP (notação CIDR)."},
+  "nameTooLong": {"message":"O nome deve ter 50 caracteres ou menos"},
+  "nameTooShort": {"message":"O nome deve ter pelo menos 1 caractere"},
+  "hostPlaceholder": {"message":"proxy.example.com"},
+  "portPlaceholder": {"message":"8080"},
+  "scheme": {"message":"Esquema"},
+  "noProxiesYet": {"message":"Nenhuma configuração de proxy ainda"},
+  "noProxiesDescription": {"message":"Comece criando sua primeira configuração de proxy para controlar como seu navegador se conecta à internet."},
+  "getStarted": {"message":"Começar"},
+  "quickSwitchEmptyHint": {"message":"Arraste configurações de proxy aqui para acesso rápido no popup"},
+  "quickSwitchEmptySubHint": {"message":"Proxies adicionados aqui aparecerão no popup para alternância com um clique"},
+  "pacUrlHelp": {"message":"O script PAC será carregado a partir desta URL"},
+  "keyboardShortcuts": {"message":"Atalhos de teclado"},
+  "keyboardShortcutFocusSearch": {"message":"Focar pesquisa"},
+  "keyboardShortcutNewProxy": {"message":"Novo proxy"},
+  "keyboardShortcutClearSearch": {"message":"Limpar pesquisa"},
+  "keyboardShortcutToggleProxy": {"message":"Alternar proxy 1-9"},
+  "searchProxiesPlaceholder": {"message":"Pesquisar proxies... (Ctrl+K)"},
+  "keyboardShortcutCtrlCmdK": {"message":"Ctrl/Cmd+K"},
+  "keyboardShortcutCtrlCmdN": {"message":"Ctrl/Cmd+N"},
+  "keyboardShortcutEscape": {"message":"Escape"},
+  "keyboardShortcutNumbers": {"message":"1-9"},
+  "keyboardShortcutsNote": {"message":"Note: Some shortcuts may conflict with browser or OS shortcuts"},
+  "keyboardShortcutQuickSwitchOnly": {"message":"Only works for proxies in the Quick Switch section"},
+  "updateInterval": {"message":"Intervalo de atualização automática"},
+  "noAutoUpdate": {"message":"Sem atualização automática"},
+  "minutes": {"message":"minutos"},
+  "hour": {"message":"hora"},
+  "hours": {"message":"horas"},
+  "refreshNow": {"message":"Atualizar agora"},
+  "refreshing": {"message":"Atualizando..."},
+  "lastFetched": {"message":"Última busca"},
+  "pacScriptRefreshed": {"message":"Script PAC atualizado com sucesso"},
+  "autoReloadEnabled": {"message":"Auto-reload enabled"},
+  "autoReloadDisabled": {"message":"Auto-reload disabled"},
+  "systemNotifications": {"message":"System Notifications"},
+  "systemNotificationsEnabled": {"message":"System notifications enabled"},
+  "systemNotificationsDisabled": {"message":"System notifications disabled"},
+  "systemNotificationsTooltip": {"message":"Enable Chrome notifications for background events"},
+  "systemNotificationsDescription": {"message":"Show system notifications for proxy switches and errors"},
+  "errorFailedToLoadSettings": {"message":"Failed to load settings"},
+  "errorFailedToSetProxy": {"message":"Failed to set proxy configuration"},
+  "errorFailedToClearProxy": {"message":"Failed to clear proxy configuration"},
+  "errorFailedToDeleteScript": {"message":"Failed to delete script"},
+  "proxySwitched": {"message":"Proxy Switched"},
+  "proxySwitchedTo": {"message":"Switched to \"$1\""},
+  "proxySwitchedToForHost": {"message":"Switched to \"$1\" for $2"},
+  "proxyError": {"message":"Proxy Error"},
+  "proxyErrorMessage": {"message":"Failed to use \"$1\": $2"},
+  "pacScriptPreview": {"message":"PAC Script Preview (Read-only)"},
+  "pacScriptFetchError": {"message":"Failed to fetch PAC script from URL"},
+  "addAutoProxy": {"message":"Adicionar Auto-Proxy"},
+  "addAutoProxyTooltip": {"message":"Criar regras de roteamento baseadas em URL"},
+  "autoProxyMode": {"message":"Auto-Proxy"},
+  "autoProxyRulesCount": {"message":"$1 regras"},
+  "createAutoProxy": {"message":"Criar Auto-Proxy"},
+  "editAutoProxy": {"message":"Editar Auto-Proxy"},
+  "autoProxyCreated": {"message":"Auto-Proxy \"$1\" criado com sucesso"},
+  "autoProxyUpdated": {"message":"Auto-Proxy \"$1\" atualizado com sucesso"},
+  "autoProxyDeleted": {"message":"Auto-Proxy \"$1\" excluído com sucesso"},
+  "autoProxyNamePlaceholder": {"message":"ex., Roteamento de trabalho, Split Tunnel"},
+  "addRule": {"message":"Adicionar regra"},
+  "editRule": {"message":"Editar regra"},
+  "deleteRule": {"message":"Excluir regra"},
+  "saveRule": {"message":"Salvar regra"},
+  "cancelRule": {"message":"Cancelar"},
+  "urlPattern": {"message":"Padrão de URL"},
+  "patternType": {"message":"Tipo de padrão"},
+  "wildcardPattern": {"message":"Curinga"},
+  "regexPattern": {"message":"Regex"},
+  "exactMatch": {"message":"Correspondência exata"},
+  "cidrPattern": {"message":"CIDR (Faixa de IP)"},
+  "selectProxy": {"message":"Selecionar proxy"},
+  "defineInline": {"message":"Definir inline"},
+  "directConnection": {"message":"Conexão direta"},
+  "fallbackBehavior": {"message":"Comportamento de fallback"},
+  "fallbackDescription": {"message":"Aplicado quando nenhuma regra corresponde à URL"},
+  "testPattern": {"message":"Testar padrão"},
+  "testUrl": {"message":"URL de teste"},
+  "testUrlPlaceholder": {"message":"Insira uma URL para testar contra as regras"},
+  "patternMatches": {"message":"O padrão corresponde!"},
+  "noPatternMatch": {"message":"Nenhum padrão corresponde - o fallback será usado"},
+  "ruleEnabled": {"message":"Regra habilitada"},
+  "ruleDisabled": {"message":"Regra desabilitada"},
+  "routingRules": {"message":"Regras de roteamento"},
+  "noRulesYet": {"message":"Nenhuma regra definida ainda"},
+  "noRulesDescription": {"message":"Adicione regras para definir como as URLs serão roteadas para diferentes proxies"},
+  "atLeastOneRule": {"message":"Pelo menos uma regra é necessária"},
+  "failedToSave": {"message":"Falha ao salvar a configuração"},
+  "proxyType": {"message":"Tipo de proxy"},
+  "noProxiesAvailable": {"message":"Nenhum proxy disponível"},
+  "name": {"message":"Nome"},
+  "ruleDescription": {"message":"Descrição (opcional)"},
+  "ruleDescriptionPlaceholder": {"message":"ex., Rotear todo o tráfego do Google"},
+  "patternPlaceholder": {"message":"ex., *.google.com"},
+  "wildcardHelp": {"message":"Use * para corresponder a qualquer caractere. Exemplo: *.example.com"},
+  "regexHelp": {"message":"Use sintaxe de regex JavaScript. Exemplo: ^https?://.*\\.example\\.com"},
+  "exactHelp": {"message":"Corresponde ao nome de host exato. Exemplo: www.example.com"},
+  "cidrHelp": {"message":"Use notação CIDR para faixas de IP. Exemplo: 192.168.1.0/24"},
+  "invalidPattern": {"message":"Padrão inválido"},
+  "patternRequired": {"message":"O padrão é obrigatório"},
+  "saveChanges": {"message":"Salvar alterações"},
+  "autoProxyReferenceWarning": {"message":"Este proxy é utilizado pelas seguintes configurações de Auto-Proxy:"},
+  "autoProxyRefSingular": {"message":"1 regra"},
+  "autoProxyRefPlural": {"message":"$1 regras","placeholders":{"1":{"content":"$1","example":"3"}}},
+  "autoProxyDeleteConsequence": {"message":"Estas regras serão automaticamente removidas quando você excluir este proxy."},
+  "orphanedProxyWarning": {"message":"O proxy referenciado foi excluído. Por favor, selecione um proxy diferente."},
+  "matchedRule": {"message":"Regra correspondente"},
+  "useFallback": {"message":"Usar fallback"},
+  "dragToReorder": {"message":"Arraste para reordenar as regras"},
+  "failedToSaveProxy": {"message":"Falha ao salvar a configuração do proxy"},
+  "autoProxySubtitle": {"message":"Roteamento de tráfego inteligente baseado em URL"},
+  "close": {"message":"Fechar"},
+  "ruleSingular": {"message":"regra"},
+  "rulePlural": {"message":"regras"},
+  "rulesConfigured": {"message":"$1 $2 configuradas"},
+  "ruleActiveDescription": {"message":"Esta regra estará ativa quando a configuração estiver habilitada"},
+  "ruleSkippedDescription": {"message":"Esta regra será ignorada"},
+  "matchTypeWildcard": {"message":"Curinga"},
+  "matchTypeExact": {"message":"Exato"},
+  "matchTypeRegex": {"message":"Regex"},
+  "matchTypeCidr": {"message":"CIDR"},
+  "referencedProxyDeleted": {"message":"Proxy excluído"},
+  "testPatternHint": {"message":"Verifique se suas regras funcionam corretamente"},
+  "testButton": {"message":"Testar"},
+  "ruleLabel": {"message":"Regra:"},
+  "testPatternHelp": {"message":"Digite uma URL acima e clique em Testar para ver qual regra corresponde"},
+  "proxyModePacScript": {"message":"(Script PAC)"},
+  "proxyModeSystem": {"message":"(Sistema)"},
+  "proxyModeDirect": {"message":"(Direto)"},
+  "proxyModeAutoDetect": {"message":"(Detecção automática)"},
+  "toggleSearch": {"message":"Alternar pesquisa"},
+  "hideSearch": {"message":"Ocultar pesquisa"},
+  "viewMode": {"message":"Modo de visualização"},
+  "viewModeGrid": {"message":"Visualização em grade"},
+  "viewModeList": {"message":"Visualização em lista"},
+  "viewModeGridDescription": {"message":"Exibir proxies em layout de grade de cartões"},
+  "viewModeListDescription": {"message":"Exibir proxies em lista horizontal"},
+  "authentication": {"message":"Autenticação"},
+  "optional": {"message":"Opcional"},
+  "authStorageInfo": {"message":"As credenciais são armazenadas localmente e criptografadas"},
+  "username": {"message":"Nome de usuário"},
+  "usernamePlaceholder": {"message":"nome de usuário"},
+  "password": {"message":"Senha"},
+  "passwordPlaceholder": {"message":"••••••••"},
+  "hidePassword": {"message":"Ocultar senha"},
+  "showPassword": {"message":"Mostrar senha"},
+  "diagnostics": {"message":"Diagnóstico"},
+  "tabDiagnostics": {"message":"Diagnóstico"},
+  "diagnosticsDesc": {"message":"Visualizar logs de erros e informações de diagnóstico para depuração"},
+  "diagnosticsExported": {"message":"Diagnóstico exportado com sucesso"},
+  "diagnosticsExportFailed": {"message":"Falha ao exportar diagnóstico"},
+  "confirmClearLogs": {"message":"Limpar todos os logs de diagnóstico?"},
+  "diagnosticsCleared": {"message":"Diagnóstico limpo com sucesso"},
+  "diagnosticsClearFailed": {"message":"Falha ao limpar diagnóstico"},
+  "allLogsMarkedRead": {"message":"Todos os logs marcados como lidos"},
+  "justNow": {"message":"Agora mesmo"},
+  "markAllRead": {"message":"Marcar tudo como lido"},
+  "export": {"message":"Exportar"},
+  "clearAll": {"message":"Limpar tudo"},
+  "noErrors": {"message":"Nenhum erro detectado"},
+  "noErrorsDesc": {"message":"Seus proxies estão funcionando bem!"},
+  "details": {"message":"Detalhes"},
+  "url": {"message":"URL"},
+  "stackTrace": {"message":"Rastreamento de pilha"},
+  "logId": {"message":"ID"},
+  "proxyHasAuth": {"message":"Este proxy tem autenticação configurada"},
+  "settingsFileTooLarge": {"message":"Arquivo de configurações muito grande. Tamanho máximo é $1KB.","placeholders":{"1":{"content":"$1","example":"1024"}}},
+  "invalidFileType": {"message":"Tipo de arquivo inválido. Por favor selecione um arquivo JSON."},
+  "invalidJsonFormat": {"message":"Formato JSON inválido."},
+  "settingsMustBeObject": {"message":"As configurações devem ser um objeto válido."},
+  "invalidProxyConfigsArray": {"message":"Configurações inválidas: proxyConfigs deve ser um array."},
+  "invalidQuickSwitchEnabled": {"message":"Configurações inválidas: quickSwitchEnabled deve ser um booleano."},
+  "invalidDisableProxyOnStartup": {"message":"Configurações inválidas: disableProxyOnStartup deve ser um booleano."},
+  "invalidAutoReloadOnProxySwitch": {"message":"Configurações inválidas: autoReloadOnProxySwitch deve ser um booleano."},
+  "invalidActiveScriptId": {"message":"Configurações inválidas: activeScriptId deve ser uma string ou null."},
+  "invalidProxyConfiguration": {"message":"Configuração de proxy inválida."},
+  "proxyMustHaveName": {"message":"Cada proxy deve ter um nome válido."},
+  "proxyMustHaveMode": {"message":"Cada proxy deve ter um modo válido."},
+  "failedToRestoreSettingsGeneric": {"message":"Falha ao restaurar configurações. Por favor verifique o formato do arquivo."},
+  "noActiveProxy": {"message":"Nenhum"},
+  "configuredProxies": {"message":"Proxies configurados"},
+  "storageUsed": {"message":"Armazenamento utilizado"},
+  "extensionVersion": {"message":"Versão da extensão"},
+  "logsCount": {"message":"Registros de atividade"},
+  "activityLog": {"message":"Registro de atividade"},
+  "pacScriptValid": {"message":"O script PAC é válido"},
+  "pacScriptError": {"message":"O script PAC contém erros. Por favor verifique a sintaxe do script."},
+  "invalidPacScript": {"message":"Script PAC inválido. Certifique-se de que contém uma função FindProxyForURL válida."},
+  "pacFetchFailed": {"message":"Falha ao obter o script PAC da URL. Verifique a URL e a conexão de rede."},
+  "proxyPermissionDenied": {"message":"Permissão negada. A extensão pode não ter as permissões necessárias."},
+  "proxyControlledByOther": {"message":"As configurações de proxy são controladas por outra extensão."},
+  "proxyManagedByPolicy": {"message":"As configurações de proxy são gerenciadas pela política da sua organização."},
+  "invalidProxyHost": {"message":"Endereço de host de proxy inválido. Verifique a configuração do servidor."},
+  "invalidProxyPort": {"message":"Porta de proxy inválida. Insira um número de porta válido (1-65535)."},
+  "proxyTimeout": {"message":"Tempo de conexão esgotado. O servidor proxy pode estar inacessível."},
+  "proxySettingsFailed": {"message":"Falha ao aplicar as configurações de proxy."},
+  "onboardingWelcomeTitle": {"message":"Bem-vindo ao PACify"},
+  "onboardingWelcomeDescription": {"message":"O gerenciador de proxy moderno para Chrome. Configure, alterne e gerencie suas configurações de proxy com facilidade."},
+  "onboardingFeaturesTitle": {"message":"Recursos Poderosos"},
+  "onboardingFeaturesDescription": {"message":"Tudo o que você precisa para gerenciar seus proxies de forma eficaz."},
+  "onboardingFeatureProxies": {"message":"Múltiplos Perfis de Proxy"},
+  "onboardingFeatureProxiesDesc": {"message":"Crie e alterne entre diferentes configurações de proxy instantaneamente."},
+  "onboardingFeatureAutoProxy": {"message":"Regras de Auto-Proxy"},
+  "onboardingFeatureAutoProxyDesc": {"message":"Roteie o tráfego com base em padrões de URL com regras de roteamento inteligentes."},
+  "onboardingFeaturePAC": {"message":"Suporte a Scripts PAC"},
+  "onboardingFeaturePACDesc": {"message":"Use scripts PAC personalizados para configuração avançada de proxy."},
+  "onboardingShortcutsTitle": {"message":"Atalhos de Teclado"},
+  "onboardingShortcutsDescription": {"message":"Trabalhe mais rápido com atalhos de teclado."},
+  "onboardingShortcutNewProxy": {"message":"Criar novo proxy"},
+  "onboardingShortcutSearch": {"message":"Pesquisar proxies"},
+  "onboardingShortcutClose": {"message":"Fechar modal"},
+  "onboardingGetStartedTitle": {"message":"Tudo Pronto!"},
+  "onboardingGetStartedDescription": {"message":"Crie sua primeira configuração de proxy para começar, ou explore as configurações."},
+  "onboardingCreateFirstProxy": {"message":"Criar Primeiro Proxy"},
+  "onboardingExploreSettings": {"message":"Explorar Configurações"},
+  "previous": {"message":"Anterior"},
+  "next": {"message":"Próximo"},
+  "skipTour": {"message":"Pular Tour"},
+  "keyboardShortcutsDescription": {"message":"Use estes atalhos para trabalhar mais rápido"},
+  "shortcutsGroupGeneral": {"message":"Geral"},
+  "shortcutsGroupNavigation": {"message":"Navegação"},
+  "shortcutsGroupProxyList": {"message":"Lista de Proxies"},
+  "shortcutNewProxy": {"message":"Criar nova configuração de proxy"},
+  "shortcutSearch": {"message":"Abrir pesquisa"},
+  "shortcutCloseModal": {"message":"Fechar modal atual"},
+  "shortcutShowHelp": {"message":"Mostrar atalhos de teclado"},
+  "shortcutNextElement": {"message":"Mover para o próximo elemento"},
+  "shortcutPrevElement": {"message":"Mover para o elemento anterior"},
+  "shortcutActivate": {"message":"Ativar elemento focado"},
+  "shortcutToggle": {"message":"Alternar interruptores e caixas de seleção"},
+  "shortcutNavigateList": {"message":"Navegar pela lista de proxies"},
+  "shortcutActivateProxy": {"message":"Ativar proxy selecionado"},
+  "shortcutEditProxy": {"message":"Editar proxy selecionado"},
+  "shortcutDeleteProxy": {"message":"Excluir proxy selecionado"},
+  "shortcutsTip": {"message":"Pressione ? em qualquer lugar para mostrar esta ajuda"},
+  "subscriptions": {"message":"Assinaturas"},
+  "subscriptionsDescription": {"message":"Importar regras de listas de domínios remotas"},
+  "addSubscription": {"message":"Adicionar assinatura"},
+  "subscriptionName": {"message":"Nome"},
+  "subscriptionNamePlaceholder": {"message":"ex., GFWList, Ad Domains"},
+  "subscriptionNameRequired": {"message":"Nome da assinatura é obrigatório"},
+  "subscriptionUrl": {"message":"URL"},
+  "subscriptionUrlRequired": {"message":"URL da assinatura é obrigatório"},
+  "subscriptionUrlInvalid": {"message":"Por favor, insira uma URL válida"},
+  "subscriptionFormat": {"message":"Formato"},
+  "subscriptionInterval": {"message":"Atualização automática"},
+  "subscriptionFetching": {"message":"Buscando..."},
+  "subscriptionFetchFailed": {"message":"Falha ao buscar assinatura"},
+  "subscriptionNoRules": {"message":"Nenhuma regra encontrada na assinatura"},
+  "noSubscriptions": {"message":"Sem assinaturas"},
+  "noSubscriptionsDescription": {"message":"Assine listas de domínios remotas para importar automaticamente regras de proxy de URLs como GFWList ou listas de domínios personalizadas"},
+  "refreshSubscription": {"message":"Atualizar"},
+  "editSubscription": {"message":"Editar assinatura"},
+  "saveSubscription": {"message":"Salvar alterações"},
+  "deleteSubscription": {"message":"Excluir assinatura"},
+  "deleteSubscriptionTitle": {"message":"Excluir assinatura"},
+  "deleteSubscriptionMessage": {"message":"Tem certeza de que deseja excluir a assinatura \"$1\"?","placeholders":{"1":{"content":"$1","example":"GFWList"}}},
+  "rules": {"message":"regras"},
+  "fromSubscriptions": {"message":"de assinaturas"},
+  "never": {"message":"Nunca"},
+  "minutesAgo": {"message":"$1 min atrás","placeholders":{"1":{"content":"$1","example":"5"}}},
+  "hoursAgo": {"message":"$1h atrás","placeholders":{"1":{"content":"$1","example":"2"}}},
+  "formatAuto": {"message":"Detectar automaticamente"},
+  "formatAbp": {"message":"ABP / GFWList"},
+  "formatDomains": {"message":"Lista de domínios"},
+  "formatSurge": {"message":"Surge / Shadowrocket"},
+  "formatClash": {"message":"Clash / Mihomo"},
+  "intervalManual": {"message":"Apenas manual"},
+  "intervalMinutes": {"message":"A cada $1 min","placeholders":{"1":{"content":"$1","example":"30"}}},
+  "intervalHour": {"message":"A cada $1 hora","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "intervalHours": {"message":"A cada $1 horas","placeholders":{"1":{"content":"$1","example":"6"}}},
+  "intervalDay": {"message":"A cada $1 dia","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "showQuickSettings": {"message":"Mostrar configurações rápidas"},
+  "showQuickSettingsDescription": {"message":"Exibir seção de configurações rápidas na página de configuração de proxy"},
+  "showQuickSettingsEnabled": {"message":"A seção de configurações rápidas agora está visível"},
+  "showQuickSettingsDisabled": {"message":"A seção de configurações rápidas agora está oculta"},
+  "showQuickSettingsTooltip": {"message":"Quando desativado, a seção de troca rápida será ocultada da página de configuração de proxy"},
+  "privacyPolicy": {"message":"Política de Privacidade"},
+  "privacyPolicyTitle": {"message":"Política de Privacidade"},
+  "privacyIntro": {"message":"Sua privacidade é importante para nós. Esta política explica como o PACify lida com seus dados."},
+  "privacyLastUpdated": {"message":"Última atualização"},
+  "privacyDataCollection": {"message":"Coleta de Dados"},
+  "privacyDataStorage": {"message":"Armazenamento de Dados"},
+  "privacyNetworkRequests": {"message":"Solicitações de Rede"},
+  "privacyPermissions": {"message":"Permissões Utilizadas"},
+  "privacyContact": {"message":"Se você tiver dúvidas sobre esta política de privacidade, abra uma issue em nosso repositório GitHub."},
+  "httpWarning": {"message":"Esta URL usa HTTP. Suas regras de proxy podem ser interceptadas. Use HTTPS quando possível."},
+  "save": {"message":"Salvar"},
+  "editProxy": {"message":"Editar proxy"},
+  "proxyActivated": {"message":"Proxy '$1' ativado","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
+  "proxyDeactivated": {"message":"Proxy desativado"}
 }
