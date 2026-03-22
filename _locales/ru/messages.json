@@ -1,1214 +1,438 @@
 {
-  "extName": {
-    "message": "PACify | Менеджер прокси"
-  },
-  "extDescription": {
-    "message": "Полный менеджер прокси для Chrome. Создавайте, редактируйте и переключайтесь между PAC-скриптами, ручными прокси и системными конфигурациями."
-  },
-  "basicSettings": {
-    "message": "Основные настройки"
-  },
-  "proxyMode": {
-    "message": "Режим прокси"
-  },
-  "systemProxy": {
-    "message": "Использовать настройки прокси операционной системы."
-  },
-  "directMode": {
-    "message": "Прямое подключение"
-  },
-  "directModeHelp": {
-    "message": "В прямом режиме все соединения создаются напрямую, без использования прокси."
-  },
-  "autoDetectMode": {
-    "message": "URL автоконфигурации"
-  },
-  "autoDetectModeHelp": {
-    "message": "В режиме автоопределения Chrome автоматически ищет и загружает настройки прокси с помощью протокола WPAD."
-  },
-  "deleteConfirm": {
-    "message": "Вы уверены, что хотите удалить этот скрипт?"
-  },
-  "toggleProxyHint": {
-    "message": "Переключите прокси, нажав на переключатель."
-  },
-  "systemMode": {
-    "message": "Системный"
-  },
-  "pacScriptMode": {
-    "message": "PAC скрипт"
-  },
-  "manualMode": {
-    "message": "Ручная настройка"
-  },
-  "addNewScript": {
-    "message": "Добавить новый скрипт"
-  },
-  "quickSwitchMode": {
-    "message": "Режим быстрого переключения"
-  },
-  "quickSwitchDescription": {
-    "message": "Включить быстрое переключение между конфигурациями прокси из всплывающего окна"
-  },
-  "settings": {
-    "message": "Настройки"
-  },
-  "nameRequired": {
-    "message": "Необходимо указать имя"
-  },
-  "proxyConfiguration": {
-    "message": "Конфигурация прокси"
-  },
-  "cancel": {
-    "message": "Отмена"
-  },
-  "saveConfiguration": {
-    "message": "Сохранить конфигурацию"
-  },
-  "saving": {
-    "message": "Сохранение..."
-  },
-  "noScriptsAvailable": {
-    "message": "Нет доступных PAC скриптов. Добавьте свой первый скрипт, чтобы начать."
-  },
-  "noQuickSwitchScripts": {
-    "message": "Нет настроенных скриптов быстрого переключения. Перетащите скрипты сюда, чтобы включить быстрое переключение."
-  },
-  "noScriptsAvailableOptions": {
-    "message": "Нет доступных скриптов. Нажмите \"Добавить новый скрипт\", чтобы создать свой первый PAC скрипт."
-  },
-  "backupSettings": {
-    "message": "Резервное копирование настроек"
-  },
-  "restoreSettings": {
-    "message": "Восстановить настройки"
-  },
-  "useSameProxy": {
-    "message": "Использовать один прокси-сервер для всех протоколов"
-  },
-  "proxyServer": {
-    "message": "Прокси-сервер"
-  },
-  "httpProxy": {
-    "message": "HTTP прокси"
-  },
-  "httpsProxy": {
-    "message": "HTTPS прокси"
-  },
-  "ftpProxy": {
-    "message": "FTP прокси"
-  },
-  "fallbackProxy": {
-    "message": "Резервный прокси"
-  },
-  "bypassList": {
-    "message": "Список исключений"
-  },
-  "pacScriptUrl": {
-    "message": "URL PAC скрипта"
-  },
-  "pacScript": {
-    "message": "PAC скрипт"
-  },
-  "templates": {
-    "message": "Шаблоны:"
-  },
-  "emptyTemplate": {
-    "message": "Пустой"
-  },
-  "basicTemplate": {
-    "message": "Базовый"
-  },
-  "proTemplate": {
-    "message": "Про"
-  },
-  "advancedTemplate": {
-    "message": "Расширенный"
-  },
-  "mandatoryPacScript": {
-    "message": "Обязательный PAC скрипт (предотвращает переход на прямое соединение)"
-  },
-  "dropToAddQuickScripts": {
-    "message": "Перетащите сюда, чтобы добавить в быстрые скрипты"
-  },
-  "dropToRemoveQuickScripts": {
-    "message": "Перетащите сюда, чтобы удалить из быстрых скриптов"
-  },
-  "quickPacScripts": {
-    "message": "Конфигурации быстрого переключения"
-  },
-  "allProxyConfigs": {
-    "message": "Все конфигурации прокси"
-  },
-  "dragScriptsHere": {
-    "message": "Перетащите скрипты сюда, чтобы включить быстрое переключение. Быстрое переключение позволяет менять прокси, нажимая на значок расширения."
-  },
-  "colorRequired": {
-    "message": "Необходимо указать цвет"
-  },
-  "configurationName": {
-    "message": "Название конфигурации"
-  },
-  "color": {
-    "message": "Цвет"
-  },
-  "badgeLabel": {
-    "message": "Метка значка"
-  },
-  "badgeLabelHelp": {
-    "message": "Пользовательский текст для значка расширения (макс. 4 символа). Оставьте пустым для автогенерации."
-  },
-  "active": {
-    "message": "Активный"
-  },
-  "host": {
-    "message": "Хост"
-  },
-  "port": {
-    "message": "Порт"
-  },
-  "enterConfigurationName": {
-    "message": "Введите название конфигурации"
-  },
-  "disableProxyOnStartup": {
-    "message": "Отключить прокси при запуске"
-  },
-  "disableProxyOnStartupDescription": {
-    "message": "Запускать с отключенным прокси каждый раз при открытии браузера"
-  },
-  "autoReloadOnProxySwitch": {
-    "message": "Автоматическая перезагрузка страницы при смене прокси"
-  },
-  "autoReloadOnProxySwitchDescription": {
-    "message": "Автоматически перезагружать активную вкладку при переключении прокси"
-  },
-  "tooltipAutoReload": {
-    "message": "При включении текущая страница будет перезагружена после изменения настроек прокси для немедленного применения изменений"
-  },
-  "invalidConfiguration": {
-    "message": "Недопустимая конфигурация"
-  },
-  "syncStorage": {
-    "message": "Синхронизированное хранилище"
-  },
-  "localStorage": {
-    "message": "Локальное хранилище"
-  },
-  "dropTarget": {
-    "message": "Цель перетаскивания"
-  },
-  "tabProxyConfigs": {
-    "message": "Конфигурации прокси"
-  },
-  "tabSettings": {
-    "message": "Настройки"
-  },
-  "tabAbout": {
-    "message": "О программе"
-  },
-  "settingsProxyBehavior": {
-    "message": "Поведение прокси"
-  },
-  "settingsDataManagement": {
-    "message": "Управление данными"
-  },
-  "aboutVersion": {
-    "message": "Версия"
-  },
-  "aboutHelpResources": {
-    "message": "Справка и ресурсы"
-  },
-  "aboutExtensionInfo": {
-    "message": "Информация о расширении"
-  },
-  "aboutDiagnostics": {
-    "message": "Диагностика"
-  },
-  "aboutViewOnGithub": {
-    "message": "Посмотреть на GitHub"
-  },
-  "aboutReportIssue": {
-    "message": "Сообщить о проблеме"
-  },
-  "aboutDocumentation": {
-    "message": "Документация"
-  },
-  "aboutFeatureRequest": {
-    "message": "Запросить функцию"
-  },
-  "feedbackAndRating": {
-    "message": "Отзывы и Оценка"
-  },
-  "rateExtension": {
-    "message": "Оценить Расширение"
-  },
-  "leaveReview": {
-    "message": "Оставить Отзыв"
-  },
-  "supportProject": {
-    "message": "Поддержать Проект"
-  },
-  "statusConnected": {
-    "message": "Подключено"
-  },
-  "statusDisconnected": {
-    "message": "Нет активного прокси"
-  },
-  "footerActiveProxy": {
-    "message": "Нажмите переключатель, чтобы отключить прокси"
-  },
-  "footerSelectProxy": {
-    "message": "Выберите прокси для подключения"
-  },
-  "proxyEnabled": {
-    "message": "Прокси \"$1\" включен"
-  },
-  "proxyDisabled": {
-    "message": "Прокси \"$1\" отключен"
-  },
-  "proxyDeleted": {
-    "message": "Прокси \"$1\" успешно удален"
-  },
-  "toggleProxyOn": {
-    "message": "Включить прокси $1"
-  },
-  "toggleProxyOff": {
-    "message": "Отключить прокси $1"
-  },
-  "editConfiguration": {
-    "message": "Редактировать конфигурацию $1"
-  },
-  "deleteConfiguration": {
-    "message": "Удалить конфигурацию $1"
-  },
-  "deleteProxyTitle": {
-    "message": "Удалить конфигурацию прокси"
-  },
-  "deleteProxyMessage": {
-    "message": "Вы уверены, что хотите удалить \"$1\"? Это действие нельзя отменить."
-  },
-  "delete": {
-    "message": "Удалить"
-  },
-  "backupSuccess": {
-    "message": "Настройки успешно сохранены"
-  },
-  "backupFailed": {
-    "message": "Не удалось сохранить настройки"
-  },
-  "restoreSuccess": {
-    "message": "Настройки успешно восстановлены"
-  },
-  "restoreFailed": {
-    "message": "Не удалось восстановить настройки"
-  },
-  "backupDescription": {
-    "message": "Скачать все конфигурации прокси и настройки в виде JSON-файла"
-  },
-  "restoreDescription": {
-    "message": "Загрузите файл резервной копии для восстановления конфигураций"
-  },
-  "errorBoundaryTitle": {
-    "message": "Что-то пошло не так"
-  },
-  "errorBoundaryRetry": {
-    "message": "Попробовать снова"
-  },
-  "closeNotification": {
-    "message": "Закрыть уведомление"
-  },
-  "closeDialog": {
-    "message": "Закрыть диалог"
-  },
-  "confirm": {
-    "message": "Подтвердить"
-  },
-  "quickSwitchEnabled": {
-    "message": "Режим быстрого переключения включен"
-  },
-  "quickSwitchDisabled": {
-    "message": "Режим быстрого переключения отключен"
-  },
-  "proxyDisabledOnStartup": {
-    "message": "Прокси будет отключен при запуске браузера"
-  },
-  "proxyPersistOnStartup": {
-    "message": "Состояние прокси сохранится при запуске браузера"
-  },
-  "proxyUpdated": {
-    "message": "Прокси \"$1\" успешно обновлен"
-  },
-  "proxyCreated": {
-    "message": "Прокси \"$1\" успешно создан"
-  },
-  "quickSwitchEnabledStatus": {
-    "message": "✓ Включено – Нажмите на значок расширения для быстрого переключения"
-  },
-  "quickSwitchConfigsTitle": {
-    "message": "Конфигурации быстрого переключения"
-  },
-  "quickSwitchConfigsDescription": {
-    "message": "Перетащите прокси сюда для доступа в один клик во всплывающем окне"
-  },
-  "allProxyConfigsTitle": {
-    "message": "Все конфигурации прокси"
-  },
-  "allProxyConfigsDescription": {
-    "message": "Управление всеми вашими конфигурациями прокси"
-  },
-  "quickStatsTitle": {
-    "message": "Быстрая статистика"
-  },
-  "totalProxies": {
-    "message": "Всего прокси"
-  },
-  "quickSwitch": {
-    "message": "Быстрое переключение"
-  },
-  "activeProxy": {
-    "message": "Активный прокси"
-  },
-  "lastUsed": {
-    "message": "Последнее использование"
-  },
-  "none": {
-    "message": "Нет"
-  },
-  "versionLabel": {
-    "message": "Версия:"
-  },
-  "extensionDescription": {
-    "message": "Расширение Chrome для управления скриптами PAC (Proxy Auto-Config)"
-  },
-  "bypassListPlaceholder": {
-    "message": "Введите один шаблон в строке:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
-  },
-  "pacUrlPlaceholder": {
-    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
-  },
-  "noProxiesTitle": {
-    "message": "Нет доступных прокси"
-  },
-  "noQuickSwitchTitle": {
-    "message": "Нет прокси быстрого переключения"
-  },
-  "noProxyConfigsTitle": {
-    "message": "Нет конфигураций прокси"
-  },
-  "addFirstProxyAction": {
-    "message": "Добавить первый прокси"
-  },
-  "offButton": {
-    "message": "ВЫКЛ"
-  },
-  "tooltipQuickSwitchMode": {
-    "message": "Мгновенный доступ к избранным прокси из всплывающего окна без открытия настроек"
-  },
-  "tooltipDisableOnStartup": {
-    "message": "Это гарантирует, что прокси-сервер не будет автоматически включен при запуске Chrome."
-  },
-  "tooltipDragToQuickSwitch": {
-    "message": "Перетащите карточки прокси сюда, чтобы добавить их в быстрое переключение для более быстрого доступа"
-  },
-  "tooltipDragToRemove": {
-    "message": "Перетащите прокси быстрого переключения сюда, чтобы удалить их из всплывающего окна"
-  },
-  "tooltipKeyboardShortcut": {
-    "message": "Нажмите Ctrl+N (Cmd+N на Mac), чтобы быстро добавить новый прокси"
-  },
-  "invalidHost": {
-    "message": "Недопустимое имя хоста или IP-адрес"
-  },
-  "invalidPort": {
-    "message": "Порт должен быть от 1 до 65535"
-  },
-  "invalidUrl": {
-    "message": "Пожалуйста, введите правильный URL"
-  },
-  "invalidPacUrlProtocol": {
-    "message": "URL PAC должен использовать протокол http://, https:// или file://"
-  },
-  "pacUrlWarning": {
-    "message": "Файлы PAC обычно заканчиваются на .pac"
-  },
-  "bypassListHelp": {
-    "message": "Введите один адрес в строке. Вы можете использовать подстановочные знаки (*) и диапазоны IP (нотация CIDR)."
-  },
-  "nameTooLong": {
-    "message": "Имя должно содержать не более 50 символов"
-  },
-  "nameTooShort": {
-    "message": "Имя должно содержать хотя бы 1 символ"
-  },
-  "hostPlaceholder": {
-    "message": "proxy.example.com"
-  },
-  "portPlaceholder": {
-    "message": "8080"
-  },
-  "scheme": {
-    "message": "Схема"
-  },
-  "noProxiesYet": {
-    "message": "Пока нет конфигураций прокси"
-  },
-  "noProxiesDescription": {
-    "message": "Начните с создания первой конфигурации прокси, чтобы управлять подключением браузера к Интернету."
-  },
-  "getStarted": {
-    "message": "Начать"
-  },
-  "quickSwitchEmptyHint": {
-    "message": "Перетащите конфигурации прокси сюда для быстрого доступа из всплывающего окна"
-  },
-  "quickSwitchEmptySubHint": {
-    "message": "Прокси, добавленные сюда, будут отображаться во всплывающем окне для переключения одним кликом"
-  },
-  "pacUrlHelp": {
-    "message": "PAC-скрипт будет загружен с этого URL"
-  },
-  "keyboardShortcuts": {
-    "message": "Горячие клавиши"
-  },
-  "keyboardShortcutFocusSearch": {
-    "message": "Фокус на поиске"
-  },
-  "keyboardShortcutNewProxy": {
-    "message": "Новый прокси"
-  },
-  "keyboardShortcutClearSearch": {
-    "message": "Очистить поиск"
-  },
-  "keyboardShortcutToggleProxy": {
-    "message": "Переключить прокси 1-9"
-  },
-  "searchProxiesPlaceholder": {
-    "message": "Поиск прокси... (Ctrl+K)"
-  },
-  "keyboardShortcutCtrlCmdK": {
-    "message": "Ctrl/Cmd+K"
-  },
-  "keyboardShortcutCtrlCmdN": {
-    "message": "Ctrl/Cmd+N"
-  },
-  "keyboardShortcutEscape": {
-    "message": "Escape"
-  },
-  "keyboardShortcutNumbers": {
-    "message": "1-9"
-  },
-  "keyboardShortcutsNote": {
-    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
-  },
-  "keyboardShortcutQuickSwitchOnly": {
-    "message": "Only works for proxies in the Quick Switch section"
-  },
-  "updateInterval": {
-    "message": "Интервал автообновления"
-  },
-  "noAutoUpdate": {
-    "message": "Без автообновления"
-  },
-  "minutes": {
-    "message": "минут"
-  },
-  "hour": {
-    "message": "час"
-  },
-  "hours": {
-    "message": "часов"
-  },
-  "refreshNow": {
-    "message": "Обновить сейчас"
-  },
-  "refreshing": {
-    "message": "Обновление..."
-  },
-  "lastFetched": {
-    "message": "Последнее получение"
-  },
-  "pacScriptRefreshed": {
-    "message": "PAC скрипт успешно обновлен"
-  },
-  "autoReloadEnabled": {
-    "message": "Auto-reload enabled"
-  },
-  "autoReloadDisabled": {
-    "message": "Auto-reload disabled"
-  },
-  "systemNotifications": {
-    "message": "System Notifications"
-  },
-  "systemNotificationsEnabled": {
-    "message": "System notifications enabled"
-  },
-  "systemNotificationsDisabled": {
-    "message": "System notifications disabled"
-  },
-  "systemNotificationsTooltip": {
-    "message": "Enable Chrome notifications for background events"
-  },
-  "systemNotificationsDescription": {
-    "message": "Show system notifications for proxy switches and errors"
-  },
-  "errorFailedToLoadSettings": {
-    "message": "Failed to load settings"
-  },
-  "errorFailedToSetProxy": {
-    "message": "Failed to set proxy configuration"
-  },
-  "errorFailedToClearProxy": {
-    "message": "Failed to clear proxy configuration"
-  },
-  "errorFailedToDeleteScript": {
-    "message": "Failed to delete script"
-  },
-  "proxySwitched": {
-    "message": "Proxy Switched"
-  },
-  "proxySwitchedTo": {
-    "message": "Switched to \"$1\""
-  },
-  "proxySwitchedToForHost": {
-    "message": "Switched to \"$1\" for $2"
-  },
-  "proxyError": {
-    "message": "Proxy Error"
-  },
-  "proxyErrorMessage": {
-    "message": "Failed to use \"$1\": $2"
-  },
-  "pacScriptPreview": {
-    "message": "PAC Script Preview (Read-only)"
-  },
-  "pacScriptFetchError": {
-    "message": "Failed to fetch PAC script from URL"
-  },
-  "addAutoProxy": {
-    "message": "Добавить авто-прокси"
-  },
-  "addAutoProxyTooltip": {
-    "message": "Создать правила маршрутизации на основе URL"
-  },
-  "autoProxyMode": {
-    "message": "Авто-прокси"
-  },
-  "autoProxyRulesCount": {
-    "message": "$1 правил"
-  },
-  "createAutoProxy": {
-    "message": "Создать авто-прокси"
-  },
-  "editAutoProxy": {
-    "message": "Редактировать авто-прокси"
-  },
-  "autoProxyCreated": {
-    "message": "Авто-прокси \"$1\" успешно создан"
-  },
-  "autoProxyUpdated": {
-    "message": "Авто-прокси \"$1\" успешно обновлен"
-  },
-  "autoProxyDeleted": {
-    "message": "Авто-прокси \"$1\" успешно удален"
-  },
-  "autoProxyNamePlaceholder": {
-    "message": "напр., Рабочая маршрутизация, Split Tunnel"
-  },
-  "addRule": {
-    "message": "Добавить правило"
-  },
-  "editRule": {
-    "message": "Редактировать правило"
-  },
-  "deleteRule": {
-    "message": "Удалить правило"
-  },
-  "saveRule": {
-    "message": "Сохранить правило"
-  },
-  "cancelRule": {
-    "message": "Отмена"
-  },
-  "urlPattern": {
-    "message": "Шаблон URL"
-  },
-  "patternType": {
-    "message": "Тип шаблона"
-  },
-  "wildcardPattern": {
-    "message": "Подстановочный знак"
-  },
-  "regexPattern": {
-    "message": "Регулярное выражение"
-  },
-  "exactMatch": {
-    "message": "Точное совпадение"
-  },
-  "cidrPattern": {
-    "message": "CIDR (Диапазон IP)"
-  },
-  "selectProxy": {
-    "message": "Выбрать прокси"
-  },
-  "defineInline": {
-    "message": "Определить встроенно"
-  },
-  "directConnection": {
-    "message": "Прямое подключение"
-  },
-  "fallbackBehavior": {
-    "message": "Резервное поведение"
-  },
-  "fallbackDescription": {
-    "message": "Применяется, когда ни одно правило не соответствует URL"
-  },
-  "testPattern": {
-    "message": "Тестировать шаблон"
-  },
-  "testUrl": {
-    "message": "Тестовый URL"
-  },
-  "testUrlPlaceholder": {
-    "message": "Введите URL для проверки правил"
-  },
-  "patternMatches": {
-    "message": "Шаблон совпадает!"
-  },
-  "noPatternMatch": {
-    "message": "Ни один шаблон не совпадает - будет использован резервный"
-  },
-  "ruleEnabled": {
-    "message": "Правило включено"
-  },
-  "ruleDisabled": {
-    "message": "Правило отключено"
-  },
-  "routingRules": {
-    "message": "Правила маршрутизации"
-  },
-  "noRulesYet": {
-    "message": "Правила еще не определены"
-  },
-  "noRulesDescription": {
-    "message": "Добавьте правила, чтобы определить, как URL будут маршрутизироваться на разные прокси"
-  },
-  "atLeastOneRule": {
-    "message": "Требуется хотя бы одно правило"
-  },
-  "failedToSave": {
-    "message": "Не удалось сохранить конфигурацию"
-  },
-  "proxyType": {
-    "message": "Тип прокси"
-  },
-  "noProxiesAvailable": {
-    "message": "Нет доступных прокси"
-  },
-  "name": {
-    "message": "Имя"
-  },
-  "ruleDescription": {
-    "message": "Описание (необязательно)"
-  },
-  "ruleDescriptionPlaceholder": {
-    "message": "напр., Маршрутизировать весь трафик Google"
-  },
-  "patternPlaceholder": {
-    "message": "напр., *.google.com"
-  },
-  "wildcardHelp": {
-    "message": "Используйте * для соответствия любым символам. Пример: *.example.com"
-  },
-  "regexHelp": {
-    "message": "Используйте синтаксис регулярных выражений JavaScript. Пример: ^https?://.*\\.example\\.com"
-  },
-  "exactHelp": {
-    "message": "Совпадение с точным именем хоста. Пример: www.example.com"
-  },
-  "cidrHelp": {
-    "message": "Используйте нотацию CIDR для диапазонов IP. Пример: 192.168.1.0/24"
-  },
-  "invalidPattern": {
-    "message": "Недопустимый шаблон"
-  },
-  "patternRequired": {
-    "message": "Шаблон обязателен"
-  },
-  "saveChanges": {
-    "message": "Сохранить изменения"
-  },
-  "autoProxyReferenceWarning": {
-    "message": "Этот прокси используется в следующих конфигурациях авто-прокси:"
-  },
-  "autoProxyRefSingular": {
-    "message": "1 правило"
-  },
-  "autoProxyRefPlural": {
-    "message": "$1 правил",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
-  },
-  "autoProxyDeleteConsequence": {
-    "message": "Эти правила будут автоматически удалены при удалении этого прокси."
-  },
-  "orphanedProxyWarning": {
-    "message": "Связанный прокси был удален. Пожалуйста, выберите другой прокси."
-  },
-  "matchedRule": {
-    "message": "Совпавшее правило"
-  },
-  "useFallback": {
-    "message": "Использовать резервный"
-  },
-  "dragToReorder": {
-    "message": "Перетащите для изменения порядка правил"
-  },
-  "failedToSaveProxy": {
-    "message": "Не удалось сохранить конфигурацию прокси"
-  },
-  "autoProxySubtitle": {
-    "message": "Умная маршрутизация трафика на основе URL"
-  },
-  "close": {
-    "message": "Закрыть"
-  },
-  "ruleSingular": {
-    "message": "правило"
-  },
-  "rulePlural": {
-    "message": "правила"
-  },
-  "rulesConfigured": {
-    "message": "$1 $2 настроено"
-  },
-  "ruleActiveDescription": {
-    "message": "Это правило будет активно при включенной конфигурации"
-  },
-  "ruleSkippedDescription": {
-    "message": "Это правило будет пропущено"
-  },
-  "matchTypeWildcard": {
-    "message": "Маска"
-  },
-  "matchTypeExact": {
-    "message": "Точное"
-  },
-  "matchTypeRegex": {
-    "message": "Регулярное выражение"
-  },
-  "matchTypeCidr": {
-    "message": "CIDR"
-  },
-  "referencedProxyDeleted": {
-    "message": "Прокси удален"
-  },
-  "testPatternHint": {
-    "message": "Проверьте правильность работы ваших правил"
-  },
-  "testButton": {
-    "message": "Тест"
-  },
-  "ruleLabel": {
-    "message": "Правило:"
-  },
-  "testPatternHelp": {
-    "message": "Введите URL выше и нажмите Тест, чтобы увидеть совпадающее правило"
-  },
-  "proxyModePacScript": {
-    "message": "(PAC-скрипт)"
-  },
-  "proxyModeSystem": {
-    "message": "(Системный)"
-  },
-  "proxyModeDirect": {
-    "message": "(Прямое)"
-  },
-  "proxyModeAutoDetect": {
-    "message": "(Автоопределение)"
-  },
-  "toggleSearch": {
-    "message": "Переключить поиск"
-  },
-  "hideSearch": {
-    "message": "Скрыть поиск"
-  },
-  "viewMode": {
-    "message": "Режим просмотра"
-  },
-  "viewModeGrid": {
-    "message": "Сеточный вид"
-  },
-  "viewModeList": {
-    "message": "Список"
-  },
-  "viewModeGridDescription": {
-    "message": "Отображать прокси в виде сетки карточек"
-  },
-  "viewModeListDescription": {
-    "message": "Отображать прокси в горизонтальном списке"
-  },
-  "authentication": {
-    "message": "Аутентификация"
-  },
-  "optional": {
-    "message": "Необязательно"
-  },
-  "authStorageInfo": {
-    "message": "Учетные данные хранятся локально и зашифрованы"
-  },
-  "username": {
-    "message": "Имя пользователя"
-  },
-  "usernamePlaceholder": {
-    "message": "имя пользователя"
-  },
-  "password": {
-    "message": "Пароль"
-  },
-  "passwordPlaceholder": {
-    "message": "••••••••"
-  },
-  "hidePassword": {
-    "message": "Скрыть пароль"
-  },
-  "showPassword": {
-    "message": "Показать пароль"
-  },
-  "diagnostics": {
-    "message": "Диагностика"
-  },
-  "tabDiagnostics": {
-    "message": "Диагностика"
-  },
-  "diagnosticsDesc": {
-    "message": "Просмотр журналов ошибок и диагностической информации для отладки"
-  },
-  "diagnosticsExported": {
-    "message": "Диагностика успешно экспортирована"
-  },
-  "diagnosticsExportFailed": {
-    "message": "Не удалось экспортировать диагностику"
-  },
-  "confirmClearLogs": {
-    "message": "Очистить все журналы диагностики?"
-  },
-  "diagnosticsCleared": {
-    "message": "Диагностика успешно очищена"
-  },
-  "diagnosticsClearFailed": {
-    "message": "Не удалось очистить диагностику"
-  },
-  "allLogsMarkedRead": {
-    "message": "Все журналы отмечены как прочитанные"
-  },
-  "justNow": {
-    "message": "Только что"
-  },
-  "markAllRead": {
-    "message": "Отметить все как прочитанные"
-  },
-  "export": {
-    "message": "Экспорт"
-  },
-  "clearAll": {
-    "message": "Очистить все"
-  },
-  "noErrors": {
-    "message": "Ошибок не обнаружено"
-  },
-  "noErrorsDesc": {
-    "message": "Ваши прокси работают нормально!"
-  },
-  "details": {
-    "message": "Подробности"
-  },
-  "url": {
-    "message": "URL"
-  },
-  "stackTrace": {
-    "message": "Трассировка стека"
-  },
-  "logId": {
-    "message": "ID"
-  },
-  "proxyHasAuth": {
-    "message": "Для этого прокси настроена аутентификация"
-  },
-  "settingsFileTooLarge": {
-    "message": "Файл настроек слишком большой. Максимальный размер $1КБ.",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "1024"
-      }
-    }
-  },
-  "invalidFileType": {
-    "message": "Неверный тип файла. Пожалуйста, выберите JSON файл."
-  },
-  "invalidJsonFormat": {
-    "message": "Неверный формат JSON."
-  },
-  "settingsMustBeObject": {
-    "message": "Настройки должны быть допустимым объектом."
-  },
-  "invalidProxyConfigsArray": {
-    "message": "Неверные настройки: proxyConfigs должен быть массивом."
-  },
-  "invalidQuickSwitchEnabled": {
-    "message": "Неверные настройки: quickSwitchEnabled должен быть логическим значением."
-  },
-  "invalidDisableProxyOnStartup": {
-    "message": "Неверные настройки: disableProxyOnStartup должен быть логическим значением."
-  },
-  "invalidAutoReloadOnProxySwitch": {
-    "message": "Неверные настройки: autoReloadOnProxySwitch должен быть логическим значением."
-  },
-  "invalidActiveScriptId": {
-    "message": "Неверные настройки: activeScriptId должен быть строкой или null."
-  },
-  "invalidProxyConfiguration": {
-    "message": "Неверная конфигурация прокси."
-  },
-  "proxyMustHaveName": {
-    "message": "Каждый прокси должен иметь допустимое имя."
-  },
-  "proxyMustHaveMode": {
-    "message": "Каждый прокси должен иметь допустимый режим."
-  },
-  "failedToRestoreSettingsGeneric": {
-    "message": "Не удалось восстановить настройки. Пожалуйста, проверьте формат файла."
-  },
-  "noActiveProxy": {
-    "message": "Нет"
-  },
-  "configuredProxies": {
-    "message": "Настроенные прокси"
-  },
-  "storageUsed": {
-    "message": "Использовано хранилище"
-  },
-  "extensionVersion": {
-    "message": "Версия расширения"
-  },
-  "logsCount": {
-    "message": "Журналы активности"
-  },
-  "activityLog": {
-    "message": "Журнал активности"
-  },
-  "pacScriptValid": {
-    "message": "PAC-скрипт действителен"
-  },
-  "pacScriptError": {
-    "message": "PAC-скрипт содержит ошибки. Пожалуйста, проверьте синтаксис скрипта."
-  },
-  "invalidPacScript": {
-    "message": "Недействительный PAC-скрипт. Убедитесь, что он содержит действительную функцию FindProxyForURL."
-  },
-  "pacFetchFailed": {
-    "message": "Не удалось получить PAC-скрипт по URL. Проверьте URL и сетевое подключение."
-  },
-  "proxyPermissionDenied": {
-    "message": "Доступ запрещен. У расширения может не быть необходимых разрешений."
-  },
-  "proxyControlledByOther": {
-    "message": "Настройки прокси контролируются другим расширением."
-  },
-  "proxyManagedByPolicy": {
-    "message": "Настройки прокси управляются политикой вашей организации."
-  },
-  "invalidProxyHost": {
-    "message": "Недействительный адрес хоста прокси. Проверьте конфигурацию сервера."
-  },
-  "invalidProxyPort": {
-    "message": "Недействительный порт прокси. Введите действительный номер порта (1-65535)."
-  },
-  "proxyTimeout": {
-    "message": "Время ожидания подключения истекло. Прокси-сервер может быть недоступен."
-  },
-  "proxySettingsFailed": {
-    "message": "Не удалось применить настройки прокси."
-  },
-  "onboardingWelcomeTitle": {
-    "message": "Добро пожаловать в PACify"
-  },
-  "onboardingWelcomeDescription": {
-    "message": "Современный менеджер прокси для Chrome. Легко настраивайте, переключайте и управляйте настройками прокси."
-  },
-  "onboardingFeaturesTitle": {
-    "message": "Мощные функции"
-  },
-  "onboardingFeaturesDescription": {
-    "message": "Все, что нужно для эффективного управления прокси."
-  },
-  "onboardingFeatureProxies": {
-    "message": "Несколько профилей прокси"
-  },
-  "onboardingFeatureProxiesDesc": {
-    "message": "Мгновенно создавайте и переключайтесь между различными конфигурациями прокси."
-  },
-  "onboardingFeatureAutoProxy": {
-    "message": "Правила авто-прокси"
-  },
-  "onboardingFeatureAutoProxyDesc": {
-    "message": "Маршрутизируйте трафик на основе URL-шаблонов с помощью умных правил маршрутизации."
-  },
-  "onboardingFeaturePAC": {
-    "message": "Поддержка PAC-скриптов"
-  },
-  "onboardingFeaturePACDesc": {
-    "message": "Используйте пользовательские PAC-скрипты для расширенной настройки прокси."
-  },
-  "onboardingShortcutsTitle": {
-    "message": "Горячие клавиши"
-  },
-  "onboardingShortcutsDescription": {
-    "message": "Работайте быстрее с помощью горячих клавиш."
-  },
-  "onboardingShortcutNewProxy": {
-    "message": "Создать новый прокси"
-  },
-  "onboardingShortcutSearch": {
-    "message": "Поиск прокси"
-  },
-  "onboardingShortcutClose": {
-    "message": "Закрыть окно"
-  },
-  "onboardingGetStartedTitle": {
-    "message": "Всё готово!"
-  },
-  "onboardingGetStartedDescription": {
-    "message": "Создайте свою первую конфигурацию прокси, чтобы начать, или изучите настройки."
-  },
-  "onboardingCreateFirstProxy": {
-    "message": "Создать первый прокси"
-  },
-  "onboardingExploreSettings": {
-    "message": "Изучить настройки"
-  },
-  "previous": {
-    "message": "Назад"
-  },
-  "next": {
-    "message": "Далее"
-  },
-  "skipTour": {
-    "message": "Пропустить тур"
-  },
-  "keyboardShortcutsDescription": {
-    "message": "Используйте эти сочетания клавиш для ускорения работы"
-  },
-  "shortcutsGroupGeneral": {
-    "message": "Общие"
-  },
-  "shortcutsGroupNavigation": {
-    "message": "Навигация"
-  },
-  "shortcutsGroupProxyList": {
-    "message": "Список прокси"
-  },
-  "shortcutNewProxy": {
-    "message": "Создать новую конфигурацию прокси"
-  },
-  "shortcutSearch": {
-    "message": "Открыть поиск"
-  },
-  "shortcutCloseModal": {
-    "message": "Закрыть текущее окно"
-  },
-  "shortcutShowHelp": {
-    "message": "Показать горячие клавиши"
-  },
-  "shortcutNextElement": {
-    "message": "Перейти к следующему элементу"
-  },
-  "shortcutPrevElement": {
-    "message": "Перейти к предыдущему элементу"
-  },
-  "shortcutActivate": {
-    "message": "Активировать выделенный элемент"
-  },
-  "shortcutToggle": {
-    "message": "Переключить переключатели и флажки"
-  },
-  "shortcutNavigateList": {
-    "message": "Навигация по списку прокси"
-  },
-  "shortcutActivateProxy": {
-    "message": "Активировать выбранный прокси"
-  },
-  "shortcutEditProxy": {
-    "message": "Редактировать выбранный прокси"
-  },
-  "shortcutDeleteProxy": {
-    "message": "Удалить выбранный прокси"
-  },
-  "shortcutsTip": {
-    "message": "Нажмите ? в любом месте для показа этой справки"
-  },
-  "subscriptions": { "message": "Подписки" },
-  "subscriptionsDescription": {
-    "message": "Импорт правил из удаленных списков доменов"
-  },
-  "addSubscription": { "message": "Добавить подписку" },
-  "subscriptionName": { "message": "Название" },
-  "subscriptionNamePlaceholder": { "message": "например, GFWList, Ad Domains" },
-  "subscriptionNameRequired": { "message": "Необходимо название подписки" },
-  "subscriptionUrl": { "message": "URL" },
-  "subscriptionUrlRequired": { "message": "Необходим URL подписки" },
-  "subscriptionUrlInvalid": { "message": "Пожалуйста, введите правильный URL" },
-  "subscriptionFormat": { "message": "Формат" },
-  "subscriptionInterval": { "message": "Автообновление" },
-  "subscriptionFetching": { "message": "Получение..." },
-  "subscriptionFetchFailed": { "message": "Не удалось получить подписку" },
-  "subscriptionNoRules": { "message": "В подписке не найдено правил" },
-  "noSubscriptions": { "message": "Нет подписок" },
-  "noSubscriptionsDescription": {
-    "message": "Подпишитесь на удаленные списки доменов для автоматического импорта правил прокси из URL-адресов, таких как GFWList или пользовательские списки доменов"
-  },
-  "refreshSubscription": { "message": "Обновить" },
-  "editSubscription": { "message": "Редактировать подписку" },
-  "saveSubscription": { "message": "Сохранить изменения" },
-  "deleteSubscription": { "message": "Удалить подписку" },
-  "deleteSubscriptionTitle": { "message": "Удалить подписку" },
-  "deleteSubscriptionMessage": {
-    "message": "Вы уверены, что хотите удалить подписку \"$1\"?",
-    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
-  },
-  "rules": { "message": "правила" },
-  "fromSubscriptions": { "message": "из подписок" },
-  "never": { "message": "Никогда" },
-  "minutesAgo": {
-    "message": "$1 мин назад",
-    "placeholders": { "1": { "content": "$1", "example": "5" } }
-  },
-  "hoursAgo": {
-    "message": "$1 ч назад",
-    "placeholders": { "1": { "content": "$1", "example": "2" } }
-  },
-  "formatAuto": { "message": "Автоопределение" },
-  "formatAbp": { "message": "ABP / GFWList" },
-  "formatDomains": { "message": "Список доменов" },
-  "intervalManual": { "message": "Только вручную" },
-  "intervalMinutes": {
-    "message": "Каждые $1 мин",
-    "placeholders": { "1": { "content": "$1", "example": "30" } }
-  },
-  "intervalHour": {
-    "message": "Каждый $1 час",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  },
-  "intervalHours": {
-    "message": "Каждые $1 ч",
-    "placeholders": { "1": { "content": "$1", "example": "6" } }
-  },
-  "intervalDay": {
-    "message": "Каждый $1 день",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  }
+  "extName": {"message":"PACify | Менеджер прокси"},
+  "extDescription": {"message":"Полный менеджер прокси для Chrome. Создавайте, редактируйте и переключайтесь между PAC-скриптами, ручными прокси и системными конфигурациями."},
+  "basicSettings": {"message":"Основные настройки"},
+  "proxyMode": {"message":"Режим прокси"},
+  "systemProxy": {"message":"Использовать настройки прокси операционной системы."},
+  "directMode": {"message":"Прямое подключение"},
+  "directModeHelp": {"message":"В прямом режиме все соединения создаются напрямую, без использования прокси."},
+  "autoDetectMode": {"message":"URL автоконфигурации"},
+  "autoDetectModeHelp": {"message":"В режиме автоопределения Chrome автоматически ищет и загружает настройки прокси с помощью протокола WPAD."},
+  "deleteConfirm": {"message":"Вы уверены, что хотите удалить этот скрипт?"},
+  "toggleProxyHint": {"message":"Переключите прокси, нажав на переключатель."},
+  "systemMode": {"message":"Системный"},
+  "pacScriptMode": {"message":"PAC скрипт"},
+  "manualMode": {"message":"Ручная настройка"},
+  "addNewScript": {"message":"Добавить новый скрипт"},
+  "quickSwitchMode": {"message":"Режим быстрого переключения"},
+  "quickSwitchDescription": {"message":"Включить быстрое переключение между конфигурациями прокси из всплывающего окна"},
+  "settings": {"message":"Настройки"},
+  "nameRequired": {"message":"Необходимо указать имя"},
+  "proxyConfiguration": {"message":"Конфигурация прокси"},
+  "cancel": {"message":"Отмена"},
+  "saveConfiguration": {"message":"Сохранить конфигурацию"},
+  "saving": {"message":"Сохранение..."},
+  "noScriptsAvailable": {"message":"Нет доступных PAC скриптов. Добавьте свой первый скрипт, чтобы начать."},
+  "noQuickSwitchScripts": {"message":"Нет настроенных скриптов быстрого переключения. Перетащите скрипты сюда, чтобы включить быстрое переключение."},
+  "noScriptsAvailableOptions": {"message":"Нет доступных скриптов. Нажмите \"Добавить новый скрипт\", чтобы создать свой первый PAC скрипт."},
+  "backupSettings": {"message":"Резервное копирование настроек"},
+  "restoreSettings": {"message":"Восстановить настройки"},
+  "useSameProxy": {"message":"Использовать один прокси-сервер для всех протоколов"},
+  "proxyServer": {"message":"Прокси-сервер"},
+  "httpProxy": {"message":"HTTP прокси"},
+  "httpsProxy": {"message":"HTTPS прокси"},
+  "ftpProxy": {"message":"FTP прокси"},
+  "fallbackProxy": {"message":"Резервный прокси"},
+  "bypassList": {"message":"Список исключений"},
+  "pacScriptUrl": {"message":"URL PAC скрипта"},
+  "pacScript": {"message":"PAC скрипт"},
+  "templates": {"message":"Шаблоны:"},
+  "emptyTemplate": {"message":"Пустой"},
+  "basicTemplate": {"message":"Базовый"},
+  "proTemplate": {"message":"Про"},
+  "advancedTemplate": {"message":"Расширенный"},
+  "mandatoryPacScript": {"message":"Обязательный PAC скрипт (предотвращает переход на прямое соединение)"},
+  "dropToAddQuickScripts": {"message":"Перетащите сюда, чтобы добавить в быстрые скрипты"},
+  "dropToRemoveQuickScripts": {"message":"Перетащите сюда, чтобы удалить из быстрых скриптов"},
+  "quickPacScripts": {"message":"Конфигурации быстрого переключения"},
+  "allProxyConfigs": {"message":"Все конфигурации прокси"},
+  "dragScriptsHere": {"message":"Перетащите скрипты сюда, чтобы включить быстрое переключение. Быстрое переключение позволяет менять прокси, нажимая на значок расширения."},
+  "colorRequired": {"message":"Необходимо указать цвет"},
+  "configurationName": {"message":"Название конфигурации"},
+  "color": {"message":"Цвет"},
+  "badgeLabel": {"message":"Метка значка"},
+  "badgeLabelHelp": {"message":"Пользовательский текст для значка расширения (макс. 4 символа). Оставьте пустым для автогенерации."},
+  "active": {"message":"Активный"},
+  "host": {"message":"Хост"},
+  "port": {"message":"Порт"},
+  "enterConfigurationName": {"message":"Введите название конфигурации"},
+  "disableProxyOnStartup": {"message":"Отключить прокси при запуске"},
+  "disableProxyOnStartupDescription": {"message":"Запускать с отключенным прокси каждый раз при открытии браузера"},
+  "autoReloadOnProxySwitch": {"message":"Автоматическая перезагрузка страницы при смене прокси"},
+  "autoReloadOnProxySwitchDescription": {"message":"Автоматически перезагружать активную вкладку при переключении прокси"},
+  "tooltipAutoReload": {"message":"При включении текущая страница будет перезагружена после изменения настроек прокси для немедленного применения изменений"},
+  "invalidConfiguration": {"message":"Недопустимая конфигурация"},
+  "syncStorage": {"message":"Синхронизированное хранилище"},
+  "localStorage": {"message":"Локальное хранилище"},
+  "dropTarget": {"message":"Цель перетаскивания"},
+  "tabProxyConfigs": {"message":"Конфигурации прокси"},
+  "tabSettings": {"message":"Настройки"},
+  "tabAbout": {"message":"О программе"},
+  "settingsProxyBehavior": {"message":"Поведение прокси"},
+  "settingsDataManagement": {"message":"Управление данными"},
+  "aboutVersion": {"message":"Версия"},
+  "aboutHelpResources": {"message":"Справка и ресурсы"},
+  "aboutExtensionInfo": {"message":"Информация о расширении"},
+  "aboutDiagnostics": {"message":"Диагностика"},
+  "aboutViewOnGithub": {"message":"Посмотреть на GitHub"},
+  "aboutReportIssue": {"message":"Сообщить о проблеме"},
+  "aboutDocumentation": {"message":"Документация"},
+  "aboutFeatureRequest": {"message":"Запросить функцию"},
+  "feedbackAndRating": {"message":"Отзывы и Оценка"},
+  "rateExtension": {"message":"Оценить Расширение"},
+  "leaveReview": {"message":"Оставить Отзыв"},
+  "supportProject": {"message":"Поддержать Проект"},
+  "statusConnected": {"message":"Подключено"},
+  "statusDisconnected": {"message":"Нет активного прокси"},
+  "footerActiveProxy": {"message":"Нажмите переключатель, чтобы отключить прокси"},
+  "footerSelectProxy": {"message":"Выберите прокси для подключения"},
+  "proxyEnabled": {"message":"Прокси \"$1\" включен"},
+  "proxyDisabled": {"message":"Прокси \"$1\" отключен"},
+  "proxyDeleted": {"message":"Прокси \"$1\" успешно удален"},
+  "toggleProxyOn": {"message":"Включить прокси $1"},
+  "toggleProxyOff": {"message":"Отключить прокси $1"},
+  "editConfiguration": {"message":"Редактировать конфигурацию $1"},
+  "deleteConfiguration": {"message":"Удалить конфигурацию $1"},
+  "deleteProxyTitle": {"message":"Удалить конфигурацию прокси"},
+  "deleteProxyMessage": {"message":"Вы уверены, что хотите удалить \"$1\"? Это действие нельзя отменить."},
+  "delete": {"message":"Удалить"},
+  "backupSuccess": {"message":"Настройки успешно сохранены"},
+  "backupFailed": {"message":"Не удалось сохранить настройки"},
+  "restoreSuccess": {"message":"Настройки успешно восстановлены"},
+  "restoreFailed": {"message":"Не удалось восстановить настройки"},
+  "backupDescription": {"message":"Скачать все конфигурации прокси и настройки в виде JSON-файла"},
+  "restoreDescription": {"message":"Загрузите файл резервной копии для восстановления конфигураций"},
+  "errorBoundaryTitle": {"message":"Что-то пошло не так"},
+  "errorBoundaryRetry": {"message":"Попробовать снова"},
+  "closeNotification": {"message":"Закрыть уведомление"},
+  "closeDialog": {"message":"Закрыть диалог"},
+  "confirm": {"message":"Подтвердить"},
+  "quickSwitchEnabled": {"message":"Режим быстрого переключения включен"},
+  "quickSwitchDisabled": {"message":"Режим быстрого переключения отключен"},
+  "proxyDisabledOnStartup": {"message":"Прокси будет отключен при запуске браузера"},
+  "proxyPersistOnStartup": {"message":"Состояние прокси сохранится при запуске браузера"},
+  "proxyUpdated": {"message":"Прокси \"$1\" успешно обновлен"},
+  "proxyCreated": {"message":"Прокси \"$1\" успешно создан"},
+  "quickSwitchEnabledStatus": {"message":"✓ Включено – Нажмите на значок расширения для быстрого переключения"},
+  "quickSwitchConfigsTitle": {"message":"Конфигурации быстрого переключения"},
+  "quickSwitchConfigsDescription": {"message":"Перетащите прокси сюда для доступа в один клик во всплывающем окне"},
+  "allProxyConfigsTitle": {"message":"Все конфигурации прокси"},
+  "allProxyConfigsDescription": {"message":"Управление всеми вашими конфигурациями прокси"},
+  "quickStatsTitle": {"message":"Быстрая статистика"},
+  "totalProxies": {"message":"Всего прокси"},
+  "quickSwitch": {"message":"Быстрое переключение"},
+  "activeProxy": {"message":"Активный прокси"},
+  "lastUsed": {"message":"Последнее использование"},
+  "none": {"message":"Нет"},
+  "versionLabel": {"message":"Версия:"},
+  "extensionDescription": {"message":"Расширение Chrome для управления скриптами PAC (Proxy Auto-Config)"},
+  "bypassListPlaceholder": {"message":"Введите один шаблон в строке:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"},
+  "pacUrlPlaceholder": {"message":"https://nav-proxy.vercel.app/api/proxyman.pac"},
+  "noProxiesTitle": {"message":"Нет доступных прокси"},
+  "noQuickSwitchTitle": {"message":"Нет прокси быстрого переключения"},
+  "noProxyConfigsTitle": {"message":"Нет конфигураций прокси"},
+  "addFirstProxyAction": {"message":"Добавить первый прокси"},
+  "offButton": {"message":"ВЫКЛ"},
+  "tooltipQuickSwitchMode": {"message":"Мгновенный доступ к избранным прокси из всплывающего окна без открытия настроек"},
+  "tooltipDisableOnStartup": {"message":"Это гарантирует, что прокси-сервер не будет автоматически включен при запуске Chrome."},
+  "tooltipDragToQuickSwitch": {"message":"Перетащите карточки прокси сюда, чтобы добавить их в быстрое переключение для более быстрого доступа"},
+  "tooltipDragToRemove": {"message":"Перетащите прокси быстрого переключения сюда, чтобы удалить их из всплывающего окна"},
+  "tooltipKeyboardShortcut": {"message":"Нажмите Ctrl+N (Cmd+N на Mac), чтобы быстро добавить новый прокси"},
+  "invalidHost": {"message":"Недопустимое имя хоста или IP-адрес"},
+  "invalidPort": {"message":"Порт должен быть от 1 до 65535"},
+  "invalidUrl": {"message":"Пожалуйста, введите правильный URL"},
+  "invalidPacUrlProtocol": {"message":"URL PAC должен использовать протокол http://, https:// или file://"},
+  "pacUrlWarning": {"message":"Файлы PAC обычно заканчиваются на .pac"},
+  "bypassListHelp": {"message":"Введите один адрес в строке. Вы можете использовать подстановочные знаки (*) и диапазоны IP (нотация CIDR)."},
+  "nameTooLong": {"message":"Имя должно содержать не более 50 символов"},
+  "nameTooShort": {"message":"Имя должно содержать хотя бы 1 символ"},
+  "hostPlaceholder": {"message":"proxy.example.com"},
+  "portPlaceholder": {"message":"8080"},
+  "scheme": {"message":"Схема"},
+  "noProxiesYet": {"message":"Пока нет конфигураций прокси"},
+  "noProxiesDescription": {"message":"Начните с создания первой конфигурации прокси, чтобы управлять подключением браузера к Интернету."},
+  "getStarted": {"message":"Начать"},
+  "quickSwitchEmptyHint": {"message":"Перетащите конфигурации прокси сюда для быстрого доступа из всплывающего окна"},
+  "quickSwitchEmptySubHint": {"message":"Прокси, добавленные сюда, будут отображаться во всплывающем окне для переключения одним кликом"},
+  "pacUrlHelp": {"message":"PAC-скрипт будет загружен с этого URL"},
+  "keyboardShortcuts": {"message":"Горячие клавиши"},
+  "keyboardShortcutFocusSearch": {"message":"Фокус на поиске"},
+  "keyboardShortcutNewProxy": {"message":"Новый прокси"},
+  "keyboardShortcutClearSearch": {"message":"Очистить поиск"},
+  "keyboardShortcutToggleProxy": {"message":"Переключить прокси 1-9"},
+  "searchProxiesPlaceholder": {"message":"Поиск прокси... (Ctrl+K)"},
+  "keyboardShortcutCtrlCmdK": {"message":"Ctrl/Cmd+K"},
+  "keyboardShortcutCtrlCmdN": {"message":"Ctrl/Cmd+N"},
+  "keyboardShortcutEscape": {"message":"Escape"},
+  "keyboardShortcutNumbers": {"message":"1-9"},
+  "keyboardShortcutsNote": {"message":"Note: Some shortcuts may conflict with browser or OS shortcuts"},
+  "keyboardShortcutQuickSwitchOnly": {"message":"Only works for proxies in the Quick Switch section"},
+  "updateInterval": {"message":"Интервал автообновления"},
+  "noAutoUpdate": {"message":"Без автообновления"},
+  "minutes": {"message":"минут"},
+  "hour": {"message":"час"},
+  "hours": {"message":"часов"},
+  "refreshNow": {"message":"Обновить сейчас"},
+  "refreshing": {"message":"Обновление..."},
+  "lastFetched": {"message":"Последнее получение"},
+  "pacScriptRefreshed": {"message":"PAC скрипт успешно обновлен"},
+  "autoReloadEnabled": {"message":"Auto-reload enabled"},
+  "autoReloadDisabled": {"message":"Auto-reload disabled"},
+  "systemNotifications": {"message":"System Notifications"},
+  "systemNotificationsEnabled": {"message":"System notifications enabled"},
+  "systemNotificationsDisabled": {"message":"System notifications disabled"},
+  "systemNotificationsTooltip": {"message":"Enable Chrome notifications for background events"},
+  "systemNotificationsDescription": {"message":"Show system notifications for proxy switches and errors"},
+  "errorFailedToLoadSettings": {"message":"Failed to load settings"},
+  "errorFailedToSetProxy": {"message":"Failed to set proxy configuration"},
+  "errorFailedToClearProxy": {"message":"Failed to clear proxy configuration"},
+  "errorFailedToDeleteScript": {"message":"Failed to delete script"},
+  "proxySwitched": {"message":"Proxy Switched"},
+  "proxySwitchedTo": {"message":"Switched to \"$1\""},
+  "proxySwitchedToForHost": {"message":"Switched to \"$1\" for $2"},
+  "proxyError": {"message":"Proxy Error"},
+  "proxyErrorMessage": {"message":"Failed to use \"$1\": $2"},
+  "pacScriptPreview": {"message":"PAC Script Preview (Read-only)"},
+  "pacScriptFetchError": {"message":"Failed to fetch PAC script from URL"},
+  "addAutoProxy": {"message":"Добавить авто-прокси"},
+  "addAutoProxyTooltip": {"message":"Создать правила маршрутизации на основе URL"},
+  "autoProxyMode": {"message":"Авто-прокси"},
+  "autoProxyRulesCount": {"message":"$1 правил"},
+  "createAutoProxy": {"message":"Создать авто-прокси"},
+  "editAutoProxy": {"message":"Редактировать авто-прокси"},
+  "autoProxyCreated": {"message":"Авто-прокси \"$1\" успешно создан"},
+  "autoProxyUpdated": {"message":"Авто-прокси \"$1\" успешно обновлен"},
+  "autoProxyDeleted": {"message":"Авто-прокси \"$1\" успешно удален"},
+  "autoProxyNamePlaceholder": {"message":"напр., Рабочая маршрутизация, Split Tunnel"},
+  "addRule": {"message":"Добавить правило"},
+  "editRule": {"message":"Редактировать правило"},
+  "deleteRule": {"message":"Удалить правило"},
+  "saveRule": {"message":"Сохранить правило"},
+  "cancelRule": {"message":"Отмена"},
+  "urlPattern": {"message":"Шаблон URL"},
+  "patternType": {"message":"Тип шаблона"},
+  "wildcardPattern": {"message":"Подстановочный знак"},
+  "regexPattern": {"message":"Регулярное выражение"},
+  "exactMatch": {"message":"Точное совпадение"},
+  "cidrPattern": {"message":"CIDR (Диапазон IP)"},
+  "selectProxy": {"message":"Выбрать прокси"},
+  "defineInline": {"message":"Определить встроенно"},
+  "directConnection": {"message":"Прямое подключение"},
+  "fallbackBehavior": {"message":"Резервное поведение"},
+  "fallbackDescription": {"message":"Применяется, когда ни одно правило не соответствует URL"},
+  "testPattern": {"message":"Тестировать шаблон"},
+  "testUrl": {"message":"Тестовый URL"},
+  "testUrlPlaceholder": {"message":"Введите URL для проверки правил"},
+  "patternMatches": {"message":"Шаблон совпадает!"},
+  "noPatternMatch": {"message":"Ни один шаблон не совпадает - будет использован резервный"},
+  "ruleEnabled": {"message":"Правило включено"},
+  "ruleDisabled": {"message":"Правило отключено"},
+  "routingRules": {"message":"Правила маршрутизации"},
+  "noRulesYet": {"message":"Правила еще не определены"},
+  "noRulesDescription": {"message":"Добавьте правила, чтобы определить, как URL будут маршрутизироваться на разные прокси"},
+  "atLeastOneRule": {"message":"Требуется хотя бы одно правило"},
+  "failedToSave": {"message":"Не удалось сохранить конфигурацию"},
+  "proxyType": {"message":"Тип прокси"},
+  "noProxiesAvailable": {"message":"Нет доступных прокси"},
+  "name": {"message":"Имя"},
+  "ruleDescription": {"message":"Описание (необязательно)"},
+  "ruleDescriptionPlaceholder": {"message":"напр., Маршрутизировать весь трафик Google"},
+  "patternPlaceholder": {"message":"напр., *.google.com"},
+  "wildcardHelp": {"message":"Используйте * для соответствия любым символам. Пример: *.example.com"},
+  "regexHelp": {"message":"Используйте синтаксис регулярных выражений JavaScript. Пример: ^https?://.*\\.example\\.com"},
+  "exactHelp": {"message":"Совпадение с точным именем хоста. Пример: www.example.com"},
+  "cidrHelp": {"message":"Используйте нотацию CIDR для диапазонов IP. Пример: 192.168.1.0/24"},
+  "invalidPattern": {"message":"Недопустимый шаблон"},
+  "patternRequired": {"message":"Шаблон обязателен"},
+  "saveChanges": {"message":"Сохранить изменения"},
+  "autoProxyReferenceWarning": {"message":"Этот прокси используется в следующих конфигурациях авто-прокси:"},
+  "autoProxyRefSingular": {"message":"1 правило"},
+  "autoProxyRefPlural": {"message":"$1 правил","placeholders":{"1":{"content":"$1","example":"3"}}},
+  "autoProxyDeleteConsequence": {"message":"Эти правила будут автоматически удалены при удалении этого прокси."},
+  "orphanedProxyWarning": {"message":"Связанный прокси был удален. Пожалуйста, выберите другой прокси."},
+  "matchedRule": {"message":"Совпавшее правило"},
+  "useFallback": {"message":"Использовать резервный"},
+  "dragToReorder": {"message":"Перетащите для изменения порядка правил"},
+  "failedToSaveProxy": {"message":"Не удалось сохранить конфигурацию прокси"},
+  "autoProxySubtitle": {"message":"Умная маршрутизация трафика на основе URL"},
+  "close": {"message":"Закрыть"},
+  "ruleSingular": {"message":"правило"},
+  "rulePlural": {"message":"правила"},
+  "rulesConfigured": {"message":"$1 $2 настроено"},
+  "ruleActiveDescription": {"message":"Это правило будет активно при включенной конфигурации"},
+  "ruleSkippedDescription": {"message":"Это правило будет пропущено"},
+  "matchTypeWildcard": {"message":"Маска"},
+  "matchTypeExact": {"message":"Точное"},
+  "matchTypeRegex": {"message":"Регулярное выражение"},
+  "matchTypeCidr": {"message":"CIDR"},
+  "referencedProxyDeleted": {"message":"Прокси удален"},
+  "testPatternHint": {"message":"Проверьте правильность работы ваших правил"},
+  "testButton": {"message":"Тест"},
+  "ruleLabel": {"message":"Правило:"},
+  "testPatternHelp": {"message":"Введите URL выше и нажмите Тест, чтобы увидеть совпадающее правило"},
+  "proxyModePacScript": {"message":"(PAC-скрипт)"},
+  "proxyModeSystem": {"message":"(Системный)"},
+  "proxyModeDirect": {"message":"(Прямое)"},
+  "proxyModeAutoDetect": {"message":"(Автоопределение)"},
+  "toggleSearch": {"message":"Переключить поиск"},
+  "hideSearch": {"message":"Скрыть поиск"},
+  "viewMode": {"message":"Режим просмотра"},
+  "viewModeGrid": {"message":"Сеточный вид"},
+  "viewModeList": {"message":"Список"},
+  "viewModeGridDescription": {"message":"Отображать прокси в виде сетки карточек"},
+  "viewModeListDescription": {"message":"Отображать прокси в горизонтальном списке"},
+  "authentication": {"message":"Аутентификация"},
+  "optional": {"message":"Необязательно"},
+  "authStorageInfo": {"message":"Учетные данные хранятся локально и зашифрованы"},
+  "username": {"message":"Имя пользователя"},
+  "usernamePlaceholder": {"message":"имя пользователя"},
+  "password": {"message":"Пароль"},
+  "passwordPlaceholder": {"message":"••••••••"},
+  "hidePassword": {"message":"Скрыть пароль"},
+  "showPassword": {"message":"Показать пароль"},
+  "diagnostics": {"message":"Диагностика"},
+  "tabDiagnostics": {"message":"Диагностика"},
+  "diagnosticsDesc": {"message":"Просмотр журналов ошибок и диагностической информации для отладки"},
+  "diagnosticsExported": {"message":"Диагностика успешно экспортирована"},
+  "diagnosticsExportFailed": {"message":"Не удалось экспортировать диагностику"},
+  "confirmClearLogs": {"message":"Очистить все журналы диагностики?"},
+  "diagnosticsCleared": {"message":"Диагностика успешно очищена"},
+  "diagnosticsClearFailed": {"message":"Не удалось очистить диагностику"},
+  "allLogsMarkedRead": {"message":"Все журналы отмечены как прочитанные"},
+  "justNow": {"message":"Только что"},
+  "markAllRead": {"message":"Отметить все как прочитанные"},
+  "export": {"message":"Экспорт"},
+  "clearAll": {"message":"Очистить все"},
+  "noErrors": {"message":"Ошибок не обнаружено"},
+  "noErrorsDesc": {"message":"Ваши прокси работают нормально!"},
+  "details": {"message":"Подробности"},
+  "url": {"message":"URL"},
+  "stackTrace": {"message":"Трассировка стека"},
+  "logId": {"message":"ID"},
+  "proxyHasAuth": {"message":"Для этого прокси настроена аутентификация"},
+  "settingsFileTooLarge": {"message":"Файл настроек слишком большой. Максимальный размер $1КБ.","placeholders":{"1":{"content":"$1","example":"1024"}}},
+  "invalidFileType": {"message":"Неверный тип файла. Пожалуйста, выберите JSON файл."},
+  "invalidJsonFormat": {"message":"Неверный формат JSON."},
+  "settingsMustBeObject": {"message":"Настройки должны быть допустимым объектом."},
+  "invalidProxyConfigsArray": {"message":"Неверные настройки: proxyConfigs должен быть массивом."},
+  "invalidQuickSwitchEnabled": {"message":"Неверные настройки: quickSwitchEnabled должен быть логическим значением."},
+  "invalidDisableProxyOnStartup": {"message":"Неверные настройки: disableProxyOnStartup должен быть логическим значением."},
+  "invalidAutoReloadOnProxySwitch": {"message":"Неверные настройки: autoReloadOnProxySwitch должен быть логическим значением."},
+  "invalidActiveScriptId": {"message":"Неверные настройки: activeScriptId должен быть строкой или null."},
+  "invalidProxyConfiguration": {"message":"Неверная конфигурация прокси."},
+  "proxyMustHaveName": {"message":"Каждый прокси должен иметь допустимое имя."},
+  "proxyMustHaveMode": {"message":"Каждый прокси должен иметь допустимый режим."},
+  "failedToRestoreSettingsGeneric": {"message":"Не удалось восстановить настройки. Пожалуйста, проверьте формат файла."},
+  "noActiveProxy": {"message":"Нет"},
+  "configuredProxies": {"message":"Настроенные прокси"},
+  "storageUsed": {"message":"Использовано хранилище"},
+  "extensionVersion": {"message":"Версия расширения"},
+  "logsCount": {"message":"Журналы активности"},
+  "activityLog": {"message":"Журнал активности"},
+  "pacScriptValid": {"message":"PAC-скрипт действителен"},
+  "pacScriptError": {"message":"PAC-скрипт содержит ошибки. Пожалуйста, проверьте синтаксис скрипта."},
+  "invalidPacScript": {"message":"Недействительный PAC-скрипт. Убедитесь, что он содержит действительную функцию FindProxyForURL."},
+  "pacFetchFailed": {"message":"Не удалось получить PAC-скрипт по URL. Проверьте URL и сетевое подключение."},
+  "proxyPermissionDenied": {"message":"Доступ запрещен. У расширения может не быть необходимых разрешений."},
+  "proxyControlledByOther": {"message":"Настройки прокси контролируются другим расширением."},
+  "proxyManagedByPolicy": {"message":"Настройки прокси управляются политикой вашей организации."},
+  "invalidProxyHost": {"message":"Недействительный адрес хоста прокси. Проверьте конфигурацию сервера."},
+  "invalidProxyPort": {"message":"Недействительный порт прокси. Введите действительный номер порта (1-65535)."},
+  "proxyTimeout": {"message":"Время ожидания подключения истекло. Прокси-сервер может быть недоступен."},
+  "proxySettingsFailed": {"message":"Не удалось применить настройки прокси."},
+  "onboardingWelcomeTitle": {"message":"Добро пожаловать в PACify"},
+  "onboardingWelcomeDescription": {"message":"Современный менеджер прокси для Chrome. Легко настраивайте, переключайте и управляйте настройками прокси."},
+  "onboardingFeaturesTitle": {"message":"Мощные функции"},
+  "onboardingFeaturesDescription": {"message":"Все, что нужно для эффективного управления прокси."},
+  "onboardingFeatureProxies": {"message":"Несколько профилей прокси"},
+  "onboardingFeatureProxiesDesc": {"message":"Мгновенно создавайте и переключайтесь между различными конфигурациями прокси."},
+  "onboardingFeatureAutoProxy": {"message":"Правила авто-прокси"},
+  "onboardingFeatureAutoProxyDesc": {"message":"Маршрутизируйте трафик на основе URL-шаблонов с помощью умных правил маршрутизации."},
+  "onboardingFeaturePAC": {"message":"Поддержка PAC-скриптов"},
+  "onboardingFeaturePACDesc": {"message":"Используйте пользовательские PAC-скрипты для расширенной настройки прокси."},
+  "onboardingShortcutsTitle": {"message":"Горячие клавиши"},
+  "onboardingShortcutsDescription": {"message":"Работайте быстрее с помощью горячих клавиш."},
+  "onboardingShortcutNewProxy": {"message":"Создать новый прокси"},
+  "onboardingShortcutSearch": {"message":"Поиск прокси"},
+  "onboardingShortcutClose": {"message":"Закрыть окно"},
+  "onboardingGetStartedTitle": {"message":"Всё готово!"},
+  "onboardingGetStartedDescription": {"message":"Создайте свою первую конфигурацию прокси, чтобы начать, или изучите настройки."},
+  "onboardingCreateFirstProxy": {"message":"Создать первый прокси"},
+  "onboardingExploreSettings": {"message":"Изучить настройки"},
+  "previous": {"message":"Назад"},
+  "next": {"message":"Далее"},
+  "skipTour": {"message":"Пропустить тур"},
+  "keyboardShortcutsDescription": {"message":"Используйте эти сочетания клавиш для ускорения работы"},
+  "shortcutsGroupGeneral": {"message":"Общие"},
+  "shortcutsGroupNavigation": {"message":"Навигация"},
+  "shortcutsGroupProxyList": {"message":"Список прокси"},
+  "shortcutNewProxy": {"message":"Создать новую конфигурацию прокси"},
+  "shortcutSearch": {"message":"Открыть поиск"},
+  "shortcutCloseModal": {"message":"Закрыть текущее окно"},
+  "shortcutShowHelp": {"message":"Показать горячие клавиши"},
+  "shortcutNextElement": {"message":"Перейти к следующему элементу"},
+  "shortcutPrevElement": {"message":"Перейти к предыдущему элементу"},
+  "shortcutActivate": {"message":"Активировать выделенный элемент"},
+  "shortcutToggle": {"message":"Переключить переключатели и флажки"},
+  "shortcutNavigateList": {"message":"Навигация по списку прокси"},
+  "shortcutActivateProxy": {"message":"Активировать выбранный прокси"},
+  "shortcutEditProxy": {"message":"Редактировать выбранный прокси"},
+  "shortcutDeleteProxy": {"message":"Удалить выбранный прокси"},
+  "shortcutsTip": {"message":"Нажмите ? в любом месте для показа этой справки"},
+  "subscriptions": {"message":"Подписки"},
+  "subscriptionsDescription": {"message":"Импорт правил из удаленных списков доменов"},
+  "addSubscription": {"message":"Добавить подписку"},
+  "subscriptionName": {"message":"Название"},
+  "subscriptionNamePlaceholder": {"message":"например, GFWList, Ad Domains"},
+  "subscriptionNameRequired": {"message":"Необходимо название подписки"},
+  "subscriptionUrl": {"message":"URL"},
+  "subscriptionUrlRequired": {"message":"Необходим URL подписки"},
+  "subscriptionUrlInvalid": {"message":"Пожалуйста, введите правильный URL"},
+  "subscriptionFormat": {"message":"Формат"},
+  "subscriptionInterval": {"message":"Автообновление"},
+  "subscriptionFetching": {"message":"Получение..."},
+  "subscriptionFetchFailed": {"message":"Не удалось получить подписку"},
+  "subscriptionNoRules": {"message":"В подписке не найдено правил"},
+  "noSubscriptions": {"message":"Нет подписок"},
+  "noSubscriptionsDescription": {"message":"Подпишитесь на удаленные списки доменов для автоматического импорта правил прокси из URL-адресов, таких как GFWList или пользовательские списки доменов"},
+  "refreshSubscription": {"message":"Обновить"},
+  "editSubscription": {"message":"Редактировать подписку"},
+  "saveSubscription": {"message":"Сохранить изменения"},
+  "deleteSubscription": {"message":"Удалить подписку"},
+  "deleteSubscriptionTitle": {"message":"Удалить подписку"},
+  "deleteSubscriptionMessage": {"message":"Вы уверены, что хотите удалить подписку \"$1\"?","placeholders":{"1":{"content":"$1","example":"GFWList"}}},
+  "rules": {"message":"правила"},
+  "fromSubscriptions": {"message":"из подписок"},
+  "never": {"message":"Никогда"},
+  "minutesAgo": {"message":"$1 мин назад","placeholders":{"1":{"content":"$1","example":"5"}}},
+  "hoursAgo": {"message":"$1 ч назад","placeholders":{"1":{"content":"$1","example":"2"}}},
+  "formatAuto": {"message":"Автоопределение"},
+  "formatAbp": {"message":"ABP / GFWList"},
+  "formatDomains": {"message":"Список доменов"},
+  "formatSurge": {"message":"Surge / Shadowrocket"},
+  "formatClash": {"message":"Clash / Mihomo"},
+  "intervalManual": {"message":"Только вручную"},
+  "intervalMinutes": {"message":"Каждые $1 мин","placeholders":{"1":{"content":"$1","example":"30"}}},
+  "intervalHour": {"message":"Каждый $1 час","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "intervalHours": {"message":"Каждые $1 ч","placeholders":{"1":{"content":"$1","example":"6"}}},
+  "intervalDay": {"message":"Каждый $1 день","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "showQuickSettings": {"message":"Показать быстрые настройки"},
+  "showQuickSettingsDescription": {"message":"Отображать раздел быстрых настроек на странице конфигурации прокси"},
+  "showQuickSettingsEnabled": {"message":"Раздел быстрых настроек теперь виден"},
+  "showQuickSettingsDisabled": {"message":"Раздел быстрых настроек скрыт"},
+  "showQuickSettingsTooltip": {"message":"При отключении раздел быстрого переключения будет скрыт со страницы конфигурации прокси"},
+  "privacyPolicy": {"message":"Политика конфиденциальности"},
+  "privacyPolicyTitle": {"message":"Политика конфиденциальности"},
+  "privacyIntro": {"message":"Ваша конфиденциальность важна для нас. Эта политика объясняет, как PACify обрабатывает ваши данные."},
+  "privacyLastUpdated": {"message":"Последнее обновление"},
+  "privacyDataCollection": {"message":"Сбор данных"},
+  "privacyDataStorage": {"message":"Хранение данных"},
+  "privacyNetworkRequests": {"message":"Сетевые запросы"},
+  "privacyPermissions": {"message":"Используемые разрешения"},
+  "privacyContact": {"message":"Если у вас есть вопросы по этой политике конфиденциальности, создайте issue в нашем репозитории GitHub."},
+  "httpWarning": {"message":"Этот URL использует HTTP. Ваши правила прокси могут быть перехвачены. Используйте HTTPS, когда это возможно."},
+  "save": {"message":"Сохранить"},
+  "editProxy": {"message":"Редактировать прокси"},
+  "proxyActivated": {"message":"Прокси '$1' активирован","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
+  "proxyDeactivated": {"message":"Прокси деактивирован"}
 }

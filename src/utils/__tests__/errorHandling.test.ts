@@ -31,7 +31,7 @@ describe('errorHandling utilities', () => {
       expect(mockNotificationError).not.toHaveBeenCalled()
     })
 
-    test('should handle errors and call NotifyService.error', async () => {
+    test('should handle errors and call error handler', async () => {
       const testError = new Error('Test error')
       const mockOperation = mock().mockRejectedValue(testError)
       const wrappedOperation = withErrorHandling(mockOperation, ERROR_TYPES.SAVE_SCRIPT)

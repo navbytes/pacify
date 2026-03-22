@@ -153,7 +153,13 @@ function handleCancelDelete() {
         </Text>
       </div>
     </div>
-    <Button onclick={onAddRule} variant="gradient" gradient="purple" size="sm" data-testid="add-rule-btn">
+    <Button
+      onclick={onAddRule}
+      variant="gradient"
+      gradient="purple"
+      size="sm"
+      data-testid="add-rule-btn"
+    >
       {#snippet icon()}
         <Plus size={16} />
       {/snippet}
@@ -212,7 +218,7 @@ function handleCancelDelete() {
 
               <!-- Priority number -->
               <div class={ruleItem.priorityBadge()}>
-                <span class="text-xs font-bold text-slate-500 dark:text-slate-400"
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-300"
                   >{index + 1}</span
                 >
               </div>
@@ -249,7 +255,7 @@ function handleCancelDelete() {
                         style="background-color: {proxyColor}"
                       ></div>
                     {/if}
-                    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">
+                    <span class="text-sm font-medium text-slate-600 dark:text-slate-300">
                       {getProxyName(rule)}
                     </span>
                   </div>
@@ -326,7 +332,12 @@ function handleCancelDelete() {
         <p class={emptyState.description()}>
           {I18nService.getMessage('noRulesDescription') || 'Add rules to define how URLs should be routed to different proxies'}
         </p>
-        <Button onclick={onAddRule} variant="gradient" gradient="purple" data-testid="add-rule-empty-btn">
+        <Button
+          onclick={onAddRule}
+          variant="gradient"
+          gradient="purple"
+          data-testid="add-rule-empty-btn"
+        >
           {#snippet icon()}
             <Plus size={18} />
           {/snippet}

@@ -34,7 +34,7 @@ async function disableAllProxies() {
 }
 </script>
 
-<div class="w-96 bg-white dark:bg-slate-900 flex flex-col">
+<div class="min-w-80 w-96 max-w-full bg-white dark:bg-slate-900 flex flex-col">
   <!-- Header -->
   <header
     class="flex items-center justify-between px-5 py-3 border-b border-slate-200 dark:border-slate-700"
@@ -44,12 +44,12 @@ async function disableAllProxies() {
     </h1>
 
     <div class="flex items-center gap-1">
-      <Tooltip text="Add new proxy" position="bottom">
+      <Tooltip text={I18nService.getMessage('addNewProxy')} position="bottom">
         <Button minimal color="primary" onclick={quickAddProxy} data-testid="add-proxy-btn">
           {#snippet icon()}
             <Plus size={18} />
           {/snippet}
-          <Text classes="sr-only">Add new proxy</Text>
+          <Text classes="sr-only">{I18nService.getMessage('addNewProxy')}</Text>
         </Button>
       </Tooltip>
 
@@ -94,7 +94,7 @@ async function disableAllProxies() {
             </Text>
           {:else}
             <div class="w-2 h-2 bg-slate-400 dark:bg-slate-500 rounded-full"></div>
-            <Text size="sm" weight="medium" classes="text-slate-600 dark:text-slate-400">
+            <Text size="sm" weight="medium" classes="text-slate-600 dark:text-slate-300">
               {I18nService.getMessage('statusDisconnected')}
             </Text>
           {/if}
@@ -103,7 +103,12 @@ async function disableAllProxies() {
         <!-- Always reserve space for the button to prevent layout shift -->
         <div class="shrink-0">
           {#if activeProxy}
-            <Button size="sm" color="secondary" onclick={disableAllProxies} data-testid="disable-proxy-btn">
+            <Button
+              size="sm"
+              color="secondary"
+              onclick={disableAllProxies}
+              data-testid="disable-proxy-btn"
+            >
               {#snippet icon()}
                 <Power size={14} />
               {/snippet}

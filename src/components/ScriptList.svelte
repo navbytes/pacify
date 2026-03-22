@@ -5,6 +5,7 @@ import { settingsStore } from '@/stores/settingsStore'
 import { viewModeContainerVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Globe, Zap } from '@/utils/icons'
+import { buildAutoProxyReferenceMap } from '@/utils/proxyModeHelpers'
 import { colors } from '@/utils/theme'
 import EmptyState from './EmptyState.svelte'
 import ScriptItem from './ScriptItem.svelte'
@@ -35,6 +36,9 @@ let {
 
 // Use provided proxies or fall back to store
 let proxyConfigs = $derived(proxies ?? proxyConfigsFromStore)
+
+// Build reference map once for all proxies (avoids O(n²) per-item lookups)
+let autoProxyRefMap = $derived(buildAutoProxyReferenceMap($settingsStore.proxyConfigs ?? []))
 
 function openEditor(scriptId?: string) {
   if (!scriptId || !onScriptEdit) return
@@ -69,6 +73,7 @@ let displayProxyConfigs = $derived<ProxyConfig[]>(
           {pageType}
           {disableDrag}
           {viewMode}
+          {autoProxyRefMap}
           bind:dragType
           onScriptEdit={() => openEditor(proxy.id)}
         />

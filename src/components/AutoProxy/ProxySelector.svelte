@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Network, Server, Zap, Eye, EyeOff } from 'lucide-svelte'
+import { Eye, EyeOff, Network, Server, Zap } from 'lucide-svelte'
 import type { AutoProxyRouteType, ProxyConfig, ProxyServer } from '@/interfaces/settings'
 import { I18nService } from '@/services/i18n/i18nService'
 import { inputVariants } from '@/utils/classPatterns'
@@ -78,7 +78,13 @@ function handleTypeChange(newType: string) {
   } else if (type === 'existing') {
     onchange('existing', selectableProxies[0]?.id)
   } else if (type === 'inline') {
-    onchange('inline', undefined, { scheme: 'http', host: '', port: '', username: '', password: '' })
+    onchange('inline', undefined, {
+      scheme: 'http',
+      host: '',
+      port: '',
+      username: '',
+      password: '',
+    })
   }
 }
 
@@ -160,7 +166,7 @@ function handleInlineChange() {
         <div class="w-24">
           <label
             for="inline-scheme"
-            class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1"
+            class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1"
           >
             {I18nService.getMessage('scheme')}
           </label>
@@ -179,7 +185,7 @@ function handleInlineChange() {
         <div class="flex-1">
           <label
             for="inline-host"
-            class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1"
+            class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1"
           >
             {I18nService.getMessage('host')}
           </label>
@@ -195,7 +201,7 @@ function handleInlineChange() {
         <div class="w-20">
           <label
             for="inline-port"
-            class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1"
+            class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1"
           >
             {I18nService.getMessage('port')}
           </label>
@@ -212,16 +218,18 @@ function handleInlineChange() {
 
       <!-- Authentication fields (Optional) -->
       <div class="pt-3 mt-3 border-t border-slate-200 dark:border-slate-700">
-        <Text size="xs" weight="medium" classes="block text-slate-600 dark:text-slate-400 mb-2">
-          {I18nService.getMessage('authentication') || 'Authentication'} ({I18nService.getMessage(
+        <Text size="xs" weight="medium" classes="block text-slate-600 dark:text-slate-300 mb-2">
+          {I18nService.getMessage('authentication') || 'Authentication'} (
+          {I18nService.getMessage(
             'optional'
-          ) || 'Optional'})
+          ) || 'Optional'}
+          )
         </Text>
         <FlexGroup direction="horizontal" childrenGap="sm">
           <div class="flex-1">
             <label
               for="inline-username"
-              class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1"
+              class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1"
             >
               {I18nService.getMessage('username')}
             </label>
@@ -237,7 +245,7 @@ function handleInlineChange() {
           <div class="flex-1">
             <label
               for="inline-password"
-              class="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1"
+              class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1"
             >
               {I18nService.getMessage('password')}
             </label>
@@ -253,7 +261,7 @@ function handleInlineChange() {
               <button
                 type="button"
                 onclick={() => (showInlinePassword = !showInlinePassword)}
-                class="absolute right-1.5 top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors rounded"
+                class="absolute right-1.5 top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-slate-700 dark:text-slate-300 dark:hover:text-slate-200 transition-colors rounded"
                 aria-label={showInlinePassword
                   ? I18nService.getMessage('hidePassword') || 'Hide password'
                   : I18nService.getMessage('showPassword') || 'Show password'}

@@ -1,1214 +1,438 @@
 {
-  "extName": {
-    "message": "PACify | 프록시 관리자"
-  },
-  "extDescription": {
-    "message": "Chrome용 완벽한 프록시 관리자입니다. PAC 스크립트, 수동 프록시, 시스템 구성을 쉽게 만들고, 편집하고, 전환합니다."
-  },
-  "basicSettings": {
-    "message": "기본 설정"
-  },
-  "proxyMode": {
-    "message": "프록시 모드"
-  },
-  "systemProxy": {
-    "message": "운영 체제의 프록시 설정을 사용합니다."
-  },
-  "directMode": {
-    "message": "직접"
-  },
-  "directModeHelp": {
-    "message": "직접 모드에서는 모든 연결이 프록시 없이 직접 생성됩니다."
-  },
-  "autoDetectMode": {
-    "message": "URL 자동 구성"
-  },
-  "autoDetectModeHelp": {
-    "message": "자동 감지 모드에서 Chrome은 WPAD 프로토콜을 사용하여 프록시 설정을 자동으로 검색하고 다운로드합니다."
-  },
-  "deleteConfirm": {
-    "message": "이 스크립트를 삭제하시겠습니까?"
-  },
-  "toggleProxyHint": {
-    "message": "스위치를 클릭하여 프록시를 토글합니다."
-  },
-  "systemMode": {
-    "message": "시스템"
-  },
-  "pacScriptMode": {
-    "message": "PAC 스크립트"
-  },
-  "manualMode": {
-    "message": "수동 구성"
-  },
-  "addNewScript": {
-    "message": "새 스크립트 추가"
-  },
-  "quickSwitchMode": {
-    "message": "빠른 전환 모드"
-  },
-  "quickSwitchDescription": {
-    "message": "팝업에서 프록시 구성 간 빠른 전환을 활성화합니다"
-  },
-  "settings": {
-    "message": "설정"
-  },
-  "nameRequired": {
-    "message": "이름이 필요합니다"
-  },
-  "proxyConfiguration": {
-    "message": "프록시 구성"
-  },
-  "cancel": {
-    "message": "취소"
-  },
-  "saveConfiguration": {
-    "message": "구성 저장"
-  },
-  "saving": {
-    "message": "저장 중..."
-  },
-  "noScriptsAvailable": {
-    "message": "사용 가능한 PAC 스크립트가 없습니다. 시작하려면 첫 번째 스크립트를 추가하세요."
-  },
-  "noQuickSwitchScripts": {
-    "message": "구성된 빠른 전환 스크립트가 없습니다. 빠른 전환을 활성화하려면 스크립트를 여기로 끌어다 놓으세요."
-  },
-  "noScriptsAvailableOptions": {
-    "message": "사용 가능한 스크립트가 없습니다. \"새 스크립트 추가\"를 클릭하여 첫 번째 PAC 스크립트를 만드세요."
-  },
-  "backupSettings": {
-    "message": "백업 설정"
-  },
-  "restoreSettings": {
-    "message": "설정 복원"
-  },
-  "useSameProxy": {
-    "message": "모든 프로토콜에 동일한 프록시 서버 사용"
-  },
-  "proxyServer": {
-    "message": "프록시 서버"
-  },
-  "httpProxy": {
-    "message": "HTTP 프록시"
-  },
-  "httpsProxy": {
-    "message": "HTTPS 프록시"
-  },
-  "ftpProxy": {
-    "message": "FTP 프록시"
-  },
-  "fallbackProxy": {
-    "message": "폴백 프록시"
-  },
-  "bypassList": {
-    "message": "우회 목록"
-  },
-  "pacScriptUrl": {
-    "message": "PAC 스크립트 URL"
-  },
-  "pacScript": {
-    "message": "PAC 스크립트"
-  },
-  "templates": {
-    "message": "템플릿:"
-  },
-  "emptyTemplate": {
-    "message": "비어 있음"
-  },
-  "basicTemplate": {
-    "message": "기본"
-  },
-  "proTemplate": {
-    "message": "Pro"
-  },
-  "advancedTemplate": {
-    "message": "고급"
-  },
-  "mandatoryPacScript": {
-    "message": "필수 PAC 스크립트(직접 폴백 방지)"
-  },
-  "dropToAddQuickScripts": {
-    "message": "빠른 스크립트에 추가하려면 여기에 놓으세요"
-  },
-  "dropToRemoveQuickScripts": {
-    "message": "빠른 스크립트에서 제거하려면 여기에 놓으세요"
-  },
-  "quickPacScripts": {
-    "message": "빠른 전환 구성"
-  },
-  "allProxyConfigs": {
-    "message": "모든 프록시 구성"
-  },
-  "dragScriptsHere": {
-    "message": "빠른 전환을 활성화하려면 스크립트를 여기에 끌어다 놓으세요. 빠른 전환을 사용하면 확장 프로그램 아이콘을 클릭하여 프록시를 전환할 수 있습니다."
-  },
-  "colorRequired": {
-    "message": "색상이 필요합니다."
-  },
-  "configurationName": {
-    "message": "구성 이름"
-  },
-  "color": {
-    "message": "색상"
-  },
-  "badgeLabel": {
-    "message": "배지 레이블"
-  },
-  "badgeLabelHelp": {
-    "message": "확장 프로그램 아이콘의 맞춤 텍스트(최대 4자). 비워두면 자동 생성됩니다."
-  },
-  "active": {
-    "message": "활성"
-  },
-  "host": {
-    "message": "호스트"
-  },
-  "port": {
-    "message": "포트"
-  },
-  "enterConfigurationName": {
-    "message": "구성 이름을 입력하세요"
-  },
-  "disableProxyOnStartup": {
-    "message": "시작 시 프록시 비활성화"
-  },
-  "disableProxyOnStartupDescription": {
-    "message": "브라우저를 시작할 때마다 프록시를 비활성화한 상태로 시작"
-  },
-  "autoReloadOnProxySwitch": {
-    "message": "프록시 전환 시 페이지 자동 새로고침"
-  },
-  "autoReloadOnProxySwitchDescription": {
-    "message": "프록시 전환 시 활성 탭을 자동으로 새로고침"
-  },
-  "tooltipAutoReload": {
-    "message": "활성화하면 프록시 설정 변경 후 현재 페이지가 새로고침되어 변경 사항이 즉시 적용됩니다"
-  },
-  "invalidConfiguration": {
-    "message": "잘못된 구성"
-  },
-  "syncStorage": {
-    "message": "동기화 저장소"
-  },
-  "localStorage": {
-    "message": "로컬 저장소"
-  },
-  "dropTarget": {
-    "message": "놓기 대상"
-  },
-  "tabProxyConfigs": {
-    "message": "프록시 구성"
-  },
-  "tabSettings": {
-    "message": "설정"
-  },
-  "tabAbout": {
-    "message": "정보"
-  },
-  "settingsProxyBehavior": {
-    "message": "프록시 동작"
-  },
-  "settingsDataManagement": {
-    "message": "데이터 관리"
-  },
-  "aboutVersion": {
-    "message": "버전"
-  },
-  "aboutHelpResources": {
-    "message": "도움말 및 리소스"
-  },
-  "aboutExtensionInfo": {
-    "message": "확장 프로그램 정보"
-  },
-  "aboutDiagnostics": {
-    "message": "진단"
-  },
-  "aboutViewOnGithub": {
-    "message": "GitHub에서 보기"
-  },
-  "aboutReportIssue": {
-    "message": "문제 보고"
-  },
-  "aboutDocumentation": {
-    "message": "문서"
-  },
-  "aboutFeatureRequest": {
-    "message": "기능 요청"
-  },
-  "feedbackAndRating": {
-    "message": "피드백 및 평가"
-  },
-  "rateExtension": {
-    "message": "확장 프로그램 평가"
-  },
-  "leaveReview": {
-    "message": "리뷰 남기기"
-  },
-  "supportProject": {
-    "message": "프로젝트 지원"
-  },
-  "statusConnected": {
-    "message": "연결됨"
-  },
-  "statusDisconnected": {
-    "message": "활성 프록시 없음"
-  },
-  "footerActiveProxy": {
-    "message": "프록시를 비활성화하려면 토글을 클릭하세요"
-  },
-  "footerSelectProxy": {
-    "message": "연결할 프록시를 선택하세요"
-  },
-  "proxyEnabled": {
-    "message": "프록시 \"$1\" 활성화됨"
-  },
-  "proxyDisabled": {
-    "message": "프록시 \"$1\" 비활성화됨"
-  },
-  "proxyDeleted": {
-    "message": "프록시 \"$1\" 삭제 완료"
-  },
-  "toggleProxyOn": {
-    "message": "프록시 $1 활성화"
-  },
-  "toggleProxyOff": {
-    "message": "프록시 $1 비활성화"
-  },
-  "editConfiguration": {
-    "message": "$1 구성 편집"
-  },
-  "deleteConfiguration": {
-    "message": "$1 구성 삭제"
-  },
-  "deleteProxyTitle": {
-    "message": "프록시 구성 삭제"
-  },
-  "deleteProxyMessage": {
-    "message": "\"$1\"을(를) 삭제하시겠습니까? 이 작업은 취소할 수 없습니다."
-  },
-  "delete": {
-    "message": "삭제"
-  },
-  "backupSuccess": {
-    "message": "설정이 성공적으로 백업되었습니다"
-  },
-  "backupFailed": {
-    "message": "설정 백업에 실패했습니다"
-  },
-  "restoreSuccess": {
-    "message": "설정이 성공적으로 복원되었습니다"
-  },
-  "restoreFailed": {
-    "message": "설정 복원에 실패했습니다"
-  },
-  "backupDescription": {
-    "message": "모든 프록시 구성 및 기본 설정을 JSON 파일로 다운로드"
-  },
-  "restoreDescription": {
-    "message": "구성을 복원하려면 백업 파일을 업로드하세요"
-  },
-  "errorBoundaryTitle": {
-    "message": "문제가 발생했습니다"
-  },
-  "errorBoundaryRetry": {
-    "message": "다시 시도"
-  },
-  "closeNotification": {
-    "message": "알림 닫기"
-  },
-  "closeDialog": {
-    "message": "대화상자 닫기"
-  },
-  "confirm": {
-    "message": "확인"
-  },
-  "quickSwitchEnabled": {
-    "message": "빠른 전환 모드가 활성화되었습니다"
-  },
-  "quickSwitchDisabled": {
-    "message": "빠른 전환 모드가 비활성화되었습니다"
-  },
-  "proxyDisabledOnStartup": {
-    "message": "브라우저 시작 시 프록시가 비활성화됩니다"
-  },
-  "proxyPersistOnStartup": {
-    "message": "브라우저 시작 시 프록시 상태가 유지됩니다"
-  },
-  "proxyUpdated": {
-    "message": "프록시 \"$1\"이(가) 성공적으로 업데이트되었습니다"
-  },
-  "proxyCreated": {
-    "message": "프록시 \"$1\"이(가) 성공적으로 생성되었습니다"
-  },
-  "quickSwitchEnabledStatus": {
-    "message": "✓ 활성화됨 – 빠르게 전환하려면 확장 프로그램 아이콘을 클릭하세요"
-  },
-  "quickSwitchConfigsTitle": {
-    "message": "빠른 전환 구성"
-  },
-  "quickSwitchConfigsDescription": {
-    "message": "팝업에서 원클릭 액세스를 위해 프록시를 여기로 드래그하세요"
-  },
-  "allProxyConfigsTitle": {
-    "message": "모든 프록시 구성"
-  },
-  "allProxyConfigsDescription": {
-    "message": "모든 프록시 구성 관리"
-  },
-  "quickStatsTitle": {
-    "message": "빠른 통계"
-  },
-  "totalProxies": {
-    "message": "전체 프록시"
-  },
-  "quickSwitch": {
-    "message": "빠른 전환"
-  },
-  "activeProxy": {
-    "message": "활성 프록시"
-  },
-  "lastUsed": {
-    "message": "마지막 사용"
-  },
-  "none": {
-    "message": "없음"
-  },
-  "versionLabel": {
-    "message": "버전:"
-  },
-  "extensionDescription": {
-    "message": "PAC (Proxy Auto-Config) 스크립트 관리를 위한 Chrome 확장 프로그램"
-  },
-  "bypassListPlaceholder": {
-    "message": "한 줄에 하나의 패턴 입력:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
-  },
-  "pacUrlPlaceholder": {
-    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
-  },
-  "noProxiesTitle": {
-    "message": "사용 가능한 프록시 없음"
-  },
-  "noQuickSwitchTitle": {
-    "message": "빠른 전환 프록시 없음"
-  },
-  "noProxyConfigsTitle": {
-    "message": "프록시 구성 없음"
-  },
-  "addFirstProxyAction": {
-    "message": "첫 번째 프록시 추가"
-  },
-  "offButton": {
-    "message": "꺼짐"
-  },
-  "tooltipQuickSwitchMode": {
-    "message": "설정을 열지 않고 팝업에서 즐겨찾는 프록시에 즉시 액세스"
-  },
-  "tooltipDisableOnStartup": {
-    "message": "Chrome이 시작될 때 프록시가 자동으로 활성화되는 것을 방지합니다."
-  },
-  "tooltipDragToQuickSwitch": {
-    "message": "빠른 액세스를 위해 프록시 카드를 여기로 드래그하여 빠른 전환에 추가"
-  },
-  "tooltipDragToRemove": {
-    "message": "팝업에서 제거하려면 빠른 전환 프록시를 여기로 드래그"
-  },
-  "tooltipKeyboardShortcut": {
-    "message": "새 프록시를 빠르게 추가하려면 Ctrl+N (Mac에서 Cmd+N)을 누르세요"
-  },
-  "invalidHost": {
-    "message": "잘못된 호스트 이름 또는 IP 주소"
-  },
-  "invalidPort": {
-    "message": "포트는 1에서 65535 사이여야 합니다"
-  },
-  "invalidUrl": {
-    "message": "유효한 URL을 입력하세요"
-  },
-  "invalidPacUrlProtocol": {
-    "message": "PAC URL은 http://, https:// 또는 file:// 프로토콜을 사용해야 합니다"
-  },
-  "pacUrlWarning": {
-    "message": "PAC 파일은 일반적으로 .pac로 끝납니다"
-  },
-  "bypassListHelp": {
-    "message": "한 줄에 하나의 주소를 입력하세요. 와일드카드(*)와 IP 범위(CIDR 표기법)를 사용할 수 있습니다."
-  },
-  "nameTooLong": {
-    "message": "이름은 50자 이하여야 합니다"
-  },
-  "nameTooShort": {
-    "message": "이름은 최소 1자 이상이어야 합니다"
-  },
-  "hostPlaceholder": {
-    "message": "proxy.example.com"
-  },
-  "portPlaceholder": {
-    "message": "8080"
-  },
-  "scheme": {
-    "message": "스킴"
-  },
-  "noProxiesYet": {
-    "message": "아직 프록시 구성이 없습니다"
-  },
-  "noProxiesDescription": {
-    "message": "브라우저가 인터넷에 연결하는 방법을 제어하려면 첫 번째 프록시 구성을 만들어 시작하세요."
-  },
-  "getStarted": {
-    "message": "시작하기"
-  },
-  "quickSwitchEmptyHint": {
-    "message": "팝업에서 빠른 액세스를 위해 프록시 구성을 여기로 드래그하세요"
-  },
-  "quickSwitchEmptySubHint": {
-    "message": "여기에 추가된 프록시는 원클릭 전환을 위해 팝업에 표시됩니다"
-  },
-  "pacUrlHelp": {
-    "message": "PAC 스크립트가 이 URL에서 로드됩니다"
-  },
-  "keyboardShortcuts": {
-    "message": "키보드 단축키"
-  },
-  "keyboardShortcutFocusSearch": {
-    "message": "검색 포커스"
-  },
-  "keyboardShortcutNewProxy": {
-    "message": "새 프록시"
-  },
-  "keyboardShortcutClearSearch": {
-    "message": "검색 지우기"
-  },
-  "keyboardShortcutToggleProxy": {
-    "message": "프록시 전환 1-9"
-  },
-  "searchProxiesPlaceholder": {
-    "message": "프록시 검색... (Ctrl+K)"
-  },
-  "keyboardShortcutCtrlCmdK": {
-    "message": "Ctrl/Cmd+K"
-  },
-  "keyboardShortcutCtrlCmdN": {
-    "message": "Ctrl/Cmd+N"
-  },
-  "keyboardShortcutEscape": {
-    "message": "Escape"
-  },
-  "keyboardShortcutNumbers": {
-    "message": "1-9"
-  },
-  "keyboardShortcutsNote": {
-    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
-  },
-  "keyboardShortcutQuickSwitchOnly": {
-    "message": "Only works for proxies in the Quick Switch section"
-  },
-  "updateInterval": {
-    "message": "자동 업데이트 간격"
-  },
-  "noAutoUpdate": {
-    "message": "자동 업데이트 없음"
-  },
-  "minutes": {
-    "message": "분"
-  },
-  "hour": {
-    "message": "시간"
-  },
-  "hours": {
-    "message": "시간"
-  },
-  "refreshNow": {
-    "message": "지금 새로고침"
-  },
-  "refreshing": {
-    "message": "새로고침 중..."
-  },
-  "lastFetched": {
-    "message": "마지막 가져오기"
-  },
-  "pacScriptRefreshed": {
-    "message": "PAC 스크립트가 성공적으로 새로고침되었습니다"
-  },
-  "autoReloadEnabled": {
-    "message": "Auto-reload enabled"
-  },
-  "autoReloadDisabled": {
-    "message": "Auto-reload disabled"
-  },
-  "systemNotifications": {
-    "message": "System Notifications"
-  },
-  "systemNotificationsEnabled": {
-    "message": "System notifications enabled"
-  },
-  "systemNotificationsDisabled": {
-    "message": "System notifications disabled"
-  },
-  "systemNotificationsTooltip": {
-    "message": "Enable Chrome notifications for background events"
-  },
-  "systemNotificationsDescription": {
-    "message": "Show system notifications for proxy switches and errors"
-  },
-  "errorFailedToLoadSettings": {
-    "message": "Failed to load settings"
-  },
-  "errorFailedToSetProxy": {
-    "message": "Failed to set proxy configuration"
-  },
-  "errorFailedToClearProxy": {
-    "message": "Failed to clear proxy configuration"
-  },
-  "errorFailedToDeleteScript": {
-    "message": "Failed to delete script"
-  },
-  "proxySwitched": {
-    "message": "Proxy Switched"
-  },
-  "proxySwitchedTo": {
-    "message": "Switched to \"$1\""
-  },
-  "proxySwitchedToForHost": {
-    "message": "Switched to \"$1\" for $2"
-  },
-  "proxyError": {
-    "message": "Proxy Error"
-  },
-  "proxyErrorMessage": {
-    "message": "Failed to use \"$1\": $2"
-  },
-  "pacScriptPreview": {
-    "message": "PAC Script Preview (Read-only)"
-  },
-  "pacScriptFetchError": {
-    "message": "Failed to fetch PAC script from URL"
-  },
-  "addAutoProxy": {
-    "message": "자동 프록시 추가"
-  },
-  "addAutoProxyTooltip": {
-    "message": "URL 기반 라우팅 규칙 생성"
-  },
-  "autoProxyMode": {
-    "message": "자동 프록시"
-  },
-  "autoProxyRulesCount": {
-    "message": "$1개 규칙"
-  },
-  "createAutoProxy": {
-    "message": "자동 프록시 생성"
-  },
-  "editAutoProxy": {
-    "message": "자동 프록시 편집"
-  },
-  "autoProxyCreated": {
-    "message": "자동 프록시 \"$1\" 생성 완료"
-  },
-  "autoProxyUpdated": {
-    "message": "자동 프록시 \"$1\" 업데이트 완료"
-  },
-  "autoProxyDeleted": {
-    "message": "자동 프록시 \"$1\" 삭제 완료"
-  },
-  "autoProxyNamePlaceholder": {
-    "message": "예: 업무 라우팅, 스플릿 터널"
-  },
-  "addRule": {
-    "message": "규칙 추가"
-  },
-  "editRule": {
-    "message": "규칙 편집"
-  },
-  "deleteRule": {
-    "message": "규칙 삭제"
-  },
-  "saveRule": {
-    "message": "규칙 저장"
-  },
-  "cancelRule": {
-    "message": "취소"
-  },
-  "urlPattern": {
-    "message": "URL 패턴"
-  },
-  "patternType": {
-    "message": "패턴 유형"
-  },
-  "wildcardPattern": {
-    "message": "와일드카드"
-  },
-  "regexPattern": {
-    "message": "정규식"
-  },
-  "exactMatch": {
-    "message": "정확히 일치"
-  },
-  "cidrPattern": {
-    "message": "CIDR (IP 범위)"
-  },
-  "selectProxy": {
-    "message": "프록시 선택"
-  },
-  "defineInline": {
-    "message": "인라인 정의"
-  },
-  "directConnection": {
-    "message": "직접 연결"
-  },
-  "fallbackBehavior": {
-    "message": "폴백 동작"
-  },
-  "fallbackDescription": {
-    "message": "URL과 일치하는 규칙이 없을 때 적용됩니다"
-  },
-  "testPattern": {
-    "message": "패턴 테스트"
-  },
-  "testUrl": {
-    "message": "테스트 URL"
-  },
-  "testUrlPlaceholder": {
-    "message": "규칙에 대해 테스트할 URL을 입력하세요"
-  },
-  "patternMatches": {
-    "message": "패턴이 일치합니다!"
-  },
-  "noPatternMatch": {
-    "message": "일치하는 패턴 없음 - 폴백이 사용됩니다"
-  },
-  "ruleEnabled": {
-    "message": "규칙 활성화됨"
-  },
-  "ruleDisabled": {
-    "message": "규칙 비활성화됨"
-  },
-  "routingRules": {
-    "message": "라우팅 규칙"
-  },
-  "noRulesYet": {
-    "message": "아직 정의된 규칙이 없습니다"
-  },
-  "noRulesDescription": {
-    "message": "URL을 다른 프록시로 라우팅하는 방법을 정의하는 규칙을 추가하세요"
-  },
-  "atLeastOneRule": {
-    "message": "최소 하나의 규칙이 필요합니다"
-  },
-  "failedToSave": {
-    "message": "구성 저장 실패"
-  },
-  "proxyType": {
-    "message": "프록시 유형"
-  },
-  "noProxiesAvailable": {
-    "message": "사용 가능한 프록시 없음"
-  },
-  "name": {
-    "message": "이름"
-  },
-  "ruleDescription": {
-    "message": "설명 (선택 사항)"
-  },
-  "ruleDescriptionPlaceholder": {
-    "message": "예: 모든 Google 트래픽 라우팅"
-  },
-  "patternPlaceholder": {
-    "message": "예: *.google.com"
-  },
-  "wildcardHelp": {
-    "message": "모든 문자와 일치시키려면 *를 사용하세요. 예: *.example.com"
-  },
-  "regexHelp": {
-    "message": "JavaScript 정규식 구문을 사용하세요. 예: ^https?://.*\\.example\\.com"
-  },
-  "exactHelp": {
-    "message": "정확한 호스트 이름과 일치시킵니다. 예: www.example.com"
-  },
-  "cidrHelp": {
-    "message": "IP 범위에는 CIDR 표기법을 사용하세요. 예: 192.168.1.0/24"
-  },
-  "invalidPattern": {
-    "message": "잘못된 패턴"
-  },
-  "patternRequired": {
-    "message": "패턴이 필요합니다"
-  },
-  "saveChanges": {
-    "message": "변경 사항 저장"
-  },
-  "autoProxyReferenceWarning": {
-    "message": "이 프록시는 다음 자동 프록시 구성에서 사용됩니다:"
-  },
-  "autoProxyRefSingular": {
-    "message": "1개 규칙"
-  },
-  "autoProxyRefPlural": {
-    "message": "$1개 규칙",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
-  },
-  "autoProxyDeleteConsequence": {
-    "message": "이 프록시를 삭제하면 해당 규칙이 자동으로 제거됩니다."
-  },
-  "orphanedProxyWarning": {
-    "message": "참조된 프록시가 삭제되었습니다. 다른 프록시를 선택하세요."
-  },
-  "matchedRule": {
-    "message": "일치한 규칙"
-  },
-  "useFallback": {
-    "message": "폴백 사용"
-  },
-  "dragToReorder": {
-    "message": "드래그하여 규칙 순서 변경"
-  },
-  "failedToSaveProxy": {
-    "message": "프록시 구성 저장 실패"
-  },
-  "autoProxySubtitle": {
-    "message": "URL 기반 스마트 트래픽 라우팅"
-  },
-  "close": {
-    "message": "닫기"
-  },
-  "ruleSingular": {
-    "message": "규칙"
-  },
-  "rulePlural": {
-    "message": "규칙"
-  },
-  "rulesConfigured": {
-    "message": "$1개의 $2이 구성됨"
-  },
-  "ruleActiveDescription": {
-    "message": "구성이 활성화되면 이 규칙이 활성화됩니다"
-  },
-  "ruleSkippedDescription": {
-    "message": "이 규칙은 건너뜁니다"
-  },
-  "matchTypeWildcard": {
-    "message": "와일드카드"
-  },
-  "matchTypeExact": {
-    "message": "정확히 일치"
-  },
-  "matchTypeRegex": {
-    "message": "정규식"
-  },
-  "matchTypeCidr": {
-    "message": "CIDR"
-  },
-  "referencedProxyDeleted": {
-    "message": "프록시 삭제됨"
-  },
-  "testPatternHint": {
-    "message": "규칙이 올바르게 작동하는지 확인하세요"
-  },
-  "testButton": {
-    "message": "테스트"
-  },
-  "ruleLabel": {
-    "message": "규칙:"
-  },
-  "testPatternHelp": {
-    "message": "위에 URL을 입력하고 테스트를 클릭하여 일치하는 규칙을 확인하세요"
-  },
-  "proxyModePacScript": {
-    "message": "(PAC 스크립트)"
-  },
-  "proxyModeSystem": {
-    "message": "(시스템)"
-  },
-  "proxyModeDirect": {
-    "message": "(직접 연결)"
-  },
-  "proxyModeAutoDetect": {
-    "message": "(자동 감지)"
-  },
-  "toggleSearch": {
-    "message": "검색 전환"
-  },
-  "hideSearch": {
-    "message": "검색 숨기기"
-  },
-  "viewMode": {
-    "message": "보기 모드"
-  },
-  "viewModeGrid": {
-    "message": "그리드 보기"
-  },
-  "viewModeList": {
-    "message": "목록 보기"
-  },
-  "viewModeGridDescription": {
-    "message": "프록시를 카드 그리드 레이아웃으로 표시"
-  },
-  "viewModeListDescription": {
-    "message": "프록시를 가로 목록으로 표시"
-  },
-  "authentication": {
-    "message": "인증"
-  },
-  "optional": {
-    "message": "선택 사항"
-  },
-  "authStorageInfo": {
-    "message": "자격 증명은 로컬에 암호화되어 저장됩니다"
-  },
-  "username": {
-    "message": "사용자 이름"
-  },
-  "usernamePlaceholder": {
-    "message": "사용자 이름"
-  },
-  "password": {
-    "message": "비밀번호"
-  },
-  "passwordPlaceholder": {
-    "message": "••••••••"
-  },
-  "hidePassword": {
-    "message": "비밀번호 숨기기"
-  },
-  "showPassword": {
-    "message": "비밀번호 표시"
-  },
-  "diagnostics": {
-    "message": "진단"
-  },
-  "tabDiagnostics": {
-    "message": "진단"
-  },
-  "diagnosticsDesc": {
-    "message": "디버깅을 위한 오류 로그 및 진단 정보 보기"
-  },
-  "diagnosticsExported": {
-    "message": "진단이 성공적으로 내보내졌습니다"
-  },
-  "diagnosticsExportFailed": {
-    "message": "진단 내보내기 실패"
-  },
-  "confirmClearLogs": {
-    "message": "모든 진단 로그를 지우시겠습니까?"
-  },
-  "diagnosticsCleared": {
-    "message": "진단이 성공적으로 지워졌습니다"
-  },
-  "diagnosticsClearFailed": {
-    "message": "진단 지우기 실패"
-  },
-  "allLogsMarkedRead": {
-    "message": "모든 로그를 읽음으로 표시했습니다"
-  },
-  "justNow": {
-    "message": "방금 전"
-  },
-  "markAllRead": {
-    "message": "모두 읽음으로 표시"
-  },
-  "export": {
-    "message": "내보내기"
-  },
-  "clearAll": {
-    "message": "모두 지우기"
-  },
-  "noErrors": {
-    "message": "오류가 감지되지 않았습니다"
-  },
-  "noErrorsDesc": {
-    "message": "프록시가 정상적으로 작동하고 있습니다!"
-  },
-  "details": {
-    "message": "세부 정보"
-  },
-  "url": {
-    "message": "URL"
-  },
-  "stackTrace": {
-    "message": "스택 추적"
-  },
-  "logId": {
-    "message": "ID"
-  },
-  "proxyHasAuth": {
-    "message": "이 프록시에는 인증이 구성되어 있습니다"
-  },
-  "settingsFileTooLarge": {
-    "message": "설정 파일이 너무 큽니다. 최대 크기는 $1KB입니다.",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "1024"
-      }
-    }
-  },
-  "invalidFileType": {
-    "message": "잘못된 파일 형식입니다. JSON 파일을 선택하세요."
-  },
-  "invalidJsonFormat": {
-    "message": "잘못된 JSON 형식입니다."
-  },
-  "settingsMustBeObject": {
-    "message": "설정은 유효한 객체여야 합니다."
-  },
-  "invalidProxyConfigsArray": {
-    "message": "잘못된 설정: proxyConfigs는 배열이어야 합니다."
-  },
-  "invalidQuickSwitchEnabled": {
-    "message": "잘못된 설정: quickSwitchEnabled는 불리언이어야 합니다."
-  },
-  "invalidDisableProxyOnStartup": {
-    "message": "잘못된 설정: disableProxyOnStartup은 불리언이어야 합니다."
-  },
-  "invalidAutoReloadOnProxySwitch": {
-    "message": "잘못된 설정: autoReloadOnProxySwitch는 불리언이어야 합니다."
-  },
-  "invalidActiveScriptId": {
-    "message": "잘못된 설정: activeScriptId는 문자열 또는 null이어야 합니다."
-  },
-  "invalidProxyConfiguration": {
-    "message": "잘못된 프록시 구성입니다."
-  },
-  "proxyMustHaveName": {
-    "message": "각 프록시에는 유효한 이름이 있어야 합니다."
-  },
-  "proxyMustHaveMode": {
-    "message": "각 프록시에는 유효한 모드가 있어야 합니다."
-  },
-  "failedToRestoreSettingsGeneric": {
-    "message": "설정 복원에 실패했습니다. 파일 형식을 확인하세요."
-  },
-  "noActiveProxy": {
-    "message": "없음"
-  },
-  "configuredProxies": {
-    "message": "구성된 프록시"
-  },
-  "storageUsed": {
-    "message": "사용된 저장 공간"
-  },
-  "extensionVersion": {
-    "message": "확장 프로그램 버전"
-  },
-  "logsCount": {
-    "message": "활동 로그"
-  },
-  "activityLog": {
-    "message": "활동 로그"
-  },
-  "pacScriptValid": {
-    "message": "PAC 스크립트가 유효합니다"
-  },
-  "pacScriptError": {
-    "message": "PAC 스크립트에 오류가 있습니다. 스크립트 구문을 확인하세요."
-  },
-  "invalidPacScript": {
-    "message": "잘못된 PAC 스크립트입니다. 유효한 FindProxyForURL 함수가 포함되어 있는지 확인하세요."
-  },
-  "pacFetchFailed": {
-    "message": "URL에서 PAC 스크립트를 가져오지 못했습니다. URL과 네트워크 연결을 확인하세요."
-  },
-  "proxyPermissionDenied": {
-    "message": "권한이 거부되었습니다. 확장 프로그램에 필요한 권한이 없을 수 있습니다."
-  },
-  "proxyControlledByOther": {
-    "message": "프록시 설정이 다른 확장 프로그램에 의해 제어되고 있습니다."
-  },
-  "proxyManagedByPolicy": {
-    "message": "프록시 설정이 조직의 정책에 의해 관리됩니다."
-  },
-  "invalidProxyHost": {
-    "message": "잘못된 프록시 호스트 주소입니다. 서버 구성을 확인하세요."
-  },
-  "invalidProxyPort": {
-    "message": "잘못된 프록시 포트입니다. 유효한 포트 번호(1-65535)를 입력하세요."
-  },
-  "proxyTimeout": {
-    "message": "연결 시간이 초과되었습니다. 프록시 서버에 연결할 수 없을 수 있습니다."
-  },
-  "proxySettingsFailed": {
-    "message": "프록시 설정을 적용하지 못했습니다."
-  },
-  "onboardingWelcomeTitle": {
-    "message": "PACify에 오신 것을 환영합니다"
-  },
-  "onboardingWelcomeDescription": {
-    "message": "Chrome용 최신 프록시 관리자입니다. 프록시 설정을 쉽게 구성, 전환 및 관리하세요."
-  },
-  "onboardingFeaturesTitle": {
-    "message": "강력한 기능"
-  },
-  "onboardingFeaturesDescription": {
-    "message": "프록시를 효과적으로 관리하는 데 필요한 모든 것."
-  },
-  "onboardingFeatureProxies": {
-    "message": "다중 프록시 프로필"
-  },
-  "onboardingFeatureProxiesDesc": {
-    "message": "다양한 프록시 구성을 즉시 생성하고 전환합니다."
-  },
-  "onboardingFeatureAutoProxy": {
-    "message": "자동 프록시 규칙"
-  },
-  "onboardingFeatureAutoProxyDesc": {
-    "message": "스마트 라우팅 규칙으로 URL 패턴에 따라 트래픽을 라우팅합니다."
-  },
-  "onboardingFeaturePAC": {
-    "message": "PAC 스크립트 지원"
-  },
-  "onboardingFeaturePACDesc": {
-    "message": "고급 프록시 구성을 위해 사용자 정의 PAC 스크립트를 사용하세요."
-  },
-  "onboardingShortcutsTitle": {
-    "message": "키보드 단축키"
-  },
-  "onboardingShortcutsDescription": {
-    "message": "키보드 단축키로 더 빠르게 작업하세요."
-  },
-  "onboardingShortcutNewProxy": {
-    "message": "새 프록시 생성"
-  },
-  "onboardingShortcutSearch": {
-    "message": "프록시 검색"
-  },
-  "onboardingShortcutClose": {
-    "message": "모달 닫기"
-  },
-  "onboardingGetStartedTitle": {
-    "message": "준비 완료!"
-  },
-  "onboardingGetStartedDescription": {
-    "message": "첫 번째 프록시 구성을 생성하여 시작하거나 설정을 탐색하세요."
-  },
-  "onboardingCreateFirstProxy": {
-    "message": "첫 번째 프록시 생성"
-  },
-  "onboardingExploreSettings": {
-    "message": "설정 탐색"
-  },
-  "previous": {
-    "message": "이전"
-  },
-  "next": {
-    "message": "다음"
-  },
-  "skipTour": {
-    "message": "투어 건너뛰기"
-  },
-  "keyboardShortcutsDescription": {
-    "message": "이 단축키를 사용하여 더 빠르게 작업하세요"
-  },
-  "shortcutsGroupGeneral": {
-    "message": "일반"
-  },
-  "shortcutsGroupNavigation": {
-    "message": "탐색"
-  },
-  "shortcutsGroupProxyList": {
-    "message": "프록시 목록"
-  },
-  "shortcutNewProxy": {
-    "message": "새 프록시 구성 만들기"
-  },
-  "shortcutSearch": {
-    "message": "검색 열기"
-  },
-  "shortcutCloseModal": {
-    "message": "현재 모달 닫기"
-  },
-  "shortcutShowHelp": {
-    "message": "키보드 단축키 표시"
-  },
-  "shortcutNextElement": {
-    "message": "다음 요소로 이동"
-  },
-  "shortcutPrevElement": {
-    "message": "이전 요소로 이동"
-  },
-  "shortcutActivate": {
-    "message": "포커스된 요소 활성화"
-  },
-  "shortcutToggle": {
-    "message": "스위치 및 체크박스 전환"
-  },
-  "shortcutNavigateList": {
-    "message": "프록시 목록 탐색"
-  },
-  "shortcutActivateProxy": {
-    "message": "선택한 프록시 활성화"
-  },
-  "shortcutEditProxy": {
-    "message": "선택한 프록시 편집"
-  },
-  "shortcutDeleteProxy": {
-    "message": "선택한 프록시 삭제"
-  },
-  "shortcutsTip": {
-    "message": "어디서든 ?를 눌러 이 도움말을 표시하세요"
-  },
-  "subscriptions": { "message": "구독" },
-  "subscriptionsDescription": {
-    "message": "원격 도메인 목록에서 규칙 가져오기"
-  },
-  "addSubscription": { "message": "구독 추가" },
-  "subscriptionName": { "message": "이름" },
-  "subscriptionNamePlaceholder": { "message": "예: GFWList, 광고 도메인" },
-  "subscriptionNameRequired": { "message": "구독 이름이 필요합니다" },
-  "subscriptionUrl": { "message": "URL" },
-  "subscriptionUrlRequired": { "message": "구독 URL이 필요합니다" },
-  "subscriptionUrlInvalid": { "message": "유효한 URL을 입력하세요" },
-  "subscriptionFormat": { "message": "형식" },
-  "subscriptionInterval": { "message": "자동 새로고침" },
-  "subscriptionFetching": { "message": "가져오는 중..." },
-  "subscriptionFetchFailed": { "message": "구독을 가져오지 못했습니다" },
-  "subscriptionNoRules": { "message": "구독에서 규칙을 찾을 수 없습니다" },
-  "noSubscriptions": { "message": "구독 없음" },
-  "noSubscriptionsDescription": {
-    "message": "원격 도메인 목록을 구독하여 GFWList 또는 사용자 정의 도메인 목록과 같은 URL에서 프록시 규칙을 자동으로 가져옵니다"
-  },
-  "refreshSubscription": { "message": "새로고침" },
-  "editSubscription": { "message": "구독 편집" },
-  "saveSubscription": { "message": "변경 사항 저장" },
-  "deleteSubscription": { "message": "구독 삭제" },
-  "deleteSubscriptionTitle": { "message": "구독 삭제" },
-  "deleteSubscriptionMessage": {
-    "message": "구독 \"$1\"을(를) 삭제하시겠습니까?",
-    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
-  },
-  "rules": { "message": "규칙" },
-  "fromSubscriptions": { "message": "구독에서" },
-  "never": { "message": "안 함" },
-  "minutesAgo": {
-    "message": "$1분 전",
-    "placeholders": { "1": { "content": "$1", "example": "5" } }
-  },
-  "hoursAgo": {
-    "message": "$1시간 전",
-    "placeholders": { "1": { "content": "$1", "example": "2" } }
-  },
-  "formatAuto": { "message": "자동 감지" },
-  "formatAbp": { "message": "ABP / GFWList" },
-  "formatDomains": { "message": "도메인 목록" },
-  "intervalManual": { "message": "수동만" },
-  "intervalMinutes": {
-    "message": "$1분마다",
-    "placeholders": { "1": { "content": "$1", "example": "30" } }
-  },
-  "intervalHour": {
-    "message": "$1시간마다",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  },
-  "intervalHours": {
-    "message": "$1시간마다",
-    "placeholders": { "1": { "content": "$1", "example": "6" } }
-  },
-  "intervalDay": {
-    "message": "$1일마다",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  }
+  "extName": {"message":"PACify | 프록시 관리자"},
+  "extDescription": {"message":"Chrome용 완벽한 프록시 관리자입니다. PAC 스크립트, 수동 프록시, 시스템 구성을 쉽게 만들고, 편집하고, 전환합니다."},
+  "basicSettings": {"message":"기본 설정"},
+  "proxyMode": {"message":"프록시 모드"},
+  "systemProxy": {"message":"운영 체제의 프록시 설정을 사용합니다."},
+  "directMode": {"message":"직접"},
+  "directModeHelp": {"message":"직접 모드에서는 모든 연결이 프록시 없이 직접 생성됩니다."},
+  "autoDetectMode": {"message":"URL 자동 구성"},
+  "autoDetectModeHelp": {"message":"자동 감지 모드에서 Chrome은 WPAD 프로토콜을 사용하여 프록시 설정을 자동으로 검색하고 다운로드합니다."},
+  "deleteConfirm": {"message":"이 스크립트를 삭제하시겠습니까?"},
+  "toggleProxyHint": {"message":"스위치를 클릭하여 프록시를 토글합니다."},
+  "systemMode": {"message":"시스템"},
+  "pacScriptMode": {"message":"PAC 스크립트"},
+  "manualMode": {"message":"수동 구성"},
+  "addNewScript": {"message":"새 스크립트 추가"},
+  "quickSwitchMode": {"message":"빠른 전환 모드"},
+  "quickSwitchDescription": {"message":"팝업에서 프록시 구성 간 빠른 전환을 활성화합니다"},
+  "settings": {"message":"설정"},
+  "nameRequired": {"message":"이름이 필요합니다"},
+  "proxyConfiguration": {"message":"프록시 구성"},
+  "cancel": {"message":"취소"},
+  "saveConfiguration": {"message":"구성 저장"},
+  "saving": {"message":"저장 중..."},
+  "noScriptsAvailable": {"message":"사용 가능한 PAC 스크립트가 없습니다. 시작하려면 첫 번째 스크립트를 추가하세요."},
+  "noQuickSwitchScripts": {"message":"구성된 빠른 전환 스크립트가 없습니다. 빠른 전환을 활성화하려면 스크립트를 여기로 끌어다 놓으세요."},
+  "noScriptsAvailableOptions": {"message":"사용 가능한 스크립트가 없습니다. \"새 스크립트 추가\"를 클릭하여 첫 번째 PAC 스크립트를 만드세요."},
+  "backupSettings": {"message":"백업 설정"},
+  "restoreSettings": {"message":"설정 복원"},
+  "useSameProxy": {"message":"모든 프로토콜에 동일한 프록시 서버 사용"},
+  "proxyServer": {"message":"프록시 서버"},
+  "httpProxy": {"message":"HTTP 프록시"},
+  "httpsProxy": {"message":"HTTPS 프록시"},
+  "ftpProxy": {"message":"FTP 프록시"},
+  "fallbackProxy": {"message":"폴백 프록시"},
+  "bypassList": {"message":"우회 목록"},
+  "pacScriptUrl": {"message":"PAC 스크립트 URL"},
+  "pacScript": {"message":"PAC 스크립트"},
+  "templates": {"message":"템플릿:"},
+  "emptyTemplate": {"message":"비어 있음"},
+  "basicTemplate": {"message":"기본"},
+  "proTemplate": {"message":"Pro"},
+  "advancedTemplate": {"message":"고급"},
+  "mandatoryPacScript": {"message":"필수 PAC 스크립트(직접 폴백 방지)"},
+  "dropToAddQuickScripts": {"message":"빠른 스크립트에 추가하려면 여기에 놓으세요"},
+  "dropToRemoveQuickScripts": {"message":"빠른 스크립트에서 제거하려면 여기에 놓으세요"},
+  "quickPacScripts": {"message":"빠른 전환 구성"},
+  "allProxyConfigs": {"message":"모든 프록시 구성"},
+  "dragScriptsHere": {"message":"빠른 전환을 활성화하려면 스크립트를 여기에 끌어다 놓으세요. 빠른 전환을 사용하면 확장 프로그램 아이콘을 클릭하여 프록시를 전환할 수 있습니다."},
+  "colorRequired": {"message":"색상이 필요합니다."},
+  "configurationName": {"message":"구성 이름"},
+  "color": {"message":"색상"},
+  "badgeLabel": {"message":"배지 레이블"},
+  "badgeLabelHelp": {"message":"확장 프로그램 아이콘의 맞춤 텍스트(최대 4자). 비워두면 자동 생성됩니다."},
+  "active": {"message":"활성"},
+  "host": {"message":"호스트"},
+  "port": {"message":"포트"},
+  "enterConfigurationName": {"message":"구성 이름을 입력하세요"},
+  "disableProxyOnStartup": {"message":"시작 시 프록시 비활성화"},
+  "disableProxyOnStartupDescription": {"message":"브라우저를 시작할 때마다 프록시를 비활성화한 상태로 시작"},
+  "autoReloadOnProxySwitch": {"message":"프록시 전환 시 페이지 자동 새로고침"},
+  "autoReloadOnProxySwitchDescription": {"message":"프록시 전환 시 활성 탭을 자동으로 새로고침"},
+  "tooltipAutoReload": {"message":"활성화하면 프록시 설정 변경 후 현재 페이지가 새로고침되어 변경 사항이 즉시 적용됩니다"},
+  "invalidConfiguration": {"message":"잘못된 구성"},
+  "syncStorage": {"message":"동기화 저장소"},
+  "localStorage": {"message":"로컬 저장소"},
+  "dropTarget": {"message":"놓기 대상"},
+  "tabProxyConfigs": {"message":"프록시 구성"},
+  "tabSettings": {"message":"설정"},
+  "tabAbout": {"message":"정보"},
+  "settingsProxyBehavior": {"message":"프록시 동작"},
+  "settingsDataManagement": {"message":"데이터 관리"},
+  "aboutVersion": {"message":"버전"},
+  "aboutHelpResources": {"message":"도움말 및 리소스"},
+  "aboutExtensionInfo": {"message":"확장 프로그램 정보"},
+  "aboutDiagnostics": {"message":"진단"},
+  "aboutViewOnGithub": {"message":"GitHub에서 보기"},
+  "aboutReportIssue": {"message":"문제 보고"},
+  "aboutDocumentation": {"message":"문서"},
+  "aboutFeatureRequest": {"message":"기능 요청"},
+  "feedbackAndRating": {"message":"피드백 및 평가"},
+  "rateExtension": {"message":"확장 프로그램 평가"},
+  "leaveReview": {"message":"리뷰 남기기"},
+  "supportProject": {"message":"프로젝트 지원"},
+  "statusConnected": {"message":"연결됨"},
+  "statusDisconnected": {"message":"활성 프록시 없음"},
+  "footerActiveProxy": {"message":"프록시를 비활성화하려면 토글을 클릭하세요"},
+  "footerSelectProxy": {"message":"연결할 프록시를 선택하세요"},
+  "proxyEnabled": {"message":"프록시 \"$1\" 활성화됨"},
+  "proxyDisabled": {"message":"프록시 \"$1\" 비활성화됨"},
+  "proxyDeleted": {"message":"프록시 \"$1\" 삭제 완료"},
+  "toggleProxyOn": {"message":"프록시 $1 활성화"},
+  "toggleProxyOff": {"message":"프록시 $1 비활성화"},
+  "editConfiguration": {"message":"$1 구성 편집"},
+  "deleteConfiguration": {"message":"$1 구성 삭제"},
+  "deleteProxyTitle": {"message":"프록시 구성 삭제"},
+  "deleteProxyMessage": {"message":"\"$1\"을(를) 삭제하시겠습니까? 이 작업은 취소할 수 없습니다."},
+  "delete": {"message":"삭제"},
+  "backupSuccess": {"message":"설정이 성공적으로 백업되었습니다"},
+  "backupFailed": {"message":"설정 백업에 실패했습니다"},
+  "restoreSuccess": {"message":"설정이 성공적으로 복원되었습니다"},
+  "restoreFailed": {"message":"설정 복원에 실패했습니다"},
+  "backupDescription": {"message":"모든 프록시 구성 및 기본 설정을 JSON 파일로 다운로드"},
+  "restoreDescription": {"message":"구성을 복원하려면 백업 파일을 업로드하세요"},
+  "errorBoundaryTitle": {"message":"문제가 발생했습니다"},
+  "errorBoundaryRetry": {"message":"다시 시도"},
+  "closeNotification": {"message":"알림 닫기"},
+  "closeDialog": {"message":"대화상자 닫기"},
+  "confirm": {"message":"확인"},
+  "quickSwitchEnabled": {"message":"빠른 전환 모드가 활성화되었습니다"},
+  "quickSwitchDisabled": {"message":"빠른 전환 모드가 비활성화되었습니다"},
+  "proxyDisabledOnStartup": {"message":"브라우저 시작 시 프록시가 비활성화됩니다"},
+  "proxyPersistOnStartup": {"message":"브라우저 시작 시 프록시 상태가 유지됩니다"},
+  "proxyUpdated": {"message":"프록시 \"$1\"이(가) 성공적으로 업데이트되었습니다"},
+  "proxyCreated": {"message":"프록시 \"$1\"이(가) 성공적으로 생성되었습니다"},
+  "quickSwitchEnabledStatus": {"message":"✓ 활성화됨 – 빠르게 전환하려면 확장 프로그램 아이콘을 클릭하세요"},
+  "quickSwitchConfigsTitle": {"message":"빠른 전환 구성"},
+  "quickSwitchConfigsDescription": {"message":"팝업에서 원클릭 액세스를 위해 프록시를 여기로 드래그하세요"},
+  "allProxyConfigsTitle": {"message":"모든 프록시 구성"},
+  "allProxyConfigsDescription": {"message":"모든 프록시 구성 관리"},
+  "quickStatsTitle": {"message":"빠른 통계"},
+  "totalProxies": {"message":"전체 프록시"},
+  "quickSwitch": {"message":"빠른 전환"},
+  "activeProxy": {"message":"활성 프록시"},
+  "lastUsed": {"message":"마지막 사용"},
+  "none": {"message":"없음"},
+  "versionLabel": {"message":"버전:"},
+  "extensionDescription": {"message":"PAC (Proxy Auto-Config) 스크립트 관리를 위한 Chrome 확장 프로그램"},
+  "bypassListPlaceholder": {"message":"한 줄에 하나의 패턴 입력:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"},
+  "pacUrlPlaceholder": {"message":"https://nav-proxy.vercel.app/api/proxyman.pac"},
+  "noProxiesTitle": {"message":"사용 가능한 프록시 없음"},
+  "noQuickSwitchTitle": {"message":"빠른 전환 프록시 없음"},
+  "noProxyConfigsTitle": {"message":"프록시 구성 없음"},
+  "addFirstProxyAction": {"message":"첫 번째 프록시 추가"},
+  "offButton": {"message":"꺼짐"},
+  "tooltipQuickSwitchMode": {"message":"설정을 열지 않고 팝업에서 즐겨찾는 프록시에 즉시 액세스"},
+  "tooltipDisableOnStartup": {"message":"Chrome이 시작될 때 프록시가 자동으로 활성화되는 것을 방지합니다."},
+  "tooltipDragToQuickSwitch": {"message":"빠른 액세스를 위해 프록시 카드를 여기로 드래그하여 빠른 전환에 추가"},
+  "tooltipDragToRemove": {"message":"팝업에서 제거하려면 빠른 전환 프록시를 여기로 드래그"},
+  "tooltipKeyboardShortcut": {"message":"새 프록시를 빠르게 추가하려면 Ctrl+N (Mac에서 Cmd+N)을 누르세요"},
+  "invalidHost": {"message":"잘못된 호스트 이름 또는 IP 주소"},
+  "invalidPort": {"message":"포트는 1에서 65535 사이여야 합니다"},
+  "invalidUrl": {"message":"유효한 URL을 입력하세요"},
+  "invalidPacUrlProtocol": {"message":"PAC URL은 http://, https:// 또는 file:// 프로토콜을 사용해야 합니다"},
+  "pacUrlWarning": {"message":"PAC 파일은 일반적으로 .pac로 끝납니다"},
+  "bypassListHelp": {"message":"한 줄에 하나의 주소를 입력하세요. 와일드카드(*)와 IP 범위(CIDR 표기법)를 사용할 수 있습니다."},
+  "nameTooLong": {"message":"이름은 50자 이하여야 합니다"},
+  "nameTooShort": {"message":"이름은 최소 1자 이상이어야 합니다"},
+  "hostPlaceholder": {"message":"proxy.example.com"},
+  "portPlaceholder": {"message":"8080"},
+  "scheme": {"message":"스킴"},
+  "noProxiesYet": {"message":"아직 프록시 구성이 없습니다"},
+  "noProxiesDescription": {"message":"브라우저가 인터넷에 연결하는 방법을 제어하려면 첫 번째 프록시 구성을 만들어 시작하세요."},
+  "getStarted": {"message":"시작하기"},
+  "quickSwitchEmptyHint": {"message":"팝업에서 빠른 액세스를 위해 프록시 구성을 여기로 드래그하세요"},
+  "quickSwitchEmptySubHint": {"message":"여기에 추가된 프록시는 원클릭 전환을 위해 팝업에 표시됩니다"},
+  "pacUrlHelp": {"message":"PAC 스크립트가 이 URL에서 로드됩니다"},
+  "keyboardShortcuts": {"message":"키보드 단축키"},
+  "keyboardShortcutFocusSearch": {"message":"검색 포커스"},
+  "keyboardShortcutNewProxy": {"message":"새 프록시"},
+  "keyboardShortcutClearSearch": {"message":"검색 지우기"},
+  "keyboardShortcutToggleProxy": {"message":"프록시 전환 1-9"},
+  "searchProxiesPlaceholder": {"message":"프록시 검색... (Ctrl+K)"},
+  "keyboardShortcutCtrlCmdK": {"message":"Ctrl/Cmd+K"},
+  "keyboardShortcutCtrlCmdN": {"message":"Ctrl/Cmd+N"},
+  "keyboardShortcutEscape": {"message":"Escape"},
+  "keyboardShortcutNumbers": {"message":"1-9"},
+  "keyboardShortcutsNote": {"message":"Note: Some shortcuts may conflict with browser or OS shortcuts"},
+  "keyboardShortcutQuickSwitchOnly": {"message":"Only works for proxies in the Quick Switch section"},
+  "updateInterval": {"message":"자동 업데이트 간격"},
+  "noAutoUpdate": {"message":"자동 업데이트 없음"},
+  "minutes": {"message":"분"},
+  "hour": {"message":"시간"},
+  "hours": {"message":"시간"},
+  "refreshNow": {"message":"지금 새로고침"},
+  "refreshing": {"message":"새로고침 중..."},
+  "lastFetched": {"message":"마지막 가져오기"},
+  "pacScriptRefreshed": {"message":"PAC 스크립트가 성공적으로 새로고침되었습니다"},
+  "autoReloadEnabled": {"message":"Auto-reload enabled"},
+  "autoReloadDisabled": {"message":"Auto-reload disabled"},
+  "systemNotifications": {"message":"System Notifications"},
+  "systemNotificationsEnabled": {"message":"System notifications enabled"},
+  "systemNotificationsDisabled": {"message":"System notifications disabled"},
+  "systemNotificationsTooltip": {"message":"Enable Chrome notifications for background events"},
+  "systemNotificationsDescription": {"message":"Show system notifications for proxy switches and errors"},
+  "errorFailedToLoadSettings": {"message":"Failed to load settings"},
+  "errorFailedToSetProxy": {"message":"Failed to set proxy configuration"},
+  "errorFailedToClearProxy": {"message":"Failed to clear proxy configuration"},
+  "errorFailedToDeleteScript": {"message":"Failed to delete script"},
+  "proxySwitched": {"message":"Proxy Switched"},
+  "proxySwitchedTo": {"message":"Switched to \"$1\""},
+  "proxySwitchedToForHost": {"message":"Switched to \"$1\" for $2"},
+  "proxyError": {"message":"Proxy Error"},
+  "proxyErrorMessage": {"message":"Failed to use \"$1\": $2"},
+  "pacScriptPreview": {"message":"PAC Script Preview (Read-only)"},
+  "pacScriptFetchError": {"message":"Failed to fetch PAC script from URL"},
+  "addAutoProxy": {"message":"자동 프록시 추가"},
+  "addAutoProxyTooltip": {"message":"URL 기반 라우팅 규칙 생성"},
+  "autoProxyMode": {"message":"자동 프록시"},
+  "autoProxyRulesCount": {"message":"$1개 규칙"},
+  "createAutoProxy": {"message":"자동 프록시 생성"},
+  "editAutoProxy": {"message":"자동 프록시 편집"},
+  "autoProxyCreated": {"message":"자동 프록시 \"$1\" 생성 완료"},
+  "autoProxyUpdated": {"message":"자동 프록시 \"$1\" 업데이트 완료"},
+  "autoProxyDeleted": {"message":"자동 프록시 \"$1\" 삭제 완료"},
+  "autoProxyNamePlaceholder": {"message":"예: 업무 라우팅, 스플릿 터널"},
+  "addRule": {"message":"규칙 추가"},
+  "editRule": {"message":"규칙 편집"},
+  "deleteRule": {"message":"규칙 삭제"},
+  "saveRule": {"message":"규칙 저장"},
+  "cancelRule": {"message":"취소"},
+  "urlPattern": {"message":"URL 패턴"},
+  "patternType": {"message":"패턴 유형"},
+  "wildcardPattern": {"message":"와일드카드"},
+  "regexPattern": {"message":"정규식"},
+  "exactMatch": {"message":"정확히 일치"},
+  "cidrPattern": {"message":"CIDR (IP 범위)"},
+  "selectProxy": {"message":"프록시 선택"},
+  "defineInline": {"message":"인라인 정의"},
+  "directConnection": {"message":"직접 연결"},
+  "fallbackBehavior": {"message":"폴백 동작"},
+  "fallbackDescription": {"message":"URL과 일치하는 규칙이 없을 때 적용됩니다"},
+  "testPattern": {"message":"패턴 테스트"},
+  "testUrl": {"message":"테스트 URL"},
+  "testUrlPlaceholder": {"message":"규칙에 대해 테스트할 URL을 입력하세요"},
+  "patternMatches": {"message":"패턴이 일치합니다!"},
+  "noPatternMatch": {"message":"일치하는 패턴 없음 - 폴백이 사용됩니다"},
+  "ruleEnabled": {"message":"규칙 활성화됨"},
+  "ruleDisabled": {"message":"규칙 비활성화됨"},
+  "routingRules": {"message":"라우팅 규칙"},
+  "noRulesYet": {"message":"아직 정의된 규칙이 없습니다"},
+  "noRulesDescription": {"message":"URL을 다른 프록시로 라우팅하는 방법을 정의하는 규칙을 추가하세요"},
+  "atLeastOneRule": {"message":"최소 하나의 규칙이 필요합니다"},
+  "failedToSave": {"message":"구성 저장 실패"},
+  "proxyType": {"message":"프록시 유형"},
+  "noProxiesAvailable": {"message":"사용 가능한 프록시 없음"},
+  "name": {"message":"이름"},
+  "ruleDescription": {"message":"설명 (선택 사항)"},
+  "ruleDescriptionPlaceholder": {"message":"예: 모든 Google 트래픽 라우팅"},
+  "patternPlaceholder": {"message":"예: *.google.com"},
+  "wildcardHelp": {"message":"모든 문자와 일치시키려면 *를 사용하세요. 예: *.example.com"},
+  "regexHelp": {"message":"JavaScript 정규식 구문을 사용하세요. 예: ^https?://.*\\.example\\.com"},
+  "exactHelp": {"message":"정확한 호스트 이름과 일치시킵니다. 예: www.example.com"},
+  "cidrHelp": {"message":"IP 범위에는 CIDR 표기법을 사용하세요. 예: 192.168.1.0/24"},
+  "invalidPattern": {"message":"잘못된 패턴"},
+  "patternRequired": {"message":"패턴이 필요합니다"},
+  "saveChanges": {"message":"변경 사항 저장"},
+  "autoProxyReferenceWarning": {"message":"이 프록시는 다음 자동 프록시 구성에서 사용됩니다:"},
+  "autoProxyRefSingular": {"message":"1개 규칙"},
+  "autoProxyRefPlural": {"message":"$1개 규칙","placeholders":{"1":{"content":"$1","example":"3"}}},
+  "autoProxyDeleteConsequence": {"message":"이 프록시를 삭제하면 해당 규칙이 자동으로 제거됩니다."},
+  "orphanedProxyWarning": {"message":"참조된 프록시가 삭제되었습니다. 다른 프록시를 선택하세요."},
+  "matchedRule": {"message":"일치한 규칙"},
+  "useFallback": {"message":"폴백 사용"},
+  "dragToReorder": {"message":"드래그하여 규칙 순서 변경"},
+  "failedToSaveProxy": {"message":"프록시 구성 저장 실패"},
+  "autoProxySubtitle": {"message":"URL 기반 스마트 트래픽 라우팅"},
+  "close": {"message":"닫기"},
+  "ruleSingular": {"message":"규칙"},
+  "rulePlural": {"message":"규칙"},
+  "rulesConfigured": {"message":"$1개의 $2이 구성됨"},
+  "ruleActiveDescription": {"message":"구성이 활성화되면 이 규칙이 활성화됩니다"},
+  "ruleSkippedDescription": {"message":"이 규칙은 건너뜁니다"},
+  "matchTypeWildcard": {"message":"와일드카드"},
+  "matchTypeExact": {"message":"정확히 일치"},
+  "matchTypeRegex": {"message":"정규식"},
+  "matchTypeCidr": {"message":"CIDR"},
+  "referencedProxyDeleted": {"message":"프록시 삭제됨"},
+  "testPatternHint": {"message":"규칙이 올바르게 작동하는지 확인하세요"},
+  "testButton": {"message":"테스트"},
+  "ruleLabel": {"message":"규칙:"},
+  "testPatternHelp": {"message":"위에 URL을 입력하고 테스트를 클릭하여 일치하는 규칙을 확인하세요"},
+  "proxyModePacScript": {"message":"(PAC 스크립트)"},
+  "proxyModeSystem": {"message":"(시스템)"},
+  "proxyModeDirect": {"message":"(직접 연결)"},
+  "proxyModeAutoDetect": {"message":"(자동 감지)"},
+  "toggleSearch": {"message":"검색 전환"},
+  "hideSearch": {"message":"검색 숨기기"},
+  "viewMode": {"message":"보기 모드"},
+  "viewModeGrid": {"message":"그리드 보기"},
+  "viewModeList": {"message":"목록 보기"},
+  "viewModeGridDescription": {"message":"프록시를 카드 그리드 레이아웃으로 표시"},
+  "viewModeListDescription": {"message":"프록시를 가로 목록으로 표시"},
+  "authentication": {"message":"인증"},
+  "optional": {"message":"선택 사항"},
+  "authStorageInfo": {"message":"자격 증명은 로컬에 암호화되어 저장됩니다"},
+  "username": {"message":"사용자 이름"},
+  "usernamePlaceholder": {"message":"사용자 이름"},
+  "password": {"message":"비밀번호"},
+  "passwordPlaceholder": {"message":"••••••••"},
+  "hidePassword": {"message":"비밀번호 숨기기"},
+  "showPassword": {"message":"비밀번호 표시"},
+  "diagnostics": {"message":"진단"},
+  "tabDiagnostics": {"message":"진단"},
+  "diagnosticsDesc": {"message":"디버깅을 위한 오류 로그 및 진단 정보 보기"},
+  "diagnosticsExported": {"message":"진단이 성공적으로 내보내졌습니다"},
+  "diagnosticsExportFailed": {"message":"진단 내보내기 실패"},
+  "confirmClearLogs": {"message":"모든 진단 로그를 지우시겠습니까?"},
+  "diagnosticsCleared": {"message":"진단이 성공적으로 지워졌습니다"},
+  "diagnosticsClearFailed": {"message":"진단 지우기 실패"},
+  "allLogsMarkedRead": {"message":"모든 로그를 읽음으로 표시했습니다"},
+  "justNow": {"message":"방금 전"},
+  "markAllRead": {"message":"모두 읽음으로 표시"},
+  "export": {"message":"내보내기"},
+  "clearAll": {"message":"모두 지우기"},
+  "noErrors": {"message":"오류가 감지되지 않았습니다"},
+  "noErrorsDesc": {"message":"프록시가 정상적으로 작동하고 있습니다!"},
+  "details": {"message":"세부 정보"},
+  "url": {"message":"URL"},
+  "stackTrace": {"message":"스택 추적"},
+  "logId": {"message":"ID"},
+  "proxyHasAuth": {"message":"이 프록시에는 인증이 구성되어 있습니다"},
+  "settingsFileTooLarge": {"message":"설정 파일이 너무 큽니다. 최대 크기는 $1KB입니다.","placeholders":{"1":{"content":"$1","example":"1024"}}},
+  "invalidFileType": {"message":"잘못된 파일 형식입니다. JSON 파일을 선택하세요."},
+  "invalidJsonFormat": {"message":"잘못된 JSON 형식입니다."},
+  "settingsMustBeObject": {"message":"설정은 유효한 객체여야 합니다."},
+  "invalidProxyConfigsArray": {"message":"잘못된 설정: proxyConfigs는 배열이어야 합니다."},
+  "invalidQuickSwitchEnabled": {"message":"잘못된 설정: quickSwitchEnabled는 불리언이어야 합니다."},
+  "invalidDisableProxyOnStartup": {"message":"잘못된 설정: disableProxyOnStartup은 불리언이어야 합니다."},
+  "invalidAutoReloadOnProxySwitch": {"message":"잘못된 설정: autoReloadOnProxySwitch는 불리언이어야 합니다."},
+  "invalidActiveScriptId": {"message":"잘못된 설정: activeScriptId는 문자열 또는 null이어야 합니다."},
+  "invalidProxyConfiguration": {"message":"잘못된 프록시 구성입니다."},
+  "proxyMustHaveName": {"message":"각 프록시에는 유효한 이름이 있어야 합니다."},
+  "proxyMustHaveMode": {"message":"각 프록시에는 유효한 모드가 있어야 합니다."},
+  "failedToRestoreSettingsGeneric": {"message":"설정 복원에 실패했습니다. 파일 형식을 확인하세요."},
+  "noActiveProxy": {"message":"없음"},
+  "configuredProxies": {"message":"구성된 프록시"},
+  "storageUsed": {"message":"사용된 저장 공간"},
+  "extensionVersion": {"message":"확장 프로그램 버전"},
+  "logsCount": {"message":"활동 로그"},
+  "activityLog": {"message":"활동 로그"},
+  "pacScriptValid": {"message":"PAC 스크립트가 유효합니다"},
+  "pacScriptError": {"message":"PAC 스크립트에 오류가 있습니다. 스크립트 구문을 확인하세요."},
+  "invalidPacScript": {"message":"잘못된 PAC 스크립트입니다. 유효한 FindProxyForURL 함수가 포함되어 있는지 확인하세요."},
+  "pacFetchFailed": {"message":"URL에서 PAC 스크립트를 가져오지 못했습니다. URL과 네트워크 연결을 확인하세요."},
+  "proxyPermissionDenied": {"message":"권한이 거부되었습니다. 확장 프로그램에 필요한 권한이 없을 수 있습니다."},
+  "proxyControlledByOther": {"message":"프록시 설정이 다른 확장 프로그램에 의해 제어되고 있습니다."},
+  "proxyManagedByPolicy": {"message":"프록시 설정이 조직의 정책에 의해 관리됩니다."},
+  "invalidProxyHost": {"message":"잘못된 프록시 호스트 주소입니다. 서버 구성을 확인하세요."},
+  "invalidProxyPort": {"message":"잘못된 프록시 포트입니다. 유효한 포트 번호(1-65535)를 입력하세요."},
+  "proxyTimeout": {"message":"연결 시간이 초과되었습니다. 프록시 서버에 연결할 수 없을 수 있습니다."},
+  "proxySettingsFailed": {"message":"프록시 설정을 적용하지 못했습니다."},
+  "onboardingWelcomeTitle": {"message":"PACify에 오신 것을 환영합니다"},
+  "onboardingWelcomeDescription": {"message":"Chrome용 최신 프록시 관리자입니다. 프록시 설정을 쉽게 구성, 전환 및 관리하세요."},
+  "onboardingFeaturesTitle": {"message":"강력한 기능"},
+  "onboardingFeaturesDescription": {"message":"프록시를 효과적으로 관리하는 데 필요한 모든 것."},
+  "onboardingFeatureProxies": {"message":"다중 프록시 프로필"},
+  "onboardingFeatureProxiesDesc": {"message":"다양한 프록시 구성을 즉시 생성하고 전환합니다."},
+  "onboardingFeatureAutoProxy": {"message":"자동 프록시 규칙"},
+  "onboardingFeatureAutoProxyDesc": {"message":"스마트 라우팅 규칙으로 URL 패턴에 따라 트래픽을 라우팅합니다."},
+  "onboardingFeaturePAC": {"message":"PAC 스크립트 지원"},
+  "onboardingFeaturePACDesc": {"message":"고급 프록시 구성을 위해 사용자 정의 PAC 스크립트를 사용하세요."},
+  "onboardingShortcutsTitle": {"message":"키보드 단축키"},
+  "onboardingShortcutsDescription": {"message":"키보드 단축키로 더 빠르게 작업하세요."},
+  "onboardingShortcutNewProxy": {"message":"새 프록시 생성"},
+  "onboardingShortcutSearch": {"message":"프록시 검색"},
+  "onboardingShortcutClose": {"message":"모달 닫기"},
+  "onboardingGetStartedTitle": {"message":"준비 완료!"},
+  "onboardingGetStartedDescription": {"message":"첫 번째 프록시 구성을 생성하여 시작하거나 설정을 탐색하세요."},
+  "onboardingCreateFirstProxy": {"message":"첫 번째 프록시 생성"},
+  "onboardingExploreSettings": {"message":"설정 탐색"},
+  "previous": {"message":"이전"},
+  "next": {"message":"다음"},
+  "skipTour": {"message":"투어 건너뛰기"},
+  "keyboardShortcutsDescription": {"message":"이 단축키를 사용하여 더 빠르게 작업하세요"},
+  "shortcutsGroupGeneral": {"message":"일반"},
+  "shortcutsGroupNavigation": {"message":"탐색"},
+  "shortcutsGroupProxyList": {"message":"프록시 목록"},
+  "shortcutNewProxy": {"message":"새 프록시 구성 만들기"},
+  "shortcutSearch": {"message":"검색 열기"},
+  "shortcutCloseModal": {"message":"현재 모달 닫기"},
+  "shortcutShowHelp": {"message":"키보드 단축키 표시"},
+  "shortcutNextElement": {"message":"다음 요소로 이동"},
+  "shortcutPrevElement": {"message":"이전 요소로 이동"},
+  "shortcutActivate": {"message":"포커스된 요소 활성화"},
+  "shortcutToggle": {"message":"스위치 및 체크박스 전환"},
+  "shortcutNavigateList": {"message":"프록시 목록 탐색"},
+  "shortcutActivateProxy": {"message":"선택한 프록시 활성화"},
+  "shortcutEditProxy": {"message":"선택한 프록시 편집"},
+  "shortcutDeleteProxy": {"message":"선택한 프록시 삭제"},
+  "shortcutsTip": {"message":"어디서든 ?를 눌러 이 도움말을 표시하세요"},
+  "subscriptions": {"message":"구독"},
+  "subscriptionsDescription": {"message":"원격 도메인 목록에서 규칙 가져오기"},
+  "addSubscription": {"message":"구독 추가"},
+  "subscriptionName": {"message":"이름"},
+  "subscriptionNamePlaceholder": {"message":"예: GFWList, 광고 도메인"},
+  "subscriptionNameRequired": {"message":"구독 이름이 필요합니다"},
+  "subscriptionUrl": {"message":"URL"},
+  "subscriptionUrlRequired": {"message":"구독 URL이 필요합니다"},
+  "subscriptionUrlInvalid": {"message":"유효한 URL을 입력하세요"},
+  "subscriptionFormat": {"message":"형식"},
+  "subscriptionInterval": {"message":"자동 새로고침"},
+  "subscriptionFetching": {"message":"가져오는 중..."},
+  "subscriptionFetchFailed": {"message":"구독을 가져오지 못했습니다"},
+  "subscriptionNoRules": {"message":"구독에서 규칙을 찾을 수 없습니다"},
+  "noSubscriptions": {"message":"구독 없음"},
+  "noSubscriptionsDescription": {"message":"원격 도메인 목록을 구독하여 GFWList 또는 사용자 정의 도메인 목록과 같은 URL에서 프록시 규칙을 자동으로 가져옵니다"},
+  "refreshSubscription": {"message":"새로고침"},
+  "editSubscription": {"message":"구독 편집"},
+  "saveSubscription": {"message":"변경 사항 저장"},
+  "deleteSubscription": {"message":"구독 삭제"},
+  "deleteSubscriptionTitle": {"message":"구독 삭제"},
+  "deleteSubscriptionMessage": {"message":"구독 \"$1\"을(를) 삭제하시겠습니까?","placeholders":{"1":{"content":"$1","example":"GFWList"}}},
+  "rules": {"message":"규칙"},
+  "fromSubscriptions": {"message":"구독에서"},
+  "never": {"message":"안 함"},
+  "minutesAgo": {"message":"$1분 전","placeholders":{"1":{"content":"$1","example":"5"}}},
+  "hoursAgo": {"message":"$1시간 전","placeholders":{"1":{"content":"$1","example":"2"}}},
+  "formatAuto": {"message":"자동 감지"},
+  "formatAbp": {"message":"ABP / GFWList"},
+  "formatDomains": {"message":"도메인 목록"},
+  "formatSurge": {"message":"Surge / Shadowrocket"},
+  "formatClash": {"message":"Clash / Mihomo"},
+  "intervalManual": {"message":"수동만"},
+  "intervalMinutes": {"message":"$1분마다","placeholders":{"1":{"content":"$1","example":"30"}}},
+  "intervalHour": {"message":"$1시간마다","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "intervalHours": {"message":"$1시간마다","placeholders":{"1":{"content":"$1","example":"6"}}},
+  "intervalDay": {"message":"$1일마다","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "showQuickSettings": {"message":"빠른 설정 표시"},
+  "showQuickSettingsDescription": {"message":"프록시 구성 페이지에 빠른 설정 섹션 표시"},
+  "showQuickSettingsEnabled": {"message":"빠른 설정 섹션이 표시됩니다"},
+  "showQuickSettingsDisabled": {"message":"빠른 설정 섹션이 숨겨졌습니다"},
+  "showQuickSettingsTooltip": {"message":"비활성화하면 프록시 구성 페이지에서 빠른 전환 섹션이 숨겨집니다"},
+  "privacyPolicy": {"message":"개인정보 처리방침"},
+  "privacyPolicyTitle": {"message":"개인정보 처리방침"},
+  "privacyIntro": {"message":"귀하의 개인정보는 중요합니다. 이 정책은 PACify가 데이터를 처리하는 방법을 설명합니다."},
+  "privacyLastUpdated": {"message":"마지막 업데이트"},
+  "privacyDataCollection": {"message":"데이터 수집"},
+  "privacyDataStorage": {"message":"데이터 저장"},
+  "privacyNetworkRequests": {"message":"네트워크 요청"},
+  "privacyPermissions": {"message":"사용 권한"},
+  "privacyContact": {"message":"이 개인정보 처리방침에 대해 질문이 있으시면 GitHub 저장소에 이슈를 등록해 주세요."},
+  "httpWarning": {"message":"이 URL은 HTTP를 사용합니다. 프록시 규칙이 가로채질 수 있습니다. 가능하면 HTTPS를 사용하세요."},
+  "save": {"message":"저장"},
+  "editProxy": {"message":"프록시 편집"},
+  "proxyActivated": {"message":"프록시 '$1' 활성화됨","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
+  "proxyDeactivated": {"message":"프록시 비활성화됨"}
 }

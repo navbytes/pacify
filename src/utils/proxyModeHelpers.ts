@@ -136,6 +136,42 @@ export function findAutoProxyReferences(
 }
 
 /**
+ * Build a map of proxy ID → Auto-Proxy references for all proxies in one pass.
+ * Avoids O(n²) lookups when rendering a list of proxy items.
+ */
+export function buildAutoProxyReferenceMap(
+  allConfigs: ProxyConfig[]
+): Map<string, { configName: string; ruleCount: number }[]> {
+  const map = new Map<string, { configName: string; ruleCount: number }[]>()
+
+  for (const config of allConfigs) {
+    if (!isAutoProxy(config) || !config.autoProxy) continue
+
+    // Count references per proxy ID
+    const refCounts = new Map<string, number>()
+
+    for (const rule of config.autoProxy.rules) {
+      if (rule.proxyType === 'existing' && rule.proxyId) {
+        refCounts.set(rule.proxyId, (refCounts.get(rule.proxyId) || 0) + 1)
+      }
+    }
+
+    if (config.autoProxy.fallbackType === 'existing' && config.autoProxy.fallbackProxyId) {
+      const id = config.autoProxy.fallbackProxyId
+      refCounts.set(id, (refCounts.get(id) || 0) + 1)
+    }
+
+    for (const [proxyId, count] of refCounts) {
+      const existing = map.get(proxyId) || []
+      existing.push({ configName: config.name, ruleCount: count })
+      map.set(proxyId, existing)
+    }
+  }
+
+  return map
+}
+
+/**
  * Check if a proxy ID is referenced by any Auto-Proxy config
  */
 export function isProxyReferencedByAutoProxy(proxyId: string, allConfigs: ProxyConfig[]): boolean {

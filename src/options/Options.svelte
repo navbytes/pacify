@@ -267,7 +267,7 @@ function handleOnboardingCreateProxy() {
               >
                 PACify
               </h1>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+              <p class="text-xs text-slate-500 dark:text-slate-300 mt-0.5 font-medium">
                 Proxy Manager
               </p>
             </div>
@@ -294,7 +294,7 @@ function handleOnboardingCreateProxy() {
             <button
               type="button"
               onclick={() => (showKeyboardShortcuts = true)}
-              class="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              class="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-300 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label={I18nService.getMessage('keyboardShortcuts') || 'Keyboard Shortcuts'}
               title={I18nService.getMessage('keyboardShortcuts') || 'Keyboard Shortcuts'}
             >
@@ -386,7 +386,9 @@ function handleOnboardingCreateProxy() {
                 </svg>
               </div>
             </div>
-            <p class="text-lg font-medium text-slate-800 dark:text-slate-100">Loading editor...</p>
+            <p class="text-lg font-medium text-slate-800 dark:text-slate-100">
+              {I18nService.getMessage('loadingEditor')}
+            </p>
           </div>
         </div>
       </div>
@@ -442,7 +444,7 @@ function handleOnboardingCreateProxy() {
               </div>
             </div>
             <p class="text-lg font-medium text-slate-800 dark:text-slate-100">
-              Loading Auto-Proxy editor...
+              {I18nService.getMessage('loadingAutoProxyEditor')}
             </p>
           </div>
         </div>

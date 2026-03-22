@@ -25,9 +25,30 @@ function createSettingsStore() {
     ($settings) => $settings.proxyConfigs.find((script) => script.isActive) || null
   )
 
+  // Mutex flag to prevent concurrent saves
+  let isSaving = false
+  let pendingSave: AppSettings | null = null
+
   // Function to save settings and return a promise
   async function saveSettings(settings: AppSettings): Promise<void> {
-    await StorageService.saveSettings(settings)
+    if (isSaving) {
+      // Queue this save to run after the current one completes
+      pendingSave = settings
+      return
+    }
+
+    isSaving = true
+    try {
+      await StorageService.saveSettings(settings)
+    } finally {
+      isSaving = false
+      // If a save was queued while we were saving, run it now
+      if (pendingSave) {
+        const queued = pendingSave
+        pendingSave = null
+        await saveSettings(queued)
+      }
+    }
   }
 
   // Debounced function only for non-critical updates

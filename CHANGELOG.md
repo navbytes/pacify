@@ -5,6 +5,98 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.31.0] - 2026-03-22
+
+### Fixed
+
+- **Subscription Fetch Failing on Anubis-Protected Servers** ([#34](https://github.com/navbytes/pacify/issues/34))
+  - Fixed "No rules found in the subscription" error when fetching lists from servers using Anubis bot protection (e.g., gfwlist on repo.or.cz)
+  - Root cause: Chrome's `fetch()` sends a User-Agent with "Mozilla", which triggers Anubis's JS proof-of-work challenge that `fetch()` can't solve
+  - Fix: subscription and PAC script fetches now use a non-browser User-Agent (`PACify/1.31`) that bypasses bot protection by design
+  - Added specific Anubis detection with a clear error message when the workaround doesn't work
+  - Added HTML response detection for other bot protection systems, firewalls, and proxy login pages
+
+- **PAC Script Injection Vulnerability**
+  - Subscription domain names and proxy strings are now escaped before interpolation into generated PAC scripts, preventing JavaScript injection via malicious subscription content
+  - PAC script body extraction now correctly handles braces inside string literals and comments
+  - Domain validation rejects characters that could enable injection (`"`, `'`, `\`, `<`, `` ` ``)
+
+- **Credential Storage Security**
+  - Proxy credentials are now encrypted with AES-GCM (Web Crypto API) and stored in `chrome.storage.local` instead of plaintext in `chrome.storage.sync`
+  - Credentials no longer sync across devices — they stay local to the machine
+  - Fixed misleading UI text that claimed credentials were already encrypted
+
+- **Active Proxy State Race Condition**
+  - `activeScriptId` and `isActive` flags are now updated atomically to prevent desync where multiple proxies appear active or none are active when one should be
+
+- **Subscription Refresh Stale Data**
+  - After updating a subscription, the already-known config is used directly instead of re-reading from storage, preventing stale data and eliminating a redundant storage read
+
+- **Settings Save Race Condition**
+  - Added a mutex to serialize concurrent `saveSettings` calls, preventing data loss when multiple saves fire in quick succession (e.g., from rapid UI changes)
+
+- **Theme Store Memory Leak**
+  - Media query change handler no longer creates a new store subscription on each system theme change event
+
+- **Service Worker Reliability**
+  - Initialization retry now uses `chrome.alarms` instead of `setTimeout`, which is unreliable in MV3 service workers (timers are lost when the worker terminates)
+  - All network fetches have a 15-second timeout via `AbortSignal` to prevent the service worker from hanging on unresponsive servers
+
+- **Dark Mode Color Contrast**
+  - Improved contrast of muted text in dark mode (`dark:text-slate-400` → `dark:text-slate-300`) for WCAG AA compliance
+
+- **Modal UX**
+  - Form validation errors now auto-scroll into view
+  - Modal focus lands on the close button instead of the first form input (standard accessible pattern)
+
+### Added
+
+- **Surge & Clash Subscription Format Support**
+  - Auto-detect and parse Surge-style rules (`DOMAIN,`, `DOMAIN-SUFFIX,`)
+  - Auto-detect and parse Clash-style rules (YAML payload with `'+.domain'`, `DOMAIN,`)
+  - Format selector in subscription form now includes Surge/Shadowrocket and Clash/Mihomo options
+
+- **HTTPS Warning for Subscription URLs**
+  - HTTP subscription and PAC script URLs now show a yellow warning banner about MITM risk
+  - Warning is non-blocking — users can still use HTTP URLs for internal networks
+
+- **Background-Based Subscription Fetching**
+  - Subscription fetches are routed through the background service worker via `chrome.runtime.sendMessage` for more reliable network access in MV3
+
+- **Message Sender Verification**
+  - Background script now verifies `sender.id` matches the extension's own ID as defense-in-depth
+
+### Changed
+
+- **Credential Storage Architecture**
+  - New `CredentialService` using Web Crypto API for AES-GCM encryption at rest
+  - Encryption key derived via PBKDF2 from extension ID, cached in `chrome.storage.session`
+  - Credentials stripped from sync storage and stored encrypted in local storage only
+
+- **Settings Performance**
+  - Settings cache timeout increased from 5 seconds to 30 seconds, reducing storage reads
+  - `JSON.parse(JSON.stringify())` deep clone replaced with `structuredClone()` for faster settings saves
+  - Subscription metadata (title, homepage) capped at 200/500 chars to prevent storage abuse
+  - Pre-compiled regex patterns in ABP parser for faster subscription parsing
+  - Proxy reference lookups reduced from O(n²) to O(n) using a pre-computed reference map
+
+- **UI Polish**
+  - `hover:scale` effects replaced with `hover:shadow` to avoid layout recalculation
+  - Popup width now responsive (`min-w-80 w-96 max-w-full`) instead of fixed
+  - Standardized terminology: "scripts" → "proxies" across empty states and UI text
+  - Loading placeholder text and popup tooltips now use i18n keys instead of hardcoded English
+  - `LoadingSpinner` now has `role="status"` and `aria-label` for screen readers
+
+### Removed
+
+- Deprecated `NotifyService` (replaced by `NotificationService` in v1.25.0)
+
+### i18n
+
+- Added 20+ new keys across all 12 locales: privacy page content, quick settings, HTTPS warning, subscription formats, proxy activation toasts, loading text, tooltips
+- Locale JSON files compacted to one-entry-per-line format
+- Locale files excluded from Biome auto-formatting to preserve compact format
+
 ## [1.30.0] - 2026-03-15
 
 ### Added
@@ -188,9 +280,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 - **Credential Storage**
-  - Proxy credentials stored encrypted in Chrome sync storage
-  - Automatic synchronization across user's Chrome browsers
-  - Clear UI messaging about credential storage location and encryption
+  - Proxy credentials stored in Chrome storage
+  - Clear UI messaging about credential storage
+  - _Note: v1.31.0 upgraded this to AES-GCM encryption in local-only storage_
 
 ## [1.27.0] - 2026-01-18
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { I18nService } from '@/services/i18n/i18nService'
 import { formLabelVariants, inputVariants } from '@/utils/classPatterns'
-import { Eye, EyeOff, Lock, Info } from '@/utils/icons'
+import { Eye, EyeOff, Info, Lock } from '@/utils/icons'
 import Text from '../Text.svelte'
 
 interface Props {
@@ -178,25 +178,34 @@ $effect(() => {
     >
       <Lock class="w-4 h-4" />
       <span>{I18nService.getMessage('authentication') || 'Authentication'}</span>
-      <span class="text-xs text-slate-500">({I18nService.getMessage('optional') || 'Optional'})</span>
+      <span class="text-xs text-slate-500"
+        >({I18nService.getMessage('optional') || 'Optional'})</span
+      >
       <svg
         class="w-4 h-4 ml-auto transition-transform {showAuthSection ? 'rotate-180' : ''}"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"
+        ></path>
       </svg>
     </button>
 
     {#if showAuthSection}
       <div class="mt-4 space-y-4">
         <!-- Info message about credential storage -->
-        <div class="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+        <div
+          class="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg"
+        >
           <Info class="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
           <Text as="p" size="xs" classes="text-blue-800 dark:text-blue-200">
             {I18nService.getMessage('authStorageInfo') ||
-              'Credentials are stored encrypted in Chrome sync storage and will sync across your devices.'}
+              'Credentials are encrypted and stored locally on this device. They are not synced across devices.'}
           </Text>
         </div>
 
@@ -233,7 +242,7 @@ $effect(() => {
               <button
                 type="button"
                 onclick={() => (showPassword = !showPassword)}
-                class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors rounded"
+                class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-slate-500 hover:text-slate-700 dark:text-slate-300 dark:hover:text-slate-200 transition-colors rounded"
                 aria-label={showPassword
                   ? I18nService.getMessage('hidePassword') || 'Hide password'
                   : I18nService.getMessage('showPassword') || 'Show password'}

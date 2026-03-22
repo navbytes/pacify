@@ -138,7 +138,7 @@ export class NotificationService {
     let message: string
     let notificationContext: NotificationContext = 'background'
 
-    // Handle legacy NotifyService.error(ERROR_TYPES, error, context) signature
+    // Handle legacy error(ERROR_TYPES, error, context) signature
     if (typeof messageOrType !== 'string') {
       const errorType = messageOrType
       const error = errorOrContext

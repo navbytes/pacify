@@ -1,1212 +1,438 @@
 {
-  "extName": {
-    "message": "PACify | 代理管理器"
-  },
-  "extDescription": {
-    "message": "Chrome的完整代理管理器。轻松创建、编辑和切换PAC脚本、手动代理和系统配置。"
-  },
-  "basicSettings": {
-    "message": "基本设置"
-  },
-  "proxyMode": {
-    "message": "代理模式"
-  },
-  "systemProxy": {
-    "message": "使用操作系统的代理设置。"
-  },
-  "directMode": {
-    "message": "直接连接"
-  },
-  "directModeHelp": {
-    "message": "在直接模式下，所有连接都直接创建，不使用任何代理。"
-  },
-  "autoDetectMode": {
-    "message": "自动配置URL"
-  },
-  "autoDetectModeHelp": {
-    "message": "在自动检测模式下，Chrome将自动搜索并使用WPAD协议下载代理设置。"
-  },
-  "deleteConfirm": {
-    "message": "您确定要删除此脚本吗？"
-  },
-  "toggleProxyHint": {
-    "message": "点击开关切换代理。"
-  },
-  "systemMode": {
-    "message": "系统"
-  },
-  "pacScriptMode": {
-    "message": "PAC脚本"
-  },
-  "manualMode": {
-    "message": "手动配置"
-  },
-  "addNewScript": {
-    "message": "添加新脚本"
-  },
-  "quickSwitchMode": {
-    "message": "快速切换模式"
-  },
-  "quickSwitchDescription": {
-    "message": "从弹出窗口启用代理配置之间的快速切换"
-  },
-  "settings": {
-    "message": "设置"
-  },
-  "nameRequired": {
-    "message": "名称为必填项"
-  },
-  "proxyConfiguration": {
-    "message": "代理配置"
-  },
-  "cancel": {
-    "message": "取消"
-  },
-  "saveConfiguration": {
-    "message": "保存配置"
-  },
-  "saving": {
-    "message": "保存中..."
-  },
-  "noScriptsAvailable": {
-    "message": "没有可用的PAC脚本。添加您的第一个脚本以开始使用。"
-  },
-  "noQuickSwitchScripts": {
-    "message": "没有配置快速切换脚本。将脚本拖到此处以启用快速切换。"
-  },
-  "noScriptsAvailableOptions": {
-    "message": "没有可用的脚本。点击\"添加新脚本\"创建您的第一个PAC脚本。"
-  },
-  "backupSettings": {
-    "message": "备份设置"
-  },
-  "restoreSettings": {
-    "message": "恢复设置"
-  },
-  "useSameProxy": {
-    "message": "对所有协议使用相同的代理服务器"
-  },
-  "proxyServer": {
-    "message": "代理服务器"
-  },
-  "httpProxy": {
-    "message": "HTTP代理"
-  },
-  "httpsProxy": {
-    "message": "HTTPS代理"
-  },
-  "ftpProxy": {
-    "message": "FTP代理"
-  },
-  "fallbackProxy": {
-    "message": "备用代理"
-  },
-  "bypassList": {
-    "message": "绕过列表"
-  },
-  "pacScriptUrl": {
-    "message": "PAC脚本URL"
-  },
-  "pacScript": {
-    "message": "PAC脚本"
-  },
-  "templates": {
-    "message": "模板:"
-  },
-  "emptyTemplate": {
-    "message": "空白"
-  },
-  "basicTemplate": {
-    "message": "基础"
-  },
-  "proTemplate": {
-    "message": "专业"
-  },
-  "advancedTemplate": {
-    "message": "高级"
-  },
-  "mandatoryPacScript": {
-    "message": "强制PAC脚本（防止回退到直接连接）"
-  },
-  "dropToAddQuickScripts": {
-    "message": "拖放到此处添加到快速脚本"
-  },
-  "dropToRemoveQuickScripts": {
-    "message": "拖放到此处从快速脚本中移除"
-  },
-  "quickPacScripts": {
-    "message": "快速切換配置"
-  },
-  "allProxyConfigs": {
-    "message": "所有代理程式設定"
-  },
-  "dragScriptsHere": {
-    "message": "将脚本拖到此处以启用快速切换。快速切换允许您通过点击扩展图标切换代理。"
-  },
-  "colorRequired": {
-    "message": "颜色为必填项"
-  },
-  "configurationName": {
-    "message": "配置名称"
-  },
-  "color": {
-    "message": "颜色"
-  },
-  "badgeLabel": {
-    "message": "徽章标签"
-  },
-  "badgeLabelHelp": {
-    "message": "扩展图标的自定义文本（最多4个字符）。留空以自动生成。"
-  },
-  "active": {
-    "message": "激活"
-  },
-  "host": {
-    "message": "主机"
-  },
-  "port": {
-    "message": "端口"
-  },
-  "enterConfigurationName": {
-    "message": "输入配置名称"
-  },
-  "disableProxyOnStartup": {
-    "message": "启动时禁用代理"
-  },
-  "disableProxyOnStartupDescription": {
-    "message": "每次启动浏览器时以禁用代理的状态开始"
-  },
-  "autoReloadOnProxySwitch": {
-    "message": "切换代理时自动重新加载页面"
-  },
-  "autoReloadOnProxySwitchDescription": {
-    "message": "切换代理时自动重新加载活动标签页"
-  },
-  "tooltipAutoReload": {
-    "message": "启用后，更改代理设置后当前页面将重新加载以立即应用更改"
-  },
-  "invalidConfiguration": {
-    "message": "无效配置"
-  },
-  "syncStorage": {
-    "message": "同步存储"
-  },
-  "localStorage": {
-    "message": "本地存储"
-  },
-  "dropTarget": {
-    "message": "拖放目标"
-  },
-  "tabProxyConfigs": {
-    "message": "代理配置"
-  },
-  "tabSettings": {
-    "message": "设置"
-  },
-  "tabAbout": {
-    "message": "关于"
-  },
-  "settingsProxyBehavior": {
-    "message": "代理行为"
-  },
-  "settingsDataManagement": {
-    "message": "数据管理"
-  },
-  "aboutVersion": {
-    "message": "版本"
-  },
-  "aboutHelpResources": {
-    "message": "帮助和资源"
-  },
-  "aboutExtensionInfo": {
-    "message": "扩展信息"
-  },
-  "aboutDiagnostics": {
-    "message": "诊断"
-  },
-  "aboutViewOnGithub": {
-    "message": "在 GitHub 上查看"
-  },
-  "aboutReportIssue": {
-    "message": "报告问题"
-  },
-  "aboutDocumentation": {
-    "message": "文档"
-  },
-  "aboutFeatureRequest": {
-    "message": "请求功能"
-  },
-  "feedbackAndRating": {
-    "message": "反馈与评分"
-  },
-  "rateExtension": {
-    "message": "评价扩展"
-  },
-  "leaveReview": {
-    "message": "留下评论"
-  },
-  "supportProject": {
-    "message": "支持项目"
-  },
-  "statusConnected": {
-    "message": "已连接"
-  },
-  "statusDisconnected": {
-    "message": "没有活动的代理"
-  },
-  "footerActiveProxy": {
-    "message": "点击切换以禁用代理"
-  },
-  "footerSelectProxy": {
-    "message": "选择要连接的代理"
-  },
-  "proxyEnabled": {
-    "message": "代理 \"$1\" 已启用"
-  },
-  "proxyDisabled": {
-    "message": "代理 \"$1\" 已禁用"
-  },
-  "proxyDeleted": {
-    "message": "代理 \"$1\" 删除成功"
-  },
-  "toggleProxyOn": {
-    "message": "启用代理 $1"
-  },
-  "toggleProxyOff": {
-    "message": "禁用代理 $1"
-  },
-  "editConfiguration": {
-    "message": "编辑配置 $1"
-  },
-  "deleteConfiguration": {
-    "message": "删除配置 $1"
-  },
-  "deleteProxyTitle": {
-    "message": "删除代理配置"
-  },
-  "deleteProxyMessage": {
-    "message": "确定要删除 \"$1\" 吗？此操作无法撤消。"
-  },
-  "delete": {
-    "message": "删除"
-  },
-  "backupSuccess": {
-    "message": "设置备份成功"
-  },
-  "backupFailed": {
-    "message": "设置备份失败"
-  },
-  "restoreSuccess": {
-    "message": "设置恢复成功"
-  },
-  "restoreFailed": {
-    "message": "设置恢复失败"
-  },
-  "backupDescription": {
-    "message": "将所有代理配置和首选项下载为 JSON 文件"
-  },
-  "restoreDescription": {
-    "message": "上传备份文件以恢复配置"
-  },
-  "errorBoundaryTitle": {
-    "message": "出错了"
-  },
-  "errorBoundaryRetry": {
-    "message": "重试"
-  },
-  "closeNotification": {
-    "message": "关闭通知"
-  },
-  "closeDialog": {
-    "message": "关闭对话框"
-  },
-  "confirm": {
-    "message": "确认"
-  },
-  "quickSwitchEnabled": {
-    "message": "快速切换模式已启用"
-  },
-  "quickSwitchDisabled": {
-    "message": "快速切换模式已禁用"
-  },
-  "proxyDisabledOnStartup": {
-    "message": "浏览器启动时将禁用代理"
-  },
-  "proxyPersistOnStartup": {
-    "message": "浏览器启动时代理状态将保持"
-  },
-  "proxyUpdated": {
-    "message": "代理 \"$1\" 更新成功"
-  },
-  "proxyCreated": {
-    "message": "代理 \"$1\" 创建成功"
-  },
-  "quickSwitchEnabledStatus": {
-    "message": "✓ 已启用 – 点击扩展图标快速切换"
-  },
-  "quickSwitchConfigsTitle": {
-    "message": "快速切换配置"
-  },
-  "quickSwitchConfigsDescription": {
-    "message": "将代理拖到此处以在弹出窗口中一键访问"
-  },
-  "allProxyConfigsTitle": {
-    "message": "所有代理配置"
-  },
-  "allProxyConfigsDescription": {
-    "message": "管理所有代理配置"
-  },
-  "quickStatsTitle": {
-    "message": "快速统计"
-  },
-  "totalProxies": {
-    "message": "代理总数"
-  },
-  "quickSwitch": {
-    "message": "快速切换"
-  },
-  "activeProxy": {
-    "message": "活动代理"
-  },
-  "lastUsed": {
-    "message": "最后使用"
-  },
-  "none": {
-    "message": "无"
-  },
-  "versionLabel": {
-    "message": "版本："
-  },
-  "extensionDescription": {
-    "message": "用于管理 PAC (代理自动配置) 脚本的 Chrome 扩展"
-  },
-  "bypassListPlaceholder": {
-    "message": "每行输入一个模式：\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
-  },
-  "pacUrlPlaceholder": {
-    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
-  },
-  "noProxiesTitle": {
-    "message": "没有可用的代理"
-  },
-  "noQuickSwitchTitle": {
-    "message": "没有快速切换代理"
-  },
-  "noProxyConfigsTitle": {
-    "message": "没有代理配置"
-  },
-  "addFirstProxyAction": {
-    "message": "添加您的第一个代理"
-  },
-  "offButton": {
-    "message": "关闭"
-  },
-  "tooltipQuickSwitchMode": {
-    "message": "无需打开设置即可从弹出窗口即时访问收藏的代理"
-  },
-  "tooltipDisableOnStartup": {
-    "message": "这可确保Chrome启动时代理不会自动启用"
-  },
-  "tooltipDragToQuickSwitch": {
-    "message": "将代理卡拖到此处以将其添加到快速切换以便更快访问"
-  },
-  "tooltipDragToRemove": {
-    "message": "将快速切换代理拖到此处以从弹出窗口中删除它们"
-  },
-  "tooltipKeyboardShortcut": {
-    "message": "按Ctrl+N（Mac上为Cmd+N）快速添加新代理"
-  },
-  "invalidHost": {
-    "message": "无效的主机名或IP地址"
-  },
-  "invalidPort": {
-    "message": "端口必须在1到65535之间"
-  },
-  "invalidUrl": {
-    "message": "请输入有效的URL"
-  },
-  "invalidPacUrlProtocol": {
-    "message": "PAC URL必须使用http://、https://或file://协议"
-  },
-  "pacUrlWarning": {
-    "message": "PAC文件通常以.pac结尾"
-  },
-  "bypassListHelp": {
-    "message": "每行输入一个地址。您可以使用通配符(*)和IP范围(CIDR表示法)。"
-  },
-  "nameTooLong": {
-    "message": "名称不得超过50个字符"
-  },
-  "nameTooShort": {
-    "message": "名称至少需要1个字符"
-  },
-  "hostPlaceholder": {
-    "message": "proxy.example.com"
-  },
-  "portPlaceholder": {
-    "message": "8080"
-  },
-  "scheme": {
-    "message": "方案"
-  },
-  "noProxiesYet": {
-    "message": "还没有代理配置"
-  },
-  "noProxiesDescription": {
-    "message": "开始创建您的第一个代理配置，以控制浏览器如何连接到互联网。"
-  },
-  "getStarted": {
-    "message": "开始使用"
-  },
-  "quickSwitchEmptyHint": {
-    "message": "将代理配置拖到此处以从弹出窗口快速访问"
-  },
-  "quickSwitchEmptySubHint": {
-    "message": "在此处添加的代理将显示在弹出窗口中以实现一键切换"
-  },
-  "pacUrlHelp": {
-    "message": "PAC脚本将从此URL加载"
-  },
-  "keyboardShortcuts": {
-    "message": "键盘快捷键"
-  },
-  "keyboardShortcutFocusSearch": {
-    "message": "聚焦搜索"
-  },
-  "keyboardShortcutNewProxy": {
-    "message": "新建代理"
-  },
-  "keyboardShortcutClearSearch": {
-    "message": "清除搜索"
-  },
-  "keyboardShortcutToggleProxy": {
-    "message": "切换代理 1-9"
-  },
-  "searchProxiesPlaceholder": {
-    "message": "搜索代理... (Ctrl+K)"
-  },
-  "keyboardShortcutCtrlCmdK": {
-    "message": "Ctrl/Cmd+K"
-  },
-  "keyboardShortcutCtrlCmdN": {
-    "message": "Ctrl/Cmd+N"
-  },
-  "keyboardShortcutEscape": {
-    "message": "Escape"
-  },
-  "keyboardShortcutNumbers": {
-    "message": "1-9"
-  },
-  "keyboardShortcutsNote": {
-    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
-  },
-  "keyboardShortcutQuickSwitchOnly": {
-    "message": "Only works for proxies in the Quick Switch section"
-  },
-  "updateInterval": {
-    "message": "自动更新间隔"
-  },
-  "noAutoUpdate": {
-    "message": "无自动更新"
-  },
-  "minutes": {
-    "message": "分钟"
-  },
-  "hour": {
-    "message": "小时"
-  },
-  "hours": {
-    "message": "小时"
-  },
-  "refreshNow": {
-    "message": "立即刷新"
-  },
-  "refreshing": {
-    "message": "刷新中..."
-  },
-  "lastFetched": {
-    "message": "最后获取"
-  },
-  "pacScriptRefreshed": {
-    "message": "PAC脚本已成功刷新"
-  },
-  "autoReloadEnabled": {
-    "message": "Auto-reload enabled"
-  },
-  "autoReloadDisabled": {
-    "message": "Auto-reload disabled"
-  },
-  "systemNotifications": {
-    "message": "System Notifications"
-  },
-  "systemNotificationsEnabled": {
-    "message": "System notifications enabled"
-  },
-  "systemNotificationsDisabled": {
-    "message": "System notifications disabled"
-  },
-  "systemNotificationsTooltip": {
-    "message": "Enable Chrome notifications for background events"
-  },
-  "systemNotificationsDescription": {
-    "message": "Show system notifications for proxy switches and errors"
-  },
-  "errorFailedToLoadSettings": {
-    "message": "Failed to load settings"
-  },
-  "errorFailedToSetProxy": {
-    "message": "Failed to set proxy configuration"
-  },
-  "errorFailedToClearProxy": {
-    "message": "Failed to clear proxy configuration"
-  },
-  "errorFailedToDeleteScript": {
-    "message": "Failed to delete script"
-  },
-  "proxySwitched": {
-    "message": "Proxy Switched"
-  },
-  "proxySwitchedTo": {
-    "message": "Switched to \"$1\""
-  },
-  "proxySwitchedToForHost": {
-    "message": "Switched to \"$1\" for $2"
-  },
-  "proxyError": {
-    "message": "Proxy Error"
-  },
-  "proxyErrorMessage": {
-    "message": "Failed to use \"$1\": $2"
-  },
-  "pacScriptPreview": {
-    "message": "PAC Script Preview (Read-only)"
-  },
-  "pacScriptFetchError": {
-    "message": "Failed to fetch PAC script from URL"
-  },
-  "addAutoProxy": {
-    "message": "添加自动代理"
-  },
-  "addAutoProxyTooltip": {
-    "message": "创建基于URL的路由规则"
-  },
-  "autoProxyMode": {
-    "message": "自动代理"
-  },
-  "autoProxyRulesCount": {
-    "message": "$1 条规则"
-  },
-  "createAutoProxy": {
-    "message": "创建自动代理"
-  },
-  "editAutoProxy": {
-    "message": "编辑自动代理"
-  },
-  "autoProxyCreated": {
-    "message": "自动代理 \"$1\" 创建成功"
-  },
-  "autoProxyUpdated": {
-    "message": "自动代理 \"$1\" 更新成功"
-  },
-  "autoProxyDeleted": {
-    "message": "自动代理 \"$1\" 删除成功"
-  },
-  "autoProxyNamePlaceholder": {
-    "message": "例如：工作路由、分流隧道"
-  },
-  "addRule": {
-    "message": "添加规则"
-  },
-  "editRule": {
-    "message": "编辑规则"
-  },
-  "deleteRule": {
-    "message": "删除规则"
-  },
-  "saveRule": {
-    "message": "保存规则"
-  },
-  "cancelRule": {
-    "message": "取消"
-  },
-  "urlPattern": {
-    "message": "URL模式"
-  },
-  "patternType": {
-    "message": "模式类型"
-  },
-  "wildcardPattern": {
-    "message": "通配符"
-  },
-  "regexPattern": {
-    "message": "正则表达式"
-  },
-  "exactMatch": {
-    "message": "精确匹配"
-  },
-  "cidrPattern": {
-    "message": "CIDR (IP范围)"
-  },
-  "selectProxy": {
-    "message": "选择代理"
-  },
-  "defineInline": {
-    "message": "内联定义"
-  },
-  "directConnection": {
-    "message": "直接连接"
-  },
-  "fallbackBehavior": {
-    "message": "回退行为"
-  },
-  "fallbackDescription": {
-    "message": "当没有规则匹配URL时应用"
-  },
-  "testPattern": {
-    "message": "测试模式"
-  },
-  "testUrl": {
-    "message": "测试URL"
-  },
-  "testUrlPlaceholder": {
-    "message": "输入URL以测试规则"
-  },
-  "patternMatches": {
-    "message": "模式匹配成功！"
-  },
-  "noPatternMatch": {
-    "message": "没有匹配的模式 - 将使用回退"
-  },
-  "ruleEnabled": {
-    "message": "规则已启用"
-  },
-  "ruleDisabled": {
-    "message": "规则已禁用"
-  },
-  "routingRules": {
-    "message": "路由规则"
-  },
-  "noRulesYet": {
-    "message": "尚未定义规则"
-  },
-  "noRulesDescription": {
-    "message": "添加规则以定义如何将URL路由到不同的代理"
-  },
-  "atLeastOneRule": {
-    "message": "至少需要一条规则"
-  },
-  "failedToSave": {
-    "message": "保存配置失败"
-  },
-  "proxyType": {
-    "message": "代理类型"
-  },
-  "noProxiesAvailable": {
-    "message": "没有可用的代理"
-  },
-  "name": {
-    "message": "名称"
-  },
-  "ruleDescription": {
-    "message": "描述（可选）"
-  },
-  "ruleDescriptionPlaceholder": {
-    "message": "例如：路由所有Google流量"
-  },
-  "patternPlaceholder": {
-    "message": "例如：*.google.com"
-  },
-  "wildcardHelp": {
-    "message": "使用 * 匹配任意字符。示例：*.example.com"
-  },
-  "regexHelp": {
-    "message": "使用JavaScript正则表达式语法。示例：^https?://.*\\.example\\.com"
-  },
-  "exactHelp": {
-    "message": "匹配精确的主机名。示例：www.example.com"
-  },
-  "cidrHelp": {
-    "message": "使用CIDR表示法表示IP范围。示例：192.168.1.0/24"
-  },
-  "invalidPattern": {
-    "message": "无效的模式"
-  },
-  "patternRequired": {
-    "message": "模式为必填项"
-  },
-  "saveChanges": {
-    "message": "保存更改"
-  },
-  "autoProxyReferenceWarning": {
-    "message": "此代理被以下自动代理配置使用："
-  },
-  "autoProxyRefSingular": {
-    "message": "1条规则"
-  },
-  "autoProxyRefPlural": {
-    "message": "$1条规则",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
-  },
-  "autoProxyDeleteConsequence": {
-    "message": "删除此代理时，这些规则将被自动移除。"
-  },
-  "orphanedProxyWarning": {
-    "message": "引用的代理已被删除。请选择其他代理。"
-  },
-  "matchedRule": {
-    "message": "匹配的规则"
-  },
-  "useFallback": {
-    "message": "使用回退"
-  },
-  "dragToReorder": {
-    "message": "拖动以重新排序规则"
-  },
-  "failedToSaveProxy": {
-    "message": "保存代理配置失败"
-  },
-  "autoProxySubtitle": {
-    "message": "基于URL的智能流量路由"
-  },
-  "close": {
-    "message": "关闭"
-  },
-  "ruleSingular": {
-    "message": "规则"
-  },
-  "rulePlural": {
-    "message": "规则"
-  },
-  "rulesConfigured": {
-    "message": "已配置 $1 条$2"
-  },
-  "ruleActiveDescription": {
-    "message": "启用配置后，此规则将生效"
-  },
-  "ruleSkippedDescription": {
-    "message": "此规则将被跳过"
-  },
-  "matchTypeWildcard": {
-    "message": "通配符"
-  },
-  "matchTypeExact": {
-    "message": "精确匹配"
-  },
-  "matchTypeRegex": {
-    "message": "正则表达式"
-  },
-  "matchTypeCidr": {
-    "message": "CIDR"
-  },
-  "referencedProxyDeleted": {
-    "message": "代理已删除"
-  },
-  "testPatternHint": {
-    "message": "验证您的规则是否正常工作"
-  },
-  "testButton": {
-    "message": "测试"
-  },
-  "ruleLabel": {
-    "message": "规则："
-  },
-  "testPatternHelp": {
-    "message": "在上方输入URL并点击测试以查看匹配的规则"
-  },
-  "proxyModePacScript": {
-    "message": "（PAC脚本）"
-  },
-  "proxyModeSystem": {
-    "message": "（系统）"
-  },
-  "proxyModeDirect": {
-    "message": "（直连）"
-  },
-  "proxyModeAutoDetect": {
-    "message": "（自动检测）"
-  },
-  "toggleSearch": {
-    "message": "切换搜索"
-  },
-  "hideSearch": {
-    "message": "隐藏搜索"
-  },
-  "viewMode": {
-    "message": "查看模式"
-  },
-  "viewModeGrid": {
-    "message": "网格视图"
-  },
-  "viewModeList": {
-    "message": "列表视图"
-  },
-  "viewModeGridDescription": {
-    "message": "以卡片网格布局显示代理"
-  },
-  "viewModeListDescription": {
-    "message": "以横向列表显示代理"
-  },
-  "authentication": {
-    "message": "身份验证"
-  },
-  "optional": {
-    "message": "可选"
-  },
-  "authStorageInfo": {
-    "message": "凭据已加密并存储在本地"
-  },
-  "username": {
-    "message": "用户名"
-  },
-  "usernamePlaceholder": {
-    "message": "用户名"
-  },
-  "password": {
-    "message": "密码"
-  },
-  "passwordPlaceholder": {
-    "message": "••••••••"
-  },
-  "hidePassword": {
-    "message": "隐藏密码"
-  },
-  "showPassword": {
-    "message": "显示密码"
-  },
-  "diagnostics": {
-    "message": "诊断"
-  },
-  "tabDiagnostics": {
-    "message": "诊断"
-  },
-  "diagnosticsDesc": {
-    "message": "查看错误日志和诊断信息以进行调试"
-  },
-  "diagnosticsExported": {
-    "message": "诊断信息导出成功"
-  },
-  "diagnosticsExportFailed": {
-    "message": "导出诊断信息失败"
-  },
-  "confirmClearLogs": {
-    "message": "清除所有诊断日志？"
-  },
-  "diagnosticsCleared": {
-    "message": "诊断信息清除成功"
-  },
-  "diagnosticsClearFailed": {
-    "message": "清除诊断信息失败"
-  },
-  "allLogsMarkedRead": {
-    "message": "所有日志已标记为已读"
-  },
-  "justNow": {
-    "message": "刚刚"
-  },
-  "markAllRead": {
-    "message": "全部标记为已读"
-  },
-  "export": {
-    "message": "导出"
-  },
-  "clearAll": {
-    "message": "全部清除"
-  },
-  "noErrors": {
-    "message": "未检测到错误"
-  },
-  "noErrorsDesc": {
-    "message": "您的代理运行正常！"
-  },
-  "details": {
-    "message": "详情"
-  },
-  "url": {
-    "message": "网址"
-  },
-  "stackTrace": {
-    "message": "堆栈跟踪"
-  },
-  "logId": {
-    "message": "ID"
-  },
-  "proxyHasAuth": {
-    "message": "此代理已配置身份验证"
-  },
-  "settingsFileTooLarge": {
-    "message": "设置文件太大。最大大小为$1KB。",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "1024"
-      }
-    }
-  },
-  "invalidFileType": {
-    "message": "无效的文件类型。请选择JSON文件。"
-  },
-  "invalidJsonFormat": {
-    "message": "无效的JSON格式。"
-  },
-  "settingsMustBeObject": {
-    "message": "设置必须是有效的对象。"
-  },
-  "invalidProxyConfigsArray": {
-    "message": "无效的设置：proxyConfigs必须是数组。"
-  },
-  "invalidQuickSwitchEnabled": {
-    "message": "无效的设置：quickSwitchEnabled必须是布尔值。"
-  },
-  "invalidDisableProxyOnStartup": {
-    "message": "无效的设置：disableProxyOnStartup必须是布尔值。"
-  },
-  "invalidAutoReloadOnProxySwitch": {
-    "message": "无效的设置：autoReloadOnProxySwitch必须是布尔值。"
-  },
-  "invalidActiveScriptId": {
-    "message": "无效的设置：activeScriptId必须是字符串或null。"
-  },
-  "invalidProxyConfiguration": {
-    "message": "无效的代理配置。"
-  },
-  "proxyMustHaveName": {
-    "message": "每个代理必须有有效的名称。"
-  },
-  "proxyMustHaveMode": {
-    "message": "每个代理必须有有效的模式。"
-  },
-  "failedToRestoreSettingsGeneric": {
-    "message": "恢复设置失败。请检查文件格式。"
-  },
-  "noActiveProxy": {
-    "message": "无"
-  },
-  "configuredProxies": {
-    "message": "已配置的代理"
-  },
-  "storageUsed": {
-    "message": "已用存储"
-  },
-  "extensionVersion": {
-    "message": "扩展版本"
-  },
-  "logsCount": {
-    "message": "活动日志"
-  },
-  "activityLog": {
-    "message": "活动日志"
-  },
-  "pacScriptValid": {
-    "message": "PAC脚本有效"
-  },
-  "pacScriptError": {
-    "message": "PAC脚本包含错误。请检查脚本语法。"
-  },
-  "invalidPacScript": {
-    "message": "无效的PAC脚本。请确保包含有效的FindProxyForURL函数。"
-  },
-  "pacFetchFailed": {
-    "message": "无法从URL获取PAC脚本。请检查URL和网络连接。"
-  },
-  "proxyPermissionDenied": {
-    "message": "权限被拒绝。扩展可能没有所需的权限。"
-  },
-  "proxyControlledByOther": {
-    "message": "代理设置由另一个扩展控制。"
-  },
-  "proxyManagedByPolicy": {
-    "message": "代理设置由组织策略管理。"
-  },
-  "invalidProxyHost": {
-    "message": "无效的代理主机地址。请检查服务器配置。"
-  },
-  "invalidProxyPort": {
-    "message": "无效的代理端口。请输入有效的端口号（1-65535）。"
-  },
-  "proxyTimeout": {
-    "message": "连接超时。代理服务器可能无法访问。"
-  },
-  "proxySettingsFailed": {
-    "message": "应用代理设置失败。"
-  },
-  "onboardingWelcomeTitle": {
-    "message": "欢迎使用 PACify"
-  },
-  "onboardingWelcomeDescription": {
-    "message": "Chrome 的现代代理管理器。轻松配置、切换和管理您的代理设置。"
-  },
-  "onboardingFeaturesTitle": {
-    "message": "强大功能"
-  },
-  "onboardingFeaturesDescription": {
-    "message": "有效管理代理所需的一切。"
-  },
-  "onboardingFeatureProxies": {
-    "message": "多个代理配置文件"
-  },
-  "onboardingFeatureProxiesDesc": {
-    "message": "即时创建和切换不同的代理配置。"
-  },
-  "onboardingFeatureAutoProxy": {
-    "message": "自动代理规则"
-  },
-  "onboardingFeatureAutoProxyDesc": {
-    "message": "使用智能路由规则根据 URL 模式路由流量。"
-  },
-  "onboardingFeaturePAC": {
-    "message": "PAC 脚本支持"
-  },
-  "onboardingFeaturePACDesc": {
-    "message": "使用自定义 PAC 脚本进行高级代理配置。"
-  },
-  "onboardingShortcutsTitle": {
-    "message": "键盘快捷键"
-  },
-  "onboardingShortcutsDescription": {
-    "message": "使用键盘快捷键更快地工作。"
-  },
-  "onboardingShortcutNewProxy": {
-    "message": "创建新代理"
-  },
-  "onboardingShortcutSearch": {
-    "message": "搜索代理"
-  },
-  "onboardingShortcutClose": {
-    "message": "关闭弹窗"
-  },
-  "onboardingGetStartedTitle": {
-    "message": "一切就绪！"
-  },
-  "onboardingGetStartedDescription": {
-    "message": "创建您的第一个代理配置以开始使用，或探索设置。"
-  },
-  "onboardingCreateFirstProxy": {
-    "message": "创建第一个代理"
-  },
-  "onboardingExploreSettings": {
-    "message": "探索设置"
-  },
-  "previous": {
-    "message": "上一步"
-  },
-  "next": {
-    "message": "下一步"
-  },
-  "skipTour": {
-    "message": "跳过导览"
-  },
-  "keyboardShortcutsDescription": {
-    "message": "使用这些快捷键更快地工作"
-  },
-  "shortcutsGroupGeneral": {
-    "message": "常规"
-  },
-  "shortcutsGroupNavigation": {
-    "message": "导航"
-  },
-  "shortcutsGroupProxyList": {
-    "message": "代理列表"
-  },
-  "shortcutNewProxy": {
-    "message": "创建新代理配置"
-  },
-  "shortcutSearch": {
-    "message": "打开搜索"
-  },
-  "shortcutCloseModal": {
-    "message": "关闭当前弹窗"
-  },
-  "shortcutShowHelp": {
-    "message": "显示键盘快捷键"
-  },
-  "shortcutNextElement": {
-    "message": "移动到下一个元素"
-  },
-  "shortcutPrevElement": {
-    "message": "移动到上一个元素"
-  },
-  "shortcutActivate": {
-    "message": "激活焦点元素"
-  },
-  "shortcutToggle": {
-    "message": "切换开关和复选框"
-  },
-  "shortcutNavigateList": {
-    "message": "浏览代理列表"
-  },
-  "shortcutActivateProxy": {
-    "message": "激活选中的代理"
-  },
-  "shortcutEditProxy": {
-    "message": "编辑选中的代理"
-  },
-  "shortcutDeleteProxy": {
-    "message": "删除选中的代理"
-  },
-  "shortcutsTip": {
-    "message": "在任何位置按 ? 显示此帮助"
-  },
-  "subscriptions": { "message": "订阅" },
-  "subscriptionsDescription": { "message": "从远程域名列表导入规则" },
-  "addSubscription": { "message": "添加订阅" },
-  "subscriptionName": { "message": "名称" },
-  "subscriptionNamePlaceholder": { "message": "例如：GFWList、广告域名" },
-  "subscriptionNameRequired": { "message": "订阅名称为必填项" },
-  "subscriptionUrl": { "message": "URL" },
-  "subscriptionUrlRequired": { "message": "订阅URL为必填项" },
-  "subscriptionUrlInvalid": { "message": "请输入有效的URL" },
-  "subscriptionFormat": { "message": "格式" },
-  "subscriptionInterval": { "message": "自动刷新" },
-  "subscriptionFetching": { "message": "获取中..." },
-  "subscriptionFetchFailed": { "message": "获取订阅失败" },
-  "subscriptionNoRules": { "message": "订阅中未找到规则" },
-  "noSubscriptions": { "message": "没有订阅" },
-  "noSubscriptionsDescription": {
-    "message": "订阅远程域名列表，自动从GFWList或自定义域名列表等URL导入代理规则"
-  },
-  "refreshSubscription": { "message": "刷新" },
-  "editSubscription": { "message": "编辑订阅" },
-  "saveSubscription": { "message": "保存更改" },
-  "deleteSubscription": { "message": "删除订阅" },
-  "deleteSubscriptionTitle": { "message": "删除订阅" },
-  "deleteSubscriptionMessage": {
-    "message": "确定要删除订阅 \"$1\" 吗？",
-    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
-  },
-  "rules": { "message": "规则" },
-  "fromSubscriptions": { "message": "来自订阅" },
-  "never": { "message": "从不" },
-  "minutesAgo": {
-    "message": "$1 分钟前",
-    "placeholders": { "1": { "content": "$1", "example": "5" } }
-  },
-  "hoursAgo": {
-    "message": "$1 小时前",
-    "placeholders": { "1": { "content": "$1", "example": "2" } }
-  },
-  "formatAuto": { "message": "自动检测" },
-  "formatAbp": { "message": "ABP / GFWList" },
-  "formatDomains": { "message": "域名列表" },
-  "intervalManual": { "message": "仅手动" },
-  "intervalMinutes": {
-    "message": "每 $1 分钟",
-    "placeholders": { "1": { "content": "$1", "example": "30" } }
-  },
-  "intervalHour": {
-    "message": "每 $1 小时",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  },
-  "intervalHours": {
-    "message": "每 $1 小时",
-    "placeholders": { "1": { "content": "$1", "example": "6" } }
-  },
-  "intervalDay": {
-    "message": "每 $1 天",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  }
+  "extName": {"message":"PACify | 代理管理器"},
+  "extDescription": {"message":"Chrome的完整代理管理器。轻松创建、编辑和切换PAC脚本、手动代理和系统配置。"},
+  "basicSettings": {"message":"基本设置"},
+  "proxyMode": {"message":"代理模式"},
+  "systemProxy": {"message":"使用操作系统的代理设置。"},
+  "directMode": {"message":"直接连接"},
+  "directModeHelp": {"message":"在直接模式下，所有连接都直接创建，不使用任何代理。"},
+  "autoDetectMode": {"message":"自动配置URL"},
+  "autoDetectModeHelp": {"message":"在自动检测模式下，Chrome将自动搜索并使用WPAD协议下载代理设置。"},
+  "deleteConfirm": {"message":"您确定要删除此脚本吗？"},
+  "toggleProxyHint": {"message":"点击开关切换代理。"},
+  "systemMode": {"message":"系统"},
+  "pacScriptMode": {"message":"PAC脚本"},
+  "manualMode": {"message":"手动配置"},
+  "addNewScript": {"message":"添加新脚本"},
+  "quickSwitchMode": {"message":"快速切换模式"},
+  "quickSwitchDescription": {"message":"从弹出窗口启用代理配置之间的快速切换"},
+  "settings": {"message":"设置"},
+  "nameRequired": {"message":"名称为必填项"},
+  "proxyConfiguration": {"message":"代理配置"},
+  "cancel": {"message":"取消"},
+  "saveConfiguration": {"message":"保存配置"},
+  "saving": {"message":"保存中..."},
+  "noScriptsAvailable": {"message":"没有可用的PAC脚本。添加您的第一个脚本以开始使用。"},
+  "noQuickSwitchScripts": {"message":"没有配置快速切换脚本。将脚本拖到此处以启用快速切换。"},
+  "noScriptsAvailableOptions": {"message":"没有可用的脚本。点击\"添加新脚本\"创建您的第一个PAC脚本。"},
+  "backupSettings": {"message":"备份设置"},
+  "restoreSettings": {"message":"恢复设置"},
+  "useSameProxy": {"message":"对所有协议使用相同的代理服务器"},
+  "proxyServer": {"message":"代理服务器"},
+  "httpProxy": {"message":"HTTP代理"},
+  "httpsProxy": {"message":"HTTPS代理"},
+  "ftpProxy": {"message":"FTP代理"},
+  "fallbackProxy": {"message":"备用代理"},
+  "bypassList": {"message":"绕过列表"},
+  "pacScriptUrl": {"message":"PAC脚本URL"},
+  "pacScript": {"message":"PAC脚本"},
+  "templates": {"message":"模板:"},
+  "emptyTemplate": {"message":"空白"},
+  "basicTemplate": {"message":"基础"},
+  "proTemplate": {"message":"专业"},
+  "advancedTemplate": {"message":"高级"},
+  "mandatoryPacScript": {"message":"强制PAC脚本（防止回退到直接连接）"},
+  "dropToAddQuickScripts": {"message":"拖放到此处添加到快速脚本"},
+  "dropToRemoveQuickScripts": {"message":"拖放到此处从快速脚本中移除"},
+  "quickPacScripts": {"message":"快速切換配置"},
+  "allProxyConfigs": {"message":"所有代理程式設定"},
+  "dragScriptsHere": {"message":"将脚本拖到此处以启用快速切换。快速切换允许您通过点击扩展图标切换代理。"},
+  "colorRequired": {"message":"颜色为必填项"},
+  "configurationName": {"message":"配置名称"},
+  "color": {"message":"颜色"},
+  "badgeLabel": {"message":"徽章标签"},
+  "badgeLabelHelp": {"message":"扩展图标的自定义文本（最多4个字符）。留空以自动生成。"},
+  "active": {"message":"激活"},
+  "host": {"message":"主机"},
+  "port": {"message":"端口"},
+  "enterConfigurationName": {"message":"输入配置名称"},
+  "disableProxyOnStartup": {"message":"启动时禁用代理"},
+  "disableProxyOnStartupDescription": {"message":"每次启动浏览器时以禁用代理的状态开始"},
+  "autoReloadOnProxySwitch": {"message":"切换代理时自动重新加载页面"},
+  "autoReloadOnProxySwitchDescription": {"message":"切换代理时自动重新加载活动标签页"},
+  "tooltipAutoReload": {"message":"启用后，更改代理设置后当前页面将重新加载以立即应用更改"},
+  "invalidConfiguration": {"message":"无效配置"},
+  "syncStorage": {"message":"同步存储"},
+  "localStorage": {"message":"本地存储"},
+  "dropTarget": {"message":"拖放目标"},
+  "tabProxyConfigs": {"message":"代理配置"},
+  "tabSettings": {"message":"设置"},
+  "tabAbout": {"message":"关于"},
+  "settingsProxyBehavior": {"message":"代理行为"},
+  "settingsDataManagement": {"message":"数据管理"},
+  "aboutVersion": {"message":"版本"},
+  "aboutHelpResources": {"message":"帮助和资源"},
+  "aboutExtensionInfo": {"message":"扩展信息"},
+  "aboutDiagnostics": {"message":"诊断"},
+  "aboutViewOnGithub": {"message":"在 GitHub 上查看"},
+  "aboutReportIssue": {"message":"报告问题"},
+  "aboutDocumentation": {"message":"文档"},
+  "aboutFeatureRequest": {"message":"请求功能"},
+  "feedbackAndRating": {"message":"反馈与评分"},
+  "rateExtension": {"message":"评价扩展"},
+  "leaveReview": {"message":"留下评论"},
+  "supportProject": {"message":"支持项目"},
+  "statusConnected": {"message":"已连接"},
+  "statusDisconnected": {"message":"没有活动的代理"},
+  "footerActiveProxy": {"message":"点击切换以禁用代理"},
+  "footerSelectProxy": {"message":"选择要连接的代理"},
+  "proxyEnabled": {"message":"代理 \"$1\" 已启用"},
+  "proxyDisabled": {"message":"代理 \"$1\" 已禁用"},
+  "proxyDeleted": {"message":"代理 \"$1\" 删除成功"},
+  "toggleProxyOn": {"message":"启用代理 $1"},
+  "toggleProxyOff": {"message":"禁用代理 $1"},
+  "editConfiguration": {"message":"编辑配置 $1"},
+  "deleteConfiguration": {"message":"删除配置 $1"},
+  "deleteProxyTitle": {"message":"删除代理配置"},
+  "deleteProxyMessage": {"message":"确定要删除 \"$1\" 吗？此操作无法撤消。"},
+  "delete": {"message":"删除"},
+  "backupSuccess": {"message":"设置备份成功"},
+  "backupFailed": {"message":"设置备份失败"},
+  "restoreSuccess": {"message":"设置恢复成功"},
+  "restoreFailed": {"message":"设置恢复失败"},
+  "backupDescription": {"message":"将所有代理配置和首选项下载为 JSON 文件"},
+  "restoreDescription": {"message":"上传备份文件以恢复配置"},
+  "errorBoundaryTitle": {"message":"出错了"},
+  "errorBoundaryRetry": {"message":"重试"},
+  "closeNotification": {"message":"关闭通知"},
+  "closeDialog": {"message":"关闭对话框"},
+  "confirm": {"message":"确认"},
+  "quickSwitchEnabled": {"message":"快速切换模式已启用"},
+  "quickSwitchDisabled": {"message":"快速切换模式已禁用"},
+  "proxyDisabledOnStartup": {"message":"浏览器启动时将禁用代理"},
+  "proxyPersistOnStartup": {"message":"浏览器启动时代理状态将保持"},
+  "proxyUpdated": {"message":"代理 \"$1\" 更新成功"},
+  "proxyCreated": {"message":"代理 \"$1\" 创建成功"},
+  "quickSwitchEnabledStatus": {"message":"✓ 已启用 – 点击扩展图标快速切换"},
+  "quickSwitchConfigsTitle": {"message":"快速切换配置"},
+  "quickSwitchConfigsDescription": {"message":"将代理拖到此处以在弹出窗口中一键访问"},
+  "allProxyConfigsTitle": {"message":"所有代理配置"},
+  "allProxyConfigsDescription": {"message":"管理所有代理配置"},
+  "quickStatsTitle": {"message":"快速统计"},
+  "totalProxies": {"message":"代理总数"},
+  "quickSwitch": {"message":"快速切换"},
+  "activeProxy": {"message":"活动代理"},
+  "lastUsed": {"message":"最后使用"},
+  "none": {"message":"无"},
+  "versionLabel": {"message":"版本："},
+  "extensionDescription": {"message":"用于管理 PAC (代理自动配置) 脚本的 Chrome 扩展"},
+  "bypassListPlaceholder": {"message":"每行输入一个模式：\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"},
+  "pacUrlPlaceholder": {"message":"https://nav-proxy.vercel.app/api/proxyman.pac"},
+  "noProxiesTitle": {"message":"没有可用的代理"},
+  "noQuickSwitchTitle": {"message":"没有快速切换代理"},
+  "noProxyConfigsTitle": {"message":"没有代理配置"},
+  "addFirstProxyAction": {"message":"添加您的第一个代理"},
+  "offButton": {"message":"关闭"},
+  "tooltipQuickSwitchMode": {"message":"无需打开设置即可从弹出窗口即时访问收藏的代理"},
+  "tooltipDisableOnStartup": {"message":"这可确保Chrome启动时代理不会自动启用"},
+  "tooltipDragToQuickSwitch": {"message":"将代理卡拖到此处以将其添加到快速切换以便更快访问"},
+  "tooltipDragToRemove": {"message":"将快速切换代理拖到此处以从弹出窗口中删除它们"},
+  "tooltipKeyboardShortcut": {"message":"按Ctrl+N（Mac上为Cmd+N）快速添加新代理"},
+  "invalidHost": {"message":"无效的主机名或IP地址"},
+  "invalidPort": {"message":"端口必须在1到65535之间"},
+  "invalidUrl": {"message":"请输入有效的URL"},
+  "invalidPacUrlProtocol": {"message":"PAC URL必须使用http://、https://或file://协议"},
+  "pacUrlWarning": {"message":"PAC文件通常以.pac结尾"},
+  "bypassListHelp": {"message":"每行输入一个地址。您可以使用通配符(*)和IP范围(CIDR表示法)。"},
+  "nameTooLong": {"message":"名称不得超过50个字符"},
+  "nameTooShort": {"message":"名称至少需要1个字符"},
+  "hostPlaceholder": {"message":"proxy.example.com"},
+  "portPlaceholder": {"message":"8080"},
+  "scheme": {"message":"方案"},
+  "noProxiesYet": {"message":"还没有代理配置"},
+  "noProxiesDescription": {"message":"开始创建您的第一个代理配置，以控制浏览器如何连接到互联网。"},
+  "getStarted": {"message":"开始使用"},
+  "quickSwitchEmptyHint": {"message":"将代理配置拖到此处以从弹出窗口快速访问"},
+  "quickSwitchEmptySubHint": {"message":"在此处添加的代理将显示在弹出窗口中以实现一键切换"},
+  "pacUrlHelp": {"message":"PAC脚本将从此URL加载"},
+  "keyboardShortcuts": {"message":"键盘快捷键"},
+  "keyboardShortcutFocusSearch": {"message":"聚焦搜索"},
+  "keyboardShortcutNewProxy": {"message":"新建代理"},
+  "keyboardShortcutClearSearch": {"message":"清除搜索"},
+  "keyboardShortcutToggleProxy": {"message":"切换代理 1-9"},
+  "searchProxiesPlaceholder": {"message":"搜索代理... (Ctrl+K)"},
+  "keyboardShortcutCtrlCmdK": {"message":"Ctrl/Cmd+K"},
+  "keyboardShortcutCtrlCmdN": {"message":"Ctrl/Cmd+N"},
+  "keyboardShortcutEscape": {"message":"Escape"},
+  "keyboardShortcutNumbers": {"message":"1-9"},
+  "keyboardShortcutsNote": {"message":"Note: Some shortcuts may conflict with browser or OS shortcuts"},
+  "keyboardShortcutQuickSwitchOnly": {"message":"Only works for proxies in the Quick Switch section"},
+  "updateInterval": {"message":"自动更新间隔"},
+  "noAutoUpdate": {"message":"无自动更新"},
+  "minutes": {"message":"分钟"},
+  "hour": {"message":"小时"},
+  "hours": {"message":"小时"},
+  "refreshNow": {"message":"立即刷新"},
+  "refreshing": {"message":"刷新中..."},
+  "lastFetched": {"message":"最后获取"},
+  "pacScriptRefreshed": {"message":"PAC脚本已成功刷新"},
+  "autoReloadEnabled": {"message":"Auto-reload enabled"},
+  "autoReloadDisabled": {"message":"Auto-reload disabled"},
+  "systemNotifications": {"message":"System Notifications"},
+  "systemNotificationsEnabled": {"message":"System notifications enabled"},
+  "systemNotificationsDisabled": {"message":"System notifications disabled"},
+  "systemNotificationsTooltip": {"message":"Enable Chrome notifications for background events"},
+  "systemNotificationsDescription": {"message":"Show system notifications for proxy switches and errors"},
+  "errorFailedToLoadSettings": {"message":"Failed to load settings"},
+  "errorFailedToSetProxy": {"message":"Failed to set proxy configuration"},
+  "errorFailedToClearProxy": {"message":"Failed to clear proxy configuration"},
+  "errorFailedToDeleteScript": {"message":"Failed to delete script"},
+  "proxySwitched": {"message":"Proxy Switched"},
+  "proxySwitchedTo": {"message":"Switched to \"$1\""},
+  "proxySwitchedToForHost": {"message":"Switched to \"$1\" for $2"},
+  "proxyError": {"message":"Proxy Error"},
+  "proxyErrorMessage": {"message":"Failed to use \"$1\": $2"},
+  "pacScriptPreview": {"message":"PAC Script Preview (Read-only)"},
+  "pacScriptFetchError": {"message":"Failed to fetch PAC script from URL"},
+  "addAutoProxy": {"message":"添加自动代理"},
+  "addAutoProxyTooltip": {"message":"创建基于URL的路由规则"},
+  "autoProxyMode": {"message":"自动代理"},
+  "autoProxyRulesCount": {"message":"$1 条规则"},
+  "createAutoProxy": {"message":"创建自动代理"},
+  "editAutoProxy": {"message":"编辑自动代理"},
+  "autoProxyCreated": {"message":"自动代理 \"$1\" 创建成功"},
+  "autoProxyUpdated": {"message":"自动代理 \"$1\" 更新成功"},
+  "autoProxyDeleted": {"message":"自动代理 \"$1\" 删除成功"},
+  "autoProxyNamePlaceholder": {"message":"例如：工作路由、分流隧道"},
+  "addRule": {"message":"添加规则"},
+  "editRule": {"message":"编辑规则"},
+  "deleteRule": {"message":"删除规则"},
+  "saveRule": {"message":"保存规则"},
+  "cancelRule": {"message":"取消"},
+  "urlPattern": {"message":"URL模式"},
+  "patternType": {"message":"模式类型"},
+  "wildcardPattern": {"message":"通配符"},
+  "regexPattern": {"message":"正则表达式"},
+  "exactMatch": {"message":"精确匹配"},
+  "cidrPattern": {"message":"CIDR (IP范围)"},
+  "selectProxy": {"message":"选择代理"},
+  "defineInline": {"message":"内联定义"},
+  "directConnection": {"message":"直接连接"},
+  "fallbackBehavior": {"message":"回退行为"},
+  "fallbackDescription": {"message":"当没有规则匹配URL时应用"},
+  "testPattern": {"message":"测试模式"},
+  "testUrl": {"message":"测试URL"},
+  "testUrlPlaceholder": {"message":"输入URL以测试规则"},
+  "patternMatches": {"message":"模式匹配成功！"},
+  "noPatternMatch": {"message":"没有匹配的模式 - 将使用回退"},
+  "ruleEnabled": {"message":"规则已启用"},
+  "ruleDisabled": {"message":"规则已禁用"},
+  "routingRules": {"message":"路由规则"},
+  "noRulesYet": {"message":"尚未定义规则"},
+  "noRulesDescription": {"message":"添加规则以定义如何将URL路由到不同的代理"},
+  "atLeastOneRule": {"message":"至少需要一条规则"},
+  "failedToSave": {"message":"保存配置失败"},
+  "proxyType": {"message":"代理类型"},
+  "noProxiesAvailable": {"message":"没有可用的代理"},
+  "name": {"message":"名称"},
+  "ruleDescription": {"message":"描述（可选）"},
+  "ruleDescriptionPlaceholder": {"message":"例如：路由所有Google流量"},
+  "patternPlaceholder": {"message":"例如：*.google.com"},
+  "wildcardHelp": {"message":"使用 * 匹配任意字符。示例：*.example.com"},
+  "regexHelp": {"message":"使用JavaScript正则表达式语法。示例：^https?://.*\\.example\\.com"},
+  "exactHelp": {"message":"匹配精确的主机名。示例：www.example.com"},
+  "cidrHelp": {"message":"使用CIDR表示法表示IP范围。示例：192.168.1.0/24"},
+  "invalidPattern": {"message":"无效的模式"},
+  "patternRequired": {"message":"模式为必填项"},
+  "saveChanges": {"message":"保存更改"},
+  "autoProxyReferenceWarning": {"message":"此代理被以下自动代理配置使用："},
+  "autoProxyRefSingular": {"message":"1条规则"},
+  "autoProxyRefPlural": {"message":"$1条规则","placeholders":{"1":{"content":"$1","example":"3"}}},
+  "autoProxyDeleteConsequence": {"message":"删除此代理时，这些规则将被自动移除。"},
+  "orphanedProxyWarning": {"message":"引用的代理已被删除。请选择其他代理。"},
+  "matchedRule": {"message":"匹配的规则"},
+  "useFallback": {"message":"使用回退"},
+  "dragToReorder": {"message":"拖动以重新排序规则"},
+  "failedToSaveProxy": {"message":"保存代理配置失败"},
+  "autoProxySubtitle": {"message":"基于URL的智能流量路由"},
+  "close": {"message":"关闭"},
+  "ruleSingular": {"message":"规则"},
+  "rulePlural": {"message":"规则"},
+  "rulesConfigured": {"message":"已配置 $1 条$2"},
+  "ruleActiveDescription": {"message":"启用配置后，此规则将生效"},
+  "ruleSkippedDescription": {"message":"此规则将被跳过"},
+  "matchTypeWildcard": {"message":"通配符"},
+  "matchTypeExact": {"message":"精确匹配"},
+  "matchTypeRegex": {"message":"正则表达式"},
+  "matchTypeCidr": {"message":"CIDR"},
+  "referencedProxyDeleted": {"message":"代理已删除"},
+  "testPatternHint": {"message":"验证您的规则是否正常工作"},
+  "testButton": {"message":"测试"},
+  "ruleLabel": {"message":"规则："},
+  "testPatternHelp": {"message":"在上方输入URL并点击测试以查看匹配的规则"},
+  "proxyModePacScript": {"message":"（PAC脚本）"},
+  "proxyModeSystem": {"message":"（系统）"},
+  "proxyModeDirect": {"message":"（直连）"},
+  "proxyModeAutoDetect": {"message":"（自动检测）"},
+  "toggleSearch": {"message":"切换搜索"},
+  "hideSearch": {"message":"隐藏搜索"},
+  "viewMode": {"message":"查看模式"},
+  "viewModeGrid": {"message":"网格视图"},
+  "viewModeList": {"message":"列表视图"},
+  "viewModeGridDescription": {"message":"以卡片网格布局显示代理"},
+  "viewModeListDescription": {"message":"以横向列表显示代理"},
+  "authentication": {"message":"身份验证"},
+  "optional": {"message":"可选"},
+  "authStorageInfo": {"message":"凭据已加密并存储在本地"},
+  "username": {"message":"用户名"},
+  "usernamePlaceholder": {"message":"用户名"},
+  "password": {"message":"密码"},
+  "passwordPlaceholder": {"message":"••••••••"},
+  "hidePassword": {"message":"隐藏密码"},
+  "showPassword": {"message":"显示密码"},
+  "diagnostics": {"message":"诊断"},
+  "tabDiagnostics": {"message":"诊断"},
+  "diagnosticsDesc": {"message":"查看错误日志和诊断信息以进行调试"},
+  "diagnosticsExported": {"message":"诊断信息导出成功"},
+  "diagnosticsExportFailed": {"message":"导出诊断信息失败"},
+  "confirmClearLogs": {"message":"清除所有诊断日志？"},
+  "diagnosticsCleared": {"message":"诊断信息清除成功"},
+  "diagnosticsClearFailed": {"message":"清除诊断信息失败"},
+  "allLogsMarkedRead": {"message":"所有日志已标记为已读"},
+  "justNow": {"message":"刚刚"},
+  "markAllRead": {"message":"全部标记为已读"},
+  "export": {"message":"导出"},
+  "clearAll": {"message":"全部清除"},
+  "noErrors": {"message":"未检测到错误"},
+  "noErrorsDesc": {"message":"您的代理运行正常！"},
+  "details": {"message":"详情"},
+  "url": {"message":"网址"},
+  "stackTrace": {"message":"堆栈跟踪"},
+  "logId": {"message":"ID"},
+  "proxyHasAuth": {"message":"此代理已配置身份验证"},
+  "settingsFileTooLarge": {"message":"设置文件太大。最大大小为$1KB。","placeholders":{"1":{"content":"$1","example":"1024"}}},
+  "invalidFileType": {"message":"无效的文件类型。请选择JSON文件。"},
+  "invalidJsonFormat": {"message":"无效的JSON格式。"},
+  "settingsMustBeObject": {"message":"设置必须是有效的对象。"},
+  "invalidProxyConfigsArray": {"message":"无效的设置：proxyConfigs必须是数组。"},
+  "invalidQuickSwitchEnabled": {"message":"无效的设置：quickSwitchEnabled必须是布尔值。"},
+  "invalidDisableProxyOnStartup": {"message":"无效的设置：disableProxyOnStartup必须是布尔值。"},
+  "invalidAutoReloadOnProxySwitch": {"message":"无效的设置：autoReloadOnProxySwitch必须是布尔值。"},
+  "invalidActiveScriptId": {"message":"无效的设置：activeScriptId必须是字符串或null。"},
+  "invalidProxyConfiguration": {"message":"无效的代理配置。"},
+  "proxyMustHaveName": {"message":"每个代理必须有有效的名称。"},
+  "proxyMustHaveMode": {"message":"每个代理必须有有效的模式。"},
+  "failedToRestoreSettingsGeneric": {"message":"恢复设置失败。请检查文件格式。"},
+  "noActiveProxy": {"message":"无"},
+  "configuredProxies": {"message":"已配置的代理"},
+  "storageUsed": {"message":"已用存储"},
+  "extensionVersion": {"message":"扩展版本"},
+  "logsCount": {"message":"活动日志"},
+  "activityLog": {"message":"活动日志"},
+  "pacScriptValid": {"message":"PAC脚本有效"},
+  "pacScriptError": {"message":"PAC脚本包含错误。请检查脚本语法。"},
+  "invalidPacScript": {"message":"无效的PAC脚本。请确保包含有效的FindProxyForURL函数。"},
+  "pacFetchFailed": {"message":"无法从URL获取PAC脚本。请检查URL和网络连接。"},
+  "proxyPermissionDenied": {"message":"权限被拒绝。扩展可能没有所需的权限。"},
+  "proxyControlledByOther": {"message":"代理设置由另一个扩展控制。"},
+  "proxyManagedByPolicy": {"message":"代理设置由组织策略管理。"},
+  "invalidProxyHost": {"message":"无效的代理主机地址。请检查服务器配置。"},
+  "invalidProxyPort": {"message":"无效的代理端口。请输入有效的端口号（1-65535）。"},
+  "proxyTimeout": {"message":"连接超时。代理服务器可能无法访问。"},
+  "proxySettingsFailed": {"message":"应用代理设置失败。"},
+  "onboardingWelcomeTitle": {"message":"欢迎使用 PACify"},
+  "onboardingWelcomeDescription": {"message":"Chrome 的现代代理管理器。轻松配置、切换和管理您的代理设置。"},
+  "onboardingFeaturesTitle": {"message":"强大功能"},
+  "onboardingFeaturesDescription": {"message":"有效管理代理所需的一切。"},
+  "onboardingFeatureProxies": {"message":"多个代理配置文件"},
+  "onboardingFeatureProxiesDesc": {"message":"即时创建和切换不同的代理配置。"},
+  "onboardingFeatureAutoProxy": {"message":"自动代理规则"},
+  "onboardingFeatureAutoProxyDesc": {"message":"使用智能路由规则根据 URL 模式路由流量。"},
+  "onboardingFeaturePAC": {"message":"PAC 脚本支持"},
+  "onboardingFeaturePACDesc": {"message":"使用自定义 PAC 脚本进行高级代理配置。"},
+  "onboardingShortcutsTitle": {"message":"键盘快捷键"},
+  "onboardingShortcutsDescription": {"message":"使用键盘快捷键更快地工作。"},
+  "onboardingShortcutNewProxy": {"message":"创建新代理"},
+  "onboardingShortcutSearch": {"message":"搜索代理"},
+  "onboardingShortcutClose": {"message":"关闭弹窗"},
+  "onboardingGetStartedTitle": {"message":"一切就绪！"},
+  "onboardingGetStartedDescription": {"message":"创建您的第一个代理配置以开始使用，或探索设置。"},
+  "onboardingCreateFirstProxy": {"message":"创建第一个代理"},
+  "onboardingExploreSettings": {"message":"探索设置"},
+  "previous": {"message":"上一步"},
+  "next": {"message":"下一步"},
+  "skipTour": {"message":"跳过导览"},
+  "keyboardShortcutsDescription": {"message":"使用这些快捷键更快地工作"},
+  "shortcutsGroupGeneral": {"message":"常规"},
+  "shortcutsGroupNavigation": {"message":"导航"},
+  "shortcutsGroupProxyList": {"message":"代理列表"},
+  "shortcutNewProxy": {"message":"创建新代理配置"},
+  "shortcutSearch": {"message":"打开搜索"},
+  "shortcutCloseModal": {"message":"关闭当前弹窗"},
+  "shortcutShowHelp": {"message":"显示键盘快捷键"},
+  "shortcutNextElement": {"message":"移动到下一个元素"},
+  "shortcutPrevElement": {"message":"移动到上一个元素"},
+  "shortcutActivate": {"message":"激活焦点元素"},
+  "shortcutToggle": {"message":"切换开关和复选框"},
+  "shortcutNavigateList": {"message":"浏览代理列表"},
+  "shortcutActivateProxy": {"message":"激活选中的代理"},
+  "shortcutEditProxy": {"message":"编辑选中的代理"},
+  "shortcutDeleteProxy": {"message":"删除选中的代理"},
+  "shortcutsTip": {"message":"在任何位置按 ? 显示此帮助"},
+  "subscriptions": {"message":"订阅"},
+  "subscriptionsDescription": {"message":"从远程域名列表导入规则"},
+  "addSubscription": {"message":"添加订阅"},
+  "subscriptionName": {"message":"名称"},
+  "subscriptionNamePlaceholder": {"message":"例如：GFWList、广告域名"},
+  "subscriptionNameRequired": {"message":"订阅名称为必填项"},
+  "subscriptionUrl": {"message":"URL"},
+  "subscriptionUrlRequired": {"message":"订阅URL为必填项"},
+  "subscriptionUrlInvalid": {"message":"请输入有效的URL"},
+  "subscriptionFormat": {"message":"格式"},
+  "subscriptionInterval": {"message":"自动刷新"},
+  "subscriptionFetching": {"message":"获取中..."},
+  "subscriptionFetchFailed": {"message":"获取订阅失败"},
+  "subscriptionNoRules": {"message":"订阅中未找到规则"},
+  "noSubscriptions": {"message":"没有订阅"},
+  "noSubscriptionsDescription": {"message":"订阅远程域名列表，自动从GFWList或自定义域名列表等URL导入代理规则"},
+  "refreshSubscription": {"message":"刷新"},
+  "editSubscription": {"message":"编辑订阅"},
+  "saveSubscription": {"message":"保存更改"},
+  "deleteSubscription": {"message":"删除订阅"},
+  "deleteSubscriptionTitle": {"message":"删除订阅"},
+  "deleteSubscriptionMessage": {"message":"确定要删除订阅 \"$1\" 吗？","placeholders":{"1":{"content":"$1","example":"GFWList"}}},
+  "rules": {"message":"规则"},
+  "fromSubscriptions": {"message":"来自订阅"},
+  "never": {"message":"从不"},
+  "minutesAgo": {"message":"$1 分钟前","placeholders":{"1":{"content":"$1","example":"5"}}},
+  "hoursAgo": {"message":"$1 小时前","placeholders":{"1":{"content":"$1","example":"2"}}},
+  "formatAuto": {"message":"自动检测"},
+  "formatAbp": {"message":"ABP / GFWList"},
+  "formatDomains": {"message":"域名列表"},
+  "formatSurge": {"message":"Surge / Shadowrocket"},
+  "formatClash": {"message":"Clash / Mihomo"},
+  "intervalManual": {"message":"仅手动"},
+  "intervalMinutes": {"message":"每 $1 分钟","placeholders":{"1":{"content":"$1","example":"30"}}},
+  "intervalHour": {"message":"每 $1 小时","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "intervalHours": {"message":"每 $1 小时","placeholders":{"1":{"content":"$1","example":"6"}}},
+  "intervalDay": {"message":"每 $1 天","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "showQuickSettings": {"message":"显示快捷设置"},
+  "showQuickSettingsDescription": {"message":"在代理配置页面显示快捷设置区域"},
+  "showQuickSettingsEnabled": {"message":"快捷设置区域现已显示"},
+  "showQuickSettingsDisabled": {"message":"快捷设置区域现已隐藏"},
+  "showQuickSettingsTooltip": {"message":"禁用后，代理配置页面将隐藏快捷切换区域"},
+  "privacyPolicy": {"message":"隐私政策"},
+  "privacyPolicyTitle": {"message":"隐私政策"},
+  "privacyIntro": {"message":"我们重视您的隐私。本政策说明 PACify 如何处理您的数据。"},
+  "privacyLastUpdated": {"message":"最后更新"},
+  "privacyDataCollection": {"message":"数据收集"},
+  "privacyDataStorage": {"message":"数据存储"},
+  "privacyNetworkRequests": {"message":"网络请求"},
+  "privacyPermissions": {"message":"使用的权限"},
+  "privacyContact": {"message":"如果您对本隐私政策有任何疑问，请在我们的 GitHub 仓库提交问题。"},
+  "httpWarning": {"message":"此URL使用HTTP。您的代理规则可能被拦截。请尽可能使用HTTPS。"},
+  "save": {"message":"保存"},
+  "editProxy": {"message":"编辑代理"},
+  "proxyActivated": {"message":"代理 '$1' 已激活","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
+  "proxyDeactivated": {"message":"代理已停用"}
 }

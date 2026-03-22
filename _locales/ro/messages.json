@@ -1,1220 +1,438 @@
 {
-  "extName": {
-    "message": "PACify | Manager de Proxy"
-  },
-  "extDescription": {
-    "message": "Manager complet de proxy pentru Chrome. Creați, editați și comutați cu ușurință între scripturi PAC, proxy-uri manuale și configurații de sistem."
-  },
-  "basicSettings": {
-    "message": "Setări de bază"
-  },
-  "proxyMode": {
-    "message": "Mod Proxy"
-  },
-  "systemProxy": {
-    "message": "Utilizează setările proxy din sistemul de operare."
-  },
-  "directMode": {
-    "message": "Direct"
-  },
-  "directModeHelp": {
-    "message": "În modul direct, toate conexiunile sunt create direct, fără niciun proxy implicat."
-  },
-  "autoDetectMode": {
-    "message": "URL auto-configurare"
-  },
-  "autoDetectModeHelp": {
-    "message": "În modul de detectare automată, Chrome va căuta și va descărca automat setările proxy folosind protocolul WPAD."
-  },
-  "deleteConfirm": {
-    "message": "Sigur doriți să ștergeți acest script?"
-  },
-  "toggleProxyHint": {
-    "message": "Comutați proxy-ul făcând clic pe întrerupător."
-  },
-  "systemMode": {
-    "message": "Sistem"
-  },
-  "pacScriptMode": {
-    "message": "Script PAC"
-  },
-  "manualMode": {
-    "message": "Configurare manuală"
-  },
-  "addNewScript": {
-    "message": "Adăugare script nou"
-  },
-  "quickSwitchMode": {
-    "message": "Mod comutare rapidă"
-  },
-  "quickSwitchDescription": {
-    "message": "Activați comutarea rapidă între configurațiile proxy din popup"
-  },
-  "settings": {
-    "message": "Setări"
-  },
-  "nameRequired": {
-    "message": "Numele este obligatoriu"
-  },
-  "proxyConfiguration": {
-    "message": "Configurație proxy"
-  },
-  "cancel": {
-    "message": "Anulare"
-  },
-  "saveConfiguration": {
-    "message": "Salvare configurație"
-  },
-  "saving": {
-    "message": "Se salvează..."
-  },
-  "noScriptsAvailable": {
-    "message": "Nu există scripturi PAC disponibile. Adăugați primul script pentru a începe."
-  },
-  "noQuickSwitchScripts": {
-    "message": "Nu există scripturi de comutare rapidă configurate. Trageți scripturile aici pentru a activa comutarea rapidă."
-  },
-  "noScriptsAvailableOptions": {
-    "message": "Nu există scripturi disponibile. Faceți clic pe \"Adăugare script nou\" pentru a crea primul script PAC."
-  },
-  "backupSettings": {
-    "message": "Backup setări"
-  },
-  "restoreSettings": {
-    "message": "Restaurare setări"
-  },
-  "useSameProxy": {
-    "message": "Utilizați același server proxy pentru toate protocoalele"
-  },
-  "proxyServer": {
-    "message": "Server proxy"
-  },
-  "httpProxy": {
-    "message": "Proxy HTTP"
-  },
-  "httpsProxy": {
-    "message": "Proxy HTTPS"
-  },
-  "ftpProxy": {
-    "message": "Proxy FTP"
-  },
-  "fallbackProxy": {
-    "message": "Proxy de rezervă"
-  },
-  "bypassList": {
-    "message": "Listă de ocolire"
-  },
-  "pacScriptUrl": {
-    "message": "URL script PAC"
-  },
-  "pacScript": {
-    "message": "Script PAC"
-  },
-  "templates": {
-    "message": "Șabloane:"
-  },
-  "emptyTemplate": {
-    "message": "Gol"
-  },
-  "basicTemplate": {
-    "message": "De bază"
-  },
-  "proTemplate": {
-    "message": "Pro"
-  },
-  "advancedTemplate": {
-    "message": "Avansat"
-  },
-  "mandatoryPacScript": {
-    "message": "Script PAC obligatoriu (previne revenirea la direct)"
-  },
-  "dropToAddQuickScripts": {
-    "message": "Plasați aici pentru a adăuga la scripturile rapide"
-  },
-  "dropToRemoveQuickScripts": {
-    "message": "Plasați aici pentru a elimina din scripturile rapide"
-  },
-  "quickPacScripts": {
-    "message": "Configurații de comutare rapidă"
-  },
-  "allProxyConfigs": {
-    "message": "Toate configurațiile proxy"
-  },
-  "dragScriptsHere": {
-    "message": "Trageți scripturile aici pentru a activa comutarea rapidă. Comutarea rapidă vă permite să schimbați proxy-ul făcând clic pe pictograma extensiei."
-  },
-  "colorRequired": {
-    "message": "Culoarea este obligatorie"
-  },
-  "configurationName": {
-    "message": "Nume configurație"
-  },
-  "color": {
-    "message": "Culoare"
-  },
-  "badgeLabel": {
-    "message": "Etichetă insignă"
-  },
-  "badgeLabelHelp": {
-    "message": "Text personalizat pentru pictograma extensiei (max. 4 caractere). Lăsați gol pentru generare automată."
-  },
-  "active": {
-    "message": "Activ"
-  },
-  "host": {
-    "message": "Gazdă"
-  },
-  "port": {
-    "message": "Port"
-  },
-  "enterConfigurationName": {
-    "message": "Introduceți numele configurației"
-  },
-  "disableProxyOnStartup": {
-    "message": "Dezactivează proxy-ul la pornire"
-  },
-  "disableProxyOnStartupDescription": {
-    "message": "Pornește cu proxy-ul dezactivat de fiecare dată când se lansează browserul"
-  },
-  "autoReloadOnProxySwitch": {
-    "message": "Reîncarcă automat pagina la schimbarea proxy-ului"
-  },
-  "autoReloadOnProxySwitchDescription": {
-    "message": "Reîncarcă automat tab-ul activ la schimbarea proxy-ului"
-  },
-  "tooltipAutoReload": {
-    "message": "Când este activat, pagina curentă va fi reîncărcată după schimbarea setărilor proxy pentru a aplica modificările imediat"
-  },
-  "invalidConfiguration": {
-    "message": "Configurație nevalidă"
-  },
-  "syncStorage": {
-    "message": "Stocare sincronizată"
-  },
-  "localStorage": {
-    "message": "Stocare locală"
-  },
-  "dropTarget": {
-    "message": "Țintă de tragere"
-  },
-  "tabProxyConfigs": {
-    "message": "Configurații proxy"
-  },
-  "tabSettings": {
-    "message": "Setări"
-  },
-  "tabAbout": {
-    "message": "Despre"
-  },
-  "settingsProxyBehavior": {
-    "message": "Comportament proxy"
-  },
-  "settingsDataManagement": {
-    "message": "Gestionarea datelor"
-  },
-  "aboutVersion": {
-    "message": "Versiune"
-  },
-  "aboutHelpResources": {
-    "message": "Ajutor și resurse"
-  },
-  "aboutExtensionInfo": {
-    "message": "Informații despre extensie"
-  },
-  "aboutDiagnostics": {
-    "message": "Diagnostice"
-  },
-  "aboutViewOnGithub": {
-    "message": "Vizualizare pe GitHub"
-  },
-  "aboutReportIssue": {
-    "message": "Raportează o problemă"
-  },
-  "aboutDocumentation": {
-    "message": "Documentație"
-  },
-  "aboutFeatureRequest": {
-    "message": "Solicitare funcționalitate"
-  },
-  "feedbackAndRating": {
-    "message": "Feedback și Evaluare"
-  },
-  "rateExtension": {
-    "message": "Evaluați Extensia"
-  },
-  "leaveReview": {
-    "message": "Lăsați o Recenzie"
-  },
-  "supportProject": {
-    "message": "Sprijiniți Proiectul"
-  },
-  "statusConnected": {
-    "message": "Conectat"
-  },
-  "statusDisconnected": {
-    "message": "Niciun proxy activ"
-  },
-  "footerActiveProxy": {
-    "message": "Faceți clic pe comutator pentru a dezactiva proxy-ul"
-  },
-  "footerSelectProxy": {
-    "message": "Selectați un proxy pentru a vă conecta"
-  },
-  "proxyEnabled": {
-    "message": "Proxy \"$1\" activat"
-  },
-  "proxyDisabled": {
-    "message": "Proxy \"$1\" dezactivat"
-  },
-  "proxyDeleted": {
-    "message": "Proxy \"$1\" șters cu succes"
-  },
-  "toggleProxyOn": {
-    "message": "Activează proxy-ul $1"
-  },
-  "toggleProxyOff": {
-    "message": "Dezactivează proxy-ul $1"
-  },
-  "editConfiguration": {
-    "message": "Editează configurația $1"
-  },
-  "deleteConfiguration": {
-    "message": "Șterge configurația $1"
-  },
-  "deleteProxyTitle": {
-    "message": "Șterge configurația proxy"
-  },
-  "deleteProxyMessage": {
-    "message": "Sigur doriți să ștergeți \"$1\"? Această acțiune nu poate fi anulată."
-  },
-  "delete": {
-    "message": "Șterge"
-  },
-  "backupSuccess": {
-    "message": "Setări salvate cu succes"
-  },
-  "backupFailed": {
-    "message": "Eșec la salvarea setărilor"
-  },
-  "restoreSuccess": {
-    "message": "Setări restaurate cu succes"
-  },
-  "restoreFailed": {
-    "message": "Eșec la restaurarea setărilor"
-  },
-  "backupDescription": {
-    "message": "Descărcați toate configurațiile proxy și preferințele ca fișier JSON"
-  },
-  "restoreDescription": {
-    "message": "Încărcați un fișier de backup pentru a restaura configurațiile"
-  },
-  "errorBoundaryTitle": {
-    "message": "Ceva nu a mers bine"
-  },
-  "errorBoundaryRetry": {
-    "message": "Încercați din nou"
-  },
-  "closeNotification": {
-    "message": "Închide notificarea"
-  },
-  "closeDialog": {
-    "message": "Închide dialogul"
-  },
-  "confirm": {
-    "message": "Confirmă"
-  },
-  "quickSwitchEnabled": {
-    "message": "Modul de comutare rapidă activat"
-  },
-  "quickSwitchDisabled": {
-    "message": "Modul de comutare rapidă dezactivat"
-  },
-  "proxyDisabledOnStartup": {
-    "message": "Proxy-ul va fi dezactivat la pornirea browserului"
-  },
-  "proxyPersistOnStartup": {
-    "message": "Starea proxy-ului va persista la pornirea browserului"
-  },
-  "proxyUpdated": {
-    "message": "Proxy \"$1\" actualizat cu succes"
-  },
-  "proxyCreated": {
-    "message": "Proxy \"$1\" creat cu succes"
-  },
-  "quickSwitchEnabledStatus": {
-    "message": "✓ Activat – Faceți clic pe pictograma extensiei pentru a comuta rapid"
-  },
-  "quickSwitchConfigsTitle": {
-    "message": "Configurații de comutare rapidă"
-  },
-  "quickSwitchConfigsDescription": {
-    "message": "Trageți proxy-uri aici pentru acces dintr-un clic în popup"
-  },
-  "allProxyConfigsTitle": {
-    "message": "Toate configurațiile proxy"
-  },
-  "allProxyConfigsDescription": {
-    "message": "Gestionați toate configurațiile proxy"
-  },
-  "quickStatsTitle": {
-    "message": "Statistici rapide"
-  },
-  "totalProxies": {
-    "message": "Total proxy-uri"
-  },
-  "quickSwitch": {
-    "message": "Comutare rapidă"
-  },
-  "activeProxy": {
-    "message": "Proxy activ"
-  },
-  "lastUsed": {
-    "message": "Ultima utilizare"
-  },
-  "none": {
-    "message": "Niciuna"
-  },
-  "versionLabel": {
-    "message": "Versiune:"
-  },
-  "extensionDescription": {
-    "message": "Extensie Chrome pentru gestionarea scripturilor PAC (Proxy Auto-Config)"
-  },
-  "bypassListPlaceholder": {
-    "message": "Introduceți un model pe linie:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"
-  },
-  "pacUrlPlaceholder": {
-    "message": "https://nav-proxy.vercel.app/api/proxyman.pac"
-  },
-  "noProxiesTitle": {
-    "message": "Nu există proxy-uri disponibile"
-  },
-  "noQuickSwitchTitle": {
-    "message": "Nu există proxy-uri de comutare rapidă"
-  },
-  "noProxyConfigsTitle": {
-    "message": "Nu există configurații proxy"
-  },
-  "addFirstProxyAction": {
-    "message": "Adăugați primul proxy"
-  },
-  "offButton": {
-    "message": "OPRIT"
-  },
-  "tooltipQuickSwitchMode": {
-    "message": "Accesați instantaneu proxy-uri favorite din popup fără a deschide setările"
-  },
-  "tooltipDisableOnStartup": {
-    "message": "Acest lucru asigură că proxy-urile nu se activează automat când Chrome pornește"
-  },
-  "tooltipDragToQuickSwitch": {
-    "message": "Trageți carduri de proxy aici pentru a le adăuga la Comutare rapidă pentru acces mai rapid"
-  },
-  "tooltipDragToRemove": {
-    "message": "Trageți proxy-uri de comutare rapidă aici pentru a le elimina din popup"
-  },
-  "tooltipKeyboardShortcut": {
-    "message": "Apăsați Ctrl+N (Cmd+N pe Mac) pentru a adăuga rapid un proxy nou"
-  },
-  "invalidHost": {
-    "message": "Nume de gazdă sau adresă IP nevalidă"
-  },
-  "invalidPort": {
-    "message": "Portul trebuie să fie între 1 și 65535"
-  },
-  "invalidUrl": {
-    "message": "Vă rugăm să introduceți un URL valid"
-  },
-  "invalidPacUrlProtocol": {
-    "message": "URL-ul PAC trebuie să folosească protocolul http://, https:// sau file://"
-  },
-  "pacUrlWarning": {
-    "message": "Fișierele PAC se termină de obicei cu .pac"
-  },
-  "bypassListHelp": {
-    "message": "Introduceți o adresă pe linie. Puteți folosi wildcard-uri (*) și intervale IP (notație CIDR)."
-  },
-  "nameTooLong": {
-    "message": "Numele trebuie să aibă maxim 50 de caractere"
-  },
-  "nameTooShort": {
-    "message": "Numele trebuie să aibă cel puțin 1 caracter"
-  },
-  "hostPlaceholder": {
-    "message": "proxy.example.com"
-  },
-  "portPlaceholder": {
-    "message": "8080"
-  },
-  "scheme": {
-    "message": "Schemă"
-  },
-  "noProxiesYet": {
-    "message": "Nicio configurație proxy încă"
-  },
-  "noProxiesDescription": {
-    "message": "Începeți prin a crea prima configurație proxy pentru a controla modul în care browserul dvs. se conectează la internet."
-  },
-  "getStarted": {
-    "message": "Începeți"
-  },
-  "quickSwitchEmptyHint": {
-    "message": "Trageți configurații proxy aici pentru acces rapid din popup"
-  },
-  "quickSwitchEmptySubHint": {
-    "message": "Proxy-urile adăugate aici vor apărea în popup pentru comutare cu un singur clic"
-  },
-  "pacUrlHelp": {
-    "message": "Scriptul PAC va fi încărcat de la acest URL"
-  },
-  "keyboardShortcuts": {
-    "message": "Comenzi rapide de la tastatură"
-  },
-  "keyboardShortcutFocusSearch": {
-    "message": "Focalizare căutare"
-  },
-  "keyboardShortcutNewProxy": {
-    "message": "Proxy nou"
-  },
-  "keyboardShortcutClearSearch": {
-    "message": "Șterge căutarea"
-  },
-  "keyboardShortcutToggleProxy": {
-    "message": "Comutare proxy 1-9"
-  },
-  "searchProxiesPlaceholder": {
-    "message": "Căutare proxy-uri... (Ctrl+K)"
-  },
-  "keyboardShortcutCtrlCmdK": {
-    "message": "Ctrl/Cmd+K"
-  },
-  "keyboardShortcutCtrlCmdN": {
-    "message": "Ctrl/Cmd+N"
-  },
-  "keyboardShortcutEscape": {
-    "message": "Escape"
-  },
-  "keyboardShortcutNumbers": {
-    "message": "1-9"
-  },
-  "keyboardShortcutsNote": {
-    "message": "Note: Some shortcuts may conflict with browser or OS shortcuts"
-  },
-  "keyboardShortcutQuickSwitchOnly": {
-    "message": "Only works for proxies in the Quick Switch section"
-  },
-  "updateInterval": {
-    "message": "Interval de actualizare automată"
-  },
-  "noAutoUpdate": {
-    "message": "Fără actualizare automată"
-  },
-  "minutes": {
-    "message": "minute"
-  },
-  "hour": {
-    "message": "oră"
-  },
-  "hours": {
-    "message": "ore"
-  },
-  "refreshNow": {
-    "message": "Actualizează acum"
-  },
-  "refreshing": {
-    "message": "Se actualizează..."
-  },
-  "lastFetched": {
-    "message": "Ultima preluare"
-  },
-  "pacScriptRefreshed": {
-    "message": "Scriptul PAC a fost actualizat cu succes"
-  },
-  "autoReloadEnabled": {
-    "message": "Auto-reload enabled"
-  },
-  "autoReloadDisabled": {
-    "message": "Auto-reload disabled"
-  },
-  "systemNotifications": {
-    "message": "System Notifications"
-  },
-  "systemNotificationsEnabled": {
-    "message": "System notifications enabled"
-  },
-  "systemNotificationsDisabled": {
-    "message": "System notifications disabled"
-  },
-  "systemNotificationsTooltip": {
-    "message": "Enable Chrome notifications for background events"
-  },
-  "systemNotificationsDescription": {
-    "message": "Show system notifications for proxy switches and errors"
-  },
-  "errorFailedToLoadSettings": {
-    "message": "Failed to load settings"
-  },
-  "errorFailedToSetProxy": {
-    "message": "Failed to set proxy configuration"
-  },
-  "errorFailedToClearProxy": {
-    "message": "Failed to clear proxy configuration"
-  },
-  "errorFailedToDeleteScript": {
-    "message": "Failed to delete script"
-  },
-  "proxySwitched": {
-    "message": "Proxy Switched"
-  },
-  "proxySwitchedTo": {
-    "message": "Switched to \"$1\""
-  },
-  "proxySwitchedToForHost": {
-    "message": "Switched to \"$1\" for $2"
-  },
-  "proxyError": {
-    "message": "Proxy Error"
-  },
-  "proxyErrorMessage": {
-    "message": "Failed to use \"$1\": $2"
-  },
-  "pacScriptPreview": {
-    "message": "PAC Script Preview (Read-only)"
-  },
-  "pacScriptFetchError": {
-    "message": "Failed to fetch PAC script from URL"
-  },
-  "addAutoProxy": {
-    "message": "Adaugă Auto-Proxy"
-  },
-  "addAutoProxyTooltip": {
-    "message": "Creați reguli de rutare bazate pe URL"
-  },
-  "autoProxyMode": {
-    "message": "Auto-Proxy"
-  },
-  "autoProxyRulesCount": {
-    "message": "$1 reguli"
-  },
-  "createAutoProxy": {
-    "message": "Creează Auto-Proxy"
-  },
-  "editAutoProxy": {
-    "message": "Editează Auto-Proxy"
-  },
-  "autoProxyCreated": {
-    "message": "Auto-Proxy \"$1\" creat cu succes"
-  },
-  "autoProxyUpdated": {
-    "message": "Auto-Proxy \"$1\" actualizat cu succes"
-  },
-  "autoProxyDeleted": {
-    "message": "Auto-Proxy \"$1\" șters cu succes"
-  },
-  "autoProxyNamePlaceholder": {
-    "message": "ex., Rutare de lucru, Split Tunnel"
-  },
-  "addRule": {
-    "message": "Adaugă regulă"
-  },
-  "editRule": {
-    "message": "Editează regulă"
-  },
-  "deleteRule": {
-    "message": "Șterge regulă"
-  },
-  "saveRule": {
-    "message": "Salvează regulă"
-  },
-  "cancelRule": {
-    "message": "Anulare"
-  },
-  "urlPattern": {
-    "message": "Model URL"
-  },
-  "patternType": {
-    "message": "Tip de model"
-  },
-  "wildcardPattern": {
-    "message": "Wildcard"
-  },
-  "regexPattern": {
-    "message": "Regex"
-  },
-  "exactMatch": {
-    "message": "Potrivire exactă"
-  },
-  "cidrPattern": {
-    "message": "CIDR (Interval IP)"
-  },
-  "selectProxy": {
-    "message": "Selectează proxy"
-  },
-  "defineInline": {
-    "message": "Definește inline"
-  },
-  "directConnection": {
-    "message": "Conexiune directă"
-  },
-  "fallbackBehavior": {
-    "message": "Comportament de rezervă"
-  },
-  "fallbackDescription": {
-    "message": "Aplicat când nicio regulă nu corespunde URL-ului"
-  },
-  "testPattern": {
-    "message": "Testează model"
-  },
-  "testUrl": {
-    "message": "URL de test"
-  },
-  "testUrlPlaceholder": {
-    "message": "Introduceți un URL pentru a testa contra regulilor"
-  },
-  "patternMatches": {
-    "message": "Modelul corespunde!"
-  },
-  "noPatternMatch": {
-    "message": "Niciun model nu corespunde - se va folosi rezerva"
-  },
-  "ruleEnabled": {
-    "message": "Regulă activată"
-  },
-  "ruleDisabled": {
-    "message": "Regulă dezactivată"
-  },
-  "routingRules": {
-    "message": "Reguli de rutare"
-  },
-  "noRulesYet": {
-    "message": "Nu există reguli definite încă"
-  },
-  "noRulesDescription": {
-    "message": "Adăugați reguli pentru a defini cum vor fi rutate URL-urile către diferite proxy-uri"
-  },
-  "atLeastOneRule": {
-    "message": "Este necesară cel puțin o regulă"
-  },
-  "failedToSave": {
-    "message": "Salvarea configurației a eșuat"
-  },
-  "proxyType": {
-    "message": "Tip de proxy"
-  },
-  "noProxiesAvailable": {
-    "message": "Nu există proxy-uri disponibile"
-  },
-  "name": {
-    "message": "Nume"
-  },
-  "ruleDescription": {
-    "message": "Descriere (opțional)"
-  },
-  "ruleDescriptionPlaceholder": {
-    "message": "ex., Rutare tot traficul Google"
-  },
-  "patternPlaceholder": {
-    "message": "ex., *.google.com"
-  },
-  "wildcardHelp": {
-    "message": "Folosiți * pentru a potrivi orice caracter. Exemplu: *.example.com"
-  },
-  "regexHelp": {
-    "message": "Folosiți sintaxa regex JavaScript. Exemplu: ^https?://.*\\.example\\.com"
-  },
-  "exactHelp": {
-    "message": "Potriviți numele de gazdă exact. Exemplu: www.example.com"
-  },
-  "cidrHelp": {
-    "message": "Folosiți notația CIDR pentru intervale IP. Exemplu: 192.168.1.0/24"
-  },
-  "invalidPattern": {
-    "message": "Model invalid"
-  },
-  "patternRequired": {
-    "message": "Modelul este obligatoriu"
-  },
-  "saveChanges": {
-    "message": "Salvează modificările"
-  },
-  "autoProxyReferenceWarning": {
-    "message": "Acest proxy este utilizat de următoarele configurații Auto-Proxy:"
-  },
-  "autoProxyRefSingular": {
-    "message": "1 regulă"
-  },
-  "autoProxyRefPlural": {
-    "message": "$1 reguli",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "3"
-      }
-    }
-  },
-  "autoProxyDeleteConsequence": {
-    "message": "Aceste reguli vor fi eliminate automat când ștergeți acest proxy."
-  },
-  "orphanedProxyWarning": {
-    "message": "Proxy-ul referențiat a fost șters. Vă rugăm să selectați un alt proxy."
-  },
-  "matchedRule": {
-    "message": "Regulă potrivită"
-  },
-  "useFallback": {
-    "message": "Folosește rezerva"
-  },
-  "dragToReorder": {
-    "message": "Trageți pentru a reordona regulile"
-  },
-  "failedToSaveProxy": {
-    "message": "Salvarea configurației proxy a eșuat"
-  },
-  "autoProxySubtitle": {
-    "message": "Rutare inteligentă a traficului bazată pe URL"
-  },
-  "close": {
-    "message": "Închide"
-  },
-  "ruleSingular": {
-    "message": "regulă"
-  },
-  "rulePlural": {
-    "message": "reguli"
-  },
-  "rulesConfigured": {
-    "message": "$1 $2 configurate"
-  },
-  "ruleActiveDescription": {
-    "message": "Această regulă va fi activă când configurația este activată"
-  },
-  "ruleSkippedDescription": {
-    "message": "Această regulă va fi omisă"
-  },
-  "matchTypeWildcard": {
-    "message": "Wildcard"
-  },
-  "matchTypeExact": {
-    "message": "Exact"
-  },
-  "matchTypeRegex": {
-    "message": "Regex"
-  },
-  "matchTypeCidr": {
-    "message": "CIDR"
-  },
-  "referencedProxyDeleted": {
-    "message": "Proxy șters"
-  },
-  "testPatternHint": {
-    "message": "Verificați dacă regulile funcționează corect"
-  },
-  "testButton": {
-    "message": "Test"
-  },
-  "ruleLabel": {
-    "message": "Regulă:"
-  },
-  "testPatternHelp": {
-    "message": "Introduceți un URL mai sus și faceți clic pe Test pentru a vedea ce regulă se potrivește"
-  },
-  "proxyModePacScript": {
-    "message": "(Script PAC)"
-  },
-  "proxyModeSystem": {
-    "message": "(Sistem)"
-  },
-  "proxyModeDirect": {
-    "message": "(Direct)"
-  },
-  "proxyModeAutoDetect": {
-    "message": "(Detectare automată)"
-  },
-  "toggleSearch": {
-    "message": "Comută căutarea"
-  },
-  "hideSearch": {
-    "message": "Ascunde căutarea"
-  },
-  "viewMode": {
-    "message": "Mod de vizualizare"
-  },
-  "viewModeGrid": {
-    "message": "Vizualizare grilă"
-  },
-  "viewModeList": {
-    "message": "Vizualizare listă"
-  },
-  "viewModeGridDescription": {
-    "message": "Afișează proxy-urile într-o grilă de carduri"
-  },
-  "viewModeListDescription": {
-    "message": "Afișează proxy-urile într-o listă orizontală"
-  },
-  "authentication": {
-    "message": "Autentificare"
-  },
-  "optional": {
-    "message": "Opțional"
-  },
-  "authStorageInfo": {
-    "message": "Acreditările sunt stocate local și criptate"
-  },
-  "username": {
-    "message": "Nume utilizator"
-  },
-  "usernamePlaceholder": {
-    "message": "nume utilizator"
-  },
-  "password": {
-    "message": "Parolă"
-  },
-  "passwordPlaceholder": {
-    "message": "••••••••"
-  },
-  "hidePassword": {
-    "message": "Ascunde parola"
-  },
-  "showPassword": {
-    "message": "Arată parola"
-  },
-  "diagnostics": {
-    "message": "Diagnosticare"
-  },
-  "tabDiagnostics": {
-    "message": "Diagnosticare"
-  },
-  "diagnosticsDesc": {
-    "message": "Vizualizați jurnalele de erori și informațiile de diagnosticare pentru depanare"
-  },
-  "diagnosticsExported": {
-    "message": "Diagnosticare exportată cu succes"
-  },
-  "diagnosticsExportFailed": {
-    "message": "Exportarea diagnosticării a eșuat"
-  },
-  "confirmClearLogs": {
-    "message": "Ștergeți toate jurnalele de diagnosticare?"
-  },
-  "diagnosticsCleared": {
-    "message": "Diagnosticare ștearsă cu succes"
-  },
-  "diagnosticsClearFailed": {
-    "message": "Ștergerea diagnosticării a eșuat"
-  },
-  "allLogsMarkedRead": {
-    "message": "Toate jurnalele au fost marcate ca citite"
-  },
-  "justNow": {
-    "message": "Chiar acum"
-  },
-  "markAllRead": {
-    "message": "Marchează toate ca citite"
-  },
-  "export": {
-    "message": "Exportă"
-  },
-  "clearAll": {
-    "message": "Șterge tot"
-  },
-  "noErrors": {
-    "message": "Nu au fost detectate erori"
-  },
-  "noErrorsDesc": {
-    "message": "Proxy-urile tale funcționează bine!"
-  },
-  "details": {
-    "message": "Detalii"
-  },
-  "url": {
-    "message": "URL"
-  },
-  "stackTrace": {
-    "message": "Urmărire stivă"
-  },
-  "logId": {
-    "message": "ID"
-  },
-  "proxyHasAuth": {
-    "message": "Acest proxy are autentificare configurată"
-  },
-  "settingsFileTooLarge": {
-    "message": "Fișierul de setări este prea mare. Dimensiunea maximă este $1KB.",
-    "placeholders": {
-      "1": {
-        "content": "$1",
-        "example": "1024"
-      }
-    }
-  },
-  "invalidFileType": {
-    "message": "Tip de fișier invalid. Vă rugăm să selectați un fișier JSON."
-  },
-  "invalidJsonFormat": {
-    "message": "Format JSON invalid."
-  },
-  "settingsMustBeObject": {
-    "message": "Setările trebuie să fie un obiect valid."
-  },
-  "invalidProxyConfigsArray": {
-    "message": "Setări invalide: proxyConfigs trebuie să fie un array."
-  },
-  "invalidQuickSwitchEnabled": {
-    "message": "Setări invalide: quickSwitchEnabled trebuie să fie un boolean."
-  },
-  "invalidDisableProxyOnStartup": {
-    "message": "Setări invalide: disableProxyOnStartup trebuie să fie un boolean."
-  },
-  "invalidAutoReloadOnProxySwitch": {
-    "message": "Setări invalide: autoReloadOnProxySwitch trebuie să fie un boolean."
-  },
-  "invalidActiveScriptId": {
-    "message": "Setări invalide: activeScriptId trebuie să fie un șir sau null."
-  },
-  "invalidProxyConfiguration": {
-    "message": "Configurație proxy invalidă."
-  },
-  "proxyMustHaveName": {
-    "message": "Fiecare proxy trebuie să aibă un nume valid."
-  },
-  "proxyMustHaveMode": {
-    "message": "Fiecare proxy trebuie să aibă un mod valid."
-  },
-  "failedToRestoreSettingsGeneric": {
-    "message": "Restaurarea setărilor a eșuat. Vă rugăm să verificați formatul fișierului."
-  },
-  "noActiveProxy": {
-    "message": "Niciunul"
-  },
-  "configuredProxies": {
-    "message": "Proxy-uri configurate"
-  },
-  "storageUsed": {
-    "message": "Stocare utilizată"
-  },
-  "extensionVersion": {
-    "message": "Versiunea extensiei"
-  },
-  "logsCount": {
-    "message": "Jurnale de activitate"
-  },
-  "activityLog": {
-    "message": "Jurnal de activitate"
-  },
-  "pacScriptValid": {
-    "message": "Scriptul PAC este valid"
-  },
-  "pacScriptError": {
-    "message": "Scriptul PAC conține erori. Vă rugăm să verificați sintaxa scriptului."
-  },
-  "invalidPacScript": {
-    "message": "Script PAC invalid. Asigurați-vă că conține o funcție FindProxyForURL validă."
-  },
-  "pacFetchFailed": {
-    "message": "Nu s-a putut obține scriptul PAC de la URL. Verificați URL-ul și conexiunea la rețea."
-  },
-  "proxyPermissionDenied": {
-    "message": "Permisiune refuzată. Este posibil ca extensia să nu aibă permisiunile necesare."
-  },
-  "proxyControlledByOther": {
-    "message": "Setările proxy sunt controlate de o altă extensie."
-  },
-  "proxyManagedByPolicy": {
-    "message": "Setările proxy sunt gestionate de politica organizației dvs."
-  },
-  "invalidProxyHost": {
-    "message": "Adresă de gazdă proxy invalidă. Verificați configurația serverului."
-  },
-  "invalidProxyPort": {
-    "message": "Port proxy invalid. Introduceți un număr de port valid (1-65535)."
-  },
-  "proxyTimeout": {
-    "message": "Conexiunea a expirat. Serverul proxy poate fi inaccesibil."
-  },
-  "proxySettingsFailed": {
-    "message": "Nu s-au putut aplica setările proxy."
-  },
-  "onboardingWelcomeTitle": {
-    "message": "Bine ați venit la PACify"
-  },
-  "onboardingWelcomeDescription": {
-    "message": "Managerul modern de proxy pentru Chrome. Configurați, comutați și gestionați setările proxy cu ușurință."
-  },
-  "onboardingFeaturesTitle": {
-    "message": "Funcții Puternice"
-  },
-  "onboardingFeaturesDescription": {
-    "message": "Tot ce aveți nevoie pentru a gestiona eficient proxy-urile."
-  },
-  "onboardingFeatureProxies": {
-    "message": "Profiluri Multiple de Proxy"
-  },
-  "onboardingFeatureProxiesDesc": {
-    "message": "Creați și comutați instantaneu între diferite configurații de proxy."
-  },
-  "onboardingFeatureAutoProxy": {
-    "message": "Reguli Auto-Proxy"
-  },
-  "onboardingFeatureAutoProxyDesc": {
-    "message": "Direcționați traficul pe baza modelelor URL cu reguli de rutare inteligente."
-  },
-  "onboardingFeaturePAC": {
-    "message": "Suport Scripturi PAC"
-  },
-  "onboardingFeaturePACDesc": {
-    "message": "Utilizați scripturi PAC personalizate pentru configurarea avansată a proxy-ului."
-  },
-  "onboardingShortcutsTitle": {
-    "message": "Comenzi Rapide de la Tastatură"
-  },
-  "onboardingShortcutsDescription": {
-    "message": "Lucrați mai rapid cu comenzile rapide de la tastatură."
-  },
-  "onboardingShortcutNewProxy": {
-    "message": "Creați proxy nou"
-  },
-  "onboardingShortcutSearch": {
-    "message": "Căutați proxy-uri"
-  },
-  "onboardingShortcutClose": {
-    "message": "Închideți fereastra"
-  },
-  "onboardingGetStartedTitle": {
-    "message": "Totul e Pregătit!"
-  },
-  "onboardingGetStartedDescription": {
-    "message": "Creați prima configurație de proxy pentru a începe sau explorați setările."
-  },
-  "onboardingCreateFirstProxy": {
-    "message": "Creați Primul Proxy"
-  },
-  "onboardingExploreSettings": {
-    "message": "Explorați Setările"
-  },
-  "previous": {
-    "message": "Anterior"
-  },
-  "next": {
-    "message": "Următor"
-  },
-  "skipTour": {
-    "message": "Săriți Turul"
-  },
-  "keyboardShortcutsDescription": {
-    "message": "Folosiți aceste comenzi rapide pentru a lucra mai repede"
-  },
-  "shortcutsGroupGeneral": {
-    "message": "General"
-  },
-  "shortcutsGroupNavigation": {
-    "message": "Navigare"
-  },
-  "shortcutsGroupProxyList": {
-    "message": "Lista de Proxy-uri"
-  },
-  "shortcutNewProxy": {
-    "message": "Creați o nouă configurație de proxy"
-  },
-  "shortcutSearch": {
-    "message": "Deschideți căutarea"
-  },
-  "shortcutCloseModal": {
-    "message": "Închideți fereastra curentă"
-  },
-  "shortcutShowHelp": {
-    "message": "Afișați comenzile rapide de la tastatură"
-  },
-  "shortcutNextElement": {
-    "message": "Treceți la elementul următor"
-  },
-  "shortcutPrevElement": {
-    "message": "Treceți la elementul anterior"
-  },
-  "shortcutActivate": {
-    "message": "Activați elementul focalizat"
-  },
-  "shortcutToggle": {
-    "message": "Comutați întrerupătoarele și casetele de selectare"
-  },
-  "shortcutNavigateList": {
-    "message": "Navigați prin lista de proxy-uri"
-  },
-  "shortcutActivateProxy": {
-    "message": "Activați proxy-ul selectat"
-  },
-  "shortcutEditProxy": {
-    "message": "Editați proxy-ul selectat"
-  },
-  "shortcutDeleteProxy": {
-    "message": "Ștergeți proxy-ul selectat"
-  },
-  "shortcutsTip": {
-    "message": "Apăsați ? oriunde pentru a afișa acest ajutor"
-  },
-  "subscriptions": { "message": "Abonamente" },
-  "subscriptionsDescription": {
-    "message": "Importați reguli din liste de domenii la distanță"
-  },
-  "addSubscription": { "message": "Adăugați abonament" },
-  "subscriptionName": { "message": "Nume" },
-  "subscriptionNamePlaceholder": { "message": "ex., GFWList, Ad Domains" },
-  "subscriptionNameRequired": {
-    "message": "Numele abonamentului este obligatoriu"
-  },
-  "subscriptionUrl": { "message": "URL" },
-  "subscriptionUrlRequired": {
-    "message": "URL-ul abonamentului este obligatoriu"
-  },
-  "subscriptionUrlInvalid": {
-    "message": "Vă rugăm să introduceți un URL valid"
-  },
-  "subscriptionFormat": { "message": "Format" },
-  "subscriptionInterval": { "message": "Actualizare automată" },
-  "subscriptionFetching": { "message": "Se preia..." },
-  "subscriptionFetchFailed": { "message": "Nu s-a putut prelua abonamentul" },
-  "subscriptionNoRules": { "message": "Nu s-au găsit reguli în abonament" },
-  "noSubscriptions": { "message": "Fără abonamente" },
-  "noSubscriptionsDescription": {
-    "message": "Abonați-vă la liste de domenii la distanță pentru a importa automat reguli proxy din URL-uri precum GFWList sau liste de domenii personalizate"
-  },
-  "refreshSubscription": { "message": "Actualizează" },
-  "editSubscription": { "message": "Editați abonamentul" },
-  "saveSubscription": { "message": "Salvați modificările" },
-  "deleteSubscription": { "message": "Ștergeți abonamentul" },
-  "deleteSubscriptionTitle": { "message": "Ștergeți abonamentul" },
-  "deleteSubscriptionMessage": {
-    "message": "Sigur doriți să ștergeți abonamentul \"$1\"?",
-    "placeholders": { "1": { "content": "$1", "example": "GFWList" } }
-  },
-  "rules": { "message": "reguli" },
-  "fromSubscriptions": { "message": "din abonamente" },
-  "never": { "message": "Niciodată" },
-  "minutesAgo": {
-    "message": "$1 min în urmă",
-    "placeholders": { "1": { "content": "$1", "example": "5" } }
-  },
-  "hoursAgo": {
-    "message": "$1h în urmă",
-    "placeholders": { "1": { "content": "$1", "example": "2" } }
-  },
-  "formatAuto": { "message": "Detectare automată" },
-  "formatAbp": { "message": "ABP / GFWList" },
-  "formatDomains": { "message": "Listă de domenii" },
-  "intervalManual": { "message": "Doar manual" },
-  "intervalMinutes": {
-    "message": "La fiecare $1 min",
-    "placeholders": { "1": { "content": "$1", "example": "30" } }
-  },
-  "intervalHour": {
-    "message": "La fiecare $1 oră",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  },
-  "intervalHours": {
-    "message": "La fiecare $1 ore",
-    "placeholders": { "1": { "content": "$1", "example": "6" } }
-  },
-  "intervalDay": {
-    "message": "La fiecare $1 zi",
-    "placeholders": { "1": { "content": "$1", "example": "1" } }
-  }
+  "extName": {"message":"PACify | Manager de Proxy"},
+  "extDescription": {"message":"Manager complet de proxy pentru Chrome. Creați, editați și comutați cu ușurință între scripturi PAC, proxy-uri manuale și configurații de sistem."},
+  "basicSettings": {"message":"Setări de bază"},
+  "proxyMode": {"message":"Mod Proxy"},
+  "systemProxy": {"message":"Utilizează setările proxy din sistemul de operare."},
+  "directMode": {"message":"Direct"},
+  "directModeHelp": {"message":"În modul direct, toate conexiunile sunt create direct, fără niciun proxy implicat."},
+  "autoDetectMode": {"message":"URL auto-configurare"},
+  "autoDetectModeHelp": {"message":"În modul de detectare automată, Chrome va căuta și va descărca automat setările proxy folosind protocolul WPAD."},
+  "deleteConfirm": {"message":"Sigur doriți să ștergeți acest script?"},
+  "toggleProxyHint": {"message":"Comutați proxy-ul făcând clic pe întrerupător."},
+  "systemMode": {"message":"Sistem"},
+  "pacScriptMode": {"message":"Script PAC"},
+  "manualMode": {"message":"Configurare manuală"},
+  "addNewScript": {"message":"Adăugare script nou"},
+  "quickSwitchMode": {"message":"Mod comutare rapidă"},
+  "quickSwitchDescription": {"message":"Activați comutarea rapidă între configurațiile proxy din popup"},
+  "settings": {"message":"Setări"},
+  "nameRequired": {"message":"Numele este obligatoriu"},
+  "proxyConfiguration": {"message":"Configurație proxy"},
+  "cancel": {"message":"Anulare"},
+  "saveConfiguration": {"message":"Salvare configurație"},
+  "saving": {"message":"Se salvează..."},
+  "noScriptsAvailable": {"message":"Nu există scripturi PAC disponibile. Adăugați primul script pentru a începe."},
+  "noQuickSwitchScripts": {"message":"Nu există scripturi de comutare rapidă configurate. Trageți scripturile aici pentru a activa comutarea rapidă."},
+  "noScriptsAvailableOptions": {"message":"Nu există scripturi disponibile. Faceți clic pe \"Adăugare script nou\" pentru a crea primul script PAC."},
+  "backupSettings": {"message":"Backup setări"},
+  "restoreSettings": {"message":"Restaurare setări"},
+  "useSameProxy": {"message":"Utilizați același server proxy pentru toate protocoalele"},
+  "proxyServer": {"message":"Server proxy"},
+  "httpProxy": {"message":"Proxy HTTP"},
+  "httpsProxy": {"message":"Proxy HTTPS"},
+  "ftpProxy": {"message":"Proxy FTP"},
+  "fallbackProxy": {"message":"Proxy de rezervă"},
+  "bypassList": {"message":"Listă de ocolire"},
+  "pacScriptUrl": {"message":"URL script PAC"},
+  "pacScript": {"message":"Script PAC"},
+  "templates": {"message":"Șabloane:"},
+  "emptyTemplate": {"message":"Gol"},
+  "basicTemplate": {"message":"De bază"},
+  "proTemplate": {"message":"Pro"},
+  "advancedTemplate": {"message":"Avansat"},
+  "mandatoryPacScript": {"message":"Script PAC obligatoriu (previne revenirea la direct)"},
+  "dropToAddQuickScripts": {"message":"Plasați aici pentru a adăuga la scripturile rapide"},
+  "dropToRemoveQuickScripts": {"message":"Plasați aici pentru a elimina din scripturile rapide"},
+  "quickPacScripts": {"message":"Configurații de comutare rapidă"},
+  "allProxyConfigs": {"message":"Toate configurațiile proxy"},
+  "dragScriptsHere": {"message":"Trageți scripturile aici pentru a activa comutarea rapidă. Comutarea rapidă vă permite să schimbați proxy-ul făcând clic pe pictograma extensiei."},
+  "colorRequired": {"message":"Culoarea este obligatorie"},
+  "configurationName": {"message":"Nume configurație"},
+  "color": {"message":"Culoare"},
+  "badgeLabel": {"message":"Etichetă insignă"},
+  "badgeLabelHelp": {"message":"Text personalizat pentru pictograma extensiei (max. 4 caractere). Lăsați gol pentru generare automată."},
+  "active": {"message":"Activ"},
+  "host": {"message":"Gazdă"},
+  "port": {"message":"Port"},
+  "enterConfigurationName": {"message":"Introduceți numele configurației"},
+  "disableProxyOnStartup": {"message":"Dezactivează proxy-ul la pornire"},
+  "disableProxyOnStartupDescription": {"message":"Pornește cu proxy-ul dezactivat de fiecare dată când se lansează browserul"},
+  "autoReloadOnProxySwitch": {"message":"Reîncarcă automat pagina la schimbarea proxy-ului"},
+  "autoReloadOnProxySwitchDescription": {"message":"Reîncarcă automat tab-ul activ la schimbarea proxy-ului"},
+  "tooltipAutoReload": {"message":"Când este activat, pagina curentă va fi reîncărcată după schimbarea setărilor proxy pentru a aplica modificările imediat"},
+  "invalidConfiguration": {"message":"Configurație nevalidă"},
+  "syncStorage": {"message":"Stocare sincronizată"},
+  "localStorage": {"message":"Stocare locală"},
+  "dropTarget": {"message":"Țintă de tragere"},
+  "tabProxyConfigs": {"message":"Configurații proxy"},
+  "tabSettings": {"message":"Setări"},
+  "tabAbout": {"message":"Despre"},
+  "settingsProxyBehavior": {"message":"Comportament proxy"},
+  "settingsDataManagement": {"message":"Gestionarea datelor"},
+  "aboutVersion": {"message":"Versiune"},
+  "aboutHelpResources": {"message":"Ajutor și resurse"},
+  "aboutExtensionInfo": {"message":"Informații despre extensie"},
+  "aboutDiagnostics": {"message":"Diagnostice"},
+  "aboutViewOnGithub": {"message":"Vizualizare pe GitHub"},
+  "aboutReportIssue": {"message":"Raportează o problemă"},
+  "aboutDocumentation": {"message":"Documentație"},
+  "aboutFeatureRequest": {"message":"Solicitare funcționalitate"},
+  "feedbackAndRating": {"message":"Feedback și Evaluare"},
+  "rateExtension": {"message":"Evaluați Extensia"},
+  "leaveReview": {"message":"Lăsați o Recenzie"},
+  "supportProject": {"message":"Sprijiniți Proiectul"},
+  "statusConnected": {"message":"Conectat"},
+  "statusDisconnected": {"message":"Niciun proxy activ"},
+  "footerActiveProxy": {"message":"Faceți clic pe comutator pentru a dezactiva proxy-ul"},
+  "footerSelectProxy": {"message":"Selectați un proxy pentru a vă conecta"},
+  "proxyEnabled": {"message":"Proxy \"$1\" activat"},
+  "proxyDisabled": {"message":"Proxy \"$1\" dezactivat"},
+  "proxyDeleted": {"message":"Proxy \"$1\" șters cu succes"},
+  "toggleProxyOn": {"message":"Activează proxy-ul $1"},
+  "toggleProxyOff": {"message":"Dezactivează proxy-ul $1"},
+  "editConfiguration": {"message":"Editează configurația $1"},
+  "deleteConfiguration": {"message":"Șterge configurația $1"},
+  "deleteProxyTitle": {"message":"Șterge configurația proxy"},
+  "deleteProxyMessage": {"message":"Sigur doriți să ștergeți \"$1\"? Această acțiune nu poate fi anulată."},
+  "delete": {"message":"Șterge"},
+  "backupSuccess": {"message":"Setări salvate cu succes"},
+  "backupFailed": {"message":"Eșec la salvarea setărilor"},
+  "restoreSuccess": {"message":"Setări restaurate cu succes"},
+  "restoreFailed": {"message":"Eșec la restaurarea setărilor"},
+  "backupDescription": {"message":"Descărcați toate configurațiile proxy și preferințele ca fișier JSON"},
+  "restoreDescription": {"message":"Încărcați un fișier de backup pentru a restaura configurațiile"},
+  "errorBoundaryTitle": {"message":"Ceva nu a mers bine"},
+  "errorBoundaryRetry": {"message":"Încercați din nou"},
+  "closeNotification": {"message":"Închide notificarea"},
+  "closeDialog": {"message":"Închide dialogul"},
+  "confirm": {"message":"Confirmă"},
+  "quickSwitchEnabled": {"message":"Modul de comutare rapidă activat"},
+  "quickSwitchDisabled": {"message":"Modul de comutare rapidă dezactivat"},
+  "proxyDisabledOnStartup": {"message":"Proxy-ul va fi dezactivat la pornirea browserului"},
+  "proxyPersistOnStartup": {"message":"Starea proxy-ului va persista la pornirea browserului"},
+  "proxyUpdated": {"message":"Proxy \"$1\" actualizat cu succes"},
+  "proxyCreated": {"message":"Proxy \"$1\" creat cu succes"},
+  "quickSwitchEnabledStatus": {"message":"✓ Activat – Faceți clic pe pictograma extensiei pentru a comuta rapid"},
+  "quickSwitchConfigsTitle": {"message":"Configurații de comutare rapidă"},
+  "quickSwitchConfigsDescription": {"message":"Trageți proxy-uri aici pentru acces dintr-un clic în popup"},
+  "allProxyConfigsTitle": {"message":"Toate configurațiile proxy"},
+  "allProxyConfigsDescription": {"message":"Gestionați toate configurațiile proxy"},
+  "quickStatsTitle": {"message":"Statistici rapide"},
+  "totalProxies": {"message":"Total proxy-uri"},
+  "quickSwitch": {"message":"Comutare rapidă"},
+  "activeProxy": {"message":"Proxy activ"},
+  "lastUsed": {"message":"Ultima utilizare"},
+  "none": {"message":"Niciuna"},
+  "versionLabel": {"message":"Versiune:"},
+  "extensionDescription": {"message":"Extensie Chrome pentru gestionarea scripturilor PAC (Proxy Auto-Config)"},
+  "bypassListPlaceholder": {"message":"Introduceți un model pe linie:\n*.example.com\nlocalhost\n127.0.0.1\n[::1]"},
+  "pacUrlPlaceholder": {"message":"https://nav-proxy.vercel.app/api/proxyman.pac"},
+  "noProxiesTitle": {"message":"Nu există proxy-uri disponibile"},
+  "noQuickSwitchTitle": {"message":"Nu există proxy-uri de comutare rapidă"},
+  "noProxyConfigsTitle": {"message":"Nu există configurații proxy"},
+  "addFirstProxyAction": {"message":"Adăugați primul proxy"},
+  "offButton": {"message":"OPRIT"},
+  "tooltipQuickSwitchMode": {"message":"Accesați instantaneu proxy-uri favorite din popup fără a deschide setările"},
+  "tooltipDisableOnStartup": {"message":"Acest lucru asigură că proxy-urile nu se activează automat când Chrome pornește"},
+  "tooltipDragToQuickSwitch": {"message":"Trageți carduri de proxy aici pentru a le adăuga la Comutare rapidă pentru acces mai rapid"},
+  "tooltipDragToRemove": {"message":"Trageți proxy-uri de comutare rapidă aici pentru a le elimina din popup"},
+  "tooltipKeyboardShortcut": {"message":"Apăsați Ctrl+N (Cmd+N pe Mac) pentru a adăuga rapid un proxy nou"},
+  "invalidHost": {"message":"Nume de gazdă sau adresă IP nevalidă"},
+  "invalidPort": {"message":"Portul trebuie să fie între 1 și 65535"},
+  "invalidUrl": {"message":"Vă rugăm să introduceți un URL valid"},
+  "invalidPacUrlProtocol": {"message":"URL-ul PAC trebuie să folosească protocolul http://, https:// sau file://"},
+  "pacUrlWarning": {"message":"Fișierele PAC se termină de obicei cu .pac"},
+  "bypassListHelp": {"message":"Introduceți o adresă pe linie. Puteți folosi wildcard-uri (*) și intervale IP (notație CIDR)."},
+  "nameTooLong": {"message":"Numele trebuie să aibă maxim 50 de caractere"},
+  "nameTooShort": {"message":"Numele trebuie să aibă cel puțin 1 caracter"},
+  "hostPlaceholder": {"message":"proxy.example.com"},
+  "portPlaceholder": {"message":"8080"},
+  "scheme": {"message":"Schemă"},
+  "noProxiesYet": {"message":"Nicio configurație proxy încă"},
+  "noProxiesDescription": {"message":"Începeți prin a crea prima configurație proxy pentru a controla modul în care browserul dvs. se conectează la internet."},
+  "getStarted": {"message":"Începeți"},
+  "quickSwitchEmptyHint": {"message":"Trageți configurații proxy aici pentru acces rapid din popup"},
+  "quickSwitchEmptySubHint": {"message":"Proxy-urile adăugate aici vor apărea în popup pentru comutare cu un singur clic"},
+  "pacUrlHelp": {"message":"Scriptul PAC va fi încărcat de la acest URL"},
+  "keyboardShortcuts": {"message":"Comenzi rapide de la tastatură"},
+  "keyboardShortcutFocusSearch": {"message":"Focalizare căutare"},
+  "keyboardShortcutNewProxy": {"message":"Proxy nou"},
+  "keyboardShortcutClearSearch": {"message":"Șterge căutarea"},
+  "keyboardShortcutToggleProxy": {"message":"Comutare proxy 1-9"},
+  "searchProxiesPlaceholder": {"message":"Căutare proxy-uri... (Ctrl+K)"},
+  "keyboardShortcutCtrlCmdK": {"message":"Ctrl/Cmd+K"},
+  "keyboardShortcutCtrlCmdN": {"message":"Ctrl/Cmd+N"},
+  "keyboardShortcutEscape": {"message":"Escape"},
+  "keyboardShortcutNumbers": {"message":"1-9"},
+  "keyboardShortcutsNote": {"message":"Note: Some shortcuts may conflict with browser or OS shortcuts"},
+  "keyboardShortcutQuickSwitchOnly": {"message":"Only works for proxies in the Quick Switch section"},
+  "updateInterval": {"message":"Interval de actualizare automată"},
+  "noAutoUpdate": {"message":"Fără actualizare automată"},
+  "minutes": {"message":"minute"},
+  "hour": {"message":"oră"},
+  "hours": {"message":"ore"},
+  "refreshNow": {"message":"Actualizează acum"},
+  "refreshing": {"message":"Se actualizează..."},
+  "lastFetched": {"message":"Ultima preluare"},
+  "pacScriptRefreshed": {"message":"Scriptul PAC a fost actualizat cu succes"},
+  "autoReloadEnabled": {"message":"Auto-reload enabled"},
+  "autoReloadDisabled": {"message":"Auto-reload disabled"},
+  "systemNotifications": {"message":"System Notifications"},
+  "systemNotificationsEnabled": {"message":"System notifications enabled"},
+  "systemNotificationsDisabled": {"message":"System notifications disabled"},
+  "systemNotificationsTooltip": {"message":"Enable Chrome notifications for background events"},
+  "systemNotificationsDescription": {"message":"Show system notifications for proxy switches and errors"},
+  "errorFailedToLoadSettings": {"message":"Failed to load settings"},
+  "errorFailedToSetProxy": {"message":"Failed to set proxy configuration"},
+  "errorFailedToClearProxy": {"message":"Failed to clear proxy configuration"},
+  "errorFailedToDeleteScript": {"message":"Failed to delete script"},
+  "proxySwitched": {"message":"Proxy Switched"},
+  "proxySwitchedTo": {"message":"Switched to \"$1\""},
+  "proxySwitchedToForHost": {"message":"Switched to \"$1\" for $2"},
+  "proxyError": {"message":"Proxy Error"},
+  "proxyErrorMessage": {"message":"Failed to use \"$1\": $2"},
+  "pacScriptPreview": {"message":"PAC Script Preview (Read-only)"},
+  "pacScriptFetchError": {"message":"Failed to fetch PAC script from URL"},
+  "addAutoProxy": {"message":"Adaugă Auto-Proxy"},
+  "addAutoProxyTooltip": {"message":"Creați reguli de rutare bazate pe URL"},
+  "autoProxyMode": {"message":"Auto-Proxy"},
+  "autoProxyRulesCount": {"message":"$1 reguli"},
+  "createAutoProxy": {"message":"Creează Auto-Proxy"},
+  "editAutoProxy": {"message":"Editează Auto-Proxy"},
+  "autoProxyCreated": {"message":"Auto-Proxy \"$1\" creat cu succes"},
+  "autoProxyUpdated": {"message":"Auto-Proxy \"$1\" actualizat cu succes"},
+  "autoProxyDeleted": {"message":"Auto-Proxy \"$1\" șters cu succes"},
+  "autoProxyNamePlaceholder": {"message":"ex., Rutare de lucru, Split Tunnel"},
+  "addRule": {"message":"Adaugă regulă"},
+  "editRule": {"message":"Editează regulă"},
+  "deleteRule": {"message":"Șterge regulă"},
+  "saveRule": {"message":"Salvează regulă"},
+  "cancelRule": {"message":"Anulare"},
+  "urlPattern": {"message":"Model URL"},
+  "patternType": {"message":"Tip de model"},
+  "wildcardPattern": {"message":"Wildcard"},
+  "regexPattern": {"message":"Regex"},
+  "exactMatch": {"message":"Potrivire exactă"},
+  "cidrPattern": {"message":"CIDR (Interval IP)"},
+  "selectProxy": {"message":"Selectează proxy"},
+  "defineInline": {"message":"Definește inline"},
+  "directConnection": {"message":"Conexiune directă"},
+  "fallbackBehavior": {"message":"Comportament de rezervă"},
+  "fallbackDescription": {"message":"Aplicat când nicio regulă nu corespunde URL-ului"},
+  "testPattern": {"message":"Testează model"},
+  "testUrl": {"message":"URL de test"},
+  "testUrlPlaceholder": {"message":"Introduceți un URL pentru a testa contra regulilor"},
+  "patternMatches": {"message":"Modelul corespunde!"},
+  "noPatternMatch": {"message":"Niciun model nu corespunde - se va folosi rezerva"},
+  "ruleEnabled": {"message":"Regulă activată"},
+  "ruleDisabled": {"message":"Regulă dezactivată"},
+  "routingRules": {"message":"Reguli de rutare"},
+  "noRulesYet": {"message":"Nu există reguli definite încă"},
+  "noRulesDescription": {"message":"Adăugați reguli pentru a defini cum vor fi rutate URL-urile către diferite proxy-uri"},
+  "atLeastOneRule": {"message":"Este necesară cel puțin o regulă"},
+  "failedToSave": {"message":"Salvarea configurației a eșuat"},
+  "proxyType": {"message":"Tip de proxy"},
+  "noProxiesAvailable": {"message":"Nu există proxy-uri disponibile"},
+  "name": {"message":"Nume"},
+  "ruleDescription": {"message":"Descriere (opțional)"},
+  "ruleDescriptionPlaceholder": {"message":"ex., Rutare tot traficul Google"},
+  "patternPlaceholder": {"message":"ex., *.google.com"},
+  "wildcardHelp": {"message":"Folosiți * pentru a potrivi orice caracter. Exemplu: *.example.com"},
+  "regexHelp": {"message":"Folosiți sintaxa regex JavaScript. Exemplu: ^https?://.*\\.example\\.com"},
+  "exactHelp": {"message":"Potriviți numele de gazdă exact. Exemplu: www.example.com"},
+  "cidrHelp": {"message":"Folosiți notația CIDR pentru intervale IP. Exemplu: 192.168.1.0/24"},
+  "invalidPattern": {"message":"Model invalid"},
+  "patternRequired": {"message":"Modelul este obligatoriu"},
+  "saveChanges": {"message":"Salvează modificările"},
+  "autoProxyReferenceWarning": {"message":"Acest proxy este utilizat de următoarele configurații Auto-Proxy:"},
+  "autoProxyRefSingular": {"message":"1 regulă"},
+  "autoProxyRefPlural": {"message":"$1 reguli","placeholders":{"1":{"content":"$1","example":"3"}}},
+  "autoProxyDeleteConsequence": {"message":"Aceste reguli vor fi eliminate automat când ștergeți acest proxy."},
+  "orphanedProxyWarning": {"message":"Proxy-ul referențiat a fost șters. Vă rugăm să selectați un alt proxy."},
+  "matchedRule": {"message":"Regulă potrivită"},
+  "useFallback": {"message":"Folosește rezerva"},
+  "dragToReorder": {"message":"Trageți pentru a reordona regulile"},
+  "failedToSaveProxy": {"message":"Salvarea configurației proxy a eșuat"},
+  "autoProxySubtitle": {"message":"Rutare inteligentă a traficului bazată pe URL"},
+  "close": {"message":"Închide"},
+  "ruleSingular": {"message":"regulă"},
+  "rulePlural": {"message":"reguli"},
+  "rulesConfigured": {"message":"$1 $2 configurate"},
+  "ruleActiveDescription": {"message":"Această regulă va fi activă când configurația este activată"},
+  "ruleSkippedDescription": {"message":"Această regulă va fi omisă"},
+  "matchTypeWildcard": {"message":"Wildcard"},
+  "matchTypeExact": {"message":"Exact"},
+  "matchTypeRegex": {"message":"Regex"},
+  "matchTypeCidr": {"message":"CIDR"},
+  "referencedProxyDeleted": {"message":"Proxy șters"},
+  "testPatternHint": {"message":"Verificați dacă regulile funcționează corect"},
+  "testButton": {"message":"Test"},
+  "ruleLabel": {"message":"Regulă:"},
+  "testPatternHelp": {"message":"Introduceți un URL mai sus și faceți clic pe Test pentru a vedea ce regulă se potrivește"},
+  "proxyModePacScript": {"message":"(Script PAC)"},
+  "proxyModeSystem": {"message":"(Sistem)"},
+  "proxyModeDirect": {"message":"(Direct)"},
+  "proxyModeAutoDetect": {"message":"(Detectare automată)"},
+  "toggleSearch": {"message":"Comută căutarea"},
+  "hideSearch": {"message":"Ascunde căutarea"},
+  "viewMode": {"message":"Mod de vizualizare"},
+  "viewModeGrid": {"message":"Vizualizare grilă"},
+  "viewModeList": {"message":"Vizualizare listă"},
+  "viewModeGridDescription": {"message":"Afișează proxy-urile într-o grilă de carduri"},
+  "viewModeListDescription": {"message":"Afișează proxy-urile într-o listă orizontală"},
+  "authentication": {"message":"Autentificare"},
+  "optional": {"message":"Opțional"},
+  "authStorageInfo": {"message":"Acreditările sunt stocate local și criptate"},
+  "username": {"message":"Nume utilizator"},
+  "usernamePlaceholder": {"message":"nume utilizator"},
+  "password": {"message":"Parolă"},
+  "passwordPlaceholder": {"message":"••••••••"},
+  "hidePassword": {"message":"Ascunde parola"},
+  "showPassword": {"message":"Arată parola"},
+  "diagnostics": {"message":"Diagnosticare"},
+  "tabDiagnostics": {"message":"Diagnosticare"},
+  "diagnosticsDesc": {"message":"Vizualizați jurnalele de erori și informațiile de diagnosticare pentru depanare"},
+  "diagnosticsExported": {"message":"Diagnosticare exportată cu succes"},
+  "diagnosticsExportFailed": {"message":"Exportarea diagnosticării a eșuat"},
+  "confirmClearLogs": {"message":"Ștergeți toate jurnalele de diagnosticare?"},
+  "diagnosticsCleared": {"message":"Diagnosticare ștearsă cu succes"},
+  "diagnosticsClearFailed": {"message":"Ștergerea diagnosticării a eșuat"},
+  "allLogsMarkedRead": {"message":"Toate jurnalele au fost marcate ca citite"},
+  "justNow": {"message":"Chiar acum"},
+  "markAllRead": {"message":"Marchează toate ca citite"},
+  "export": {"message":"Exportă"},
+  "clearAll": {"message":"Șterge tot"},
+  "noErrors": {"message":"Nu au fost detectate erori"},
+  "noErrorsDesc": {"message":"Proxy-urile tale funcționează bine!"},
+  "details": {"message":"Detalii"},
+  "url": {"message":"URL"},
+  "stackTrace": {"message":"Urmărire stivă"},
+  "logId": {"message":"ID"},
+  "proxyHasAuth": {"message":"Acest proxy are autentificare configurată"},
+  "settingsFileTooLarge": {"message":"Fișierul de setări este prea mare. Dimensiunea maximă este $1KB.","placeholders":{"1":{"content":"$1","example":"1024"}}},
+  "invalidFileType": {"message":"Tip de fișier invalid. Vă rugăm să selectați un fișier JSON."},
+  "invalidJsonFormat": {"message":"Format JSON invalid."},
+  "settingsMustBeObject": {"message":"Setările trebuie să fie un obiect valid."},
+  "invalidProxyConfigsArray": {"message":"Setări invalide: proxyConfigs trebuie să fie un array."},
+  "invalidQuickSwitchEnabled": {"message":"Setări invalide: quickSwitchEnabled trebuie să fie un boolean."},
+  "invalidDisableProxyOnStartup": {"message":"Setări invalide: disableProxyOnStartup trebuie să fie un boolean."},
+  "invalidAutoReloadOnProxySwitch": {"message":"Setări invalide: autoReloadOnProxySwitch trebuie să fie un boolean."},
+  "invalidActiveScriptId": {"message":"Setări invalide: activeScriptId trebuie să fie un șir sau null."},
+  "invalidProxyConfiguration": {"message":"Configurație proxy invalidă."},
+  "proxyMustHaveName": {"message":"Fiecare proxy trebuie să aibă un nume valid."},
+  "proxyMustHaveMode": {"message":"Fiecare proxy trebuie să aibă un mod valid."},
+  "failedToRestoreSettingsGeneric": {"message":"Restaurarea setărilor a eșuat. Vă rugăm să verificați formatul fișierului."},
+  "noActiveProxy": {"message":"Niciunul"},
+  "configuredProxies": {"message":"Proxy-uri configurate"},
+  "storageUsed": {"message":"Stocare utilizată"},
+  "extensionVersion": {"message":"Versiunea extensiei"},
+  "logsCount": {"message":"Jurnale de activitate"},
+  "activityLog": {"message":"Jurnal de activitate"},
+  "pacScriptValid": {"message":"Scriptul PAC este valid"},
+  "pacScriptError": {"message":"Scriptul PAC conține erori. Vă rugăm să verificați sintaxa scriptului."},
+  "invalidPacScript": {"message":"Script PAC invalid. Asigurați-vă că conține o funcție FindProxyForURL validă."},
+  "pacFetchFailed": {"message":"Nu s-a putut obține scriptul PAC de la URL. Verificați URL-ul și conexiunea la rețea."},
+  "proxyPermissionDenied": {"message":"Permisiune refuzată. Este posibil ca extensia să nu aibă permisiunile necesare."},
+  "proxyControlledByOther": {"message":"Setările proxy sunt controlate de o altă extensie."},
+  "proxyManagedByPolicy": {"message":"Setările proxy sunt gestionate de politica organizației dvs."},
+  "invalidProxyHost": {"message":"Adresă de gazdă proxy invalidă. Verificați configurația serverului."},
+  "invalidProxyPort": {"message":"Port proxy invalid. Introduceți un număr de port valid (1-65535)."},
+  "proxyTimeout": {"message":"Conexiunea a expirat. Serverul proxy poate fi inaccesibil."},
+  "proxySettingsFailed": {"message":"Nu s-au putut aplica setările proxy."},
+  "onboardingWelcomeTitle": {"message":"Bine ați venit la PACify"},
+  "onboardingWelcomeDescription": {"message":"Managerul modern de proxy pentru Chrome. Configurați, comutați și gestionați setările proxy cu ușurință."},
+  "onboardingFeaturesTitle": {"message":"Funcții Puternice"},
+  "onboardingFeaturesDescription": {"message":"Tot ce aveți nevoie pentru a gestiona eficient proxy-urile."},
+  "onboardingFeatureProxies": {"message":"Profiluri Multiple de Proxy"},
+  "onboardingFeatureProxiesDesc": {"message":"Creați și comutați instantaneu între diferite configurații de proxy."},
+  "onboardingFeatureAutoProxy": {"message":"Reguli Auto-Proxy"},
+  "onboardingFeatureAutoProxyDesc": {"message":"Direcționați traficul pe baza modelelor URL cu reguli de rutare inteligente."},
+  "onboardingFeaturePAC": {"message":"Suport Scripturi PAC"},
+  "onboardingFeaturePACDesc": {"message":"Utilizați scripturi PAC personalizate pentru configurarea avansată a proxy-ului."},
+  "onboardingShortcutsTitle": {"message":"Comenzi Rapide de la Tastatură"},
+  "onboardingShortcutsDescription": {"message":"Lucrați mai rapid cu comenzile rapide de la tastatură."},
+  "onboardingShortcutNewProxy": {"message":"Creați proxy nou"},
+  "onboardingShortcutSearch": {"message":"Căutați proxy-uri"},
+  "onboardingShortcutClose": {"message":"Închideți fereastra"},
+  "onboardingGetStartedTitle": {"message":"Totul e Pregătit!"},
+  "onboardingGetStartedDescription": {"message":"Creați prima configurație de proxy pentru a începe sau explorați setările."},
+  "onboardingCreateFirstProxy": {"message":"Creați Primul Proxy"},
+  "onboardingExploreSettings": {"message":"Explorați Setările"},
+  "previous": {"message":"Anterior"},
+  "next": {"message":"Următor"},
+  "skipTour": {"message":"Săriți Turul"},
+  "keyboardShortcutsDescription": {"message":"Folosiți aceste comenzi rapide pentru a lucra mai repede"},
+  "shortcutsGroupGeneral": {"message":"General"},
+  "shortcutsGroupNavigation": {"message":"Navigare"},
+  "shortcutsGroupProxyList": {"message":"Lista de Proxy-uri"},
+  "shortcutNewProxy": {"message":"Creați o nouă configurație de proxy"},
+  "shortcutSearch": {"message":"Deschideți căutarea"},
+  "shortcutCloseModal": {"message":"Închideți fereastra curentă"},
+  "shortcutShowHelp": {"message":"Afișați comenzile rapide de la tastatură"},
+  "shortcutNextElement": {"message":"Treceți la elementul următor"},
+  "shortcutPrevElement": {"message":"Treceți la elementul anterior"},
+  "shortcutActivate": {"message":"Activați elementul focalizat"},
+  "shortcutToggle": {"message":"Comutați întrerupătoarele și casetele de selectare"},
+  "shortcutNavigateList": {"message":"Navigați prin lista de proxy-uri"},
+  "shortcutActivateProxy": {"message":"Activați proxy-ul selectat"},
+  "shortcutEditProxy": {"message":"Editați proxy-ul selectat"},
+  "shortcutDeleteProxy": {"message":"Ștergeți proxy-ul selectat"},
+  "shortcutsTip": {"message":"Apăsați ? oriunde pentru a afișa acest ajutor"},
+  "subscriptions": {"message":"Abonamente"},
+  "subscriptionsDescription": {"message":"Importați reguli din liste de domenii la distanță"},
+  "addSubscription": {"message":"Adăugați abonament"},
+  "subscriptionName": {"message":"Nume"},
+  "subscriptionNamePlaceholder": {"message":"ex., GFWList, Ad Domains"},
+  "subscriptionNameRequired": {"message":"Numele abonamentului este obligatoriu"},
+  "subscriptionUrl": {"message":"URL"},
+  "subscriptionUrlRequired": {"message":"URL-ul abonamentului este obligatoriu"},
+  "subscriptionUrlInvalid": {"message":"Vă rugăm să introduceți un URL valid"},
+  "subscriptionFormat": {"message":"Format"},
+  "subscriptionInterval": {"message":"Actualizare automată"},
+  "subscriptionFetching": {"message":"Se preia..."},
+  "subscriptionFetchFailed": {"message":"Nu s-a putut prelua abonamentul"},
+  "subscriptionNoRules": {"message":"Nu s-au găsit reguli în abonament"},
+  "noSubscriptions": {"message":"Fără abonamente"},
+  "noSubscriptionsDescription": {"message":"Abonați-vă la liste de domenii la distanță pentru a importa automat reguli proxy din URL-uri precum GFWList sau liste de domenii personalizate"},
+  "refreshSubscription": {"message":"Actualizează"},
+  "editSubscription": {"message":"Editați abonamentul"},
+  "saveSubscription": {"message":"Salvați modificările"},
+  "deleteSubscription": {"message":"Ștergeți abonamentul"},
+  "deleteSubscriptionTitle": {"message":"Ștergeți abonamentul"},
+  "deleteSubscriptionMessage": {"message":"Sigur doriți să ștergeți abonamentul \"$1\"?","placeholders":{"1":{"content":"$1","example":"GFWList"}}},
+  "rules": {"message":"reguli"},
+  "fromSubscriptions": {"message":"din abonamente"},
+  "never": {"message":"Niciodată"},
+  "minutesAgo": {"message":"$1 min în urmă","placeholders":{"1":{"content":"$1","example":"5"}}},
+  "hoursAgo": {"message":"$1h în urmă","placeholders":{"1":{"content":"$1","example":"2"}}},
+  "formatAuto": {"message":"Detectare automată"},
+  "formatAbp": {"message":"ABP / GFWList"},
+  "formatDomains": {"message":"Listă de domenii"},
+  "formatSurge": {"message":"Surge / Shadowrocket"},
+  "formatClash": {"message":"Clash / Mihomo"},
+  "intervalManual": {"message":"Doar manual"},
+  "intervalMinutes": {"message":"La fiecare $1 min","placeholders":{"1":{"content":"$1","example":"30"}}},
+  "intervalHour": {"message":"La fiecare $1 oră","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "intervalHours": {"message":"La fiecare $1 ore","placeholders":{"1":{"content":"$1","example":"6"}}},
+  "intervalDay": {"message":"La fiecare $1 zi","placeholders":{"1":{"content":"$1","example":"1"}}},
+  "showQuickSettings": {"message":"Afișează setări rapide"},
+  "showQuickSettingsDescription": {"message":"Afișează secțiunea de setări rapide pe pagina de configurare proxy"},
+  "showQuickSettingsEnabled": {"message":"Secțiunea de setări rapide este acum vizibilă"},
+  "showQuickSettingsDisabled": {"message":"Secțiunea de setări rapide este acum ascunsă"},
+  "showQuickSettingsTooltip": {"message":"Când este dezactivat, secțiunea de comutare rapidă va fi ascunsă din pagina de configurare proxy"},
+  "privacyPolicy": {"message":"Politica de confidențialitate"},
+  "privacyPolicyTitle": {"message":"Politica de confidențialitate"},
+  "privacyIntro": {"message":"Confidențialitatea dumneavoastră este importantă pentru noi. Această politică explică modul în care PACify gestionează datele dumneavoastră."},
+  "privacyLastUpdated": {"message":"Ultima actualizare"},
+  "privacyDataCollection": {"message":"Colectarea datelor"},
+  "privacyDataStorage": {"message":"Stocarea datelor"},
+  "privacyNetworkRequests": {"message":"Cereri de rețea"},
+  "privacyPermissions": {"message":"Permisiuni utilizate"},
+  "privacyContact": {"message":"Dacă aveți întrebări despre această politică de confidențialitate, vă rugăm să deschideți un issue pe repository-ul nostru GitHub."},
+  "httpWarning": {"message":"Acest URL folosește HTTP. Regulile proxy ar putea fi interceptate. Folosiți HTTPS când este posibil."},
+  "save": {"message":"Salvare"},
+  "editProxy": {"message":"Editare proxy"},
+  "proxyActivated": {"message":"Proxy '$1' activat","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
+  "proxyDeactivated": {"message":"Proxy dezactivat"}
 }

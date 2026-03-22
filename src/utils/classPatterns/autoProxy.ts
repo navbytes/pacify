@@ -246,14 +246,14 @@ export const sectionInnerContentVariants = tv({
 export const ruleListItemVariants = tv({
   slots: {
     wrapper:
-      'group relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.01]',
+      'group relative overflow-hidden rounded-xl transition-all duration-300 hover:shadow-md',
     background:
       'absolute inset-0 bg-linear-to-r from-white via-white to-slate-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-700',
     accentBar: 'absolute left-0 top-0 bottom-0 w-1 transition-all duration-200',
     content:
       'relative p-4 pl-5 border border-l-0 rounded-xl rounded-l-none border-slate-200/80 dark:border-slate-700/50',
     dragHandle:
-      'cursor-grab active:cursor-grabbing text-slate-300 hover:text-slate-500 dark:text-slate-600 dark:hover:text-slate-400 transition-colors',
+      'cursor-grab active:cursor-grabbing text-slate-300 hover:text-slate-500 dark:text-slate-500 dark:hover:text-slate-300 transition-colors',
     priorityBadge:
       'shrink-0 w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center',
     patternCode:
@@ -350,7 +350,7 @@ export const emptyStateCardVariants = tv({
         iconWrapper:
           'bg-linear-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30',
         title: 'text-slate-800 dark:text-slate-200',
-        description: 'text-slate-500 dark:text-slate-400',
+        description: 'text-slate-500 dark:text-slate-300',
       },
       slate: {
         wrapper: 'border-slate-200 dark:border-slate-700',
@@ -359,7 +359,7 @@ export const emptyStateCardVariants = tv({
         iconWrapper:
           'bg-linear-to-br from-slate-100 to-gray-100 dark:from-slate-900/30 dark:to-gray-900/30',
         title: 'text-slate-800 dark:text-slate-200',
-        description: 'text-slate-500 dark:text-slate-400',
+        description: 'text-slate-500 dark:text-slate-300',
       },
     },
   },
@@ -478,7 +478,7 @@ export const ruleCountBadgeVariants = tv({
   base: 'flex items-center gap-2 px-3 py-1.5 rounded-full text-sm',
   variants: {
     color: {
-      slate: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400',
+      slate: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300',
     },
   },
   defaultVariants: {

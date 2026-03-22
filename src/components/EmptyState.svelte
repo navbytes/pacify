@@ -35,7 +35,7 @@ let Icon = $derived(icon)
 
 <div class={cn(emptyStatePatterns.container, compact ? 'py-8' : 'py-12')}>
   <div class={cn(emptyStatePatterns.icon, compact ? 'mb-4' : 'mb-6')}>
-    <Icon size={iconSize} class="text-slate-400 dark:text-slate-600" strokeWidth={1.5} />
+    <Icon size={iconSize} class="text-slate-400 dark:text-slate-500" strokeWidth={1.5} />
   </div>
 
   <Text as="h3" size="xl" weight="semibold" classes="mb-2">{title}</Text>
@@ -54,7 +54,13 @@ let Icon = $derived(icon)
       </Button>
 
       {#if secondaryActionLabel && onSecondaryAction}
-        <Button color="secondary" onclick={onSecondaryAction} data-testid="empty-state-secondary-action-btn">{secondaryActionLabel}</Button>
+        <Button
+          color="secondary"
+          onclick={onSecondaryAction}
+          data-testid="empty-state-secondary-action-btn"
+        >
+          {secondaryActionLabel}
+        </Button>
       {/if}
     </div>
   {/if}

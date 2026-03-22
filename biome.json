@@ -104,6 +104,10 @@
       }
     },
     {
+      "includes": ["_locales/**/*.json"],
+      "formatter": { "enabled": false }
+    },
+    {
       "includes": ["**/*.test.ts", "**/__tests__/**"],
       "linter": {
         "rules": {

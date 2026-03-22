@@ -1,5 +1,5 @@
 <script lang="ts">
-import { onMount } from 'svelte'
+import { onMount, tick } from 'svelte'
 import { cubicOut } from 'svelte/easing'
 import { fade, slide } from 'svelte/transition'
 import type { ProxyConfig, ProxyMode, ProxyServer, ProxySettings } from '@/interfaces'
@@ -129,7 +129,8 @@ async function handlePacRefresh() {
     toastStore.show(successMsg, 'success')
   } catch (error) {
     logger.error('Error refreshing PAC script:', error)
-    const errorMsg = I18nService.getMessage('pacScriptRefreshFailed') || 'Failed to refresh PAC script'
+    const errorMsg =
+      I18nService.getMessage('pacScriptRefreshFailed') || 'Failed to refresh PAC script'
     toastStore.show(errorMsg, 'error')
   }
 }
@@ -157,6 +158,11 @@ async function handleSubmit(event: Event) {
 
   if (!name.trim()) {
     errorMessage = I18nService.getMessage('nameRequired')
+    tick().then(() => {
+      document
+        .querySelector('[data-error-message]')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
     return
   }
 
@@ -191,6 +197,11 @@ async function handleSubmit(event: Event) {
             logger.error('Error fetching PAC script:', error)
             errorMessage =
               I18nService.getMessage('pacScriptFetchError') || 'Failed to fetch PAC script from URL'
+            tick().then(() => {
+              document
+                .querySelector('[data-error-message]')
+                ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            })
             // Error is shown in modal via errorMessage, no need for toast notification
             return // Don't save if fetch fails
           }
@@ -236,6 +247,11 @@ async function handleSubmit(event: Event) {
     logger.error('Error saving proxy configuration:', error)
     errorMessage =
       error instanceof Error ? error.message : I18nService.getMessage('invalidConfiguration')
+    tick().then(() => {
+      document
+        .querySelector('[data-error-message]')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
   } finally {
     isSubmitting = false
   }
@@ -248,10 +264,10 @@ $effect(() => {
   // Store the previously focused element
   previouslyFocusedElement = document.activeElement as HTMLElement
 
-  // Focus the modal content when it opens
+  // Focus the close button when modal opens (accessible pattern: focus dialog control, not form input)
   if (modalRef) {
-    const firstInput = modalRef.querySelector('input, textarea, select, button') as HTMLElement
-    firstInput?.focus()
+    const closeButton = modalRef.querySelector('[data-testid="modal-close-btn"]') as HTMLElement
+    closeButton?.focus()
   }
 
   // Return focus when modal closes
@@ -343,7 +359,7 @@ function handleKeydown(event: KeyboardEvent) {
                 >
                   {proxyConfig ? I18nService.getMessage('editProxy') || 'Edit Proxy' : I18nService.getMessage('proxyConfiguration')}
                 </h2>
-                <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                <p class="text-sm text-slate-500 dark:text-slate-300 mt-0.5">
                   {proxyConfig ? 'Modify your proxy settings' : 'Configure a new proxy connection'}
                 </p>
               </div>
@@ -415,7 +431,7 @@ function handleKeydown(event: KeyboardEvent) {
                   >
                     <div class="flex items-center gap-3">
                       <div class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700">
-                        <Globe size={20} class="text-slate-600 dark:text-slate-400" />
+                        <Globe size={20} class="text-slate-600 dark:text-slate-300" />
                       </div>
                       <Text as="p" color="muted">{I18nService.getMessage('systemProxy')}</Text>
                     </div>
@@ -483,6 +499,7 @@ function handleKeydown(event: KeyboardEvent) {
         {#if errorMessage}
           <div
             class="relative mx-6 mb-4 overflow-hidden rounded-xl"
+            data-error-message
             transition:slide={{ duration: 200 }}
           >
             <div
@@ -521,7 +538,13 @@ function handleKeydown(event: KeyboardEvent) {
           class="relative px-6 py-4 border-t border-slate-200/50 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50"
         >
           <div class="flex items-center justify-end gap-3">
-            <Button type="button" onclick={handleClose} color="secondary" classes="px-5" data-testid="modal-cancel-btn">
+            <Button
+              type="button"
+              onclick={handleClose}
+              color="secondary"
+              classes="px-5"
+              data-testid="modal-cancel-btn"
+            >
               {I18nService.getMessage('cancel')}
             </Button>
 

@@ -220,7 +220,7 @@ function formatTimestamp(timestamp: number): string {
       <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">
         {I18nService.getMessage('diagnostics') || 'Diagnostics'}
       </h2>
-      <Text as="p" size="sm" classes="mt-1 text-slate-600 dark:text-slate-400">
+      <Text as="p" size="sm" classes="mt-1 text-slate-600 dark:text-slate-300">
         {I18nService.getMessage('diagnosticsDesc') ||
           'View error logs and diagnostic information for debugging'}
       </Text>
@@ -265,7 +265,7 @@ function formatTimestamp(timestamp: number): string {
           <Shield class="w-5 h-5 text-blue-600 dark:text-blue-400" />
         </div>
         <div>
-          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-300">
             {I18nService.getMessage('activeProxy') || 'Active Proxy'}
           </Text>
           <Text as="p" size="sm" weight="semibold" classes="text-slate-900 dark:text-slate-100">
@@ -280,14 +280,14 @@ function formatTimestamp(timestamp: number): string {
       {#if activeProxy}
         <div class="mt-2 flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-          <Text as="span" size="xs" classes="text-slate-600 dark:text-slate-400">
+          <Text as="span" size="xs" classes="text-slate-600 dark:text-slate-300">
             {getProxyModeLabel(activeProxy.mode)}
           </Text>
         </div>
       {:else}
         <div class="mt-2 flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-slate-400"></span>
-          <Text as="span" size="xs" classes="text-slate-600 dark:text-slate-400">
+          <Text as="span" size="xs" classes="text-slate-600 dark:text-slate-300">
             {I18nService.getMessage('directConnection') || 'Direct connection'}
           </Text>
         </div>
@@ -305,7 +305,7 @@ function formatTimestamp(timestamp: number): string {
           <Server class="w-5 h-5 text-purple-600 dark:text-purple-400" />
         </div>
         <div>
-          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-300">
             {I18nService.getMessage('configuredProxies') || 'Configured Proxies'}
           </Text>
           <Text as="p" size="sm" weight="semibold" classes="text-slate-900 dark:text-slate-100">
@@ -326,7 +326,7 @@ function formatTimestamp(timestamp: number): string {
           <HardDrive class="w-5 h-5 text-amber-600 dark:text-amber-400" />
         </div>
         <div>
-          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-300">
             {I18nService.getMessage('storageUsed') || 'Storage Used'}
           </Text>
           <Text as="p" size="sm" weight="semibold" classes="text-slate-900 dark:text-slate-100">
@@ -346,7 +346,7 @@ function formatTimestamp(timestamp: number): string {
               style="width: {Math.min((storageUsage.used / storageUsage.total) * 100, 100)}%"
             ></div>
           </div>
-          <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-400">
+          <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-300">
             {((storageUsage.used / storageUsage.total) * 100).toFixed(1)}% of
             {formatBytes(storageUsage.total)}
           </Text>
@@ -365,7 +365,7 @@ function formatTimestamp(timestamp: number): string {
           <Activity class="w-5 h-5 text-green-600 dark:text-green-400" />
         </div>
         <div>
-          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+          <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-300">
             {I18nService.getMessage('extensionVersion') || 'Extension Version'}
           </Text>
           <Text as="p" size="sm" weight="semibold" classes="text-slate-900 dark:text-slate-100">
@@ -374,7 +374,7 @@ function formatTimestamp(timestamp: number): string {
         </div>
       </div>
       <div class="mt-2">
-        <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-400">
+        <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-300">
           {I18nService.getMessage('logsCount') || 'Activity Logs'}: {logs.length}
         </Text>
       </div>
@@ -404,7 +404,7 @@ function formatTimestamp(timestamp: number): string {
       <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">
         {I18nService.getMessage('noErrors') || 'No errors detected'}
       </h3>
-      <Text as="p" size="sm" classes="text-slate-600 dark:text-slate-400">
+      <Text as="p" size="sm" classes="text-slate-600 dark:text-slate-300">
         {I18nService.getMessage('noErrorsDesc') || 'Your proxies are working fine!'}
       </Text>
     </div>
@@ -435,7 +435,7 @@ function formatTimestamp(timestamp: number): string {
                   {log.severity}
                 </span>
                 <span class="text-slate-400 dark:text-slate-500">•</span>
-                <span class="text-sm text-slate-600 dark:text-slate-400">
+                <span class="text-sm text-slate-600 dark:text-slate-300">
                   {formatTimestamp(log.timestamp)}
                 </span>
                 {#if log.proxyName}
@@ -469,7 +469,7 @@ function formatTimestamp(timestamp: number): string {
                     as="p"
                     size="xs"
                     weight="medium"
-                    classes="text-slate-600 dark:text-slate-400 mb-1"
+                    classes="text-slate-600 dark:text-slate-300 mb-1"
                   >
                     {I18nService.getMessage('details') || 'Details'}
                   </Text>
@@ -489,7 +489,7 @@ function formatTimestamp(timestamp: number): string {
                     as="p"
                     size="xs"
                     weight="medium"
-                    classes="text-slate-600 dark:text-slate-400 mb-1"
+                    classes="text-slate-600 dark:text-slate-300 mb-1"
                   >
                     {I18nService.getMessage('url') || 'URL'}
                   </Text>
@@ -509,7 +509,7 @@ function formatTimestamp(timestamp: number): string {
                     as="p"
                     size="xs"
                     weight="medium"
-                    classes="text-slate-600 dark:text-slate-400 mb-1"
+                    classes="text-slate-600 dark:text-slate-300 mb-1"
                   >
                     {I18nService.getMessage('stackTrace') || 'Stack Trace'}
                   </Text>
@@ -523,7 +523,7 @@ function formatTimestamp(timestamp: number): string {
                 </div>
               {/if}
 
-              <div class="text-xs text-slate-500 dark:text-slate-400">
+              <div class="text-xs text-slate-500 dark:text-slate-300">
                 {I18nService.getMessage('logId') || 'ID'}: {log.id}
               </div>
             </div>
