@@ -1,25 +1,17 @@
-import { beforeEach, describe, expect, mock, test } from 'bun:test'
+import { afterEach, beforeEach, describe, expect, type Mock, spyOn, test } from 'bun:test'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import type { AppSettings, ProxyConfig } from '@/interfaces'
+import { SettingsReader } from '@/services/SettingsReader'
+import { SettingsWriter } from '@/services/SettingsWriter'
+import { ImportService } from '../ImportService'
+
+// NOTE: We use spyOn (not mock.module) so we don't globally replace the
+// SettingsReader/SettingsWriter modules — that would leak into and break their
+// own test suites when the whole suite runs in one process.
 
 let mockSettings: AppSettings
-const updateSettings = mock(async (partial: Partial<AppSettings>) => {
-  mockSettings = { ...mockSettings, ...partial }
-})
-
-mock.module('@/services/SettingsReader', () => ({
-  SettingsReader: {
-    getSettings: mock(async () => mockSettings),
-  },
-}))
-
-mock.module('@/services/SettingsWriter', () => ({
-  SettingsWriter: {
-    updateSettings,
-  },
-}))
-
-import { ImportService } from '../ImportService'
+let getSettingsSpy: Mock<() => Promise<AppSettings>>
+let updateSpy: Mock<(partial: Partial<AppSettings>) => Promise<void>>
 
 const switchyOmegaBak = JSON.stringify({
   schemaVersion: 2,
@@ -33,7 +25,15 @@ const switchyOmegaBak = JSON.stringify({
 describe('ImportService', () => {
   beforeEach(() => {
     mockSettings = { ...DEFAULT_SETTINGS, proxyConfigs: [] }
-    updateSettings.mockClear()
+    getSettingsSpy = spyOn(SettingsReader, 'getSettings').mockImplementation(
+      async () => mockSettings
+    )
+    updateSpy = spyOn(SettingsWriter, 'updateSettings').mockImplementation(async () => {})
+  })
+
+  afterEach(() => {
+    getSettingsSpy.mockRestore()
+    updateSpy.mockRestore()
   })
 
   describe('parse', () => {
@@ -70,7 +70,7 @@ describe('ImportService', () => {
       const result = ImportService.parse(switchyOmegaBak)
       await ImportService.commit(result, 'merge')
 
-      const saved = updateSettings.mock.calls[0][0].proxyConfigs as ProxyConfig[]
+      const saved = updateSpy.mock.calls[0][0].proxyConfigs as ProxyConfig[]
       expect(saved).toHaveLength(2)
       expect(saved.map((c) => c.name)).toEqual(['Existing', 'work'])
     })
@@ -82,7 +82,7 @@ describe('ImportService', () => {
       const result = ImportService.parse(switchyOmegaBak)
       await ImportService.commit(result, 'merge')
 
-      const saved = updateSettings.mock.calls[0][0].proxyConfigs as ProxyConfig[]
+      const saved = updateSpy.mock.calls[0][0].proxyConfigs as ProxyConfig[]
       expect(saved.map((c) => c.name)).toEqual(['work', 'work (imported)'])
     })
   })
@@ -95,7 +95,7 @@ describe('ImportService', () => {
       const result = ImportService.parse(switchyOmegaBak)
       await ImportService.commit(result, 'replace')
 
-      const arg = updateSettings.mock.calls[0][0]
+      const arg = updateSpy.mock.calls[0][0]
       expect((arg.proxyConfigs as ProxyConfig[]).map((c) => c.name)).toEqual(['work'])
       expect(arg.activeScriptId).toBeNull()
     })

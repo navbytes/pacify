@@ -33,8 +33,11 @@ export function detectSource(raw: string): DetectionResult {
   }
 
   if (!isJson) {
-    // Non-JSON: only a raw PAC script is supported here.
+    // Non-JSON: a raw PAC script, or a single URL pointing at a PAC file.
     if (/function\s+FindProxyForURL\s*\(/i.test(text)) {
+      return { type: 'pac', data: text }
+    }
+    if (/^https?:\/\/[^\s]+$/i.test(text)) {
       return { type: 'pac', data: text }
     }
     return { type: 'unknown', data: text }

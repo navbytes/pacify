@@ -1,11 +1,12 @@
 <script lang="ts">
 import { I18nService } from '@/services/i18n/i18nService'
 import type { ImportResult, ImportSourceType, ImportStrategy } from '@/services/import'
-import { ImportService } from '@/services/import'
+import { detectCurrentProxy, ImportService } from '@/services/import'
 import { SettingsWriter } from '@/services/SettingsWriter'
+import { toastStore } from '@/stores/toastStore'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
-import { AlertTriangle, Check, Download, FileText, Upload, X } from '@/utils/icons'
+import { AlertTriangle, Check, Copy, Download, FileText, Radar, Upload, X } from '@/utils/icons'
 import { colors } from '@/utils/theme'
 import Button from './Button.svelte'
 import Text from './Text.svelte'
@@ -75,6 +76,36 @@ function handleParseText() {
     step = 'preview'
   } catch (error) {
     errorMessage = resolveError(error)
+  }
+}
+
+async function handleDetectCurrent() {
+  errorMessage = ''
+  isBusy = true
+  try {
+    result = await detectCurrentProxy()
+    rawText = ''
+    step = 'preview'
+  } catch (error) {
+    errorMessage = resolveError(error)
+  } finally {
+    isBusy = false
+  }
+}
+
+async function handleCopyReport() {
+  if (!result) return
+  const { report } = result
+  const lines = [
+    `${I18nService.getMessage('importDetected', sourceLabel(report.source))}`,
+    `Proxies: ${report.proxyCount}, Rules: ${report.ruleCount}`,
+    ...report.warnings.map((w) => `[${w.level}] ${w.context}: ${w.message}`),
+  ]
+  try {
+    await navigator.clipboard.writeText(lines.join('\n'))
+    toastStore.show(I18nService.getMessage('importReportCopied'), 'success')
+  } catch {
+    toastStore.show(I18nService.getMessage('importReportCopyFailed'), 'error')
   }
 }
 
@@ -166,13 +197,30 @@ let skippedCount = $derived(warnings.filter((w) => w.level === 'skipped').length
           {I18nService.getMessage('importInputHelp')}
         </Text>
 
-        <!-- File upload -->
-        <Button color="secondary" onclick={() => fileInput?.click()} data-testid="import-file-btn">
-          {#snippet icon()}
-            <FileText size={18} />
-          {/snippet}
-          {I18nService.getMessage('importChooseFile')}
-        </Button>
+        <!-- File upload + detect current browser proxy -->
+        <div class="flex flex-wrap gap-3">
+          <Button
+            color="secondary"
+            onclick={() => fileInput?.click()}
+            data-testid="import-file-btn"
+          >
+            {#snippet icon()}
+              <FileText size={18} />
+            {/snippet}
+            {I18nService.getMessage('importChooseFile')}
+          </Button>
+          <Button
+            color="secondary"
+            onclick={handleDetectCurrent}
+            disabled={isBusy}
+            data-testid="import-detect-current-btn"
+          >
+            {#snippet icon()}
+              <Radar size={18} />
+            {/snippet}
+            {I18nService.getMessage('importDetectCurrent')}
+          </Button>
+        </div>
         <input
           bind:this={fileInput}
           type="file"
@@ -245,6 +293,19 @@ let skippedCount = $derived(warnings.filter((w) => w.level === 'skipped').length
                 </li>
               {/each}
             </ul>
+            <div class="mt-3 flex justify-end">
+              <Button
+                color="ghost"
+                variant="minimal"
+                onclick={handleCopyReport}
+                data-testid="import-copy-report-btn"
+              >
+                {#snippet icon()}
+                  <Copy size={14} />
+                {/snippet}
+                {I18nService.getMessage('importCopyReport')}
+              </Button>
+            </div>
           </div>
         {/if}
 

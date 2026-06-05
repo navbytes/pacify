@@ -138,7 +138,8 @@ Powered by CodeMirror 6 (modern, lightweight code editor):
 ### 💾 Data Management
 
 - **Backup & Restore**: Export/import all configurations as JSON
-- **Migrate from Other Extensions**: 🆕 One-click import from **Proxy SwitchyOmega / ZeroOmega**, **FoxyProxy**, raw **PAC scripts**, and PACify backups — auto-detects the format, previews exactly what will be created (with a report of anything skipped), and lets you merge into or replace your existing setup. See [Migrating to PACify](#-migrating-to-pacify).
+- **Migrate from Other Extensions**: 🆕 One-click import from **Proxy SwitchyOmega / ZeroOmega**, **FoxyProxy**, **PAC scripts/URLs**, PACify backups, and even the **current browser proxy** — auto-detects the format, previews exactly what will be created (with a report of anything skipped), and lets you merge into or replace your existing setup. See [Migrating to PACify](#-migrating-to-pacify).
+- **Export to Other Tools**: 🆕 Two-way migration — export your configs as a PACify backup, **SwitchyOmega** `.bak`, or **FoxyProxy** JSON.
 - **Cloud Sync**: Settings sync across Chrome browsers via Chrome Sync Storage
 - **Storage Diagnostics**: Monitor storage usage with visual progress bars
 - **Import Validation**: Automatic validation when restoring from backup
@@ -152,9 +153,11 @@ Already using another proxy manager? Bring your whole setup over in seconds:
    - **Proxy SwitchyOmega / ZeroOmega**: Options → _Import/Export_ → **Make backup** (a `.bak` file).
    - **FoxyProxy**: Options → **Export** (a `.json` file).
    - **PAC users**: any `.pac` file or PAC script text.
-2. In PACify, open **Settings → Data Management → Import**.
-3. Drop in the file (or paste its contents) — PACify detects the format automatically.
-4. Review the preview: how many proxies and rules will be created, plus any items that need your attention. Choose **Add to my configurations** or **Replace all**, optionally download a safety backup, and confirm.
+2. In PACify, open **Settings → Data Management → Import** (or use the prompt on the onboarding screen / empty Proxy Configs view).
+3. Drop in the file (or paste its contents) — PACify detects the format automatically. You can also paste a **PAC URL**, or click **Detect current browser proxy** to capture whatever proxy the browser is using right now.
+4. Review the preview: how many proxies and rules will be created, plus any items that need your attention (copyable as a report). Choose **Add to my configurations** or **Replace all**, optionally download a safety backup, and confirm.
+
+Leaving for another tool later? **Settings → Data Management → Export** writes your configs back out as a PACify backup, a SwitchyOmega `.bak`, or FoxyProxy JSON.
 
 **What gets mapped:**
 

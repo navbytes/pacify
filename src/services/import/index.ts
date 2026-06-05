@@ -1,3 +1,4 @@
+export { detectCurrentProxy } from './detectCurrentProxy'
 export { type DetectionResult, detectSource } from './detectSource'
 export { ImportService } from './ImportService'
 export type {

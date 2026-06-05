@@ -21,9 +21,10 @@ import { colors } from '@/utils/theme'
 interface Props {
   onOpenEditor: (scriptId?: string) => void
   onOpenAutoProxyEditor: () => void
+  onOpenImport?: () => void
 }
 
-let { onOpenEditor, onOpenAutoProxyEditor }: Props = $props()
+let { onOpenEditor, onOpenAutoProxyEditor, onOpenImport }: Props = $props()
 
 let settings = $derived($settingsStore)
 let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
@@ -267,6 +268,7 @@ async function handleViewModeChange(mode: ViewMode) {
           pageType="OPTIONS"
           proxies={regularProxies}
           onScriptEdit={(scriptId) => onOpenEditor(scriptId)}
+          onImport={onOpenImport}
           disableDrag={!settings.showQuickSettings}
           viewMode={settings.viewMode}
           bind:dragType

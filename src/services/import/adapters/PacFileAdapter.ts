@@ -3,33 +3,38 @@ import type { ImportResult } from '../types'
 import { pickColor } from '../utils'
 
 /**
- * Wrap a raw PAC script (the `FindProxyForURL` body and friends) into a single
- * PACify `pac_script` configuration.
+ * Wrap a PAC source into a single PACify `pac_script` configuration.
+ *
+ * Accepts either an inline script (the `FindProxyForURL` body and friends) or a
+ * single `http(s)://` URL pointing at a remotely-hosted PAC file.
  */
 // biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern, consistent with the rest of the codebase
 export class PacFileAdapter {
   static readonly source = 'pac' as const
 
   static map(input: unknown): ImportResult {
-    const data = typeof input === 'string' ? input : ''
+    const raw = typeof input === 'string' ? input.trim() : ''
 
+    if (!raw) {
+      return {
+        configs: [],
+        report: { source: 'pac', proxyCount: 0, ruleCount: 0, warnings: [] },
+      }
+    }
+
+    const isUrl = /^https?:\/\/[^\s]+$/i.test(raw)
     const config: ProxyConfig = {
       id: crypto.randomUUID(),
-      name: 'Imported PAC script',
+      name: isUrl ? 'Imported PAC (URL)' : 'Imported PAC script',
       color: pickColor(undefined),
       isActive: false,
       mode: 'pac_script',
-      pacScript: { data },
+      pacScript: isUrl ? { url: raw } : { data: raw },
     }
 
     return {
-      configs: data.trim() ? [config] : [],
-      report: {
-        source: 'pac',
-        proxyCount: data.trim() ? 1 : 0,
-        ruleCount: 0,
-        warnings: [],
-      },
+      configs: [config],
+      report: { source: 'pac', proxyCount: 1, ruleCount: 0, warnings: [] },
     }
   }
 }

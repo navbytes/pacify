@@ -3,8 +3,9 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
 import { settingsCardVariants } from '@/utils/classPatterns'
-import { Download, Upload } from '@/utils/icons'
+import { Download, FileText, Upload } from '@/utils/icons'
 import Button from './Button.svelte'
+import ExportModal from './ExportModal.svelte'
 import FlexGroup from './FlexGroup.svelte'
 import ImportModal from './ImportModal.svelte'
 import Text from './Text.svelte'
@@ -17,11 +18,13 @@ let { onRestore }: Props = $props()
 
 let fileInputElement: HTMLInputElement | undefined = $state()
 let showImport = $state(false)
+let showExport = $state(false)
 
 // Card variants
 const emeraldCard = settingsCardVariants({ color: 'emerald', size: 'sm' })
 const amberCard = settingsCardVariants({ color: 'amber', size: 'sm' })
 const blueCard = settingsCardVariants({ color: 'blue', size: 'sm' })
+const purpleCard = settingsCardVariants({ color: 'purple', size: 'sm' })
 
 // Handle the backup action
 async function handleBackup() {
@@ -68,7 +71,7 @@ async function handleRestore(event: Event) {
 }
 </script>
 
-<div class="grid-responsive-3">
+<div class="grid-responsive-2">
   <!-- Backup Settings -->
   <div class="group {emeraldCard.wrapper()}">
     <!-- Background gradient -->
@@ -170,6 +173,37 @@ async function handleRestore(event: Event) {
       </FlexGroup>
     </div>
   </div>
+
+  <!-- Export to other apps -->
+  <div class="group {purpleCard.wrapper()}">
+    <!-- Background gradient -->
+    <div class={purpleCard.background()}></div>
+
+    <!-- Decorative elements -->
+    <div></div>
+
+    <!-- Top accent -->
+    <div class={purpleCard.accent()}></div>
+
+    <div class="relative p-5">
+      <FlexGroup direction="vertical" childrenGap="xs">
+        <Button
+          color="secondary"
+          onclick={() => (showExport = true)}
+          aria-label="Export proxy configurations to other formats"
+          data-testid="export-btn"
+        >
+          {#snippet icon()}
+            <FileText size={18} />
+          {/snippet}
+          {I18nService.getMessage('exportSettings')}
+        </Button>
+        <Text as="p" size="xs" color="muted" classes="px-1">
+          {I18nService.getMessage('exportDescription')}
+        </Text>
+      </FlexGroup>
+    </div>
+  </div>
 </div>
 
 {#if showImport}
@@ -179,4 +213,8 @@ async function handleRestore(event: Event) {
       await onRestore()
     }}
   />
+{/if}
+
+{#if showExport}
+  <ExportModal onClose={() => (showExport = false)} />
 {/if}

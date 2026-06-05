@@ -2,7 +2,17 @@
 import { I18nService } from '@/services/i18n/i18nService'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
-import { Cable, Check, Globe, Keyboard, Route, Settings, Shield, Zap } from '@/utils/icons'
+import {
+  Cable,
+  Check,
+  Download,
+  Globe,
+  Keyboard,
+  Route,
+  Settings,
+  Shield,
+  Zap,
+} from '@/utils/icons'
 import { colors, transitions } from '@/utils/theme'
 import Button from '../Button.svelte'
 import Text from '../Text.svelte'
@@ -11,9 +21,10 @@ interface Props {
   open?: boolean
   onComplete: () => void
   onCreateProxy: () => void
+  onImport?: () => void
 }
 
-let { open = $bindable(false), onComplete, onCreateProxy }: Props = $props()
+let { open = $bindable(false), onComplete, onCreateProxy, onImport }: Props = $props()
 
 let currentStep = $state(0)
 
@@ -130,6 +141,12 @@ function handleCreateProxy() {
   open = false
   onComplete()
   onCreateProxy()
+}
+
+function handleImport() {
+  open = false
+  onComplete()
+  onImport?.()
 }
 
 function handleBackdropClick(e: MouseEvent) {
@@ -271,7 +288,7 @@ const isFirstStep = $derived(currentStep === 0)
 
         <!-- Get Started actions (last step) -->
         {#if isLastStep}
-          <div class={cn(flexPatterns.center, 'gap-4 mb-8')}>
+          <div class={cn(flexPatterns.center, 'gap-4 mb-4')}>
             <Button color="primary" size="lg" onclick={handleCreateProxy}>
               {#snippet icon()}
                 <Cable size={20} />
@@ -285,6 +302,16 @@ const isFirstStep = $derived(currentStep === 0)
               {getMessage('onboardingExploreSettings', 'Explore Settings')}
             </Button>
           </div>
+          {#if onImport}
+            <div class={cn(flexPatterns.center, 'mb-8')}>
+              <Button color="ghost" onclick={handleImport} data-testid="onboarding-import-btn">
+                {#snippet icon()}
+                  <Download size={18} />
+                {/snippet}
+                {getMessage('onboardingImport', 'Coming from another proxy manager? Import your setup')}
+              </Button>
+            </div>
+          {/if}
         {/if}
 
         <!-- Step dots -->
