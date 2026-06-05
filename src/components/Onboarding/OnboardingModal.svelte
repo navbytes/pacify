@@ -13,6 +13,7 @@ import {
   Shield,
   Zap,
 } from '@/utils/icons'
+import { modalFocus } from '@/utils/modalFocus'
 import { colors, transitions } from '@/utils/theme'
 import Button from '../Button.svelte'
 import Text from '../Text.svelte'
@@ -105,6 +106,16 @@ const steps = [
     ],
   },
   {
+    id: 'migrate',
+    titleKey: 'onboardingMigrateTitle',
+    titleFallback: 'Coming from another proxy manager?',
+    descriptionKey: 'onboardingMigrateDescription',
+    descriptionFallback:
+      'Import your setup from SwitchyOmega, FoxyProxy, a PAC file, or a PACify backup — in one step.',
+    icon: Download,
+    features: null,
+  },
+  {
     id: 'getStarted',
     titleKey: 'onboardingGetStartedTitle',
     titleFallback: "You're All Set!",
@@ -182,6 +193,8 @@ const isFirstStep = $derived(currentStep === 0)
     tabindex="-1"
   >
     <div
+      use:modalFocus
+      tabindex="-1"
       class={cn(
         modalVariants.content({ size: 'lg' }),
         'mx-4 animate-scale-in overflow-hidden'
@@ -283,6 +296,23 @@ const isFirstStep = $derived(currentStep === 0)
                 </div>
               </div>
             {/each}
+          </div>
+        {/if}
+
+        <!-- Migration step CTA -->
+        {#if step.id === 'migrate' && onImport}
+          <div class={cn(flexPatterns.center, 'mb-8')}>
+            <Button
+              color="primary"
+              size="lg"
+              onclick={handleImport}
+              data-testid="onboarding-migrate-btn"
+            >
+              {#snippet icon()}
+                <Download size={20} />
+              {/snippet}
+              {getMessage('onboardingImportSetup', 'Import my setup')}
+            </Button>
           </div>
         {/if}
 

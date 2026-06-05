@@ -14,6 +14,7 @@ import {
 } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { getRandomProxyColor } from '@/utils/colors'
+import { fetchPacViaBackground } from '@/utils/fetchPac'
 import { Globe, Radar, Settings, Sparkles, X, Zap } from '@/utils/icons'
 import AnimatedIconBadge from '../AnimatedIconBadge.svelte'
 import Button from '../Button.svelte'
@@ -101,11 +102,7 @@ async function handlePacRefresh() {
   if (!pacUrl) return
 
   try {
-    const response = await fetch(pacUrl)
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-    const data = await response.text()
+    const data = await fetchPacViaBackground(pacUrl)
     editorContent = data
     lastFetched = Date.now()
 
@@ -186,11 +183,7 @@ async function handleSubmit(event: Event) {
 
         if (needsInitialFetch) {
           try {
-            const response = await fetch(pacUrl)
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`)
-            }
-            const data = await response.text()
+            const data = await fetchPacViaBackground(pacUrl)
             editorContent = data
             lastFetched = Date.now()
           } catch (error) {
@@ -360,7 +353,9 @@ function handleKeydown(event: KeyboardEvent) {
                   {proxyConfig ? I18nService.getMessage('editProxy') || 'Edit Proxy' : I18nService.getMessage('proxyConfiguration')}
                 </h2>
                 <p class="text-sm text-slate-500 dark:text-slate-300 mt-0.5">
-                  {proxyConfig ? 'Modify your proxy settings' : 'Configure a new proxy connection'}
+                  {proxyConfig
+                    ? I18nService.getMessage('editProxySubtitle')
+                    : I18nService.getMessage('createProxySubtitle')}
                 </p>
               </div>
             </div>
@@ -371,7 +366,7 @@ function handleKeydown(event: KeyboardEvent) {
               onclick={handleClose}
               color="ghost"
               variant="minimal"
-              aria-label="Close"
+              aria-label={I18nService.getMessage('close')}
               classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
               data-testid="modal-close-btn"
             >

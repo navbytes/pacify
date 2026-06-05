@@ -10,7 +10,6 @@ import {
   RefreshCw,
   Rss,
   Trash,
-  X,
 } from 'lucide-svelte'
 import type {
   AutoProxyRouteType,

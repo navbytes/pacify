@@ -19,6 +19,7 @@ import {
   settingsCardVariants,
 } from '@/utils/classPatterns/autoProxy'
 import { getRandomProxyColor } from '@/utils/colors'
+import { modalFocus } from '@/utils/modalFocus'
 import Button from '../Button.svelte'
 import FlexGroup from '../FlexGroup.svelte'
 import LabelButton from '../LabelButton.svelte'
@@ -251,7 +252,14 @@ let selectableProxies = $derived(
   <div class={modalBackdrop.background()} onclick={handleClose} role="presentation"></div>
 
   <!-- Modal -->
-  <div class={modalContent.wrapper()} role="dialog" aria-labelledby="auto-proxy-title">
+  <div
+    class={modalContent.wrapper()}
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="auto-proxy-title"
+    use:modalFocus
+    tabindex="-1"
+  >
     <!-- Decorative gradient accent -->
     <div class={modalContent.accentBar()}></div>
 
@@ -470,7 +478,14 @@ let selectableProxies = $derived(
 
         <!-- Pattern Tester -->
         {#if rules.length > 0}
-          <PatternTester {rules} availableProxies={selectableProxies} />
+          <PatternTester
+            {rules}
+            {subscriptions}
+            {fallbackType}
+            {fallbackProxyId}
+            {fallbackInlineProxy}
+            availableProxies={selectableProxies}
+          />
         {/if}
       {/if}
 

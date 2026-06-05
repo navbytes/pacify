@@ -11,7 +11,7 @@ import {
   scriptItemVariants,
 } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
-import { GripVertical, Lock, Pencil, ShieldCheck, Trash } from '@/utils/icons'
+import { GripVertical, Lock, Pencil, ShieldCheck, Trash, Zap } from '@/utils/icons'
 import {
   getProxyDescription,
   getProxyModeColor,
@@ -43,7 +43,6 @@ let {
   autoProxyRefMap,
 }: Props = $props()
 
-let settings = $derived($settingsStore)
 let modeColors = $derived(getProxyModeColor(proxy.mode, proxy))
 let ModeIcon = $derived(getProxyModeIcon(proxy.mode, proxy))
 let modeLabel = $derived(getProxyModeLabel(proxy.mode, proxy))
@@ -127,6 +126,20 @@ function openEditor(scriptId?: string) {
   onScriptEdit(scriptId)
 }
 
+// Keyboard/click accessible alternative to drag-and-drop for managing the
+// Quick Switch rotation.
+async function toggleQuickSwitch() {
+  if (!proxy.id) return
+  const next = !proxy.quickSwitch
+  await settingsStore.updateScriptQuickSwitch(proxy.id, next)
+  toastStore.show(
+    next
+      ? I18nService.getMessage('addedToQuickSwitch', proxy.name)
+      : I18nService.getMessage('removedFromQuickSwitch', proxy.name),
+    'success'
+  )
+}
+
 function confirmDelete() {
   showDeleteDialog = true
 }
@@ -198,10 +211,8 @@ async function handleScriptDelete() {
               'hover:text-blue-600 dark:hover:text-blue-400',
               transitions.fast
             )}
-              role="button"
-              tabindex="0"
-              aria-label="Drag to move to Quick Switch"
-              title="Drag to Quick Switch"
+              aria-hidden="true"
+              title={I18nService.getMessage('dragToQuickSwitch')}
             >
               <GripVertical size={18} strokeWidth={2.5} />
             </div>
@@ -333,6 +344,25 @@ async function handleScriptDelete() {
           />
 
           <Button
+            color={proxy.quickSwitch ? 'primary' : 'secondary'}
+            minimal
+            onclick={toggleQuickSwitch}
+            aria-label={I18nService.getMessage(
+              proxy.quickSwitch ? 'removeFromQuickSwitch' : 'addToQuickSwitch',
+              proxy.name
+            )}
+            classes="hover:bg-purple-50 dark:hover:bg-purple-950/20 transition-all"
+            data-testid={`quick-switch-toggle-${proxy.id}`}
+          >
+            {#snippet icon()}
+              <Zap
+                size={16}
+                class={proxy.quickSwitch ? 'text-purple-600 dark:text-purple-400' : ''}
+              />
+            {/snippet}
+          </Button>
+
+          <Button
             color="primary"
             minimal
             onclick={() => openEditor(proxy.id)}
@@ -378,6 +408,24 @@ async function handleScriptDelete() {
           />
 
           <div class={cn(flexPatterns.centerVertical, 'gap-1.5')}>
+            <Button
+              color={proxy.quickSwitch ? 'primary' : 'secondary'}
+              minimal
+              onclick={toggleQuickSwitch}
+              aria-label={I18nService.getMessage(
+                proxy.quickSwitch ? 'removeFromQuickSwitch' : 'addToQuickSwitch',
+                proxy.name
+              )}
+              classes="hover:bg-purple-50 dark:hover:bg-purple-950/20 transition-all"
+              data-testid={`quick-switch-toggle-${proxy.id}`}
+            >
+              {#snippet icon()}
+                <Zap
+                  size={16}
+                  class={proxy.quickSwitch ? 'text-purple-600 dark:text-purple-400' : ''}
+                />
+              {/snippet}
+            </Button>
             <Button
               color="primary"
               minimal

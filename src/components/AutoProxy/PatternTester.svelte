@@ -8,7 +8,13 @@ import {
   XCircle,
   Zap,
 } from 'lucide-svelte'
-import type { AutoProxyRule, ProxyConfig } from '@/interfaces/settings'
+import type {
+  AutoProxyRouteType,
+  AutoProxyRule,
+  AutoProxySubscription,
+  ProxyConfig,
+  ProxyServer,
+} from '@/interfaces/settings'
 import { I18nService } from '@/services/i18n/i18nService'
 import { PACScriptGenerator } from '@/services/PACScriptGenerator'
 import {
@@ -22,15 +28,27 @@ import Text from '../Text.svelte'
 interface Props {
   rules: AutoProxyRule[]
   availableProxies: ProxyConfig[]
+  subscriptions?: AutoProxySubscription[]
+  fallbackType?: AutoProxyRouteType
+  fallbackProxyId?: string
+  fallbackInlineProxy?: ProxyServer
 }
 
-let { rules, availableProxies }: Props = $props()
+let {
+  rules,
+  availableProxies,
+  subscriptions = [],
+  fallbackType = 'direct',
+  fallbackProxyId = undefined,
+  fallbackInlineProxy = undefined,
+}: Props = $props()
 
 let testUrl = $state('')
 let testResult = $state<{
   matched: boolean
   rule?: AutoProxyRule
   proxyResult: string
+  source?: 'rule' | 'subscription' | 'fallback'
 } | null>(null)
 let isAnimating = $state(false)
 
@@ -53,7 +71,12 @@ function handleTest() {
     isAnimating = false
   }, 300)
 
-  testResult = PACScriptGenerator.testUrl(testUrl, rules, availableProxies)
+  testResult = PACScriptGenerator.testUrl(testUrl, rules, availableProxies, {
+    subscriptions,
+    fallbackType,
+    fallbackProxyId,
+    fallbackInlineProxy,
+  })
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -170,7 +193,9 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
                     <code
                       class="px-2 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-md font-mono text-xs"
                     >
-                      {testResult.rule?.pattern}
+                      {testResult.source === 'subscription'
+                        ? I18nService.getMessage('matchedSubscription')
+                        : testResult.rule?.pattern}
                     </code>
                     <ArrowRight size={14} class="text-slate-400" />
                     <div class="flex items-center gap-1.5">
@@ -208,9 +233,15 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
                   <span class="text-base font-semibold text-slate-700 dark:text-slate-300">
                     {I18nService.getMessage('noPatternMatch') || 'No pattern matches'}
                   </span>
-                  <p class="text-sm text-slate-500 dark:text-slate-300 mt-1">
-                    {I18nService.getMessage('useFallback') || 'Fallback behavior will be used for this URL'}
-                  </p>
+                  <div class="flex items-center gap-2 flex-wrap text-sm mt-1">
+                    <span class="text-slate-500 dark:text-slate-300">
+                      {I18nService.getMessage('useFallback') || 'Fallback behavior will be used for this URL'}
+                    </span>
+                    <ArrowRight size={14} class="text-slate-400" />
+                    <span class="font-medium text-slate-700 dark:text-slate-300">
+                      {testResult.proxyResult}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

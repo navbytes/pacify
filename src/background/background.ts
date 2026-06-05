@@ -7,11 +7,12 @@ import {
 import type {
   BackgroundMessage,
   BackgroundMessageType,
+  FetchPacMessage,
   FetchSubscriptionMessage,
   ProxyConfig,
   SetProxyMessage,
 } from '@/interfaces'
-import type { AutoProxySubscription, SubscriptionFormat } from '@/interfaces/settings'
+import type { AutoProxySubscription, ProxyServer, SubscriptionFormat } from '@/interfaces/settings'
 import { SettingsReader, SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
@@ -132,6 +133,12 @@ async function initialize(): Promise<void> {
 
       // Set up browser action click listeners
       browserService.action.onClicked.addListener(handleActionClick)
+
+      // Supply stored credentials when a proxy issues an authentication challenge.
+      // Requires the "webRequest" + "webRequestAuthProvider" permissions.
+      chrome.webRequest.onAuthRequired.addListener(handleAuthRequired, { urls: ['<all_urls>'] }, [
+        'asyncBlocking',
+      ])
 
       // Listen for browser startup events
       browserService.runtime.onStartup.addListener(async () => {
@@ -257,6 +264,24 @@ async function handleRuntimeMessageInternal(
     return
   }
 
+  // FETCH_PAC fetches a remote PAC file through the hardened background fetch
+  // (custom User-Agent + timeout) so PAC URLs work on bot-protected servers,
+  // matching the subscription fetch path.
+  if (message.type === 'FETCH_PAC') {
+    try {
+      const { url } = message as FetchPacMessage
+      const data = await fetchPacScript(url)
+      sendResponse({ success: true, data })
+    } catch (error) {
+      logger.error('Error fetching PAC script:', error)
+      sendResponse({
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to fetch PAC script',
+      })
+    }
+    return
+  }
+
   const handler = messageHandlers[message.type]
   if (handler) {
     try {
@@ -301,6 +326,11 @@ async function handleActionClick(): Promise<void> {
 
       // Optionally clear any active proxy
       await clearProxySettings()
+
+      // The popup is disabled in Quick Switch mode, so the user has no surface
+      // explaining the "!" — open the options page so they can add proxies to
+      // the Quick Switch rotation.
+      ChromeService.openOptionsPage()
 
       return
     }
@@ -528,6 +558,95 @@ async function safeSetPopup(popup: string): Promise<void> {
 }
 
 /**
+ * Fetch a remote PAC script with a non-browser User-Agent and a timeout.
+ * Centralized so the modal (via FETCH_PAC) and the auto-refresh alarm share
+ * the same hardened request that defeats bot-protection (e.g. Anubis) and
+ * avoids hanging the service worker.
+ */
+async function fetchPacScript(url: string): Promise<string> {
+  const response = await fetch(url, {
+    signal: AbortSignal.timeout(15_000),
+    headers: { 'User-Agent': 'PACify/1.31' },
+  })
+  if (!response.ok) {
+    throw new Error(`Failed to fetch PAC script: HTTP ${response.status}`)
+  }
+  return response.text()
+}
+
+// Track auth attempts per request so a wrong stored credential doesn't loop
+// forever — after the first rejection we defer to the browser's native dialog.
+const authAttempts = new Map<string, number>()
+
+/**
+ * Supply the active proxy's stored credentials in response to a proxy auth
+ * challenge. Falls back to the browser's native dialog when we have no match.
+ */
+function handleAuthRequired(
+  details: chrome.webRequest.OnAuthRequiredDetails,
+  callback?: (response: chrome.webRequest.BlockingResponse) => void
+): chrome.webRequest.BlockingResponse | undefined {
+  // Without asyncBlocking (or in non-supporting contexts) there is no callback.
+  if (!callback) return undefined
+
+  // Only handle proxy challenges; site auth is left to the browser.
+  if (!details.isProxy) {
+    callback({})
+    return undefined
+  }
+
+  const attempts = (authAttempts.get(details.requestId) ?? 0) + 1
+  authAttempts.set(details.requestId, attempts)
+  if (attempts > 1) {
+    // Stored credentials were rejected once — stop retrying to avoid a loop.
+    authAttempts.delete(details.requestId)
+    callback({})
+    return undefined
+  }
+
+  void (async () => {
+    try {
+      const credentials = await getActiveProxyCredentials(details.challenger?.host)
+      callback(credentials ? { authCredentials: credentials } : {})
+    } catch (error) {
+      logger.error('Error supplying proxy credentials:', error)
+      callback({})
+    }
+  })()
+  return undefined
+}
+
+/**
+ * Find credentials for the currently active proxy, preferring a server whose
+ * host matches the challenging proxy, else the first server that has any.
+ */
+async function getActiveProxyCredentials(
+  challengerHost?: string
+): Promise<{ username: string; password: string } | null> {
+  const settings = await safeGetSettings()
+  if (!settings) return null
+
+  const active = settings.proxyConfigs.find(
+    (c) => c.isActive || (settings.activeScriptId && c.id === settings.activeScriptId)
+  )
+  if (!active?.rules) return null
+
+  const servers: (ProxyServer | undefined)[] = [
+    active.rules.singleProxy,
+    active.rules.proxyForHttp,
+    active.rules.proxyForHttps,
+    active.rules.proxyForFtp,
+    active.rules.fallbackProxy,
+  ]
+  const withCreds = servers.filter((s): s is ProxyServer => !!s?.username)
+  if (withCreds.length === 0) return null
+
+  const matched = challengerHost ? withCreds.find((s) => s.host === challengerHost) : undefined
+  const chosen = matched ?? withCreds[0]
+  return { username: chosen.username || '', password: chosen.password || '' }
+}
+
+/**
  * Sets up alarms for auto-refreshing PAC scripts
  */
 async function setupPacRefreshAlarms(): Promise<void> {
@@ -602,28 +721,8 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
       return
     }
 
-    // Fetch the PAC script (15s timeout to prevent service worker hang)
-    const response = await fetch(config.pacScript.url, {
-      signal: AbortSignal.timeout(15_000),
-      headers: { 'User-Agent': 'PACify/1.31' },
-    })
-
-    if (!response.ok) {
-      logger.error(`Failed to fetch PAC script: HTTP ${response.status}`)
-      await diagnosticsService.logError(
-        'PAC_SCRIPT_FETCH_FAILED',
-        `Failed to fetch PAC script: HTTP ${response.status}`,
-        {
-          proxyName: config.name,
-          proxyId: config.id,
-          url: config.pacScript.url,
-          details: `HTTP ${response.status} ${response.statusText}`,
-        }
-      )
-      return
-    }
-
-    const data = await response.text()
+    // Fetch the PAC script through the shared hardened fetch (UA + timeout)
+    const data = await fetchPacScript(config.pacScript.url)
 
     // Update the config with new data and timestamp
     const updatedConfig: ProxyConfig = {
