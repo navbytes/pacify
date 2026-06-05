@@ -3,6 +3,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { AlertTriangle, X } from '@/utils/icons'
+import { modalFocus } from '@/utils/modalFocus'
 import { colors } from '@/utils/theme'
 import Button from './Button.svelte'
 import Text from './Text.svelte'
@@ -62,7 +63,11 @@ function handleKeydown(e: KeyboardEvent) {
     aria-labelledby="dialog-title"
     tabindex="-1"
   >
-    <div class={cn(modalVariants.content({ size: 'md' }), 'mx-4 animate-scale-in')}>
+    <div
+      class={cn(modalVariants.content({ size: 'md' }), 'mx-4 animate-scale-in')}
+      use:modalFocus
+      tabindex="-1"
+    >
       <!-- Header -->
       <div class={cn(modalVariants.header(), 'items-start justify-between')}>
         <div class={cn(flexPatterns.start, 'gap-3')}>

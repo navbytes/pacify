@@ -354,6 +354,30 @@ function createSettingsStore() {
       set(settings)
     }, ERROR_TYPES.LOAD_SETTINGS),
 
+    /**
+     * Re-apply the persisted active proxy to Chrome so the live connection
+     * matches stored settings. Used after bulk writes (import / restore) that
+     * change settings without going through setProxy.
+     */
+    reconcileActiveProxy: withErrorHandling(async () => {
+      const settings = await StorageService.getSettings()
+      const active = settings.proxyConfigs.find(
+        (s) => s.isActive || (settings.activeScriptId && s.id === settings.activeScriptId)
+      )
+
+      if (!active) {
+        await ChromeService.sendMessage({ type: 'CLEAR_PROXY' })
+        return
+      }
+
+      let proxyToSend = active
+      if (active.autoProxy) {
+        const generatedPAC = PACScriptGenerator.generate(active.autoProxy, settings.proxyConfigs)
+        proxyToSend = { ...active, pacScript: { data: generatedPAC }, mode: 'pac_script' }
+      }
+      await ChromeService.sendMessage({ type: 'SET_PROXY', proxy: proxyToSend })
+    }, ERROR_TYPES.SAVE_SETTINGS),
+
     init: withErrorHandling(async () => {
       await StorageService.migrateStorage()
       await StorageService.invalidateCache()

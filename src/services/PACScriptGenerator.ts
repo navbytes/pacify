@@ -1,7 +1,9 @@
 import type {
   AutoProxyConfig,
   AutoProxyMatchType,
+  AutoProxyRouteType,
   AutoProxyRule,
+  AutoProxySubscription,
   ProxyConfig,
   ProxyServer,
 } from '@/interfaces/settings'
@@ -572,17 +574,28 @@ ${extractedBody}
   }
 
   /**
-   * Test a URL against the rules and return match information
+   * Test a URL against the rules and return match information.
+   *
+   * `options` lets the tester evaluate the same inputs the generated PAC
+   * actually uses: enabled subscriptions (cached domain lists) and the
+   * configured fallback. Without it, only inline rules are checked.
    */
   static testUrl(
     url: string,
     rules: AutoProxyRule[],
-    allProxies: ProxyConfig[]
+    allProxies: ProxyConfig[],
+    options?: {
+      subscriptions?: AutoProxySubscription[]
+      fallbackType?: AutoProxyRouteType
+      fallbackProxyId?: string
+      fallbackInlineProxy?: ProxyServer
+    }
   ): {
     matched: boolean
     rule?: AutoProxyRule
     proxyResult: string
     isPACScript?: boolean
+    source?: 'rule' | 'subscription' | 'fallback'
   } {
     // Extract host from URL
     let host: string
@@ -607,6 +620,7 @@ ${extractedBody}
               rule,
               proxyResult: `PAC Script: ${proxy.name}`,
               isPACScript: true,
+              source: 'rule',
             }
           }
         }
@@ -620,13 +634,39 @@ ${extractedBody}
             rule.inlineProxy,
             allProxies
           ),
+          source: 'rule',
         }
       }
     }
 
+    // No inline rule matched — check enabled subscriptions' cached domain lists.
+    for (const sub of options?.subscriptions ?? []) {
+      if (!sub.enabled || !sub.cachedRules?.length) continue
+      const hit = sub.cachedRules.some((pattern) => PACScriptGenerator.matchWildcard(host, pattern))
+      if (hit) {
+        return {
+          matched: true,
+          proxyResult: PACScriptGenerator.getProxyString(
+            sub.proxyType,
+            sub.proxyId,
+            sub.inlineProxy,
+            allProxies
+          ),
+          source: 'subscription',
+        }
+      }
+    }
+
+    // Nothing matched — report what the fallback will actually do.
     return {
       matched: false,
-      proxyResult: 'DIRECT',
+      source: 'fallback',
+      proxyResult: PACScriptGenerator.getProxyString(
+        options?.fallbackType ?? 'direct',
+        options?.fallbackProxyId,
+        options?.fallbackInlineProxy,
+        allProxies
+      ),
     }
   }
 

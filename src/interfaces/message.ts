@@ -7,6 +7,7 @@ export type BackgroundMessageType =
   | 'QUICK_SWITCH'
   | 'REFRESH_SUBSCRIPTION'
   | 'FETCH_SUBSCRIPTION'
+  | 'FETCH_PAC'
 
 export interface BaseMessage {
   type: BackgroundMessageType
@@ -43,6 +44,11 @@ export interface FetchSubscriptionMessage extends BaseMessage {
   format: string
 }
 
+export interface FetchPacMessage extends BaseMessage {
+  type: 'FETCH_PAC'
+  url: string
+}
+
 export type BackgroundMessage =
   | QuickSwitchMessage
   | SetProxyMessage
@@ -50,6 +56,7 @@ export type BackgroundMessage =
   | ClearProxyMessage
   | RefreshSubscriptionMessage
   | FetchSubscriptionMessage
+  | FetchPacMessage
 
 export interface BackgroundMessageResponse {
   success: boolean

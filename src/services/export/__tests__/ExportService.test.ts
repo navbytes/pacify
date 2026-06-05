@@ -87,7 +87,7 @@ describe('FoxyProxyExporter', () => {
 describe('ExportService.build', () => {
   test('builds a PACify backup artifact', () => {
     const artifact = ExportService.build('pacify', settings)
-    expect(artifact.filename).toBe('pacify-settings-backup.json')
+    expect(artifact.filename).toMatch(/^pacify-settings-backup-\d{4}-\d{2}-\d{2}\.json$/)
     expect(JSON.parse(artifact.content).proxyConfigs).toHaveLength(2)
   })
 

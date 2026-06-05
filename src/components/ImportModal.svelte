@@ -1,12 +1,25 @@
 <script lang="ts">
+import type { ProxyConfig } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import type { ImportResult, ImportSourceType, ImportStrategy } from '@/services/import'
 import { detectCurrentProxy, ImportService } from '@/services/import'
 import { SettingsWriter } from '@/services/SettingsWriter'
+import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
-import { AlertTriangle, Check, Copy, Download, FileText, Radar, Upload, X } from '@/utils/icons'
+import {
+  AlertTriangle,
+  Check,
+  Copy,
+  Download,
+  FileText,
+  Power,
+  Radar,
+  Upload,
+  X,
+} from '@/utils/icons'
+import { modalFocus } from '@/utils/modalFocus'
 import { colors } from '@/utils/theme'
 import Button from './Button.svelte'
 import Text from './Text.svelte'
@@ -28,6 +41,9 @@ let result = $state<ImportResult | null>(null)
 let strategy = $state<ImportStrategy>('merge')
 let backupDone = $state(false)
 let fileInput: HTMLInputElement | undefined = $state()
+let committed = $state<ProxyConfig[]>([])
+// First imported config worth activating (a Direct config needs no activation).
+let activatable = $derived(committed.find((c) => c.mode !== 'direct'))
 
 const SOURCE_LABEL_KEYS: Record<ImportSourceType, string> = {
   switchyomega: 'importSourceSwitchyOmega',
@@ -123,9 +139,26 @@ async function handleConfirm() {
   errorMessage = ''
   isBusy = true
   try {
-    await ImportService.commit(result, strategy)
+    committed = await ImportService.commit(result, strategy)
+    // Keep Chrome's live proxy in sync with the freshly written settings.
+    await settingsStore.reconcileActiveProxy()
     await onImported()
     step = 'done'
+  } catch (error) {
+    errorMessage = resolveError(error)
+  } finally {
+    isBusy = false
+  }
+}
+
+async function handleActivate() {
+  if (!activatable?.id) return
+  isBusy = true
+  try {
+    await settingsStore.setProxy(activatable.id, true)
+    toastStore.show(`${I18nService.getMessage('proxyActivated', activatable.name)}`, 'success')
+    await onImported()
+    onClose()
   } catch (error) {
     errorMessage = resolveError(error)
   } finally {
@@ -160,7 +193,11 @@ let skippedCount = $derived(warnings.filter((w) => w.level === 'skipped').length
   aria-labelledby="import-dialog-title"
   tabindex="-1"
 >
-  <div class={cn(modalVariants.content({ size: 'lg' }), 'mx-4 animate-scale-in')}>
+  <div
+    class={cn(modalVariants.content({ size: 'lg' }), 'mx-4 animate-scale-in')}
+    use:modalFocus
+    tabindex="-1"
+  >
     <!-- Header -->
     <div class={cn(modalVariants.header(), 'items-start justify-between')}>
       <div class={cn(flexPatterns.start, 'gap-3')}>
@@ -365,6 +402,11 @@ let skippedCount = $derived(warnings.filter((w) => w.level === 'skipped').length
               {I18nService.getMessage('importDoneSummary', String(result.report.proxyCount))}
             </Text>
           {/if}
+          {#if activatable}
+            <Text as="p" size="sm" color="muted" classes="mt-3">
+              {I18nService.getMessage('importActivateHint')}
+            </Text>
+          {/if}
         </div>
       {/if}
 
@@ -390,9 +432,26 @@ let skippedCount = $derived(warnings.filter((w) => w.level === 'skipped').length
           {I18nService.getMessage('importConfirmBtn')}
         </Button>
       {:else if step === 'done'}
-        <Button color="primary" onclick={onClose} data-testid="import-done-btn">
-          {I18nService.getMessage('done')}
-        </Button>
+        {#if activatable}
+          <Button color="secondary" onclick={onClose} data-testid="import-done-btn">
+            {I18nService.getMessage('done')}
+          </Button>
+          <Button
+            color="primary"
+            onclick={handleActivate}
+            disabled={isBusy}
+            data-testid="import-activate-btn"
+          >
+            {#snippet icon()}
+              <Power size={16} />
+            {/snippet}
+            {I18nService.getMessage('importActivateBtn', activatable.name)}
+          </Button>
+        {:else}
+          <Button color="primary" onclick={onClose} data-testid="import-done-btn">
+            {I18nService.getMessage('done')}
+          </Button>
+        {/if}
       {:else}
         <Button color="secondary" onclick={onClose}>{I18nService.getMessage('cancel')}</Button>
       {/if}

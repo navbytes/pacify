@@ -3,6 +3,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Keyboard, X } from '@/utils/icons'
+import { modalFocus } from '@/utils/modalFocus'
 import { colors } from '@/utils/theme'
 import Button from './Button.svelte'
 import Text from './Text.svelte'
@@ -82,24 +83,9 @@ const shortcutGroups: ShortcutGroup[] = [
     titleFallback: 'Proxy List',
     shortcuts: [
       {
-        keys: ['\u2191', '\u2193'],
-        descriptionKey: 'shortcutNavigateList',
-        descriptionFallback: 'Navigate through proxy list',
-      },
-      {
-        keys: ['Enter'],
-        descriptionKey: 'shortcutActivateProxy',
-        descriptionFallback: 'Activate selected proxy',
-      },
-      {
-        keys: ['E'],
-        descriptionKey: 'shortcutEditProxy',
-        descriptionFallback: 'Edit selected proxy',
-      },
-      {
-        keys: ['Delete'],
-        descriptionKey: 'shortcutDeleteProxy',
-        descriptionFallback: 'Delete selected proxy',
+        keys: ['1', '\u2013', '9'],
+        descriptionKey: 'shortcutToggleQuickSwitch',
+        descriptionFallback: 'Toggle Quick Switch proxies 1\u20139',
       },
     ],
   },
@@ -142,7 +128,11 @@ function formatKey(key: string): string {
     aria-labelledby="shortcuts-title"
     tabindex="-1"
   >
-    <div class={cn(modalVariants.content({ size: 'lg' }), 'mx-4 animate-scale-in')}>
+    <div
+      class={cn(modalVariants.content({ size: 'lg' }), 'mx-4 animate-scale-in')}
+      use:modalFocus
+      tabindex="-1"
+    >
       <!-- Header -->
       <div class={cn(modalVariants.header(), 'items-start justify-between')}>
         <div class={cn(flexPatterns.start, 'gap-3')}>

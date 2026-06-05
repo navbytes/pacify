@@ -7,6 +7,7 @@ import { toastStore } from '@/stores/toastStore'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Download, X } from '@/utils/icons'
+import { modalFocus } from '@/utils/modalFocus'
 import { colors } from '@/utils/theme'
 import Button from './Button.svelte'
 import Text from './Text.svelte'
@@ -19,6 +20,20 @@ let { onClose }: Props = $props()
 
 let settings = $derived($settingsStore)
 let format = $state<ExportFormat>('pacify')
+
+// Exports serialize proxy credentials in plaintext — warn if any exist.
+let hasCredentials = $derived(
+  settings.proxyConfigs.some((c) => {
+    const servers = [
+      c.rules?.singleProxy,
+      c.rules?.proxyForHttp,
+      c.rules?.proxyForHttps,
+      c.rules?.proxyForFtp,
+      c.rules?.fallbackProxy,
+    ]
+    return servers.some((s) => s?.username || s?.password)
+  })
+)
 
 const FORMATS: { id: ExportFormat; labelKey: string; descKey: string }[] = [
   { id: 'pacify', labelKey: 'exportFormatPacify', descKey: 'exportFormatPacifyDesc' },
@@ -59,7 +74,11 @@ function handleBackdropClick(event: MouseEvent) {
   aria-labelledby="export-dialog-title"
   tabindex="-1"
 >
-  <div class={cn(modalVariants.content({ size: 'md' }), 'mx-4 animate-scale-in')}>
+  <div
+    class={cn(modalVariants.content({ size: 'md' }), 'mx-4 animate-scale-in')}
+    use:modalFocus
+    tabindex="-1"
+  >
     <!-- Header -->
     <div class={cn(modalVariants.header(), 'items-start justify-between')}>
       <div class={cn(flexPatterns.start, 'gap-3')}>
@@ -115,6 +134,16 @@ function handleBackdropClick(event: MouseEvent) {
           </label>
         {/each}
       </fieldset>
+
+      {#if hasCredentials}
+        <div
+          class="mt-4 rounded-lg border border-amber-200 dark:border-amber-800/40 bg-amber-50 dark:bg-amber-950/20 p-3"
+        >
+          <Text size="xs" classes="text-amber-700 dark:text-amber-300">
+            {I18nService.getMessage('exportCredentialWarning')}
+          </Text>
+        </div>
+      {/if}
     </div>
 
     <!-- Footer -->

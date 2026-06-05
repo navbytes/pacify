@@ -315,6 +315,9 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     <BackupRestore
       onRestore={async () => {
         await settingsStore.reloadSettings()
+        // Re-apply the active proxy to Chrome so the live connection matches
+        // the restored/imported settings.
+        await settingsStore.reconcileActiveProxy()
         // Switch to Proxy Configs tab to show the restored proxies
         if (activeTab !== undefined) {
           activeTab = 'proxy-configs'

@@ -90,18 +90,12 @@ onMount(() => {
       showKeyboardShortcuts = true
     }
 
-    // Escape to close modals (priority order)
-    if (e.key === 'Escape') {
-      if (showKeyboardShortcuts) {
-        e.preventDefault()
-        showKeyboardShortcuts = false
-      } else if (showEditor) {
-        e.preventDefault()
-        showEditor = false
-      } else if (showAutoProxyEditor) {
-        e.preventDefault()
-        showAutoProxyEditor = false
-      }
+    // Escape closes the keyboard-shortcuts overlay here. The editor modals
+    // (ProxyConfig / AutoProxy) handle their own Escape so their exit
+    // animation plays; handling them here too would unmount them instantly.
+    if (e.key === 'Escape' && showKeyboardShortcuts) {
+      e.preventDefault()
+      showKeyboardShortcuts = false
     }
   }
 

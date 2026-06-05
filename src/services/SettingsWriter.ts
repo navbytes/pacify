@@ -1,5 +1,6 @@
 import type { AppSettings, ProxyConfig } from '@/interfaces'
 import { I18nService } from './i18n/i18nService'
+import { detectSource } from './import/detectSource'
 import { SettingsReader } from './SettingsReader'
 import { StorageService } from './StorageService'
 
@@ -74,7 +75,7 @@ export class SettingsWriter {
       // Create a temporary link for downloading
       link = document.createElement('a')
       link.href = url
-      link.download = 'pacify-settings-backup.json'
+      link.download = `pacify-settings-backup-${new Date().toISOString().slice(0, 10)}.json`
       document.body.appendChild(link)
       link.click()
     } finally {
@@ -118,6 +119,12 @@ export class SettingsWriter {
       }
 
       if (!Array.isArray(settings.proxyConfigs)) {
+        // The file parsed as JSON but isn't a PACify backup. If it looks like a
+        // SwitchyOmega/FoxyProxy/PAC export, steer the user to the Import flow.
+        const detected = detectSource(fileContent).type
+        if (detected === 'switchyomega' || detected === 'foxyproxy' || detected === 'pac') {
+          throw new Error(I18nService.getMessage('restoreUseImportInstead'))
+        }
         throw new Error(I18nService.getMessage('invalidProxyConfigsArray'))
       }
 

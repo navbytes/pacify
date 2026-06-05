@@ -74,7 +74,7 @@ async function disableAllProxies() {
         description={I18nService.getMessage('noProxiesDescription') ||
           'Get started by creating your first proxy configuration to control how your browser connects to the internet.'}
         actionLabel={I18nService.getMessage('getStarted') || 'Get Started'}
-        onAction={openSettings}
+        onAction={quickAddProxy}
         icon={Cable}
         iconSize={48}
         compact

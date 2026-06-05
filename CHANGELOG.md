@@ -22,6 +22,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Export all configurations as a **PACify backup**, **Proxy SwitchyOmega** `.bak`, or **FoxyProxy** JSON from Settings → Data Management → Export
   - New `ExportService` with SwitchyOmega/FoxyProxy exporters and unit tests (incl. an export→re-import round-trip)
 
+### Fixed
+
+- **Proxy authentication now actually applies.** Added an `onAuthRequired` provider (and the `webRequest`/`webRequestAuthProvider` permissions) so the active proxy's stored credentials answer proxy auth challenges instead of falling back to Chrome's native dialog.
+- **Import & Restore now re-apply the proxy to Chrome.** After committing an import or restoring a backup, the live connection is reconciled with the saved settings so the UI "Active" state can no longer disagree with the real proxy.
+- **PAC-by-URL fetches go through the hardened background fetch** (custom User-Agent + timeout), so they work on the same bot-protected servers as subscriptions instead of failing/hanging.
+- **Accessibility: all modals trap and restore focus** via a shared `modalFocus` action; the Auto-Proxy editor now sets `aria-modal`. Escape handling is centralized so editor close animations play.
+- **Pattern Tester now evaluates subscriptions and the configured fallback**, eliminating false "no match" results and showing the real fallback target.
+
+### Changed
+
+- **Keyboard-accessible Quick Switch:** each proxy card has a Quick Switch toggle button (drag-and-drop is no longer the only way); the keyboard-shortcuts dialog now lists only implemented shortcuts.
+- **Import dead-end fixed:** the import "done" step offers to activate an imported proxy; the popup empty-state and a dedicated onboarding step lead into the create/import flows.
+- **Clearer data management:** export warns that files contain plaintext credentials; backup/export filenames are timestamped; restoring a SwitchyOmega/FoxyProxy file now points users to Import.
+- Terminology: the primary action reads "Add Proxy" (not "Add New Script"); hardcoded editor strings are localized.
+
 ## [1.31.0] - 2026-03-22
 
 ### Fixed

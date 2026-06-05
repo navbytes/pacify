@@ -1,3 +1,4 @@
+import type { ProxyConfig } from '@/interfaces'
 import { SettingsReader } from '../SettingsReader'
 import { SettingsWriter } from '../SettingsWriter'
 import { FoxyProxyAdapter } from './adapters/FoxyProxyAdapter'
@@ -62,8 +63,14 @@ export class ImportService {
   /**
    * Persist a parsed import. `merge` (default) appends, disambiguating
    * duplicate names; `replace` swaps in only the imported configs.
+   *
+   * Returns the committed configs (with their final, de-duplicated names and
+   * ids) so callers can offer to activate one.
    */
-  static async commit(result: ImportResult, strategy: ImportStrategy = 'merge'): Promise<void> {
+  static async commit(
+    result: ImportResult,
+    strategy: ImportStrategy = 'merge'
+  ): Promise<ProxyConfig[]> {
     if (result.configs.length === 0) {
       throw new Error('nothingToImport')
     }
@@ -72,7 +79,7 @@ export class ImportService {
       const taken = new Set<string>()
       const deduped = result.configs.map((c) => ({ ...c, name: dedupeName(c.name, taken) }))
       await SettingsWriter.updateSettings({ proxyConfigs: deduped, activeScriptId: null })
-      return
+      return deduped
     }
 
     const settings = await SettingsReader.getSettings()
@@ -81,5 +88,6 @@ export class ImportService {
     await SettingsWriter.updateSettings({
       proxyConfigs: [...settings.proxyConfigs, ...deduped],
     })
+    return deduped
   }
 }
