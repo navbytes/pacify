@@ -138,10 +138,35 @@ Powered by CodeMirror 6 (modern, lightweight code editor):
 ### 💾 Data Management
 
 - **Backup & Restore**: Export/import all configurations as JSON
+- **Migrate from Other Extensions**: 🆕 One-click import from **Proxy SwitchyOmega / ZeroOmega**, **FoxyProxy**, raw **PAC scripts**, and PACify backups — auto-detects the format, previews exactly what will be created (with a report of anything skipped), and lets you merge into or replace your existing setup. See [Migrating to PACify](#-migrating-to-pacify).
 - **Cloud Sync**: Settings sync across Chrome browsers via Chrome Sync Storage
 - **Storage Diagnostics**: Monitor storage usage with visual progress bars
 - **Import Validation**: Automatic validation when restoring from backup
 - **Cache Management**: Intelligent caching with invalidation support
+
+#### 🔀 Migrating to PACify
+
+Already using another proxy manager? Bring your whole setup over in seconds:
+
+1. Export your configuration from your current extension:
+   - **Proxy SwitchyOmega / ZeroOmega**: Options → _Import/Export_ → **Make backup** (a `.bak` file).
+   - **FoxyProxy**: Options → **Export** (a `.json` file).
+   - **PAC users**: any `.pac` file or PAC script text.
+2. In PACify, open **Settings → Data Management → Import**.
+3. Drop in the file (or paste its contents) — PACify detects the format automatically.
+4. Review the preview: how many proxies and rules will be created, plus any items that need your attention. Choose **Add to my configurations** or **Replace all**, optionally download a safety backup, and confirm.
+
+**What gets mapped:**
+
+| Source construct | Becomes in PACify |
+| --- | --- |
+| SwitchyOmega `FixedProfile` / FoxyProxy proxy | Manual (fixed-servers) proxy, with bypass list |
+| SwitchyOmega `PacProfile` / `.pac` file | PAC Script config (URL or inline) |
+| SwitchyOmega `SwitchProfile` rules | Auto-Proxy rules (wildcard / regex / IP-CIDR) |
+| SwitchyOmega `RuleListProfile` / GFWList | Auto-Proxy subscription with cached rules |
+| FoxyProxy URL patterns | Auto-Proxy configuration routed to the proxy |
+
+Everything runs locally — nothing is uploaded. Constructs without a PACify equivalent (e.g. time-based rules) are listed in the import report rather than dropped silently.
 
 ### 🔔 Notifications & Feedback
 

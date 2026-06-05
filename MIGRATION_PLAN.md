@@ -5,7 +5,10 @@
 > their entire configuration into PACify in one or two clicks, with zero manual
 > re-entry.
 >
-> **Status:** Proposal / planning. No code changes yet.
+> **Status:** Phases 0 & 1 implemented — `ImportService` + SwitchyOmega,
+> FoxyProxy, PAC and PACify adapters, the import wizard, and unit tests are in
+> `src/services/import/` and `src/components/ImportModal.svelte`. Phases 2 & 3
+> remain planned.
 > **Owner:** TBD · **Target version:** 1.32.0 (Phase 1)
 
 ---
@@ -277,12 +280,19 @@ trust and cuts support load.
 
 ## 9. Phased delivery
 
-| Phase | Scope | Outcome |
+| Phase | Scope | Status |
 | --- | --- | --- |
-| **0 — Foundation** | `import/` skeleton, `types.ts`, `detectSource`, `PacifyAdapter` (wrap `restoreSettings`), unified Import card in Settings, pre-import auto-backup | Unified import shell shipped; PACify→PACify works through it |
-| **1 — SwitchyOmega + FoxyProxy** | Both adapters, full condition mapping, wizard (source→upload→preview→result), `ImportReport`, merge strategies, fixtures + unit tests | **The headline migration feature.** Covers the large majority of switchers |
-| **2 — PAC & native** | Raw `.pac`/PAC-URL import, "detect current Chrome proxy", onboarding migration step, empty-state CTA | Smoother first-run; rounds out sources |
-| **3 — Polish** | Export *to* SwitchyOmega/FoxyProxy/PAC (two-way), import report export, docs + Chrome Web Store screenshots, README "Migrating to PACify" section | Reduces lock-in fear; marketing-ready |
+| **0 — Foundation** | `import/` skeleton, `types.ts`, `detectSource`, `PacifyAdapter`, unified Import card in Settings, optional pre-import backup | ✅ Done |
+| **1 — SwitchyOmega + FoxyProxy** | Both adapters, full condition mapping, wizard (upload/paste→preview→result), `ImportReport`, merge/replace strategies, unit tests | ✅ Done |
+| **2 — PAC & native** | Raw `.pac` import ✅ (PAC-URL & "detect current Chrome proxy" pending); onboarding migration step, empty-state CTA | ◻ Partial / planned |
+| **3 — Polish** | Export *to* SwitchyOmega/FoxyProxy/PAC (two-way), import report export, Chrome Web Store screenshots, README "Migrating to PACify" section ✅ | ◻ Planned |
+
+> Implemented in this iteration: `src/services/import/` (`ImportService`,
+> `detectSource`, and the SwitchyOmega/FoxyProxy/PAC/PACify adapters with shared
+> mapping utils), `src/components/ImportModal.svelte`, the Import card in
+> `BackupRestore.svelte`, en locale strings, and
+> `src/services/import/__tests__/` (41 unit tests across detection, both major
+> adapters, and the orchestrator).
 
 **Recommendation:** ship Phases 0+1 together as **v1.32.0** — that's the version
 that actually moves the adoption needle. Phases 2–3 follow incrementally.
