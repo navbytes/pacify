@@ -1,24 +1,19 @@
 <script lang="ts">
-import { onMount, tick } from 'svelte'
+import { tick } from 'svelte'
 import { cubicOut } from 'svelte/easing'
-import { fade, slide } from 'svelte/transition'
+import { slide } from 'svelte/transition'
 import type { ProxyConfig, ProxyMode, ProxyServer, ProxySettings } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
 import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
-import {
-  flexPatterns,
-  modalBackdropVariants,
-  modalGlassmorphismVariants,
-} from '@/utils/classPatterns'
+import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { getRandomProxyColor } from '@/utils/colors'
 import { fetchPacViaBackground } from '@/utils/fetchPac'
 import { Globe, Radar, Settings, Sparkles, X, Zap } from '@/utils/icons'
-import AnimatedIconBadge from '../AnimatedIconBadge.svelte'
+import { modalFocus } from '@/utils/modalFocus'
 import Button from '../Button.svelte'
-import ModalDecorations from '../ModalDecorations.svelte'
 import Text from '../Text.svelte'
 import BasicSettings from './BasicSettings.svelte'
 import ManualProxyConfiguration from './ManualProxyConfiguration.svelte'
@@ -59,9 +54,6 @@ let pacMandatory = $state<boolean>(false)
 let updateInterval = $state<number>(0)
 let lastFetched = $state<number | undefined>(undefined)
 
-// Animation state
-let isVisible = $state(false)
-
 $effect(() => {
   // Initialize state from proxyConfig
   name = proxyConfig?.name || ''
@@ -89,13 +81,6 @@ $effect(() => {
   useSharedProxy = proxyConfig?.rules?.singleProxy !== undefined ? true : !proxyConfig?.rules
   // Initialize bypassListContent directly from proxyConfig to avoid reading from proxySettings
   bypassListContent = (proxyConfig?.rules?.bypassList || []).join('\n')
-})
-
-onMount(() => {
-  // Trigger entrance animation
-  requestAnimationFrame(() => {
-    isVisible = true
-  })
 })
 
 async function handlePacRefresh() {
@@ -250,335 +235,283 @@ async function handleSubmit(event: Event) {
   }
 }
 
-let modalRef = $state<HTMLDivElement>()
-let previouslyFocusedElement: HTMLElement | null = null
-
-$effect(() => {
-  // Store the previously focused element
-  previouslyFocusedElement = document.activeElement as HTMLElement
-
-  // Focus the close button when modal opens (accessible pattern: focus dialog control, not form input)
-  if (modalRef) {
-    const closeButton = modalRef.querySelector('[data-testid="modal-close-btn"]') as HTMLElement
-    closeButton?.focus()
-  }
-
-  // Return focus when modal closes
-  return () => {
-    previouslyFocusedElement?.focus()
-  }
-})
-
 function handleClose() {
-  isVisible = false
-  setTimeout(onCancel, 200)
+  onCancel()
 }
 
 function handleKeydown(event: KeyboardEvent) {
+  // Focus trapping is handled by the shared `modalFocus` action.
   if (event.key === 'Escape') {
     handleClose()
   }
+}
 
-  // Trap focus within modal
-  if (event.key === 'Tab' && modalRef) {
-    const focusableElements = modalRef.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    )
-    const firstElement = focusableElements[0] as HTMLElement
-    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
-
-    if (event.shiftKey && document.activeElement === firstElement) {
-      event.preventDefault()
-      lastElement?.focus()
-    } else if (!event.shiftKey && document.activeElement === lastElement) {
-      event.preventDefault()
-      firstElement?.focus()
-    }
-  }
+function handleBackdropClick(event: MouseEvent) {
+  if (event.target === event.currentTarget) handleClose()
 }
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
-
 <div
-  class="fixed inset-0 z-50 flex items-center justify-center p-4"
+  class={cn(modalVariants.overlay(), flexPatterns.center)}
   data-testid="proxy-config-modal"
-  role="presentation"
-  transition:fade={{ duration: 200 }}
+  onclick={handleBackdropClick}
+  onkeydown={handleKeydown}
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="editor-title"
+  tabindex="-1"
 >
-  <!-- Backdrop with blur and gradient -->
-  <div
-    class="absolute inset-0 transition-all duration-300"
-    class:opacity-100={isVisible}
-    class:opacity-0={!isVisible}
-    onclick={handleClose}
-    onkeydown={(e) => e.key === 'Escape' && handleClose()}
-    role="button"
-    tabindex="-1"
-    aria-label="Close modal"
-  >
-    <div class={modalBackdropVariants()}></div>
-  </div>
-
   <!-- Modal Content -->
   <div
-    bind:this={modalRef}
-    class="relative w-full max-w-4xl max-h-[90vh] overflow-hidden transition-all duration-300"
-    class:scale-100={isVisible}
-    class:opacity-100={isVisible}
-    class:scale-95={!isVisible}
-    class:opacity-0={!isVisible}
-    role="dialog"
-    aria-labelledby="editor-title"
-    aria-modal="true"
+    class={cn(
+      modalVariants.content({ size: 'xl' }),
+      'mx-4 animate-scale-in flex flex-col max-h-[90vh] overflow-hidden'
+    )}
+    use:modalFocus
+    tabindex="-1"
   >
-    <!-- Glassmorphism container -->
-    <div class={modalGlassmorphismVariants()}>
-      <!-- Modal decorations -->
-      <ModalDecorations />
+    <!-- Accent bar for editor identity -->
+    <div class="h-1 shrink-0 bg-linear-to-r from-blue-500 to-indigo-500"></div>
 
-      <form class={cn(flexPatterns.col, 'flex-1 relative')} onsubmit={handleSubmit}>
-        <!-- Header -->
-        <div class="relative px-6 py-5 border-b border-slate-200/50 dark:border-slate-700/50">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-4">
-              <!-- Animated icon -->
-              <AnimatedIconBadge icon={Settings} />
-              <div>
-                <h2
-                  id="editor-title"
-                  class="text-xl font-bold text-slate-800 dark:text-slate-100"
-                  data-testid="modal-title"
-                >
-                  {proxyConfig ? I18nService.getMessage('editProxy') || 'Edit Proxy' : I18nService.getMessage('proxyConfiguration')}
-                </h2>
-                <p class="text-sm text-slate-500 dark:text-slate-300 mt-0.5">
-                  {proxyConfig
+    <form class={cn(flexPatterns.col, 'flex-1 min-h-0 relative')} onsubmit={handleSubmit}>
+      <!-- Header -->
+      <div class="relative px-6 py-5 border-b border-slate-200/50 dark:border-slate-700/50">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <!-- Icon badge -->
+            <div
+              class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-blue-100 dark:bg-blue-900/40"
+            >
+              <Settings size={20} class="text-blue-600 dark:text-blue-300" />
+            </div>
+            <div>
+              <h2
+                id="editor-title"
+                class="text-xl font-bold text-slate-800 dark:text-slate-100"
+                data-testid="modal-title"
+              >
+                {proxyConfig ? I18nService.getMessage('editProxy') || 'Edit Proxy' : I18nService.getMessage('proxyConfiguration')}
+              </h2>
+              <p class="text-sm text-slate-500 dark:text-slate-300 mt-0.5">
+                {proxyConfig
                     ? I18nService.getMessage('editProxySubtitle')
                     : I18nService.getMessage('createProxySubtitle')}
-                </p>
-              </div>
-            </div>
-
-            <!-- Close button -->
-            <Button
-              type="button"
-              onclick={handleClose}
-              color="ghost"
-              variant="minimal"
-              aria-label={I18nService.getMessage('close')}
-              classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-              data-testid="modal-close-btn"
-            >
-              {#snippet icon()}
-                <X size={20} />
-              {/snippet}
-            </Button>
-          </div>
-        </div>
-
-        <!-- Scrollable Content -->
-        <div class="px-6 py-5 space-y-6 overflow-y-auto max-h-[calc(90vh-200px)]">
-          <!-- Basic Settings Section -->
-          <div class="relative overflow-hidden rounded-xl">
-            <div
-              class="absolute inset-0 bg-linear-to-br from-slate-50 to-gray-50 dark:from-slate-800/50 dark:via-gray-800/50 dark:to-zinc-800/50"
-            ></div>
-            <div
-              class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-gray-500"
-            ></div>
-
-            <div
-              class="relative p-4 border border-slate-200/50 dark:border-slate-700/30 rounded-xl"
-            >
-              <div class="flex items-center gap-2 mb-4">
-                <div class="relative">
-                  <div
-                    class="relative p-1.5 rounded-lg bg-linear-to-br from-slate-500 to-gray-600 shadow-sm"
-                  >
-                    <Settings size={14} class="text-white" />
-                  </div>
-                </div>
-                <Text weight="semibold" size="sm" classes="text-slate-700 dark:text-slate-200">
-                  {I18nService.getMessage('basicSettings')}
-                </Text>
-              </div>
-              <BasicSettings bind:name bind:color bind:badgeLabel bind:isActive />
+              </p>
             </div>
           </div>
 
-          <!-- Proxy Mode Selection -->
-          <ProxyModeSelector bind:proxyMode />
-
-          <!-- Mode-specific Configuration -->
-          {#key proxyMode}
-            <div transition:slide={{ duration: 200, easing: cubicOut }}>
-              {#if proxyMode === 'system'}
-                <div class="relative overflow-hidden rounded-xl">
-                  <div
-                    class="absolute inset-0 bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-700/50 dark:to-slate-800/30"
-                  ></div>
-                  <div
-                    class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-gray-500"
-                  ></div>
-                  <div
-                    class="relative p-5 border border-slate-200 dark:border-slate-700 rounded-xl"
-                  >
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700">
-                        <Globe size={20} class="text-slate-600 dark:text-slate-300" />
-                      </div>
-                      <Text as="p" color="muted">{I18nService.getMessage('systemProxy')}</Text>
-                    </div>
-                  </div>
-                </div>
-              {:else if proxyMode === 'direct'}
-                <div class="relative overflow-hidden rounded-xl">
-                  <div
-                    class="absolute inset-0 bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/20"
-                  ></div>
-                  <div
-                    class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-500"
-                  ></div>
-                  <div class="relative p-5 border border-blue-200 dark:border-blue-800 rounded-xl">
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/50">
-                        <Zap size={20} class="text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <Text as="p" color="muted">{I18nService.getMessage('directModeHelp')}</Text>
-                    </div>
-                  </div>
-                </div>
-              {:else if proxyMode === 'auto_detect'}
-                <div class="relative overflow-hidden rounded-xl">
-                  <div
-                    class="absolute inset-0 bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
-                  ></div>
-                  <div
-                    class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-500 to-pink-500"
-                  ></div>
-                  <div
-                    class="relative p-5 border border-purple-200 dark:border-purple-800 rounded-xl"
-                  >
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/50">
-                        <Radar size={20} class="text-purple-600 dark:text-purple-400" />
-                      </div>
-                      <Text as="p" color="muted">
-                        {I18nService.getMessage('autoDetectModeHelp')}
-                      </Text>
-                    </div>
-                  </div>
-                </div>
-              {:else if proxyMode === 'pac_script'}
-                <PACScriptSettings
-                  bind:pacUrl
-                  bind:pacMandatory
-                  bind:editorContent
-                  bind:updateInterval
-                  bind:lastFetched
-                  onRefresh={handlePacRefresh}
-                />
-              {:else if proxyMode === 'fixed_servers'}
-                <ManualProxyConfiguration
-                  bind:useSharedProxy
-                  bind:proxySettings
-                  bind:bypassListContent
-                />
-              {/if}
-            </div>
-          {/key}
-        </div>
-
-        <!-- Error Message -->
-        {#if errorMessage}
-          <div
-            class="relative mx-6 mb-4 overflow-hidden rounded-xl"
-            data-error-message
-            transition:slide={{ duration: 200 }}
+          <!-- Close button -->
+          <Button
+            type="button"
+            onclick={handleClose}
+            color="ghost"
+            variant="minimal"
+            aria-label={I18nService.getMessage('close')}
+            classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+            data-testid="modal-close-btn"
           >
-            <div
-              class="absolute inset-0 bg-linear-to-r from-red-500/10 to-rose-500/10 dark:from-red-500/5 dark:to-rose-500/5"
-            ></div>
-            <div
-              class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-red-500 to-rose-500"
-            ></div>
-            <div
-              class="relative flex items-start gap-3 p-4 border border-red-200 dark:border-red-800 rounded-xl"
-            >
-              <div class="shrink-0 p-1.5 rounded-lg bg-red-100 dark:bg-red-900/30">
-                <svg
-                  class="w-4 h-4 text-red-600 dark:text-red-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            {#snippet icon()}
+              <X size={20} />
+            {/snippet}
+          </Button>
+        </div>
+      </div>
+
+      <!-- Scrollable Content -->
+      <div class="px-6 py-5 space-y-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+        <!-- Basic Settings Section -->
+        <div class="relative overflow-hidden rounded-xl">
+          <div
+            class="absolute inset-0 bg-linear-to-br from-slate-50 to-gray-50 dark:from-slate-800/50 dark:via-gray-800/50 dark:to-zinc-800/50"
+          ></div>
+          <div
+            class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-gray-500"
+          ></div>
+
+          <div class="relative p-4 border border-slate-200/50 dark:border-slate-700/30 rounded-xl">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="relative">
+                <div
+                  class="relative p-1.5 rounded-lg bg-linear-to-br from-slate-500 to-gray-600 shadow-sm"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                  <Settings size={14} class="text-white" />
+                </div>
               </div>
-              <Text as="p" size="sm" classes="text-red-700 dark:text-red-300 font-medium">
-                {errorMessage}
+              <Text weight="semibold" size="sm" classes="text-slate-700 dark:text-slate-200">
+                {I18nService.getMessage('basicSettings')}
               </Text>
             </div>
-          </div>
-        {/if}
-
-        <!-- Footer with Actions -->
-        <div
-          class="relative px-6 py-4 border-t border-slate-200/50 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50"
-        >
-          <div class="flex items-center justify-end gap-3">
-            <Button
-              type="button"
-              onclick={handleClose}
-              color="secondary"
-              classes="px-5"
-              data-testid="modal-cancel-btn"
-            >
-              {I18nService.getMessage('cancel')}
-            </Button>
-
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              variant="gradient"
-              gradient="blue"
-              classes="px-6"
-              data-testid="modal-save-btn"
-            >
-              {#snippet icon()}
-                {#if isSubmitting}
-                  <svg class="w-4 h-4 animate-spin" viewBox="0 0 24 24">
-                    <circle
-                      class="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      stroke-width="4"
-                      fill="none"
-                    ></circle>
-                    <path
-                      class="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                {:else}
-                  <Sparkles size={16} />
-                {/if}
-              {/snippet}
-              {I18nService.getMessage('save')}
-            </Button>
+            <BasicSettings bind:name bind:color bind:badgeLabel bind:isActive />
           </div>
         </div>
-      </form>
-    </div>
+
+        <!-- Proxy Mode Selection -->
+        <ProxyModeSelector bind:proxyMode />
+
+        <!-- Mode-specific Configuration -->
+        {#key proxyMode}
+          <div transition:slide={{ duration: 200, easing: cubicOut }}>
+            {#if proxyMode === 'system'}
+              <div class="relative overflow-hidden rounded-xl">
+                <div
+                  class="absolute inset-0 bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-700/50 dark:to-slate-800/30"
+                ></div>
+                <div
+                  class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-gray-500"
+                ></div>
+                <div class="relative p-5 border border-slate-200 dark:border-slate-700 rounded-xl">
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700">
+                      <Globe size={20} class="text-slate-600 dark:text-slate-300" />
+                    </div>
+                    <Text as="p" color="muted">{I18nService.getMessage('systemProxy')}</Text>
+                  </div>
+                </div>
+              </div>
+            {:else if proxyMode === 'direct'}
+              <div class="relative overflow-hidden rounded-xl">
+                <div
+                  class="absolute inset-0 bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/20"
+                ></div>
+                <div
+                  class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-500"
+                ></div>
+                <div class="relative p-5 border border-blue-200 dark:border-blue-800 rounded-xl">
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/50">
+                      <Zap size={20} class="text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <Text as="p" color="muted">{I18nService.getMessage('directModeHelp')}</Text>
+                  </div>
+                </div>
+              </div>
+            {:else if proxyMode === 'auto_detect'}
+              <div class="relative overflow-hidden rounded-xl">
+                <div
+                  class="absolute inset-0 bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
+                ></div>
+                <div
+                  class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-500 to-pink-500"
+                ></div>
+                <div
+                  class="relative p-5 border border-purple-200 dark:border-purple-800 rounded-xl"
+                >
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/50">
+                      <Radar size={20} class="text-purple-600 dark:text-purple-400" />
+                    </div>
+                    <Text as="p" color="muted">{I18nService.getMessage('autoDetectModeHelp')}</Text>
+                  </div>
+                </div>
+              </div>
+            {:else if proxyMode === 'pac_script'}
+              <PACScriptSettings
+                bind:pacUrl
+                bind:pacMandatory
+                bind:editorContent
+                bind:updateInterval
+                bind:lastFetched
+                onRefresh={handlePacRefresh}
+              />
+            {:else if proxyMode === 'fixed_servers'}
+              <ManualProxyConfiguration
+                bind:useSharedProxy
+                bind:proxySettings
+                bind:bypassListContent
+              />
+            {/if}
+          </div>
+        {/key}
+      </div>
+
+      <!-- Error Message -->
+      {#if errorMessage}
+        <div
+          class="relative mx-6 mb-4 overflow-hidden rounded-xl"
+          data-error-message
+          transition:slide={{ duration: 200 }}
+        >
+          <div
+            class="absolute inset-0 bg-linear-to-r from-red-500/10 to-rose-500/10 dark:from-red-500/5 dark:to-rose-500/5"
+          ></div>
+          <div
+            class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-red-500 to-rose-500"
+          ></div>
+          <div
+            class="relative flex items-start gap-3 p-4 border border-red-200 dark:border-red-800 rounded-xl"
+          >
+            <div class="shrink-0 p-1.5 rounded-lg bg-red-100 dark:bg-red-900/30">
+              <svg
+                class="w-4 h-4 text-red-600 dark:text-red-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <Text as="p" size="sm" classes="text-red-700 dark:text-red-300 font-medium">
+              {errorMessage}
+            </Text>
+          </div>
+        </div>
+      {/if}
+
+      <!-- Footer with Actions -->
+      <div
+        class="relative px-6 py-4 border-t border-slate-200/50 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50"
+      >
+        <div class="flex items-center justify-end gap-3">
+          <Button
+            type="button"
+            onclick={handleClose}
+            color="secondary"
+            classes="px-5"
+            data-testid="modal-cancel-btn"
+          >
+            {I18nService.getMessage('cancel')}
+          </Button>
+
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            variant="gradient"
+            gradient="blue"
+            classes="px-6"
+            data-testid="modal-save-btn"
+          >
+            {#snippet icon()}
+              {#if isSubmitting}
+                <svg class="w-4 h-4 animate-spin" viewBox="0 0 24 24">
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                    fill="none"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              {:else}
+                <Sparkles size={16} />
+              {/if}
+            {/snippet}
+            {I18nService.getMessage('save')}
+          </Button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -587,4 +520,19 @@ function handleKeydown(event: KeyboardEvent) {
 
 /* Note: Global styles for modal body scroll lock and CodeMirror editor
      are defined in app.css to avoid Lightning CSS warnings about :global() syntax */
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
 </style>

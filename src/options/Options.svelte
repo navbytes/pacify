@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { Component } from 'svelte'
 import { onMount } from 'svelte'
+import LoadingSpinner from '@/components/common/LoadingSpinner.svelte'
 import ImportModal from '@/components/ImportModal.svelte'
 import KeyboardShortcutsModal from '@/components/KeyboardShortcutsModal.svelte'
 import OnboardingModal from '@/components/Onboarding/OnboardingModal.svelte'
@@ -8,6 +9,7 @@ import Tab from '@/components/Tabs/Tab.svelte'
 import TabList from '@/components/Tabs/TabList.svelte'
 import TabPanel from '@/components/Tabs/TabPanel.svelte'
 import Tabs from '@/components/Tabs/Tabs.svelte'
+import Text from '@/components/Text.svelte'
 import ThemeToggle from '@/components/ThemeToggle.svelte'
 import Toast from '@/components/Toast.svelte'
 import type { ProxyConfig } from '@/interfaces'
@@ -16,6 +18,8 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
+import { flexPatterns, modalVariants } from '@/utils/classPatterns'
+import { cn } from '@/utils/cn'
 import { Activity, Cable, Keyboard, Settings } from '@/utils/icons'
 import { isAutoProxy } from '@/utils/proxyModeHelpers'
 import DiagnosticsTab from './DiagnosticsTab.svelte'
@@ -248,6 +252,22 @@ async function handleImported() {
 }
 </script>
 
+{#snippet loadingModal(label: string)}
+  <div
+    class={cn(modalVariants.overlay(), flexPatterns.center)}
+    role="dialog"
+    aria-modal="true"
+    aria-label={label}
+  >
+    <div class={cn(modalVariants.content({ size: 'sm' }), 'mx-4')}>
+      <div class="flex items-center gap-4 p-8">
+        <LoadingSpinner size="md" />
+        <Text size="lg" weight="medium">{label}</Text>
+      </div>
+    </div>
+  </div>
+{/snippet}
+
 <div id="options-container" class="container mx-auto max-w-7xl px-4" role="region">
   <!-- Integrated Header with Tabs -->
   <Tabs bind:activeTab variant="buttons">
@@ -357,48 +377,7 @@ async function handleImported() {
         onCancel={() => (showEditor = false)}
       />
     {:else if isLoadingModal}
-      <!-- Loading placeholder with gradient -->
-      <div
-        class="fixed inset-0 z-50 flex items-center justify-center"
-        role="dialog"
-        aria-modal="true"
-      >
-        <div
-          class="absolute inset-0 bg-linear-to-br from-slate-900/80 via-blue-900/40 to-slate-900/80 backdrop-blur-md"
-        ></div>
-        <div
-          class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/20 dark:border-slate-700/50"
-        >
-          <div class="flex items-center gap-4">
-            <div class="relative">
-              <div
-                class="absolute inset-0 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl blur-lg opacity-40 animate-pulse"
-              ></div>
-              <div class="relative p-3 rounded-xl bg-linear-to-br from-blue-500 to-purple-600">
-                <svg class="w-6 h-6 text-white animate-spin" viewBox="0 0 24 24">
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                    fill="none"
-                  ></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <p class="text-lg font-medium text-slate-800 dark:text-slate-100">
-              {I18nService.getMessage('loadingEditor')}
-            </p>
-          </div>
-        </div>
-      </div>
+      {@render loadingModal(I18nService.getMessage('loadingEditor'))}
     {/if}
   {/if}
 
@@ -414,48 +393,7 @@ async function handleImported() {
         onCancel={() => (showAutoProxyEditor = false)}
       />
     {:else if isLoadingAutoProxyModal}
-      <!-- Loading placeholder with gradient -->
-      <div
-        class="fixed inset-0 z-50 flex items-center justify-center"
-        role="dialog"
-        aria-modal="true"
-      >
-        <div
-          class="absolute inset-0 bg-linear-to-br from-slate-900/80 via-orange-900/40 to-slate-900/80 backdrop-blur-md"
-        ></div>
-        <div
-          class="relative bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/20 dark:border-slate-700/50"
-        >
-          <div class="flex items-center gap-4">
-            <div class="relative">
-              <div
-                class="absolute inset-0 bg-linear-to-br from-orange-400 to-amber-500 rounded-xl blur-lg opacity-40 animate-pulse"
-              ></div>
-              <div class="relative p-3 rounded-xl bg-linear-to-br from-orange-500 to-amber-600">
-                <svg class="w-6 h-6 text-white animate-spin" viewBox="0 0 24 24">
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                    fill="none"
-                  ></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <p class="text-lg font-medium text-slate-800 dark:text-slate-100">
-              {I18nService.getMessage('loadingAutoProxyEditor')}
-            </p>
-          </div>
-        </div>
-      </div>
+      {@render loadingModal(I18nService.getMessage('loadingAutoProxyEditor'))}
     {/if}
   {/if}
 

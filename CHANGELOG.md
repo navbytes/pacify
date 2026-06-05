@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Unified modal look & feel.** The Proxy and Auto-Proxy editors now use the same shell as every other dialog (one backdrop, container, entrance animation, header, and right-aligned footer), keeping a subtle per-editor accent bar for identity. Removed the parallel glassmorphism modal system (and its now-unused `ModalDecorations`/`AnimatedIconBadge` components) and consolidated the editor lazy-load loaders into one consistent loading dialog.
+
 ### Added
 
 - **Import from Other Proxy Managers** — make migrating to PACify effortless

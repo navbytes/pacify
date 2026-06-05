@@ -1,6 +1,6 @@
 <script lang="ts">
 import { GitBranch, Route, Save, Settings, Sparkles, X } from 'lucide-svelte'
-import { onMount, tick } from 'svelte'
+import { tick } from 'svelte'
 import type {
   AutoProxyConfig,
   AutoProxyRouteType,
@@ -10,16 +10,16 @@ import type {
   ProxyServer,
 } from '@/interfaces/settings'
 import { I18nService } from '@/services/i18n/i18nService'
+import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import {
   gradientIconBadgeVariants,
   gradientSectionVariants,
-  modalBackdropVariants,
-  modalContentVariants,
-  ruleCountBadgeVariants,
   settingsCardVariants,
 } from '@/utils/classPatterns/autoProxy'
+import { cn } from '@/utils/cn'
 import { getRandomProxyColor } from '@/utils/colors'
 import { modalFocus } from '@/utils/modalFocus'
+import { colors } from '@/utils/theme'
 import Button from '../Button.svelte'
 import FlexGroup from '../FlexGroup.svelte'
 import LabelButton from '../LabelButton.svelte'
@@ -72,7 +72,6 @@ let editingRule = $state<AutoProxyRule | null>(null)
 let isAddingRule = $state(false)
 let errorMessage = $state('')
 let isSubmitting = $state(false)
-let isVisible = $state(false)
 
 // Badge preview - shows what the badge will display
 let badgePreview = $derived(
@@ -80,23 +79,9 @@ let badgePreview = $derived(
 )
 
 // Styling variants
-const orangeIconBadge = gradientIconBadgeVariants({ color: 'amber', size: 'lg' })
 const blueIconBadge = gradientIconBadgeVariants({ color: 'blue' })
 const slateIconBadge = gradientIconBadgeVariants({ color: 'slate' })
 const redSection = gradientSectionVariants({ color: 'red' })
-
-onMount(() => {
-  // Trigger entrance animation
-  requestAnimationFrame(() => {
-    isVisible = true
-  })
-})
-
-// Derived modal variants based on visibility
-let modalContent = $derived(
-  modalContentVariants({ visible: isVisible, size: 'xl', color: 'orange' })
-)
-let modalBackdrop = $derived(modalBackdropVariants({ visible: isVisible }))
 
 function handleAddRule() {
   isAddingRule = true
@@ -224,8 +209,7 @@ async function handleSubmit() {
 }
 
 function handleClose() {
-  isVisible = false
-  setTimeout(onCancel, 200)
+  onCancel()
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -238,72 +222,73 @@ function handleKeydown(event: KeyboardEvent) {
   }
 }
 
+function handleBackdropClick(event: MouseEvent) {
+  if (event.target === event.currentTarget) handleClose()
+}
+
 // Filter out the current config from available proxies (can't reference itself)
 let selectableProxies = $derived(
   availableProxies.filter((p) => p.id !== proxyConfig?.id && p.autoProxy === undefined)
 )
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
-
-<!-- Backdrop with blur -->
-<div class={modalBackdrop.container()}>
-  <!-- Animated background -->
-  <div class={modalBackdrop.background()} onclick={handleClose} role="presentation"></div>
-
+<div
+  class={cn(modalVariants.overlay(), flexPatterns.center)}
+  onclick={handleBackdropClick}
+  onkeydown={handleKeydown}
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="auto-proxy-title"
+  tabindex="-1"
+>
   <!-- Modal -->
   <div
-    class={modalContent.wrapper()}
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="auto-proxy-title"
+    class={cn(
+      modalVariants.content({ size: 'xl' }),
+      'mx-4 animate-scale-in flex flex-col max-h-[90vh] overflow-hidden'
+    )}
     use:modalFocus
     tabindex="-1"
   >
-    <!-- Decorative gradient accent -->
-    <div class={modalContent.accentBar()}></div>
+    <!-- Accent bar for editor identity -->
+    <div class="h-1 shrink-0 bg-linear-to-r from-orange-500 to-amber-500"></div>
 
     <!-- Header -->
-    <div class={modalContent.header()}>
-      <!-- Background pattern -->
-      <div class={modalContent.headerBackground()}></div>
-
-      <div class="relative flex items-center justify-between">
-        <FlexGroup direction="horizontal" alignItems="center" childrenGap="md">
-          <!-- Icon container -->
-          <div class={orangeIconBadge.wrapper()}>
-            <div class={orangeIconBadge.badge()}>
-              <GitBranch size={24} class="text-white" strokeWidth={2.5} />
-            </div>
-          </div>
-          <div>
-            <h2 id="auto-proxy-title" class="text-xl font-bold text-slate-900 dark:text-white">
-              {proxyConfig ? I18nService.getMessage('editAutoProxy') : I18nService.getMessage('createAutoProxy')}
-            </h2>
-            <p class="text-sm text-slate-500 dark:text-slate-300 flex items-center gap-1.5 mt-0.5">
-              <Route size={14} />
-              {I18nService.getMessage('autoProxySubtitle')}
-            </p>
-          </div>
-        </FlexGroup>
-
-        <Button
-          onclick={handleClose}
-          color="ghost"
-          variant="minimal"
-          aria-label={I18nService.getMessage('close')}
-          classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-          data-testid="auto-proxy-close-btn"
+    <div class={cn(modalVariants.header(), 'items-start')}>
+      <div class="flex items-center gap-3">
+        <!-- Icon badge -->
+        <div
+          class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-orange-100 dark:bg-orange-900/40"
         >
-          {#snippet icon()}
-            <X size={20} />
-          {/snippet}
-        </Button>
+          <GitBranch size={20} class="text-orange-600 dark:text-orange-300" />
+        </div>
+        <div>
+          <h2 id="auto-proxy-title" class={cn('text-lg font-semibold', colors.text.default)}>
+            {proxyConfig ? I18nService.getMessage('editAutoProxy') : I18nService.getMessage('createAutoProxy')}
+          </h2>
+          <p class="text-sm text-slate-500 dark:text-slate-300 flex items-center gap-1.5 mt-0.5">
+            <Route size={14} />
+            {I18nService.getMessage('autoProxySubtitle')}
+          </p>
+        </div>
       </div>
+
+      <Button
+        onclick={handleClose}
+        color="ghost"
+        variant="minimal"
+        aria-label={I18nService.getMessage('close')}
+        classes="p-2 min-w-11 min-h-11 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+        data-testid="auto-proxy-close-btn"
+      >
+        {#snippet icon()}
+          <X size={20} />
+        {/snippet}
+      </Button>
     </div>
 
     <!-- Content -->
-    <div class={modalContent.body()}>
+    <div class={cn(modalVariants.body(), 'overflow-y-auto space-y-4')}>
       <!-- Basic Settings Card -->
       <div class={settingsCardVariants({ color: 'slate' })}>
         <FlexGroup direction="horizontal" alignItems="center" childrenGap="sm" classes="mb-4">
@@ -502,44 +487,39 @@ let selectableProxies = $derived(
     </div>
 
     <!-- Footer -->
-    <div class={modalContent.footer()}>
-      <!-- Subtle gradient background -->
-      <div class={modalContent.footerBackground()}></div>
-
-      <div class="relative">
-        <FlexGroup direction="horizontal" justifyContent="between" alignItems="center">
-          <!-- Rule count badge -->
-          <div class={ruleCountBadgeVariants({ color: 'slate' })}>
-            <Route size={14} />
-            <span>
-              {I18nService.getMessage('rulesConfigured', [String(rules.length), rules.length === 1 ? I18nService.getMessage('ruleSingular') : I18nService.getMessage('rulePlural')])}
-              {#if subscriptions.length > 0}
-                {' + '}
-                {subscriptions.filter(s => s.enabled).reduce((sum, s) => sum + (s.ruleCount || 0), 0)}
-                {I18nService.getMessage('fromSubscriptions')}
-              {/if}
-            </span>
-          </div>
-
-          <FlexGroup direction="horizontal" childrenGap="sm">
-            <Button color="secondary" onclick={handleClose} data-testid="auto-proxy-cancel-btn">
-              {I18nService.getMessage('cancel')}
-            </Button>
-            <Button
-              onclick={handleSubmit}
-              disabled={isSubmitting || isAddingRule || !!editingRule}
-              variant="gradient"
-              gradient="orange"
-              data-testid="auto-proxy-save-btn"
-            >
-              {#snippet icon()}
-                <Save size={16} />
-              {/snippet}
-              {proxyConfig ? I18nService.getMessage('saveChanges') : I18nService.getMessage('createAutoProxy')}
-            </Button>
-          </FlexGroup>
-        </FlexGroup>
-      </div>
+    <div class={modalVariants.footer()}>
+      <Button color="secondary" onclick={handleClose} data-testid="auto-proxy-cancel-btn">
+        {I18nService.getMessage('cancel')}
+      </Button>
+      <Button
+        onclick={handleSubmit}
+        disabled={isSubmitting || isAddingRule || !!editingRule}
+        variant="gradient"
+        gradient="orange"
+        data-testid="auto-proxy-save-btn"
+      >
+        {#snippet icon()}
+          <Save size={16} />
+        {/snippet}
+        {proxyConfig ? I18nService.getMessage('saveChanges') : I18nService.getMessage('createAutoProxy')}
+      </Button>
     </div>
   </div>
 </div>
+
+<style>
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+</style>
