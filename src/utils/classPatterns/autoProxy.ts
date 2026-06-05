@@ -69,11 +69,11 @@ export const gradientSectionVariants = tv({
       },
       slate: {
         background:
-          'bg-linear-to-br from-slate-50 to-gray-50 dark:from-slate-950/20 dark:to-gray-950/20',
-        accentBar: 'from-slate-400 to-gray-500',
+          'bg-linear-to-br from-slate-50 to-slate-50 dark:from-slate-950/20 dark:to-slate-950/20',
+        accentBar: 'from-slate-400 to-slate-500',
         content: 'border-slate-200/50 dark:border-slate-700/30',
         decorativeBlur:
-          'bg-linear-to-br from-slate-400/10 to-gray-400/10 dark:from-slate-400/5 dark:to-gray-400/5',
+          'bg-linear-to-br from-slate-400/10 to-slate-400/10 dark:from-slate-400/5 dark:to-slate-400/5',
       },
       red: {
         background:
@@ -142,7 +142,7 @@ export const gradientIconBadgeVariants = tv({
         badge: 'bg-linear-to-br from-orange-500 to-red-600',
       },
       slate: {
-        badge: 'bg-linear-to-br from-slate-500 to-gray-600',
+        badge: 'bg-linear-to-br from-slate-500 to-slate-600',
       },
       green: {
         badge: 'bg-linear-to-br from-green-500 to-emerald-600',
@@ -355,9 +355,9 @@ export const emptyStateCardVariants = tv({
       slate: {
         wrapper: 'border-slate-200 dark:border-slate-700',
         background:
-          'bg-linear-to-br from-slate-50/50 via-transparent to-gray-50/50 dark:from-slate-950/20 dark:via-transparent dark:to-gray-950/20',
+          'bg-linear-to-br from-slate-50/50 via-transparent to-slate-50/50 dark:from-slate-950/20 dark:via-transparent dark:to-slate-950/20',
         iconWrapper:
-          'bg-linear-to-br from-slate-100 to-gray-100 dark:from-slate-900/30 dark:to-gray-900/30',
+          'bg-linear-to-br from-slate-100 to-slate-100 dark:from-slate-900/30 dark:to-slate-900/30',
         title: 'text-slate-800 dark:text-slate-200',
         description: 'text-slate-500 dark:text-slate-300',
       },

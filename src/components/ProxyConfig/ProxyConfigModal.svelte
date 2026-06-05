@@ -322,17 +322,17 @@ function handleBackdropClick(event: MouseEvent) {
         <!-- Basic Settings Section -->
         <div class="relative overflow-hidden rounded-xl">
           <div
-            class="absolute inset-0 bg-linear-to-br from-slate-50 to-gray-50 dark:from-slate-800/50 dark:via-gray-800/50 dark:to-zinc-800/50"
+            class="absolute inset-0 bg-linear-to-br from-slate-50 to-slate-50 dark:from-slate-800/50 dark:via-slate-800/50 dark:to-slate-800/50"
           ></div>
           <div
-            class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-gray-500"
+            class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-slate-500"
           ></div>
 
           <div class="relative p-4 border border-slate-200/50 dark:border-slate-700/30 rounded-xl">
             <div class="flex items-center gap-2 mb-4">
               <div class="relative">
                 <div
-                  class="relative p-1.5 rounded-lg bg-linear-to-br from-slate-500 to-gray-600 shadow-sm"
+                  class="relative p-1.5 rounded-lg bg-linear-to-br from-slate-500 to-slate-600 shadow-sm"
                 >
                   <Settings size={14} class="text-white" />
                 </div>
@@ -357,7 +357,7 @@ function handleBackdropClick(event: MouseEvent) {
                   class="absolute inset-0 bg-linear-to-br from-slate-50 to-slate-100/50 dark:from-slate-700/50 dark:to-slate-800/30"
                 ></div>
                 <div
-                  class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-gray-500"
+                  class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-slate-400 to-slate-500"
                 ></div>
                 <div class="relative p-5 border border-slate-200 dark:border-slate-700 rounded-xl">
                   <div class="flex items-center gap-3">
