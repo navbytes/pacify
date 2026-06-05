@@ -18,6 +18,7 @@ interface Props {
   pageType?: ListViewType
   title: string
   onScriptEdit?: (scriptId: string) => void
+  onImport?: () => void
   dragType?: string
   proxies?: ProxyConfig[] // Optional filtered proxies list
   disableDrag?: boolean // Disable drag-and-drop functionality
@@ -28,6 +29,7 @@ let {
   pageType = 'POPUP',
   title,
   onScriptEdit,
+  onImport,
   dragType = $bindable(),
   proxies,
   disableDrag = false,
@@ -102,6 +104,10 @@ let displayProxyConfigs = $derived<ProxyConfig[]>(
         'Create your first proxy configuration to get started'}
       actionLabel={I18nService.getMessage('addFirstProxyAction') || 'Add Proxy'}
       onAction={() => onScriptEdit?.('')}
+      secondaryActionLabel={onImport
+        ? I18nService.getMessage('importExistingSetup') || 'Import existing setup'
+        : undefined}
+      onSecondaryAction={onImport}
       icon={Globe}
       iconSize={56}
     />

@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { Component } from 'svelte'
 import { onMount } from 'svelte'
+import ImportModal from '@/components/ImportModal.svelte'
 import KeyboardShortcutsModal from '@/components/KeyboardShortcutsModal.svelte'
 import OnboardingModal from '@/components/Onboarding/OnboardingModal.svelte'
 import Tab from '@/components/Tabs/Tab.svelte'
@@ -25,6 +26,7 @@ let showEditor = $state(false)
 let showAutoProxyEditor = $state(false)
 let showOnboarding = $state(false)
 let showKeyboardShortcuts = $state(false)
+let showImport = $state(false)
 let editingScriptId = $state<string | null>(null)
 let settings = $derived($settingsStore)
 let activeTab = $state('proxy-configs')
@@ -240,6 +242,16 @@ function handleOnboardingCreateProxy() {
   // Open the proxy editor after onboarding
   openEditor()
 }
+
+function openImport() {
+  activeTab = 'proxy-configs'
+  showImport = true
+}
+
+async function handleImported() {
+  await settingsStore.reloadSettings()
+  activeTab = 'proxy-configs'
+}
 </script>
 
 <div id="options-container" class="container mx-auto max-w-7xl px-4" role="region">
@@ -325,6 +337,7 @@ function handleOnboardingCreateProxy() {
       <ProxyConfigsTab
         onOpenEditor={handleOpenEditor}
         onOpenAutoProxyEditor={() => openAutoProxyEditor()}
+        onOpenImport={openImport}
       />
     </TabPanel>
 
@@ -457,7 +470,13 @@ function handleOnboardingCreateProxy() {
     bind:open={showOnboarding}
     onComplete={handleOnboardingComplete}
     onCreateProxy={handleOnboardingCreateProxy}
+    onImport={openImport}
   />
+
+  <!-- Import Modal (onboarding / empty-state entry point) -->
+  {#if showImport}
+    <ImportModal onClose={() => (showImport = false)} onImported={handleImported} />
+  {/if}
 
   <!-- Keyboard Shortcuts Modal -->
   <KeyboardShortcutsModal

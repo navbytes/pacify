@@ -5,6 +5,23 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **Import from Other Proxy Managers** — make migrating to PACify effortless
+  - New unified **Import** flow under Settings → Data Management, alongside Backup/Restore
+  - Auto-detects and imports from **Proxy SwitchyOmega / ZeroOmega** (`.bak`), **FoxyProxy** (Standard 7.x+ and legacy), raw **PAC scripts**, and PACify backups
+  - Faithful mapping: SwitchyOmega `FixedProfile`/`PacProfile`/`SwitchProfile`/`RuleListProfile` and FoxyProxy proxies + URL patterns map onto PACify proxy configs, Auto-Proxy rules (wildcard/regex/CIDR), and subscriptions
+  - Also imports **PAC files via URL** and can **detect the current browser proxy** and capture it as a config
+  - Import wizard with format detection, a preview + report of what will be created (and anything skipped, copyable to clipboard), merge-or-replace strategy, and an optional pre-import backup
+  - Migration entry points beyond Settings: an onboarding "coming from another proxy manager?" step and an empty-state "Import existing setup" call-to-action
+  - Runs entirely locally; imported patterns are sanitized before reaching generated PAC scripts
+  - New `ImportService` with per-format adapters and full unit-test coverage
+- **Export to Other Proxy Managers** — two-way migration
+  - Export all configurations as a **PACify backup**, **Proxy SwitchyOmega** `.bak`, or **FoxyProxy** JSON from Settings → Data Management → Export
+  - New `ExportService` with SwitchyOmega/FoxyProxy exporters and unit tests (incl. an export→re-import round-trip)
+
 ## [1.31.0] - 2026-03-22
 
 ### Fixed
