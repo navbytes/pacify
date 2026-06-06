@@ -26,13 +26,15 @@ export type Spacing = keyof typeof spacing
  * Color palette
  * Maps semantic color names to Tailwind color families
  */
+// Semantic color families. Kept in sync with `src/utils/theme.ts` (the runtime
+// source of truth) so the design-system docs don't contradict the UI.
 export const colors = {
   primary: 'blue',
-  secondary: 'gray',
+  secondary: 'slate',
   success: 'green',
   error: 'red',
-  warning: 'orange',
-  info: 'indigo',
+  warning: 'amber',
+  info: 'blue',
 } as const
 
 export type Color = keyof typeof colors

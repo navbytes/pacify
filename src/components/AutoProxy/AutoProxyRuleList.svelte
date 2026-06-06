@@ -231,7 +231,7 @@ function handleCancelDelete() {
 
                   <!-- Match type badge -->
                   <span
-                    class="{matchTypeBadge} {matchTypeBadgeGradients[rule.matchType] || 'from-gray-500 to-gray-600'}"
+                    class="{matchTypeBadge} {matchTypeBadgeGradients[rule.matchType] || 'from-slate-500 to-slate-600'}"
                   >
                     {getMatchTypeLabel(rule.matchType)}
                   </span>

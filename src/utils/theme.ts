@@ -26,12 +26,12 @@ export const colors = {
   },
 
   warning: {
-    light: 'bg-yellow-50 dark:bg-yellow-950/20',
-    base: 'bg-yellow-500 dark:bg-yellow-600',
-    hover: 'hover:bg-yellow-600 dark:hover:bg-yellow-700',
-    text: 'text-yellow-600 dark:text-yellow-400',
-    border: 'border-yellow-200 dark:border-yellow-800',
-    borderLeft: 'border-l-yellow-500 dark:border-l-yellow-400',
+    light: 'bg-amber-50 dark:bg-amber-950/20',
+    base: 'bg-amber-500 dark:bg-amber-600',
+    hover: 'hover:bg-amber-600 dark:hover:bg-amber-700',
+    text: 'text-amber-600 dark:text-amber-400',
+    border: 'border-amber-200 dark:border-amber-800',
+    borderLeft: 'border-l-amber-500 dark:border-l-amber-400',
   },
 
   danger: {
@@ -64,7 +64,7 @@ export const colors = {
   text: {
     default: 'text-slate-900 dark:text-white',
     muted: 'text-slate-600 dark:text-slate-300',
-    subtle: 'text-slate-500 dark:text-slate-500',
+    subtle: 'text-slate-500 dark:text-slate-400',
     inverse: 'text-white dark:text-slate-900',
   },
 
