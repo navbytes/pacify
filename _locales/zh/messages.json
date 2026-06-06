@@ -434,5 +434,9 @@
   "save": {"message":"保存"},
   "editProxy": {"message":"编辑代理"},
   "proxyActivated": {"message":"代理 '$1' 已激活","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
-  "proxyDeactivated": {"message":"代理已停用"}
+  "proxyDeactivated": {"message":"代理已停用",
+  "routeTo": {"message":"Route To"}
+}
+,
+  "routeTo": {"message":"Route To"}
 }

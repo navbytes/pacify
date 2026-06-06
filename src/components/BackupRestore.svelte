@@ -3,7 +3,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
 import { settingsCardVariants } from '@/utils/classPatterns'
-import { Download, FileText, Upload } from '@/utils/icons'
+import { Download, Upload } from '@/utils/icons'
 import Button from './Button.svelte'
 import ExportModal from './ExportModal.svelte'
 import FlexGroup from './FlexGroup.svelte'
@@ -20,11 +20,12 @@ let fileInputElement: HTMLInputElement | undefined = $state()
 let showImport = $state(false)
 let showExport = $state(false)
 
-// Card variants
-const emeraldCard = settingsCardVariants({ color: 'emerald', size: 'sm' })
-const amberCard = settingsCardVariants({ color: 'amber', size: 'sm' })
-const blueCard = settingsCardVariants({ color: 'blue', size: 'sm' })
-const purpleCard = settingsCardVariants({ color: 'purple', size: 'sm' })
+// Card variants — Backup/Restore are a native-format pair (blue),
+// Import/Export are a cross-app-format pair (emerald)
+const backupCard = settingsCardVariants({ color: 'blue', size: 'sm' })
+const restoreCard = settingsCardVariants({ color: 'blue', size: 'sm' })
+const importCard = settingsCardVariants({ color: 'emerald', size: 'sm' })
+const exportCard = settingsCardVariants({ color: 'emerald', size: 'sm' })
 
 // Handle the backup action
 async function handleBackup() {
@@ -73,15 +74,15 @@ async function handleRestore(event: Event) {
 
 <div class="grid-responsive-2">
   <!-- Backup Settings -->
-  <div class="group {emeraldCard.wrapper()}">
+  <div class="group {backupCard.wrapper()}">
     <!-- Background gradient -->
-    <div class={emeraldCard.background()}></div>
+    <div class={backupCard.background()}></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div class={emeraldCard.accent()}></div>
+    <div class={backupCard.accent()}></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
@@ -104,15 +105,15 @@ async function handleRestore(event: Event) {
   </div>
 
   <!-- Restore Settings -->
-  <div class="group {amberCard.wrapper()}">
+  <div class="group {restoreCard.wrapper()}">
     <!-- Background gradient -->
-    <div class={amberCard.background()}></div>
+    <div class={restoreCard.background()}></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div class={amberCard.accent()}></div>
+    <div class={restoreCard.accent()}></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
@@ -144,15 +145,15 @@ async function handleRestore(event: Event) {
   </div>
 
   <!-- Import from another app -->
-  <div class="group {blueCard.wrapper()}">
+  <div class="group {importCard.wrapper()}">
     <!-- Background gradient -->
-    <div class={blueCard.background()}></div>
+    <div class={importCard.background()}></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div class={blueCard.accent()}></div>
+    <div class={importCard.accent()}></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
@@ -175,15 +176,15 @@ async function handleRestore(event: Event) {
   </div>
 
   <!-- Export to other apps -->
-  <div class="group {purpleCard.wrapper()}">
+  <div class="group {exportCard.wrapper()}">
     <!-- Background gradient -->
-    <div class={purpleCard.background()}></div>
+    <div class={exportCard.background()}></div>
 
     <!-- Decorative elements -->
     <div></div>
 
     <!-- Top accent -->
-    <div class={purpleCard.accent()}></div>
+    <div class={exportCard.accent()}></div>
 
     <div class="relative p-5">
       <FlexGroup direction="vertical" childrenGap="xs">
@@ -194,7 +195,7 @@ async function handleRestore(event: Event) {
           data-testid="export-btn"
         >
           {#snippet icon()}
-            <FileText size={18} />
+            <Upload size={18} />
           {/snippet}
           {I18nService.getMessage('exportSettings')}
         </Button>

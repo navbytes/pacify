@@ -125,7 +125,7 @@ function handleKeydown(event: KeyboardEvent, index: number) {
               'text-slate-900 dark:text-white',
               'shadow-sm',
               variant === 'pills' &&
-                'bg-linear-to-r from-blue-500 to-purple-500 text-white shadow-md shadow-blue-500/20'
+                'bg-linear-to-r from-blue-500 to-indigo-500 text-white shadow-md shadow-blue-500/20'
             )
           : cn(
               'text-slate-600 dark:text-slate-300',

@@ -91,7 +91,7 @@
     outline: none;
     ring: 2px;
     ring-offset: 2px;
-    ring-color: var(--color-primary);
+    ring-color: theme(colors.blue.500);
   }
 
   /* Animation utilities */

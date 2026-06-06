@@ -434,5 +434,9 @@
   "save": {"message":"保存"},
   "editProxy": {"message":"プロキシを編集"},
   "proxyActivated": {"message":"プロキシ '$1' が有効になりました","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
-  "proxyDeactivated": {"message":"プロキシが無効になりました"}
+  "proxyDeactivated": {"message":"プロキシが無効になりました",
+  "routeTo": {"message":"Route To"}
+}
+,
+  "routeTo": {"message":"Route To"}
 }

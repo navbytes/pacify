@@ -79,9 +79,9 @@ export function getProxyModeColor(
       border: 'border-sky-300 dark:border-sky-700',
     },
     pac_script: {
-      bg: 'bg-purple-100 dark:bg-purple-900/30',
-      text: 'text-purple-800 dark:text-purple-200',
-      border: 'border-purple-300 dark:border-purple-700',
+      bg: 'bg-indigo-100 dark:bg-indigo-900/30',
+      text: 'text-indigo-800 dark:text-indigo-200',
+      border: 'border-indigo-300 dark:border-indigo-700',
     },
     fixed_servers: {
       bg: 'bg-blue-100 dark:bg-blue-900/30',

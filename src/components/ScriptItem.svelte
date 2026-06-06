@@ -351,14 +351,11 @@ async function handleScriptDelete() {
               proxy.quickSwitch ? 'removeFromQuickSwitch' : 'addToQuickSwitch',
               proxy.name
             )}
-            classes="hover:bg-purple-50 dark:hover:bg-purple-950/20 transition-all"
+            classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all"
             data-testid={`quick-switch-toggle-${proxy.id}`}
           >
             {#snippet icon()}
-              <Zap
-                size={16}
-                class={proxy.quickSwitch ? 'text-purple-600 dark:text-purple-400' : ''}
-              />
+              <Zap size={16} class={proxy.quickSwitch ? 'text-blue-600 dark:text-blue-400' : ''} />
             {/snippet}
           </Button>
 
@@ -416,13 +413,13 @@ async function handleScriptDelete() {
                 proxy.quickSwitch ? 'removeFromQuickSwitch' : 'addToQuickSwitch',
                 proxy.name
               )}
-              classes="hover:bg-purple-50 dark:hover:bg-purple-950/20 transition-all"
+              classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all"
               data-testid={`quick-switch-toggle-${proxy.id}`}
             >
               {#snippet icon()}
                 <Zap
                   size={16}
-                  class={proxy.quickSwitch ? 'text-purple-600 dark:text-purple-400' : ''}
+                  class={proxy.quickSwitch ? 'text-blue-600 dark:text-blue-400' : ''}
                 />
               {/snippet}
             </Button>

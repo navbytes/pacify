@@ -71,8 +71,8 @@ const gradientConfigs: Record<
   { bg: string; hover: string; shadow: string; ring: string }
 > = {
   blue: {
-    bg: 'from-blue-600 to-pink-600',
-    hover: 'from-blue-500 to-pink-500',
+    bg: 'from-blue-600 to-indigo-600',
+    hover: 'from-blue-500 to-indigo-500',
     shadow: 'shadow-blue-500/25 hover:shadow-blue-500/30',
     ring: 'focus-visible:ring-blue-500/50',
   },

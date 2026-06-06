@@ -624,6 +624,7 @@ export const sectionHeaderIconVariants = tv({
   base: 'shrink-0 w-8 h-8 rounded-lg flex items-center justify-center shadow-md',
   variants: {
     iconColor: {
+      blue: 'bg-linear-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-indigo-700',
       purple:
         'bg-linear-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700',
       slate: 'bg-linear-to-br from-slate-600 to-slate-700 dark:from-slate-500 dark:to-slate-600',
@@ -639,6 +640,7 @@ export const sectionHeaderBorderVariants = tv({
   base: '',
   variants: {
     iconColor: {
+      blue: 'border-blue-200 dark:border-blue-800',
       purple: 'border-purple-200 dark:border-purple-800',
       slate: 'border-slate-200 dark:border-slate-700',
       pink: 'border-pink-200 dark:border-pink-800',
@@ -653,6 +655,7 @@ export const sectionHeaderBadgeVariants = tv({
   base: 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold border',
   variants: {
     iconColor: {
+      blue: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800',
       purple:
         'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800',
       slate:
@@ -672,12 +675,12 @@ export const toggleSwitchTrackClasses = cn(
   'block w-12 h-7 rounded-full transition-all duration-200 ease-in-out relative',
   'bg-slate-400 dark:bg-slate-600',
   'hover:bg-slate-500 dark:hover:bg-slate-500',
-  'peer-checked:bg-green-500 dark:peer-checked:bg-green-600',
-  'peer-checked:hover:bg-green-600 dark:peer-checked:hover:bg-green-500',
+  'peer-checked:bg-blue-500 dark:peer-checked:bg-blue-600',
+  'peer-checked:hover:bg-blue-600 dark:peer-checked:hover:bg-blue-500',
   'before:absolute before:content-[""] before:h-5 before:w-5 before:left-[4px] before:top-[4px]',
   'before:bg-white before:rounded-full before:transition-transform before:duration-200 before:ease-in-out before:shadow-md',
   'peer-checked:before:translate-x-5',
-  'peer-focus:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-green-500/50 dark:peer-focus-visible:ring-green-400/50 peer-focus-visible:ring-offset-2'
+  'peer-focus:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-blue-500/50 dark:peer-focus-visible:ring-blue-400/50 peer-focus-visible:ring-offset-2'
 )
 
 /**
@@ -970,10 +973,10 @@ export const linkCardLabelVariants = tv({
  */
 const gradientColors = {
   bluePurple: {
-    light: 'from-blue-400/20 to-purple-400/20',
-    medium: 'from-blue-400 to-purple-500',
-    dark: 'from-blue-500 to-purple-600',
-    accent: 'from-blue-500 to-purple-500',
+    light: 'from-blue-400/20 to-indigo-400/20',
+    medium: 'from-blue-400 to-indigo-500',
+    dark: 'from-blue-500 to-indigo-600',
+    accent: 'from-blue-500 to-indigo-500',
   },
   purplePink: {
     light: 'from-purple-400/20 to-pink-400/20',

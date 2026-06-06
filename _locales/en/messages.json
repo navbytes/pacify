@@ -508,5 +508,6 @@
   "dragToQuickSwitch": {"message":"Drag to Quick Switch"},
   "onboardingMigrateTitle": {"message":"Coming from another proxy manager?"},
   "onboardingMigrateDescription": {"message":"Import your setup from SwitchyOmega, FoxyProxy, a PAC file, or a PACify backup — in one step."},
-  "onboardingImportSetup": {"message":"Import my setup"}
+  "onboardingImportSetup": {"message":"Import my setup"},
+  "routeTo": {"message":"Route To"}
 }

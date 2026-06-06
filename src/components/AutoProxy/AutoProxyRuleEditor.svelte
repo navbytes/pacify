@@ -68,14 +68,14 @@ let patternError = $state<string | null>(null)
 let isSubmitting = $state(false)
 
 // Gradient section styles
-const purpleSection = gradientSectionVariants({ color: 'purple' })
+const purpleSection = gradientSectionVariants({ color: 'blue' })
 const slateSection = gradientSectionVariants({ color: 'slate' })
 const blueSection = gradientSectionVariants({ color: 'blue' })
 const tealSection = gradientSectionVariants({ color: 'teal' })
 const amberSection = gradientSectionVariants({ color: 'amber' })
 
 // Icon badge styles
-const purpleIconBadge = gradientIconBadgeVariants({ color: 'purple' })
+const purpleIconBadge = gradientIconBadgeVariants({ color: 'blue' })
 const slateIconBadge = gradientIconBadgeVariants({ color: 'slate' })
 const blueIconBadge = gradientIconBadgeVariants({ color: 'blue' })
 const tealIconBadge = gradientIconBadgeVariants({ color: 'teal' })
@@ -140,7 +140,7 @@ const matchTypeOptions: {
     label: I18nService.getMessage('wildcardPattern'),
     description: '*.google.com',
     icon: Sparkles,
-    gradientKey: 'purple',
+    gradientKey: 'blue',
   },
   {
     value: 'exact',
@@ -154,14 +154,14 @@ const matchTypeOptions: {
     label: I18nService.getMessage('regexPattern'),
     description: '^www\\..*',
     icon: Regex,
-    gradientKey: 'orange',
+    gradientKey: 'blue',
   },
   {
     value: 'cidr',
     label: I18nService.getMessage('cidrPattern'),
     description: '192.168.0.0/16',
     icon: Network,
-    gradientKey: 'green',
+    gradientKey: 'blue',
   },
 ]
 
@@ -171,8 +171,8 @@ let currentMatchType = $derived(
 )
 
 // Input state for dynamic styling
-let inputState = $derived<'error' | 'success' | 'purple'>(
-  patternError ? 'error' : pattern && !patternError ? 'success' : 'purple'
+let inputState = $derived<'error' | 'success' | 'default'>(
+  patternError ? 'error' : pattern && !patternError ? 'success' : 'default'
 )
 </script>
 
@@ -407,7 +407,7 @@ let inputState = $derived<'error' | 'success' | 'purple'>(
       type="submit"
       disabled={isSubmitting || !!patternError}
       variant="gradient"
-      gradient="purple"
+      gradient="orange"
       classes="px-6"
       data-testid="rule-save-btn"
     >

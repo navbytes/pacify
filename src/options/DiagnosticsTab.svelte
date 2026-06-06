@@ -300,9 +300,9 @@ function formatTimestamp(timestamp: number): string {
     >
       <div class="flex items-center gap-3 mb-2">
         <div
-          class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center"
+          class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"
         >
-          <Server class="w-5 h-5 text-purple-600 dark:text-purple-400" />
+          <Server class="w-5 h-5 text-blue-600 dark:text-blue-400" />
         </div>
         <div>
           <Text as="p" size="xs" classes="text-slate-500 dark:text-slate-300">

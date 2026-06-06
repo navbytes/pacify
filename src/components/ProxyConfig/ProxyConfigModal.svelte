@@ -388,17 +388,15 @@ function handleBackdropClick(event: MouseEvent) {
             {:else if proxyMode === 'auto_detect'}
               <div class="relative overflow-hidden rounded-xl">
                 <div
-                  class="absolute inset-0 bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/20"
+                  class="absolute inset-0 bg-linear-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20"
                 ></div>
                 <div
-                  class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-purple-500 to-pink-500"
+                  class="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-blue-500 to-indigo-500"
                 ></div>
-                <div
-                  class="relative p-5 border border-purple-200 dark:border-purple-800 rounded-xl"
-                >
+                <div class="relative p-5 border border-blue-200 dark:border-blue-800 rounded-xl">
                   <div class="flex items-center gap-3">
-                    <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/50">
-                      <Radar size={20} class="text-purple-600 dark:text-purple-400" />
+                    <div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/50">
+                      <Radar size={20} class="text-blue-600 dark:text-blue-400" />
                     </div>
                     <Text as="p" color="muted">{I18nService.getMessage('autoDetectModeHelp')}</Text>
                   </div>

@@ -40,9 +40,9 @@ let notificationsEnabled = $state(true)
 
 // Card variants for different settings cards
 const blueCard = settingsCardVariants({ color: 'blue', size: 'md' })
-const greenCard = settingsCardVariants({ color: 'green', size: 'md' })
-const purpleCard = settingsCardVariants({ color: 'purple', size: 'md' })
-const amberCard = settingsCardVariants({ color: 'amber', size: 'md' })
+const greenCard = settingsCardVariants({ color: 'blue', size: 'md' })
+const purpleCard = settingsCardVariants({ color: 'blue', size: 'md' })
+const amberCard = settingsCardVariants({ color: 'blue', size: 'md' })
 
 // Load notification preference on mount
 $effect(() => {
@@ -99,7 +99,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     <SectionHeader
       icon={Shield}
       title={I18nService.getMessage('settingsProxyBehavior')}
-      iconColor="purple"
+      iconColor="blue"
     />
 
     <!-- Grid layout for proxy behavior cards -->
@@ -310,7 +310,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     <SectionHeader
       icon={Database}
       title={I18nService.getMessage('settingsDataManagement')}
-      iconColor="purple"
+      iconColor="blue"
     />
     <BackupRestore
       onRestore={async () => {
@@ -363,7 +363,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     <SectionHeader
       icon={HelpCircle}
       title={I18nService.getMessage('aboutHelpResources')}
-      iconColor="purple"
+      iconColor="slate"
     />
     <div class="grid-responsive-4">
       <LinkCard
@@ -394,7 +394,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         href="/privacy.html"
         icon={Lock}
         label={I18nService.getMessage('privacyPolicy') || 'Privacy Policy'}
-        color="purple"
+        color="blue"
       />
     </div>
   </div>

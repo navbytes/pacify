@@ -153,7 +153,7 @@ async function handleViewModeChange(mode: ViewMode) {
         title={I18nService.getMessage('quickSwitchConfigsTitle')}
         description={I18nService.getMessage('quickSwitchConfigsDescription')}
         count={quickSwitchProxies.length}
-        iconColor="purple"
+        iconColor="blue"
       >
         {#snippet rightContent()}
           <div class="flex items-center min-h-11">

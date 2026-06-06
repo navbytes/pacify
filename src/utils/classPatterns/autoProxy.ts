@@ -266,7 +266,7 @@ export const ruleListItemVariants = tv({
       false: { wrapper: 'opacity-50' },
     },
     dragging: {
-      true: { wrapper: 'ring-2 ring-purple-500 shadow-xl' },
+      true: { wrapper: 'ring-2 ring-blue-500 shadow-xl' },
       false: {},
     },
     orphaned: {
@@ -287,7 +287,7 @@ export const ruleListItemVariants = tv({
  * Match type badge gradient lookup
  */
 export const matchTypeBadgeGradients: Record<string, string> = {
-  wildcard: 'from-purple-500 to-pink-500',
+  wildcard: 'from-violet-500 to-indigo-500',
   exact: 'from-blue-500 to-cyan-500',
   regex: 'from-orange-500 to-red-500',
   cidr: 'from-green-500 to-emerald-500',

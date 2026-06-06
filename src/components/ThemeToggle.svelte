@@ -25,5 +25,6 @@ async function handleThemeChange(theme: string) {
   value={currentTheme}
   onchange={handleThemeChange}
   size="sm"
+  variant="pills"
   aria-label="Theme selector"
 />

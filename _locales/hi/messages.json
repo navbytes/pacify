@@ -434,5 +434,9 @@
   "save": {"message":"सहेजें"},
   "editProxy": {"message":"प्रॉक्सी संपादित करें"},
   "proxyActivated": {"message":"प्रॉक्सी '$1' सक्रिय किया गया","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
-  "proxyDeactivated": {"message":"प्रॉक्सी निष्क्रिय किया गया"}
+  "proxyDeactivated": {"message":"प्रॉक्सी निष्क्रिय किया गया",
+  "routeTo": {"message":"Route To"}
+}
+,
+  "routeTo": {"message":"Route To"}
 }

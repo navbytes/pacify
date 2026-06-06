@@ -434,5 +434,9 @@
   "save": {"message":"Сохранить"},
   "editProxy": {"message":"Редактировать прокси"},
   "proxyActivated": {"message":"Прокси '$1' активирован","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
-  "proxyDeactivated": {"message":"Прокси деактивирован"}
+  "proxyDeactivated": {"message":"Прокси деактивирован",
+  "routeTo": {"message":"Route To"}
+}
+,
+  "routeTo": {"message":"Route To"}
 }

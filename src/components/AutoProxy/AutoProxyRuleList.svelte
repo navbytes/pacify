@@ -52,8 +52,8 @@ let deleteConfirmRule = $state<AutoProxyRule | null>(null)
 let draggedIndex = $state<number | null>(null)
 
 // Styling variants
-const purpleIconBadge = gradientIconBadgeVariants({ color: 'purple' })
-const emptyState = emptyStateCardVariants({ color: 'purple' })
+const purpleIconBadge = gradientIconBadgeVariants({ color: 'blue' })
+const emptyState = emptyStateCardVariants({ color: 'blue' })
 const matchTypeBadge = matchTypeBadgeVariants()
 
 function getProxyName(rule: AutoProxyRule): string {
@@ -156,7 +156,7 @@ function handleCancelDelete() {
     <Button
       onclick={onAddRule}
       variant="gradient"
-      gradient="purple"
+      gradient="blue"
       size="sm"
       data-testid="add-rule-btn"
     >
@@ -324,7 +324,7 @@ function handleCancelDelete() {
 
       <div class={emptyState.content()}>
         <div class={emptyState.iconWrapper()}>
-          <Route size={32} class="text-purple-600 dark:text-purple-400" />
+          <Route size={32} class="text-blue-600 dark:text-blue-400" />
         </div>
         <h3 class={emptyState.title()}>
           {I18nService.getMessage('noRulesYet') || 'No rules defined yet'}
@@ -335,7 +335,7 @@ function handleCancelDelete() {
         <Button
           onclick={onAddRule}
           variant="gradient"
-          gradient="purple"
+          gradient="blue"
           data-testid="add-rule-empty-btn"
         >
           {#snippet icon()}
