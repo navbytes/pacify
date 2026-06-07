@@ -134,11 +134,10 @@ async function initialize(): Promise<void> {
       // Set up browser action click listeners
       browserService.action.onClicked.addListener(handleActionClick)
 
-      // Supply stored credentials when a proxy issues an authentication challenge.
-      // Requires the "webRequest" + "webRequestAuthProvider" permissions.
-      chrome.webRequest.onAuthRequired.addListener(handleAuthRequired, { urls: ['<all_urls>'] }, [
-        'asyncBlocking',
-      ])
+      // Register the auth listener only when the optional permissions are granted.
+      // Users who never configure proxy credentials won't have these permissions
+      // and don't need this listener.
+      void registerAuthListenerIfPermitted()
 
       // Listen for browser startup events
       browserService.runtime.onStartup.addListener(async () => {
@@ -573,6 +572,28 @@ async function fetchPacScript(url: string): Promise<string> {
   }
   return response.text()
 }
+
+/**
+ * Register the onAuthRequired listener only when the optional
+ * webRequest + webRequestAuthProvider permissions are granted.
+ * Safe to call multiple times — Chrome deduplicates identical listeners.
+ */
+async function registerAuthListenerIfPermitted(): Promise<void> {
+  const granted = await chrome.permissions.contains({
+    permissions: ['webRequest', 'webRequestAuthProvider'],
+  })
+  if (!granted) return
+  chrome.webRequest.onAuthRequired.addListener(handleAuthRequired, { urls: ['<all_urls>'] }, [
+    'asyncBlocking',
+  ])
+  logger.info('Auth credential listener registered')
+}
+
+// Re-register when the user grants the optional permissions mid-session
+// (e.g. after saving a proxy config with credentials for the first time).
+chrome.permissions.onAdded.addListener(() => {
+  void registerAuthListenerIfPermitted()
+})
 
 // Track auth attempts per request so a wrong stored credential doesn't loop
 // forever — after the first rejection we defer to the browser's native dialog.

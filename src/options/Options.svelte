@@ -18,6 +18,11 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
+import {
+  hasAuthPermissions,
+  proxyConfigHasCredentials,
+  requestAuthPermissions,
+} from '@/utils/authPermissions'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Activity, Cable, Keyboard, Settings } from '@/utils/icons'
@@ -183,15 +188,35 @@ function handleOpenEditor(scriptId?: string) {
   openEditor(scriptId)
 }
 
+/**
+ * After saving a proxy config that contains credentials, ask for the optional
+ * webRequest + webRequestAuthProvider permissions if not already granted.
+ * Must run after the modal closes (user-gesture context is still valid within
+ * the same event-loop turn as the save button click).
+ */
+async function maybeRequestAuthPermissions(config: Omit<ProxyConfig, 'id'>): Promise<void> {
+  if (!proxyConfigHasCredentials(config)) return
+  if (await hasAuthPermissions()) return
+  const granted = await requestAuthPermissions()
+  if (!granted) {
+    toastStore.show(
+      'Credentials saved. Grant the network permission to auto-supply them — otherwise Chrome will prompt you.',
+      'info'
+    )
+  }
+}
+
 async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
-  // Close modal immediately
+  // Close modal immediately (keeps user-gesture context for the permission request below)
   showEditor = false
+
+  // Request optional auth permissions if this config has credentials
+  await maybeRequestAuthPermissions(script)
 
   // Save in background
   settingsStore
     .updatePACScript(script, editingScriptId)
     .then(() => {
-      // Show success toast
       toastStore.show(
         editingScriptId
           ? I18nService.getMessage('proxyUpdated').replace('$1', script.name)
@@ -201,20 +226,21 @@ async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
     })
     .catch((error) => {
       logger.error('Error in handleScriptSave:', error)
-      // Show error toast
       toastStore.show(I18nService.getMessage('failedToSaveProxy'), 'error')
     })
 }
 
 async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
-  // Close modal immediately
+  // Close modal immediately (keeps user-gesture context for the permission request below)
   showAutoProxyEditor = false
+
+  // Request optional auth permissions if this config has credentials
+  await maybeRequestAuthPermissions(config)
 
   // Save in background
   settingsStore
     .updatePACScript(config, editingScriptId)
     .then(() => {
-      // Show success toast
       const messageKey = editingScriptId ? 'autoProxyUpdated' : 'autoProxyCreated'
       const message =
         I18nService.getMessage(messageKey)?.replace('$1', config.name) ||
@@ -225,7 +251,6 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
     })
     .catch((error) => {
       logger.error('Error in handleAutoProxySave:', error)
-      // Show error toast
       toastStore.show(I18nService.getMessage('failedToSaveProxy'), 'error')
     })
 }
