@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Export all configurations as a **PACify backup**, **Proxy SwitchyOmega** `.bak`, or **FoxyProxy** JSON from Settings → Data Management → Export
   - New `ExportService` with SwitchyOmega/FoxyProxy exporters and unit tests (incl. an export→re-import round-trip)
 - **Activity logging toggle** — diagnostic logging is now **off by default**; enable it in Diagnostics → Activity Log when needed. Eliminates storage noise for users who never open diagnostics.
+- **Proxy auth permission is now optional** — `webRequest` and `webRequestAuthProvider` are no longer required on install. They are requested in context — only when a proxy config with credentials is saved — so users who never use proxy authentication are never prompted for sensitive permissions.
 
 ### Fixed
 
