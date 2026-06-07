@@ -7,9 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- **Unified modal look & feel.** The Proxy and Auto-Proxy editors now use the same shell as every other dialog (one backdrop, container, entrance animation, header, and right-aligned footer), keeping a subtle per-editor accent bar for identity. Removed the parallel glassmorphism modal system (and its now-unused `ModalDecorations`/`AnimatedIconBadge` components) and consolidated the editor lazy-load loaders into one consistent loading dialog.
+## [1.32.0] - 2026-06-07
 
 ### Added
 
@@ -25,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Export to Other Proxy Managers** — two-way migration
   - Export all configurations as a **PACify backup**, **Proxy SwitchyOmega** `.bak`, or **FoxyProxy** JSON from Settings → Data Management → Export
   - New `ExportService` with SwitchyOmega/FoxyProxy exporters and unit tests (incl. an export→re-import round-trip)
+- **Activity logging toggle** — diagnostic logging is now **off by default**; enable it in Diagnostics → Activity Log when needed. Eliminates storage noise for users who never open diagnostics.
 
 ### Fixed
 
@@ -36,7 +35,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Keyboard-accessible Quick Switch:** each proxy card has a Quick Switch toggle button (drag-and-drop is no longer the only way); the keyboard-shortcuts dialog now lists only implemented shortcuts.
+- **Unified modal look & feel.** The Proxy and Auto-Proxy editors now share the same shell as every other dialog — one backdrop, container, entrance animation, header, and right-aligned footer, with a subtle per-editor accent bar for identity. Removed the parallel glassmorphism modal system (`ModalDecorations`, `AnimatedIconBadge`) and consolidated lazy-load loaders into one consistent loading dialog.
+- **Design system overhaul.** Purple removed from all functional UI; every surface uses the blue/indigo brand palette. All arbitrary `[px]` spacing values replaced with Tailwind scale tokens. Consistent gap, padding, and margin across every screen.
+- **Keyboard-accessible Quick Switch:** each proxy card now has a ⚡ Quick Switch button with a tooltip ("Pin to Quick Switch" / "Remove from Quick Switch") — drag-and-drop is no longer the only way. The keyboard-shortcuts dialog lists only implemented shortcuts.
+- **Data Management redesigned** from a 2×2 card grid into two compact action-list groups (Local Backup and Import & Export) — same actions, 40% less vertical space, instantly scannable.
+- **Settings layout fixed:** Proxy Behavior cards use a strict 2-column grid so 4 cards never land in a broken 3+1 row.
+- **Diagnostics log level badges:** severity is now a colored pill (blue `INFO` / amber `WARNING` / red `ERROR`) instead of plain uppercase text, making mixed-severity logs scannable at a glance.
+- **Modal subtitle context:** the Edit Proxy modal subtitle now reads "Editing: {name}" instead of the generic "Modify your proxy settings".
+- **"Route traffic to"** label replaces the raw camelCase field-name feel of "Route To" in the Auto-Proxy rule editor.
+- **Privacy Policy** demoted from a resource card to a compact text link — it's a legal link, not a feature.
 - **Import dead-end fixed:** the import "done" step offers to activate an imported proxy; the popup empty-state and a dedicated onboarding step lead into the create/import flows.
 - **Clearer data management:** export warns that files contain plaintext credentials; backup/export filenames are timestamped; restoring a SwitchyOmega/FoxyProxy file now points users to Import.
 - Terminology: the primary action reads "Add Proxy" (not "Add New Script"); hardcoded editor strings are localized.
