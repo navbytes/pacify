@@ -12,6 +12,7 @@ export interface AppSettings {
 
 export interface Settings {
   notifications: boolean
+  loggingEnabled: boolean
 }
 
 export type ProxyScheme = 'http' | 'https' | 'quic' | 'socks4' | 'socks5'

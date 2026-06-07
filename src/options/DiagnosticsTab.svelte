@@ -2,11 +2,13 @@
 import { onMount } from 'svelte'
 import Button from '@/components/Button.svelte'
 import Text from '@/components/Text.svelte'
+import ToggleSwitch from '@/components/ToggleSwitch.svelte'
 import type { DiagnosticLogEntry } from '@/interfaces/error'
 import type { ProxyConfig } from '@/interfaces/settings'
 import { diagnosticsService } from '@/services/DiagnosticsService'
 import { I18nService } from '@/services/i18n/i18nService'
 import { SettingsReader } from '@/services/SettingsReader'
+import { StorageService } from '@/services/StorageService'
 import { toastStore } from '@/stores/toastStore'
 import {
   Activity,
@@ -25,6 +27,7 @@ import {
 let logs = $state<DiagnosticLogEntry[]>([])
 let expandedLogIds = $state<Set<string>>(new Set())
 let isLoading = $state(true)
+let loggingEnabled = $state(false)
 
 // System status state
 let activeProxy = $state<ProxyConfig | null>(null)
@@ -33,9 +36,17 @@ let storageUsage = $state<{ used: number; total: number } | null>(null)
 let extensionVersion = $state('')
 
 onMount(async () => {
+  const prefs = await StorageService.getPreferences()
+  loggingEnabled = prefs.loggingEnabled ?? false
   await Promise.all([loadLogs(), loadSystemStatus()])
   isLoading = false
 })
+
+async function handleLoggingToggle(enabled: boolean) {
+  loggingEnabled = enabled
+  await StorageService.savePreferences({ loggingEnabled: enabled, notifications: true })
+  toastStore.show(enabled ? 'Activity logging enabled' : 'Activity logging disabled', 'success')
+}
 
 async function loadSystemStatus() {
   try {
@@ -383,9 +394,23 @@ function formatTimestamp(timestamp: number): string {
 
   <!-- Activity Log Section Header -->
   <div class="flex items-center justify-between mb-4">
-    <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
-      {I18nService.getMessage('activityLog') || 'Activity Log'}
-    </h3>
+    <div>
+      <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+        {I18nService.getMessage('activityLog') || 'Activity Log'}
+      </h3>
+      <Text as="p" size="xs" classes="mt-0.5 text-slate-500 dark:text-slate-400">
+        {loggingEnabled ? 'Recording proxy events' : 'Logging is off — enable to record proxy events'}
+      </Text>
+    </div>
+    <div class="flex items-center gap-3">
+      <Text size="sm" classes="text-slate-600 dark:text-slate-300">Enable logging</Text>
+      <ToggleSwitch
+        id="loggingEnabledToggle"
+        checked={loggingEnabled}
+        onchange={handleLoggingToggle}
+        aria-label="Toggle activity logging"
+      />
+    </div>
   </div>
 
   <!-- Loading state -->
@@ -430,17 +455,21 @@ function formatTimestamp(timestamp: number): string {
 
             <!-- Content -->
             <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-2">
-                <span class="font-semibold text-sm uppercase {getSeverityColor(log.severity)}">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span
+                  class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide
+                  {log.severity === 'error' ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300' :
+                   log.severity === 'warning' ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300' :
+                   'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'}"
+                >
                   {log.severity}
                 </span>
-                <span class="text-slate-400 dark:text-slate-500">•</span>
-                <span class="text-sm text-slate-600 dark:text-slate-300">
+                <span class="text-xs text-slate-500 dark:text-slate-400">
                   {formatTimestamp(log.timestamp)}
                 </span>
                 {#if log.proxyName}
-                  <span class="text-slate-400 dark:text-slate-500">•</span>
-                  <span class="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  <span class="text-xs text-slate-400 dark:text-slate-500">·</span>
+                  <span class="text-xs font-medium text-slate-600 dark:text-slate-300">
                     {log.proxyName}
                   </span>
                 {/if}

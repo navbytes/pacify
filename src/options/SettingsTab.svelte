@@ -102,8 +102,8 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
       iconColor="blue"
     />
 
-    <!-- Grid layout for proxy behavior cards -->
-    <div class="grid-settings-cards">
+    <!-- Grid layout for proxy behavior cards: strict 2-col so no orphan row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Disable Proxy on Startup Card -->
       <div class="group {blueCard.wrapper()}">
         <!-- Background gradient -->
@@ -390,12 +390,16 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
         label={I18nService.getMessage('aboutDocumentation')}
         color="green"
       />
-      <LinkCard
+    </div>
+    <!-- Privacy Policy: legal link, lower visual weight than resource cards -->
+    <div class="mt-3 flex items-center gap-1.5">
+      <Lock size={12} class="text-slate-400 dark:text-slate-500" />
+      <a
         href="/privacy.html"
-        icon={Lock}
-        label={I18nService.getMessage('privacyPolicy') || 'Privacy Policy'}
-        color="blue"
-      />
+        class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 underline underline-offset-2 transition-colors"
+      >
+        {I18nService.getMessage('privacyPolicy') || 'Privacy Policy'}
+      </a>
     </div>
   </div>
 </div>

@@ -315,9 +315,13 @@ export class StorageService {
   static getPreferences = withErrorHandlingAndFallback(
     async (): Promise<Settings> => {
       const data = await browserService.storage.sync.get('preferences')
-      return (data.preferences as Settings | undefined) || { notifications: true }
+      const stored = data.preferences as Partial<Settings> | undefined
+      return {
+        notifications: stored?.notifications ?? true,
+        loggingEnabled: stored?.loggingEnabled ?? false,
+      }
     },
     ERROR_TYPES.FETCH_SETTINGS,
-    { notifications: true }
+    { notifications: true, loggingEnabled: false }
   )
 }

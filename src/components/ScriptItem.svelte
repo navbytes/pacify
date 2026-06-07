@@ -22,6 +22,7 @@ import { colors, transitions } from '@/utils/theme'
 import Button from './Button.svelte'
 import ConfirmDialog from './ConfirmDialog.svelte'
 import DraggableItem from './DragDrop/DraggableItem.svelte'
+import Tooltip from './Tooltip.svelte'
 
 interface Props {
   proxy: ProxyConfig
@@ -343,21 +344,29 @@ async function handleScriptDelete() {
             )}
           />
 
-          <Button
-            color={proxy.quickSwitch ? 'primary' : 'secondary'}
-            minimal
-            onclick={toggleQuickSwitch}
-            aria-label={I18nService.getMessage(
-              proxy.quickSwitch ? 'removeFromQuickSwitch' : 'addToQuickSwitch',
-              proxy.name
-            )}
-            classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all"
-            data-testid={`quick-switch-toggle-${proxy.id}`}
+          <Tooltip
+            text={proxy.quickSwitch ? 'Remove from Quick Switch' : 'Pin to Quick Switch'}
+            position="top"
           >
-            {#snippet icon()}
-              <Zap size={16} class={proxy.quickSwitch ? 'text-blue-600 dark:text-blue-400' : ''} />
-            {/snippet}
-          </Button>
+            <Button
+              color={proxy.quickSwitch ? 'primary' : 'secondary'}
+              minimal
+              onclick={toggleQuickSwitch}
+              aria-label={I18nService.getMessage(
+                proxy.quickSwitch ? 'removeFromQuickSwitch' : 'addToQuickSwitch',
+                proxy.name
+              )}
+              classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all"
+              data-testid={`quick-switch-toggle-${proxy.id}`}
+            >
+              {#snippet icon()}
+                <Zap
+                  size={16}
+                  class={proxy.quickSwitch ? 'text-blue-600 dark:text-blue-400' : ''}
+                />
+              {/snippet}
+            </Button>
+          </Tooltip>
 
           <Button
             color="primary"
@@ -405,24 +414,29 @@ async function handleScriptDelete() {
           />
 
           <div class={cn(flexPatterns.centerVertical, 'gap-1.5')}>
-            <Button
-              color={proxy.quickSwitch ? 'primary' : 'secondary'}
-              minimal
-              onclick={toggleQuickSwitch}
-              aria-label={I18nService.getMessage(
-                proxy.quickSwitch ? 'removeFromQuickSwitch' : 'addToQuickSwitch',
-                proxy.name
-              )}
-              classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all"
-              data-testid={`quick-switch-toggle-${proxy.id}`}
+            <Tooltip
+              text={proxy.quickSwitch ? 'Remove from Quick Switch' : 'Pin to Quick Switch'}
+              position="top"
             >
-              {#snippet icon()}
-                <Zap
-                  size={16}
-                  class={proxy.quickSwitch ? 'text-blue-600 dark:text-blue-400' : ''}
-                />
-              {/snippet}
-            </Button>
+              <Button
+                color={proxy.quickSwitch ? 'primary' : 'secondary'}
+                minimal
+                onclick={toggleQuickSwitch}
+                aria-label={I18nService.getMessage(
+                  proxy.quickSwitch ? 'removeFromQuickSwitch' : 'addToQuickSwitch',
+                  proxy.name
+                )}
+                classes="hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all"
+                data-testid={`quick-switch-toggle-${proxy.id}`}
+              >
+                {#snippet icon()}
+                  <Zap
+                    size={16}
+                    class={proxy.quickSwitch ? 'text-blue-600 dark:text-blue-400' : ''}
+                  />
+                {/snippet}
+              </Button>
+            </Tooltip>
             <Button
               color="primary"
               minimal

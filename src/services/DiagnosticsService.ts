@@ -12,6 +12,12 @@ class DiagnosticsService {
   /**
    * Add a new diagnostic log entry
    */
+  async isLoggingEnabled(): Promise<boolean> {
+    const result = await chrome.storage.sync.get('preferences')
+    const prefs = result.preferences as { loggingEnabled?: boolean } | undefined
+    return prefs?.loggingEnabled ?? false
+  }
+
   async addLog(
     severity: ErrorSeverity,
     type: string,
@@ -24,6 +30,9 @@ class DiagnosticsService {
       stack?: string
     }
   ): Promise<void> {
+    // Only log if the user has explicitly enabled logging
+    if (!(await this.isLoggingEnabled())) return
+
     const entry: DiagnosticLogEntry = {
       id: crypto.randomUUID(),
       timestamp: Date.now(),
