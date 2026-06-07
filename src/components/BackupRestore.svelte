@@ -97,7 +97,7 @@ async function handleRestore(event: Event) {
           {/snippet}
           {I18nService.getMessage('backupSettings')}
         </Button>
-        <Text as="p" size="xs" color="muted" classes="px-1">
+        <Text as="p" size="xs" color="muted" classes="px-2">
           {I18nService.getMessage('backupDescription')}
         </Text>
       </FlexGroup>
@@ -137,7 +137,7 @@ async function handleRestore(event: Event) {
           aria-label="Upload backup file to restore configurations"
           data-testid="restore-file-input"
         >
-        <Text as="p" size="xs" color="muted" classes="px-1">
+        <Text as="p" size="xs" color="muted" classes="px-2">
           {I18nService.getMessage('restoreDescription')}
         </Text>
       </FlexGroup>
@@ -168,7 +168,7 @@ async function handleRestore(event: Event) {
           {/snippet}
           {I18nService.getMessage('importSettings')}
         </Button>
-        <Text as="p" size="xs" color="muted" classes="px-1">
+        <Text as="p" size="xs" color="muted" classes="px-2">
           {I18nService.getMessage('importDescription')}
         </Text>
       </FlexGroup>
@@ -199,7 +199,7 @@ async function handleRestore(event: Event) {
           {/snippet}
           {I18nService.getMessage('exportSettings')}
         </Button>
-        <Text as="p" size="xs" color="muted" classes="px-1">
+        <Text as="p" size="xs" color="muted" classes="px-2">
           {I18nService.getMessage('exportDescription')}
         </Text>
       </FlexGroup>

@@ -286,7 +286,7 @@ onDestroy(async () => {
             <option value={1440}>24 {I18nService.getMessage('hours') || 'hours'}</option>
           </select>
         </div>
-        <div class="flex flex-col items-end gap-1" style="margin-top: 1.5rem;">
+        <div class="flex flex-col items-end gap-1 mt-6">
           <Button
             color="primary"
             onclick={handleRefresh}

@@ -290,7 +290,7 @@ function handleCancelDelete() {
                   color="ghost"
                   variant="minimal"
                   aria-label={I18nService.getMessage('editRule')}
-                  classes="p-2 min-w-[40px] min-h-[40px] text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+                  classes="p-2 min-w-10 min-h-10 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30"
                   data-testid="edit-rule-btn-{rule.id}"
                 >
                   {#snippet icon()}
@@ -303,7 +303,7 @@ function handleCancelDelete() {
                   color="ghost"
                   variant="minimal"
                   aria-label={I18nService.getMessage('deleteRule')}
-                  classes="p-2 min-w-[40px] min-h-[40px] text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+                  classes="p-2 min-w-10 min-h-10 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
                   data-testid="delete-rule-btn-{rule.id}"
                 >
                   {#snippet icon()}

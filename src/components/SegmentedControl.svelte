@@ -36,12 +36,12 @@ let {
 const sizeClasses = {
   sm: {
     container: 'p-1 gap-0.5',
-    button: 'px-3 py-1.5 text-sm min-h-[36px]',
+    button: 'px-3 py-1.5 text-sm min-h-9',
     icon: 16,
   },
   md: {
     container: 'p-1 gap-1',
-    button: 'px-4 py-2 text-sm min-h-[40px]',
+    button: 'px-4 py-2 text-sm min-h-10',
     icon: 18,
   },
   lg: {

@@ -257,7 +257,7 @@ export const ruleListItemVariants = tv({
     priorityBadge:
       'shrink-0 w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center',
     patternCode:
-      'text-sm font-mono font-medium text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-700/80 px-2.5 py-1 rounded-lg truncate max-w-[300px] border border-slate-200 dark:border-slate-600',
+      'text-sm font-mono font-medium text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-700/80 px-2.5 py-1 rounded-lg truncate max-w-xs border border-slate-200 dark:border-slate-600',
     actions: 'flex items-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity',
   },
   variants: {

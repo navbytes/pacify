@@ -260,7 +260,7 @@ async function handleImported() {
     aria-label={label}
   >
     <div class={cn(modalVariants.content({ size: 'sm' }), 'mx-4')}>
-      <div class="flex items-center gap-4 p-8">
+      <div class="flex items-center gap-4 px-6 py-5">
         <LoadingSpinner size="md" />
         <Text size="lg" weight="medium">{label}</Text>
       </div>
@@ -288,7 +288,7 @@ async function handleImported() {
             </div>
             <div class="min-w-0">
               <h1
-                class="text-2xl font-bold bg-linear-to-r from-slate-900 via-blue-800 to-purple-800 dark:from-slate-100 dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent tracking-tight"
+                class="text-2xl font-bold bg-linear-to-r from-slate-900 via-blue-800 to-indigo-800 dark:from-slate-100 dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent tracking-tight"
                 data-testid="page-title"
               >
                 PACify

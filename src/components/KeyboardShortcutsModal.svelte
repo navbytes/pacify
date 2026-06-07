@@ -158,7 +158,7 @@ function formatKey(key: string): string {
           color="ghost"
           variant="minimal"
           aria-label={getMessage('close', 'Close')}
-          classes="p-2 min-w-[40px] min-h-[40px]"
+          classes="p-2 min-w-10 min-h-10"
         >
           {#snippet icon()}
             <X size={20} />

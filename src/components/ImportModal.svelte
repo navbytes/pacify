@@ -218,7 +218,7 @@ let skippedCount = $derived(warnings.filter((w) => w.level === 'skipped').length
         color="ghost"
         variant="minimal"
         aria-label={I18nService.getMessage('close')}
-        classes={cn(colors.icon.muted, 'p-2 min-w-[40px] min-h-[40px]')}
+        classes={cn(colors.icon.muted, 'p-2 min-w-10 min-h-10')}
         data-testid="import-close-btn"
       >
         {#snippet icon()}

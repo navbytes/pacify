@@ -213,7 +213,7 @@ function formatTimestamp(timestamp: number): string {
 }
 </script>
 
-<div class="max-w-6xl mx-auto py-8 px-4">
+<div class="max-w-6xl mx-auto py-6 px-6">
   <!-- Header -->
   <div class="flex items-center justify-between mb-6">
     <div>
@@ -253,7 +253,7 @@ function formatTimestamp(timestamp: number): string {
   </div>
 
   <!-- System Status Panel -->
-  <div class="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+  <div class="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
     <!-- Active Proxy Status -->
     <div
       class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4"
@@ -423,14 +423,14 @@ function formatTimestamp(timestamp: number): string {
           <button
             type="button"
             onclick={() => toggleExpanded(log.id)}
-            class="w-full px-4 py-3 flex items-start gap-3 hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-left"
+            class="w-full px-4 py-2 flex items-start gap-3 hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-left"
           >
             <!-- Severity icon -->
             <SeverityIcon class="w-5 h-5 {getSeverityColor(log.severity)} shrink-0 mt-0.5" />
 
             <!-- Content -->
             <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-2 mb-1">
+              <div class="flex items-center gap-2">
                 <span class="font-semibold text-sm uppercase {getSeverityColor(log.severity)}">
                   {log.severity}
                 </span>
@@ -458,73 +458,77 @@ function formatTimestamp(timestamp: number): string {
             />
           </button>
 
-          <!-- Expanded details -->
+          <!-- Expanded details — flex spacer aligns content with the icon column above -->
           {#if isExpanded}
-            <div
-              class="px-4 pb-4 pl-12 space-y-3 border-t border-slate-200 dark:border-slate-700/50 pt-3"
-            >
-              {#if log.details}
-                <div>
-                  <Text
-                    as="p"
-                    size="xs"
-                    weight="medium"
-                    classes="text-slate-600 dark:text-slate-300 mb-1"
-                  >
-                    {I18nService.getMessage('details') || 'Details'}
-                  </Text>
-                  <Text
-                    as="pre"
-                    size="xs"
-                    classes="text-slate-700 dark:text-slate-300 font-mono whitespace-pre-wrap bg-white/50 dark:bg-black/20 p-2 rounded"
-                  >
-                    {log.details}
-                  </Text>
-                </div>
-              {/if}
+            <div class="px-4 pb-4 pt-3 border-t border-slate-200 dark:border-slate-700/50">
+              <div class="flex gap-3">
+                <!-- Spacer matches the w-5 severity icon above, preserving alignment -->
+                <div class="w-5 shrink-0"></div>
+                <div class="flex-1 space-y-3">
+                  {#if log.details}
+                    <div>
+                      <Text
+                        as="p"
+                        size="xs"
+                        weight="medium"
+                        classes="text-slate-600 dark:text-slate-300"
+                      >
+                        {I18nService.getMessage('details') || 'Details'}
+                      </Text>
+                      <Text
+                        as="pre"
+                        size="xs"
+                        classes="text-slate-700 dark:text-slate-300 font-mono whitespace-pre-wrap bg-white/50 dark:bg-black/20 p-3 rounded-lg mt-1"
+                      >
+                        {log.details}
+                      </Text>
+                    </div>
+                  {/if}
 
-              {#if log.url}
-                <div>
-                  <Text
-                    as="p"
-                    size="xs"
-                    weight="medium"
-                    classes="text-slate-600 dark:text-slate-300 mb-1"
-                  >
-                    {I18nService.getMessage('url') || 'URL'}
-                  </Text>
-                  <Text
-                    as="p"
-                    size="xs"
-                    classes="text-slate-700 dark:text-slate-300 font-mono break-all"
-                  >
-                    {log.url}
-                  </Text>
-                </div>
-              {/if}
+                  {#if log.url}
+                    <div>
+                      <Text
+                        as="p"
+                        size="xs"
+                        weight="medium"
+                        classes="text-slate-600 dark:text-slate-300"
+                      >
+                        {I18nService.getMessage('url') || 'URL'}
+                      </Text>
+                      <Text
+                        as="p"
+                        size="xs"
+                        classes="text-slate-700 dark:text-slate-300 font-mono break-all mt-1"
+                      >
+                        {log.url}
+                      </Text>
+                    </div>
+                  {/if}
 
-              {#if log.stack}
-                <div>
-                  <Text
-                    as="p"
-                    size="xs"
-                    weight="medium"
-                    classes="text-slate-600 dark:text-slate-300 mb-1"
-                  >
-                    {I18nService.getMessage('stackTrace') || 'Stack Trace'}
-                  </Text>
-                  <Text
-                    as="pre"
-                    size="xs"
-                    classes="text-slate-700 dark:text-slate-300 font-mono whitespace-pre-wrap bg-white/50 dark:bg-black/20 p-2 rounded max-h-64 overflow-auto"
-                  >
-                    {log.stack}
-                  </Text>
-                </div>
-              {/if}
+                  {#if log.stack}
+                    <div>
+                      <Text
+                        as="p"
+                        size="xs"
+                        weight="medium"
+                        classes="text-slate-600 dark:text-slate-300"
+                      >
+                        {I18nService.getMessage('stackTrace') || 'Stack Trace'}
+                      </Text>
+                      <Text
+                        as="pre"
+                        size="xs"
+                        classes="text-slate-700 dark:text-slate-300 font-mono whitespace-pre-wrap bg-white/50 dark:bg-black/20 p-3 rounded-lg max-h-64 overflow-auto mt-1"
+                      >
+                        {log.stack}
+                      </Text>
+                    </div>
+                  {/if}
 
-              <div class="text-xs text-slate-500 dark:text-slate-300">
-                {I18nService.getMessage('logId') || 'ID'}: {log.id}
+                  <div class="text-xs text-slate-500 dark:text-slate-300">
+                    {I18nService.getMessage('logId') || 'ID'}: {log.id}
+                  </div>
+                </div>
               </div>
             </div>
           {/if}

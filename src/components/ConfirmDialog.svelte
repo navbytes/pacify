@@ -99,7 +99,7 @@ function handleKeydown(e: KeyboardEvent) {
           aria-label={I18nService.getMessage('closeDialog')}
           classes={cn(
             colors.icon.muted,
-            'p-2 min-w-[40px] min-h-[40px] hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+            'p-2 min-w-10 min-h-10 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
           )}
         >
           {#snippet icon()}

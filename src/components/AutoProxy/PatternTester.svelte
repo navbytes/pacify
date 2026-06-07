@@ -85,14 +85,21 @@ function handleKeydown(event: KeyboardEvent) {
   }
 }
 
+// Semantic color tokens for proxy type indicators
+const PROXY_DOT_COLORS = {
+  none: '#64748b', // slate-500 — no rule matched
+  direct: '#10b981', // emerald-500 — direct connection
+  inline: '#6366f1', // indigo-500 — inline/fallback proxy
+} as const
+
 function getProxyColor(rule: AutoProxyRule | undefined): string {
-  if (!rule) return '#6b7280'
-  if (rule.proxyType === 'direct') return '#10b981'
+  if (!rule) return PROXY_DOT_COLORS.none
+  if (rule.proxyType === 'direct') return PROXY_DOT_COLORS.direct
   if (rule.proxyType === 'existing' && rule.proxyId) {
     const proxy = availableProxies.find((p) => p.id === rule.proxyId)
-    return proxy?.color || '#6366f1'
+    return proxy?.color || PROXY_DOT_COLORS.inline
   }
-  return '#6366f1'
+  return PROXY_DOT_COLORS.inline
 }
 </script>
 

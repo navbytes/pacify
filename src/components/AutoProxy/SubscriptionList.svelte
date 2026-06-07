@@ -557,7 +557,7 @@ const intervalOptions: { value: number; label: string }[] = [
                 </div>
 
                 <div class="flex items-center gap-3 mt-1">
-                  <code class="text-xs text-slate-500 dark:text-slate-300 truncate max-w-[300px]">
+                  <code class="text-xs text-slate-500 dark:text-slate-300 truncate max-w-xs">
                     {sub.url}
                   </code>
                 </div>
@@ -590,7 +590,7 @@ const intervalOptions: { value: number; label: string }[] = [
                   color="ghost"
                   variant="minimal"
                   aria-label={I18nService.getMessage('editSubscription')}
-                  classes="p-2 min-w-[40px] min-h-[40px] text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+                  classes="p-2 min-w-10 min-h-10 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30"
                   data-testid="edit-subscription-btn-{sub.id}"
                 >
                   {#snippet icon()}
@@ -604,7 +604,7 @@ const intervalOptions: { value: number; label: string }[] = [
                   variant="minimal"
                   disabled={isRefreshing}
                   aria-label={I18nService.getMessage('refreshSubscription')}
-                  classes="p-2 min-w-[40px] min-h-[40px] text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 dark:hover:bg-cyan-950/30"
+                  classes="p-2 min-w-10 min-h-10 text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 dark:hover:bg-cyan-950/30"
                   data-testid="refresh-subscription-btn-{sub.id}"
                 >
                   {#snippet icon()}
@@ -617,7 +617,7 @@ const intervalOptions: { value: number; label: string }[] = [
                   color="ghost"
                   variant="minimal"
                   aria-label={I18nService.getMessage('deleteSubscription')}
-                  classes="p-2 min-w-[40px] min-h-[40px] text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+                  classes="p-2 min-w-10 min-h-10 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
                   data-testid="delete-subscription-btn-{sub.id}"
                 >
                   {#snippet icon()}
