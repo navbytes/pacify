@@ -147,6 +147,12 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
     // Wait for modal to close first
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
 
+    // Success toast must include the proxy name (regression: chrome.i18n strips
+    // "$1" when no substitution is passed, which once produced 'Proxy "" …').
+    await expect(page.locator('text=/created successfully/').first()).toContainText(
+      'Complete PAC Test'
+    )
+
     // Verify creation
     await expect(page.locator('text=Complete PAC Test').first()).toBeVisible()
   })
