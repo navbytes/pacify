@@ -21,6 +21,7 @@ import { logger } from '@/services/LoggerService'
 import { PACScriptGenerator } from '@/services/PACScriptGenerator'
 import { SubscriptionParser } from '@/services/SubscriptionParser'
 import { parseProxyError } from '@/utils/errorHandling'
+import { assertTextResponse } from '@/utils/httpContent'
 
 /**
  * Reject remote PAC scripts larger than this to prevent memory-exhaustion DoS.
@@ -575,12 +576,9 @@ async function fetchPacScript(url: string): Promise<string> {
   if (!response.ok) {
     throw new Error(`Failed to fetch PAC script: HTTP ${response.status}`)
   }
-  // Reject oversized payloads to prevent memory-exhaustion DoS from a
-  // malicious or misconfigured PAC URL.
-  const declaredLength = Number(response.headers.get('content-length'))
-  if (Number.isFinite(declaredLength) && declaredLength > MAX_PAC_SCRIPT_BYTES) {
-    throw new Error('PAC script is too large (over 10 MB).')
-  }
+  // Reject oversized (declared) or binary payloads to prevent memory-exhaustion
+  // DoS from a malicious or misconfigured PAC URL.
+  assertTextResponse(response, 'PAC script')
   const text = await response.text()
   if (text.length > MAX_PAC_SCRIPT_BYTES) {
     throw new Error('PAC script is too large (over 10 MB).')
