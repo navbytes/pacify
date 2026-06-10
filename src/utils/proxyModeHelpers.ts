@@ -207,16 +207,20 @@ export function getProxyDescription(mode: ProxyMode, config: ProxyConfig): strin
       if (config?.pacScript?.url) {
         return config.pacScript.url
       }
-      return 'PAC script configuration'
-    case 'fixed_servers':
-      if (config?.rules?.singleProxy) {
-        const { host, port } = config.rules.singleProxy
-        return `${host}:${port}`
-      } else if (config?.rules?.proxyForHttp) {
-        const { host, port } = config.rules.proxyForHttp
-        return `${host}:${port}`
+      return I18nService.getMessage('pacScriptConfigured') || 'PAC script configuration'
+    case 'fixed_servers': {
+      // A freshly-created manual proxy can have an empty host/port; don't
+      // render a bare ":" — fall back to a descriptive label instead.
+      const server = config?.rules?.singleProxy?.host
+        ? config.rules.singleProxy
+        : config?.rules?.proxyForHttp?.host
+          ? config.rules.proxyForHttp
+          : null
+      if (server?.host) {
+        return `${server.host}:${server.port}`
       }
-      return 'Manual proxy configuration'
+      return I18nService.getMessage('manualProxyNotConfigured') || 'No server configured yet'
+    }
     default:
       return ''
   }
