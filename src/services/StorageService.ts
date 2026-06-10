@@ -303,11 +303,17 @@ export class StorageService {
   }, ERROR_TYPES.SAVE_SETTINGS)
 
   /**
-   * Save user preferences (separate from AppSettings)
+   * Save user preferences (separate from AppSettings).
+   * Accepts a partial update and merges it with stored values so callers
+   * can't accidentally clobber preferences they didn't touch.
    */
-  static savePreferences = withErrorHandling(async (preferences: Settings): Promise<void> => {
-    await browserService.storage.sync.set({ preferences })
-  }, ERROR_TYPES.SAVE_SETTINGS)
+  static savePreferences = withErrorHandling(
+    async (preferences: Partial<Settings>): Promise<void> => {
+      const current = await StorageService.getPreferences()
+      await browserService.storage.sync.set({ preferences: { ...current, ...preferences } })
+    },
+    ERROR_TYPES.SAVE_SETTINGS
+  )
 
   /**
    * Get user preferences with fallback to defaults

@@ -50,11 +50,7 @@ test.describe('Chrome Web Store Screenshots', () => {
     }
 
     // Open popup
-    const popupPage = await navigateToExtensionPage(
-      sharedContext,
-      sharedExtensionId,
-      'src/popup/popup.html'
-    )
+    const popupPage = await navigateToExtensionPage(sharedContext, sharedExtensionId, 'popup.html')
 
     // Set popup dimensions
     await popupPage.setViewportSize({
@@ -142,7 +138,7 @@ test.describe('Chrome Web Store Screenshots', () => {
     const optionsPage = await navigateToExtensionPage(
       sharedContext,
       sharedExtensionId,
-      'src/options/options.html'
+      'options.html'
     )
 
     await optionsPage.setViewportSize({
@@ -173,7 +169,7 @@ test.describe('Chrome Web Store Screenshots', () => {
     const optionsPage = await navigateToExtensionPage(
       sharedContext,
       sharedExtensionId,
-      'src/options/options.html'
+      'options.html'
     )
 
     await optionsPage.setViewportSize({
@@ -238,7 +234,7 @@ test.describe('Chrome Web Store Screenshots', () => {
     const optionsPage = await navigateToExtensionPage(
       sharedContext,
       sharedExtensionId,
-      'src/options/options.html'
+      'options.html'
     )
 
     await optionsPage.setViewportSize({
@@ -303,7 +299,7 @@ test.describe('Chrome Web Store Screenshots', () => {
       }
 
       // Save
-      await optionsPage.getByTestId('save-config-btn').click()
+      await optionsPage.getByTestId('modal-save-btn').click()
       await optionsPage.waitForTimeout(1000)
     }
 
@@ -331,7 +327,7 @@ test.describe('Chrome Web Store Screenshots', () => {
     const settingsPage = await navigateToExtensionPage(
       sharedContext,
       sharedExtensionId,
-      'src/options/options.html'
+      'options.html'
     )
 
     await settingsPage.setViewportSize({

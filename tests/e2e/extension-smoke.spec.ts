@@ -1,7 +1,7 @@
-import { test, expect } from '@playwright/test'
-import { existsSync } from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import { existsSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { expect, test } from '@playwright/test'
 
 /**
  * Smoke tests for PACify Extension Build
@@ -22,12 +22,12 @@ test.describe('Extension Build Verification', () => {
   })
 
   test('should have options page', () => {
-    const optionsPath = path.join(distPath, 'src/options/options.html')
+    const optionsPath = path.join(distPath, 'options.html')
     expect(existsSync(optionsPath)).toBeTruthy()
   })
 
   test('should have popup page', () => {
-    const popupPath = path.join(distPath, 'src/popup/popup.html')
+    const popupPath = path.join(distPath, 'popup.html')
     expect(existsSync(popupPath)).toBeTruthy()
   })
 

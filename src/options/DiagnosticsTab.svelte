@@ -44,7 +44,7 @@ onMount(async () => {
 
 async function handleLoggingToggle(enabled: boolean) {
   loggingEnabled = enabled
-  await StorageService.savePreferences({ loggingEnabled: enabled, notifications: true })
+  await StorageService.savePreferences({ loggingEnabled: enabled })
   toastStore.show(enabled ? 'Activity logging enabled' : 'Activity logging disabled', 'success')
 }
 

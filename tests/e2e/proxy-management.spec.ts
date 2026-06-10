@@ -1,4 +1,4 @@
-import { test, expect, type Page, type BrowserContext } from '@playwright/test'
+import { type BrowserContext, expect, type Page, test } from '@playwright/test'
 import { launchExtension, navigateToExtensionPage } from './helpers/extension-loader'
 
 /**
@@ -47,11 +47,7 @@ async function getOptionsPage(): Promise<Page> {
   if (!sharedContext || !sharedExtensionId) {
     throw new Error('Extension not loaded')
   }
-  const page = await navigateToExtensionPage(
-    sharedContext,
-    sharedExtensionId,
-    'src/options/options.html'
-  )
+  const page = await navigateToExtensionPage(sharedContext, sharedExtensionId, 'options.html')
   await page.waitForLoadState('networkidle')
   return page
 }
@@ -94,7 +90,7 @@ test.describe('Proxy Configuration Management', () => {
     await page.fill('input#scriptName', 'Test PAC Script')
 
     // PAC Script mode is the default, just save
-    await page.getByTestId('save-config-btn').click()
+    await page.getByTestId('modal-save-btn').click()
 
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -110,7 +106,7 @@ test.describe('Proxy Configuration Management', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('text=Proxy Configuration').first()).toBeVisible()
     await page.fill('input#scriptName', 'Delete Test')
-    await page.getByTestId('save-config-btn').click()
+    await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Delete Test').first()).toBeVisible()
@@ -132,7 +128,7 @@ test.describe('Proxy Configuration Management', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('text=Proxy Configuration').first()).toBeVisible()
     await page.fill('input#scriptName', 'Original Name')
-    await page.getByTestId('save-config-btn').click()
+    await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Original Name').first()).toBeVisible()
@@ -145,7 +141,7 @@ test.describe('Proxy Configuration Management', () => {
 
     // Change name
     await page.fill('input#scriptName', 'Updated Name')
-    await page.getByTestId('save-config-btn').click()
+    await page.getByTestId('modal-save-btn').click()
 
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -168,7 +164,7 @@ test.describe('Quick Switch Functionality', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('text=Proxy Configuration').first()).toBeVisible()
     await page.fill('input#scriptName', 'Quick Switch Test')
-    await page.getByTestId('save-config-btn').click()
+    await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Quick Switch Test').first()).toBeVisible()
@@ -209,7 +205,7 @@ test.describe('Backup and Restore', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('text=Proxy Configuration').first()).toBeVisible()
     await page.fill('input#scriptName', 'Export Test')
-    await page.getByTestId('save-config-btn').click()
+    await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Export Test').first()).toBeVisible()
@@ -240,7 +236,7 @@ test.describe('Error Handling', () => {
     await expect(page.getByTestId('modal-title')).toBeVisible()
 
     // Try to save without required name field
-    await page.getByTestId('save-config-btn').click()
+    await page.getByTestId('modal-save-btn').click()
 
     // Should show validation error or the button should not work
     // Check if modal is still open (indicating validation failed)
