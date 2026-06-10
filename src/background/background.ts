@@ -23,6 +23,11 @@ import { SubscriptionParser } from '@/services/SubscriptionParser'
 import { parseProxyError } from '@/utils/errorHandling'
 
 /**
+ * Reject remote PAC scripts larger than this to prevent memory-exhaustion DoS.
+ */
+const MAX_PAC_SCRIPT_BYTES = 10 * 1024 * 1024
+
+/**
  * Flag to track if the background worker is fully initialized
  */
 let isInitialized = false
@@ -570,7 +575,17 @@ async function fetchPacScript(url: string): Promise<string> {
   if (!response.ok) {
     throw new Error(`Failed to fetch PAC script: HTTP ${response.status}`)
   }
-  return response.text()
+  // Reject oversized payloads to prevent memory-exhaustion DoS from a
+  // malicious or misconfigured PAC URL.
+  const declaredLength = Number(response.headers.get('content-length'))
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_PAC_SCRIPT_BYTES) {
+    throw new Error('PAC script is too large (over 10 MB).')
+  }
+  const text = await response.text()
+  if (text.length > MAX_PAC_SCRIPT_BYTES) {
+    throw new Error('PAC script is too large (over 10 MB).')
+  }
+  return text
 }
 
 /**

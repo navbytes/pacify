@@ -22,6 +22,9 @@ export class SubscriptionParser {
   private static readonly MODIFIED_REGEX = /^[!#]\s*Last modified:\s*(.+)/i
   private static readonly PLAIN_DOMAIN_REGEX = /^\.?[\w][\w.-]*\.\w{2,}$/
 
+  /** Reject remote rule lists larger than this to prevent memory-exhaustion DoS. */
+  static readonly MAX_SUBSCRIPTION_BYTES = 10 * 1024 * 1024
+
   /**
    * Fetch and parse a subscription URL
    */
@@ -37,7 +40,23 @@ export class SubscriptionParser {
       throw new Error(`Failed to fetch subscription: HTTP ${response.status}`)
     }
 
+    // Reject oversized payloads up front when the server advertises the size,
+    // so we don't buffer a multi-gigabyte body into memory.
+    const declaredLength = Number(response.headers.get('content-length'))
+    if (
+      Number.isFinite(declaredLength) &&
+      declaredLength > SubscriptionParser.MAX_SUBSCRIPTION_BYTES
+    ) {
+      throw new Error('The rule list is too large (over 10 MB). Use a smaller or filtered list.')
+    }
+
     const rawText = await response.text()
+
+    // Defense for servers that omit or understate content-length: enforce the
+    // cap on the actual body too.
+    if (rawText.length > SubscriptionParser.MAX_SUBSCRIPTION_BYTES) {
+      throw new Error('The rule list is too large (over 10 MB). Use a smaller or filtered list.')
+    }
 
     // Detect HTML responses (e.g., from proxy login pages, firewalls, bot challenges)
     const trimmedStart = rawText.trimStart().slice(0, 200).toLowerCase()

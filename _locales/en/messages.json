@@ -509,5 +509,9 @@
   "onboardingMigrateTitle": {"message":"Coming from another proxy manager?"},
   "onboardingMigrateDescription": {"message":"Import your setup from SwitchyOmega, FoxyProxy, a PAC file, or a PACify backup — in one step."},
   "onboardingImportSetup": {"message":"Import my setup"},
-  "routeTo": {"message":"Route traffic to"}
+  "routeTo": {"message":"Route traffic to"},
+  "patternHelpWildcard": {"message":"Matches the hostname — * stands for any characters, e.g."},
+  "patternHelpExact": {"message":"Matches this hostname exactly, e.g."},
+  "patternHelpRegex": {"message":"Regular expression tested against the hostname, e.g."},
+  "patternHelpCidr": {"message":"Matches IP addresses within a CIDR range, e.g."}
 }
