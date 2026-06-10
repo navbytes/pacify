@@ -39,9 +39,15 @@ async function disableAllProxies() {
   <header
     class="flex items-center justify-between px-5 py-3 border-b border-slate-200 dark:border-slate-700"
   >
-    <h1 class="text-base font-bold text-primary dark:text-primary-light">
-      {I18nService.getMessage('extName')}
-    </h1>
+    <div class="flex items-center gap-2 min-w-0">
+      <img src="/icons/icon48.png" alt="" class="w-7 h-7 shrink-0">
+      <div class="min-w-0 leading-tight">
+        <h1 class="text-base font-bold text-primary dark:text-primary-light truncate">PACify</h1>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 -mt-0.5">
+          {I18nService.getMessage('popupSubtitle') || 'Proxy Manager'}
+        </p>
+      </div>
+    </div>
 
     <div class="flex items-center gap-1">
       <Tooltip text={I18nService.getMessage('addNewProxy')} position="bottom">

@@ -8,6 +8,7 @@
   "directModeHelp": {"message":"In direct mode all connections are created directly, without any proxy involved."},
   "autoDetectMode": {"message":"Auto‑config URL"},
   "autoDetectModeHelp": {"message":"In Auto-detect mode, Chrome will automatically search for and download proxy settings using the WPAD protocol."},
+  "popupSubtitle": {"message":"Proxy Manager"},
   "pacScriptConfigured": {"message":"PAC script configuration"},
   "manualProxyNotConfigured": {"message":"No server configured yet"},
   "deleteConfirm": {"message":"Are you sure you want to delete this script?"},
