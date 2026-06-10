@@ -71,7 +71,7 @@ async function disableAllProxies() {
   </header>
 
   <!-- Main Content -->
-  <main class="overflow-y-auto flex-1 px-5 pt-4 pb-4">
+  <main class="popup-scroll overflow-y-auto flex-1 px-5 pt-4 pb-4">
     {#if hasProxies}
       <ScriptList pageType="POPUP" title="" viewMode="list" />
     {:else}
@@ -138,45 +138,10 @@ async function disableAllProxies() {
 </div>
 
 <style lang="postcss">
-/* Custom scrollbar styles */
+/* Popup scrollbar sizing/clamp. Theme-dependent colors live in app.css
+   (`.popup-scroll`) so they follow the in-app `.dark` class rather than the
+   OS prefers-color-scheme, and to avoid Lightning CSS :global() warnings. */
 main {
   max-height: calc(400px - 4rem);
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-slate-300) var(--color-slate-100);
-}
-
-main::-webkit-scrollbar {
-  width: 0.375rem;
-}
-
-main::-webkit-scrollbar-track {
-  background-color: var(--color-slate-100);
-}
-
-@media (prefers-color-scheme: dark) {
-  main {
-    scrollbar-color: var(--color-slate-600) var(--color-slate-700);
-  }
-
-  main::-webkit-scrollbar-track {
-    background-color: var(--color-slate-700);
-  }
-
-  main::-webkit-scrollbar-thumb {
-    background-color: var(--color-slate-600);
-  }
-
-  main::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-slate-500);
-  }
-}
-
-main::-webkit-scrollbar-thumb {
-  background-color: var(--color-slate-300);
-  border-radius: 9999px;
-}
-
-main::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-slate-400);
 }
 </style>
