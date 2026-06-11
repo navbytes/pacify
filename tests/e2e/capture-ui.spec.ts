@@ -10,11 +10,11 @@ test('Capture Options Page UI', async () => {
   await page.waitForLoadState('networkidle')
 
   // Create a test proxy
-  await page.click('button:has-text("Add New Script")')
-  await page.waitForSelector('text=Proxy Configuration')
+  await page.getByTestId('add-new-script-btn').click()
+  await page.getByTestId('modal-title').waitFor()
   await page.fill('input#scriptName', 'Test Proxy')
   await page.getByTestId('modal-save-btn').click()
-  await page.waitForTimeout(1000)
+  await page.getByTestId('modal-title').waitFor({ state: 'hidden' })
 
   // Take a snapshot of the page
   const snapshot = await page.locator('body').evaluate((el) => {

@@ -187,22 +187,9 @@ test.describe('Chrome Web Store Screenshots', () => {
       await expect(optionsPage.getByTestId('proxy-config-modal')).toBeVisible()
     }
 
-    // Select PAC script mode by clicking the button (not a select dropdown)
-    const pacScriptButton = await optionsPage.$('button[role="tab"]:has-text("PAC Script")')
-    if (pacScriptButton) {
-      await pacScriptButton.click()
-      await optionsPage.waitForTimeout(500)
-    } else {
-      // Fallback: try different text variations
-      const altButton = await optionsPage.$('button[role="tab"][aria-selected="false"]')
-      if (altButton) {
-        const buttonText = await altButton.textContent()
-        if (buttonText?.toLowerCase().includes('pac')) {
-          await altButton.click()
-          await optionsPage.waitForTimeout(500)
-        }
-      }
-    }
+    // Select PAC script mode (segmented control → role=radio)
+    await optionsPage.getByRole('radio', { name: 'PAC Script' }).click()
+    await optionsPage.waitForTimeout(500)
 
     // The editor container should appear automatically when PAC mode is selected
     // and pacUrl is empty (which it is by default)
@@ -271,24 +258,8 @@ test.describe('Chrome Web Store Screenshots', () => {
       // Fill in details
       await optionsPage.fill('input#scriptName', config.name)
 
-      // Select PAC script mode by clicking the button (not a select dropdown)
-      const pacScriptButton = await optionsPage.$('button[role="tab"]:has-text("PAC Script")')
-      if (pacScriptButton) {
-        await pacScriptButton.click()
-        await optionsPage.waitForTimeout(500)
-      } else {
-        // Fallback: try different text variations
-        const altButton = await optionsPage.$('button[role="tab"][aria-selected="false"]')
-        if (altButton) {
-          const buttonText = await altButton.textContent()
-          if (buttonText?.toLowerCase().includes('pac')) {
-            await altButton.click()
-            await optionsPage.waitForTimeout(500)
-          }
-        }
-      }
-
-      await optionsPage.fill('input#pacUrl', 'https://nav-proxy.vercel.app/api/proxyman.pac')
+      // Keep the default proxy mode (no PAC URL) so saving doesn't depend on a
+      // network fetch — this is just a screenshot fixture.
 
       // Set color
       const colorInput = await optionsPage.$('input[type="color"]')

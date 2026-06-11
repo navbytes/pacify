@@ -104,6 +104,35 @@ test.describe('PAC-based routing modes', () => {
     }
   })
 
+  test('inline PAC script (CodeMirror) routes per its FindProxyForURL', async () => {
+    const page = await optionsPage()
+
+    await page.getByTestId('add-new-script-btn').click()
+    await expect(page.getByTestId('modal-title')).toBeVisible()
+    await page.fill('input#scriptName', 'PAC Inline')
+    await page.getByRole('radio', { name: 'PAC Script' }).click()
+
+    // Replace the editor contents (CodeMirror 6 contenteditable) with our PAC.
+    const pac =
+      'function FindProxyForURL(url, host) {' +
+      ` if (host === "${PROXY_TEST_HOST}") return "PROXY 127.0.0.1:${proxy.port}";` +
+      ' return "DIRECT"; }'
+    await page.locator('.cm-content').click()
+    await page.keyboard.press('ControlOrMeta+A')
+    await page.keyboard.press('Delete')
+    await page.keyboard.insertText(pac)
+    await page.getByTestId('modal-save-btn').click()
+    await expect(page.getByTestId('modal-title')).not.toBeVisible()
+
+    await activate('PAC Inline')
+    proxy.reset()
+    expect(await fetchBody(originUrl(PROXY_TEST_HOST))).toContain('PROXIED:P')
+    expect(await fetchBody(originUrl(PROXY_TEST_HOST_ALT))).toBe('ORIGIN_OK')
+    expect(proxy.requests.some((r) => r.target.includes(PROXY_TEST_HOST_ALT))).toBe(false)
+
+    await activate('PAC Inline')
+  })
+
   test('Auto-Proxy routes matching hosts via the rule, others via fallback', async () => {
     const page = await optionsPage()
 

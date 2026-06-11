@@ -40,9 +40,18 @@ HEADED=1 bunx playwright test <spec>            # debug in a visible window
 
 - `comprehensive-flows.spec.ts` — main UI flows (27 tests) ⭐
 - `proxy-management.spec.ts` — proxy CRUD / quick-switch / backup (8 tests)
-- `traffic-routing.spec.ts` — **real traffic** through a local proxy (DIRECT vs
-  proxied vs bypass) — proves UI → store → background → `chrome.proxy` → routing
+- `traffic-routing.spec.ts` — **real traffic** for fixed-server modes: DIRECT,
+  single manual proxy, bypass list, per-protocol — proves UI → store →
+  background → `chrome.proxy` → routing
+- `traffic-modes.spec.ts` — **real traffic** for PAC modes: PAC-from-URL, inline
+  PAC (CodeMirror), and Auto-Proxy rules (generated PAC, match + fallback)
 - `extension-smoke.spec.ts` — build verification (5 tests)
+
+> Routing decisions that can't be driven end-to-end headless (the authenticated-
+> proxy handshake needs an optional-permission grant) are covered by fast unit
+> tests against the same logic — e.g. `src/utils/__tests__/proxyAuth.test.ts`
+> (credential selection) and `src/utils/__tests__/chrome.test.ts`
+> (`convertAppSettingsToChromeConfig`, incl. the bypass-list regression).
 - `*-screenshots.spec.ts`, `capture-ui.spec.ts` — screenshot capture utilities
 
 ## Test helpers / fakes
