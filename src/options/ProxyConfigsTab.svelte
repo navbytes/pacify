@@ -15,16 +15,15 @@ import type { DropItem, ViewMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
 import { toastStore } from '@/stores/toastStore'
-import { Cable, CircleQuestionMark, GitBranch, Search, Zap } from '@/utils/icons'
+import { Cable, CircleQuestionMark, Plus, Search, Zap } from '@/utils/icons'
 import { colors } from '@/utils/theme'
 
 interface Props {
   onOpenEditor: (scriptId?: string) => void
-  onOpenAutoProxyEditor: () => void
   onOpenImport?: () => void
 }
 
-let { onOpenEditor, onOpenAutoProxyEditor, onOpenImport }: Props = $props()
+let { onOpenEditor, onOpenImport }: Props = $props()
 
 let settings = $derived($settingsStore)
 let dragType = $state<'QUICK_SWITCH' | 'OPTIONS' | ''>('')
@@ -213,27 +212,14 @@ async function handleViewModeChange(mode: ViewMode) {
           onclick={toggleSearch}
         />
 
-        <!-- Add Auto-Proxy Button -->
-        <Tooltip
-          text={I18nService.getMessage('addAutoProxyTooltip') || 'Create URL-based routing rules'}
-          position="bottom"
-        >
-          <Button
-            variant="gradient"
-            gradient="orange"
-            onclick={onOpenAutoProxyEditor}
-            data-testid="add-auto-proxy-btn"
-          >
-            {#snippet icon()}
-              <GitBranch size={16} />
-            {/snippet}
-            {I18nService.getMessage('addAutoProxy') || 'Add Auto-Proxy'}
-          </Button>
-        </Tooltip>
-
-        <!-- Add New Script Button -->
+        <!-- Single "Add proxy" entry. Rule-based routing is now a connection
+             type inside the editor ("Route by site"), so the separate
+             Add Auto-Proxy button is gone (item 10). -->
         <Tooltip text={I18nService.getMessage('tooltipKeyboardShortcut')} position="bottom">
           <Button data-testid="add-new-script-btn" color="primary" onclick={() => onOpenEditor()}>
+            {#snippet icon()}
+              <Plus size={16} />
+            {/snippet}
             {I18nService.getMessage('addNewScript')}
           </Button>
         </Tooltip>

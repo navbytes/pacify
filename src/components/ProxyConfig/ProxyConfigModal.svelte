@@ -16,17 +16,20 @@ import { modalFocus } from '@/utils/modalFocus'
 import Button from '../Button.svelte'
 import Text from '../Text.svelte'
 import BasicSettings from './BasicSettings.svelte'
+import ConnectionTypeSelect from './ConnectionTypeSelect.svelte'
 import ManualProxyConfiguration from './ManualProxyConfiguration.svelte'
 import PACScriptSettings from './PACScriptSettings.svelte'
-import ProxyModeSelector from './ProxyModeSelector.svelte'
 
 interface Props {
   proxyConfig?: ProxyConfig
   onSave: (config: Omit<ProxyConfig, 'id'>, activate: boolean) => Promise<void>
   onCancel: () => void
+  // Picking "Route by site" in the connection-type dropdown hands off to the
+  // rule-based routing editor (item 10). Only offered when creating.
+  onSwitchToRouting?: () => void
 }
 
-let { proxyConfig = undefined, onSave, onCancel }: Props = $props()
+let { proxyConfig = undefined, onSave, onCancel, onSwitchToRouting }: Props = $props()
 
 // Which footer verb was pressed: "Save" (false) or "Save & Turn On" (true).
 let activateOnSave = $state(false)
@@ -48,7 +51,7 @@ let isActive = $state<boolean>(false)
 let quickSwitch = $state<boolean>(false)
 
 // Proxy Mode
-let proxyMode = $state<ProxyMode>('system')
+let proxyMode = $state<ProxyMode>('fixed_servers')
 
 // PAC Script Settings
 let editorContent = $state<string>('')
@@ -64,7 +67,7 @@ $effect(() => {
   badgeLabel = proxyConfig?.badgeLabel || ''
   isActive = proxyConfig?.isActive || false
   quickSwitch = proxyConfig?.quickSwitch || false
-  proxyMode = proxyConfig?.mode || 'system'
+  proxyMode = proxyConfig?.mode || 'fixed_servers'
   editorContent = proxyConfig?.pacScript?.data || ''
   pacUrl = proxyConfig?.pacScript?.url || ''
   pacMandatory = proxyConfig?.pacScript?.mandatory || false
@@ -348,8 +351,17 @@ function handleBackdropClick(event: MouseEvent) {
           </div>
         </div>
 
-        <!-- Proxy Mode Selection -->
-        <ProxyModeSelector bind:proxyMode />
+        <!-- Connection type — de-jargoned "what kind of proxy" (item 9/10) -->
+        <div>
+          <span class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+            {I18nService.getMessage('connectionType')}
+            <span class="text-red-500">*</span>
+          </span>
+          <ConnectionTypeSelect
+            bind:value={proxyMode}
+            onRouteBySite={proxyConfig ? undefined : onSwitchToRouting}
+          />
+        </div>
 
         <!-- Mode-specific Configuration -->
         {#key proxyMode}

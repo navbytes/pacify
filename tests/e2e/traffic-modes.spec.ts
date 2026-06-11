@@ -93,7 +93,10 @@ test.describe('PAC-based routing modes', () => {
       await page.getByTestId('add-new-script-btn').click()
       await expect(page.getByTestId('modal-title')).toBeVisible()
       await page.fill('input#scriptName', 'PAC URL')
-      await page.getByRole('radio', { name: 'PAC Script' }).click()
+      await page.getByTestId('conn-type-trigger').click()
+      await page.getByTestId('segment-pac_script').click()
+      // PAC source defaults to "Write it here"; switch to "Load from a URL".
+      await page.getByTestId('segment-url').click()
       await page.getByTestId('pac-url-input').fill(pac.url)
       await page.getByTestId('modal-save-btn').click()
       await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -119,7 +122,8 @@ test.describe('PAC-based routing modes', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'PAC Inline')
-    await page.getByRole('radio', { name: 'PAC Script' }).click()
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-pac_script').click()
 
     // Replace the editor contents (CodeMirror 6 contenteditable) with our PAC.
     const pac =
@@ -146,8 +150,11 @@ test.describe('PAC-based routing modes', () => {
     const page = await optionsPage()
 
     // Create an Auto-Proxy whose single rule sends the primary host to an inline
-    // proxy; the fallback (default) is DIRECT.
-    await page.getByTestId('add-auto-proxy-btn').click()
+    // proxy; the fallback (default) is DIRECT. Routing is now reached via the
+    // unified "Add proxy" → connection type "Route by site" (item 10).
+    await page.getByTestId('add-new-script-btn').click()
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-route_by_site').click()
     await page.locator('#name').fill('Auto Routes')
     const addEmpty = page.getByTestId('add-rule-empty-btn')
     if (await addEmpty.count()) {
@@ -158,7 +165,7 @@ test.describe('PAC-based routing modes', () => {
     // Default match type (wildcard) with the literal hostname matches only that
     // host; the fallback assertion below confirms it doesn't over-match.
     await page.getByTestId('rule-pattern-input').fill(PROXY_TEST_HOST)
-    await page.getByRole('radio', { name: 'Define Inline' }).click()
+    await page.getByTestId('segment-inline').click()
     await page.locator('#inline-host').fill('127.0.0.1')
     await page.locator('#inline-port').fill(String(proxy.port))
     await page.getByTestId('rule-save-btn').click()

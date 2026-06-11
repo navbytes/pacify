@@ -382,11 +382,7 @@ async function handleImported() {
 
     <!-- Tab 1: Proxy Configs -->
     <TabPanel id="proxy-configs">
-      <ProxyConfigsTab
-        onOpenEditor={handleOpenEditor}
-        onOpenAutoProxyEditor={() => openAutoProxyEditor()}
-        onOpenImport={openImport}
-      />
+      <ProxyConfigsTab onOpenEditor={handleOpenEditor} onOpenImport={openImport} />
     </TabPanel>
 
     <!-- Tab 2: Settings -->
@@ -409,6 +405,11 @@ async function handleImported() {
           : undefined}
         onSave={handleScriptSave}
         onCancel={() => (showEditor = false)}
+        onSwitchToRouting={() => {
+          // Hand off "Route by site" to the rule-based routing editor (item 10).
+          showEditor = false
+          openAutoProxyEditor()
+        }}
       />
     {:else if isLoadingModal}
       {@render loadingModal(I18nService.getMessage('loadingEditor'))}

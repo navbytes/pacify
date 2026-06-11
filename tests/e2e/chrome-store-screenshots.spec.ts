@@ -188,7 +188,8 @@ test.describe('Chrome Web Store Screenshots', () => {
     }
 
     // Select PAC script mode (segmented control → role=radio)
-    await optionsPage.getByRole('radio', { name: 'PAC Script' }).click()
+    await optionsPage.getByTestId('conn-type-trigger').click()
+    await optionsPage.getByTestId('segment-pac_script').click()
     await optionsPage.waitForTimeout(500)
 
     // The editor container should appear automatically when PAC mode is selected

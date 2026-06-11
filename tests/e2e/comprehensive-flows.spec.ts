@@ -239,10 +239,8 @@ test.describe('3. Manual Proxy Configuration', () => {
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Manual Single Proxy')
 
-    // Switch to Manual Configuration tab
-    const manualTab = page.locator('button:has-text("Manual Configuration")')
-    await manualTab.click()
-    // Wait for manual configuration fields to appear
+    // "Connect through a server" (manual) is the default connection type, so the
+    // manual fields are already shown.
     await expect(page.locator('input[type="checkbox"]#useSharedProxy')).toBeVisible()
 
     // Check "Use same proxy server for all protocols"
@@ -273,7 +271,6 @@ test.describe('3. Manual Proxy Configuration', () => {
     await page.fill('input#scriptName', 'Manual Multi Proxy')
 
     // Switch to Manual Configuration
-    await page.locator('button:has-text("Manual Configuration")').click()
 
     // Uncheck "Use same proxy server" to see individual protocol sections
     const sameProxyCheckbox = page.locator('input[type="checkbox"]#useSharedProxy')
@@ -304,8 +301,6 @@ test.describe('3. Manual Proxy Configuration', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Manual Bypass Proxy')
-
-    await page.locator('button:has-text("Manual Configuration")').click()
 
     // Wait for manual configuration fields to appear
     const sameProxyCheckbox = page.locator('input[type="checkbox"]#useSharedProxy')
@@ -736,23 +731,20 @@ test.describe('12. Configuration Mode Switching', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
 
-    // Mode is a segmented control (role=radio, aria-checked). Default is
-    // System; switch to PAC Script first.
-    const pacButton = page.getByRole('radio', { name: 'PAC Script' })
-    await pacButton.click()
-    await expect(pacButton).toHaveAttribute('aria-checked', 'true')
+    // Connection type is a dropdown. Switch to PAC script and confirm its fields.
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-pac_script').click()
+    await expect(page.getByTestId('segment-url')).toBeVisible()
 
-    // Switch to Manual Configuration
-    const manualButton = page.getByRole('radio', { name: 'Manual Configuration' })
-    await manualButton.click()
-    await expect(manualButton).toHaveAttribute('aria-checked', 'true')
-
-    // Should show manual proxy fields - wait for them to appear
+    // Switch to "Connect through a server" (manual) and confirm its fields.
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-fixed_servers').click()
     await expect(page.locator('text=/Use same proxy|HTTP Proxy/i').first()).toBeVisible()
 
-    // Switch back to PAC Script
-    await pacButton.click()
-    await expect(pacButton).toHaveAttribute('aria-checked', 'true')
+    // Switch back to PAC script.
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-pac_script').click()
+    await expect(page.getByTestId('segment-url')).toBeVisible()
 
     // Close modal
     await page.getByTestId('modal-cancel-btn').click()

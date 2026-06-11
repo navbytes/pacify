@@ -23,6 +23,7 @@ import { colors } from '@/utils/theme'
 import Button from '../Button.svelte'
 import FlexGroup from '../FlexGroup.svelte'
 import LabelButton from '../LabelButton.svelte'
+import SegmentedControl from '../SegmentedControl.svelte'
 import Text from '../Text.svelte'
 import ToggleSwitch from '../ToggleSwitch.svelte'
 import AutoProxyRuleEditor from './AutoProxyRuleEditor.svelte'
@@ -72,6 +73,19 @@ let editingRule = $state<AutoProxyRule | null>(null)
 let isAddingRule = $state(false)
 let errorMessage = $state('')
 let isSubmitting = $state(false)
+
+// Stage the routing editor into tabs (item 15) instead of one dense scroll.
+let activeSection = $state<'rules' | 'lists' | 'fallback' | 'test'>('rules')
+let sectionTabs = $derived([
+  { value: 'rules', label: I18nService.getMessage('apTabRules'), badge: rules.length || undefined },
+  {
+    value: 'lists',
+    label: I18nService.getMessage('subscriptions'),
+    badge: subscriptions.length || undefined,
+  },
+  { value: 'fallback', label: I18nService.getMessage('apTabFallback') },
+  { value: 'test', label: I18nService.getMessage('apTabTest') },
+])
 
 // Badge preview - shows what the badge will display
 let badgePreview = $derived(
@@ -434,35 +448,41 @@ let selectableProxies = $derived(
           </div>
         </div>
       {:else}
-        <!-- Rules List -->
-        <AutoProxyRuleList
-          {rules}
-          availableProxies={selectableProxies}
-          onAddRule={handleAddRule}
-          onEditRule={handleEditRule}
-          onDeleteRule={handleDeleteRule}
-          onToggleRule={handleToggleRule}
-          onReorderRules={handleReorderRules}
+        <!-- Staged into tabs so the editor isn't one dense scroll (item 15) -->
+        <SegmentedControl
+          options={sectionTabs}
+          value={activeSection}
+          onchange={(v) => (activeSection = v as typeof activeSection)}
+          size="sm"
+          fullWidth
+          aria-label={I18nService.getMessage('autoProxyMode')}
         />
 
-        <!-- Subscriptions -->
-        <SubscriptionList
-          {subscriptions}
-          availableProxies={selectableProxies}
-          onUpdate={handleSubscriptionsUpdate}
-        />
-
-        <!-- Fallback Configuration -->
-        <FallbackConfig
-          {fallbackType}
-          {fallbackProxyId}
-          {fallbackInlineProxy}
-          availableProxies={selectableProxies}
-          onchange={handleFallbackChange}
-        />
-
-        <!-- Pattern Tester -->
-        {#if rules.length > 0}
+        {#if activeSection === 'rules'}
+          <AutoProxyRuleList
+            {rules}
+            availableProxies={selectableProxies}
+            onAddRule={handleAddRule}
+            onEditRule={handleEditRule}
+            onDeleteRule={handleDeleteRule}
+            onToggleRule={handleToggleRule}
+            onReorderRules={handleReorderRules}
+          />
+        {:else if activeSection === 'lists'}
+          <SubscriptionList
+            {subscriptions}
+            availableProxies={selectableProxies}
+            onUpdate={handleSubscriptionsUpdate}
+          />
+        {:else if activeSection === 'fallback'}
+          <FallbackConfig
+            {fallbackType}
+            {fallbackProxyId}
+            {fallbackInlineProxy}
+            availableProxies={selectableProxies}
+            onchange={handleFallbackChange}
+          />
+        {:else if activeSection === 'test'}
           <PatternTester
             {rules}
             {subscriptions}

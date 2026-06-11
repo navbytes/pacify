@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pacify — items 9 & 10 editor mockup</title>
+    <style>
+      :root{
+        --s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;
+        --s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;
+        --b50:#eff6ff;--b100:#dbeafe;--b500:#3b82f6;--b600:#2563eb;--i600:#4f46e5;
+        --r50:#fef2f2;--r200:#fecaca;--r500:#ef4444;--r600:#dc2626;
+        --a50:#fffbeb;--a200:#fde68a;--a700:#b45309;
+      }
+      *{box-sizing:border-box}
+      body{margin:0;background:var(--s100);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;color:var(--s800);-webkit-font-smoothing:antialiased}
+      .page{max-width:760px;margin:0 auto;padding:26px 20px 60px}
+      h1{font-size:21px;font-weight:800;color:var(--s900);margin:0 0 2px}
+      .sub{color:var(--s500);font-size:13px;margin:0 0 24px}
+      .panel{margin-bottom:30px}
+      .lab{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--b600);margin-bottom:4px}
+      .lab.bad{color:var(--r600)}
+      .cap{font-size:13px;color:var(--s500);margin-bottom:12px}
+      .tag{display:inline-block;font-size:11px;font-weight:700;color:var(--i600);background:var(--b50);border:1px solid var(--b100);border-radius:999px;padding:1px 8px;margin-left:6px}
+      .modal{background:#fff;border:1px solid var(--s200);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+      .accent{height:4px;background:linear-gradient(90deg,var(--b500),var(--i600))}
+      .head{padding:16px 18px;border-bottom:1px solid var(--s200)}
+      .head h3{margin:0;font-size:16px;font-weight:800;color:var(--s900)}
+      .head p{margin:2px 0 0;font-size:12px;color:var(--s500)}
+      .body{padding:16px 18px}
+      .foot{padding:12px 18px;border-top:1px solid var(--s200);display:flex;justify-content:flex-end;gap:9px;background:var(--s50)}
+      .field{margin-bottom:13px}
+      .field>label{display:block;margin-bottom:5px;font-size:13px;font-weight:600;color:var(--s700)}
+      .req{color:var(--r500)}
+      .input{width:100%;padding:9px 11px;border:1px solid var(--s300);border-radius:9px;font-size:14px;background:#fff}
+      .input::placeholder{color:var(--s400)}
+      .row{display:flex;align-items:center;gap:9px}
+      .muted{color:var(--s500)}.xs{font-size:12px}
+      .dot{width:12px;height:12px;border-radius:999px;flex:0 0 auto}
+      .twocol{display:grid;grid-template-columns:1fr 110px;gap:10px}
+      .btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;border-radius:9px;padding:8px 13px;border:1px solid transparent;cursor:pointer}
+      .btn-primary{background:linear-gradient(90deg,var(--b600),var(--i600));color:#fff}
+      .btn-secondary{background:var(--s100);color:var(--s700);border-color:var(--s200)}
+      .btn-ghost{background:transparent;color:var(--s600)}
+      .disc{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--s600);cursor:pointer;padding:7px 0}
+      .tri{display:inline-block}.tri.open{transform:rotate(90deg)}
+      .hr{height:1px;background:var(--s200);margin:3px 0;border:0}
+      .typebox{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--s300);border-radius:9px;padding:9px 11px;cursor:pointer}
+      /* current jargon segmented control (the "before") */
+      .seg5{display:flex;background:var(--s100);border:1px solid var(--s200);border-radius:11px;padding:4px;gap:3px;flex-wrap:wrap}
+      .seg5 .o{font-size:12.5px;padding:7px 11px;border-radius:8px;color:var(--s600);display:flex;gap:6px;align-items:center}
+      .seg5 .o.on{background:#fff;color:var(--s900);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.08)}
+      /* dropdown menu */
+      .menu{border:1px solid var(--s200);border-radius:11px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.10);margin-top:6px}
+      .mi{display:flex;gap:11px;padding:11px 13px;cursor:pointer;align-items:flex-start;border-bottom:1px solid var(--s100)}
+      .mi:last-child{border-bottom:0}
+      .mi.sel{background:linear-gradient(180deg,#fff,var(--b50))}
+      .mi .ic{width:30px;height:30px;border-radius:8px;background:var(--s100);display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+      .mi.sel .ic{background:linear-gradient(135deg,var(--b500),var(--i600))}
+      .mi h4{margin:0 0 2px;font-size:13.5px}
+      .mi p{margin:0;font-size:12px;color:var(--s500)}
+      .seg3{display:inline-flex;background:var(--s100);border:1px solid var(--s200);border-radius:9px;padding:3px;gap:2px}
+      .seg3 .o{font-size:13px;padding:5px 11px;border-radius:7px;color:var(--s600)}
+      .seg3 .o.on{background:#fff;color:var(--s900);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.08)}
+      .note{font-size:12px;color:var(--a700);background:var(--a50);border:1px solid var(--a200);border-radius:8px;padding:6px 10px;display:inline-block}
+      .badnote{font-size:12px;color:var(--r600);background:var(--r50);border:1px solid var(--r200);border-radius:8px;padding:6px 10px;display:inline-block}
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <h1>Editor restructure — items 9 &amp; 10</h1>
+      <p class="sub">Simple mockup for sign-off before building. Save &amp; Turn On (item 11) and the popup (item 12) are already shipped.</p>
+
+      <!-- BEFORE -->
+      <div class="panel">
+        <div class="lab bad">Before — today</div>
+        <div class="cap">Two competing "Add" buttons, and the create modal leads with a 5-way jargon selector (defaults to System) before the host/port a normal user wants.</div>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <span class="btn" style="background:linear-gradient(90deg,#f97316,#ef4444);color:#fff">⑂ Add Auto-Proxy</span>
+          <span class="btn btn-primary">Add Proxy</span>
+          <span class="badnote">two entry points for one thing</span>
+        </div>
+        <div class="modal">
+          <div class="accent"></div>
+          <div class="body">
+            <div class="field"><label>Proxy Mode <span class="req">*</span></label>
+              <div class="seg5">
+                <span class="o on">🖥 System</span><span class="o">🌐 Direct</span><span class="o">🛰 Auto-config URL</span><span class="o">⚙ PAC Script</span><span class="o">🖧 Manual Configuration</span>
+              </div>
+            </div>
+            <div class="field muted xs">↑ five technical terms before you can type a server · defaults to "System"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AFTER 1: default basic server -->
+      <div class="panel">
+        <div class="lab">After · default — basic server <span class="tag">item 9</span><span class="tag">item 10</span></div>
+        <div class="cap">One "Add proxy". The modal opens straight on the server form. "Connection type" is one inline control (default "Connect through a server"). Identity (color/badge) is its own row. No jargon for the 80% case.</div>
+        <div class="modal">
+          <div class="accent"></div>
+          <div class="head"><h3>New proxy</h3><p>Connect through a server</p></div>
+          <div class="body">
+            <div class="field"><label>Connection type</label>
+              <div class="typebox"><span class="row"><span>🖧</span> Connect through a server</span><span class="muted">▾</span></div>
+            </div>
+            <div class="field"><label>Name <span class="req">*</span></label>
+              <div class="row"><span class="dot" style="width:22px;height:22px;border-radius:7px;background:#2563eb;border:1px solid var(--s300)"></span><input class="input" value="Work proxy"><input class="input" style="width:80px" placeholder="WK" maxlength="4"></div>
+              <div class="xs muted" style="margin-top:4px">Color + optional toolbar badge — how you'll recognize it.</div>
+            </div>
+            <div class="field"><label>Server <span class="req">*</span></label><div class="twocol"><input class="input" value="proxy.work.com"><input class="input" value="8080"></div></div>
+            <div class="disc"><span class="tri">▸</span> Needs a username &amp; password?</div>
+            <hr class="hr">
+            <div class="disc"><span class="tri">▸</span> More options <span class="muted xs" style="font-weight:400">— per-protocol servers, bypass list</span></div>
+          </div>
+          <div class="foot"><button class="btn btn-ghost">Cancel</button><button class="btn btn-secondary">Save</button><button class="btn btn-primary">⏻ Save &amp; Turn On</button></div>
+        </div>
+      </div>
+
+      <!-- AFTER 2: connection type open -->
+      <div class="panel">
+        <div class="lab">After · "Connection type" open <span class="tag">item 10</span></div>
+        <div class="cap">One menu replaces the two Add buttons. Plain labels, with the real term as a sub-label so migrators who know "PAC"/"SOCKS" still find it. "Route by site" hands off to the routing editor.</div>
+        <div class="modal" style="max-width:430px">
+          <div class="accent"></div>
+          <div class="body" style="padding-bottom:10px">
+            <div class="field" style="margin-bottom:0"><label>Connection type</label>
+              <div class="typebox" style="border-color:var(--b500);box-shadow:0 0 0 3px rgba(59,130,246,.15)"><span class="row"><span>🖧</span> Connect through a server</span><span class="muted">▴</span></div>
+              <div class="menu">
+                <div class="mi sel"><div class="ic">🖧</div><div><h4>Connect through a server</h4><p>A host and port — HTTP, HTTPS or SOCKS.</p></div></div>
+                <div class="mi"><div class="ic">🧭</div><div><h4>Route by site <span class="muted xs">· rules / PAC</span></h4><p>Some sites direct, others through proxies.</p></div></div>
+                <div class="mi"><div class="ic">⚙️</div><div><h4>Use system settings <span class="muted xs">· system</span></h4><p>Follow the operating system's proxy.</p></div></div>
+                <div class="mi"><div class="ic">🚫</div><div><h4>No proxy (direct)</h4><p>Connect without any proxy.</p></div></div>
+                <div class="mi"><div class="ic">🛰️</div><div><h4>Auto-detect <span class="muted xs">· WPAD</span></h4><p>Find proxy settings automatically.</p></div></div>
+                <div class="mi"><div class="ic">📄</div><div><h4>PAC script by URL <span class="muted xs">· pac</span></h4><p>Load a proxy auto-config file.</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AFTER 3: more options expanded -->
+      <div class="panel">
+        <div class="lab">After · "More options" = networking only <span class="tag">item 9</span></div>
+        <div class="cap">SOCKS / per-protocol / bypass appear only on demand, phrased plainly. Identity (color/badge) lives up top, not buried here (red-team fix).</div>
+        <div class="modal">
+          <div class="accent"></div>
+          <div class="body">
+            <div class="field"><label>Server <span class="req">*</span></label><div class="twocol"><input class="input" value="proxy.work.com"><input class="input" value="8080"></div></div>
+            <div class="disc"><span class="tri open">▸</span> More options</div>
+            <div style="padding:6px 0 2px 16px;border-left:2px solid var(--s200);margin-left:2px">
+              <div class="field"><label>Protocol</label><div class="seg3"><span class="o on">HTTP</span><span class="o">HTTPS</span><span class="o">SOCKS5</span></div></div>
+              <div class="field"><label class="row" style="gap:7px;font-weight:400"><input type="checkbox"> Use different servers per protocol (HTTP / HTTPS / FTP)</label></div>
+              <div class="field"><label>Don't proxy these sites <span class="muted xs" style="font-weight:400">(one per line)</span></label><textarea class="input" rows="2" placeholder="*.internal.corp&#10;localhost"></textarea></div>
+            </div>
+          </div>
+          <div class="foot"><button class="btn btn-ghost">Cancel</button><button class="btn btn-secondary">Save</button><button class="btn btn-primary">⏻ Save &amp; Turn On</button></div>
+        </div>
+      </div>
+
+      <p class="note">Build note: "Route by site" opens the existing Auto-Proxy editor on an interim basis until item 15 (staged routing editor) lands.</p>
+    </div>
+  </body>
+</html>
