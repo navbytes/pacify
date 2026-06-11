@@ -298,7 +298,7 @@ function handleBackdropClick(event: MouseEvent) {
               >
                 {proxyConfig ? I18nService.getMessage('editProxy') || 'Edit Proxy' : I18nService.getMessage('proxyConfiguration')}
               </h2>
-              <p class="text-sm text-slate-500 dark:text-slate-300 mt-0.5">
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
                 {proxyConfig
                     ? `Editing: ${proxyConfig.name}`
                     : I18nService.getMessage('createProxySubtitle')}

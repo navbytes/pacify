@@ -15,10 +15,12 @@ const viewModeOptions = [
   {
     value: 'grid' as ViewMode,
     icon: Grid3x3,
+    ariaLabel: I18nService.getMessage('viewModeGrid'),
   },
   {
     value: 'list' as ViewMode,
     icon: LayoutList,
+    ariaLabel: I18nService.getMessage('viewModeList'),
   },
 ]
 

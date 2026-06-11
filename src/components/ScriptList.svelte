@@ -68,17 +68,21 @@ let displayProxyConfigs = $derived<ProxyConfig[]>(
   {/if}
 
   {#if displayProxyConfigs.length > 0}
-    <div class={viewModeContainerVariants({ viewMode, pageType })}>
+    <div class={viewModeContainerVariants({ viewMode, pageType })} role="list">
       {#each displayProxyConfigs as proxy (proxy.id)}
-        <ScriptItem
-          {proxy}
-          {pageType}
-          {disableDrag}
-          {viewMode}
-          {autoProxyRefMap}
-          bind:dragType
-          onScriptEdit={() => openEditor(proxy.id)}
-        />
+        <!-- display:contents keeps the grid layout intact while still exposing
+             each card as a listitem to assistive tech. -->
+        <div role="listitem" class="contents">
+          <ScriptItem
+            {proxy}
+            {pageType}
+            {disableDrag}
+            {viewMode}
+            {autoProxyRefMap}
+            bind:dragType
+            onScriptEdit={() => openEditor(proxy.id)}
+          />
+        </div>
       {/each}
     </div>
   {:else if pageType === 'POPUP'}

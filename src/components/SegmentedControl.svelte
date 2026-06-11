@@ -5,6 +5,9 @@ import { cn } from '@/utils/cn'
 type SegmentOption<T extends string> = {
   value: T
   label?: string
+  // Accessible name for the segment. Required in practice for icon-only options
+  // (no visible label), where it's the only discernible name for the radio.
+  ariaLabel?: string
   icon?: ComponentType
   badge?: number | string
   disabled?: boolean
@@ -110,6 +113,7 @@ function handleKeydown(event: KeyboardEvent, index: number) {
       type="button"
       role="radio"
       aria-checked={isActive}
+      aria-label={option.ariaLabel ?? option.label}
       disabled={option.disabled}
       tabindex={isActive ? 0 : -1}
       data-testid="segment-{option.value}"

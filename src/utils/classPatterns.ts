@@ -108,7 +108,7 @@ export const buttonVariants = tv({
       intent: 'primary',
       variant: 'solid',
       class: cn(
-        'bg-blue-500 text-white hover:bg-blue-600',
+        'bg-blue-600 text-white hover:bg-blue-700',
         'dark:bg-blue-700 dark:hover:bg-blue-800',
         'focus-visible:ring-blue-300 dark:focus-visible:ring-blue-400/50',
         'shadow hover:shadow-md'
@@ -770,7 +770,7 @@ export const labelButtonVariants = tv({
       intent: 'primary',
       variant: 'base',
       class:
-        'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800',
+        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800',
     },
     {
       intent: 'primary',

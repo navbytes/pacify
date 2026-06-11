@@ -144,7 +144,7 @@ function onMenuKeydown(event: KeyboardEvent) {
         <span class="block text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">
           {selected.label}
         </span>
-        <span class="block text-xs text-slate-500 dark:text-slate-400 truncate">
+        <span class="block text-xs text-slate-600 dark:text-slate-400 truncate">
           {selected.desc}
         </span>
       </span>
@@ -195,10 +195,10 @@ function onMenuKeydown(event: KeyboardEvent) {
                 {item.label}
               </span>
               {#if item.sub}
-                <span class="text-[11px] text-slate-400 dark:text-slate-500">· {item.sub}</span>
+                <span class="text-[11px] text-slate-500 dark:text-slate-500">· {item.sub}</span>
               {/if}
             </span>
-            <span class="block text-xs text-slate-500 dark:text-slate-400">{item.desc}</span>
+            <span class="block text-xs text-slate-600 dark:text-slate-400">{item.desc}</span>
           </span>
           {#if isSel}
             <Check size={16} class="shrink-0 mt-0.5 text-blue-600 dark:text-blue-400" />

@@ -240,7 +240,7 @@ async function handleViewModeChange(mode: ViewMode) {
       bind:dragType
       onDrop={(item) => handleDrop(item, 'OPTIONS')}
     >
-      <div role="list">
+      <div>
         <ScriptList
           pageType="OPTIONS"
           proxies={regularProxies}
