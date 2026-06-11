@@ -282,7 +282,7 @@ function handleCancelDelete() {
                 <ToggleSwitch
                   checked={rule.enabled}
                   onchange={(checked) => onToggleRule(rule.id, checked)}
-                  aria-label={I18nService.getMessage(rule.enabled ? 'ruleDisabled' : 'ruleEnabled')}
+                  aria-label={I18nService.getMessage(rule.enabled ? 'disableRule' : 'enableRule')}
                 />
 
                 <Button

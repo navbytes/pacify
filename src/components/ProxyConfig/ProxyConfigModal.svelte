@@ -427,6 +427,7 @@ function handleBackdropClick(event: MouseEvent) {
         <div
           class="relative mx-6 mb-4 overflow-hidden rounded-xl"
           data-error-message
+          role="alert"
           transition:slide={{ duration: 200 }}
         >
           <div
