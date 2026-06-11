@@ -1,70 +1,119 @@
-name: Create Release
+name: Release
 
+# Auto-releases when the version in manifest.json changes on main (i.e. a release
+# PR is merged), and can also be triggered manually. The tag-existence guard makes
+# it idempotent: re-runs for an already-released version are a no-op rather than a
+# duplicate/failed release.
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths: ['manifest.json']
+  workflow_dispatch:
 
 permissions:
-  contents: write # This is required for creating releases
+  contents: write # required to create tags & releases
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
-  build-and-release:
+  release:
+    name: Build, package & release
     runs-on: ubuntu-latest
-
+    # Surfaced as an env var so the Chrome Web Store step can be gated on its
+    # presence (the `secrets` context isn't directly usable in step `if`s).
+    env:
+      CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Read version from manifest.json
+        id: version
+        run: |
+          VERSION=$(grep -o '"version": *"[^"]*"' manifest.json | head -1 | cut -d'"' -f4)
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Detected version: $VERSION"
+
+      - name: Check whether this version is already released
+        id: guard
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.VERSION }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::Tag v${{ steps.version.outputs.VERSION }} already exists — skipping release."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Set up Bun
-        uses: oven-sh/setup-bun@v1
+        if: steps.guard.outputs.exists == 'false'
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install
+        if: steps.guard.outputs.exists == 'false'
+        run: bun install --frozen-lockfile
+
+      - name: Unit tests
+        if: steps.guard.outputs.exists == 'false'
+        run: bun run test
 
       - name: Build
+        if: steps.guard.outputs.exists == 'false'
         run: bun run build
 
-      - name: Get version from manifest.json
-        id: manifest-version
-        run: |
-          VERSION=$(grep -o '"version": *"[^"]*"' manifest.json | cut -d'"' -f4)
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Extract release notes from CHANGELOG.md
-        id: extract-release-notes
-        run: |
-          VERSION=${{ steps.manifest-version.outputs.VERSION }}
-          # Extract the section for the current version from CHANGELOG.md
-          # This awk script extracts content between ## [$VERSION] and the next ## or end of file
-          RELEASE_NOTES=$(awk -v version="$VERSION" '
-            BEGIN { found=0; }
-            /^## \['"$VERSION"'\]/ { found=1; next; }
-            /^## \[/ { if (found) exit; }
-            { if (found) print; }
-          ' CHANGELOG.md)
-          # Store the release notes in an output variable, handling multiline strings
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_OUTPUT
-          echo "$RELEASE_NOTES" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
       - name: Create ZIP archive
+        if: steps.guard.outputs.exists == 'false'
         run: |
           cd dist
-          zip -r ../Pacify_${{ steps.manifest-version.outputs.VERSION }}.zip .
-          cd ..
+          zip -r "../Pacify_${{ steps.version.outputs.VERSION }}.zip" .
 
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
+      - name: Extract release notes from CHANGELOG.md
+        if: steps.guard.outputs.exists == 'false'
+        id: notes
+        run: |
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          NOTES=$(awk -v version="$VERSION" '
+            /^## \[/ { if (found) exit }
+            found { print }
+            $0 ~ "^## \\[" version "\\]" { found=1 }
+          ' CHANGELOG.md)
+          if [ -z "$NOTES" ]; then
+            NOTES="Release v$VERSION"
+          fi
+          {
+            echo "NOTES<<EOF"
+            echo "$NOTES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        if: steps.guard.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.manifest-version.outputs.VERSION }}
-          name: Release v${{ steps.manifest-version.outputs.VERSION }}
-          body: ${{ steps.extract-release-notes.outputs.RELEASE_NOTES }}
-          files: Pacify_${{ steps.manifest-version.outputs.VERSION }}.zip
+          tag_name: v${{ steps.version.outputs.VERSION }}
+          name: Release v${{ steps.version.outputs.VERSION }}
+          body: ${{ steps.notes.outputs.NOTES }}
+          files: Pacify_${{ steps.version.outputs.VERSION }}.zip
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Optional: publish to the Chrome Web Store. Runs only when the four CWS
+      # secrets are configured (otherwise it's skipped, so the GitHub Release
+      # above still happens). Add CHROME_EXTENSION_ID, CHROME_CLIENT_ID,
+      # CHROME_CLIENT_SECRET, CHROME_REFRESH_TOKEN under repo Settings → Secrets.
+      - name: Publish to Chrome Web Store
+        if: ${{ steps.guard.outputs.exists == 'false' && env.CHROME_EXTENSION_ID != '' }}
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: Pacify_${{ steps.version.outputs.VERSION }}.zip
+          extension-id: ${{ secrets.CHROME_EXTENSION_ID }}
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          publish: true

@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel superseded runs on the same ref (e.g. rapid pushes to a PR).
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Lint, types, unit tests & build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Lint & format (biome ci)
+        run: bun run check:ci
+
+      - name: Type check (svelte-check)
+        run: bun run check
+
+      - name: Unit tests
+        run: bun run test
+
+      - name: Build
+        run: bun run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  e2e:
+    name: E2E (Playwright)
+    runs-on: ubuntu-latest
+    needs: quality
+    env:
+      CI: 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install Playwright system dependencies
+        # Pulls in the shared libraries Chromium-family browsers need on CI.
+        run: bunx playwright install-deps chromium
+
+      - name: Install Chrome for Testing
+        # MV3 extension service workers don't start reliably under plain Chromium
+        # headless (what setup-chrome / Playwright's bundle provide). Install real
+        # Chrome for Testing — the exact browser the suite passes against locally.
+        run: |
+          bunx @puppeteer/browsers install chrome@stable --path "$HOME/.cache/puppeteer"
+          CHROME_BIN=$(find "$HOME/.cache/puppeteer/chrome" -type f -name chrome -path '*chrome-linux64*' | head -1)
+          if [ -z "$CHROME_BIN" ]; then echo "Failed to locate Chrome for Testing binary" >&2; exit 1; fi
+          chmod +x "$CHROME_BIN"
+          echo "CHROME_PATH=$CHROME_BIN" >> "$GITHUB_ENV"
+          echo "Using Chrome at: $CHROME_BIN"
+
+      - name: Build extension
+        run: bun run build
+
+      - name: Run E2E tests
+        run: bun run test:e2e:ci
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          retention-days: 7

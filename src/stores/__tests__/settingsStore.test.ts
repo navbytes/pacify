@@ -1,53 +1,64 @@
-import { beforeEach, describe, expect, mock, test } from 'bun:test'
+import { afterAll, beforeEach, describe, expect, spyOn, test } from 'bun:test'
 import { get } from 'svelte/store'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import type { AppSettings, ProxyConfig } from '@/interfaces'
+import { ChromeService } from '@/services/chrome'
+import { PACScriptGenerator } from '@/services/PACScriptGenerator'
+import { StorageService } from '@/services/StorageService'
+import { settingsStore } from '../settingsStore'
 
 /**
  * Unit tests for the settingsStore.
  *
  * The store is a singleton that coordinates the in-memory Svelte state with
  * StorageService (persistence) and ChromeService (background messaging). We
- * mock both so we can assert on (a) the observable store value, (b) what gets
+ * spy on both so we can assert on (a) the observable store value, (b) what gets
  * persisted, and (c) which background messages are sent — without a browser.
+ *
+ * NOTE: spyOn (restored in afterAll) is used deliberately instead of
+ * mock.module — the latter is process-global in bun and leaks the replacement
+ * into every later test file, breaking suites that rely on the real services.
  */
 
-// ---- Mock backing storage -------------------------------------------------
+// ---- Backing storage ------------------------------------------------------
 let mockStored: AppSettings
 let savedSettings: AppSettings | null = null
-
-const mockStorageService = {
-  getSettings: mock(async () => structuredClone(mockStored)),
-  saveSettings: mock(async (settings: AppSettings) => {
-    savedSettings = structuredClone(settings)
-    mockStored = structuredClone(settings)
-  }),
-  invalidateCache: mock(async () => {}),
-  migrateStorage: mock(async () => {}),
-}
-
 const sentMessages: Array<{ type: string; [k: string]: unknown }> = []
+
+// Spies on the real services, grouped under the same names the assertions use.
+const mockStorageService = {
+  getSettings: spyOn(StorageService, 'getSettings').mockImplementation(async () =>
+    structuredClone(mockStored)
+  ),
+  saveSettings: spyOn(StorageService, 'saveSettings').mockImplementation(
+    async (settings: AppSettings) => {
+      savedSettings = structuredClone(settings)
+      mockStored = structuredClone(settings)
+    }
+  ),
+  invalidateCache: spyOn(StorageService, 'invalidateCache').mockImplementation(() => {}),
+  migrateStorage: spyOn(StorageService, 'migrateStorage').mockImplementation(async () => {}),
+}
+
 const mockChromeService = {
-  sendMessage: mock(async (msg: { type: string; [k: string]: unknown }) => {
-    sentMessages.push(msg)
-    return { success: true }
+  // Matches ChromeService.sendMessage's signature: (message) => Promise<void>.
+  sendMessage: spyOn(ChromeService, 'sendMessage').mockImplementation(async (msg) => {
+    sentMessages.push(msg as { type: string; [k: string]: unknown })
   }),
 }
 
-mock.module('@/services/StorageService', () => ({
-  StorageService: mockStorageService,
-}))
-mock.module('@/services/chrome', () => ({
-  ChromeService: mockChromeService,
-}))
-mock.module('@/services/PACScriptGenerator', () => ({
-  PACScriptGenerator: {
-    generate: mock(() => 'function FindProxyForURL(){return "DIRECT";}'),
-  },
-}))
+const generateSpy = spyOn(PACScriptGenerator, 'generate').mockImplementation(
+  () => 'function FindProxyForURL(){return "DIRECT";}'
+)
 
-// Import after mocking so the store wires up the mocks.
-import { settingsStore } from '../settingsStore'
+afterAll(() => {
+  mockStorageService.getSettings.mockRestore()
+  mockStorageService.saveSettings.mockRestore()
+  mockStorageService.invalidateCache.mockRestore()
+  mockStorageService.migrateStorage.mockRestore()
+  mockChromeService.sendMessage.mockRestore()
+  generateSpy.mockRestore()
+})
 
 // ---- Helpers --------------------------------------------------------------
 function makeProxy(overrides: Partial<ProxyConfig> = {}): ProxyConfig {

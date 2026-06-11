@@ -1,21 +1,23 @@
-import { beforeEach, describe, expect, mock, test } from 'bun:test'
+import { afterAll, beforeEach, describe, expect, spyOn, test } from 'bun:test'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import type { AppSettings } from '@/interfaces'
+import { StorageService } from '@/services/StorageService'
+import { SettingsReader } from '../SettingsReader'
 
 // Mock data
 let mockSettings: AppSettings
 
+// spyOn (restored in afterAll) rather than mock.module: the latter is
+// process-global in bun and leaks into later test files.
 const mockStorageService = {
-  getSettings: mock(async () => mockSettings),
-  invalidateCache: mock(() => {}),
+  getSettings: spyOn(StorageService, 'getSettings').mockImplementation(async () => mockSettings),
+  invalidateCache: spyOn(StorageService, 'invalidateCache').mockImplementation(() => {}),
 }
 
-mock.module('@/services/StorageService', () => ({
-  StorageService: mockStorageService,
-}))
-
-// Import after mocking
-import { SettingsReader } from '../SettingsReader'
+afterAll(() => {
+  mockStorageService.getSettings.mockRestore()
+  mockStorageService.invalidateCache.mockRestore()
+})
 
 describe('SettingsReader', () => {
   beforeEach(() => {
