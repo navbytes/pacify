@@ -112,6 +112,7 @@ function handleKeydown(event: KeyboardEvent, index: number) {
       aria-checked={isActive}
       disabled={option.disabled}
       tabindex={isActive ? 0 : -1}
+      data-testid="segment-{option.value}"
       class={cn(
         'relative inline-flex items-center justify-center gap-2 font-medium rounded-lg',
         'transition-all duration-200 ease-out',

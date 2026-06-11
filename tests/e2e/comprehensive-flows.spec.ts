@@ -240,7 +240,7 @@ test.describe('3. Manual Proxy Configuration', () => {
     await page.fill('input#scriptName', 'Manual Single Proxy')
 
     // Switch to Manual Configuration tab
-    const manualTab = page.locator('button:has-text("Manual Configuration")')
+    const manualTab = page.getByTestId('segment-fixed_servers')
     await manualTab.click()
     // Wait for manual configuration fields to appear
     await expect(page.locator('input[type="checkbox"]#useSharedProxy')).toBeVisible()
@@ -273,7 +273,7 @@ test.describe('3. Manual Proxy Configuration', () => {
     await page.fill('input#scriptName', 'Manual Multi Proxy')
 
     // Switch to Manual Configuration
-    await page.locator('button:has-text("Manual Configuration")').click()
+    await page.getByTestId('segment-fixed_servers').click()
 
     // Uncheck "Use same proxy server" to see individual protocol sections
     const sameProxyCheckbox = page.locator('input[type="checkbox"]#useSharedProxy')
@@ -305,7 +305,7 @@ test.describe('3. Manual Proxy Configuration', () => {
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Manual Bypass Proxy')
 
-    await page.locator('button:has-text("Manual Configuration")').click()
+    await page.getByTestId('segment-fixed_servers').click()
 
     // Wait for manual configuration fields to appear
     const sameProxyCheckbox = page.locator('input[type="checkbox"]#useSharedProxy')
@@ -738,12 +738,12 @@ test.describe('12. Configuration Mode Switching', () => {
 
     // Mode is a segmented control (role=radio, aria-checked). Default is
     // System; switch to PAC Script first.
-    const pacButton = page.getByRole('radio', { name: 'PAC Script' })
+    const pacButton = page.getByTestId('segment-pac_script')
     await pacButton.click()
     await expect(pacButton).toHaveAttribute('aria-checked', 'true')
 
     // Switch to Manual Configuration
-    const manualButton = page.getByRole('radio', { name: 'Manual Configuration' })
+    const manualButton = page.getByTestId('segment-fixed_servers')
     await manualButton.click()
     await expect(manualButton).toHaveAttribute('aria-checked', 'true')
 
