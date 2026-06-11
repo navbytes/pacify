@@ -436,8 +436,13 @@ test.describe('5. Quick Switch Mode', () => {
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
     await expect(page.locator('text=Quick Switch Test').first()).toBeVisible()
 
+    // Pin the proxy — the Quick Switch section/toggle only appears once at least
+    // one proxy is pinned (via the per-card Pin button).
+    await page.click('button[aria-label=\'Add "Quick Switch Test" to Quick Switch\']')
+
     // Find the quick switch toggle in proxy configs tab
     const quickSwitchToggle = page.locator('input#sectionToggle-quick-switch')
+    await expect(quickSwitchToggle).toBeAttached()
 
     // Get initial state
     const initialState = await quickSwitchToggle.isChecked()
@@ -477,6 +482,9 @@ test.describe('5. Quick Switch Mode', () => {
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
     await expect(page.locator('text=Quick Switch Area Test').first()).toBeVisible()
+
+    // Pin the proxy so the Quick Switch section/toggle appears.
+    await page.click('button[aria-label=\'Add "Quick Switch Area Test" to Quick Switch\']')
 
     // Enable quick switch mode - click the label since checkbox is hidden
     const quickSwitchToggle = page.locator('input#sectionToggle-quick-switch')
@@ -820,6 +828,9 @@ test.describe('14. Popup Quick Switch Flow', () => {
     // Wait for modal to close
     await expect(optionsPage.getByTestId('modal-title')).not.toBeVisible()
     await expect(optionsPage.locator('text=Popup Test Proxy').first()).toBeVisible()
+
+    // Pin the proxy so the Quick Switch section/toggle appears.
+    await optionsPage.click('button[aria-label=\'Add "Popup Test Proxy" to Quick Switch\']')
 
     // Enable quick switch mode - click the label since checkbox is hidden
     const quickSwitchToggle = optionsPage.locator('input#sectionToggle-quick-switch')

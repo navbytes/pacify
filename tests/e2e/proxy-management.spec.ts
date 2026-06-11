@@ -169,8 +169,13 @@ test.describe('Quick Switch Functionality', () => {
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
     await expect(page.locator('text=Quick Switch Test').first()).toBeVisible()
 
+    // Pin the proxy via its per-card button — the Quick Switch section (and its
+    // global toggle) only appears once at least one proxy is pinned.
+    await page.click('button[aria-label=\'Add "Quick Switch Test" to Quick Switch\']')
+
     // Find the quick switch toggle checkbox (it's hidden with sr-only)
     const quickSwitchToggle = page.locator('input#sectionToggle-quick-switch')
+    await expect(quickSwitchToggle).toBeAttached()
 
     // Get initial state
     const initialState = await quickSwitchToggle.isChecked()

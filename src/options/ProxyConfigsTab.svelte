@@ -147,8 +147,10 @@ async function handleViewModeChange(mode: ViewMode) {
 <svelte:window on:keydown={handleKeydown} />
 
 <div class="py-6 space-y-8">
-  {#if hasProxies && settings.showQuickSettings}
-    <!-- Quick Switch Configs Section -->
+  {#if hasProxies && settings.showQuickSettings && quickSwitchProxies.length > 0}
+    <!-- Quick Switch Configs Section. Only shown once at least one proxy is
+         pinned (via the per-card Pin button) — an empty drop target on first
+         load was confusing noise for users who have no Quick Switch set up. -->
     <div>
       <SectionHeader
         icon={Zap}
@@ -179,26 +181,13 @@ async function handleViewModeChange(mode: ViewMode) {
         bind:dragType
         onDrop={(item) => handleDrop(item, 'QUICK_SWITCH')}
       >
-        {#if hasProxies && settings.proxyConfigs.filter((p) => p.quickSwitch).length === 0}
-          <div class="text-center py-8">
-            <Text as="p" size="sm" color="muted" classes="mb-2">
-              {I18nService.getMessage('quickSwitchEmptyHint') ||
-                'Drag proxy configurations here for quick access'}
-            </Text>
-            <Text as="p" size="xs" color="muted">
-              {I18nService.getMessage('quickSwitchEmptySubHint') ||
-                'Proxies added here will appear in Quick Switch mode'}
-            </Text>
-          </div>
-        {:else}
-          <ScriptList
-            pageType="QUICK_SWITCH"
-            title=""
-            proxies={quickSwitchProxies}
-            disableDrag={false}
-            bind:dragType
-          />
-        {/if}
+        <ScriptList
+          pageType="QUICK_SWITCH"
+          title=""
+          proxies={quickSwitchProxies}
+          disableDrag={false}
+          bind:dragType
+        />
       </DropZone>
     </div>
   {/if}

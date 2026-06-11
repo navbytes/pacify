@@ -8,6 +8,7 @@ import Tooltip from '@/components/Tooltip.svelte'
 import { ChromeService } from '@/services/chrome'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
+import { cn } from '@/utils/cn'
 import { Cable, Plus, Power, Settings } from '@/utils/icons'
 
 let settings = $derived($settingsStore)
@@ -73,6 +74,40 @@ async function disableAllProxies() {
   <!-- Main Content -->
   <main class="popup-scroll overflow-y-auto flex-1 px-5 pt-4 pb-4">
     {#if hasProxies}
+      <!-- Active-status hero: the proxy state, glanceable at the top, never
+           scrolled off below the list (J1). -->
+      <div
+        class={cn(
+          'mb-3 flex items-center gap-2.5 rounded-xl border px-3 py-2.5',
+          activeProxy
+            ? 'bg-green-50/60 dark:bg-green-900/10 border-green-200 dark:border-green-900/40'
+            : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700'
+        )}
+        role="status"
+        aria-live="polite"
+      >
+        {#if activeProxy}
+          <span
+            class="w-3 h-3 rounded-full animate-pulse shrink-0"
+            style="background-color: {activeProxy.color}"
+          ></span>
+          <div class="min-w-0 flex-1">
+            <p
+              class="text-[10px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-400"
+            >
+              {I18nService.getMessage('statusConnected')}
+            </p>
+            <p class="text-sm font-semibold truncate text-slate-800 dark:text-slate-100">
+              {activeProxy.name}
+            </p>
+          </div>
+        {:else}
+          <span class="w-3 h-3 rounded-full bg-slate-400 dark:bg-slate-500 shrink-0"></span>
+          <p class="text-sm font-medium text-slate-600 dark:text-slate-300">
+            {I18nService.getMessage('statusDisconnected')}
+          </p>
+        {/if}
+      </div>
       <ScriptList pageType="POPUP" title="" viewMode="list" />
     {:else}
       <EmptyState
@@ -88,51 +123,21 @@ async function disableAllProxies() {
     {/if}
   </main>
 
-  <!-- Footer - Status & Actions -->
-  {#if hasProxies}
-    <footer class="px-5 py-2.5 border-t border-slate-200 dark:border-slate-700 min-h-13">
-      <div class="flex items-center justify-between h-full">
-        <div class="flex items-center gap-2">
-          {#if activeProxy}
-            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <Text size="sm" weight="medium" classes="text-green-700 dark:text-green-400">
-              {I18nService.getMessage('statusConnected')}: {activeProxy.name}
-            </Text>
-          {:else}
-            <div class="w-2 h-2 bg-slate-400 dark:bg-slate-500 rounded-full"></div>
-            <Text size="sm" weight="medium" classes="text-slate-600 dark:text-slate-300">
-              {I18nService.getMessage('statusDisconnected')}
-            </Text>
-          {/if}
-        </div>
-
-        <!-- Always reserve space for the button to prevent layout shift -->
-        <div class="shrink-0">
-          {#if activeProxy}
-            <Button
-              size="sm"
-              color="secondary"
-              onclick={disableAllProxies}
-              data-testid="disable-proxy-btn"
-            >
-              {#snippet icon()}
-                <Power size={14} />
-              {/snippet}
-              {I18nService.getMessage('offButton')}
-            </Button>
-          {:else}
-            <!-- Invisible placeholder to maintain layout -->
-            <div class="invisible">
-              <Button size="sm" color="secondary">
-                {#snippet icon()}
-                  <Power size={14} />
-                {/snippet}
-                {I18nService.getMessage('offButton')}
-              </Button>
-            </div>
-          {/if}
-        </div>
-      </div>
+  <!-- Footer - the single off action (status now lives in the top hero) -->
+  {#if activeProxy}
+    <footer class="px-5 py-2.5 border-t border-slate-200 dark:border-slate-700">
+      <Button
+        size="sm"
+        color="secondary"
+        onclick={disableAllProxies}
+        data-testid="disable-proxy-btn"
+        classes="w-full justify-center"
+      >
+        {#snippet icon()}
+          <Power size={14} />
+        {/snippet}
+        {I18nService.getMessage('offButton')}
+      </Button>
     </footer>
   {/if}
 </div>
