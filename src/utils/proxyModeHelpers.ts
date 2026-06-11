@@ -26,6 +26,27 @@ export function getProxyModeLabel(mode: ProxyMode, config?: ProxyConfig): string
   return labels[mode] || mode
 }
 
+/**
+ * Plain-language label for the proxy card badge. Unlike getProxyModeLabel
+ * (which mirrors the editor's technical mode names), this avoids jargon for the
+ * everyday "Toggler" persona: "Manual Configuration" → "Proxy server",
+ * "Auto-Proxy" → "Smart routing", "Auto‑config URL" → "Auto-detect". The
+ * precise mode names stay in the editor's mode selector, not on the card.
+ */
+export function getProxyCardLabel(mode: ProxyMode, config?: ProxyConfig): string {
+  if (config && isAutoProxy(config)) {
+    return I18nService.getMessage('cardModeRouting')
+  }
+  const labels: Record<ProxyMode, string> = {
+    system: I18nService.getMessage('systemMode'),
+    direct: I18nService.getMessage('directMode'),
+    auto_detect: I18nService.getMessage('cardModeAutoDetect'),
+    pac_script: I18nService.getMessage('pacScriptMode'),
+    fixed_servers: I18nService.getMessage('cardModeManual'),
+  }
+  return labels[mode] || mode
+}
+
 export function getProxyModeIcon(mode: ProxyMode, config?: ProxyConfig): ComponentType {
   // Check if this is an Auto-Proxy config
   if (config && isAutoProxy(config)) {

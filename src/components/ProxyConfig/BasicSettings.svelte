@@ -125,38 +125,43 @@ function handleNameInput() {
   </div>
 </FlexGroup>
 
-<div class="mt-4">
-  <div class="flex items-center justify-between mb-1">
-    <label for="badgeLabel" class={formLabelVariants({ spacing: 'none' })}>
-      {I18nService.getMessage('badgeLabel')}
-      <Text size="xs" color="muted" classes="ml-1 font-normal">(Optional)</Text>
-    </label>
-    <Text size="xs" color="muted" classes="font-medium">
-      {badgeLabel.length}/{MAX_BADGE_LENGTH}
-    </Text>
-  </div>
-  <div class="flex items-center gap-3">
-    <input
-      type="text"
-      id="badgeLabel"
-      bind:value={badgeLabel}
-      maxlength={MAX_BADGE_LENGTH}
-      placeholder="Auto"
-      class={inputVariants({ size: 'md' })}
-      data-testid="config-badge-input"
-    >
-    <!-- Badge Preview -->
-    <div
-      class="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700"
-    >
-      <Text size="xs" color="muted" weight="medium">Preview:</Text>
+<!-- Badge label is a power-user cosmetic (the 2–4 char toolbar abbreviation);
+     keep it out of the default create flow behind an Advanced disclosure. -->
+<details class="mt-4 group">
+  <summary
+    class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 list-none"
+  >
+    <span class="transition-transform group-open:rotate-90" aria-hidden="true">▸</span>
+    {I18nService.getMessage('advancedOptions') || 'Advanced'}
+  </summary>
+  <div class="mt-3 pl-4">
+    <div class="flex items-center justify-between mb-1">
+      <label for="badgeLabel" class={formLabelVariants({ spacing: 'none' })}>
+        {I18nService.getMessage('badgeLabel')}
+        <Text size="xs" color="muted" classes="ml-1 font-normal">(Optional)</Text>
+      </label>
+      <Text size="xs" color="muted" classes="font-medium">
+        {badgeLabel.length}/{MAX_BADGE_LENGTH}
+      </Text>
+    </div>
+    <div class="flex items-center gap-3">
+      <input
+        type="text"
+        id="badgeLabel"
+        bind:value={badgeLabel}
+        maxlength={MAX_BADGE_LENGTH}
+        placeholder="Auto"
+        class={inputVariants({ size: 'md' })}
+        data-testid="config-badge-input"
+      >
       <div
-        class="px-2 py-0.5 rounded text-xs font-bold text-white shadow-sm"
+        class="shrink-0 px-2 py-0.5 rounded text-xs font-bold text-white shadow-sm"
         style="background-color: {color}"
+        aria-hidden="true"
       >
         {badgePreview}
       </div>
     </div>
+    <Text size="xs" color="muted" classes="mt-1">{I18nService.getMessage('badgeLabelHelp')}</Text>
   </div>
-  <Text size="xs" color="muted" classes="mt-1">{I18nService.getMessage('badgeLabelHelp')}</Text>
-</div>
+</details>

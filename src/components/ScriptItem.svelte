@@ -13,10 +13,10 @@ import {
 import { cn } from '@/utils/cn'
 import { GripVertical, Lock, Pencil, ShieldCheck, Trash, Zap } from '@/utils/icons'
 import {
+  getProxyCardLabel,
   getProxyDescription,
   getProxyModeColor,
   getProxyModeIcon,
-  getProxyModeLabel,
 } from '@/utils/proxyModeHelpers'
 import { colors, transitions } from '@/utils/theme'
 import Button from './Button.svelte'
@@ -46,7 +46,7 @@ let {
 
 let modeColors = $derived(getProxyModeColor(proxy.mode, proxy))
 let ModeIcon = $derived(getProxyModeIcon(proxy.mode, proxy))
-let modeLabel = $derived(getProxyModeLabel(proxy.mode, proxy))
+let modeLabel = $derived(getProxyCardLabel(proxy.mode, proxy))
 let proxyDesc = $derived(getProxyDescription(proxy.mode, proxy))
 let showDeleteDialog = $state(false)
 // Use pre-computed map from parent (O(1) lookup) instead of per-item search (O(n))
