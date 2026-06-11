@@ -734,7 +734,7 @@ test.describe('12. Configuration Mode Switching', () => {
     // Connection type is a dropdown. Switch to PAC script and confirm its fields.
     await page.getByTestId('conn-type-trigger').click()
     await page.getByTestId('segment-pac_script').click()
-    await expect(page.getByTestId('pac-url-input')).toBeVisible()
+    await expect(page.getByTestId('segment-url')).toBeVisible()
 
     // Switch to "Connect through a server" (manual) and confirm its fields.
     await page.getByTestId('conn-type-trigger').click()
@@ -744,7 +744,7 @@ test.describe('12. Configuration Mode Switching', () => {
     // Switch back to PAC script.
     await page.getByTestId('conn-type-trigger').click()
     await page.getByTestId('segment-pac_script').click()
-    await expect(page.getByTestId('pac-url-input')).toBeVisible()
+    await expect(page.getByTestId('segment-url')).toBeVisible()
 
     // Close modal
     await page.getByTestId('modal-cancel-btn').click()

@@ -11,6 +11,7 @@ import { defaultCodeMirrorOptions } from '@/utils/codemirror'
 import { AlertCircle, CheckCircle } from '@/utils/icons'
 import Button from '../Button.svelte'
 import FlexGroup from '../FlexGroup.svelte'
+import SegmentedControl from '../SegmentedControl.svelte'
 import Text from '../Text.svelte'
 
 // WeakMap to store MutationObserver for each editor instance
@@ -37,6 +38,19 @@ let {
   onRefresh = undefined,
   isScriptValid = $bindable(true),
 }: Props = $props()
+
+// Explicit source choice (item 21) instead of an implicit "URL wins" precedence:
+// either load the PAC from a URL, or write/paste it here.
+let pacSource = $state<'inline' | 'url'>(pacUrl ? 'url' : 'inline')
+const sourceOptions = [
+  { value: 'inline', label: I18nService.getMessage('pacSourceInline') },
+  { value: 'url', label: I18nService.getMessage('pacSourceUrl') },
+]
+function handleSourceChange(next: string) {
+  pacSource = next as 'inline' | 'url'
+  // Switching to "write it here" drops any URL so save uses the editor content.
+  if (pacSource === 'inline') pacUrl = ''
+}
 
 // Keep the parent's isScriptValid in sync with our validation state
 $effect(() => {
@@ -242,26 +256,42 @@ onDestroy(async () => {
 
 <div class="space-y-4">
   <div>
-    <label for="pacUrl" class={formLabelVariants()}>{I18nService.getMessage('pacScriptUrl')}</label>
-    <input
-      type="url"
-      id="pacUrl"
-      bind:value={pacUrl}
-      oninput={handleUrlInput}
-      onblur={handleUrlBlur}
-      class={inputVariants({ state: urlError && urlTouched ? 'error' : 'default', size: 'md' })}
-      placeholder={I18nService.getMessage('pacUrlPlaceholder') || 'http://example.com/proxy.pac'}
-      data-testid="pac-url-input"
-    >
-    {#if urlError && urlTouched}
-      <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">{urlError}</Text>
-    {/if}
-    {#if pacUrl && !urlError}
-      <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-300">
-        {I18nService.getMessage('pacUrlHelp') || 'PAC script will be loaded from this URL'}
-      </Text>
-    {/if}
+    <span class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+      {I18nService.getMessage('pacSourceLabel')}
+    </span>
+    <SegmentedControl
+      options={sourceOptions}
+      value={pacSource}
+      onchange={handleSourceChange}
+      size="sm"
+    />
   </div>
+
+  {#if pacSource === 'url'}
+    <div>
+      <label for="pacUrl" class={formLabelVariants()}>
+        {I18nService.getMessage('pacScriptUrl')}
+      </label>
+      <input
+        type="url"
+        id="pacUrl"
+        bind:value={pacUrl}
+        oninput={handleUrlInput}
+        onblur={handleUrlBlur}
+        class={inputVariants({ state: urlError && urlTouched ? 'error' : 'default', size: 'md' })}
+        placeholder={I18nService.getMessage('pacUrlPlaceholder') || 'http://example.com/proxy.pac'}
+        data-testid="pac-url-input"
+      >
+      {#if urlError && urlTouched}
+        <Text as="p" size="xs" classes="mt-1 text-red-600 dark:text-red-400">{urlError}</Text>
+      {/if}
+      {#if pacUrl && !urlError}
+        <Text as="p" size="xs" classes="mt-1 text-slate-500 dark:text-slate-300">
+          {I18nService.getMessage('pacUrlHelp') || 'PAC script will be loaded from this URL'}
+        </Text>
+      {/if}
+    </div>
+  {/if}
 
   {#if pacUrl && !urlError}
     <div class="space-y-3">

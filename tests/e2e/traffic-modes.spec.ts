@@ -95,6 +95,8 @@ test.describe('PAC-based routing modes', () => {
       await page.fill('input#scriptName', 'PAC URL')
       await page.getByTestId('conn-type-trigger').click()
       await page.getByTestId('segment-pac_script').click()
+      // PAC source defaults to "Write it here"; switch to "Load from a URL".
+      await page.getByTestId('segment-url').click()
       await page.getByTestId('pac-url-input').fill(pac.url)
       await page.getByTestId('modal-save-btn').click()
       await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -163,7 +165,7 @@ test.describe('PAC-based routing modes', () => {
     // Default match type (wildcard) with the literal hostname matches only that
     // host; the fallback assertion below confirms it doesn't over-match.
     await page.getByTestId('rule-pattern-input').fill(PROXY_TEST_HOST)
-    await page.getByRole('radio', { name: 'Define Inline' }).click()
+    await page.getByTestId('segment-inline').click()
     await page.locator('#inline-host').fill('127.0.0.1')
     await page.locator('#inline-port').fill(String(proxy.port))
     await page.getByTestId('rule-save-btn').click()
