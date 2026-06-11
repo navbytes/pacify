@@ -377,47 +377,53 @@ let selectableProxies = $derived(
           </div>
         </FlexGroup>
 
-        <!-- Badge Label Input with Preview -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between mb-1">
-            <label
-              for="badgeLabel"
-              class="block text-sm font-medium text-slate-600 dark:text-slate-300"
-            >
-              {I18nService.getMessage('badgeLabel')}
-              <span class="text-xs text-slate-500 ml-1">(Optional)</span>
-            </label>
-            <Text size="xs" color="muted" classes="font-medium">{badgeLabel.length}/4</Text>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="flex-1 relative group">
-              <input
-                id="badgeLabel"
-                type="text"
-                maxlength="4"
-                bind:value={badgeLabel}
-                placeholder="Auto"
-                class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all duration-200"
+        <!-- Badge label is a power-user toolbar cosmetic — keep it out of the
+             default create, behind an Advanced disclosure (matches the proxy
+             editor). -->
+        <details class="group">
+          <summary
+            class="flex items-center gap-1.5 cursor-pointer select-none text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 list-none"
+          >
+            <span class="transition-transform group-open:rotate-90" aria-hidden="true">▸</span>
+            {I18nService.getMessage('advancedOptions') || 'Advanced'}
+          </summary>
+          <div class="mt-3 space-y-2">
+            <div class="flex items-center justify-between mb-1">
+              <label
+                for="badgeLabel"
+                class="block text-sm font-medium text-slate-600 dark:text-slate-300"
               >
-              <div
-                class="absolute inset-0 rounded-xl bg-linear-to-r from-orange-500 to-amber-500 opacity-0 group-focus-within:opacity-100 -z-10 blur transition-opacity duration-200"
-              ></div>
+                {I18nService.getMessage('badgeLabel')}
+                <span class="text-xs text-slate-500 ml-1">(Optional)</span>
+              </label>
+              <Text size="xs" color="muted" classes="font-medium">{badgeLabel.length}/4</Text>
             </div>
-            <!-- Badge Preview -->
-            <div
-              class="flex items-center gap-2 px-3 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700"
-            >
-              <Text size="xs" color="muted" weight="medium">Preview:</Text>
+            <div class="flex items-center gap-3">
+              <div class="flex-1 relative group">
+                <input
+                  id="badgeLabel"
+                  type="text"
+                  maxlength="4"
+                  bind:value={badgeLabel}
+                  placeholder="Auto"
+                  data-testid="config-badge-input"
+                  class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-orange-500 dark:focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all duration-200"
+                >
+                <div
+                  class="absolute inset-0 rounded-xl bg-linear-to-r from-orange-500 to-amber-500 opacity-0 group-focus-within:opacity-100 -z-10 blur transition-opacity duration-200"
+                ></div>
+              </div>
               <div
-                class="px-2 py-0.5 rounded text-xs font-bold text-white shadow-sm"
+                class="shrink-0 px-2 py-0.5 rounded text-xs font-bold text-white shadow-sm"
                 style="background-color: {color}"
+                aria-hidden="true"
               >
                 {badgePreview}
               </div>
             </div>
+            <Text size="xs" color="muted">{I18nService.getMessage('badgeLabelHelp')}</Text>
           </div>
-          <Text size="xs" color="muted">{I18nService.getMessage('badgeLabelHelp')}</Text>
-        </div>
+        </details>
       </div>
 
       <!-- Rule Editor (when adding/editing) -->

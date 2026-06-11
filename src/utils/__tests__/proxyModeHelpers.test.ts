@@ -1,5 +1,6 @@
 import { beforeAll, describe, expect, test } from 'bun:test'
-import type { ProxyConfig } from '@/interfaces'
+import { DEFAULT_SETTINGS } from '@/constants/app'
+import type { AppSettings, ProxyConfig } from '@/interfaces'
 
 // I18nService.getMessage delegates to chrome.i18n; provide an echo-the-key
 // stub on the global chrome mock so these tests stay browser-free and assert
@@ -15,7 +16,11 @@ beforeAll(() => {
   } as unknown as typeof chrome
 })
 
-import { getProxyDescription } from '../proxyModeHelpers'
+import { getProxyDescription, resolveSavedProxyId } from '../proxyModeHelpers'
+
+function settingsWith(configs: ProxyConfig[]): AppSettings {
+  return { ...DEFAULT_SETTINGS, proxyConfigs: configs }
+}
 
 function config(overrides: Partial<ProxyConfig>): ProxyConfig {
   return {
@@ -66,5 +71,26 @@ describe('getProxyDescription — pac_script', () => {
   test('falls back to a label when only inline data (no url)', () => {
     const c = config({ mode: 'pac_script', pacScript: { data: 'function(){}' } })
     expect(getProxyDescription('pac_script', c)).toBe('pacScriptConfigured')
+  })
+})
+
+describe('resolveSavedProxyId (Save & Turn On activation target)', () => {
+  test('returns the editing id directly on edit', () => {
+    expect(resolveSavedProxyId('edit-id', settingsWith([]), 'Anything')).toBe('edit-id')
+  })
+
+  test('finds the freshly-created config by name on create', () => {
+    const s = settingsWith([config({ id: 'new-1', name: 'Work proxy' })])
+    expect(resolveSavedProxyId(null, s, 'Work proxy')).toBe('new-1')
+  })
+
+  test('returns null when no config matches the name', () => {
+    const s = settingsWith([config({ id: 'a', name: 'Other' })])
+    expect(resolveSavedProxyId(null, s, 'Missing')).toBeNull()
+  })
+
+  test('returns null when settings are missing', () => {
+    expect(resolveSavedProxyId(null, null, 'Work proxy')).toBeNull()
+    expect(resolveSavedProxyId(null, undefined, 'Work proxy')).toBeNull()
   })
 })

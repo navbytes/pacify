@@ -1,5 +1,5 @@
 import type { ComponentType } from 'svelte'
-import type { ProxyConfig, ProxyMode } from '@/interfaces'
+import type { AppSettings, ProxyConfig, ProxyMode } from '@/interfaces'
 import { I18nService } from '@/services/i18n/i18nService'
 import { FileText, GitBranch, Globe, Monitor, Radar, Wrench, Zap } from '@/utils/icons'
 
@@ -33,6 +33,21 @@ export function getProxyModeLabel(mode: ProxyMode, config?: ProxyConfig): string
  * "Auto-Proxy" → "Smart routing", "Auto‑config URL" → "Auto-detect". The
  * precise mode names stay in the editor's mode selector, not on the card.
  */
+/**
+ * Resolve which proxy id to activate after a save (the "Save & Turn On" flow).
+ * On edit, it's the id we were editing; on create, the freshly-saved config has
+ * a generated id, so we find it by name. Returns null when none can be resolved
+ * (the caller then skips activation).
+ */
+export function resolveSavedProxyId(
+  editingId: string | null,
+  settings: AppSettings | null | undefined,
+  name: string
+): string | null {
+  if (editingId) return editingId
+  return settings?.proxyConfigs.find((c) => c.name === name)?.id ?? null
+}
+
 export function getProxyCardLabel(mode: ProxyMode, config?: ProxyConfig): string {
   if (config && isAutoProxy(config)) {
     return I18nService.getMessage('cardModeRouting')
