@@ -41,12 +41,10 @@ const mockStorageService = {
 }
 
 const mockChromeService = {
-  sendMessage: spyOn(ChromeService, 'sendMessage').mockImplementation(
-    async (msg: { type: string; [k: string]: unknown }) => {
-      sentMessages.push(msg)
-      return { success: true }
-    }
-  ),
+  // Matches ChromeService.sendMessage's signature: (message) => Promise<void>.
+  sendMessage: spyOn(ChromeService, 'sendMessage').mockImplementation(async (msg) => {
+    sentMessages.push(msg as { type: string; [k: string]: unknown })
+  }),
 }
 
 const generateSpy = spyOn(PACScriptGenerator, 'generate').mockImplementation(
