@@ -61,19 +61,25 @@ test.describe('Proxy traffic routing', () => {
   }
 
   /**
-   * Toggle a specific proxy on/off from the popup (this is what activates it).
-   * The popup can list several proxies, so we target by name via the toggle's
-   * aria-label ("Toggle <name> proxy on/off").
+   * Pick a proxy (or "No proxy (direct)") in the popup's single-select list —
+   * this is how activation/deactivation works. Pass a name to activate that
+   * proxy, or `{ direct: true }` to turn the active one off.
    */
-  async function togglePopupProxy(name: string): Promise<void> {
+  async function popupSelect(opts: { name?: string; direct?: boolean }): Promise<void> {
     const popup = await context.newPage()
     // Avoid 'networkidle' — once a proxy is active, Chrome's background
     // connection attempts can keep the network from ever going idle.
     await popup.goto(`chrome-extension://${extensionId}/popup.html`, {
       waitUntil: 'domcontentloaded',
     })
-    const toggle = popup.locator(`label:has(input[aria-label*="${name} proxy"])`).first()
-    await toggle.click()
+    if (opts.direct) {
+      await popup.getByTestId('popup-direct-row').click()
+    } else {
+      await popup
+        .getByRole('radio', { name: opts.name as string })
+        .first()
+        .click()
+    }
     await popup.waitForTimeout(700)
     await popup.close()
   }
@@ -98,7 +104,7 @@ test.describe('Proxy traffic routing', () => {
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
 
     // Activate it from the popup and confirm Chrome received the config.
-    await togglePopupProxy('Fixture Proxy')
+    await popupSelect({ name: 'Fixture Proxy' })
     const background = context.serviceWorkers()[0]
     const chromeProxy = await background.evaluate(() => chrome.proxy.settings.get({}))
     // biome-ignore lint/suspicious/noExplicitAny: chrome typings not loaded in eval
@@ -110,7 +116,7 @@ test.describe('Proxy traffic routing', () => {
     expect(fx.requests.some((r) => r.target.includes(PROXY_TEST_HOST))).toBe(true)
 
     // Toggle off → back to DIRECT.
-    await togglePopupProxy('Fixture Proxy')
+    await popupSelect({ direct: true })
     fx.reset()
     expect(await fetchBody(fx.originHostUrl)).toBe('ORIGIN_OK')
     expect(fx.requests).toHaveLength(0)
@@ -129,7 +135,7 @@ test.describe('Proxy traffic routing', () => {
     await page.getByTestId('modal-save-btn').click()
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
 
-    await togglePopupProxy('Bypass Proxy')
+    await popupSelect({ name: 'Bypass Proxy' })
 
     // Even with the proxy active, the bypassed host must reach the origin
     // directly (regression guard for bypassList being dropped for single proxies).
@@ -137,7 +143,7 @@ test.describe('Proxy traffic routing', () => {
     expect(await fetchBody(fx.originHostUrl)).toBe('ORIGIN_OK')
     expect(fx.requests.some((r) => r.target.includes(PROXY_TEST_HOST))).toBe(false)
 
-    await togglePopupProxy('Bypass Proxy') // leave the browser back on DIRECT for any later tests
+    await popupSelect({ direct: true }) // leave the browser back on DIRECT for any later tests
   })
 
   test('a per-protocol HTTP proxy routes http traffic through it', async () => {
@@ -154,7 +160,7 @@ test.describe('Proxy traffic routing', () => {
     await page.getByTestId('modal-save-btn').click()
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
 
-    await togglePopupProxy('Per Protocol')
+    await popupSelect({ name: 'Per Protocol' })
     const background = context.serviceWorkers()[0]
     const chromeProxy = await background.evaluate(() => chrome.proxy.settings.get({}))
     // biome-ignore lint/suspicious/noExplicitAny: chrome typings not loaded in eval
@@ -166,7 +172,7 @@ test.describe('Proxy traffic routing', () => {
     expect(await fetchBody(fx.originHostUrl)).toContain('PROXIED')
     expect(fx.requests.some((r) => r.target.includes(PROXY_TEST_HOST))).toBe(true)
 
-    await togglePopupProxy('Per Protocol')
+    await popupSelect({ direct: true })
   })
 
   test('a SOCKS5 proxy tunnels traffic through the SOCKS server', async () => {
@@ -185,7 +191,7 @@ test.describe('Proxy traffic routing', () => {
       await page.getByTestId('modal-save-btn').click()
       await expect(page.getByTestId('modal-title')).not.toBeVisible()
 
-      await togglePopupProxy('Socks Proxy')
+      await popupSelect({ name: 'Socks Proxy' })
       const background = context.serviceWorkers()[0]
       const chromeProxy = await background.evaluate(() => chrome.proxy.settings.get({}))
       // biome-ignore lint/suspicious/noExplicitAny: chrome typings not loaded in eval

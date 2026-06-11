@@ -47,11 +47,20 @@ async function optionsPage(): Promise<Page> {
   return page
 }
 
-async function activate(name: string): Promise<void> {
+// Pick a proxy (or "No proxy (direct)") in the popup's single-select list.
+async function popupSelect(opts: { name?: string; direct?: boolean }): Promise<void> {
   const popup = await context.newPage()
-  await popup.goto(`chrome-extension://${extensionId}/popup.html`)
-  await popup.waitForLoadState('networkidle')
-  await popup.locator(`label:has(input[aria-label*="${name} proxy"])`).first().click()
+  await popup.goto(`chrome-extension://${extensionId}/popup.html`, {
+    waitUntil: 'domcontentloaded',
+  })
+  if (opts.direct) {
+    await popup.getByTestId('popup-direct-row').click()
+  } else {
+    await popup
+      .getByRole('radio', { name: opts.name as string })
+      .first()
+      .click()
+  }
   await popup.waitForTimeout(700)
   await popup.close()
 }
@@ -89,7 +98,7 @@ test.describe('PAC-based routing modes', () => {
       await page.getByTestId('modal-save-btn').click()
       await expect(page.getByTestId('modal-title')).not.toBeVisible()
 
-      await activate('PAC URL')
+      await popupSelect({ name: 'PAC URL' })
       expect(pac.hits).toBeGreaterThan(0) // the extension fetched the PAC
 
       // Matching host → proxied; non-matching host → DIRECT.
@@ -98,7 +107,7 @@ test.describe('PAC-based routing modes', () => {
       expect(await fetchBody(originUrl(PROXY_TEST_HOST_ALT))).toBe('ORIGIN_OK')
       expect(proxy.requests.some((r) => r.target.includes(PROXY_TEST_HOST_ALT))).toBe(false)
 
-      await activate('PAC URL') // toggle back to DIRECT
+      await popupSelect({ direct: true }) // toggle back to DIRECT
     } finally {
       await pac.stop()
     }
@@ -124,13 +133,13 @@ test.describe('PAC-based routing modes', () => {
     await page.getByTestId('modal-save-btn').click()
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
 
-    await activate('PAC Inline')
+    await popupSelect({ name: 'PAC Inline' })
     proxy.reset()
     expect(await fetchBody(originUrl(PROXY_TEST_HOST))).toContain('PROXIED:P')
     expect(await fetchBody(originUrl(PROXY_TEST_HOST_ALT))).toBe('ORIGIN_OK')
     expect(proxy.requests.some((r) => r.target.includes(PROXY_TEST_HOST_ALT))).toBe(false)
 
-    await activate('PAC Inline')
+    await popupSelect({ direct: true })
   })
 
   test('Auto-Proxy routes matching hosts via the rule, others via fallback', async () => {
@@ -156,7 +165,7 @@ test.describe('PAC-based routing modes', () => {
     await page.getByTestId('auto-proxy-save-btn').click()
     await expect(page.locator('text=Auto Routes').first()).toBeVisible()
 
-    await activate('Auto Routes')
+    await popupSelect({ name: 'Auto Routes' })
     const background = context.serviceWorkers()[0]
     const chromeProxy = await background.evaluate(() => chrome.proxy.settings.get({}))
     // biome-ignore lint/suspicious/noExplicitAny: chrome typings not loaded in eval
@@ -168,6 +177,6 @@ test.describe('PAC-based routing modes', () => {
     expect(await fetchBody(originUrl(PROXY_TEST_HOST_ALT))).toBe('ORIGIN_OK')
     expect(proxy.requests.some((r) => r.target.includes(PROXY_TEST_HOST_ALT))).toBe(false)
 
-    await activate('Auto Routes')
+    await popupSelect({ direct: true })
   })
 })

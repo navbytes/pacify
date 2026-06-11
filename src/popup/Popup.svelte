@@ -2,18 +2,24 @@
 import { onMount } from 'svelte'
 import Button from '@/components/Button.svelte'
 import EmptyState from '@/components/EmptyState.svelte'
-import ScriptList from '@/components/ScriptList.svelte'
 import Text from '@/components/Text.svelte'
 import Tooltip from '@/components/Tooltip.svelte'
 import { ChromeService } from '@/services/chrome'
 import { I18nService } from '@/services/i18n/i18nService'
 import { settingsStore } from '@/stores/settingsStore'
 import { cn } from '@/utils/cn'
-import { Cable, Plus, Power, Settings } from '@/utils/icons'
+import { Cable, Check, Plus, Settings } from '@/utils/icons'
+import { getProxyCardLabel, getProxyDescription } from '@/utils/proxyModeHelpers'
 
 let settings = $derived($settingsStore)
 let activeProxy = $derived(settings.proxyConfigs?.find((p) => p.isActive) || null)
 let hasProxies = $derived((settings.proxyConfigs?.length || 0) > 0)
+// Quick-switch proxies float to the top, matching the previous popup order.
+let sortedProxies = $derived(
+  [...(settings.proxyConfigs ?? [])].sort((a, b) =>
+    a.quickSwitch === b.quickSwitch ? 0 : a.quickSwitch ? -1 : 1
+  )
+)
 
 // Initialize settings on mount
 onMount(() => {
@@ -28,10 +34,32 @@ function quickAddProxy() {
   ChromeService.openOptionsPage({ action: 'create' })
 }
 
-async function disableAllProxies() {
-  if (activeProxy?.id) {
-    await settingsStore.setProxy(activeProxy.id, false)
-  }
+// Switching is a single selection (only one proxy can be active), so the popup
+// is a radiogroup: picking a proxy activates it; picking "No proxy (direct)"
+// turns the active one off. This makes the exclusive behavior honest, unlike
+// independent toggles that silently flipped each other.
+async function activate(id: string | undefined) {
+  if (id) await settingsStore.setProxy(id, true)
+}
+
+async function goDirect() {
+  if (activeProxy?.id) await settingsStore.setProxy(activeProxy.id, false)
+}
+
+function moveRadioFocus(event: KeyboardEvent, dir: number) {
+  const current = event.currentTarget as HTMLElement
+  const group = current.closest('[role="radiogroup"]')
+  if (!group) return
+  const radios = Array.from(group.querySelectorAll<HTMLElement>('[role="radio"]'))
+  const i = radios.indexOf(current)
+  if (i === -1) return
+  event.preventDefault()
+  radios[(i + dir + radios.length) % radios.length]?.focus()
+}
+
+function onRadioKeydown(event: KeyboardEvent) {
+  if (event.key === 'ArrowDown' || event.key === 'ArrowRight') moveRadioFocus(event, 1)
+  else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') moveRadioFocus(event, -1)
 }
 </script>
 
@@ -108,7 +136,82 @@ async function disableAllProxies() {
           </p>
         {/if}
       </div>
-      <ScriptList pageType="POPUP" title="" viewMode="list" />
+      <div
+        role="radiogroup"
+        aria-label={I18nService.getMessage('selectActiveProxy')}
+        class="flex flex-col gap-2"
+      >
+        {#each sortedProxies as proxy (proxy.id)}
+          <button
+            type="button"
+            role="radio"
+            aria-checked={proxy.isActive}
+            tabindex={proxy.isActive ? 0 : -1}
+            data-testid="popup-proxy-row"
+            onclick={() => activate(proxy.id)}
+            onkeydown={onRadioKeydown}
+            class={cn(
+              'relative flex items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
+              proxy.isActive
+                ? 'border-transparent ring-2 ring-blue-500 bg-blue-50/50 dark:bg-blue-950/20'
+                : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
+            )}
+          >
+            <span
+              class="w-3 h-3 rounded-full shrink-0 border border-black/5"
+              style="background-color: {proxy.color}"
+            ></span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-semibold truncate text-slate-800 dark:text-slate-100">
+                {proxy.name}
+              </span>
+              <span class="block text-xs truncate text-slate-500 dark:text-slate-400">
+                {getProxyCardLabel(proxy.mode, proxy)}
+                {getProxyDescription(proxy.mode, proxy)
+                  ? ` · ${getProxyDescription(proxy.mode, proxy)}`
+                  : ''}
+              </span>
+            </span>
+            {#if proxy.isActive}
+              <span
+                class="shrink-0 inline-flex items-center gap-1 text-[11px] font-semibold text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900/40 rounded-md px-1.5 py-0.5"
+              >
+                <Check size={12} aria-hidden="true" />
+                {I18nService.getMessage('active')}
+              </span>
+            {/if}
+          </button>
+        {/each}
+
+        <!-- "No proxy (direct)" is the off state — one control for on/off/switch -->
+        <button
+          type="button"
+          role="radio"
+          aria-checked={!activeProxy}
+          tabindex={!activeProxy ? 0 : -1}
+          data-testid="popup-direct-row"
+          onclick={goDirect}
+          onkeydown={onRadioKeydown}
+          class={cn(
+            'relative flex items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
+            !activeProxy
+              ? 'border-transparent ring-2 ring-blue-500 bg-blue-50/50 dark:bg-blue-950/20'
+              : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
+          )}
+        >
+          <span
+            class="w-3 h-3 rounded-full shrink-0 bg-slate-300 dark:bg-slate-600 border border-black/5"
+          ></span>
+          <span class="min-w-0 flex-1">
+            <span class="block text-sm font-semibold truncate text-slate-700 dark:text-slate-200">
+              {I18nService.getMessage('noProxyDirect')}
+            </span>
+            <span class="block text-xs truncate text-slate-500 dark:text-slate-400">
+              {I18nService.getMessage('noProxyDirectHint')}
+            </span>
+          </span>
+        </button>
+      </div>
     {:else}
       <EmptyState
         title={I18nService.getMessage('noProxiesYet') || 'No proxy configurations yet'}
@@ -122,24 +225,6 @@ async function disableAllProxies() {
       />
     {/if}
   </main>
-
-  <!-- Footer - the single off action (status now lives in the top hero) -->
-  {#if activeProxy}
-    <footer class="px-5 py-2.5 border-t border-slate-200 dark:border-slate-700">
-      <Button
-        size="sm"
-        color="secondary"
-        onclick={disableAllProxies}
-        data-testid="disable-proxy-btn"
-        classes="w-full justify-center"
-      >
-        {#snippet icon()}
-          <Power size={14} />
-        {/snippet}
-        {I18nService.getMessage('offButton')}
-      </Button>
-    </footer>
-  {/if}
 </div>
 
 <style lang="postcss">
