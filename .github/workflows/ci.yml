@@ -67,15 +67,22 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        id: playwright-cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+      - name: Install Playwright system dependencies
+        # Pulls in the shared libraries Chromium-family browsers need on CI.
+        run: bunx playwright install-deps chromium
 
-      - name: Install Playwright Chromium
-        run: bunx playwright install --with-deps chromium
+      - name: Install Chrome for Testing
+        # MV3 extensions (service workers) don't start reliably under Playwright's
+        # bundled Chromium in headless CI. Use real Chrome for Testing — the same
+        # browser the test helper prefers locally.
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Expose Chrome to the test helper
+        # The helper (tests/e2e/helpers/extension-loader.ts) resolves CHROME_PATH first.
+        run: echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> "$GITHUB_ENV"
 
       - name: Build extension
         run: bun run build
