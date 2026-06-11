@@ -1,32 +1,26 @@
-import { startCompletion } from '@codemirror/autocomplete'
-import { defaultKeymap, history, historyKeymap, indentWithTab } from '@codemirror/commands'
-import { bracketMatching, foldGutter, foldKeymap } from '@codemirror/language'
-import { Compartment, EditorState } from '@codemirror/state'
-import {
-  crosshairCursor,
-  drawSelection,
-  dropCursor,
-  EditorView,
-  highlightActiveLine,
-  highlightActiveLineGutter,
-  highlightSpecialChars,
-  keymap,
-  lineNumbers,
-  rectangularSelection,
-} from '@codemirror/view'
+// NOTE: the heavy `@codemirror/*` packages and `@/utils/codemirror` helpers are
+// imported *dynamically* inside `create()` (see below) so that loading this
+// service costs only the lightweight wrapper. The ~300 kB editor bundle is
+// fetched on demand — when the PAC editor is actually opened — not on every
+// options/popup page load. Only types are imported statically here (erased at
+// build time).
+import type { Compartment } from '@codemirror/state'
+import type { EditorView } from '@codemirror/view'
 import { type CodeMirrorOptions, ERROR_TYPES, type ICodeMirrorEditor } from '@/interfaces'
-import {
-  createBasicExtensions,
-  createThemeExtension,
-  darkTheme,
-  defaultCodeMirrorOptions,
-  getSystemTheme,
-  lightTheme,
-} from '@/utils/codemirror'
+import { defaultCodeMirrorOptions } from '@/utils/codemirrorOptions'
 import { withErrorHandling } from '@/utils/errorHandling'
 
 // Detect if we're in a browser context (runtime check for testability)
 const isBrowserContext = (): boolean => typeof window !== 'undefined'
+
+// Local, dependency-free system-theme probe so the service can report the theme
+// synchronously without importing the heavy `@/utils/codemirror` module.
+const detectSystemTheme = (): 'light' | 'dark' =>
+  typeof window !== 'undefined' && typeof window.matchMedia !== 'undefined'
+    ? window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
+    : 'light'
 
 // biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class CodeMirror {
@@ -73,11 +67,40 @@ export class CodeMirror {
 
       await this.initializeCodeMirror()
 
+      // Lazily pull in the heavy editor packages only now that an editor is
+      // actually being created. These resolve to the async `codemirror` chunk.
+      const [
+        { startCompletion },
+        { defaultKeymap, history, historyKeymap, indentWithTab },
+        { bracketMatching, foldGutter, foldKeymap },
+        { Compartment, EditorState },
+        {
+          crosshairCursor,
+          drawSelection,
+          dropCursor,
+          EditorView,
+          highlightActiveLine,
+          highlightActiveLineGutter,
+          highlightSpecialChars,
+          keymap,
+          lineNumbers,
+          rectangularSelection,
+        },
+        { createBasicExtensions, createThemeExtension, darkTheme, lightTheme },
+      ] = await Promise.all([
+        import('@codemirror/autocomplete'),
+        import('@codemirror/commands'),
+        import('@codemirror/language'),
+        import('@codemirror/state'),
+        import('@codemirror/view'),
+        import('@/utils/codemirror'),
+      ])
+
       // Merge with default options
       const mergedOptions: CodeMirrorOptions = {
         ...defaultCodeMirrorOptions,
         ...options,
-        theme: options.theme || getSystemTheme(),
+        theme: options.theme || detectSystemTheme(),
       }
 
       // Create theme compartment for dynamic theme switching
@@ -347,6 +370,9 @@ export class CodeMirror {
 
       const compartment = this.themeCompartments.get(editor)
       if (compartment) {
+        // The theme helpers live in the lazily-loaded editor bundle; by the
+        // time an editor exists to re-theme, the chunk is already resolved.
+        const { createThemeExtension, darkTheme, lightTheme } = await import('@/utils/codemirror')
         const currentTheme = theme === 'dark' ? darkTheme : lightTheme
         const themeExtension = createThemeExtension(currentTheme)
 
@@ -374,7 +400,7 @@ export class CodeMirror {
    * Gets the current system theme
    */
   static getCurrentTheme(): 'light' | 'dark' {
-    return getSystemTheme()
+    return detectSystemTheme()
   }
 
   /**
