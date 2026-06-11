@@ -245,8 +245,18 @@ export default defineConfig(({ command, mode }) => {
               return 'modal'
             }
 
-            // CodeMirror (PAC editor) gets its own chunk
-            if (id.includes('codemirror') || id.includes('CodeMirrorService')) {
+            // CodeMirror (PAC editor) gets its own chunk. Only the heavy editor
+            // libraries and helpers go here — NOT the lightweight CodeMirrorService
+            // wrapper (which is statically imported by the modal). The wrapper
+            // pulls these in via dynamic import(), so this chunk is fetched lazily
+            // the first time the PAC editor is opened. `codemirrorOptions.ts` is
+            // intentionally excluded (no `.` after `codemirror`) so it stays in the
+            // eager app chunk.
+            if (
+              id.includes('@codemirror') ||
+              id.includes('@lezer') ||
+              id.includes('/utils/codemirror.')
+            ) {
               return 'codemirror'
             }
 

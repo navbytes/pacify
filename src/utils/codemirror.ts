@@ -289,18 +289,10 @@ export function createThemeExtension(theme: CodeMirrorTheme): Extension {
   return [themeExtension, syntaxHighlighting(highlightStyle)]
 }
 
-// Default CodeMirror options
-export const defaultCodeMirrorOptions: Partial<CodeMirrorOptions> = {
-  theme: 'light',
-  language: 'javascript',
-  fontSize: 14,
-  lineNumbers: true,
-  lineWrapping: true,
-  readOnly: false,
-  enableAutocompletion: true,
-  enableSyntaxHighlighting: true,
-  enableLinting: false,
-}
+// Default CodeMirror options live in a dependency-free module so consumers can
+// reference them without pulling the heavy editor bundle. Re-exported here for
+// backward compatibility.
+export { defaultCodeMirrorOptions } from './codemirrorOptions'
 
 // Get system theme preference
 // Safe for service worker environments
