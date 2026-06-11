@@ -54,8 +54,25 @@ function listen(server: http.Server): Promise<number> {
   })
 }
 
-function closeServer(server: http.Server): Promise<void> {
-  return new Promise<void>((resolve) => server.close(() => resolve()))
+/**
+ * Track a server's live connections so the returned stop() can force them
+ * closed. A plain server.close() only stops accepting and *waits* for existing
+ * connections — but proxied/tunneled sockets (and Chrome's keep-alive
+ * connections through an active proxy) can stay open indefinitely, hanging
+ * teardown. Must be called before the server starts accepting connections.
+ */
+function forcedStop(server: http.Server | net.Server): () => Promise<void> {
+  const conns = new Set<net.Socket>()
+  server.on('connection', (s: net.Socket) => {
+    conns.add(s)
+    s.on('close', () => conns.delete(s))
+  })
+  return () =>
+    new Promise<void>((resolve) => {
+      for (const s of conns) s.destroy()
+      conns.clear()
+      server.close(() => resolve())
+    })
 }
 
 // ---------------------------------------------------------------------------
@@ -74,8 +91,9 @@ export async function startOriginServer(): Promise<OriginServer> {
     res.writeHead(200, { 'content-type': 'text/plain' })
     res.end('ORIGIN_OK')
   })
+  const stop = forcedStop(server)
   const port = await listen(server)
-  return { url: `http://127.0.0.1:${port}`, port, stop: () => closeServer(server) }
+  return { url: `http://127.0.0.1:${port}`, port, stop }
 }
 
 // ---------------------------------------------------------------------------
@@ -142,6 +160,7 @@ export async function startForwardProxy(options: ForwardProxyOptions = {}): Prom
     clientSocket.on('error', () => upstream.destroy())
   })
 
+  const stop = forcedStop(server)
   const port = await listen(server)
   return {
     url: `http://127.0.0.1:${port}`,
@@ -155,7 +174,7 @@ export async function startForwardProxy(options: ForwardProxyOptions = {}): Prom
       requests.length = 0
       state.authChallenges = 0
     },
-    stop: () => closeServer(server),
+    stop,
   }
 }
 
@@ -179,6 +198,7 @@ export async function startPacServer(pacBody: string): Promise<PacServer> {
     res.writeHead(200, { 'content-type': 'application/x-ns-proxy-autoconfig' })
     res.end(pacBody)
   })
+  const stop = forcedStop(server)
   const port = await listen(server)
   return {
     url: `http://127.0.0.1:${port}/proxy.pac`,
@@ -186,7 +206,120 @@ export async function startPacServer(pacBody: string): Promise<PacServer> {
     get hits() {
       return state.hits
     },
-    stop: () => closeServer(server),
+    stop,
+  }
+}
+
+// ---------------------------------------------------------------------------
+// SOCKS5 proxy (CONNECT tunnel)
+// ---------------------------------------------------------------------------
+
+export interface SocksConnection {
+  host: string
+  port: number
+}
+
+export interface SocksProxy {
+  /** Host the extension should point the SOCKS proxy at. */
+  host: string
+  port: number
+  /** Targets Chrome asked the SOCKS proxy to connect to. */
+  connections: SocksConnection[]
+  reset: () => void
+  stop: () => Promise<void>
+}
+
+/**
+ * Minimal SOCKS5 (no-auth, CONNECT) proxy.
+ *
+ * SOCKS is a transparent TCP tunnel, so unlike the HTTP proxy it can't mark the
+ * response body — the origin's real `ORIGIN_OK` flows back. Routing is instead
+ * proven via {@link SocksProxy.connections}: if Chrome routed through SOCKS, the
+ * proxy logs a CONNECT to the target. `PROXY_TEST_HOST` is mapped to loopback so
+ * the tunnel reaches the origin whether Chrome sends a hostname or a resolved IP.
+ */
+export async function startSocksProxy(): Promise<SocksProxy> {
+  const connections: SocksConnection[] = []
+
+  const server = net.createServer((client) => {
+    // Buffer incoming bytes — Chrome can coalesce the greeting and the CONNECT
+    // request into one packet (or split either across packets), so parse from
+    // an accumulating buffer rather than discrete 'data' events.
+    let buf = Buffer.alloc(0)
+    let phase: 'greeting' | 'request' | 'tunnel' = 'greeting'
+
+    const onData = (chunk: Buffer) => {
+      buf = Buffer.concat([buf, chunk])
+
+      if (phase === 'greeting') {
+        if (buf.length < 2) return
+        if (buf[0] !== 0x05) return client.destroy()
+        const nMethods = buf[1]
+        if (buf.length < 2 + nMethods) return
+        buf = buf.subarray(2 + nMethods)
+        phase = 'request'
+        client.write(Buffer.from([0x05, 0x00])) // no auth required
+      }
+
+      if (phase === 'request') {
+        if (buf.length < 4) return
+        if (buf[0] !== 0x05 || buf[1] !== 0x01) return client.destroy()
+        const atyp = buf[3]
+        let host: string
+        let offset: number
+        if (atyp === 0x01) {
+          if (buf.length < 10) return
+          host = `${buf[4]}.${buf[5]}.${buf[6]}.${buf[7]}`
+          offset = 8
+        } else if (atyp === 0x03) {
+          const len = buf[4]
+          if (buf.length < 5 + len + 2) return
+          host = buf.subarray(5, 5 + len).toString()
+          offset = 5 + len
+        } else {
+          return client.destroy() // IPv6 not needed for these tests
+        }
+        const port = buf.readUInt16BE(offset)
+        connections.push({ host, port })
+        phase = 'tunnel'
+
+        // Map the non-loopback test host back to the origin on loopback. Reject
+        // anything else immediately (Chrome routes its own background traffic
+        // through the active proxy; a fast 0x05 "host unreachable" keeps the
+        // page's network from hanging on unreachable upstreams).
+        const dialHost = host === PROXY_TEST_HOST || host === '127.0.0.1' ? '127.0.0.1' : null
+        if (!dialHost) {
+          client.write(Buffer.from([0x05, 0x04, 0x00, 0x01, 0, 0, 0, 0, 0, 0]))
+          return client.destroy()
+        }
+        const upstream = net.connect(port, dialHost, () => {
+          // Success reply (bound addr/port are ignored by clients here).
+          client.write(Buffer.from([0x05, 0x00, 0x00, 0x01, 0, 0, 0, 0, 0, 0]))
+          upstream.pipe(client)
+          client.pipe(upstream)
+        })
+        upstream.on('error', () => client.destroy())
+        client.on('error', () => upstream.destroy())
+      }
+    }
+
+    client.on('data', onData)
+    client.on('error', () => client.destroy())
+  })
+
+  const stop = forcedStop(server)
+  const port = await new Promise<number>((resolve) => {
+    server.listen(0, '127.0.0.1', () => resolve((server.address() as AddressInfo).port))
+  })
+
+  return {
+    host: '127.0.0.1',
+    port,
+    connections,
+    reset: () => {
+      connections.length = 0
+    },
+    stop,
   }
 }
 

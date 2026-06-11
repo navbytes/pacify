@@ -1,6 +1,11 @@
 import { type BrowserContext, expect, type Page, test } from '@playwright/test'
 import { launchExtension } from './helpers/extension-loader'
-import { PROXY_TEST_HOST, type ProxyFixtures, startProxyFixtures } from './helpers/proxy-fixtures'
+import {
+  PROXY_TEST_HOST,
+  type ProxyFixtures,
+  startProxyFixtures,
+  startSocksProxy,
+} from './helpers/proxy-fixtures'
 
 /**
  * Real-traffic E2E: proves the whole chain works end to end —
@@ -62,9 +67,13 @@ test.describe('Proxy traffic routing', () => {
    */
   async function togglePopupProxy(name: string): Promise<void> {
     const popup = await context.newPage()
-    await popup.goto(`chrome-extension://${extensionId}/popup.html`)
-    await popup.waitForLoadState('networkidle')
-    await popup.locator(`label:has(input[aria-label*="${name} proxy"])`).first().click()
+    // Avoid 'networkidle' — once a proxy is active, Chrome's background
+    // connection attempts can keep the network from ever going idle.
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`, {
+      waitUntil: 'domcontentloaded',
+    })
+    const toggle = popup.locator(`label:has(input[aria-label*="${name} proxy"])`).first()
+    await toggle.click()
     await popup.waitForTimeout(700)
     await popup.close()
   }
@@ -158,5 +167,41 @@ test.describe('Proxy traffic routing', () => {
     expect(fx.requests.some((r) => r.target.includes(PROXY_TEST_HOST))).toBe(true)
 
     await togglePopupProxy('Per Protocol')
+  })
+
+  test('a SOCKS5 proxy tunnels traffic through the SOCKS server', async () => {
+    // SOCKS is a transparent tunnel — the body stays ORIGIN_OK, so routing is
+    // proven by the SOCKS server logging the CONNECT.
+    const socks = await startSocksProxy()
+    try {
+      const page = await optionsPage()
+      await page.getByTestId('add-new-script-btn').click()
+      await expect(page.getByTestId('modal-title')).toBeVisible()
+      await page.fill('input#scriptName', 'Socks Proxy')
+      await page.getByRole('radio', { name: 'Manual Configuration' }).click()
+      await page.selectOption('#single-proxy-scheme', 'socks5')
+      await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+      await page.getByTestId('single-proxy-port-input').fill(String(socks.port))
+      await page.getByTestId('modal-save-btn').click()
+      await expect(page.getByTestId('modal-title')).not.toBeVisible()
+
+      await togglePopupProxy('Socks Proxy')
+      const background = context.serviceWorkers()[0]
+      const chromeProxy = await background.evaluate(() => chrome.proxy.settings.get({}))
+      // biome-ignore lint/suspicious/noExplicitAny: chrome typings not loaded in eval
+      expect((chromeProxy as any)?.value?.rules?.singleProxy?.scheme).toBe('socks5')
+
+      socks.reset()
+      expect(await fetchBody(fx.originHostUrl)).toBe('ORIGIN_OK')
+      expect(
+        socks.connections.some((c) => c.host === PROXY_TEST_HOST && c.port === fx.originPort)
+      ).toBe(true)
+
+      // No toggle-off cleanup here: this is the last test in the describe and
+      // afterAll closes the context. (Opening another popup to deactivate while
+      // SOCKS is still routing the browser's background traffic is flaky.)
+    } finally {
+      await socks.stop()
+    }
   })
 })
