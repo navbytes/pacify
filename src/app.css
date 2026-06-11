@@ -392,3 +392,19 @@ body.modal-open {
 .grid-settings-cards {
   @apply grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4;
 }
+
+/*
+ * Respect the user's reduced-motion preference (vestibular safety).
+ * Collapses animations and transitions to near-instant rather than removing
+ * them entirely, so state changes still read as deliberate.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
