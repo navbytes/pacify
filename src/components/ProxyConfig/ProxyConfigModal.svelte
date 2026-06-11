@@ -16,9 +16,9 @@ import { modalFocus } from '@/utils/modalFocus'
 import Button from '../Button.svelte'
 import Text from '../Text.svelte'
 import BasicSettings from './BasicSettings.svelte'
+import ConnectionTypeSelect from './ConnectionTypeSelect.svelte'
 import ManualProxyConfiguration from './ManualProxyConfiguration.svelte'
 import PACScriptSettings from './PACScriptSettings.svelte'
-import ProxyModeSelector from './ProxyModeSelector.svelte'
 
 interface Props {
   proxyConfig?: ProxyConfig
@@ -48,7 +48,7 @@ let isActive = $state<boolean>(false)
 let quickSwitch = $state<boolean>(false)
 
 // Proxy Mode
-let proxyMode = $state<ProxyMode>('system')
+let proxyMode = $state<ProxyMode>('fixed_servers')
 
 // PAC Script Settings
 let editorContent = $state<string>('')
@@ -64,7 +64,7 @@ $effect(() => {
   badgeLabel = proxyConfig?.badgeLabel || ''
   isActive = proxyConfig?.isActive || false
   quickSwitch = proxyConfig?.quickSwitch || false
-  proxyMode = proxyConfig?.mode || 'system'
+  proxyMode = proxyConfig?.mode || 'fixed_servers'
   editorContent = proxyConfig?.pacScript?.data || ''
   pacUrl = proxyConfig?.pacScript?.url || ''
   pacMandatory = proxyConfig?.pacScript?.mandatory || false
@@ -348,8 +348,14 @@ function handleBackdropClick(event: MouseEvent) {
           </div>
         </div>
 
-        <!-- Proxy Mode Selection -->
-        <ProxyModeSelector bind:proxyMode />
+        <!-- Connection type — de-jargoned "what kind of proxy" (item 9/10) -->
+        <div>
+          <span class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+            {I18nService.getMessage('connectionType')}
+            <span class="text-red-500">*</span>
+          </span>
+          <ConnectionTypeSelect bind:value={proxyMode} />
+        </div>
 
         <!-- Mode-specific Configuration -->
         {#key proxyMode}

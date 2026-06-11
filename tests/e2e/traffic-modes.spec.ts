@@ -93,6 +93,7 @@ test.describe('PAC-based routing modes', () => {
       await page.getByTestId('add-new-script-btn').click()
       await expect(page.getByTestId('modal-title')).toBeVisible()
       await page.fill('input#scriptName', 'PAC URL')
+      await page.getByTestId('conn-type-trigger').click()
       await page.getByTestId('segment-pac_script').click()
       await page.getByTestId('pac-url-input').fill(pac.url)
       await page.getByTestId('modal-save-btn').click()
@@ -119,6 +120,7 @@ test.describe('PAC-based routing modes', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'PAC Inline')
+    await page.getByTestId('conn-type-trigger').click()
     await page.getByTestId('segment-pac_script').click()
 
     // Replace the editor contents (CodeMirror 6 contenteditable) with our PAC.
