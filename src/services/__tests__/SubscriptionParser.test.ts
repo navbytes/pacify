@@ -362,4 +362,21 @@ DOMAIN-SUFFIX,youtube.com
       expect(SubscriptionParser.domainsToWildcardPatterns([])).toEqual([])
     })
   })
+
+  describe('domain cap (DoS defense)', () => {
+    test('caps parsed domains at MAX_DOMAINS', () => {
+      const count = SubscriptionParser.MAX_DOMAINS + 50
+      const lines: string[] = []
+      for (let i = 0; i < count; i++) {
+        lines.push(`host${i}.example.com`)
+      }
+      const result = SubscriptionParser.parse(lines.join('\n'), 'domains')
+      expect(result.domains.length).toBe(SubscriptionParser.MAX_DOMAINS)
+    })
+
+    test('does not truncate lists under the cap', () => {
+      const result = SubscriptionParser.parse('a.com\nb.com\nc.com', 'domains')
+      expect(result.domains.length).toBe(3)
+    })
+  })
 })

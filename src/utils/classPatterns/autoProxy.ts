@@ -352,6 +352,15 @@ export const emptyStateCardVariants = tv({
         title: 'text-slate-800 dark:text-slate-200',
         description: 'text-slate-500 dark:text-slate-300',
       },
+      blue: {
+        wrapper: 'border-slate-200 dark:border-slate-700',
+        background:
+          'bg-linear-to-br from-blue-50/50 via-transparent to-indigo-50/50 dark:from-blue-950/20 dark:via-transparent dark:to-indigo-950/20',
+        iconWrapper:
+          'bg-linear-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30',
+        title: 'text-slate-800 dark:text-slate-200',
+        description: 'text-slate-500 dark:text-slate-300',
+      },
       slate: {
         wrapper: 'border-slate-200 dark:border-slate-700',
         background:

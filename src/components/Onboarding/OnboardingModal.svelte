@@ -204,7 +204,7 @@ const isFirstStep = $derived(currentStep === 0)
       <div class="absolute top-0 left-0 right-0 h-1 bg-slate-200 dark:bg-slate-700">
         <div
           class={cn(
-            'h-full bg-gradient-to-r from-blue-500 to-purple-500',
+            'h-full bg-gradient-to-r from-blue-500 to-indigo-500',
             transitions.normal
           )}
           style="width: {((currentStep + 1) / steps.length) * 100}%"
@@ -218,12 +218,12 @@ const isFirstStep = $derived(currentStep === 0)
           <div
             class={cn(
               'relative p-5 rounded-2xl',
-              'bg-gradient-to-br from-blue-500/10 to-purple-500/10',
-              'dark:from-blue-500/20 dark:to-purple-500/20'
+              'bg-gradient-to-br from-blue-500/10 to-indigo-500/10',
+              'dark:from-blue-500/20 dark:to-indigo-500/20'
             )}
           >
             <div
-              class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 opacity-20 blur-xl"
+              class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-500 opacity-20 blur-xl"
             ></div>
             <StepIcon
               size={48}
@@ -239,8 +239,8 @@ const isFirstStep = $derived(currentStep === 0)
             id="onboarding-title"
             class={cn(
               'text-2xl font-bold mb-3',
-              'bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800',
-              'dark:from-slate-100 dark:via-blue-200 dark:to-purple-200',
+              'bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-800',
+              'dark:from-slate-100 dark:via-blue-200 dark:to-indigo-200',
               'bg-clip-text text-transparent'
             )}
           >
@@ -267,8 +267,8 @@ const isFirstStep = $derived(currentStep === 0)
                   <div
                     class={cn(
                       'shrink-0 p-2.5 rounded-lg',
-                      'bg-gradient-to-br from-blue-500/10 to-purple-500/10',
-                      'dark:from-blue-500/20 dark:to-purple-500/20'
+                      'bg-gradient-to-br from-blue-500/10 to-indigo-500/10',
+                      'dark:from-blue-500/20 dark:to-indigo-500/20'
                     )}
                   >
                     <FeatureIcon size={20} class="text-blue-600 dark:text-blue-400" />

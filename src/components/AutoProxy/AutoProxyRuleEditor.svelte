@@ -170,6 +170,39 @@ let currentMatchType = $derived(
   matchTypeOptions.find((o) => o.value === matchType) || matchTypeOptions[0]
 )
 
+// Contextual help per match type, shown under the pattern input.
+// Examples are syntax, so they stay untranslated; only the hint text is localized.
+const patternExampleClasses =
+  'text-xs font-mono px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700/80 text-slate-600 dark:text-slate-300'
+
+const matchTypeHelp: Record<
+  AutoProxyMatchType,
+  { key: string; fallback: string; examples: string[] }
+> = {
+  wildcard: {
+    key: 'patternHelpWildcard',
+    fallback: 'Matches the hostname — * stands for any characters, e.g.',
+    examples: ['*.example.com', 'mail.*.com'],
+  },
+  exact: {
+    key: 'patternHelpExact',
+    fallback: 'Matches this hostname exactly, e.g.',
+    examples: ['www.example.com'],
+  },
+  regex: {
+    key: 'patternHelpRegex',
+    fallback: 'Regular expression tested against the hostname, e.g.',
+    examples: ['^(.*\\.)?corp\\.com$'],
+  },
+  cidr: {
+    key: 'patternHelpCidr',
+    fallback: 'Matches IP addresses within a CIDR range, e.g.',
+    examples: ['192.168.0.0/16', '10.0.0.0/8'],
+  },
+}
+
+let currentHelp = $derived(matchTypeHelp[matchType])
+
 // Input state for dynamic styling
 let inputState = $derived<'error' | 'success' | 'default'>(
   patternError ? 'error' : pattern && !patternError ? 'success' : 'default'
@@ -222,6 +255,18 @@ let inputState = $derived<'error' | 'success' | 'default'>(
           <Text size="xs" classes="text-red-600 dark:text-red-400">{patternError}</Text>
         </div>
       {/if}
+
+      <div
+        class="flex flex-wrap items-center gap-x-1.5 gap-y-1 mt-2"
+        data-testid="rule-pattern-help"
+      >
+        <Text size="xs" color="muted">
+          {I18nService.getMessage(currentHelp.key) || currentHelp.fallback}
+        </Text>
+        {#each currentHelp.examples as example (example)}
+          <code class={patternExampleClasses}>{example}</code>
+        {/each}
+      </div>
     </div>
   </div>
 

@@ -380,16 +380,11 @@ ${extractedBody}
     // Truncate pattern if too long (safety check - should be caught by validation)
     const safePattern = pattern.slice(0, PACScriptGenerator.MAX_PATTERN_LENGTH)
 
-    // Escape the pattern for use in JavaScript string literal
-    // Must escape: backslashes, quotes, newlines, and other special chars
-    const escapedPattern = safePattern
-      .replaceAll('\\', '\\\\')
-      .replaceAll('"', '\\"')
-      .replaceAll('\n', '\\n')
-      .replaceAll('\r', '\\r')
-      .replaceAll('\t', '\\t')
-
-    return `new RegExp("${escapedPattern}").test(host)`
+    // Escape for safe interpolation into a JS string literal. Use the shared
+    // escaper so every interpolation site has identical, audited coverage.
+    // Escaping `'` and `<` is a no-op for regex semantics inside a
+    // double-quoted literal but adds defense-in-depth if validation is bypassed.
+    return `new RegExp("${PACScriptGenerator.escapeJSString(safePattern)}").test(host)`
   }
 
   /**
@@ -405,7 +400,9 @@ ${extractedBody}
     const prefix = Number.parseInt(prefixLength, 10)
     const mask = PACScriptGenerator.prefixToMask(prefix)
 
-    return `isInNet(host, "${network}", "${mask}")`
+    // network/mask are validated IPs, but escape them anyway for
+    // defense-in-depth (consistent with all other interpolation sites).
+    return `isInNet(host, "${PACScriptGenerator.escapeJSString(network)}", "${PACScriptGenerator.escapeJSString(mask)}")`
   }
 
   /**

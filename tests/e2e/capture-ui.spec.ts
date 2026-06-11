@@ -1,28 +1,38 @@
+import * as fs from 'node:fs'
+import * as path from 'node:path'
 import { test } from '@playwright/test'
 import { launchExtension, navigateToExtensionPage } from './helpers/extension-loader'
-import * as fs from 'fs'
-import * as path from 'path'
 
 test('Capture Options Page UI', async () => {
   const { context, extensionId } = await launchExtension()
 
-  const page = await navigateToExtensionPage(context, extensionId, 'src/options/options.html')
+  const page = await navigateToExtensionPage(context, extensionId, 'options.html')
   await page.waitForLoadState('networkidle')
 
   // Create a test proxy
-  await page.click('button:has-text("Add New Script")')
-  await page.waitForSelector('text=Proxy Configuration')
+  await page.getByTestId('add-new-script-btn').click()
+  await page.getByTestId('modal-title').waitFor()
   await page.fill('input#scriptName', 'Test Proxy')
-  await page.getByTestId('save-config-btn').click()
-  await page.waitForTimeout(1000)
+  await page.getByTestId('modal-save-btn').click()
+  await page.getByTestId('modal-title').waitFor({ state: 'hidden' })
 
   // Take a snapshot of the page
   const snapshot = await page.locator('body').evaluate((el) => {
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_ELEMENT)
-    const elements: any[] = []
-    let node
+    interface ElementInfo {
+      tag: string
+      text: string | undefined
+      ariaLabel: string | null
+      role: string | null
+      type: string | null
+      id: string | null
+      dataTestId: string | null
+      className: string
+    }
+    const elements: ElementInfo[] = []
+    let node: Node | null = walker.nextNode()
 
-    while ((node = walker.nextNode())) {
+    while (node) {
       const elem = node as Element
       if (elem.tagName === 'BUTTON' || elem.tagName === 'INPUT' || elem.hasAttribute('role')) {
         elements.push({
@@ -36,6 +46,7 @@ test('Capture Options Page UI', async () => {
           className: elem.className,
         })
       }
+      node = walker.nextNode()
     }
     return elements
   })

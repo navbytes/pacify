@@ -52,7 +52,7 @@ let deleteConfirmRule = $state<AutoProxyRule | null>(null)
 let draggedIndex = $state<number | null>(null)
 
 // Styling variants
-const purpleIconBadge = gradientIconBadgeVariants({ color: 'blue' })
+const sectionIconBadge = gradientIconBadgeVariants({ color: 'blue' })
 const emptyState = emptyStateCardVariants({ color: 'blue' })
 const matchTypeBadge = matchTypeBadgeVariants()
 
@@ -139,8 +139,8 @@ function handleCancelDelete() {
   <!-- Section Header -->
   <div class="flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class={purpleIconBadge.wrapper()}>
-        <div class={purpleIconBadge.badge()}>
+      <div class={sectionIconBadge.wrapper()}>
+        <div class={sectionIconBadge.badge()}>
           <Route size={18} class="text-white" />
         </div>
       </div>

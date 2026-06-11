@@ -217,10 +217,10 @@ async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
   settingsStore
     .updatePACScript(script, editingScriptId)
     .then(() => {
+      // Pass the name as a substitution — chrome.i18n strips `$1` when no
+      // substitution is supplied, so a post-hoc .replace('$1', …) never matches.
       toastStore.show(
-        editingScriptId
-          ? I18nService.getMessage('proxyUpdated').replace('$1', script.name)
-          : I18nService.getMessage('proxyCreated').replace('$1', script.name),
+        I18nService.getMessage(editingScriptId ? 'proxyUpdated' : 'proxyCreated', script.name),
         'success'
       )
     })
@@ -242,12 +242,7 @@ async function handleAutoProxySave(config: Omit<ProxyConfig, 'id'>) {
     .updatePACScript(config, editingScriptId)
     .then(() => {
       const messageKey = editingScriptId ? 'autoProxyUpdated' : 'autoProxyCreated'
-      const message =
-        I18nService.getMessage(messageKey)?.replace('$1', config.name) ||
-        (editingScriptId
-          ? `Auto-Proxy '${config.name}' updated`
-          : `Auto-Proxy '${config.name}' created`)
-      toastStore.show(message, 'success')
+      toastStore.show(I18nService.getMessage(messageKey, config.name), 'success')
     })
     .catch((error) => {
       logger.error('Error in handleAutoProxySave:', error)

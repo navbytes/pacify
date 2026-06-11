@@ -1,4 +1,5 @@
 import type { SubscriptionFormat } from '@/interfaces/settings'
+import { assertTextResponse } from '@/utils/httpContent'
 
 /**
  * Parsed result from a subscription rule list
@@ -22,6 +23,15 @@ export class SubscriptionParser {
   private static readonly MODIFIED_REGEX = /^[!#]\s*Last modified:\s*(.+)/i
   private static readonly PLAIN_DOMAIN_REGEX = /^\.?[\w][\w.-]*\.\w{2,}$/
 
+  /** Reject remote rule lists larger than this to prevent memory-exhaustion DoS. */
+  static readonly MAX_SUBSCRIPTION_BYTES = 10 * 1024 * 1024
+
+  /**
+   * Cap on parsed domains per subscription. A hostile or runaway list can't
+   * bloat storage or balloon the generated PAC script past this many entries.
+   */
+  static readonly MAX_DOMAINS = 100_000
+
   /**
    * Fetch and parse a subscription URL
    */
@@ -37,7 +47,17 @@ export class SubscriptionParser {
       throw new Error(`Failed to fetch subscription: HTTP ${response.status}`)
     }
 
+    // Reject oversized (declared) or binary payloads up front, so we don't
+    // buffer a multi-gigabyte/binary body into memory.
+    assertTextResponse(response, 'The rule list')
+
     const rawText = await response.text()
+
+    // Defense for servers that omit or understate content-length: enforce the
+    // cap on the actual body too.
+    if (rawText.length > SubscriptionParser.MAX_SUBSCRIPTION_BYTES) {
+      throw new Error('The rule list is too large (over 10 MB). Use a smaller or filtered list.')
+    }
 
     // Detect HTML responses (e.g., from proxy login pages, firewalls, bot challenges)
     const trimmedStart = rawText.trimStart().slice(0, 200).toLowerCase()
@@ -66,18 +86,28 @@ export class SubscriptionParser {
 
     const detectedFormat = format === 'auto' ? SubscriptionParser.detectFormat(text) : format
 
+    let parsed: ParsedSubscription
     switch (detectedFormat) {
       case 'abp':
-        return SubscriptionParser.parseABP(text)
+        parsed = SubscriptionParser.parseABP(text)
+        break
       case 'surge':
-        return SubscriptionParser.parseSurge(text)
+        parsed = SubscriptionParser.parseSurge(text)
+        break
       case 'clash':
-        return SubscriptionParser.parseClash(text)
-      case 'domains':
-        return SubscriptionParser.parseDomainList(text)
+        parsed = SubscriptionParser.parseClash(text)
+        break
       default:
-        return SubscriptionParser.parseDomainList(text)
+        parsed = SubscriptionParser.parseDomainList(text)
+        break
     }
+
+    // Defense-in-depth: cap the number of domains regardless of input size so a
+    // single subscription can't dominate storage or the generated PAC script.
+    if (parsed.domains.length > SubscriptionParser.MAX_DOMAINS) {
+      parsed.domains = parsed.domains.slice(0, SubscriptionParser.MAX_DOMAINS)
+    }
+    return parsed
   }
 
   /**

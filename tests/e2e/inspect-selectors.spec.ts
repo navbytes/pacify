@@ -11,7 +11,7 @@ test.setTimeout(300000) // 5 minutes to inspect
 test('Inspect Options Page UI', async () => {
   const { context, extensionId } = await launchExtension()
 
-  const page = await navigateToExtensionPage(context, extensionId, 'src/options/options.html')
+  const page = await navigateToExtensionPage(context, extensionId, 'options.html')
   await page.waitForLoadState('networkidle')
 
   console.log('\n=== OPTIONS PAGE LOADED ===\n')
@@ -20,7 +20,7 @@ test('Inspect Options Page UI', async () => {
   await page.click('button:has-text("Add New Script")')
   await page.waitForSelector('text=Proxy Configuration')
   await page.fill('input#scriptName', 'Test Proxy')
-  await page.getByTestId('save-config-btn').click()
+  await page.getByTestId('modal-save-btn').click()
   await page.waitForTimeout(1000)
 
   console.log('✅ Test proxy created\n')
@@ -77,7 +77,7 @@ test('Inspect Options Page UI', async () => {
 test('Inspect Popup Page UI', async () => {
   const { context, extensionId } = await launchExtension()
 
-  const page = await navigateToExtensionPage(context, extensionId, 'src/popup/popup.html')
+  const page = await navigateToExtensionPage(context, extensionId, 'popup.html')
   await page.waitForLoadState('networkidle')
 
   console.log('\n=== POPUP PAGE LOADED ===\n')

@@ -39,9 +39,15 @@ async function disableAllProxies() {
   <header
     class="flex items-center justify-between px-5 py-3 border-b border-slate-200 dark:border-slate-700"
   >
-    <h1 class="text-base font-bold text-primary dark:text-primary-light">
-      {I18nService.getMessage('extName')}
-    </h1>
+    <div class="flex items-center gap-2 min-w-0">
+      <img src="/icons/icon48.png" alt="" class="w-7 h-7 shrink-0">
+      <div class="min-w-0 leading-tight">
+        <h1 class="text-base font-bold text-primary dark:text-primary-light truncate">PACify</h1>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 -mt-0.5">
+          {I18nService.getMessage('popupSubtitle') || 'Proxy Manager'}
+        </p>
+      </div>
+    </div>
 
     <div class="flex items-center gap-1">
       <Tooltip text={I18nService.getMessage('addNewProxy')} position="bottom">
@@ -65,7 +71,7 @@ async function disableAllProxies() {
   </header>
 
   <!-- Main Content -->
-  <main class="overflow-y-auto flex-1 px-5 pt-4 pb-4">
+  <main class="popup-scroll overflow-y-auto flex-1 px-5 pt-4 pb-4">
     {#if hasProxies}
       <ScriptList pageType="POPUP" title="" viewMode="list" />
     {:else}
@@ -132,45 +138,10 @@ async function disableAllProxies() {
 </div>
 
 <style lang="postcss">
-/* Custom scrollbar styles */
+/* Popup scrollbar sizing/clamp. Theme-dependent colors live in app.css
+   (`.popup-scroll`) so they follow the in-app `.dark` class rather than the
+   OS prefers-color-scheme, and to avoid Lightning CSS :global() warnings. */
 main {
   max-height: calc(400px - 4rem);
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-slate-300) var(--color-slate-100);
-}
-
-main::-webkit-scrollbar {
-  width: 0.375rem;
-}
-
-main::-webkit-scrollbar-track {
-  background-color: var(--color-slate-100);
-}
-
-@media (prefers-color-scheme: dark) {
-  main {
-    scrollbar-color: var(--color-slate-600) var(--color-slate-700);
-  }
-
-  main::-webkit-scrollbar-track {
-    background-color: var(--color-slate-700);
-  }
-
-  main::-webkit-scrollbar-thumb {
-    background-color: var(--color-slate-600);
-  }
-
-  main::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-slate-500);
-  }
-}
-
-main::-webkit-scrollbar-thumb {
-  background-color: var(--color-slate-300);
-  border-radius: 9999px;
-}
-
-main::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-slate-400);
 }
 </style>

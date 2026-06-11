@@ -12,8 +12,27 @@ interface StoredCredentials {
 
 /**
  * Manages proxy credentials with encryption at rest.
- * Credentials are stored in chrome.storage.local (not synced across devices)
- * and encrypted using AES-GCM via the Web Crypto API.
+ *
+ * Credentials are stored in `chrome.storage.local` (never synced across
+ * devices) and encrypted with AES-GCM (random 96-bit IV per record) via the
+ * Web Crypto API.
+ *
+ * THREAT MODEL — read before relying on this for sensitive credentials:
+ * - Protects against: credentials leaking via Chrome Sync, and casual
+ *   inspection of `chrome.storage.local` (the stored value is ciphertext, not
+ *   plaintext).
+ * - Does NOT protect against a local attacker who can both read this
+ *   extension's `chrome.storage.local` AND run code in the extension's context
+ *   (or knows the public extension ID). The key is preferentially a random key
+ *   held only in `chrome.storage.session` (in-memory, cleared on browser
+ *   restart, unreadable by web pages). But to keep credentials decryptable
+ *   across restarts — once the session key is gone — we fall back to a key
+ *   deterministically derived (PBKDF2) from the public extension ID. That
+ *   fallback is reproducible by anyone who knows the extension ID, so at rest
+ *   this is obfuscation, not secrecy, against a privileged local attacker.
+ * - There is no user passphrase, so we cannot do better without forcing the
+ *   user to re-enter a secret on every browser start. This is the standard
+ *   limitation of client-side credential storage in an extension.
  */
 // biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern
 export class CredentialService {
