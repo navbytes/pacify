@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.33.0] - 2026-06-11
+
+### Added
+
+- **Full localization parity across all 12 languages.** Every locale (bn, de, es,
+  fr, hi, ja, ko, pt, ro, ru, zh) now translates all 553 UI strings — the 116
+  keys introduced by the UX overhaul (connection-type picker, PAC source toggle,
+  card-mode labels, Auto-Proxy tabs, the import/export wizard, Quick Switch,
+  onboarding migration, pattern help, "Save & Turn On", and more) are no longer
+  English-only fallbacks. Five relabelled keys were re-translated to match their
+  new meaning. (Machine-assisted; native-speaker review welcome.)
+
+### Changed
+
+- **Faster first paint.** The CodeMirror PAC editor (~488 kB / 164 kB gzipped) is
+  now lazy-loaded — its bundle is fetched only when the PAC editor is actually
+  opened, instead of on every popup/options page load.
+
+### Fixed
+
+- **Accessibility — correct language announcement.** The document `lang` (and text
+  direction) now reflect the active UI locale instead of a static `en`, so screen
+  readers pronounce localized content correctly.
+- **Accessibility — reduced motion.** Animations and transitions now collapse to
+  near-instant for users with `prefers-reduced-motion: reduce`.
+- Cleaned up a stale `routeTo` entry duplicated inside `proxyDeactivated` in every
+  non-English locale file.
+
+### Internal
+
+- Hardened unit-test coverage (451 → 503 tests): `PacifyAdapter`,
+  `detectCurrentProxy`, and `proxyModeHelpers` brought to near-full branch
+  coverage. Extracted `resolveSavedProxyId` for the "Save & Turn On" flow.
+- Auto-Proxy badge Label/Preview moved behind an "Advanced" disclosure to match
+  Basic Settings.
+
 ## [1.32.0] - 2026-06-07
 
 ### Added
