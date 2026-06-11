@@ -26,7 +26,7 @@ import {
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { Activity, Cable, Keyboard, Settings } from '@/utils/icons'
-import { isAutoProxy } from '@/utils/proxyModeHelpers'
+import { isAutoProxy, resolveSavedProxyId } from '@/utils/proxyModeHelpers'
 import DiagnosticsTab from './DiagnosticsTab.svelte'
 import ProxyConfigsTab from './ProxyConfigsTab.svelte'
 import SettingsTab from './SettingsTab.svelte'
@@ -227,8 +227,7 @@ async function handleScriptSave(script: Omit<ProxyConfig, 'id'>, activate: boole
       if (activate) {
         // Resolve the id (existing on edit; freshly generated on create) and
         // turn the proxy on — the single activation path (item 11).
-        const id =
-          savedScriptId ?? updated?.proxyConfigs.find((c) => c.name === script.name)?.id ?? null
+        const id = resolveSavedProxyId(savedScriptId, updated, script.name)
         if (id) await settingsStore.setProxy(id, true)
         toastStore.show(I18nService.getMessage('proxyActivated', script.name), 'success')
       } else {
