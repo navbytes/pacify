@@ -72,17 +72,16 @@ jobs:
         run: bunx playwright install-deps chromium
 
       - name: Install Chrome for Testing
-        # MV3 extensions (service workers) don't start reliably under Playwright's
-        # bundled Chromium in headless CI. Use real Chrome for Testing — the same
-        # browser the test helper prefers locally.
-        id: setup-chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
-
-      - name: Expose Chrome to the test helper
-        # The helper (tests/e2e/helpers/extension-loader.ts) resolves CHROME_PATH first.
-        run: echo "CHROME_PATH=${{ steps.setup-chrome.outputs.chrome-path }}" >> "$GITHUB_ENV"
+        # MV3 extension service workers don't start reliably under plain Chromium
+        # headless (what setup-chrome / Playwright's bundle provide). Install real
+        # Chrome for Testing — the exact browser the suite passes against locally.
+        run: |
+          bunx @puppeteer/browsers install chrome@stable --path "$HOME/.cache/puppeteer"
+          CHROME_BIN=$(find "$HOME/.cache/puppeteer/chrome" -type f -name chrome -path '*chrome-linux64*' | head -1)
+          if [ -z "$CHROME_BIN" ]; then echo "Failed to locate Chrome for Testing binary" >&2; exit 1; fi
+          chmod +x "$CHROME_BIN"
+          echo "CHROME_PATH=$CHROME_BIN" >> "$GITHUB_ENV"
+          echo "Using Chrome at: $CHROME_BIN"
 
       - name: Build extension
         run: bun run build
