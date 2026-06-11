@@ -100,8 +100,10 @@ function handleKeydown(event: KeyboardEvent) {
       settingsStore.setProxy(proxy.id, newState)
       toastStore.show(
         newState
-          ? `${I18nService.getMessage('proxyActivated') || 'Activated'}: ${proxy.name}`
-          : `${I18nService.getMessage('proxyDeactivated') || 'Deactivated'}: ${proxy.name}`,
+          ? // 'proxyActivated' has a "$1" slot for the name — pass it as a
+            // substitution (chrome.i18n strips "$1" when none is supplied).
+            I18nService.getMessage('proxyActivated', proxy.name)
+          : `${I18nService.getMessage('proxyDeactivated')}: ${proxy.name}`,
         'success'
       )
     }
