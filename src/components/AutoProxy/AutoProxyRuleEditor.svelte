@@ -250,6 +250,7 @@ let inputState = $derived<'error' | 'success' | 'default'>(
       {#if patternError}
         <div
           class="flex items-center gap-2 mt-2 p-2 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800"
+          role="alert"
         >
           <AlertCircle size={14} class="text-red-500 shrink-0" />
           <Text size="xs" classes="text-red-600 dark:text-red-400">{patternError}</Text>

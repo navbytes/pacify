@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pacify — Wave 2 core mockups</title>
+    <style>
+      :root {
+        --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0;
+        --slate-300: #cbd5e1; --slate-400: #94a3b8; --slate-500: #64748b;
+        --slate-600: #475569; --slate-700: #334155; --slate-800: #1e293b; --slate-900: #0f172a;
+        --blue-50: #eff6ff; --blue-100:#dbeafe; --blue-500: #3b82f6; --blue-600: #2563eb; --indigo-600:#4f46e5;
+        --green-50:#f0fdf4; --green-200:#bbf7d0; --green-500:#22c55e; --green-600:#16a34a; --green-700:#15803d;
+        --amber-50:#fffbeb; --amber-200:#fde68a; --amber-700:#b45309;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--slate-100);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif;
+        color: var(--slate-800); -webkit-font-smoothing: antialiased;
+      }
+      .page { max-width: 1180px; margin: 0 auto; padding: 28px 24px 64px; }
+      h1.title { font-size: 22px; font-weight: 800; color: var(--slate-900); margin: 0 0 2px; }
+      .subtitle { color: var(--slate-500); font-size: 13px; margin: 0 0 28px; }
+      .panel { margin-bottom: 34px; }
+      .panel > .label { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 4px; }
+      .panel > .cap { font-size: 13px; color: var(--slate-500); margin-bottom: 12px; max-width: 760px; }
+      .tag { display:inline-block; font-size:11px; font-weight:700; color: var(--indigo-600); background: var(--blue-50); border:1px solid var(--blue-100); border-radius:999px; padding:1px 8px; margin-left:6px; }
+
+      .surface { background:#fff; border:1px solid var(--slate-200); border-radius:16px; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+      .row { display:flex; align-items:center; gap:12px; }
+      .muted { color: var(--slate-500); }
+      .xs { font-size:12px; } .sm{ font-size:13px; } .label-s{ font-size:13px; font-weight:600; color:var(--slate-700); }
+      .req { color:#ef4444; }
+      .input { width:100%; padding:10px 12px; border:1px solid var(--slate-300); border-radius:10px; font-size:14px; color:var(--slate-800); background:#fff; }
+      .input::placeholder { color: var(--slate-400); }
+      .dot { width:12px; height:12px; border-radius:999px; flex:0 0 auto; }
+      .pill { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; border-radius:8px; padding:2px 7px; }
+      .pill-active { color:var(--green-700); background:var(--green-50); border:1px solid var(--green-200); }
+      .pill-soft { color:var(--slate-600); background:var(--slate-100); border:1px solid var(--slate-200); font-weight:600; }
+      .btn { display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; border-radius:10px; padding:9px 14px; border:1px solid transparent; cursor:pointer; }
+      .btn-primary { background:linear-gradient(90deg,var(--blue-600),var(--indigo-600)); color:#fff; }
+      .btn-secondary { background:var(--slate-100); color:var(--slate-700); border-color:var(--slate-200); }
+      .btn-ghost { background:transparent; color:var(--slate-600); }
+      .disclosure { display:flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--slate-600); cursor:pointer; padding:8px 0; }
+      .tri { display:inline-block; transition:transform .15s; }
+      .open .tri { transform: rotate(90deg); }
+      .hr { height:1px; background:var(--slate-200); margin:4px 0; border:0; }
+
+      /* preset chooser */
+      .preset { display:flex; gap:12px; padding:14px; border:1px solid var(--slate-200); border-radius:12px; cursor:pointer; align-items:flex-start; }
+      .preset.sel { border-color:var(--blue-500); box-shadow:0 0 0 3px rgba(59,130,246,.15); background:linear-gradient(180deg,#fff,var(--blue-50)); }
+      .preset .ic { width:34px;height:34px;border-radius:9px; background:var(--slate-100); display:flex;align-items:center;justify-content:center; font-size:17px; flex:0 0 auto;}
+      .preset.sel .ic { background:linear-gradient(135deg,var(--blue-500),var(--indigo-600)); }
+      .preset h4 { margin:0 0 2px; font-size:14px; }
+      .preset p { margin:0; font-size:12px; color:var(--slate-500); }
+
+      /* modal frame */
+      .modal { width:560px; border-radius:18px; overflow:hidden; }
+      .modal .accent { height:4px; background:linear-gradient(90deg,var(--blue-500),var(--indigo-600)); }
+      .modal .head { padding:18px 20px; border-bottom:1px solid var(--slate-200); }
+      .modal .head h3 { margin:0; font-size:17px; font-weight:800; color:var(--slate-900); }
+      .modal .head p { margin:2px 0 0; font-size:13px; color:var(--slate-500); }
+      .modal .body { padding:18px 20px; }
+      .modal .foot { padding:14px 20px; border-top:1px solid var(--slate-200); display:flex; justify-content:flex-end; gap:10px; background:var(--slate-50); }
+      .field { margin-bottom:14px; }
+      .field > label { display:block; margin-bottom:6px; font-size:13px; font-weight:600; color:var(--slate-700); }
+      .twocol { display:grid; grid-template-columns: 1fr 120px; gap:12px; }
+      .seg { display:inline-flex; background:var(--slate-100); border:1px solid var(--slate-200); border-radius:10px; padding:3px; gap:2px; }
+      .seg .opt { font-size:13px; padding:6px 12px; border-radius:8px; color:var(--slate-600); cursor:pointer; }
+      .seg .opt.on { background:#fff; color:var(--slate-900); font-weight:600; box-shadow:0 1px 2px rgba(15,23,42,.08); }
+
+      /* popup */
+      .popup { width:380px; border-radius:16px; overflow:hidden; }
+      .popup .ph { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--slate-200); }
+      .popup .logo { width:26px;height:26px;border-radius:7px; background:linear-gradient(135deg,#2563eb,#4f46e5); }
+      .popup .title2 { font-weight:800; color:var(--blue-600); font-size:15px; line-height:1; }
+      .popup .sub2 { font-size:11px; color:var(--slate-500); }
+      .seg-v { display:flex; flex-direction:column; gap:8px; padding:14px 16px; }
+      .opt-row { display:flex; align-items:center; gap:11px; padding:11px 12px; border-radius:12px; border:1px solid var(--slate-200); cursor:pointer; background:#fff; }
+      .opt-row.sel { border-color:transparent; box-shadow:0 0 0 2px var(--blue-500); background:linear-gradient(180deg,#fff,var(--blue-50)); }
+      .opt-row .name { font-weight:700; font-size:14px; }
+      .opt-row .meta { font-size:11px; color:var(--slate-500); }
+      .check { margin-left:auto; width:20px;height:20px;border-radius:999px; background:var(--green-500); color:#fff; display:flex;align-items:center;justify-content:center; font-size:12px; }
+      .radio-o { margin-left:auto; width:18px;height:18px;border-radius:999px; border:2px solid var(--slate-300); }
+      .popup .foot { padding:12px 16px; border-top:1px solid var(--slate-200); }
+      .wfull { width:100%; justify-content:center; }
+      .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start; }
+      .note { font-size:12px; color:var(--amber-700); background:var(--amber-50); border:1px solid var(--amber-200); border-radius:8px; padding:6px 10px; display:inline-block; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <h1 class="title">Pacify — Wave 2 core mockups <span class="tag" style="font-size:10px;">rev 2 · red-team applied</span></h1>
+      <p class="subtitle">Items 9–12, revised after red-team. For review before implementation — not the final pixels.</p>
+
+      <!-- PANEL 1: editor default = basic server (no gate), change-type inline -->
+      <div class="panel">
+        <div class="label">1 · Editor default = basic server, no gate <span class="tag">item 9 L1</span><span class="tag">item 10</span><span class="tag">item 11</span></div>
+        <div class="cap">Red-team fix: the preset chooser is <b>not</b> a gate (that added a step). New proxies open <b>straight</b> on the basic server form. “What kind” is an inline <b>Connection type</b> control (Panel 2) — unify happens without a pre-step, protecting time-to-first-proxy. Identity (color/badge) is its own row, not buried under networking. Two save verbs: <b>Save</b> (escape hatch) and <b>Save &amp; Turn On</b>.</div>
+        <div class="surface modal">
+          <div class="accent"></div>
+          <div class="head"><h3>New proxy</h3><p>Connect through a server</p></div>
+          <div class="body">
+            <div class="field">
+              <label>Connection type</label>
+              <div class="row" style="justify-content:space-between; border:1px solid var(--slate-300); border-radius:10px; padding:9px 12px;">
+                <span class="row" style="gap:8px;"><span>🖧</span> Connect through a server</span><span class="muted">▾</span>
+              </div>
+            </div>
+            <div class="field">
+              <label>Name <span class="req">*</span></label>
+              <div class="row" style="gap:10px;">
+                <span class="dot" style="width:22px;height:22px;background:#2563eb;border-radius:7px;border:1px solid var(--slate-300)"></span>
+                <input class="input" value="Work proxy" />
+                <input class="input" style="width:84px" placeholder="WK" maxlength="4" title="Toolbar badge (optional)"/>
+              </div>
+              <div class="xs muted" style="margin-top:4px;">Color &amp; optional toolbar badge — how you’ll recognize it.</div>
+            </div>
+            <div class="field">
+              <label>Server <span class="req">*</span></label>
+              <div class="twocol"><input class="input" value="proxy.work.com" /><input class="input" value="8080" /></div>
+            </div>
+            <div class="disclosure"><span class="tri">▸</span> Needs a username &amp; password?</div>
+            <hr class="hr" />
+            <div class="disclosure"><span class="tri">▸</span> More options <span class="muted xs" style="font-weight:400;">— connection type per protocol, bypass list</span></div>
+          </div>
+          <div class="foot"><button class="btn btn-ghost">Cancel</button><button class="btn btn-secondary">Save</button><button class="btn btn-primary">⏻ Save &amp; Turn On</button></div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: change-type dropdown open (keeps real terms for P4) -->
+      <div class="panel">
+        <div class="label">2 · “Connection type” open — one entry, real terms kept for migrators <span class="tag">item 10</span><span class="tag">§5 P4</span></div>
+        <div class="cap">Replaces the two competing “Add Proxy” / “Add Auto-Proxy” buttons with one inline selector. Plain-language primary label, with the real term as a sub-label so a migrator who knows “PAC” / “SOCKS” still finds it. “Route by site” hands off to the rules scaffold (must be built in lockstep — item 15).</div>
+        <div class="surface modal" style="width:560px">
+          <div class="accent"></div>
+          <div class="head"><h3>New proxy</h3><p>Choose how it connects</p></div>
+          <div class="body" style="display:flex; flex-direction:column; gap:8px;">
+            <div class="preset sel"><div class="ic">🖧</div><div><h4>Connect through a server</h4><p>A host and port — HTTP, HTTPS or SOCKS.</p></div></div>
+            <div class="preset"><div class="ic">🧭</div><div><h4>Route by site <span class="muted xs">· rules / PAC</span></h4><p>Some sites direct, others through proxies.</p></div></div>
+            <div class="preset"><div class="ic">⚙️</div><div><h4>Use system settings <span class="muted xs">· system</span></h4><p>Follow the operating system’s proxy.</p></div></div>
+            <div class="row muted xs" style="gap:8px; padding-left:6px;">Also: No proxy (direct) · Auto-detect (WPAD) · PAC script by URL</div>
+            <div class="note" style="margin-top:4px;">Already have a setup? <b>Import</b> from SwitchyOmega / FoxyProxy / PAC.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: more options = NETWORKING ONLY -->
+      <div class="panel">
+        <div class="label">3 · “More options” = networking only (identity moved out) <span class="tag">item 9 L2</span><span class="tag">red-team</span></div>
+        <div class="cap">Red-team fix: color/badge (identity, P2’s glanceability) is no longer under the same drawer as SOCKS/per-protocol. “More options” now holds only advanced <b>networking</b>, disclosed on demand and phrased plainly.</div>
+        <div class="surface modal">
+          <div class="accent"></div>
+          <div class="head"><h3>New proxy</h3><p>Connect through a server</p></div>
+          <div class="body">
+            <div class="field"><label>Server <span class="req">*</span></label><div class="twocol"><input class="input" value="proxy.work.com" /><input class="input" value="8080" /></div></div>
+            <div class="disclosure open"><span class="tri">▸</span> More options</div>
+            <div style="padding:8px 0 4px 18px; border-left:2px solid var(--slate-200); margin-left:2px;">
+              <div class="field"><label>Protocol</label><div class="seg"><span class="opt on">HTTP</span><span class="opt">HTTPS</span><span class="opt">SOCKS5</span></div></div>
+              <div class="field"><label class="row" style="gap:8px;"><input type="checkbox" /> Use different servers per protocol (HTTP / HTTPS / FTP)</label></div>
+              <div class="field"><label>Don’t proxy these sites <span class="muted xs" style="font-weight:400;">(one per line)</span></label><textarea class="input" rows="2" placeholder="*.internal.corp&#10;localhost"></textarea></div>
+            </div>
+          </div>
+          <div class="foot"><button class="btn btn-ghost">Cancel</button><button class="btn btn-secondary">Save</button><button class="btn btn-primary">⏻ Save &amp; Turn On</button></div>
+        </div>
+      </div>
+
+      <!-- PANEL 4: cockpit popup, SELECTION ONLY (no redundant master) -->
+      <div class="panel">
+        <div class="label">4 · Cockpit popup — one control: a single-select list <span class="tag">item 12</span><span class="tag">red-team</span></div>
+        <div class="cap">Red-team fix: <b>one</b> control, not a master On/Off <i>and</i> a list (that double-encoded “off”). The list is the only control; “No proxy (direct)” <b>is</b> the off state, selected like any row. Honest about the exclusive behavior the current toggles hide (E4). Built as a <code>radiogroup</code> (roving tabindex, arrow keys, <code>aria-checked</code>); the active row uses a check + color bar, never color-only, and unselected rows must not read as “disabled”.</div>
+        <div class="grid2" style="grid-template-columns:380px 1fr;">
+          <div class="surface popup">
+            <div class="ph"><div class="logo"></div><div><div class="title2">PACify</div><div class="sub2">Proxy Manager</div></div></div>
+            <div class="seg-v" role="radiogroup" aria-label="Active proxy">
+              <div class="opt-row sel"><span class="dot" style="background:#2563eb"></span><div><div class="name">Work proxy</div><div class="meta">proxy.work.com:8080</div></div><span class="pill pill-active">✓ Active</span></div>
+              <div class="opt-row"><span class="dot" style="background:#16a34a"></span><div><div class="name">Staging</div><div class="meta">Route by site · 6 rules</div></div><span class="radio-o"></span></div>
+              <div class="opt-row"><span class="dot" style="background:#94a3b8;border:1px solid var(--slate-300)"></span><div><div class="name">No proxy (direct)</div><div class="meta">Browse without a proxy</div></div><span class="radio-o"></span></div>
+            </div>
+            <div class="foot"><button class="btn btn-secondary wfull">⚙ Manage proxies…</button></div>
+          </div>
+          <div>
+            <p class="cap" style="margin-top:0;">Resolved decisions (from red-team):</p>
+            <ul class="sm muted" style="line-height:1.7;">
+              <li><b>One control.</b> No master toggle; the “No proxy (direct)” row is the off state. One encoding, no ambiguity.</li>
+              <li><b>Honest model.</b> Selecting a row switches the active proxy; the list shows it’s exclusive (fixes E4’s radio-in-disguise).</li>
+              <li><b>a11y:</b> <code>radiogroup</code> + roving tabindex + <code>aria-checked</code>; active = check + color bar (not color alone); unselected ≠ disabled.</li>
+              <li><b>Glance:</b> same color identity threads to the top status (Wave 1) and the toolbar icon badge (Wave 3, item 18).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

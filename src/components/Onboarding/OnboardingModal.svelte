@@ -373,11 +373,14 @@ const isFirstStep = $derived(currentStep === 0)
           </Button>
 
           {#if !isLastStep}
-            <Button color="primary" onclick={nextStep}>{getMessage('next', 'Next')}</Button>
-          {:else}
-            <Button color="ghost" onclick={handleComplete}>
-              {getMessage('skipTour', 'Skip Tour')}
-            </Button>
+            <div class={cn(flexPatterns.center, 'gap-2')}>
+              <!-- Let users bail early; on the last step the primary actions
+                   above already complete the tour, so no "Skip" is needed. -->
+              <Button color="ghost" onclick={handleComplete}>
+                {getMessage('skipTour', 'Skip tour')}
+              </Button>
+              <Button color="primary" onclick={nextStep}>{getMessage('next', 'Next')}</Button>
+            </div>
           {/if}
         </div>
       </div>

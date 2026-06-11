@@ -165,7 +165,12 @@ function getProxyColor(rule: AutoProxyRule | undefined): string {
 
     <!-- Result section -->
     {#if testResult}
-      <div class="mt-4 transition-all duration-300" class:animate-bounce-subtle={isAnimating}>
+      <div
+        class="mt-4 transition-all duration-300"
+        class:animate-bounce-subtle={isAnimating}
+        role="status"
+        aria-live="polite"
+      >
         {#if testResult.matched}
           <!-- Match found -->
           <div class={greenSection.wrapper()}>

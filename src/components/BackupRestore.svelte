@@ -4,6 +4,7 @@ import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
 import { Download, HardDrive, RefreshCw, Upload } from '@/utils/icons'
 import Button from './Button.svelte'
+import ConfirmDialog from './ConfirmDialog.svelte'
 import ExportModal from './ExportModal.svelte'
 import ImportModal from './ImportModal.svelte'
 import Text from './Text.svelte'
@@ -17,6 +18,10 @@ let { onRestore }: Props = $props()
 let fileInputElement: HTMLInputElement | undefined = $state()
 let showImport = $state(false)
 let showExport = $state(false)
+// Unlike Import (which previews before writing), Restore is a blind overwrite,
+// so gate it behind an explicit destructive confirm.
+let showRestoreConfirm = $state(false)
+let pendingRestoreFile = $state<File | null>(null)
 
 // Handle the backup action
 async function handleBackup() {
@@ -34,21 +39,36 @@ function triggerFileInput() {
   fileInputElement?.click()
 }
 
-// Handle the restore action
-async function handleRestore(event: Event) {
+// A file was chosen — hold it and ask for confirmation before overwriting.
+function handleFileSelected(event: Event) {
   const input = event.target as HTMLInputElement
-  if (input?.files?.[0]) {
-    try {
-      await SettingsWriter.restoreSettings(input.files[0])
-      toastStore.show(I18nService.getMessage('restoreSuccess'), 'success')
-      await onRestore()
-      if (input) input.value = ''
-    } catch (error) {
-      const errorMessage = (error as Error).message || I18nService.getMessage('restoreFailed')
-      toastStore.show(errorMessage, 'error')
-      console.error('Restore error:', error)
-      if (input) input.value = ''
-    }
+  const file = input?.files?.[0]
+  if (file) {
+    pendingRestoreFile = file
+    showRestoreConfirm = true
+  }
+  if (input) input.value = ''
+}
+
+function cancelRestore() {
+  pendingRestoreFile = null
+  showRestoreConfirm = false
+}
+
+// Perform the restore after the user confirms the overwrite.
+async function confirmRestore() {
+  const file = pendingRestoreFile
+  showRestoreConfirm = false
+  pendingRestoreFile = null
+  if (!file) return
+  try {
+    await SettingsWriter.restoreSettings(file)
+    toastStore.show(I18nService.getMessage('restoreSuccess'), 'success')
+    await onRestore()
+  } catch (error) {
+    const errorMessage = (error as Error).message || I18nService.getMessage('restoreFailed')
+    toastStore.show(errorMessage, 'error')
+    console.error('Restore error:', error)
   }
 }
 </script>
@@ -66,7 +86,7 @@ async function handleRestore(event: Event) {
         weight="semibold"
         classes="text-slate-500 dark:text-slate-400 uppercase tracking-wide"
       >
-        Local Backup
+        {I18nService.getMessage('localBackup')}
       </Text>
     </div>
 
@@ -94,7 +114,7 @@ async function handleRestore(event: Event) {
         {#snippet icon()}
           <Download size={14} />
         {/snippet}
-        Save
+        {I18nService.getMessage('save')}
       </Button>
     </div>
 
@@ -122,13 +142,13 @@ async function handleRestore(event: Event) {
         {#snippet icon()}
           <Upload size={14} />
         {/snippet}
-        Load
+        {I18nService.getMessage('loadAction')}
       </Button>
       <input
         bind:this={fileInputElement}
         type="file"
         accept=".json"
-        onchange={handleRestore}
+        onchange={handleFileSelected}
         class="hidden"
         aria-label="Upload backup file to restore configurations"
         data-testid="restore-file-input"
@@ -148,7 +168,7 @@ async function handleRestore(event: Event) {
         weight="semibold"
         classes="text-slate-500 dark:text-slate-400 uppercase tracking-wide"
       >
-        Import & Export
+        {I18nService.getMessage('importAndExport')}
       </Text>
     </div>
 
@@ -176,7 +196,7 @@ async function handleRestore(event: Event) {
         {#snippet icon()}
           <Download size={14} />
         {/snippet}
-        Import
+        {I18nService.getMessage('importAction')}
       </Button>
     </div>
 
@@ -204,7 +224,7 @@ async function handleRestore(event: Event) {
         {#snippet icon()}
           <Upload size={14} />
         {/snippet}
-        Export
+        {I18nService.getMessage('export')}
       </Button>
     </div>
   </div>
@@ -222,3 +242,13 @@ async function handleRestore(event: Event) {
 {#if showExport}
   <ExportModal onClose={() => (showExport = false)} />
 {/if}
+
+<ConfirmDialog
+  bind:open={showRestoreConfirm}
+  variant="danger"
+  title={I18nService.getMessage('restoreOverwriteTitle')}
+  message={I18nService.getMessage('restoreOverwriteMessage')}
+  confirmLabel={I18nService.getMessage('restoreSettings')}
+  onConfirm={confirmRestore}
+  onCancel={cancelRestore}
+/>
