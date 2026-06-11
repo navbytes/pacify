@@ -1,35 +1,41 @@
-import { beforeEach, describe, expect, mock, test } from 'bun:test'
+import { afterAll, beforeEach, describe, expect, spyOn, test } from 'bun:test'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import type { AppSettings, ProxyConfig } from '@/interfaces'
+import { SettingsReader } from '@/services/SettingsReader'
+import { StorageService } from '@/services/StorageService'
+import { SettingsWriter } from '../SettingsWriter'
 
 // Mock data
 let mockSettings: AppSettings
 let savedSettings: AppSettings | null = null
 
+// spyOn (restored in afterAll) rather than mock.module: the latter is
+// process-global in bun and leaks into later test files.
 const mockStorageService = {
-  getSettings: mock(async () => mockSettings),
-  saveSettings: mock(async (settings: AppSettings) => {
-    savedSettings = settings
-    mockSettings = settings
-  }),
-  invalidateCache: mock(() => {}),
+  getSettings: spyOn(StorageService, 'getSettings').mockImplementation(async () => mockSettings),
+  saveSettings: spyOn(StorageService, 'saveSettings').mockImplementation(
+    async (settings: AppSettings) => {
+      savedSettings = settings
+      mockSettings = settings
+    }
+  ),
+  invalidateCache: spyOn(StorageService, 'invalidateCache').mockImplementation(() => {}),
 }
 
-mock.module('@/services/StorageService', () => ({
-  StorageService: mockStorageService,
-}))
+const mockSettingsReader = {
+  getSettings: spyOn(SettingsReader, 'getSettings').mockImplementation(async () => mockSettings),
+  getPacScriptById: spyOn(SettingsReader, 'getPacScriptById').mockImplementation(
+    async (id: string) => mockSettings.proxyConfigs.find((s) => s.id === id) || null
+  ),
+}
 
-mock.module('@/services/SettingsReader', () => ({
-  SettingsReader: {
-    getSettings: mock(async () => mockSettings),
-    getPacScriptById: mock(async (id: string) => {
-      return mockSettings.proxyConfigs.find((s) => s.id === id) || null
-    }),
-  },
-}))
-
-// Import after mocking
-import { SettingsWriter } from '../SettingsWriter'
+afterAll(() => {
+  mockStorageService.getSettings.mockRestore()
+  mockStorageService.saveSettings.mockRestore()
+  mockStorageService.invalidateCache.mockRestore()
+  mockSettingsReader.getSettings.mockRestore()
+  mockSettingsReader.getPacScriptById.mockRestore()
+})
 
 describe('SettingsWriter', () => {
   beforeEach(() => {
