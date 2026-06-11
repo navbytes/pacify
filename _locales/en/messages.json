@@ -6,6 +6,8 @@
   "connectionType": {"message":"Connection type"},
   "connTypeServer": {"message":"Connect through a server"},
   "connTypeServerDesc": {"message":"A host and port — HTTP, HTTPS or SOCKS."},
+  "connTypeRouting": {"message":"Route by site"},
+  "connTypeRoutingDesc": {"message":"Send some sites direct, others through proxies."},
   "connTypeSystem": {"message":"Use system settings"},
   "connTypeSystemDesc": {"message":"Follow the operating system's proxy."},
   "connTypeDirect": {"message":"No proxy (direct)"},

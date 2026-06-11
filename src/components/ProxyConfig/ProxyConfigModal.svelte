@@ -24,9 +24,12 @@ interface Props {
   proxyConfig?: ProxyConfig
   onSave: (config: Omit<ProxyConfig, 'id'>, activate: boolean) => Promise<void>
   onCancel: () => void
+  // Picking "Route by site" in the connection-type dropdown hands off to the
+  // rule-based routing editor (item 10). Only offered when creating.
+  onSwitchToRouting?: () => void
 }
 
-let { proxyConfig = undefined, onSave, onCancel }: Props = $props()
+let { proxyConfig = undefined, onSave, onCancel, onSwitchToRouting }: Props = $props()
 
 // Which footer verb was pressed: "Save" (false) or "Save & Turn On" (true).
 let activateOnSave = $state(false)
@@ -354,7 +357,10 @@ function handleBackdropClick(event: MouseEvent) {
             {I18nService.getMessage('connectionType')}
             <span class="text-red-500">*</span>
           </span>
-          <ConnectionTypeSelect bind:value={proxyMode} />
+          <ConnectionTypeSelect
+            bind:value={proxyMode}
+            onRouteBySite={proxyConfig ? undefined : onSwitchToRouting}
+          />
         </div>
 
         <!-- Mode-specific Configuration -->

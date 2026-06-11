@@ -148,8 +148,11 @@ test.describe('PAC-based routing modes', () => {
     const page = await optionsPage()
 
     // Create an Auto-Proxy whose single rule sends the primary host to an inline
-    // proxy; the fallback (default) is DIRECT.
-    await page.getByTestId('add-auto-proxy-btn').click()
+    // proxy; the fallback (default) is DIRECT. Routing is now reached via the
+    // unified "Add proxy" → connection type "Route by site" (item 10).
+    await page.getByTestId('add-new-script-btn').click()
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-route_by_site').click()
     await page.locator('#name').fill('Auto Routes')
     const addEmpty = page.getByTestId('add-rule-empty-btn')
     if (await addEmpty.count()) {
