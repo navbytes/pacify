@@ -4,7 +4,6 @@ import { formLabelVariants, inputVariants } from '@/utils/classPatterns'
 import FlexGroup from '../FlexGroup.svelte'
 import LabelButton from '../LabelButton.svelte'
 import Text from '../Text.svelte'
-import ToggleSwitch from '../ToggleSwitch.svelte'
 
 interface Props {
   name?: string
@@ -116,12 +115,6 @@ function handleNameInput() {
         {/snippet}
       </LabelButton>
     </div>
-  </div>
-  <div>
-    <Text size="sm" weight="medium" classes="block text-slate-700 dark:text-slate-300 mb-2">
-      {I18nService.getMessage('active')}
-    </Text>
-    <ToggleSwitch bind:checked={isActive} />
   </div>
 </FlexGroup>
 

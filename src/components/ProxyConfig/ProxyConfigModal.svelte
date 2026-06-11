@@ -11,7 +11,7 @@ import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { getRandomProxyColor } from '@/utils/colors'
 import { fetchPacViaBackground } from '@/utils/fetchPac'
-import { Globe, Radar, Settings, Sparkles, X, Zap } from '@/utils/icons'
+import { Globe, Power, Radar, Settings, X, Zap } from '@/utils/icons'
 import { modalFocus } from '@/utils/modalFocus'
 import Button from '../Button.svelte'
 import Text from '../Text.svelte'
@@ -22,11 +22,14 @@ import ProxyModeSelector from './ProxyModeSelector.svelte'
 
 interface Props {
   proxyConfig?: ProxyConfig
-  onSave: (config: Omit<ProxyConfig, 'id'>) => Promise<void>
+  onSave: (config: Omit<ProxyConfig, 'id'>, activate: boolean) => Promise<void>
   onCancel: () => void
 }
 
 let { proxyConfig = undefined, onSave, onCancel }: Props = $props()
+
+// Which footer verb was pressed: "Save" (false) or "Save & Turn On" (true).
+let activateOnSave = $state(false)
 
 const DEFAULT_PROXY_CONFIG: ProxyServer = {
   scheme: 'http',
@@ -220,7 +223,7 @@ async function handleSubmit(event: Event) {
       }
     }
 
-    await onSave(config)
+    await onSave(config, activateOnSave)
   } catch (error) {
     logger.error('Error saving proxy configuration:', error)
     errorMessage =
@@ -476,13 +479,28 @@ function handleBackdropClick(event: MouseEvent) {
             {I18nService.getMessage('cancel')}
           </Button>
 
+          <!-- "Save" persists without changing the active proxy (escape hatch
+               for building a proxy you don't want on yet). -->
           <Button
             type="submit"
+            onclick={() => (activateOnSave = false)}
+            disabled={isSubmitting}
+            color="secondary"
+            classes="px-5"
+            data-testid="modal-save-btn"
+          >
+            {I18nService.getMessage('save')}
+          </Button>
+
+          <!-- "Save & Turn On" persists then activates (item 11). -->
+          <Button
+            type="submit"
+            onclick={() => (activateOnSave = true)}
             disabled={isSubmitting}
             variant="gradient"
             gradient="blue"
             classes="px-6"
-            data-testid="modal-save-btn"
+            data-testid="modal-save-activate-btn"
           >
             {#snippet icon()}
               {#if isSubmitting}
@@ -503,10 +521,10 @@ function handleBackdropClick(event: MouseEvent) {
                   ></path>
                 </svg>
               {:else}
-                <Sparkles size={16} />
+                <Power size={16} />
               {/if}
             {/snippet}
-            {I18nService.getMessage('save')}
+            {I18nService.getMessage('saveAndTurnOn') || 'Save & Turn On'}
           </Button>
         </div>
       </div>

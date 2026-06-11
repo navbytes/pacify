@@ -448,6 +448,7 @@
   "intervalDay": {"message":"Every $1 day","placeholders":{"1":{"content":"$1","example":"1"}}},
   "httpWarning": {"message":"This URL uses HTTP. Your proxy rules could be intercepted. Use HTTPS when possible."},
   "save": {"message":"Save"},
+  "saveAndTurnOn": {"message":"Save & Turn On"},
   "editProxy": {"message":"Edit Proxy"},
   "proxyActivated": {"message":"Proxy '$1' activated","placeholders":{"1":{"content":"$1","example":"My Proxy"}}},
   "proxyDeactivated": {"message":"Proxy deactivated"},

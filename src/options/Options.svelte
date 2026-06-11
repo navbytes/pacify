@@ -206,23 +206,37 @@ async function maybeRequestAuthPermissions(config: Omit<ProxyConfig, 'id'>): Pro
   }
 }
 
-async function handleScriptSave(script: Omit<ProxyConfig, 'id'>) {
+async function handleScriptSave(script: Omit<ProxyConfig, 'id'>, activate: boolean) {
+  // Capture before the modal resets it (editingScriptId is module state).
+  const savedScriptId = editingScriptId
   // Close modal immediately (keeps user-gesture context for the permission request below)
   showEditor = false
 
-  // Request optional auth permissions if this config has credentials
+  // Request optional auth permissions if this config has credentials. Runs in
+  // the click's user-gesture turn. Whether granted or denied, "Save & Turn On"
+  // still activates below (the proxy works; Chrome falls back to its own auth
+  // dialog) — so the verb's promise is always kept.
   await maybeRequestAuthPermissions(script)
 
   // Save in background
   settingsStore
-    .updatePACScript(script, editingScriptId)
-    .then(() => {
-      // Pass the name as a substitution — chrome.i18n strips `$1` when no
-      // substitution is supplied, so a post-hoc .replace('$1', …) never matches.
-      toastStore.show(
-        I18nService.getMessage(editingScriptId ? 'proxyUpdated' : 'proxyCreated', script.name),
-        'success'
-      )
+    .updatePACScript(script, savedScriptId)
+    .then(async (updated) => {
+      // chrome.i18n strips `$1` when no substitution is supplied, so pass the
+      // name as a substitution argument (not a post-hoc .replace).
+      if (activate) {
+        // Resolve the id (existing on edit; freshly generated on create) and
+        // turn the proxy on — the single activation path (item 11).
+        const id =
+          savedScriptId ?? updated?.proxyConfigs.find((c) => c.name === script.name)?.id ?? null
+        if (id) await settingsStore.setProxy(id, true)
+        toastStore.show(I18nService.getMessage('proxyActivated', script.name), 'success')
+      } else {
+        toastStore.show(
+          I18nService.getMessage(savedScriptId ? 'proxyUpdated' : 'proxyCreated', script.name),
+          'success'
+        )
+      }
     })
     .catch((error) => {
       logger.error('Error in handleScriptSave:', error)
