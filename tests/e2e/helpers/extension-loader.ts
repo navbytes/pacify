@@ -29,8 +29,10 @@ function resolveChromePath(): string | undefined {
  * Runs headless by default — Chrome's modern headless mode supports MV3
  * extensions. Set HEADED=1 to debug with a visible browser window.
  */
-export async function launchExtension(options: { suppressOnboarding?: boolean } = {}) {
-  const { suppressOnboarding = true } = options
+export async function launchExtension(
+  options: { suppressOnboarding?: boolean; extraArgs?: string[] } = {}
+) {
+  const { suppressOnboarding = true, extraArgs = [] } = options
   const extensionPath = path.join(__dirname, '../../../dist')
 
   // Launch browser with extension
@@ -42,6 +44,8 @@ export async function launchExtension(options: { suppressOnboarding?: boolean } 
       `--load-extension=${extensionPath}`,
       '--no-sandbox',
       '--disable-setuid-sandbox',
+      // e.g. --host-resolver-rules for proxy traffic tests (see proxy-fixtures)
+      ...extraArgs,
     ],
   })
 

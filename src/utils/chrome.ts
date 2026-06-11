@@ -63,9 +63,13 @@ export function convertAppSettingsToChromeConfig(proxyConfig: ProxyConfig): Chro
           port: '',
         }
       }
-      if (proxyConfig.rules.bypassList) {
-        result.rules.bypassList = proxyConfig.rules.bypassList || []
-      }
+    }
+
+    // The bypass list applies to BOTH the single-proxy and per-protocol cases,
+    // so it must live outside the if/else above. (Previously it was only set in
+    // the per-protocol branch, so a single shared proxy silently ignored it.)
+    if (proxyConfig.rules.bypassList && proxyConfig.rules.bypassList.length > 0) {
+      result.rules.bypassList = proxyConfig.rules.bypassList
     }
   }
 
