@@ -130,4 +130,33 @@ test.describe('Proxy traffic routing', () => {
 
     await togglePopupProxy('Bypass Proxy') // leave the browser back on DIRECT for any later tests
   })
+
+  test('a per-protocol HTTP proxy routes http traffic through it', async () => {
+    const page = await optionsPage()
+
+    // "Use the same proxy for all protocols" off → set only the HTTP proxy.
+    await page.getByTestId('add-new-script-btn').click()
+    await expect(page.getByTestId('modal-title')).toBeVisible()
+    await page.fill('input#scriptName', 'Per Protocol')
+    await page.getByRole('radio', { name: 'Manual Configuration' }).click()
+    await page.locator('#useSharedProxy').uncheck()
+    await page.getByTestId('http-host-input').fill('127.0.0.1')
+    await page.getByTestId('http-port-input').fill(String(fx.proxyPort))
+    await page.getByTestId('modal-save-btn').click()
+    await expect(page.getByTestId('modal-title')).not.toBeVisible()
+
+    await togglePopupProxy('Per Protocol')
+    const background = context.serviceWorkers()[0]
+    const chromeProxy = await background.evaluate(() => chrome.proxy.settings.get({}))
+    // biome-ignore lint/suspicious/noExplicitAny: chrome typings not loaded in eval
+    const rules = (chromeProxy as any)?.value?.rules
+    expect(rules?.proxyForHttp).toBeDefined()
+    expect(rules?.singleProxy).toBeUndefined()
+
+    fx.reset()
+    expect(await fetchBody(fx.originHostUrl)).toContain('PROXIED')
+    expect(fx.requests.some((r) => r.target.includes(PROXY_TEST_HOST))).toBe(true)
+
+    await togglePopupProxy('Per Protocol')
+  })
 })

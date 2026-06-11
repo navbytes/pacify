@@ -12,7 +12,7 @@ import type {
   ProxyConfig,
   SetProxyMessage,
 } from '@/interfaces'
-import type { AutoProxySubscription, ProxyServer, SubscriptionFormat } from '@/interfaces/settings'
+import type { AutoProxySubscription, SubscriptionFormat } from '@/interfaces/settings'
 import { SettingsReader, SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
 import { browserService } from '@/services/chrome/BrowserService'
@@ -22,6 +22,7 @@ import { PACScriptGenerator } from '@/services/PACScriptGenerator'
 import { SubscriptionParser } from '@/services/SubscriptionParser'
 import { parseProxyError } from '@/utils/errorHandling'
 import { assertTextResponse } from '@/utils/httpContent'
+import { selectActiveProxyCredentials } from '@/utils/proxyAuth'
 
 /**
  * Reject remote PAC scripts larger than this to prevent memory-exhaustion DoS.
@@ -653,31 +654,13 @@ function handleAuthRequired(
 /**
  * Find credentials for the currently active proxy, preferring a server whose
  * host matches the challenging proxy, else the first server that has any.
+ * The selection logic lives in `selectActiveProxyCredentials` (unit-tested).
  */
 async function getActiveProxyCredentials(
   challengerHost?: string
 ): Promise<{ username: string; password: string } | null> {
   const settings = await safeGetSettings()
-  if (!settings) return null
-
-  const active = settings.proxyConfigs.find(
-    (c) => c.isActive || (settings.activeScriptId && c.id === settings.activeScriptId)
-  )
-  if (!active?.rules) return null
-
-  const servers: (ProxyServer | undefined)[] = [
-    active.rules.singleProxy,
-    active.rules.proxyForHttp,
-    active.rules.proxyForHttps,
-    active.rules.proxyForFtp,
-    active.rules.fallbackProxy,
-  ]
-  const withCreds = servers.filter((s): s is ProxyServer => !!s?.username)
-  if (withCreds.length === 0) return null
-
-  const matched = challengerHost ? withCreds.find((s) => s.host === challengerHost) : undefined
-  const chosen = matched ?? withCreds[0]
-  return { username: chosen.username || '', password: chosen.password || '' }
+  return selectActiveProxyCredentials(settings, challengerHost)
 }
 
 /**
