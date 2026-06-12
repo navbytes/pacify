@@ -54,7 +54,7 @@
     "codemirror": "6.0.2",
     "loglevel": "1.9.2",
     "lucide-svelte": "0.562.0",
-    "svelte": "5.47.0",
+    "svelte": "5.56.3",
     "tailwind-merge": "3.4.0",
     "tailwind-variants": "3.2.2"
   },
@@ -75,10 +75,10 @@
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
     "playwright": "1.57.0",
-    "postcss": "8.5.6",
+    "postcss": "8.5.15",
     "svelte-check": "4.3.5",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3",
-    "vite": "7.3.1"
+    "vite": "7.3.5"
   }
 }
