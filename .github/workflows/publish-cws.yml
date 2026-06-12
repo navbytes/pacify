@@ -1,0 +1,90 @@
+name: Publish to Chrome Web Store
+
+# Manual-only by design: releasing to GitHub is automated, but submitting
+# to the Chrome Web Store is a human decision. Trigger this from the
+# Actions tab once a GitHub Release exists.
+#
+# NOTE: the CWS API v1 auth flow these secrets use (OAuth client id/secret +
+# refresh token) is deprecated by Google and supported only until
+# 2026-10-15. Migrate to a tool with API v2 / service-account support
+# before then.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to publish (e.g. v1.33.0); empty = latest release'
+        required: false
+        type: string
+      publish:
+        description: 'Also submit for review (otherwise upload as draft only)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Upload release zip to the store
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify Chrome Web Store credentials
+        run: |
+          missing=""
+          [ -z "${{ secrets.CHROME_EXTENSION_ID }}" ] && missing="$missing CHROME_EXTENSION_ID"
+          [ -z "${{ secrets.CHROME_CLIENT_ID }}" ] && missing="$missing CHROME_CLIENT_ID"
+          [ -z "${{ secrets.CHROME_CLIENT_SECRET }}" ] && missing="$missing CHROME_CLIENT_SECRET"
+          [ -z "${{ secrets.CHROME_REFRESH_TOKEN }}" ] && missing="$missing CHROME_REFRESH_TOKEN"
+          if [ -n "$missing" ]; then
+            echo "Missing repository secrets:$missing"
+            echo "See https://github.com/fregante/chrome-webstore-upload-cli#setup"
+            exit 1
+          fi
+
+      - name: Resolve release tag
+        id: tag
+        run: |
+          if [ -n "${{ inputs.tag }}" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+          fi
+          echo "TAG=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Publishing release: $TAG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download release zip
+        run: |
+          gh release download "${{ steps.tag.outputs.TAG }}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern 'Pacify_*.zip'
+          ls -lh Pacify_*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: .bun-version
+
+      # Default is upload-only (a draft you submit from the CWS dashboard);
+      # check the "publish" input to also submit for review automatically.
+      - name: Upload to Chrome Web Store
+        run: |
+          if [ "${{ inputs.publish }}" = "true" ]; then
+            bunx chrome-webstore-upload-cli@4 upload --source Pacify_*.zip --auto-publish
+          else
+            bunx chrome-webstore-upload-cli@4 upload --source Pacify_*.zip
+          fi
+        env:
+          EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
