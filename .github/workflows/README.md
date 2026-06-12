@@ -12,7 +12,7 @@ This pipeline shape is shared across navbytes browser-extension repos
 | Scheduled Security Audit | `audit.yml` | Mondays 06:00 UTC | `bun audit --audit-level=moderate` — catches new advisories without a code change. |
 | Release Please | `release-please.yml` | Push to `main` | Maintains a rolling release PR from conventional commits. Merging it bumps `package.json` + `manifest.json` (via `release-please-config.json` extra-files) and updates `CHANGELOG.md`. |
 | Create Release | `release.yml` | `manifest.json` change on `main` | Tag-guarded (idempotent): tests, builds, packages `Pacify_<version>.zip`, extracts notes from `CHANGELOG.md`, creates the GitHub Release. |
-| Publish to Chrome Web Store | `publish-cws.yml` | Manual (Actions tab) | Downloads the release zip and uploads it to CWS via `chrome-webstore-upload-cli`. Upload-only by default; check the `publish` input to also submit for review. |
+| Publish to Chrome Web Store | `publish-cws.yml` | Manual (Actions tab) | Downloads the release zip and uploads it to CWS via the **API v2** with service-account auth, gated behind the `chrome-web-store` environment. Upload-only by default; check the `publish` input to also submit for review. |
 
 ## Release flow
 
@@ -23,13 +23,23 @@ This pipeline shape is shared across navbytes browser-extension repos
    with the store zip attached.
 4. When ready, run **Publish to Chrome Web Store** from the Actions tab.
 
-## Required secrets (publish only)
+## Publish setup (one-time)
 
-`CHROME_EXTENSION_ID`, `CHROME_CLIENT_ID`, `CHROME_CLIENT_SECRET`,
-`CHROME_REFRESH_TOKEN` — see the
-[chrome-webstore-upload-cli setup guide](https://github.com/fregante/chrome-webstore-upload-cli#setup).
-This auth flow (CWS API v1) is deprecated by Google with support ending
-**2026-10-15**; plan a migration to API v2 / service-account auth.
+Publishing uses the [Chrome Web Store API v2 with a service
+account](https://developer.chrome.com/docs/webstore/service-accounts)
+(the v1 OAuth refresh-token flow is deprecated; support ends 2026-10-15):
+
+1. In Google Cloud Console, create a service account (no GCP roles needed)
+   and download a JSON key.
+2. In the CWS Developer Dashboard, add the service account's email under
+   Account → API access, and note your publisher ID.
+3. Create a GitHub environment named `chrome-web-store`
+   (Settings → Environments) with yourself as a **required reviewer**, and
+   add these environment secrets: `CWS_SERVICE_ACCOUNT_JSON` (key file
+   contents), `CHROME_PUBLISHER_ID`, `CHROME_EXTENSION_ID`.
+
+The required-reviewer gate means store credentials are only readable after
+a manual approval click on each publish run.
 
 ## Known limitation
 
