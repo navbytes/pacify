@@ -25,7 +25,7 @@ jobs:
       # the manifest.json change then triggers release.yml, which owns the
       # tag, GitHub Release, store zip, and Chrome Web Store upload.
       - name: Run release-please
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v5
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
