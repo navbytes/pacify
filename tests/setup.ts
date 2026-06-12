@@ -3,7 +3,7 @@
  * This file is automatically loaded before running tests (configured in bunfig.toml)
  */
 
-import { beforeAll, afterAll, beforeEach, afterEach } from 'bun:test'
+import { afterAll, afterEach, beforeAll, beforeEach } from 'bun:test'
 
 // Global test timeout (can be overridden per test)
 export const TEST_TIMEOUT = 5000
@@ -61,6 +61,13 @@ const mockChrome = {
       addListener: () => {},
       removeListener: () => {},
     },
+  },
+  // Echo-the-key stub: I18nService.getMessage falls back to the message name
+  // when the lookup returns '', so tests can assert on i18n keys without
+  // depending on which test file (and its chrome override) ran first.
+  i18n: {
+    getMessage: (_messageName: string, _substitutions?: string | string[]) => '',
+    getUILanguage: () => 'en',
   },
   tabs: {
     query: () => Promise.resolve([]),
