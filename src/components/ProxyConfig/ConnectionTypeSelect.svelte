@@ -157,7 +157,7 @@ function onMenuKeydown(event: KeyboardEvent) {
   </button>
 
   {#if open}
-    <!-- biome-ignore lint/a11y/useKeyWithClickEvents: keyboard handled via roving option focus -->
+    <!-- keyboard interaction handled via onkeydown (roving option focus) -->
     <div
       role="listbox"
       aria-label={I18nService.getMessage('connectionType')}

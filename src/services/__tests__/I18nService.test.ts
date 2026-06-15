@@ -203,7 +203,7 @@ describe('I18nService', () => {
 
   describe('edge cases', () => {
     test('handles special characters in message keys', async () => {
-      mockMessages['key_with_underscores'] = 'Works with underscores'
+      mockMessages.key_with_underscores = 'Works with underscores'
       const I18nService = await getI18nService()
 
       const message = I18nService.getMessage('key_with_underscores')
