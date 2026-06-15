@@ -234,7 +234,7 @@ function confirmDelete(sub: AutoProxySubscription) {
 
 function handleConfirmDelete() {
   if (deleteTarget) {
-    onUpdate(subscriptions.filter((s) => s.id !== deleteTarget!.id))
+    onUpdate(subscriptions.filter((s) => s.id !== deleteTarget?.id))
     showDeleteDialog = false
     deleteTarget = null
   }

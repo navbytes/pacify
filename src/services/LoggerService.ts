@@ -109,4 +109,4 @@ class ChildLogger {
 
 // Export singleton instance
 export const logger = new LoggerService()
-export type { LoggerService, ChildLogger }
+export type { ChildLogger, LoggerService }

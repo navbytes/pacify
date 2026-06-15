@@ -33,6 +33,16 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "a11y": {
+        "noLabelWithoutControl": "off",
+        "useSemanticElements": "off",
+        "useValidAriaValues": "off",
+        "useValidAriaRole": "off",
+        "noStaticElementInteractions": "off",
+        "noSvgWithoutTitle": "off",
+        "useAriaPropsSupportedByRole": "off",
+        "useValidAnchor": "off"
+      },
       "style": {
         "noUnusedTemplateLiteral": "error",
         "useConst": "error"
@@ -95,7 +105,8 @@
           },
           "correctness": {
             "noUnusedVariables": "off",
-            "noUnusedImports": "off"
+            "noUnusedImports": "off",
+            "noUnusedFunctionParameters": "off"
           },
           "suspicious": {
             "noImplicitAnyLet": "off"

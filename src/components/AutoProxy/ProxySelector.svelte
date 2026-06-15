@@ -219,7 +219,8 @@ function handleInlineChange() {
       <!-- Authentication fields (Optional) -->
       <div class="pt-3 mt-3 border-t border-slate-200 dark:border-slate-700">
         <Text size="xs" weight="medium" classes="block text-slate-600 dark:text-slate-300 mb-2">
-          {I18nService.getMessage('authentication') || 'Authentication'} (
+          {I18nService.getMessage('authentication') || 'Authentication'}
+          (
           {I18nService.getMessage(
             'optional'
           ) || 'Optional'}
@@ -256,7 +257,7 @@ function handleInlineChange() {
                 bind:value={inlinePassword}
                 onchange={handleInlineChange}
                 placeholder={I18nService.getMessage('passwordPlaceholder') || '••••••••'}
-                class={smallInputClasses + ' pr-8'}
+                class={`${smallInputClasses} pr-8`}
               >
               <button
                 type="button"

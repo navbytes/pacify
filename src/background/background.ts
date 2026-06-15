@@ -721,7 +721,7 @@ async function handleAlarm(alarm: chrome.alarms.Alarm): Promise<void> {
     if (!settings) return
 
     const config = settings.proxyConfigs.find((c) => c.id === configId)
-    if (!config || !config.pacScript?.url) {
+    if (!config?.pacScript?.url) {
       logger.warn(`Config ${configId} not found or has no URL, clearing alarm`)
       await chrome.alarms.clear(alarm.name)
       return
