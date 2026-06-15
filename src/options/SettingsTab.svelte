@@ -17,8 +17,8 @@ import {
   Bug,
   CircleQuestionMark,
   Database,
+  ExternalLink,
   Eye,
-  Github,
   Heart,
   HelpCircle,
   Lightbulb,
@@ -365,7 +365,7 @@ async function handleShowQuickSettingsToggle(checked: boolean) {
     <div class="grid-responsive-4">
       <LinkCard
         href="https://github.com/navbytes/pacify"
-        icon={Github}
+        icon={ExternalLink}
         label={I18nService.getMessage('aboutViewOnGithub')}
         color="blue"
       />
