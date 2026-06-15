@@ -82,11 +82,11 @@ let items = $derived<MenuItem[]>([
   },
 ])
 
-let open = $state(false)
+let isOpen = $state(false)
 let selected = $derived(items.find((o) => o.mode === value) ?? items[0])
 
 function pick(item: MenuItem) {
-  open = false
+  isOpen = false
   if (item.route) {
     onRouteBySite?.()
   } else if (item.mode && item.mode !== value) {
@@ -98,7 +98,7 @@ function pick(item: MenuItem) {
 function onTriggerKeydown(event: KeyboardEvent) {
   if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
     event.preventDefault()
-    open = true
+    isOpen = true
   }
 }
 
@@ -107,7 +107,7 @@ function onMenuKeydown(event: KeyboardEvent) {
   const opts = Array.from(menu.querySelectorAll<HTMLElement>('[role="option"]'))
   const i = opts.indexOf(document.activeElement as HTMLElement)
   if (event.key === 'Escape') {
-    open = false
+    isOpen = false
   } else if (event.key === 'ArrowDown') {
     event.preventDefault()
     opts[Math.min(i + 1, opts.length - 1)]?.focus()
@@ -120,7 +120,7 @@ function onMenuKeydown(event: KeyboardEvent) {
 
 <svelte:window
   onclick={(e) => {
-    if (open && !(e.target as HTMLElement)?.closest('[data-conn-type]')) open = false
+    if (isOpen && !(e.target as HTMLElement)?.closest('[data-conn-type]')) isOpen = false
   }}
 />
 
@@ -128,9 +128,9 @@ function onMenuKeydown(event: KeyboardEvent) {
   <button
     type="button"
     aria-haspopup="listbox"
-    aria-expanded={open}
+    aria-expanded={isOpen}
     data-testid="conn-type-trigger"
-    onclick={() => (open = !open)}
+    onclick={() => (isOpen = !isOpen)}
     onkeydown={onTriggerKeydown}
     class="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-left transition hover:border-slate-400 dark:hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
   >
@@ -150,13 +150,13 @@ function onMenuKeydown(event: KeyboardEvent) {
       </span>
     </span>
     <span
-      class="shrink-0 text-slate-400 transition-transform {open ? 'rotate-180' : ''}"
+      class="shrink-0 text-slate-400 transition-transform {isOpen ? 'rotate-180' : ''}"
       aria-hidden="true"
       >▾</span
     >
   </button>
 
-  {#if open}
+  {#if isOpen}
     <!-- keyboard interaction handled via onkeydown (roving option focus) -->
     <div
       role="listbox"

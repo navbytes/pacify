@@ -160,17 +160,19 @@ We only request permissions that are essential for the extension to function.`,
     </section>
 
     <!-- Back to Options -->
-    <div class="mt-8 text-center"><a
-      href="/options.html"
-      class={cn(
+    <div class="mt-8 text-center">
+      <a
+        href="/options.html"
+        class={cn(
           'inline-flex items-center gap-2 px-4 py-2 rounded-lg',
           'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700',
           'text-slate-700 dark:text-slate-300',
           'transition-colors'
         )}
-    >
-      {getMessage('backToSettings', 'Back to Settings')}
-    </a></div>
+      >
+        {getMessage('backToSettings', 'Back to Settings')}
+      </a>
+    </div>
   </main>
 
   <!-- Footer -->

@@ -122,7 +122,7 @@ $effect(() => {
         onblur={handleHostBlur}
         data-testid="{testIdPrefix}-host-input"
         aria-invalid={hostError && hostTouched ? 'true' : 'false'}
-        aria-describedby={hostError && hostTouched ? `{testIdPrefix}-host-error` : undefined}
+        aria-describedby={hostError && hostTouched ? `${testIdPrefix}-host-error` : undefined}
         class={inputVariants({ state: hostError && hostTouched ? 'error' : 'default', size: 'md' })}
       >
       {#if hostError && hostTouched}
@@ -153,7 +153,7 @@ $effect(() => {
         onblur={handlePortBlur}
         data-testid="{testIdPrefix}-port-input"
         aria-invalid={portError && portTouched ? 'true' : 'false'}
-        aria-describedby={portError && portTouched ? `{testIdPrefix}-port-error` : undefined}
+        aria-describedby={portError && portTouched ? `${testIdPrefix}-port-error` : undefined}
         class={inputVariants({ state: portError && portTouched ? 'error' : 'default', size: 'md' })}
       >
       {#if portError && portTouched}
@@ -237,7 +237,7 @@ $effect(() => {
                 placeholder={I18nService.getMessage('passwordPlaceholder') || '••••••••'}
                 bind:value={password}
                 data-testid="{testIdPrefix}-password-input"
-                class={inputVariants({ state: 'default', size: 'md' }) + ' pr-10'}
+                class={`${inputVariants({ state: 'default', size: 'md' })} pr-10`}
               >
               <button
                 type="button"

@@ -1,7 +1,16 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { resolve } from 'path'
-import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync } from 'fs'
+import {
+  existsSync,
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+  readdirSync,
+  copyFileSync,
+  renameSync,
+  rmSync,
+} from 'fs'
 
 // Check if running with Bun for optimized file operations
 const isBun = typeof Bun !== 'undefined'
@@ -69,36 +78,42 @@ function copyAssets() {
   }
 }
 
-// Plugin to flatten HTML output to root level
+// Plugin to flatten HTML output to the dist root.
+//
+// The Chrome extension manifest expects popup.html / options.html / privacy.html
+// at the extension root, but vite emits HTML entries at their source-relative
+// path (dist/src/<area>/<name>.html). vite 8 / Rolldown — unlike vite 7 / Rollup —
+// ignores reassigning or deleting keys on the in-memory `bundle` map inside
+// generateBundle (it warns "assigns to bundle variable ... not supported by
+// Rolldown"), which silently dropped the HTML from the output. We instead move
+// the files on disk in writeBundle, after Rolldown has written them — a hook it
+// fully supports. The emitted markup already uses root-absolute asset URLs
+// (/assets/*.js, /assets/*.css) that resolve from the extension root once the
+// HTML lives at the dist root, so no reference rewriting is required.
 function flattenHtmlOutput() {
   return {
     name: 'flatten-html-output',
     enforce: 'post' as const,
-    generateBundle(_options: unknown, bundle: Record<string, { fileName: string; type: string; source?: string }>) {
-      // Move HTML files from nested directories to root
+    writeBundle(outputOptions: { dir?: string }) {
+      const outDir = outputOptions.dir ?? 'dist'
       const htmlMoves: Record<string, string> = {
         'src/popup/popup.html': 'popup.html',
         'src/options/options.html': 'options.html',
         'src/privacy/privacy.html': 'privacy.html',
       }
 
-      for (const [oldPath, newPath] of Object.entries(htmlMoves)) {
-        if (bundle[oldPath]) {
-          const htmlFile = bundle[oldPath]
-          // Update internal script/link references
-          if (htmlFile.type === 'asset' && typeof htmlFile.source === 'string') {
-            // Update relative paths in HTML to account for new location
-            htmlFile.source = htmlFile.source
-              .replace(/\.\.\/app\.css/g, 'assets/app.css')
-              .replace(/\.\/[a-z]+\.(ts|js)/g, (match) => {
-                const name = match.match(/\.\/([a-z]+)\./)?.[1]
-                return name ? `assets/${name}.js` : match
-              })
-          }
-          htmlFile.fileName = newPath
-          bundle[newPath] = htmlFile
-          delete bundle[oldPath]
+      for (const [oldRelPath, newRelPath] of Object.entries(htmlMoves)) {
+        const from = resolve(outDir, oldRelPath)
+        const to = resolve(outDir, newRelPath)
+        if (existsSync(from)) {
+          renameSync(from, to)
         }
+      }
+
+      // Drop the now-empty nested src/ scaffold left behind in the output.
+      const nestedSrcDir = resolve(outDir, 'src')
+      if (existsSync(nestedSrcDir)) {
+        rmSync(nestedSrcDir, { recursive: true, force: true })
       }
     },
   }

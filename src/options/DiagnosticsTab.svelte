@@ -440,9 +440,7 @@ function formatTimestamp(timestamp: number): string {
         {@const SeverityIcon = getSeverityIcon(log.severity)}
         {@const isExpanded = expandedLogIds.has(log.id)}
         <div
-          class="border rounded-lg overflow-hidden transition-all {getSeverityBg(log.severity)} {
-            !log.read ? 'ring-2 ring-blue-200 dark:ring-blue-800' : ''
-          }"
+          class="border rounded-lg overflow-hidden transition-all {getSeverityBg(log.severity)} {!log.read ? 'ring-2 ring-blue-200 dark:ring-blue-800' : ''}"
         >
           <!-- Log header (always visible) -->
           <button

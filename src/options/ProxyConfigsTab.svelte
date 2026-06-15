@@ -3,7 +3,6 @@ import { slide } from 'svelte/transition'
 import Button from '@/components/Button.svelte'
 import DropZone from '@/components/DropZone.svelte'
 import IconButton from '@/components/IconButton.svelte'
-// biome-ignore lint/style/useImportType: Used as Svelte component in template
 import SearchBar from '@/components/ProxyConfigs/SearchBar.svelte'
 import SectionHeader from '@/components/ProxyConfigs/SectionHeader.svelte'
 import ScriptList from '@/components/ScriptList.svelte'
