@@ -157,6 +157,7 @@ function onMenuKeydown(event: KeyboardEvent) {
   </button>
 
   {#if isOpen}
+    <!-- keyboard interaction handled via onkeydown (roving option focus) -->
     <div
       role="listbox"
       aria-label={I18nService.getMessage('connectionType')}
