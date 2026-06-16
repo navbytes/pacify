@@ -460,6 +460,7 @@ function handleBackdropClick(event: MouseEvent) {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   stroke-linecap="round"
@@ -516,7 +517,7 @@ function handleBackdropClick(event: MouseEvent) {
           >
             {#snippet icon()}
               {#if isSubmitting}
-                <svg class="w-4 h-4 animate-spin" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 animate-spin" viewBox="0 0 24 24" aria-hidden="true">
                   <circle
                     class="opacity-25"
                     cx="12"

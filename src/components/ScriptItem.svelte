@@ -232,6 +232,7 @@ async function handleScriptDelete() {
               style={proxy.isActive
               ? `background-color: ${proxy.color}; ring-color: ${proxy.color}40`
               : `background-color: ${proxy.color}`}
+              role="img"
               aria-label="Proxy color: {proxy.color}"
             ></div>
           </div>

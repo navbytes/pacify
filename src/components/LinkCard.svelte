@@ -38,6 +38,7 @@ const gradientMap = {
 }
 </script>
 
+<!-- biome-ignore lint/a11y/useValidAnchor: href is provided via Svelte's {href} attribute shorthand (which Biome's own formatter enforces over href={href}); the linter just doesn't recognize the shorthand as a href attribute -->
 <a {href} {target} {rel} class="group block">
   <div
     class="relative overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
