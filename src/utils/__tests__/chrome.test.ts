@@ -33,6 +33,50 @@ describe('convertAppSettingsToChromeConfig', () => {
     expect(result.pacScript).toEqual({ url: 'https://x/p.pac', data: '', mandatory: true })
   })
 
+  test('ASCII-only inline pac_script is passed through unchanged via data', () => {
+    const data = 'function FindProxyForURL(url, host) { return "DIRECT"; }'
+    const result = convertAppSettingsToChromeConfig(
+      cfg({ mode: 'pac_script', pacScript: { data } })
+    )
+    expect(result.pacScript).toEqual({ url: '', data, mandatory: false })
+  })
+
+  // Regression: Chrome converts pacScript.data into a charset-less data: URL
+  // and decodes it as Latin-1, corrupting non-ASCII (e.g. Chinese) comments.
+  // We must encode it ourselves as a UTF-8 data: URL routed through `url`.
+  test('inline pac_script with Chinese comments is encoded as a UTF-8 data: URL', () => {
+    const data = `function FindProxyForURL(url, host) {
+  // 走代理服务器
+  return "PROXY 127.0.0.1:8080";
+}`
+    const result = convertAppSettingsToChromeConfig(
+      cfg({ mode: 'pac_script', pacScript: { data, mandatory: true } })
+    )
+
+    expect(result.pacScript?.data).toBe('')
+    expect(result.pacScript?.mandatory).toBe(true)
+    const url = result.pacScript?.url ?? ''
+    expect(url.startsWith('data:application/x-ns-proxy-autoconfig;charset=utf-8;base64,')).toBe(
+      true
+    )
+
+    // The base64 payload must round-trip back to the exact original UTF-8 script.
+    const base64 = url.split(',')[1]
+    const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0))
+    const decoded = new TextDecoder().decode(bytes)
+    expect(decoded).toBe(data)
+  })
+
+  test('a real URL always wins over the data: URL encoding path', () => {
+    const result = convertAppSettingsToChromeConfig(
+      cfg({
+        mode: 'pac_script',
+        pacScript: { url: 'https://x/p.pac', data: '// 中文\nfunction FindProxyForURL(){}' },
+      })
+    )
+    expect(result.pacScript?.url).toBe('https://x/p.pac')
+  })
+
   test('fixed_servers with a single shared proxy maps host/port/scheme', () => {
     const result = convertAppSettingsToChromeConfig(
       cfg({ rules: { singleProxy: { scheme: 'socks5', host: '10.0.0.1', port: '1080' } } })
