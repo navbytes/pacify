@@ -1,12 +1,23 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extName__",
-  "version": "1.33.0",
+  "version": "1.33.1",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
-  "permissions": ["proxy", "storage", "tabs", "notifications", "alarms"],
-  "optional_permissions": ["webRequest", "webRequestAuthProvider"],
-  "host_permissions": ["<all_urls>"],
+  "permissions": [
+    "proxy",
+    "storage",
+    "tabs",
+    "notifications",
+    "alarms"
+  ],
+  "optional_permissions": [
+    "webRequest",
+    "webRequestAuthProvider"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "background": {
     "service_worker": "assets/background.js",
     "type": "module"
