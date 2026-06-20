@@ -29,6 +29,7 @@ function handleMouseLeave() {
 }
 </script>
 
+<!-- biome-ignore lint/a11y/noStaticElementInteractions: presentational hover/focus positioner for the tooltip; the interactive trigger is the slotted child -->
 <div
   role="presentation"
   class="relative inline-block"

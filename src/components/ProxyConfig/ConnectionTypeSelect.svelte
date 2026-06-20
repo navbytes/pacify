@@ -118,6 +118,7 @@ function onMenuKeydown(event: KeyboardEvent) {
 }
 </script>
 
+<!-- biome-ignore lint/a11y/noStaticElementInteractions: window-level outside-click handler to dismiss the dropdown; there is no semantic element equivalent for a global listener -->
 <svelte:window
   onclick={(e) => {
     if (isOpen && !(e.target as HTMLElement)?.closest('[data-conn-type]')) isOpen = false

@@ -146,6 +146,7 @@ const combinedClasses = $derived(
 )
 </script>
 
+<!-- biome-ignore lint/a11y/useAriaPropsSupportedByRole: aria-selected is forwarded only by callers that render this generic Button as role=option/tab; Svelte omits the attribute when ariaSelected is undefined -->
 <button
   {type}
   class={cn(combinedClasses, 'group')}

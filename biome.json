@@ -37,11 +37,7 @@
         "noLabelWithoutControl": "off",
         "useSemanticElements": "off",
         "useValidAriaValues": "off",
-        "useValidAriaRole": "off",
-        "noStaticElementInteractions": "off",
-        "noSvgWithoutTitle": "off",
-        "useAriaPropsSupportedByRole": "off",
-        "useValidAnchor": "off"
+        "useValidAriaRole": "off"
       },
       "style": {
         "noUnusedTemplateLiteral": "error",
