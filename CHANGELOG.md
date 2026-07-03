@@ -5,6 +5,14 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.33.1](https://github.com/navbytes/pacify/compare/v1.33.0...v1.33.1) (2026-06-20)
+
+
+### Bug Fixes
+
+* **ci:** resolve esbuild advisory and clean up Biome lint findings ([#55](https://github.com/navbytes/pacify/issues/55)) ([32bbbda](https://github.com/navbytes/pacify/commit/32bbbda6e5d7448f966ebc1ebdedf157088c3ecd))
+* support non-ASCII (e.g. Chinese) comments in PAC scripts ([#57](https://github.com/navbytes/pacify/issues/57)) ([fa4826a](https://github.com/navbytes/pacify/commit/fa4826a5a2152921ee3cea2306b08fdf7b2f860f))
+
 ## [Unreleased]
 
 ## [1.33.0] - 2026-06-11
