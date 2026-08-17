@@ -41,7 +41,8 @@
   "overrides": {
     "@codemirror/state": "6.5.4",
     "@codemirror/view": "6.39.11",
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.1",
+    "postcss": "8.5.26"
   },
   "dependencies": {
     "@codemirror/autocomplete": "6.20.3",
@@ -76,7 +77,7 @@
     "husky": "9.1.7",
     "lint-staged": "17.0.8",
     "playwright": "1.61.1",
-    "postcss": "8.5.16",
+    "postcss": "8.5.26",
     "svelte-check": "4.7.1",
     "tailwindcss": "4.3.2",
     "typescript": "6.0.3",
