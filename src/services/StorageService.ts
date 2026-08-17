@@ -347,6 +347,19 @@ export class StorageService {
     let json = JSON.stringify(baseSettings)
     const existing = await sync.get(null)
     const previousMeta = existing[SETTINGS_META_KEY] as SettingsMeta | undefined
+
+    // Live chunks with no manifest means sync has delivered part of a chunked
+    // write to this device and not the rest. Everything that layout encodes —
+    // that it is chunked at all, and whether its rules were spilled — lives in
+    // the manifest, so writing now would republish this device's partial view
+    // and wipe the real settings everywhere. Refuse until the rest arrives.
+    const chunksLive = Object.keys(existing).some(
+      (key) => /^settings_\d+$/.test(key) && typeof existing[key] === 'string'
+    )
+    if (chunksLive && !previousMeta) {
+      throw new Error(I18nService.getMessage('syncStorageIncomplete'))
+    }
+
     const stickySpill = previousMeta?.rulesLocal === true
 
     const items: Record<string, unknown> = {}
@@ -422,12 +435,21 @@ export class StorageService {
       return { settings: JSON.parse(json) as AppSettings, rulesLocal: meta.rulesLocal === true }
     }
 
-    // A `chunks: 0` manifest is only ever written together with a `settings`
-    // value, so seeing one without the other means sync has delivered part of
-    // that write — it propagates per item, whatever the writer did atomically.
-    // Treat it as unreadable so the caller serves its cached copy instead of
-    // mistaking a shrink-to-single-key for "this user has no settings".
-    if (meta && stored[SETTINGS_KEY] == null) {
+    // Sync propagates per item, so a device can hold one key of a write and not
+    // another. Two shapes prove we are looking at half of one, and both must
+    // read as unreadable rather than as "this user has no settings" — the
+    // caller serves its cached copy instead.
+    //
+    // An explicit null under `settings` is written by exactly one code path
+    // (the chunked branch below), so it proves a chunked layout exists even
+    // when the manifest has not arrived. A profile that never had settings has
+    // the key absent instead, which is how the two stay distinguishable.
+    if (stored[SETTINGS_KEY] === null) {
+      throw new Error('Settings are chunked but the manifest has not arrived')
+    }
+    // A `chunks: 0` manifest is only ever written together with its `settings`
+    // value, so one without the other is the same story in reverse.
+    if (meta && stored[SETTINGS_KEY] === undefined) {
       throw new Error('Settings item missing for single-key layout')
     }
 

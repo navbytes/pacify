@@ -555,5 +555,6 @@
   "patternHelpExact": {"message":"Correspond exactement à ce nom d'hôte, ex."},
   "patternHelpRegex": {"message":"Expression régulière testée sur le nom d'hôte, ex."},
   "patternHelpCidr": {"message":"Correspond aux adresses IP d'une plage CIDR, ex."},
-  "syncStorageQuotaExceeded": {"message":"Vos paramètres sont trop volumineux pour le stockage de synchronisation de Chrome (max 100 Ko). Supprimez quelques règles ou configurations de proxy, puis réessayez."}
+  "syncStorageQuotaExceeded": {"message":"Vos paramètres sont trop volumineux pour le stockage de synchronisation de Chrome (max 100 Ko). Supprimez quelques règles ou configurations de proxy, puis réessayez."},
+  "syncStorageIncomplete": {"message":"Vos paramètres sont encore en cours de synchronisation avec cet appareil. Patientez un instant, puis réessayez."}
 }

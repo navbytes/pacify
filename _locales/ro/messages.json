@@ -555,5 +555,6 @@
   "patternHelpExact": {"message":"Se potrivește exact cu acest nume de gazdă, ex.:"},
   "patternHelpRegex": {"message":"Expresie regulată testată pe numele de gazdă, ex.:"},
   "patternHelpCidr": {"message":"Se potrivește cu adrese IP dintr-un interval CIDR, ex.:"},
-  "syncStorageQuotaExceeded": {"message":"Setările dvs. sunt prea mari pentru stocarea de sincronizare Chrome (max. 100 KB). Eliminați câteva reguli sau configurații de proxy și încercați din nou."}
+  "syncStorageQuotaExceeded": {"message":"Setările dvs. sunt prea mari pentru stocarea de sincronizare Chrome (max. 100 KB). Eliminați câteva reguli sau configurații de proxy și încercați din nou."},
+  "syncStorageIncomplete": {"message":"Setările dvs. încă se sincronizează cu acest dispozitiv. Așteptați un moment și încercați din nou."}
 }

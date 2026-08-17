@@ -555,5 +555,6 @@
   "patternHelpExact": {"message":"Corresponde exatamente a este nome de host, ex.:"},
   "patternHelpRegex": {"message":"Expressão regular testada contra o nome de host, ex.:"},
   "patternHelpCidr": {"message":"Corresponde a endereços IP dentro de uma faixa CIDR, ex.:"},
-  "syncStorageQuotaExceeded": {"message":"Suas configurações são grandes demais para o armazenamento de sincronização do Chrome (máx. 100 KB). Remova algumas regras ou configurações de proxy e tente novamente."}
+  "syncStorageQuotaExceeded": {"message":"Suas configurações são grandes demais para o armazenamento de sincronização do Chrome (máx. 100 KB). Remova algumas regras ou configurações de proxy e tente novamente."},
+  "syncStorageIncomplete": {"message":"Suas configurações ainda estão sendo sincronizadas com este dispositivo. Aguarde um momento e tente novamente."}
 }

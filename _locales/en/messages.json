@@ -555,5 +555,6 @@
   "patternHelpExact": {"message":"Matches this hostname exactly, e.g."},
   "patternHelpRegex": {"message":"Regular expression tested against the hostname, e.g."},
   "patternHelpCidr": {"message":"Matches IP addresses within a CIDR range, e.g."},
-  "syncStorageQuotaExceeded": {"message":"Your settings are too large for Chrome's sync storage (100 KB max). Remove some rules or proxy configurations and try again."}
+  "syncStorageQuotaExceeded": {"message":"Your settings are too large for Chrome's sync storage (100 KB max). Remove some rules or proxy configurations and try again."},
+  "syncStorageIncomplete": {"message":"Your settings are still syncing to this device. Wait a moment and try again."}
 }

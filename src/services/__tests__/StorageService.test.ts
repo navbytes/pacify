@@ -355,6 +355,23 @@ describe('StorageService sync layout', () => {
     expect(await StorageService.getSettings()).toEqual(DEFAULT_SETTINGS)
   })
 
+  test('a device that received the chunks but not the manifest refuses to clobber them', async () => {
+    // settings_meta is just another sync item and can arrive last. Without it,
+    // nothing marks these settings as chunked or spilled — so a save here would
+    // republish, and every other device would lose the configs entirely.
+    const settings = makeSettings(600)
+    await StorageService.saveSettings(settings)
+    const chunks = liveChunkKeys()
+    sync.store.delete('settings_meta') // manifest not delivered yet
+
+    StorageService.invalidateCache()
+    expect(await StorageService.getSettings()).toEqual(DEFAULT_SETTINGS) // nothing readable
+
+    // The save must fail rather than write those defaults over the real data.
+    await expect(StorageService.saveSettings(DEFAULT_SETTINGS)).rejects.toThrow()
+    for (const key of chunks) expect(typeof sync.store.get(key)).toBe('string')
+  })
+
   test('a partially synced chunk set falls back to the last good copy, not defaults', async () => {
     const settings = makeSettings(60)
     await StorageService.saveSettings(settings) // warms the cache
