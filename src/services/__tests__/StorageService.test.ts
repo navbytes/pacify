@@ -372,6 +372,36 @@ describe('StorageService sync layout', () => {
     for (const key of chunks) expect(typeof sync.store.get(key)).toBe('string')
   })
 
+  test('a device that received the manifest but not the chunks refuses to clobber them', async () => {
+    // The mirror of the case above, and the order sync actually delivered in
+    // for a spilled profile: the manifest is small and lands first.
+    const settings = makeSettings(600)
+    await StorageService.saveSettings(settings)
+    const chunks = liveChunkKeys()
+    sync.store.delete(chunks[0]) // one chunk still in flight
+
+    StorageService.invalidateCache()
+    expect(await StorageService.getSettings()).toEqual(DEFAULT_SETTINGS)
+
+    await expect(StorageService.saveSettings(DEFAULT_SETTINGS)).rejects.toThrow()
+    for (const key of chunks.slice(1)) expect(typeof sync.store.get(key)).toBe('string')
+    expect((sync.store.get('settings_meta') as { rulesLocal?: boolean }).rulesLocal).toBe(true)
+  })
+
+  test('a single-key manifest whose payload is in flight refuses to clobber it', async () => {
+    const settings = makeSettings(5)
+    await StorageService.saveSettings(settings)
+    sync.store.delete('settings') // payload not delivered yet
+
+    StorageService.invalidateCache()
+    await expect(StorageService.saveSettings(DEFAULT_SETTINGS)).rejects.toThrow()
+
+    // Once it lands, the real settings are still there and saving works again.
+    sync.store.set('settings', settings)
+    expect(await readBack()).toEqual(settings)
+    await StorageService.saveSettings(settings)
+  })
+
   test('a partially synced chunk set falls back to the last good copy, not defaults', async () => {
     const settings = makeSettings(60)
     await StorageService.saveSettings(settings) // warms the cache

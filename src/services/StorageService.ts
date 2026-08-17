@@ -348,15 +348,27 @@ export class StorageService {
     const existing = await sync.get(null)
     const previousMeta = existing[SETTINGS_META_KEY] as SettingsMeta | undefined
 
-    // Live chunks with no manifest means sync has delivered part of a chunked
-    // write to this device and not the rest. Everything that layout encodes —
-    // that it is chunked at all, and whether its rules were spilled — lives in
-    // the manifest, so writing now would republish this device's partial view
-    // and wipe the real settings everywhere. Refuse until the rest arrives.
-    const chunksLive = Object.keys(existing).some(
-      (key) => /^settings_\d+$/.test(key) && typeof existing[key] === 'string'
-    )
-    if (chunksLive && !previousMeta) {
+    // Never publish over a layout this device cannot currently read in full —
+    // the write-side mirror of the guards in `readSyncSettings`. Sync delivers
+    // per item, so any of these shapes means part of a write is still in
+    // flight; saving now would republish this device's partial view and wipe
+    // the real settings everywhere. All three are decided from `existing`,
+    // which is already in hand.
+    const incomplete =
+      previousMeta === undefined
+        ? // Chunks with no manifest: nothing records that this is chunked at
+          // all, nor whether its rules were spilled.
+          Object.keys(existing).some(
+            (key) => /^settings_\d+$/.test(key) && typeof existing[key] === 'string'
+          )
+        : previousMeta.chunks > 0
+          ? // A manifest promising chunks that have not all arrived.
+            !Array.from({ length: previousMeta.chunks }, (_, i) => chunkKey(i)).every(
+              (key) => typeof existing[key] === 'string'
+            )
+          : // A single-key manifest whose payload has not arrived.
+            existing[SETTINGS_KEY] == null
+    if (incomplete) {
       throw new Error(I18nService.getMessage('syncStorageIncomplete'))
     }
 
@@ -430,7 +442,10 @@ export class StorageService {
       const parts = await sync.get(keys)
       const json = keys.map((key) => parts[key] ?? '').join('')
       if (meta.length !== undefined && json.length !== meta.length) {
-        throw new Error(`Settings chunks incomplete (${json.length}/${meta.length} chars)`)
+        // Detail goes to the log; the thrown message may reach the user when a
+        // cold service worker has no cached copy to fall back on.
+        logger.warn(`Settings chunks incomplete (${json.length}/${meta.length} chars)`)
+        throw new Error(I18nService.getMessage('syncStorageIncomplete'))
       }
       return { settings: JSON.parse(json) as AppSettings, rulesLocal: meta.rulesLocal === true }
     }
@@ -445,12 +460,14 @@ export class StorageService {
     // when the manifest has not arrived. A profile that never had settings has
     // the key absent instead, which is how the two stay distinguishable.
     if (stored[SETTINGS_KEY] === null) {
-      throw new Error('Settings are chunked but the manifest has not arrived')
+      logger.warn('Settings are chunked but the manifest has not arrived')
+      throw new Error(I18nService.getMessage('syncStorageIncomplete'))
     }
     // A `chunks: 0` manifest is only ever written together with its `settings`
     // value, so one without the other is the same story in reverse.
     if (meta && stored[SETTINGS_KEY] === undefined) {
-      throw new Error('Settings item missing for single-key layout')
+      logger.warn('Settings item missing for single-key layout')
+      throw new Error(I18nService.getMessage('syncStorageIncomplete'))
     }
 
     return {
