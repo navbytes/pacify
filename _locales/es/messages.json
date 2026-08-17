@@ -554,5 +554,7 @@
   "patternHelpWildcard": {"message":"Coincide con el nombre de host — * representa cualquier carácter, ej."},
   "patternHelpExact": {"message":"Coincide exactamente con este nombre de host, ej."},
   "patternHelpRegex": {"message":"Expresión regular probada contra el nombre de host, ej."},
-  "patternHelpCidr": {"message":"Coincide con direcciones IP dentro de un rango CIDR, ej."}
+  "patternHelpCidr": {"message":"Coincide con direcciones IP dentro de un rango CIDR, ej."},
+  "syncStorageQuotaExceeded": {"message":"Tu configuración es demasiado grande para el almacenamiento de sincronización de Chrome (máx. 100 KB). Elimina algunas reglas o configuraciones de proxy e inténtalo de nuevo."},
+  "syncStorageIncomplete": {"message":"Tu configuración todavía se está sincronizando con este dispositivo. Espera un momento e inténtalo de nuevo."}
 }

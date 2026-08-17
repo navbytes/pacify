@@ -554,5 +554,7 @@
   "patternHelpWildcard": {"message":"ホスト名に一致 — * は任意の文字を表します。例:"},
   "patternHelpExact": {"message":"このホスト名に完全に一致します。例:"},
   "patternHelpRegex": {"message":"ホスト名に対してテストされる正規表現。例:"},
-  "patternHelpCidr": {"message":"CIDR範囲内のIPアドレスに一致します。例:"}
+  "patternHelpCidr": {"message":"CIDR範囲内のIPアドレスに一致します。例:"},
+  "syncStorageQuotaExceeded": {"message":"設定が Chrome の同期ストレージの上限を超えています（最大 100 KB）。ルールまたはプロキシ設定をいくつか削除してから、もう一度お試しください。"},
+  "syncStorageIncomplete": {"message":"設定はまだこの端末に同期中です。しばらく待ってからもう一度お試しください。"}
 }

@@ -34,11 +34,19 @@ export async function launchExtension(
 ) {
   const { suppressOnboarding = true, extraArgs = [] } = options
   const extensionPath = path.join(__dirname, '../../../dist')
+  const executablePath = resolveChromePath()
 
   // Launch browser with extension
   const context = await chromium.launchPersistentContext('', {
     headless: process.env.HEADED !== '1',
-    executablePath: resolveChromePath(),
+    executablePath,
+    // Playwright's default headless binary is chromium_headless_shell, which
+    // cannot load extensions at all — the service worker never starts and every
+    // extension test hangs until it times out. `channel: 'chromium'` selects the
+    // full Chromium build (new headless mode), which does support MV3.
+    // Only meaningful when Playwright picks the binary; an explicit
+    // executablePath (CHROME_PATH / Chrome for Testing) already is full Chrome.
+    ...(executablePath ? {} : { channel: 'chromium' as const }),
     args: [
       `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,

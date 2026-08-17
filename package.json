@@ -24,7 +24,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:smoke": "playwright test tests/e2e/extension-smoke.spec.ts",
-    "test:e2e:ci": "playwright test extension-smoke comprehensive-flows proxy-management traffic-modes traffic-routing accessibility",
+    "test:e2e:ci": "playwright test extension-smoke comprehensive-flows proxy-management traffic-modes traffic-routing accessibility import-large-backup",
     "check:ci": "biome ci ./src",
     "package": "vite build && cd dist && zip -r ../pacify-extension.zip . && cd ..",
     "clean": "bun --shell 'rm -rf dist dev node_modules/.vite'",
@@ -41,7 +41,8 @@
   "overrides": {
     "@codemirror/state": "6.5.4",
     "@codemirror/view": "6.39.11",
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.1",
+    "postcss": "8.5.26"
   },
   "dependencies": {
     "@codemirror/autocomplete": "6.20.3",
@@ -76,7 +77,7 @@
     "husky": "9.1.7",
     "lint-staged": "17.0.8",
     "playwright": "1.61.1",
-    "postcss": "8.5.16",
+    "postcss": "8.5.26",
     "svelte-check": "4.7.1",
     "tailwindcss": "4.3.2",
     "typescript": "6.0.3",
