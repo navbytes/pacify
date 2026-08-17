@@ -219,9 +219,6 @@ export class StorageService {
       ? await browserService.storage.local.get(autoConfigIds.map(autoRulesKey))
       : {}
     const ownsRulesOf = (configId: string): boolean => autoRulesKey(configId) in mirroredRules
-    const holdsAllRules = settingsCopy.proxyConfigs.every(
-      (c) => !c.autoProxy || !c.id || c.autoProxy.rules.length > 0 || ownsRulesOf(c.id)
-    )
 
     // Store base settings in sync storage
     const baseSettings: AppSettings = {
@@ -248,8 +245,11 @@ export class StorageService {
         // that records a real deletion. Creating one from nothing would forge
         // proof that rules spilled on another device are gone.
         if (config.id && config.autoProxy) {
-          if (config.autoProxy.rules.length > 0 || ownsRulesOf(config.id)) {
-            localWrites.push(this.storeAutoProxyRules(config.id, config.autoProxy.rules))
+          const rules = config.autoProxy.rules ?? []
+          const unchanged =
+            JSON.stringify(mirroredRules[autoRulesKey(config.id)]) === JSON.stringify(rules)
+          if ((rules.length > 0 || ownsRulesOf(config.id)) && !unchanged) {
+            localWrites.push(this.storeAutoProxyRules(config.id, rules))
           }
         }
 
@@ -308,7 +308,7 @@ export class StorageService {
     await Promise.all(localWrites)
 
     // Save base settings to sync storage
-    await StorageService.writeSyncSettings(baseSettings, holdsAllRules)
+    await StorageService.writeSyncSettings(baseSettings)
 
     // Update cache
     this.settingsCache = settings
@@ -320,32 +320,34 @@ export class StorageService {
    * fits Chrome's per-item quota and as `settings_<n>` chunks otherwise.
    *
    * Everything — manifest, payload, and `null` over whatever the other layout
-   * left behind — goes into ONE `set` call, which Chrome applies atomically. A
-   * concurrent save from another context (popup vs. background) can therefore
-   * only replace the whole layout, never leave readers with a mix or a hole; a
-   * separate `remove` of stale keys could race with such a writer and delete
-   * data it had just written. Retired keys are nulled rather than removed for
-   * the same reason and cost a few bytes each.
+   * left behind — goes into ONE `set` call, so no *local* reader (popup vs.
+   * background) can observe a half-applied layout, and a concurrent local save
+   * can only replace it wholesale. A separate `remove` of stale keys could race
+   * such a writer and delete data it had just written, so retired keys are
+   * nulled instead, at a few bytes each. Note this atomicity is local only:
+   * Chrome sync propagates *per item*, so a remote device can still see one
+   * key of a write before another — which `readSyncSettings` guards against.
    *
    * If even the chunked layout would blow sync's *total* quota, Auto-Proxy rule
    * lists are left out of the sync copy and read back from local storage, which
    * `saveSettings` keeps mirrored. That trades cross-device sync of those rules
    * (only for setups this large) against not being able to save them at all.
    *
-   * The spill flag is sticky while this device is missing rules it knows were
-   * spilled (`holdsAllRules` false). Clearing it there would publish an
-   * authoritative empty rule list to every other device — turning "this device
-   * can't see those rules" into "those rules are gone everywhere".
+   * Once set, `rulesLocal` stays set. Un-spilling would mean some device
+   * republishing its own rule lists as the truth for every device — and no
+   * device can tell a complete view from a partial one, because a device that
+   * never received the spilled rules looks exactly like one whose user deleted
+   * them. A second device adding a single rule would then overwrite the
+   * hundreds held elsewhere. The cost of staying spilled is that a profile
+   * which later shrinks keeps its rules device-local; the cost of the
+   * alternative is silent, unrecoverable data loss.
    */
-  private static async writeSyncSettings(
-    baseSettings: AppSettings,
-    holdsAllRules = true
-  ): Promise<void> {
+  private static async writeSyncSettings(baseSettings: AppSettings): Promise<void> {
     const sync = browserService.storage.sync
     let json = JSON.stringify(baseSettings)
     const existing = await sync.get(null)
     const previousMeta = existing[SETTINGS_META_KEY] as SettingsMeta | undefined
-    const stickySpill = previousMeta?.rulesLocal === true && !holdsAllRules
+    const stickySpill = previousMeta?.rulesLocal === true
 
     const items: Record<string, unknown> = {}
     let liveChunks = 0
@@ -418,6 +420,15 @@ export class StorageService {
         throw new Error(`Settings chunks incomplete (${json.length}/${meta.length} chars)`)
       }
       return { settings: JSON.parse(json) as AppSettings, rulesLocal: meta.rulesLocal === true }
+    }
+
+    // A `chunks: 0` manifest is only ever written together with a `settings`
+    // value, so seeing one without the other means sync has delivered part of
+    // that write — it propagates per item, whatever the writer did atomically.
+    // Treat it as unreadable so the caller serves its cached copy instead of
+    // mistaking a shrink-to-single-key for "this user has no settings".
+    if (meta && stored[SETTINGS_KEY] == null) {
+      throw new Error('Settings item missing for single-key layout')
     }
 
     return {

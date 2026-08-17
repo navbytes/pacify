@@ -339,6 +339,22 @@ describe('StorageService sync layout', () => {
     expect(spies.syncSet).not.toHaveBeenCalled()
   })
 
+  test('a half-delivered shrink to the single-key layout falls back to the cache', async () => {
+    // Chrome sync propagates per item, so another device can see the new
+    // `settings_meta {chunks: 0}` while `settings` still holds the null the
+    // previous chunked write left behind. That must not read as "no settings".
+    const settings = makeSettings(60)
+    await StorageService.saveSettings(settings) // chunked, warms the cache
+    sync.store.set('settings_meta', { chunks: 0 })
+    sync.store.set('settings', null)
+
+    ;(StorageService as unknown as { lastSettingsUpdate: number }).lastSettingsUpdate = 0
+    expect(await StorageService.getSettings()).toEqual(settings)
+
+    StorageService.invalidateCache()
+    expect(await StorageService.getSettings()).toEqual(DEFAULT_SETTINGS)
+  })
+
   test('a partially synced chunk set falls back to the last good copy, not defaults', async () => {
     const settings = makeSettings(60)
     await StorageService.saveSettings(settings) // warms the cache
@@ -422,6 +438,35 @@ describe('StorageService sync layout', () => {
     expect(asSeenByDeviceA.quickSwitchEnabled).toBe(true) // B's actual edit still synced
   })
 
+  test('a second device that ADDS a rule cannot overwrite the spilled set', async () => {
+    // The dangerous variant of the case above: device B's view is empty, so any
+    // edit it makes is based on a false premise. It must still not become the
+    // authority for a list it never saw.
+    const settings = makeSettings(600)
+    await StorageService.saveSettings(settings)
+    const autoId = settings.proxyConfigs[1].id as string
+    const realRules = settings.proxyConfigs[1].autoProxy?.rules
+
+    local.store.clear() // device B
+    const seenByB = await readBack()
+    expect(seenByB.proxyConfigs[1].autoProxy?.rules).toEqual([])
+
+    // The user on B, seeing "no rules", adds one.
+    await StorageService.saveSettings({
+      ...seenByB,
+      proxyConfigs: seenByB.proxyConfigs.map((c) =>
+        c.id === autoId && c.autoProxy
+          ? { ...c, autoProxy: { ...c.autoProxy, rules: [makeRule(0, autoId, '*.added.example')] } }
+          : c
+      ),
+    })
+
+    // Device A still has all 600.
+    local.store.set(`auto_rules_${autoId}`, realRules)
+    const seenByA = await readBack()
+    expect(seenByA.proxyConfigs[1].autoProxy?.rules).toHaveLength(600)
+  })
+
   test('emptying a spilled rule list on the owning device sticks', async () => {
     // The mirror records the empty list, so the restore does not resurrect the
     // old rules — the opposite failure to the cross-device case above.
@@ -449,7 +494,11 @@ describe('StorageService sync layout', () => {
     expect(sync.store.get('settings_meta')).toEqual({ chunks: 0 })
   })
 
-  test('dropping back under the quota puts rules back into sync', async () => {
+  test('once spilled, rules stay spilled even after the settings shrink', async () => {
+    // Un-spilling would mean one device republishing its own rule lists as the
+    // truth, and no device can prove its view is the complete one. Staying
+    // spilled costs cross-device sync of these rules; un-spilling would cost
+    // the rules themselves. The data still round-trips for its owner.
     await StorageService.saveSettings(makeSettings(600))
     expect((sync.store.get('settings_meta') as { rulesLocal?: boolean }).rulesLocal).toBe(true)
 
@@ -457,7 +506,7 @@ describe('StorageService sync layout', () => {
     await StorageService.saveSettings(smaller)
 
     const meta = sync.store.get('settings_meta') as { rulesLocal?: boolean }
-    expect(meta.rulesLocal).toBeUndefined()
+    expect(meta.rulesLocal).toBe(true)
     expect(await readBack()).toEqual(smaller)
   })
 
