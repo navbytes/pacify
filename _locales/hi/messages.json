@@ -554,5 +554,6 @@
   "patternHelpWildcard": {"message":"होस्टनाम से मिलान करता है — * किसी भी वर्ण के लिए होता है, जैसे"},
   "patternHelpExact": {"message":"इस होस्टनाम से ठीक मिलान करता है, जैसे"},
   "patternHelpRegex": {"message":"होस्टनाम के विरुद्ध परीक्षित रेगुलर एक्सप्रेशन, जैसे"},
-  "patternHelpCidr": {"message":"किसी CIDR रेंज के भीतर IP पतों से मिलान करता है, जैसे"}
+  "patternHelpCidr": {"message":"किसी CIDR रेंज के भीतर IP पतों से मिलान करता है, जैसे"},
+  "syncStorageQuotaExceeded": {"message":"आपकी सेटिंग्स Chrome के सिंक स्टोरेज के लिए बहुत बड़ी हैं (अधिकतम 100 KB)। कुछ नियम या प्रॉक्सी कॉन्फ़िगरेशन हटाकर फिर से प्रयास करें।"}
 }

@@ -554,5 +554,6 @@
   "patternHelpWildcard": {"message":"হোস্টনামের সাথে মেলে — * যেকোনো অক্ষরের জন্য বোঝায়, যেমন"},
   "patternHelpExact": {"message":"এই হোস্টনামের সাথে হুবহু মেলে, যেমন"},
   "patternHelpRegex": {"message":"হোস্টনামের বিপরীতে পরীক্ষিত রেগুলার এক্সপ্রেশন, যেমন"},
-  "patternHelpCidr": {"message":"একটি CIDR রেঞ্জের মধ্যে IP ঠিকানার সাথে মেলে, যেমন"}
+  "patternHelpCidr": {"message":"একটি CIDR রেঞ্জের মধ্যে IP ঠিকানার সাথে মেলে, যেমন"},
+  "syncStorageQuotaExceeded": {"message":"আপনার সেটিংস Chrome-এর সিঙ্ক স্টোরেজের জন্য খুব বড় (সর্বোচ্চ 100 KB)। কিছু নিয়ম বা প্রক্সি কনফিগারেশন সরিয়ে আবার চেষ্টা করুন।"}
 }

@@ -554,5 +554,6 @@
   "patternHelpWildcard": {"message":"匹配主机名 — * 代表任意字符，例如："},
   "patternHelpExact": {"message":"精确匹配此主机名，例如："},
   "patternHelpRegex": {"message":"针对主机名测试的正则表达式，例如："},
-  "patternHelpCidr": {"message":"匹配CIDR范围内的IP地址，例如："}
+  "patternHelpCidr": {"message":"匹配CIDR范围内的IP地址，例如："},
+  "syncStorageQuotaExceeded": {"message":"您的设置超出了 Chrome 同步存储的上限（最大 100 KB）。请删除一些规则或代理配置后重试。"}
 }

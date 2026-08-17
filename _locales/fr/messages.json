@@ -554,5 +554,6 @@
   "patternHelpWildcard": {"message":"Correspond au nom d'hôte — * représente n'importe quels caractères, ex."},
   "patternHelpExact": {"message":"Correspond exactement à ce nom d'hôte, ex."},
   "patternHelpRegex": {"message":"Expression régulière testée sur le nom d'hôte, ex."},
-  "patternHelpCidr": {"message":"Correspond aux adresses IP d'une plage CIDR, ex."}
+  "patternHelpCidr": {"message":"Correspond aux adresses IP d'une plage CIDR, ex."},
+  "syncStorageQuotaExceeded": {"message":"Vos paramètres sont trop volumineux pour le stockage de synchronisation de Chrome (max 100 Ko). Supprimez quelques règles ou configurations de proxy, puis réessayez."}
 }
