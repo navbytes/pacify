@@ -128,12 +128,18 @@ function estimateChunkedTotalBytes(chunks: string[]): number {
   return bytes
 }
 
-/** Drop every config's Auto-Proxy rule list — they are restored from local storage. */
+/**
+ * Drop Auto-Proxy rule lists so they can be read back from local storage.
+ * Only configs with an id are touched: the local copy is keyed by id, so an
+ * id-less config has nowhere to be restored from and must keep its rules.
+ */
 function withoutAutoProxyRules(settings: AppSettings): AppSettings {
   return {
     ...settings,
     proxyConfigs: settings.proxyConfigs.map((config) =>
-      config.autoProxy ? { ...config, autoProxy: { ...config.autoProxy, rules: [] } } : config
+      config.id && config.autoProxy
+        ? { ...config, autoProxy: { ...config.autoProxy, rules: [] } }
+        : config
     ),
   }
 }

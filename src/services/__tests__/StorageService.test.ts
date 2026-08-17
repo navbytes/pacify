@@ -375,6 +375,28 @@ describe('StorageService sync layout', () => {
     expect(await readBack()).toEqual(settings)
   })
 
+  test('rules of a config with no id are never spilled — they have nowhere to come back from', async () => {
+    // Local copies are keyed by config id, so an id-less config must keep its
+    // rules in sync even when the payload is over budget. Spilling the big
+    // (id'd) config is enough to get under it; the small orphan rides along.
+    const big = makeSettings(600)
+    const orphan = { ...makeSettings(10).proxyConfigs[1], id: undefined, name: 'no id' }
+    await StorageService.saveSettings({ ...big, proxyConfigs: [...big.proxyConfigs, orphan] })
+
+    const meta = sync.store.get('settings_meta') as { chunks: number; rulesLocal?: boolean }
+    expect(meta.rulesLocal).toBe(true)
+
+    const synced = JSON.parse(
+      liveChunkKeys()
+        .sort((a, b) => Number(a.slice(9)) - Number(b.slice(9)))
+        .map((k) => sync.store.get(k) as string)
+        .join('')
+    ) as AppSettings
+    expect(synced.proxyConfigs.find((c) => c.name === 'no id')?.autoProxy?.rules).toHaveLength(10)
+    // ...while the config that can be restored from local was spilled.
+    expect(synced.proxyConfigs.find((c) => c.name === 'auto switch')?.autoProxy?.rules).toEqual([])
+  })
+
   test('rules are mirrored to local even when they comfortably fit in sync', async () => {
     // Guarantees a later spill can never lose rules that were only ever in sync.
     const settings = makeSettings(5)
