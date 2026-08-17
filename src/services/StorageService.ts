@@ -208,6 +208,21 @@ export class StorageService {
     // awaited below so a save doesn't resolve before its offloaded data lands.
     const localWrites: Promise<void>[] = []
 
+    // Which Auto-Proxy rule lists this device already holds a local copy of.
+    // Read up front, before the mirroring below creates any, because that
+    // distinction is what tells "the user cleared these rules" apart from
+    // "these rules were spilled on some other device".
+    const autoConfigIds = settingsCopy.proxyConfigs
+      .filter((c) => c.id && c.autoProxy)
+      .map((c) => c.id as string)
+    const mirroredRules = autoConfigIds.length
+      ? await browserService.storage.local.get(autoConfigIds.map(autoRulesKey))
+      : {}
+    const ownsRulesOf = (configId: string): boolean => autoRulesKey(configId) in mirroredRules
+    const holdsAllRules = settingsCopy.proxyConfigs.every(
+      (c) => !c.autoProxy || !c.id || c.autoProxy.rules.length > 0 || ownsRulesOf(c.id)
+    )
+
     // Store base settings in sync storage
     const baseSettings: AppSettings = {
       ...settingsCopy,
@@ -229,8 +244,13 @@ export class StorageService {
 
         // Mirror Auto-Proxy rules to local storage on every save, so they are
         // already there if this or a later save has to spill them out of sync.
-        if (config.id && config.autoProxy && config.autoProxy.rules.length > 0) {
-          localWrites.push(this.storeAutoProxyRules(config.id, config.autoProxy.rules))
+        // An empty list is mirrored only over a copy this device already owns —
+        // that records a real deletion. Creating one from nothing would forge
+        // proof that rules spilled on another device are gone.
+        if (config.id && config.autoProxy) {
+          if (config.autoProxy.rules.length > 0 || ownsRulesOf(config.id)) {
+            localWrites.push(this.storeAutoProxyRules(config.id, config.autoProxy.rules))
+          }
         }
 
         // If PAC script data is large, we'll store it separately
@@ -288,7 +308,7 @@ export class StorageService {
     await Promise.all(localWrites)
 
     // Save base settings to sync storage
-    await StorageService.writeSyncSettings(baseSettings)
+    await StorageService.writeSyncSettings(baseSettings, holdsAllRules)
 
     // Update cache
     this.settingsCache = settings
@@ -311,29 +331,41 @@ export class StorageService {
    * lists are left out of the sync copy and read back from local storage, which
    * `saveSettings` keeps mirrored. That trades cross-device sync of those rules
    * (only for setups this large) against not being able to save them at all.
+   *
+   * The spill flag is sticky while this device is missing rules it knows were
+   * spilled (`holdsAllRules` false). Clearing it there would publish an
+   * authoritative empty rule list to every other device — turning "this device
+   * can't see those rules" into "those rules are gone everywhere".
    */
-  private static async writeSyncSettings(baseSettings: AppSettings): Promise<void> {
+  private static async writeSyncSettings(
+    baseSettings: AppSettings,
+    holdsAllRules = true
+  ): Promise<void> {
     const sync = browserService.storage.sync
     let json = JSON.stringify(baseSettings)
     const existing = await sync.get(null)
+    const previousMeta = existing[SETTINGS_META_KEY] as SettingsMeta | undefined
+    const stickySpill = previousMeta?.rulesLocal === true && !holdsAllRules
 
     const items: Record<string, unknown> = {}
     let liveChunks = 0
-    if (estimateSyncItemBytes(SETTINGS_KEY, json) <= SYNC_ITEM_BUDGET) {
+    if (!stickySpill && estimateSyncItemBytes(SETTINGS_KEY, json) <= SYNC_ITEM_BUDGET) {
       items[SETTINGS_KEY] = baseSettings
       items[SETTINGS_META_KEY] = { chunks: 0 } satisfies SettingsMeta
     } else {
       let chunks = splitForSync(json)
       let rulesLocal = false
-      if (estimateChunkedTotalBytes(chunks) > SYNC_TOTAL_BUDGET) {
+      if (stickySpill || estimateChunkedTotalBytes(chunks) > SYNC_TOTAL_BUDGET) {
         const trimmed = withoutAutoProxyRules(baseSettings)
         const trimmedJson = JSON.stringify(trimmed)
         // Only worth it if dropping the rules actually shrinks the payload.
-        if (trimmedJson.length < json.length) {
+        if (stickySpill || trimmedJson.length < json.length) {
           rulesLocal = true
           json = trimmedJson
           chunks = splitForSync(json)
-          logger.warn('Settings exceed sync storage; Auto-Proxy rules kept in local storage only')
+          if (!stickySpill) {
+            logger.warn('Settings exceed sync storage; Auto-Proxy rules kept in local storage only')
+          }
         }
       }
       liveChunks = chunks.length

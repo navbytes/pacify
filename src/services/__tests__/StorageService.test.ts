@@ -397,6 +397,48 @@ describe('StorageService sync layout', () => {
     expect(synced.proxyConfigs.find((c) => c.name === 'auto switch')?.autoProxy?.rules).toEqual([])
   })
 
+  test('a second device cannot publish an empty rule list over spilled rules', async () => {
+    // Device A spills 600 rules; only A's local storage has them.
+    const settings = makeSettings(600)
+    await StorageService.saveSettings(settings)
+    const autoId = settings.proxyConfigs[1].id as string
+
+    // Device B: same synced settings, but its local storage never had the rules.
+    local.store.clear()
+    const asSeenByDeviceB = await readBack()
+    expect(asSeenByDeviceB.proxyConfigs[1].autoProxy?.rules).toEqual([])
+
+    // B saves for an unrelated reason. That must not turn "B can't see them"
+    // into "they are gone" for device A.
+    await StorageService.saveSettings({ ...asSeenByDeviceB, quickSwitchEnabled: true })
+
+    const meta = sync.store.get('settings_meta') as { rulesLocal?: boolean }
+    expect(meta.rulesLocal).toBe(true) // still points readers at local storage
+
+    // Device A, whose local copy is intact, still sees all 600 rules.
+    local.store.set(`auto_rules_${autoId}`, settings.proxyConfigs[1].autoProxy?.rules)
+    const asSeenByDeviceA = await readBack()
+    expect(asSeenByDeviceA.proxyConfigs[1].autoProxy?.rules).toHaveLength(600)
+    expect(asSeenByDeviceA.quickSwitchEnabled).toBe(true) // B's actual edit still synced
+  })
+
+  test('emptying a spilled rule list on the owning device sticks', async () => {
+    // The mirror records the empty list, so the restore does not resurrect the
+    // old rules — the opposite failure to the cross-device case above.
+    const settings = makeSettings(600)
+    await StorageService.saveSettings(settings)
+
+    const cleared: AppSettings = {
+      ...settings,
+      proxyConfigs: settings.proxyConfigs.map((c) =>
+        c.autoProxy ? { ...c, autoProxy: { ...c.autoProxy, rules: [] } } : c
+      ),
+    }
+    await StorageService.saveSettings(cleared)
+
+    expect(await readBack()).toEqual(cleared)
+  })
+
   test('rules are mirrored to local even when they comfortably fit in sync', async () => {
     // Guarantees a later spill can never lose rules that were only ever in sync.
     const settings = makeSettings(5)
