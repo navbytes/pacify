@@ -356,16 +356,18 @@ export class StorageService {
     // which is already in hand.
     const incomplete =
       previousMeta === undefined
-        ? // Chunks with no manifest: nothing records that this is chunked at
-          // all, nor whether its rules were spilled.
+        ? // No manifest, yet something proves a chunked layout exists: either a
+          // chunk, or the `settings: null` the chunked branch writes (the same
+          // proof `readSyncSettings` relies on). Nothing here records that the
+          // layout is chunked, nor whether its rules were spilled.
+          existing[SETTINGS_KEY] === null ||
           Object.keys(existing).some(
             (key) => /^settings_\d+$/.test(key) && typeof existing[key] === 'string'
           )
         : previousMeta.chunks > 0
-          ? // A manifest promising chunks that have not all arrived.
-            !Array.from({ length: previousMeta.chunks }, (_, i) => chunkKey(i)).every(
-              (key) => typeof existing[key] === 'string'
-            )
+          ? // A manifest promising chunks that have not all arrived, or that
+            // reassemble to the wrong size — the reader's two checks exactly.
+            !StorageService.chunksComplete(existing, previousMeta)
           : // A single-key manifest whose payload has not arrived.
             existing[SETTINGS_KEY] == null
     if (incomplete) {
@@ -421,6 +423,21 @@ export class StorageService {
       if (isQuotaError(error)) throw new Error(I18nService.getMessage('syncStorageQuotaExceeded'))
       throw error
     }
+  }
+
+  /**
+   * Whether every chunk a manifest promises is present and they reassemble to
+   * the length it recorded — the same test `readSyncSettings` applies, so the
+   * write guard refuses exactly when a read would find the layout unusable.
+   */
+  private static chunksComplete(stored: Record<string, unknown>, meta: SettingsMeta): boolean {
+    let json = ''
+    for (let i = 0; i < meta.chunks; i++) {
+      const part = stored[chunkKey(i)]
+      if (typeof part !== 'string') return false
+      json += part
+    }
+    return meta.length === undefined || json.length === meta.length
   }
 
   /**

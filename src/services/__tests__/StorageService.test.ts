@@ -388,6 +388,23 @@ describe('StorageService sync layout', () => {
     expect((sync.store.get('settings_meta') as { rulesLocal?: boolean }).rulesLocal).toBe(true)
   })
 
+  test('a device holding only the null placeholder refuses to clobber the chunks', async () => {
+    // The leanest half-delivery: `settings: null` arrives, manifest and every
+    // chunk are still in flight. That null is written only by the chunked
+    // branch, so it is proof a chunked layout exists — the reader already
+    // relies on it, and the writer must too.
+    const settings = makeSettings(600)
+    await StorageService.saveSettings(settings)
+    for (const key of [...sync.store.keys()]) {
+      if (key !== 'settings') sync.store.delete(key)
+    }
+    expect(sync.store.get('settings')).toBeNull()
+
+    StorageService.invalidateCache()
+    await expect(StorageService.saveSettings(DEFAULT_SETTINGS)).rejects.toThrow()
+    expect(sync.store.get('settings')).toBeNull() // not overwritten with defaults
+  })
+
   test('a single-key manifest whose payload is in flight refuses to clobber it', async () => {
     const settings = makeSettings(5)
     await StorageService.saveSettings(settings)
