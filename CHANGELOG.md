@@ -5,6 +5,13 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.33.3](https://github.com/navbytes/pacify/compare/v1.33.2...v1.33.3) (2026-08-18)
+
+
+### Bug Fixes
+
+* **popup:** keep "No proxy (direct)" reachable without scrolling ([#85](https://github.com/navbytes/pacify/issues/85)) ([9ba6a7a](https://github.com/navbytes/pacify/commit/9ba6a7a839df824a6eead25da6fbf49c27846b12))
+
 ## [1.33.2](https://github.com/navbytes/pacify/compare/v1.33.1...v1.33.2) (2026-08-18)
 
 
