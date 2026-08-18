@@ -411,7 +411,7 @@ let skippedCount = $derived(warnings.filter((w) => w.level === 'skipped').length
       {/if}
 
       {#if errorMessage}
-        <div class="mt-3 rounded-md bg-red-50 dark:bg-red-950/30 p-3">
+        <div class="mt-3 rounded-md bg-red-50 dark:bg-red-950/30 p-3" role="alert">
           <Text as="p" size="sm" classes="text-red-700 dark:text-red-300">{errorMessage}</Text>
         </div>
       {/if}

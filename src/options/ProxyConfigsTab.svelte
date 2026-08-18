@@ -255,7 +255,10 @@ async function handleViewModeChange(mode: ViewMode) {
   </div>
 
   {#if dropError}
-    <div class="mb-6 rounded-md bg-red-100 p-4 text-red-700 dark:bg-red-900/50 dark:text-red-200">
+    <div
+      class="mb-6 rounded-md bg-red-100 p-4 text-red-700 dark:bg-red-900/50 dark:text-red-200"
+      role="alert"
+    >
       <Text as="p">{dropError}</Text>
     </div>
   {/if}

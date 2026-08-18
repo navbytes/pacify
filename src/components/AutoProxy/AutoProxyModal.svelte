@@ -502,7 +502,7 @@ let selectableProxies = $derived(
 
       <!-- Error Message -->
       {#if errorMessage}
-        <div class={redSection.wrapper()} data-error-message>
+        <div class={redSection.wrapper()} data-error-message role="alert">
           <div class={redSection.background()}></div>
           <div class={redSection.accentBar()}></div>
           <div class="relative p-4 {redSection.content()}">
