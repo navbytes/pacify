@@ -3,7 +3,6 @@ import { ALERT_TYPES } from '@/interfaces/error'
 import { type ToastType, toastStore } from '@/stores/toastStore'
 import { browserService } from './chrome/BrowserService'
 import { I18nService } from './i18n/i18nService'
-import { StorageService } from './StorageService'
 
 /**
  * Notification context determines where notifications are shown
@@ -39,8 +38,13 @@ export class NotificationService {
    */
   private static async areNotificationsEnabled(): Promise<boolean> {
     try {
-      const preferences = await StorageService.getPreferences()
-      return preferences?.notifications ?? true
+      // Read storage directly rather than via StorageService.getPreferences():
+      // that accessor is wrapped in withErrorHandlingAndFallback, whose catch
+      // calls NotificationService.error() -> show() -> back here, so a failing
+      // read would loop forever. The raw call throws, so the catch below works.
+      const data = await browserService.storage.sync.get('preferences')
+      const stored = data.preferences as { notifications?: boolean } | undefined
+      return stored?.notifications ?? true
     } catch {
       return true // Fallback to enabled if we can't read settings
     }
