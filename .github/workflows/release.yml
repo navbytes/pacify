@@ -24,6 +24,8 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write # create the tag + GitHub Release
+      pull-requests: write # hand the release PR back to release-please
+      issues: write # ensure the "autorelease: tagged" label exists
 
     steps:
       - name: Checkout code
@@ -115,6 +117,30 @@ jobs:
           files: Pacify_${{ steps.version.outputs.VERSION }}.zip
           draft: false
           prerelease: false
+
+      # release-please tracks release PRs by label and refuses to open the next
+      # one while a merged release PR is still "autorelease: pending". This repo
+      # sets skip-github-release, so release-please never creates the release and
+      # therefore never flips that label itself — the workflow that does create
+      # the release has to, or the first release silently blocks every one after
+      # it (which is exactly what happened between v1.33.1 and v1.33.2).
+      - name: Hand the release PR back to release-please
+        if: steps.guard.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create "autorelease: tagged" --repo "$GITHUB_REPOSITORY" \
+            --color ededed --description "Release PR has been tagged" --force >/dev/null
+          prs=$(gh pr list --repo "$GITHUB_REPOSITORY" --state merged \
+            --label "autorelease: pending" --json number --jq '.[].number')
+          if [ -z "$prs" ]; then
+            echo "No pending release PR to mark."
+          fi
+          for pr in $prs; do
+            echo "Marking PR #$pr as tagged"
+            gh pr edit "$pr" --repo "$GITHUB_REPOSITORY" \
+              --add-label "autorelease: tagged" --remove-label "autorelease: pending"
+          done
 
       # Chrome Web Store submission is deliberately NOT part of this
       # workflow — it is a manual, human-triggered step. Run the
