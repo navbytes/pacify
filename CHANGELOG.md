@@ -5,6 +5,14 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.33.2](https://github.com/navbytes/pacify/compare/v1.33.1...v1.33.2) (2026-08-18)
+
+
+### Bug Fixes
+
+* prevent infinite loop when sync storage read fails ([#82](https://github.com/navbytes/pacify/issues/82)) ([7fba4b0](https://github.com/navbytes/pacify/commit/7fba4b0adf29b998588883d61b9d7366d14ffaae))
+* store large settings across sync keys ([#79](https://github.com/navbytes/pacify/issues/79)) ([5e2cb0e](https://github.com/navbytes/pacify/commit/5e2cb0e798fe8c2b4453f4fed98708f3af4c9f66)), closes [#75](https://github.com/navbytes/pacify/issues/75)
+
 ## [1.33.1](https://github.com/navbytes/pacify/compare/v1.33.0...v1.33.1) (2026-06-20)
 
 
