@@ -159,12 +159,13 @@ async function readBack(): Promise<AppSettings> {
 }
 
 describe('chrome byte accounting (calibration)', () => {
-  test.each(
-    MEASURED_CHROME_BYTES
-  )('the test double charges %s what real Chrome charges', (_label, char, bytes) => {
-    const baseline = chromeItemBytes('k', '')
-    expect(chromeItemBytes('k', char.repeat(100)) - baseline).toBe(bytes * 100)
-  })
+  test.each(MEASURED_CHROME_BYTES)(
+    'the test double charges %s what real Chrome charges',
+    (_label, char, bytes) => {
+      const baseline = chromeItemBytes('k', '')
+      expect(chromeItemBytes('k', char.repeat(100)) - baseline).toBe(bytes * 100)
+    }
+  )
 
   test('a lone surrogate cannot survive storage, so chunks must never split a pair', () => {
     // Real Chrome round-trips 'a\ud83da' as 'a�a' — the lone half is
