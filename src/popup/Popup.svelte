@@ -100,7 +100,7 @@ function onRadioKeydown(event: KeyboardEvent) {
   </header>
 
   <!-- Main Content -->
-  <main class="popup-scroll overflow-y-auto flex-1 px-5 pt-4 pb-4">
+  <main class="popup-scroll overflow-y-auto flex-1 px-5 pt-4">
     {#if hasProxies}
       <!-- Active-status hero: the proxy state, glanceable at the top, never
            scrolled off below the list (J1). -->
@@ -183,34 +183,43 @@ function onRadioKeydown(event: KeyboardEvent) {
           </button>
         {/each}
 
-        <!-- "No proxy (direct)" is the off state — one control for on/off/switch -->
-        <button
-          type="button"
-          role="radio"
-          aria-checked={!activeProxy}
-          tabindex={!activeProxy ? 0 : -1}
-          data-testid="popup-direct-row"
-          onclick={goDirect}
-          onkeydown={onRadioKeydown}
-          class={cn(
+        <!-- "No proxy (direct)" is the off state — one control for on/off/switch.
+             Pinned to the bottom of the scroll area: with a handful of proxies
+             it sat below the fold (274px past it at 7), so the single most
+             common "get me back to normal" action needed a scroll. Sticky keeps
+             DOM order, so arrow keys still read proxies-then-off, and the row
+             holds one screen position for muscle memory. -->
+        <div
+          class="sticky bottom-0 -mx-5 mt-1 flex flex-col border-t border-slate-200 bg-white px-5 pt-2 pb-4 dark:border-slate-700 dark:bg-slate-900"
+        >
+          <button
+            type="button"
+            role="radio"
+            aria-checked={!activeProxy}
+            tabindex={!activeProxy ? 0 : -1}
+            data-testid="popup-direct-row"
+            onclick={goDirect}
+            onkeydown={onRadioKeydown}
+            class={cn(
             'relative flex items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
             !activeProxy
               ? 'border-transparent ring-2 ring-blue-500 bg-blue-50/50 dark:bg-blue-950/20'
               : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
           )}
-        >
-          <span
-            class="w-3 h-3 rounded-full shrink-0 bg-slate-300 dark:bg-slate-600 border border-black/5"
-          ></span>
-          <span class="min-w-0 flex-1">
-            <span class="block text-sm font-semibold truncate text-slate-700 dark:text-slate-200">
-              {I18nService.getMessage('noProxyDirect')}
+          >
+            <span
+              class="w-3 h-3 rounded-full shrink-0 bg-slate-300 dark:bg-slate-600 border border-black/5"
+            ></span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-semibold truncate text-slate-700 dark:text-slate-200">
+                {I18nService.getMessage('noProxyDirect')}
+              </span>
+              <span class="block text-xs truncate text-slate-500 dark:text-slate-400">
+                {I18nService.getMessage('noProxyDirectHint')}
+              </span>
             </span>
-            <span class="block text-xs truncate text-slate-500 dark:text-slate-400">
-              {I18nService.getMessage('noProxyDirectHint')}
-            </span>
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
     {:else}
       <EmptyState
