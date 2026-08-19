@@ -1,7 +1,6 @@
 import { afterAll, beforeEach, describe, expect, spyOn, test } from 'bun:test'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import type { AppSettings, ProxyConfig } from '@/interfaces'
-import { SettingsReader } from '@/services/SettingsReader'
 import { StorageService } from '@/services/StorageService'
 import { SettingsWriter } from '../SettingsWriter'
 
@@ -22,19 +21,10 @@ const mockStorageService = {
   invalidateCache: spyOn(StorageService, 'invalidateCache').mockImplementation(() => {}),
 }
 
-const mockSettingsReader = {
-  getSettings: spyOn(SettingsReader, 'getSettings').mockImplementation(async () => mockSettings),
-  getPacScriptById: spyOn(SettingsReader, 'getPacScriptById').mockImplementation(
-    async (id: string) => mockSettings.proxyConfigs.find((s) => s.id === id) || null
-  ),
-}
-
 afterAll(() => {
   mockStorageService.getSettings.mockRestore()
   mockStorageService.saveSettings.mockRestore()
   mockStorageService.invalidateCache.mockRestore()
-  mockSettingsReader.getSettings.mockRestore()
-  mockSettingsReader.getPacScriptById.mockRestore()
 })
 
 describe('SettingsWriter', () => {

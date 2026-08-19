@@ -1,7 +1,6 @@
 import { afterAll, beforeEach, describe, expect, spyOn, test } from 'bun:test'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import type { AppSettings, AutoProxyRule, ProxyConfig } from '@/interfaces'
-import { browserService } from '@/services/chrome/BrowserService'
 import { ImportService } from '@/services/import/ImportService'
 import { StorageService } from '@/services/StorageService'
 
@@ -91,10 +90,18 @@ let local = createArea()
 // spyOn (restored in afterAll) rather than mock.module, which is process-global
 // in bun and would leak into other test files.
 const spies = {
-  syncGet: spyOn(browserService.storage.sync, 'get').mockImplementation((k) => sync.get(k)),
-  syncSet: spyOn(browserService.storage.sync, 'set').mockImplementation((i) => sync.set(i)),
-  localGet: spyOn(browserService.storage.local, 'get').mockImplementation((k) => local.get(k)),
-  localSet: spyOn(browserService.storage.local, 'set').mockImplementation((i) => local.set(i)),
+  syncGet: spyOn(chrome.storage.sync, 'get').mockImplementation((k: unknown) =>
+    sync.get(k as string | string[] | null)
+  ),
+  syncSet: spyOn(chrome.storage.sync, 'set').mockImplementation((i: unknown) =>
+    sync.set(i as Record<string, unknown>)
+  ),
+  localGet: spyOn(chrome.storage.local, 'get').mockImplementation((k: unknown) =>
+    local.get(k as string | string[] | null)
+  ),
+  localSet: spyOn(chrome.storage.local, 'set').mockImplementation((i: unknown) =>
+    local.set(i as Record<string, unknown>)
+  ),
 }
 
 afterAll(() => {

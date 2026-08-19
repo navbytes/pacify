@@ -7,7 +7,6 @@ import type { DiagnosticLogEntry } from '@/interfaces/error'
 import type { ProxyConfig } from '@/interfaces/settings'
 import { diagnosticsService } from '@/services/DiagnosticsService'
 import { I18nService } from '@/services/i18n/i18nService'
-import { SettingsReader } from '@/services/SettingsReader'
 import { StorageService } from '@/services/StorageService'
 import { toastStore } from '@/stores/toastStore'
 import {
@@ -51,7 +50,7 @@ async function handleLoggingToggle(enabled: boolean) {
 async function loadSystemStatus() {
   try {
     // Load settings
-    const settings = await SettingsReader.getSettings()
+    const settings = await StorageService.getSettings()
     totalProxies = settings.proxyConfigs.length
     activeProxy = settings.proxyConfigs.find((p) => p.isActive) || null
 

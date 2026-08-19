@@ -1,5 +1,4 @@
 import { describe, expect, spyOn, test } from 'bun:test'
-import { browserService } from '@/services/chrome/BrowserService'
 import { StorageService } from '@/services/StorageService'
 
 /**
@@ -12,8 +11,10 @@ import { StorageService } from '@/services/StorageService'
  */
 describe('NotificationService / StorageService cycle', () => {
   test('a sync-storage failure falls back once instead of recursing', async () => {
-    const get = spyOn(browserService.storage.sync, 'get').mockRejectedValue(
-      new Error('QUOTA_BYTES quota exceeded')
+    // mockImplementation rather than mockRejectedValue: chrome.storage.sync.get
+    // is an overloaded declaration, so the resolved type infers as `never`.
+    const get = spyOn(chrome.storage.sync, 'get').mockImplementation(() =>
+      Promise.reject(new Error('QUOTA_BYTES quota exceeded'))
     )
 
     try {

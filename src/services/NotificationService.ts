@@ -1,7 +1,6 @@
 import { ERROR_TYPES } from '@/interfaces'
 import { ALERT_TYPES } from '@/interfaces/error'
 import { type ToastType, toastStore } from '@/stores/toastStore'
-import { browserService } from './chrome/BrowserService'
 import { I18nService } from './i18n/i18nService'
 
 /**
@@ -42,7 +41,7 @@ export class NotificationService {
       // that accessor is wrapped in withErrorHandlingAndFallback, whose catch
       // calls NotificationService.error() -> show() -> back here, so a failing
       // read would loop forever. The raw call throws, so the catch below works.
-      const data = await browserService.storage.sync.get('preferences')
+      const data = await chrome.storage.sync.get('preferences')
       const stored = data.preferences as { notifications?: boolean } | undefined
       return stored?.notifications ?? true
     } catch {
@@ -110,7 +109,7 @@ export class NotificationService {
   }): Promise<void> {
     const { title, message, type, requireInteraction } = options
 
-    await browserService.notifications.create(crypto.randomUUID(), {
+    await chrome.notifications.create(crypto.randomUUID(), {
       type: 'basic',
       iconUrl: NotificationService.DEFAULT_ICON,
       title,

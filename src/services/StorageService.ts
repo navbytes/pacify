@@ -5,7 +5,6 @@ import { type AppSettings, ERROR_TYPES, type Settings } from '@/interfaces'
 import type { AutoProxyRule, ProxyServer } from '@/interfaces/settings'
 import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
 import { CredentialService } from './CredentialService'
-import { browserService } from './chrome/BrowserService'
 import { I18nService } from './i18n/i18nService'
 import { logger } from './LoggerService'
 
@@ -216,7 +215,7 @@ export class StorageService {
       .filter((c) => c.id && c.autoProxy)
       .map((c) => c.id as string)
     const mirroredRules = autoConfigIds.length
-      ? await browserService.storage.local.get(autoConfigIds.map(autoRulesKey))
+      ? await chrome.storage.local.get(autoConfigIds.map(autoRulesKey))
       : {}
     const ownsRulesOf = (configId: string): boolean => autoRulesKey(configId) in mirroredRules
 
@@ -343,7 +342,7 @@ export class StorageService {
    * alternative is silent, unrecoverable data loss.
    */
   private static async writeSyncSettings(baseSettings: AppSettings): Promise<void> {
-    const sync = browserService.storage.sync
+    const sync = chrome.storage.sync
     let json = JSON.stringify(baseSettings)
     const existing = await sync.get(null)
     const previousMeta = existing[SETTINGS_META_KEY] as SettingsMeta | undefined
@@ -450,7 +449,7 @@ export class StorageService {
     settings: AppSettings | null
     rulesLocal: boolean
   }> {
-    const sync = browserService.storage.sync
+    const sync = chrome.storage.sync
     const stored = await sync.get([SETTINGS_KEY, SETTINGS_META_KEY])
     const meta = stored[SETTINGS_META_KEY] as SettingsMeta | undefined
 
@@ -611,7 +610,7 @@ export class StorageService {
    */
   private static storeScriptData = withErrorHandling(
     async (scriptId: string, data: string): Promise<void> => {
-      await browserService.storage.local.set({ [`script_${scriptId}`]: data })
+      await chrome.storage.local.set({ [`script_${scriptId}`]: data })
     },
     ERROR_TYPES.SAVE_SCRIPT
   )
@@ -621,7 +620,7 @@ export class StorageService {
    */
   private static storeSubscriptionRules = withErrorHandling(
     async (configId: string, rulesMap: Record<string, string[]>): Promise<void> => {
-      await browserService.storage.local.set({ [`sub_rules_${configId}`]: rulesMap })
+      await chrome.storage.local.set({ [`sub_rules_${configId}`]: rulesMap })
     },
     ERROR_TYPES.SAVE_SCRIPT
   )
@@ -632,7 +631,7 @@ export class StorageService {
    */
   private static storeAutoProxyRules = withErrorHandling(
     async (configId: string, rules: AutoProxyRule[]): Promise<void> => {
-      await browserService.storage.local.set({ [autoRulesKey(configId)]: rules })
+      await chrome.storage.local.set({ [autoRulesKey(configId)]: rules })
     },
     ERROR_TYPES.SAVE_SCRIPT
   )
@@ -642,7 +641,7 @@ export class StorageService {
    */
   private static getAutoProxyRules = withErrorHandlingAndFallback(
     async (configId: string): Promise<AutoProxyRule[] | null> => {
-      const data = await browserService.storage.local.get(autoRulesKey(configId))
+      const data = await chrome.storage.local.get(autoRulesKey(configId))
       return (data[autoRulesKey(configId)] as AutoProxyRule[] | undefined) ?? null
     },
     ERROR_TYPES.FETCH_SETTINGS,
@@ -654,7 +653,7 @@ export class StorageService {
    */
   private static getSubscriptionRules = withErrorHandlingAndFallback(
     async (configId: string): Promise<Record<string, string[]> | null> => {
-      const data = await browserService.storage.local.get(`sub_rules_${configId}`)
+      const data = await chrome.storage.local.get(`sub_rules_${configId}`)
       return (data[`sub_rules_${configId}`] as Record<string, string[]> | undefined) || null
     },
     ERROR_TYPES.FETCH_SETTINGS,
@@ -666,7 +665,7 @@ export class StorageService {
    */
   private static getScriptData = withErrorHandlingAndFallback(
     async (scriptId: string): Promise<string | null> => {
-      const data = await browserService.storage.local.get(`script_${scriptId}`)
+      const data = await chrome.storage.local.get(`script_${scriptId}`)
       return (data[`script_${scriptId}`] as string | undefined) || null
     },
     ERROR_TYPES.FETCH_SETTINGS,
@@ -687,7 +686,7 @@ export class StorageService {
   static migrateStorage = withErrorHandling(async (): Promise<void> => {
     // Already on the manifest layout — nothing to migrate, and skipping the
     // rewrite avoids burning a sync write on every popup/options open.
-    const current = await browserService.storage.sync.get(SETTINGS_META_KEY)
+    const current = await chrome.storage.sync.get(SETTINGS_META_KEY)
     if (current[SETTINGS_META_KEY]) return
 
     // Legacy single-key layout: re-save through the current write path.
@@ -705,7 +704,7 @@ export class StorageService {
   static savePreferences = withErrorHandling(
     async (preferences: Partial<Settings>): Promise<void> => {
       const current = await StorageService.getPreferences()
-      await browserService.storage.sync.set({ preferences: { ...current, ...preferences } })
+      await chrome.storage.sync.set({ preferences: { ...current, ...preferences } })
     },
     ERROR_TYPES.SAVE_SETTINGS
   )
@@ -715,7 +714,7 @@ export class StorageService {
    */
   static getPreferences = withErrorHandlingAndFallback(
     async (): Promise<Settings> => {
-      const data = await browserService.storage.sync.get('preferences')
+      const data = await chrome.storage.sync.get('preferences')
       const stored = data.preferences as Partial<Settings> | undefined
       return {
         notifications: stored?.notifications ?? true,

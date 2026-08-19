@@ -13,12 +13,12 @@ import type {
   SetProxyMessage,
 } from '@/interfaces'
 import type { AutoProxySubscription, SubscriptionFormat } from '@/interfaces/settings'
-import { SettingsReader, SettingsWriter } from '@/services'
+import { SettingsWriter } from '@/services'
 import { ChromeService } from '@/services/chrome'
-import { browserService } from '@/services/chrome/BrowserService'
 import { diagnosticsService } from '@/services/DiagnosticsService'
 import { logger } from '@/services/LoggerService'
 import { PACScriptGenerator } from '@/services/PACScriptGenerator'
+import { StorageService } from '@/services/StorageService'
 import { SubscriptionParser } from '@/services/SubscriptionParser'
 import { parseProxyError } from '@/utils/errorHandling'
 import { assertTextResponse } from '@/utils/httpContent'
@@ -66,7 +66,7 @@ const messageHandlers: Partial<
 > = {
   QUICK_SWITCH: async () => {
     // Invalidate cache to ensure we read fresh settings
-    SettingsReader.invalidateCache()
+    StorageService.invalidateCache()
     await updateQuickAction()
   },
   SET_PROXY: async (message?: BackgroundMessage) => {
@@ -130,7 +130,7 @@ async function initialize(): Promise<void> {
     if (!listenersRegistered) {
       // Register message listener FIRST, before any async operations
       // This ensures we don't miss messages during initialization
-      browserService.runtime.onMessage.addListener((message, sender, sendResponse) =>
+      chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>
         handleRuntimeMessage(
           message as BackgroundMessage,
           sender as unknown as chrome.runtime.MessageSender,
@@ -139,7 +139,7 @@ async function initialize(): Promise<void> {
       )
 
       // Set up browser action click listeners
-      browserService.action.onClicked.addListener(handleActionClick)
+      chrome.action.onClicked.addListener(handleActionClick)
 
       // Register the auth listener only when the optional permissions are granted.
       // Users who never configure proxy credentials won't have these permissions
@@ -147,13 +147,13 @@ async function initialize(): Promise<void> {
       void registerAuthListenerIfPermitted()
 
       // Listen for browser startup events
-      browserService.runtime.onStartup.addListener(async () => {
+      chrome.runtime.onStartup.addListener(async () => {
         logger.info('Browser started - reinitializing proxy settings and badge')
         await initializeProxySettings()
       })
 
       // Listen for extension installation or update events
-      browserService.runtime.onInstalled.addListener(async (details) => {
+      chrome.runtime.onInstalled.addListener(async (details) => {
         logger.info('Extension installed/updated - initializing proxy settings and badge')
         await initializeProxySettings()
 
@@ -311,7 +311,7 @@ async function handleRuntimeMessageInternal(
  */
 async function handleActionClick(): Promise<void> {
   try {
-    const settings = await SettingsReader.getSettings()
+    const settings = await StorageService.getSettings()
 
     // CRITICAL: Check if Quick Switch is actually enabled first
     // If disabled, the popup should open instead (this shouldn't be called)
@@ -342,7 +342,7 @@ async function handleActionClick(): Promise<void> {
     }
 
     // Atomically update both activeScriptId and isActive flags to prevent desync
-    const currentSettings = await SettingsReader.getSettings()
+    const currentSettings = await StorageService.getSettings()
     currentSettings.activeScriptId = nextScript?.id ?? null
     currentSettings.proxyConfigs = currentSettings.proxyConfigs.map((s) => ({
       ...s,
@@ -381,7 +381,7 @@ async function getNextQuickScript(): Promise<{
   scripts: ProxyConfig[]
   nextScript: ProxyConfig | null
 }> {
-  const scripts = await SettingsReader.getScripts()
+  const scripts = (await StorageService.getSettings()).proxyConfigs
   const quickScripts = scripts.filter((script) => script.quickSwitch)
 
   const activeScriptIndex = quickScripts.findIndex((script) => script.isActive)
@@ -537,8 +537,8 @@ async function clearProxySettings(): Promise<void> {
 
 async function updateBadge(text = 'N/A', color = DEFAULT_BADGE_COLOR): Promise<void> {
   try {
-    await browserService.action.setBadgeBackgroundColor({ color })
-    await browserService.action.setBadgeText({
+    await chrome.action.setBadgeBackgroundColor({ color })
+    await chrome.action.setBadgeText({
       text: text.slice(0, 4).toUpperCase(),
     })
   } catch (error) {
@@ -548,7 +548,7 @@ async function updateBadge(text = 'N/A', color = DEFAULT_BADGE_COLOR): Promise<v
 
 async function safeGetSettings() {
   try {
-    return await SettingsReader.getSettings()
+    return await StorageService.getSettings()
   } catch (error) {
     logger.error('Error fetching settings:', error)
     return null
@@ -557,7 +557,7 @@ async function safeGetSettings() {
 
 async function safeSetPopup(popup: string): Promise<void> {
   try {
-    await browserService.action.setPopup({ popup })
+    await chrome.action.setPopup({ popup })
   } catch (error) {
     logger.error('Error setting popup:', error)
   }
