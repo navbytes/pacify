@@ -40,15 +40,10 @@ const mockChrome = {
     },
   },
   notifications: {
-    create: (id: string, options: any, callback?: (notificationId: string) => void) => {
-      if (callback) callback(id)
-    },
-    getAll: (callback: (notifications: Record<string, boolean>) => void) => {
-      callback({})
-    },
-    clear: (id: string, callback?: (wasCleared: boolean) => void) => {
-      if (callback) callback(true)
-    },
+    // MV3 shape: these resolve rather than taking a callback.
+    create: (id: string, _options: any) => Promise.resolve(id),
+    getAll: () => Promise.resolve({}),
+    clear: (_id: string) => Promise.resolve(true),
     onClicked: {
       addListener: () => {},
       removeListener: () => {},

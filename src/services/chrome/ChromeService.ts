@@ -10,12 +10,9 @@ import {
 import { logger } from '@/services/LoggerService'
 import { withErrorHandling, withErrorHandlingAndFallback } from '@/utils/errorHandling'
 import { convertAppSettingsToChromeConfig } from '../../utils/chrome'
-import { browserService } from './BrowserService'
 
 // biome-ignore lint/complexity/noStaticOnlyClass: Service class pattern provides namespace and consistent API
 export class ChromeService {
-  // Reference to the browser service
-  private static browser = browserService
   /**
    * Sets Chrome proxy settings based on proxy configuration
    */
@@ -25,27 +22,24 @@ export class ChromeService {
         value: convertAppSettingsToChromeConfig(proxy),
         scope: 'regular',
       }
+      // ChromeProxyConfig types `port` as a string (that is what the settings
+      // UI stores and what Chrome accepts — the e2e proxy-routing tests cover
+      // it), while @types/chrome declares ProxyServer.port as a number. The
+      // cast records that mismatch instead of hiding it; the previous
+      // BrowserService wrapper typed this parameter as `unknown`, which
+      // silently erased all type checking on the proxy config.
+      await chrome.proxy.settings.set(
+        details as unknown as chrome.types.ChromeSettingSetDetails<chrome.proxy.ProxyConfig>
+      )
 
-      return new Promise((resolve, reject) => {
-        this.browser.proxy.settings.set(details, async () => {
-          if (this.browser.runtime.lastError) {
-            return reject(
-              new Error(this.browser.runtime.lastError?.message || 'Unknown Chrome error')
-            )
-          }
-
-          // Reload active tab to apply proxy changes if enabled
-          if (autoReload) {
-            try {
-              await this.reloadActiveTab()
-            } catch (error) {
-              logger.warn('Failed to reload tab (proxy still set):', error)
-            }
-          }
-
-          resolve()
-        })
-      })
+      // Reload active tab to apply proxy changes if enabled
+      if (autoReload) {
+        try {
+          await ChromeService.reloadActiveTab()
+        } catch (error) {
+          logger.warn('Failed to reload tab (proxy still set):', error)
+        }
+      }
     },
     ERROR_TYPES.SET_PROXY
   )
@@ -54,26 +48,16 @@ export class ChromeService {
    * Clears all proxy settings
    */
   static clearProxy = withErrorHandling(async (autoReload: boolean = true): Promise<void> => {
-    return new Promise((resolve, reject) => {
-      this.browser.proxy.settings.clear({}, async () => {
-        if (this.browser.runtime.lastError) {
-          return reject(
-            new Error(this.browser.runtime.lastError?.message || 'Unknown Chrome error')
-          )
-        }
+    await chrome.proxy.settings.clear({})
 
-        // Reload active tab to apply proxy changes if enabled
-        if (autoReload) {
-          try {
-            await this.reloadActiveTab()
-          } catch (error) {
-            logger.warn('Failed to reload tab (proxy still cleared):', error)
-          }
-        }
-
-        resolve()
-      })
-    })
+    // Reload active tab to apply proxy changes if enabled
+    if (autoReload) {
+      try {
+        await ChromeService.reloadActiveTab()
+      } catch (error) {
+        logger.warn('Failed to reload tab (proxy still cleared):', error)
+      }
+    }
   }, ERROR_TYPES.CLEAR_PROXY)
 
   /**
@@ -81,14 +65,11 @@ export class ChromeService {
    */
   static async reloadActiveTab(): Promise<void> {
     try {
-      const activeTabs = await ChromeService.browser.tabs.query({
-        active: true,
-        currentWindow: true,
-      })
+      const activeTabs = await chrome.tabs.query({ active: true, currentWindow: true })
       const tabToReload = activeTabs.find((tab) => tab.id && tab.id > 0)
 
       if (tabToReload?.id) {
-        await ChromeService.browser.tabs.reload(tabToReload.id)
+        await chrome.tabs.reload(tabToReload.id)
       }
     } catch (error) {
       logger.debug('Could not reload tab:', error)
@@ -100,16 +81,9 @@ export class ChromeService {
    */
   static getProxy = withErrorHandlingAndFallback(
     async (): Promise<chrome.types.ChromeSettingGetDetails> => {
-      return new Promise((resolve, reject) => {
-        this.browser.proxy.settings.get({}, (config) => {
-          if (this.browser.runtime.lastError) {
-            return reject(
-              new Error(this.browser.runtime.lastError?.message || 'Unknown Chrome error')
-            )
-          }
-          resolve(config as unknown as chrome.types.ChromeSettingGetDetails)
-        })
-      })
+      return (await chrome.proxy.settings.get(
+        {}
+      )) as unknown as chrome.types.ChromeSettingGetDetails
     },
     ERROR_TYPES.FETCH_SETTINGS,
     { value: { mode: 'direct' }, levelOfControl: 'not_controllable' }
@@ -120,9 +94,7 @@ export class ChromeService {
    */
   static sendMessage = withErrorHandling(
     async <T extends BackgroundMessage>(message: T): Promise<void> => {
-      const response = (await this.browser.runtime.sendMessage<T>(
-        message
-      )) as BackgroundMessageResponse
+      const response = (await chrome.runtime.sendMessage(message)) as BackgroundMessageResponse
 
       // Validate response from background script
       if (response && !response.success) {
@@ -143,10 +115,10 @@ export class ChromeService {
     if (params && Object.keys(params).length > 0) {
       // Build URL with query parameters
       const queryString = new URLSearchParams(params).toString()
-      const optionsUrl = `${ChromeService.browser.runtime.getURL('options.html')}?${queryString}`
-      ChromeService.browser.tabs.create({ url: optionsUrl })
+      const optionsUrl = `${chrome.runtime.getURL('options.html')}?${queryString}`
+      chrome.tabs.create({ url: optionsUrl })
     } else {
-      ChromeService.browser.runtime.openOptionsPage()
+      chrome.runtime.openOptionsPage()
     }
   }
 
@@ -154,7 +126,7 @@ export class ChromeService {
    * Saves settings to sync storage
    */
   static setSyncSettings = withErrorHandling(async (settings: AppSettings): Promise<void> => {
-    await this.browser.storage.sync.set({ settings })
+    await chrome.storage.sync.set({ settings })
   }, ERROR_TYPES.SAVE_SETTINGS)
 
   /**
@@ -162,7 +134,7 @@ export class ChromeService {
    */
   static getSyncSettings = withErrorHandlingAndFallback(
     async (): Promise<AppSettings> => {
-      const data = await this.browser.storage.sync.get('settings')
+      const data = await chrome.storage.sync.get('settings')
       return (data.settings as AppSettings | undefined) || DEFAULT_SETTINGS
     },
     ERROR_TYPES.FETCH_SETTINGS,

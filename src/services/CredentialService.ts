@@ -1,4 +1,3 @@
-import { browserService } from './chrome/BrowserService'
 import { logger } from './LoggerService'
 
 const CREDENTIAL_STORAGE_KEY = 'pacify_credentials'
@@ -123,7 +122,7 @@ export class CredentialService {
 
       const plaintext = JSON.stringify(existing)
       const encrypted = await CredentialService.encrypt(plaintext)
-      await browserService.storage.local.set({ [CREDENTIAL_STORAGE_KEY]: encrypted })
+      await chrome.storage.local.set({ [CREDENTIAL_STORAGE_KEY]: encrypted })
     } catch (error) {
       logger.error('Failed to save credentials:', error)
     }
@@ -148,7 +147,7 @@ export class CredentialService {
 
       const plaintext = JSON.stringify(existing)
       const encrypted = await CredentialService.encrypt(plaintext)
-      await browserService.storage.local.set({ [CREDENTIAL_STORAGE_KEY]: encrypted })
+      await chrome.storage.local.set({ [CREDENTIAL_STORAGE_KEY]: encrypted })
     } catch (error) {
       logger.error('Failed to delete credentials:', error)
     }
@@ -156,7 +155,7 @@ export class CredentialService {
 
   private static async loadAllCredentials(): Promise<StoredCredentials> {
     try {
-      const data = await browserService.storage.local.get(CREDENTIAL_STORAGE_KEY)
+      const data = await chrome.storage.local.get(CREDENTIAL_STORAGE_KEY)
       const encrypted = data[CREDENTIAL_STORAGE_KEY] as string | undefined
       if (!encrypted) return {}
 

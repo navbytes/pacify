@@ -1,6 +1,6 @@
 import type { ProxyConfig } from '@/interfaces'
-import { SettingsReader } from '../SettingsReader'
 import { SettingsWriter } from '../SettingsWriter'
+import { StorageService } from '../StorageService'
 import { FoxyProxyAdapter } from './adapters/FoxyProxyAdapter'
 import { PacFileAdapter } from './adapters/PacFileAdapter'
 import { PacifyAdapter } from './adapters/PacifyAdapter'
@@ -82,7 +82,7 @@ export class ImportService {
       return deduped
     }
 
-    const settings = await SettingsReader.getSettings()
+    const settings = await StorageService.getSettings()
     const taken = new Set(settings.proxyConfigs.map((c) => c.name))
     const deduped = result.configs.map((c) => ({ ...c, name: dedupeName(c.name, taken) }))
     await SettingsWriter.updateSettings({

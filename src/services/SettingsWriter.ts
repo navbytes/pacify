@@ -1,7 +1,6 @@
 import type { AppSettings, ProxyConfig } from '@/interfaces'
 import { I18nService } from './i18n/i18nService'
 import { detectSource } from './import/detectSource'
-import { SettingsReader } from './SettingsReader'
 import { StorageService } from './StorageService'
 
 // Maximum allowed file size for settings restore (1MB)
@@ -15,20 +14,20 @@ export class SettingsWriter {
   }
 
   static async updateSettings(partialSettings: Partial<AppSettings>): Promise<void> {
-    const currentSettings = await SettingsReader.getSettings()
+    const currentSettings = await StorageService.getSettings()
     const updatedSettings = { ...currentSettings, ...partialSettings }
     await SettingsWriter.saveSettings(updatedSettings)
   }
 
   static async addPACScript(script: Omit<ProxyConfig, 'id'>): Promise<void> {
-    const settings = await SettingsReader.getSettings()
+    const settings = await StorageService.getSettings()
     const newScript: ProxyConfig = { ...script, id: crypto.randomUUID() }
     settings.proxyConfigs.push(newScript)
     await SettingsWriter.saveSettings(settings)
   }
 
   static async updatePACScript(script: ProxyConfig): Promise<void> {
-    const settings = await SettingsReader.getSettings()
+    const settings = await StorageService.getSettings()
     const index = settings.proxyConfigs.findIndex((s) => s.id === script.id)
     if (index !== -1) {
       settings.proxyConfigs[index] = script
@@ -37,7 +36,7 @@ export class SettingsWriter {
   }
 
   static async deletePACScript(id: string): Promise<void> {
-    const settings = await SettingsReader.getSettings()
+    const settings = await StorageService.getSettings()
     settings.proxyConfigs = settings.proxyConfigs.filter((s) => s.id !== id)
     if (settings.activeScriptId === id) {
       settings.activeScriptId = null
@@ -46,17 +45,18 @@ export class SettingsWriter {
   }
 
   static async toggleQuickSwitch(enabled: boolean): Promise<void> {
-    const settings = await SettingsReader.getSettings()
+    const settings = await StorageService.getSettings()
     settings.quickSwitchEnabled = enabled
     await SettingsWriter.saveSettings(settings)
   }
   public static async updateAllScripts(scripts: ProxyConfig[]): Promise<void> {
-    const settings = await SettingsReader.getSettings()
+    const settings = await StorageService.getSettings()
     settings.proxyConfigs = scripts
     await SettingsWriter.saveSettings(settings)
   }
   public static async updateScriptQuickSwitch(id: string, enabled: boolean): Promise<void> {
-    const script = await SettingsReader.getPacScriptById(id)
+    const settings = await StorageService.getSettings()
+    const script = settings.proxyConfigs.find((s) => s.id === id)
     if (script) {
       await SettingsWriter.updatePACScript({ ...script, quickSwitch: enabled })
     }
@@ -67,7 +67,7 @@ export class SettingsWriter {
     let link: HTMLAnchorElement | null = null
 
     try {
-      const settings = await SettingsReader.getSettings()
+      const settings = await StorageService.getSettings()
       const dataStr = JSON.stringify(settings, null, 2)
       const blob = new Blob([dataStr], { type: 'application/json' })
       url = URL.createObjectURL(blob)

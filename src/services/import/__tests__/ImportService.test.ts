@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, type Mock, spyOn, test } from 'bun:test'
 import { DEFAULT_SETTINGS } from '@/constants/app'
 import type { AppSettings, ProxyConfig } from '@/interfaces'
-import { SettingsReader } from '@/services/SettingsReader'
 import { SettingsWriter } from '@/services/SettingsWriter'
+import { StorageService } from '@/services/StorageService'
 import { ImportService } from '../ImportService'
 
 // NOTE: We use spyOn (not mock.module) so we don't globally replace the
-// SettingsReader/SettingsWriter modules — that would leak into and break their
+// StorageService/SettingsWriter modules — that would leak into and break their
 // own test suites when the whole suite runs in one process.
 
 let mockSettings: AppSettings
@@ -25,7 +25,7 @@ const switchyOmegaBak = JSON.stringify({
 describe('ImportService', () => {
   beforeEach(() => {
     mockSettings = { ...DEFAULT_SETTINGS, proxyConfigs: [] }
-    getSettingsSpy = spyOn(SettingsReader, 'getSettings').mockImplementation(
+    getSettingsSpy = spyOn(StorageService, 'getSettings').mockImplementation(
       async () => mockSettings
     )
     updateSpy = spyOn(SettingsWriter, 'updateSettings').mockImplementation(async () => {})
