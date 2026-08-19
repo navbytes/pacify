@@ -89,7 +89,11 @@ test.describe('Proxy Configuration Management', () => {
     // Fill in configuration name
     await page.fill('input#scriptName', 'Test PAC Script')
 
-    // PAC Script mode is the default, just save
+    // The modal opens on "Connect through a server" (fixed_servers), so switch
+    // to PAC script explicitly rather than relying on a default.
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-pac_script').click()
+
     await page.getByTestId('modal-save-btn').click()
 
     // Wait for modal to close
@@ -106,6 +110,10 @@ test.describe('Proxy Configuration Management', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('text=Proxy Configuration').first()).toBeVisible()
     await page.fill('input#scriptName', 'Delete Test')
+    // fixed_servers is the modal's default mode and needs a real server:
+    // a config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -128,6 +136,10 @@ test.describe('Proxy Configuration Management', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('text=Proxy Configuration').first()).toBeVisible()
     await page.fill('input#scriptName', 'Original Name')
+    // fixed_servers is the modal's default mode and needs a real server:
+    // a config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -164,6 +176,10 @@ test.describe('Quick Switch Functionality', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('text=Proxy Configuration').first()).toBeVisible()
     await page.fill('input#scriptName', 'Quick Switch Test')
+    // fixed_servers is the modal's default mode and needs a real server:
+    // a config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -210,6 +226,10 @@ test.describe('Backup and Restore', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.locator('text=Proxy Configuration').first()).toBeVisible()
     await page.fill('input#scriptName', 'Export Test')
+    // fixed_servers is the modal's default mode and needs a real server:
+    // a config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.locator('h2:has-text("Proxy Configuration")').first()).not.toBeVisible()
@@ -246,5 +266,38 @@ test.describe('Error Handling', () => {
     // Should show validation error or the button should not work
     // Check if modal is still open (indicating validation failed)
     await expect(page.getByTestId('modal-title')).toBeVisible()
+  })
+
+  /**
+   * Regression: a manual proxy saved with the port left blank used to be
+   * accepted. Chrome then rejected the whole config, so activating it left the
+   * popup showing the proxy as ON while traffic went out unproxied — a silent
+   * failure with privacy consequences. Saving must now be refused.
+   *
+   * (An out-of-range port like 99999 was already blocked, but by the browser's
+   * native min/max validation on the number input, not by the app. The empty
+   * case slipped through because the input carries no `required` attribute and
+   * validatePort() treats blank as "no error".)
+   */
+  test('refuses to save a manual proxy whose port is blank', async () => {
+    const page = await getOptionsPage()
+
+    await page.getByTestId('add-new-script-btn').click()
+    await expect(page.getByTestId('modal-title')).toBeVisible()
+    await page.fill('input#scriptName', 'Blank Port Proxy')
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    // port deliberately left empty
+    await page.getByTestId('modal-save-btn').click()
+
+    // The modal stays open and reports the problem instead of saving.
+    await expect(page.getByTestId('modal-title')).toBeVisible()
+    await expect(page.locator('[data-error-message]')).toBeVisible()
+
+    // And nothing was persisted.
+    const saved = await page.evaluate(async () => {
+      const data = await chrome.storage.sync.get(null)
+      return JSON.stringify(data).includes('Blank Port Proxy')
+    })
+    expect(saved).toBe(false)
   })
 })

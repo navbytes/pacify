@@ -1,6 +1,10 @@
 import { describe, expect, test } from 'bun:test'
 import type { ProxyConfig } from '@/interfaces'
-import { convertAppSettingsToChromeConfig } from '../chrome'
+import {
+  convertAppSettingsToChromeConfig,
+  fromChromeProxyRules,
+  toChromeProxyServer,
+} from '../chrome'
 
 function cfg(overrides: Partial<ProxyConfig>): ProxyConfig {
   return {
@@ -81,7 +85,7 @@ describe('convertAppSettingsToChromeConfig', () => {
     const result = convertAppSettingsToChromeConfig(
       cfg({ rules: { singleProxy: { scheme: 'socks5', host: '10.0.0.1', port: '1080' } } })
     )
-    expect(result.rules?.singleProxy).toEqual({ scheme: 'socks5', host: '10.0.0.1', port: '1080' })
+    expect(result.rules?.singleProxy).toEqual({ scheme: 'socks5', host: '10.0.0.1', port: 1080 })
   })
 
   // Regression: bypassList used to be applied only in the per-protocol branch,
@@ -109,7 +113,7 @@ describe('convertAppSettingsToChromeConfig', () => {
         },
       })
     )
-    expect(result.rules?.proxyForHttp).toEqual({ scheme: 'http', host: 'p1', port: '80' })
+    expect(result.rules?.proxyForHttp).toEqual({ scheme: 'http', host: 'p1', port: 80 })
     expect(result.rules?.bypassList).toEqual(['intranet'])
   })
 
@@ -118,5 +122,80 @@ describe('convertAppSettingsToChromeConfig', () => {
       cfg({ rules: { singleProxy: { scheme: 'http', host: 'h', port: '1' }, bypassList: [] } })
     )
     expect(result.rules?.bypassList).toBeUndefined()
+  })
+})
+
+describe('toChromeProxyServer', () => {
+  test('parses a valid port to a number', () => {
+    expect(toChromeProxyServer({ scheme: 'http', host: 'h', port: '8080' })).toEqual({
+      scheme: 'http',
+      host: 'h',
+      port: 8080,
+    })
+  })
+
+  test.each([
+    ['empty port', { scheme: 'http', host: 'h', port: '' }],
+    ['blank port', { scheme: 'http', host: 'h', port: '   ' }],
+    ['non-numeric port', { scheme: 'http', host: 'h', port: 'abc' }],
+    ['port 0', { scheme: 'http', host: 'h', port: '0' }],
+    ['port above range', { scheme: 'http', host: 'h', port: '65536' }],
+    ['missing host', { scheme: 'http', host: '', port: '8080' }],
+  ])('rejects %s', (_label, server) => {
+    expect(toChromeProxyServer(server as any)).toBeNull()
+  })
+
+  test('tolerates a numeric port already stored by the detect-current-proxy flow', () => {
+    expect(toChromeProxyServer({ scheme: 'http', host: 'h', port: 8080 } as any)).toEqual({
+      scheme: 'http',
+      host: 'h',
+      port: 8080,
+    })
+  })
+})
+
+describe('fixed_servers guards', () => {
+  // The bug: an empty port used to be forwarded as port:'' , Chrome rejected the
+  // whole config, and the extension reported the proxy as active while traffic
+  // went out unproxied.
+  test('throws instead of emitting a config Chrome will reject', () => {
+    expect(() =>
+      convertAppSettingsToChromeConfig(
+        cfg({ rules: { singleProxy: { scheme: 'http', host: '127.0.0.1', port: '' } } })
+      )
+    ).toThrow(/no usable server/i)
+  })
+
+  test('drops unfilled per-protocol entries instead of forwarding them', () => {
+    const result = convertAppSettingsToChromeConfig(
+      cfg({
+        rules: {
+          proxyForHttp: { scheme: 'http', host: 'p1', port: '80' },
+          proxyForHttps: { scheme: 'http', host: '', port: '' },
+          proxyForFtp: { scheme: 'http', host: '', port: '' },
+        },
+      })
+    )
+    expect(result.rules?.proxyForHttp).toEqual({ scheme: 'http', host: 'p1', port: 80 })
+    expect(result.rules?.proxyForHttps).toBeUndefined()
+    expect(result.rules?.proxyForFtp).toBeUndefined()
+  })
+})
+
+describe('fromChromeProxyRules', () => {
+  test('converts Chrome numeric ports back to the stored string shape', () => {
+    expect(
+      fromChromeProxyRules({
+        singleProxy: { scheme: 'socks5', host: '10.0.0.1', port: 1080 },
+        bypassList: ['x'],
+      })
+    ).toEqual({
+      singleProxy: { scheme: 'socks5', host: '10.0.0.1', port: '1080' },
+      proxyForHttp: undefined,
+      proxyForHttps: undefined,
+      proxyForFtp: undefined,
+      fallbackProxy: undefined,
+      bypassList: ['x'],
+    })
   })
 })

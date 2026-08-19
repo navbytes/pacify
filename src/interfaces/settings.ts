@@ -113,6 +113,29 @@ export interface ProxySettings {
 
 export type ProxyType = keyof Omit<ProxySettings, 'bypassList'>
 
+/**
+ * The proxy payload as Chrome's API actually expects it.
+ *
+ * Deliberately NOT the app's `ProxyServer`/`ProxyRules`: those model what the
+ * settings form produces and what we persist, where `port` is the string an
+ * `<input>` yields. Chrome wants a number. Reusing one type for both contracts
+ * is what let an unconvertible `port: ''` reach chrome.proxy.settings.set().
+ */
+export interface ChromeProxyServer {
+  scheme: ProxyScheme
+  host: string
+  port: number
+}
+
+export interface ChromeProxyRules {
+  singleProxy?: ChromeProxyServer
+  proxyForHttp?: ChromeProxyServer
+  proxyForHttps?: ChromeProxyServer
+  proxyForFtp?: ChromeProxyServer
+  fallbackProxy?: ChromeProxyServer
+  bypassList?: string[]
+}
+
 export interface ChromeProxyConfig {
   mode: ProxyMode
   pacScript?: {
@@ -122,5 +145,5 @@ export interface ChromeProxyConfig {
     updateInterval?: number
     lastFetched?: number
   }
-  rules?: ProxyRules
+  rules?: ChromeProxyRules
 }

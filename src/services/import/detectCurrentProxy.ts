@@ -1,5 +1,6 @@
 import type { ChromeProxyConfig, ProxyConfig, ProxyMode } from '@/interfaces'
 import { ChromeService } from '@/services/chrome/ChromeService'
+import { fromChromeProxyRules } from '@/utils/chrome'
 import type { ImportResult, ImportWarning } from './types'
 import { pickColor } from './utils'
 
@@ -55,7 +56,7 @@ export async function detectCurrentProxy(): Promise<ImportResult> {
       data: value.pacScript.data || undefined,
     }
   } else if (mode === 'fixed_servers' && value.rules) {
-    config.rules = value.rules
+    config.rules = fromChromeProxyRules(value.rules)
   }
 
   if (mode === 'direct') {

@@ -22,15 +22,7 @@ export class ChromeService {
         value: convertAppSettingsToChromeConfig(proxy),
         scope: 'regular',
       }
-      // ChromeProxyConfig types `port` as a string (that is what the settings
-      // UI stores and what Chrome accepts — the e2e proxy-routing tests cover
-      // it), while @types/chrome declares ProxyServer.port as a number. The
-      // cast records that mismatch instead of hiding it; the previous
-      // BrowserService wrapper typed this parameter as `unknown`, which
-      // silently erased all type checking on the proxy config.
-      await chrome.proxy.settings.set(
-        details as unknown as chrome.types.ChromeSettingSetDetails<chrome.proxy.ProxyConfig>
-      )
+      await chrome.proxy.settings.set(details)
 
       // Reload active tab to apply proxy changes if enabled
       if (autoReload) {

@@ -1,4 +1,11 @@
-import type { ChromeProxyConfig, ProxyConfig } from '@/interfaces'
+import type {
+  ChromeProxyConfig,
+  ChromeProxyRules,
+  ChromeProxyServer,
+  ProxyConfig,
+  ProxyRules,
+  ProxyServer,
+} from '@/interfaces'
 
 // Data-URL prefix Chrome uses for inline PAC scripts. We add an explicit
 // `charset=utf-8` (Chrome's own `pacScript.data` handling omits it) so the
@@ -31,6 +38,49 @@ function encodePacDataUrl(script: string): string {
     binary += String.fromCharCode(bytes[i])
   }
   return PAC_DATA_URL_PREFIX + btoa(binary)
+}
+
+/**
+ * Convert one stored proxy server into Chrome's shape, or `null` if it is not
+ * usable.
+ *
+ * A server is only sent to Chrome when it has both a host and a port that
+ * parses to a valid TCP port. Anything else is dropped: Chrome rejects the
+ * *entire* config if any server is malformed, which previously left the
+ * extension reporting a proxy as active while traffic went out unproxied.
+ */
+export function toChromeProxyServer(server: ProxyServer | undefined): ChromeProxyServer | null {
+  if (!server) return null
+
+  const host = server.host?.trim()
+  if (!host) return null
+
+  const port = Number.parseInt(String(server.port ?? '').trim(), 10)
+  if (!Number.isInteger(port) || port < 1 || port > 65535) return null
+
+  return { scheme: server.scheme || 'http', host, port }
+}
+
+/**
+ * Convert Chrome's proxy rules back into the app's storage shape.
+ *
+ * The inverse of {@link toChromeProxyServer}: Chrome hands back numeric ports,
+ * but the settings form and everything we persist use strings. Assigning
+ * Chrome's rules straight across (as the "import current browser proxy" flow
+ * used to) writes numbers into a field the rest of the app reads as a string.
+ */
+export function fromChromeProxyRules(rules: ChromeProxyRules): ProxyRules {
+  const toApp = (s: ChromeProxyServer | undefined): ProxyServer | undefined =>
+    s ? { scheme: s.scheme, host: s.host, port: String(s.port) } : undefined
+
+  return {
+    singleProxy: toApp(rules.singleProxy),
+    proxyForHttp: toApp(rules.proxyForHttp),
+    proxyForHttps: toApp(rules.proxyForHttps),
+    proxyForFtp: toApp(rules.proxyForFtp),
+    fallbackProxy: toApp(rules.fallbackProxy),
+    bypassList: rules.bypassList,
+  }
 }
 
 /**
@@ -74,41 +124,31 @@ export function convertAppSettingsToChromeConfig(proxyConfig: ProxyConfig): Chro
   // For fixed_servers mode, include the proxy rules.
   else if (proxyConfig.mode === 'fixed_servers' && proxyConfig.rules) {
     result.rules = {}
-    if (proxyConfig.rules.singleProxy) {
-      result.rules.singleProxy = {
-        scheme: proxyConfig.rules.singleProxy.scheme || 'http',
-        host: proxyConfig.rules.singleProxy.host || '',
-        port: proxyConfig.rules.singleProxy.port || '',
-      }
+    const single = toChromeProxyServer(proxyConfig.rules.singleProxy)
+    if (single) {
+      result.rules.singleProxy = single
     } else {
-      // Use the values from activeConfig.rules if available, otherwise fall back to default empty fields.
-      if (proxyConfig.rules.proxyForHttp)
-        result.rules.proxyForHttp = proxyConfig.rules.proxyForHttp || {
-          scheme: 'http',
-          host: '',
-          port: '',
-        }
-      if (proxyConfig.rules.proxyForHttps) {
-        result.rules.proxyForHttps = proxyConfig.rules.proxyForHttps || {
-          scheme: 'http',
-          host: '',
-          port: '',
-        }
+      // Per-protocol servers. Each is included only if fully specified; the
+      // form renders an input group for every protocol, so the unused ones
+      // arrive here empty and must not be forwarded.
+      const perProtocol = {
+        proxyForHttp: toChromeProxyServer(proxyConfig.rules.proxyForHttp),
+        proxyForHttps: toChromeProxyServer(proxyConfig.rules.proxyForHttps),
+        proxyForFtp: toChromeProxyServer(proxyConfig.rules.proxyForFtp),
+        fallbackProxy: toChromeProxyServer(proxyConfig.rules.fallbackProxy),
+      } as const
+      for (const [key, server] of Object.entries(perProtocol)) {
+        if (server) result.rules[key as keyof typeof perProtocol] = server
       }
-      if (proxyConfig.rules.proxyForFtp) {
-        result.rules.proxyForFtp = proxyConfig.rules.proxyForFtp || {
-          scheme: 'http',
-          host: '',
-          port: '',
-        }
-      }
-      if (proxyConfig.rules.fallbackProxy) {
-        result.rules.fallbackProxy = proxyConfig.rules.fallbackProxy || {
-          scheme: 'http',
-          host: '',
-          port: '',
-        }
-      }
+    }
+
+    // No usable server means there is nothing to proxy through. Chrome would
+    // reject the config and quietly leave the previous setting in place, so the
+    // extension would show the proxy as active while traffic went out
+    // unproxied. Throwing surfaces it: setProxy is wrapped in
+    // withErrorHandling, which reports the failure to the user.
+    if (!result.rules.singleProxy && Object.keys(result.rules).length === 0) {
+      throw new Error('This proxy has no usable server. Set a host and a port between 1 and 65535.')
     }
 
     // The bypass list applies to BOTH the single-proxy and per-protocol cases,
