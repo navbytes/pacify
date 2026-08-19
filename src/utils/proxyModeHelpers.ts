@@ -135,43 +135,6 @@ export function getProxyModeColor(
 }
 
 /**
- * Find Auto-Proxy configs that reference a given proxy ID
- * Returns the names of Auto-Proxy configs that would be affected if this proxy is deleted
- */
-export function findAutoProxyReferences(
-  proxyId: string,
-  allConfigs: ProxyConfig[]
-): { configName: string; ruleCount: number }[] {
-  const references: { configName: string; ruleCount: number }[] = []
-
-  for (const config of allConfigs) {
-    if (!isAutoProxy(config) || !config.autoProxy) continue
-
-    // Count rules that reference this proxy
-    const referencingRules = config.autoProxy.rules.filter(
-      (rule) => rule.proxyType === 'existing' && rule.proxyId === proxyId
-    )
-
-    // Check fallback
-    const fallbackReferences =
-      config.autoProxy.fallbackType === 'existing' && config.autoProxy.fallbackProxyId === proxyId
-        ? 1
-        : 0
-
-    const totalReferences = referencingRules.length + fallbackReferences
-
-    if (totalReferences > 0) {
-      references.push({
-        configName: config.name,
-        ruleCount: totalReferences,
-      })
-    }
-  }
-
-  return references
-}
-
-/**
  * Build a map of proxy ID → Auto-Proxy references for all proxies in one pass.
  * Avoids O(n²) lookups when rendering a list of proxy items.
  */
@@ -205,13 +168,6 @@ export function buildAutoProxyReferenceMap(
   }
 
   return map
-}
-
-/**
- * Check if a proxy ID is referenced by any Auto-Proxy config
- */
-export function isProxyReferencedByAutoProxy(proxyId: string, allConfigs: ProxyConfig[]): boolean {
-  return findAutoProxyReferences(proxyId, allConfigs).length > 0
 }
 
 /**

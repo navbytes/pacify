@@ -62,5 +62,3 @@ export interface BackgroundMessageResponse {
   success: boolean
   error?: string
 }
-
-export type MessageResponseHandler<T = unknown> = (response: T) => void

@@ -35,17 +35,9 @@ export const PROXY_COLORS = [
   '#7c3aed', // Violet dark
 ] as const
 
-export type ProxyColor = (typeof PROXY_COLORS)[number]
-
 /**
  * Get a random color from the predefined palette
  */
 export function getRandomProxyColor(): string {
   return PROXY_COLORS[Math.floor(Math.random() * PROXY_COLORS.length)]
 }
-
-/**
- * Default colors for specific proxy types
- */
-export const DEFAULT_PROXY_COLOR = '#3b82f6' // Blue
-export const DEFAULT_AUTO_PROXY_COLOR = '#f97316' // Orange

@@ -1,7 +1,6 @@
 // src/utils/errorHandling.ts
 
 import type { ERROR_TYPES } from '@/interfaces'
-import { logger } from '@/services/LoggerService'
 import { NotificationService } from '@/services/NotificationService'
 
 export type ErrorHandler = (error: unknown) => void
@@ -136,44 +135,4 @@ export function withErrorHandlingAndFallback<
       return fallbackValue
     }
   }
-}
-
-/**
- * Creates a function that retries a failed operation
- *
- * @param operation - The async operation to execute
- * @param errorType - The type of error for logging
- * @param maxRetries - Maximum number of retry attempts
- * @param delayMs - Base delay between retries (will increase exponentially)
- */
-// biome-ignore lint/suspicious/noExplicitAny: Generic function wrapper requires any for proper type inference
-export function withRetry<T extends (...args: any[]) => Promise<any>>(
-  operation: T,
-  errorType: ERROR_TYPES,
-  maxRetries: number = 3,
-  delayMs: number = 1000
-): T {
-  return (async (...args: Parameters<T>) => {
-    let lastError: unknown
-
-    for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
-      try {
-        return await operation(...args)
-      } catch (error) {
-        lastError = error
-
-        if (attempt <= maxRetries) {
-          // Log error but continue with retry
-          logger.warn(`Operation failed (attempt ${attempt}/${maxRetries + 1}). Retrying...`, error)
-
-          // Exponential backoff
-          await new Promise((resolve) => setTimeout(resolve, delayMs * 2 ** (attempt - 1)))
-        }
-      }
-    }
-
-    // If we reach here, all retries failed
-    await NotificationService.error(errorType, lastError)
-    throw lastError
-  }) as T
 }

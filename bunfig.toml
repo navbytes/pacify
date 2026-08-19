@@ -5,9 +5,6 @@
 # Use exact versions for reproducible builds
 exact = true
 
-# Enable global cache for faster installs
-cache = "~/.bun/install/cache"
-
 # Parallel downloads for faster dependency installation
 parallel = true
 

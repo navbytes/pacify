@@ -1,7 +1,5 @@
 export * from './codemirror'
-export * from './editor'
 export * from './error'
-export * from './languages'
 export * from './message'
 export * from './misc'
 export * from './settings'
