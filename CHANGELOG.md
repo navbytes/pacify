@@ -5,6 +5,13 @@ All notable changes to the Pacify Chrome Extension will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.33.4](https://github.com/navbytes/pacify/compare/v1.33.3...v1.33.4) (2026-08-19)
+
+
+### Bug Fixes
+
+* **proxy:** reject proxy configs Chrome cannot apply ([#90](https://github.com/navbytes/pacify/issues/90)) ([b30a5b8](https://github.com/navbytes/pacify/commit/b30a5b889a76af79452951086ea4036fd87cbe8d))
+
 ## [1.33.3](https://github.com/navbytes/pacify/compare/v1.33.2...v1.33.3) (2026-08-18)
 
 
