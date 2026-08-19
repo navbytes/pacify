@@ -1,33 +1,34 @@
 # Bun Configuration File
 # https://bun.sh/docs/runtime/bunfig
+#
+# Only keys Bun actually parses live here. Several plausible-looking options
+# were removed after testing showed Bun ignores them (Bun does not warn about
+# unknown keys, so they had read as configuration for a long time):
+#   [build]                — not a bunfig section at all; `bun build` ignored
+#                            its minify/sourcemap/target/splitting values.
+#   [test] timeout, bail   — not parsed; a 300ms test passed under timeout=100
+#                            and bail=true did not stop the run after a failure.
+#   [install] frozen       — the real key is `frozenLockfile`.
+#   [install] auto         — real, but takes "auto"|"force"|"disable"|"fallback",
+#                            not a boolean, and governs runtime auto-install
+#                            rather than peer dependencies.
+#   [install] parallel     — no such option.
+#   [install.scopes]       — both scopes pointed at the default registry.
 
 [install]
-# Use exact versions for reproducible builds
+# Pin exact versions for reproducible builds
 exact = true
 
-# Parallel downloads for faster dependency installation
-parallel = true
-
-# Default registry
+# State the registry explicitly so a user-level .npmrc or bunfig cannot
+# silently redirect installs for this project.
 registry = "https://registry.npmjs.org/"
 
-# Auto-install peer dependencies
-auto = true
-
-# Frozen lockfile in CI
-frozen = false
-
-[install.scopes]
-# Optimize specific scopes
-"@types" = "https://registry.npmjs.org/"
-"@sveltejs" = "https://registry.npmjs.org/"
-
 [test]
-# Enable coverage by default
+# Coverage on by default
 coverage = true
-
-# Exclude files from coverage that are difficult to test (Chrome API dependent)
 coverageSkipTestFiles = true
+
+# Chrome-API-dependent modules that unit tests cannot meaningfully cover
 coveragePathIgnorePatterns = [
   "src/services/chrome/**",
   "src/services/StorageService.ts",
@@ -37,36 +38,14 @@ coveragePathIgnorePatterns = [
   "tests/**"
 ]
 
-# Preload test setup files - ensure chrome mocking is available
+# Installs the global `chrome` mock before any test imports run
 preload = ["./tests/setup.ts"]
 
-# Root directory for test discovery
 root = "."
 
-# Set test timeout (in milliseconds)
-timeout = 5000
-
-# Bail on first test failure (useful for CI)
-bail = false
-
-# Note: Unit tests are run using explicit patterns in package.json scripts
-# E2E tests should be run separately with Playwright: npm run test:e2e
-# This avoids conflicts between Bun test and Playwright test APIs
+# Unit tests are selected by explicit globs in package.json; Playwright E2E runs
+# separately via `bun run test:e2e` to keep the two test APIs from colliding.
 
 [run]
-# Set default shell for cross-platform compatibility
-# Options: "bun" or "system"
+# Use Bun's own shell so scripts behave the same across platforms
 shell = "bun"
-
-[build]
-# Default build target
-target = "browser"
-
-# Enable minification by default
-minify = true
-
-# Enable source maps in development
-sourcemap = "external"
-
-# Code splitting
-splitting = true
