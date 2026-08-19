@@ -7,6 +7,7 @@ import { I18nService } from '@/services/i18n/i18nService'
 import { logger } from '@/services/LoggerService'
 import { SettingsWriter } from '@/services/SettingsWriter'
 import { toastStore } from '@/stores/toastStore'
+import { toChromeProxyServer } from '@/utils/chrome'
 import { flexPatterns, modalVariants } from '@/utils/classPatterns'
 import { cn } from '@/utils/cn'
 import { getRandomProxyColor } from '@/utils/colors'
@@ -205,14 +206,7 @@ async function handleSubmit(event: Event) {
       }
 
       if (useSharedProxy) {
-        // For single proxy, we need to ensure the proxy has at least a host
-        if (proxySettings.singleProxy?.host?.trim()) {
-          config.rules.singleProxy = proxySettings.singleProxy
-        } else {
-          // If no host is provided, but we're in fixed_servers mode with useSharedProxy,
-          // we still need to save the configuration (it might be intentionally empty)
-          config.rules.singleProxy = proxySettings.singleProxy
-        }
+        config.rules.singleProxy = proxySettings.singleProxy
       } else {
         // For individual proxies, add only those with hosts
         if (proxySettings.proxyForHttp?.host?.trim())
@@ -223,6 +217,29 @@ async function handleSubmit(event: Event) {
           config.rules.proxyForFtp = proxySettings.proxyForFtp
         if (proxySettings.fallbackProxy?.host?.trim())
           config.rules.fallbackProxy = proxySettings.fallbackProxy
+      }
+
+      // A fixed_servers config with no fully-specified server cannot be
+      // applied: Chrome rejects the whole payload and silently keeps the
+      // previous setting, so the UI would show the proxy as active while
+      // traffic went out unproxied. toChromeProxyServer is the same predicate
+      // the Chrome boundary uses, so the form and the apply step agree.
+      const usable = [
+        config.rules.singleProxy,
+        config.rules.proxyForHttp,
+        config.rules.proxyForHttps,
+        config.rules.proxyForFtp,
+        config.rules.fallbackProxy,
+      ].some((server) => toChromeProxyServer(server) !== null)
+
+      if (!usable) {
+        errorMessage = I18nService.getMessage('invalidProxyPort')
+        tick().then(() => {
+          document
+            .querySelector('[data-error-message]')
+            ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        })
+        return
       }
     }
 

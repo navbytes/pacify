@@ -137,6 +137,10 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
 
     // Fill in all fields
     await page.fill('input#scriptName', 'Complete PAC Test')
+    // Section 2 covers PAC scripts, but the modal opens on "Connect through a
+    // server" (fixed_servers), so the mode has to be selected explicitly.
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-pac_script').click()
 
     // Pick a color (native color input, bound via Svelte)
     await setColor(page, '#22c55e')
@@ -163,6 +167,10 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
     // Create a proxy first
     await page.getByTestId('add-new-script-btn').click()
     await page.fill('input#scriptName', 'Edit PAC Test')
+    // Section 2 covers PAC scripts, but the modal opens on "Connect through a
+    // server" (fixed_servers), so the mode has to be selected explicitly.
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-pac_script').click()
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -190,6 +198,10 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
     // Create a proxy
     await page.getByTestId('add-new-script-btn').click()
     await page.fill('input#scriptName', 'Delete PAC Test')
+    // Section 2 covers PAC scripts, but the modal opens on "Connect through a
+    // server" (fixed_servers), so the mode has to be selected explicitly.
+    await page.getByTestId('conn-type-trigger').click()
+    await page.getByTestId('segment-pac_script').click()
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -214,6 +226,10 @@ test.describe('2. PAC Script Configuration - Full CRUD', () => {
       await page.getByTestId('add-new-script-btn').click()
       await expect(page.getByTestId('modal-title')).toBeVisible()
       await page.fill('input#scriptName', name)
+      // Section 2 covers PAC scripts, but the modal opens on "Connect through a
+      // server" (fixed_servers), so the mode has to be selected explicitly.
+      await page.getByTestId('conn-type-trigger').click()
+      await page.getByTestId('segment-pac_script').click()
       await page.getByTestId('modal-save-btn').click()
       // Wait for modal to close before verifying proxy was created
       await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -340,6 +356,10 @@ test.describe('4. Proxy Activation & Deactivation', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Activation Test')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -386,6 +406,10 @@ test.describe('4. Proxy Activation & Deactivation', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Proxy One')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -394,6 +418,10 @@ test.describe('4. Proxy Activation & Deactivation', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Proxy Two')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -426,6 +454,10 @@ test.describe('5. Quick Switch Mode', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Quick Switch Test')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -473,6 +505,10 @@ test.describe('5. Quick Switch Mode', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Quick Switch Area Test')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -547,6 +583,10 @@ test.describe('7. Backup & Restore', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Backup Test Proxy')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(page.getByTestId('modal-title')).not.toBeVisible()
@@ -628,6 +668,10 @@ test.describe('9. Color Selection', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Color Test')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
 
     // Choose a non-default color and confirm the bound input took the value
     const colorInput = page.getByTestId('config-color-input')
@@ -762,6 +806,10 @@ test.describe('13. Data Persistence', () => {
     await page.getByTestId('add-new-script-btn').click()
     await expect(page.getByTestId('modal-title')).toBeVisible()
     await page.fill('input#scriptName', 'Persistence Test')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await page.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await page.getByTestId('single-proxy-port-input').fill('8080')
     await page.getByTestId('modal-save-btn').click()
 
     // Wait for modal to close
@@ -816,6 +864,10 @@ test.describe('14. Popup Quick Switch Flow', () => {
     await optionsPage.getByTestId('add-new-script-btn').click()
     await expect(optionsPage.getByTestId('modal-title')).toBeVisible()
     await optionsPage.fill('input#scriptName', 'Popup Test Proxy')
+    // fixed_servers is the modal's default mode and needs a real server: a
+    // config with no usable host/port can no longer be saved.
+    await optionsPage.getByTestId('single-proxy-host-input').fill('127.0.0.1')
+    await optionsPage.getByTestId('single-proxy-port-input').fill('8080')
     await optionsPage.getByTestId('modal-save-btn').click()
     // Wait for modal to close
     await expect(optionsPage.getByTestId('modal-title')).not.toBeVisible()
