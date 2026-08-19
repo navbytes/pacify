@@ -18,7 +18,6 @@ beforeAll(() => {
 
 import {
   buildAutoProxyReferenceMap,
-  findAutoProxyReferences,
   getProxyCardLabel,
   getProxyDescription,
   getProxyModeColor,
@@ -26,7 +25,6 @@ import {
   getProxyModeLabel,
   isAutoProxy,
   isOrphanedRule,
-  isProxyReferencedByAutoProxy,
   resolveSavedProxyId,
 } from '../proxyModeHelpers'
 
@@ -227,56 +225,6 @@ describe('getProxyModeColor', () => {
   })
 })
 
-describe('findAutoProxyReferences', () => {
-  const target = config({ id: 'target', name: 'Target' })
-
-  test('counts rules that reference the proxy id', () => {
-    const auto = autoConfig({
-      name: 'Router',
-      autoProxy: {
-        rules: [
-          autoRule({ id: 'a', proxyType: 'existing', proxyId: 'target' }),
-          autoRule({ id: 'b', proxyType: 'existing', proxyId: 'target' }),
-          autoRule({ id: 'c', proxyType: 'existing', proxyId: 'other' }),
-          autoRule({ id: 'd', proxyType: 'direct' }),
-        ],
-        fallbackType: 'direct',
-      },
-    })
-    const refs = findAutoProxyReferences('target', [target, auto])
-    expect(refs).toHaveLength(1)
-    expect(refs[0].configName).toBe('Router')
-    expect(refs[0].ruleCount).toBe(2)
-  })
-
-  test('counts a fallback reference to the proxy id', () => {
-    const auto = autoConfig({
-      name: 'FallbackRouter',
-      autoProxy: { rules: [], fallbackType: 'existing', fallbackProxyId: 'target' },
-    })
-    const refs = findAutoProxyReferences('target', [auto])
-    expect(refs).toHaveLength(1)
-    expect(refs[0].ruleCount).toBe(1)
-  })
-
-  test('combines rule and fallback references', () => {
-    const auto = autoConfig({
-      autoProxy: {
-        rules: [autoRule({ id: 'a', proxyType: 'existing', proxyId: 'target' })],
-        fallbackType: 'existing',
-        fallbackProxyId: 'target',
-      },
-    })
-    expect(findAutoProxyReferences('target', [auto])[0].ruleCount).toBe(2)
-  })
-
-  test('ignores non-auto configs and auto configs without references', () => {
-    const plain = config({ id: 'p' })
-    const emptyAuto = autoConfig({ autoProxy: { rules: [], fallbackType: 'direct' } })
-    expect(findAutoProxyReferences('target', [plain, emptyAuto])).toHaveLength(0)
-  })
-})
-
 describe('buildAutoProxyReferenceMap', () => {
   test('aggregates references per proxy id across configs', () => {
     const a = autoConfig({
@@ -331,22 +279,6 @@ describe('buildAutoProxyReferenceMap', () => {
 
   test('returns an empty map when there are no auto configs', () => {
     expect(buildAutoProxyReferenceMap([config({}), config({})]).size).toBe(0)
-  })
-})
-
-describe('isProxyReferencedByAutoProxy', () => {
-  test('true when at least one auto config references the proxy', () => {
-    const auto = autoConfig({
-      autoProxy: {
-        rules: [autoRule({ id: '1', proxyType: 'existing', proxyId: 'target' })],
-        fallbackType: 'direct',
-      },
-    })
-    expect(isProxyReferencedByAutoProxy('target', [auto])).toBe(true)
-  })
-
-  test('false when no auto config references the proxy', () => {
-    expect(isProxyReferencedByAutoProxy('target', [autoConfig(), config({})])).toBe(false)
   })
 })
 

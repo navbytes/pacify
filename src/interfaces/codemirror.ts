@@ -57,9 +57,3 @@ export interface CodeMirrorTheme {
     identifier: string
   }
 }
-
-// Error types for CodeMirror operations
-export interface CodeMirrorError extends Error {
-  type: 'INITIALIZATION' | 'OPERATION' | 'THEME' | 'COMPLETION'
-  context?: string
-}

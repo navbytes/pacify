@@ -378,92 +378,6 @@ export const emptyStateCardVariants = tv({
 })
 
 /**
- * Modal backdrop variants for AutoProxy and similar modals
- */
-export const modalBackdropVariants = tv({
-  slots: {
-    container:
-      'fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300',
-    background:
-      'absolute inset-0 bg-linear-to-br from-slate-900/80 via-purple-900/40 to-slate-900/80 backdrop-blur-md transition-opacity duration-300',
-  },
-  variants: {
-    visible: {
-      true: {
-        container: 'opacity-100',
-        background: 'opacity-100',
-      },
-      false: {
-        container: 'opacity-0',
-        background: 'opacity-0',
-      },
-    },
-  },
-  defaultVariants: {
-    visible: false,
-  },
-})
-
-/**
- * Modal content variants for AutoProxy and similar modals
- */
-export const modalContentVariants = tv({
-  slots: {
-    wrapper:
-      'relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl shadow-2xl flex flex-col w-full overflow-hidden border border-white/20 dark:border-slate-700/50 transition-all duration-300 transform',
-    accentBar: 'absolute top-0 left-0 right-0 h-1 bg-linear-to-r',
-    header: 'relative px-6 py-5 border-b border-slate-200/80 dark:border-slate-700/80',
-    headerBackground: 'absolute inset-0',
-    body: 'flex-1 overflow-y-auto px-6 py-6 space-y-6',
-    footer: 'relative px-6 py-4 border-t border-slate-200/80 dark:border-slate-700/80',
-    footerBackground: 'absolute inset-0',
-  },
-  variants: {
-    visible: {
-      true: {
-        wrapper: 'scale-100 translate-y-0',
-      },
-      false: {
-        wrapper: 'scale-95 translate-y-4',
-      },
-    },
-    size: {
-      md: { wrapper: 'max-w-lg max-h-[90vh]' },
-      lg: { wrapper: 'max-w-2xl max-h-[90vh]' },
-      xl: { wrapper: 'max-w-4xl max-h-[90vh]' },
-    },
-    color: {
-      orange: {
-        accentBar: 'from-orange-500 to-amber-500',
-        headerBackground:
-          'bg-linear-to-r from-orange-50/50 to-amber-50/50 dark:from-orange-950/20 dark:to-amber-950/20',
-        footerBackground:
-          'bg-linear-to-r from-slate-50 to-slate-50 dark:from-slate-900/50 dark:to-slate-800/50',
-      },
-      purple: {
-        accentBar: 'from-violet-500 to-purple-500',
-        headerBackground:
-          'bg-linear-to-r from-purple-50/50 to-violet-50/50 dark:from-purple-950/20 dark:to-violet-950/20',
-        footerBackground:
-          'bg-linear-to-r from-slate-50 to-slate-50 dark:from-slate-900/50 dark:to-slate-800/50',
-      },
-      blue: {
-        accentBar: 'from-blue-500 to-indigo-500',
-        headerBackground:
-          'bg-linear-to-r from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20',
-        footerBackground:
-          'bg-linear-to-r from-slate-50 to-slate-50 dark:from-slate-900/50 dark:to-slate-800/50',
-      },
-    },
-  },
-  defaultVariants: {
-    visible: false,
-    size: 'xl',
-    color: 'orange',
-  },
-})
-
-/**
  * Basic settings card variants for modal forms
  */
 export const settingsCardVariants = tv({
@@ -473,21 +387,6 @@ export const settingsCardVariants = tv({
       slate:
         'from-slate-50 to-slate-100/50 dark:from-slate-800/50 dark:to-slate-800/30 border-slate-200/80 dark:border-slate-700/50',
       blue: 'from-blue-50 to-cyan-50/50 dark:from-blue-950/30 dark:to-cyan-950/20 border-blue-300 dark:border-blue-700',
-    },
-  },
-  defaultVariants: {
-    color: 'slate',
-  },
-})
-
-/**
- * Rule count badge variants
- */
-export const ruleCountBadgeVariants = tv({
-  base: 'flex items-center gap-2 px-3 py-1.5 rounded-full text-sm',
-  variants: {
-    color: {
-      slate: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300',
     },
   },
   defaultVariants: {

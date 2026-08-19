@@ -1,5 +1,3 @@
-export type DebounceTimeout = ReturnType<typeof setTimeout> | null
-
 /**
  * Represents the type of the list view.
  * this is used to determine the type of list view to render.

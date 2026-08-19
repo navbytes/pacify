@@ -63,13 +63,6 @@ export const badgePatterns = {
   base: cn('inline-flex items-center gap-1', 'px-2.5 py-0.5', radius.full, 'text-xs font-medium'),
 }
 
-/**
- * Utility function to combine patterns with additional classes
- */
-export function withPattern(pattern: string, ...classes: string[]) {
-  return cn(pattern, ...classes)
-}
-
 // ============================================================================
 // TV VARIANTS (Type-safe component variants using tailwind-variants)
 // ============================================================================
@@ -233,55 +226,6 @@ export const buttonVariants = tv({
 })
 
 /**
- * Badge variants with type-safe props
- */
-export const badgeVariants = tv({
-  base: `inline-flex items-center gap-1 text-xs font-medium ${radius.full}`,
-  variants: {
-    intent: {
-      primary: `${colors.primary.light} ${colors.primary.text}`,
-      success: `${colors.success.light} ${colors.success.text}`,
-      warning: `${colors.warning.light} ${colors.warning.text}`,
-      danger: `${colors.danger.light} ${colors.danger.text}`,
-      neutral: `bg-slate-100 dark:bg-slate-800 ${colors.text.muted}`,
-    },
-    size: {
-      sm: 'px-2 py-0.5',
-      md: 'px-2.5 py-0.5',
-      lg: 'px-3 py-1',
-    },
-  },
-  defaultVariants: {
-    intent: 'neutral',
-    size: 'md',
-  },
-})
-
-/**
- * Alert variants with type-safe props
- */
-export const alertVariants = tv({
-  base: `p-4 ${radius.lg} border ${transitions.normal}`,
-  variants: {
-    intent: {
-      info: `${colors.info.light} ${colors.info.border} ${colors.info.text}`,
-      success: `${colors.success.light} ${colors.success.border} ${colors.success.text}`,
-      warning: `${colors.warning.light} ${colors.warning.border} ${colors.warning.text}`,
-      danger: `${colors.danger.light} ${colors.danger.border} ${colors.danger.text}`,
-    },
-    size: {
-      sm: 'text-sm',
-      md: 'text-base',
-      lg: 'text-lg',
-    },
-  },
-  defaultVariants: {
-    intent: 'info',
-    size: 'md',
-  },
-})
-
-/**
  * Input variants with type-safe props
  * Supports text inputs, textareas, and select elements
  */
@@ -327,32 +271,6 @@ export const toastVariants = tv({
   },
   defaultVariants: {
     intent: 'info',
-  },
-})
-
-/**
- * Card variants with type-safe props
- */
-export const cardVariants = tv({
-  base: `${radius.lg} border ${transitions.normal}`,
-  variants: {
-    variant: {
-      default: `${colors.background.default} ${colors.border.default} ${shadows.sm}`,
-      elevated: `${colors.background.elevated} ${colors.border.default} ${shadows.md}`,
-      interactive: `${colors.background.default} ${colors.border.default} ${shadows.card} cursor-pointer hover:scale-[1.02] ${colors.interactive.hover}`,
-      outlined: `bg-transparent ${colors.border.default} border-2 hover:bg-slate-50 dark:hover:bg-slate-800/50`,
-    },
-    padding: {
-      none: 'p-0',
-      sm: 'p-3',
-      md: 'p-4',
-      lg: 'p-6',
-      xl: 'p-8',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-    padding: 'md',
   },
 })
 
@@ -717,37 +635,6 @@ export const tooltipArrowVariants = tv({
 })
 
 /**
- * ProgressBar variants with type-safe props
- */
-export const progressBarVariants = tv({
-  base: 'w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden',
-  variants: {
-    size: {
-      sm: 'h-1',
-      md: 'h-2',
-      lg: 'h-3',
-    },
-  },
-  defaultVariants: {
-    size: 'md',
-  },
-})
-
-export const progressBarFillVariants = tv({
-  base: 'h-full rounded-full transition-all duration-500 ease-out',
-  variants: {
-    percentage: {
-      low: 'bg-green-500 dark:bg-green-400',
-      medium: 'bg-yellow-500 dark:bg-yellow-400',
-      high: 'bg-red-500 dark:bg-red-400',
-    },
-  },
-  defaultVariants: {
-    percentage: 'low',
-  },
-})
-
-/**
  * LabelButton variants with type-safe props
  */
 export const labelButtonVariants = tv({
@@ -870,30 +757,6 @@ export const formLabelVariants = tv({
 })
 
 /**
- * Error container variants for error messages and error boundaries
- */
-export const errorContainerVariants = tv({
-  base: 'rounded border p-4',
-  variants: {
-    variant: {
-      subtle:
-        'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800 text-red-700 dark:text-red-300',
-      solid: 'bg-red-500 text-white border-red-600',
-      outline: 'bg-transparent border-red-300 dark:border-red-700 text-red-600 dark:text-red-400',
-    },
-    size: {
-      sm: 'p-2 text-sm',
-      md: 'p-4',
-      lg: 'p-6',
-    },
-  },
-  defaultVariants: {
-    variant: 'subtle',
-    size: 'md',
-  },
-})
-
-/**
  * Search input container variants
  */
 export const searchInputVariants = tv({
@@ -919,35 +782,6 @@ export const checkboxLabelVariants = tv({
 })
 
 /**
- * Modal footer action bar variants
- */
-export const modalFooterVariants = tv({
-  base: 'p-4 border-t flex justify-end gap-3 sticky bottom-0',
-  variants: {
-    variant: {
-      default: 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800',
-      transparent:
-        'border-slate-200/50 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-})
-
-/**
- * Section title variants for page headers
- */
-export const sectionTitleVariants = tv({
-  slots: {
-    wrapper: '',
-    header: 'flex items-center gap-2 mb-2',
-    title: 'text-xl font-semibold text-slate-900 dark:text-slate-100',
-    description: 'mt-1 ml-8',
-  },
-})
-
-/**
  * Link card label text variants
  */
 export const linkCardLabelVariants = tv({
@@ -969,171 +803,9 @@ export const linkCardLabelVariants = tv({
 // ============================================================================
 
 /**
- * Shared gradient color configurations for consistency across components
- */
-const gradientColors = {
-  bluePurple: {
-    light: 'from-blue-400/20 to-indigo-400/20',
-    medium: 'from-blue-400 to-indigo-500',
-    dark: 'from-blue-500 to-indigo-600',
-    accent: 'from-blue-500 to-indigo-500',
-  },
-  purplePink: {
-    light: 'from-purple-400/20 to-pink-400/20',
-    medium: 'from-purple-400 to-pink-500',
-    dark: 'from-purple-500 to-pink-600',
-    accent: 'from-purple-500 to-pink-500',
-  },
-  tealCyan: {
-    light: 'from-teal-400/20 to-cyan-400/20',
-    medium: 'from-teal-400 to-cyan-500',
-    dark: 'from-teal-500 to-cyan-600',
-    accent: 'from-teal-500 to-blue-500',
-  },
-  pinkOrange: {
-    light: 'from-pink-400/20 to-orange-400/20',
-    medium: 'from-orange-400 to-red-500',
-    dark: 'from-orange-500 to-red-600',
-    accent: 'from-orange-500 to-red-500',
-  },
-  greenTeal: {
-    light: 'from-green-400/20 to-teal-400/20',
-    medium: 'from-green-400 to-teal-500',
-    dark: 'from-green-500 to-teal-600',
-    accent: 'from-green-500 to-teal-500',
-  },
-} as const
-
-/**
- * Shared position utilities for absolutely positioned elements
- */
-const absolutePositions = {
-  topRight: '-top-20 -right-20',
-  topLeft: '-top-20 -left-20',
-  bottomRight: '-bottom-20 -right-20',
-  bottomLeft: '-bottom-20 -left-20',
-} as const
-
-/**
  * Base overlay pattern for reusable overlays
  */
 const baseOverlay = 'absolute inset-0'
-
-/**
- * Modal backdrop variants with blur and gradient effects
- */
-export const modalBackdropVariants = tv({
-  base: baseOverlay,
-  variants: {
-    variant: {
-      default: 'bg-linear-to-br from-slate-900/80 via-blue-900/40 to-slate-900/80 backdrop-blur-md',
-      dark: 'bg-linear-to-br from-slate-900/90 via-slate-800/60 to-slate-900/90 backdrop-blur-lg',
-      light: 'bg-linear-to-br from-white/80 via-slate-100/60 to-white/80 backdrop-blur-md',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-})
-
-/**
- * Modal glassmorphism container variants
- */
-export const modalGlassmorphismVariants = tv({
-  base: 'relative backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden',
-  variants: {
-    variant: {
-      default: 'bg-white/95 dark:bg-slate-900/95 border border-white/20 dark:border-slate-700/50',
-      frosted: 'bg-white/90 dark:bg-slate-900/90 border border-white/30 dark:border-slate-600/50',
-      solid: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-})
-
-/**
- * Modal decorative blur element variants
- */
-export const modalDecorativeBlurVariants = tv({
-  base: 'absolute w-40 h-40 rounded-full blur-3xl',
-  variants: {
-    position: {
-      topRight: absolutePositions.topRight,
-      topLeft: absolutePositions.topLeft,
-      bottomRight: absolutePositions.bottomRight,
-      bottomLeft: absolutePositions.bottomLeft,
-    },
-    color: {
-      bluePurple: `bg-linear-to-br ${gradientColors.bluePurple.light}`,
-      pinkOrange: `bg-linear-to-br ${gradientColors.pinkOrange.light}`,
-      tealCyan: `bg-linear-to-br ${gradientColors.tealCyan.light}`,
-      purplePink: `bg-linear-to-br ${gradientColors.purplePink.light}`,
-      greenTeal: `bg-linear-to-br ${gradientColors.greenTeal.light}`,
-    },
-  },
-  defaultVariants: {
-    position: 'topRight',
-    color: 'bluePurple',
-  },
-})
-
-/**
- * Modal top accent bar variants
- */
-export const modalAccentBarVariants = tv({
-  base: 'absolute top-0 left-0 right-0 h-1',
-  variants: {
-    gradient: {
-      bluePurple: `bg-linear-to-r ${gradientColors.bluePurple.accent}`,
-      purplePink: `bg-linear-to-r ${gradientColors.purplePink.accent}`,
-      tealBlue: `bg-linear-to-r ${gradientColors.tealCyan.accent}`,
-      orangeRed: `bg-linear-to-r ${gradientColors.pinkOrange.accent}`,
-      greenTeal: `bg-linear-to-r ${gradientColors.greenTeal.accent}`,
-    },
-  },
-  defaultVariants: {
-    gradient: 'bluePurple',
-  },
-})
-
-/**
- * Modal animated icon background variants
- */
-export const modalAnimatedIconVariants = tv({
-  slots: {
-    glow: `${baseOverlay} rounded-xl blur-lg opacity-40 animate-pulse`,
-    container: 'relative p-3 rounded-xl shadow-md',
-  },
-  variants: {
-    color: {
-      blue: {
-        glow: `bg-linear-to-br ${gradientColors.bluePurple.medium}`,
-        container: `bg-linear-to-br ${gradientColors.bluePurple.dark} shadow-blue-500/20`,
-      },
-      purple: {
-        glow: `bg-linear-to-br ${gradientColors.purplePink.medium}`,
-        container: `bg-linear-to-br ${gradientColors.purplePink.dark} shadow-purple-500/20`,
-      },
-      teal: {
-        glow: `bg-linear-to-br ${gradientColors.tealCyan.medium}`,
-        container: `bg-linear-to-br ${gradientColors.tealCyan.dark} shadow-teal-500/20`,
-      },
-      orange: {
-        glow: `bg-linear-to-br ${gradientColors.pinkOrange.medium}`,
-        container: `bg-linear-to-br ${gradientColors.pinkOrange.dark} shadow-orange-500/20`,
-      },
-      green: {
-        glow: `bg-linear-to-br ${gradientColors.greenTeal.medium}`,
-        container: `bg-linear-to-br ${gradientColors.greenTeal.dark} shadow-green-500/20`,
-      },
-    },
-  },
-  defaultVariants: {
-    color: 'blue',
-  },
-})
 
 // ============================================================================
 // VIEW MODE & LAYOUT VARIANTS

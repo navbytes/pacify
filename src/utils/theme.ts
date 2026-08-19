@@ -177,32 +177,3 @@ export const transitions = {
 
 // Import cn utility
 import { cn } from './cn'
-
-// Helper function to get color by variant
-export function getColorByVariant(variant: 'primary' | 'success' | 'warning' | 'danger' | 'info') {
-  return colors[variant]
-}
-
-// Helper function to get icon color classes
-export function getIconColorClasses(color: string): string {
-  const colorMap: Record<string, string> = {
-    blue: colors.primary.text,
-    green: colors.success.text,
-    yellow: colors.warning.text,
-    red: colors.danger.text,
-    slate: colors.icon.default,
-  }
-  return colorMap[color] || colors.icon.default
-}
-
-// Helper function to get border color classes
-export function getBorderColorClasses(color: string): string {
-  const colorMap: Record<string, string> = {
-    blue: colors.primary.border,
-    green: colors.success.border,
-    yellow: colors.warning.border,
-    red: colors.danger.border,
-    slate: colors.border.default,
-  }
-  return colorMap[color] || colors.border.default
-}

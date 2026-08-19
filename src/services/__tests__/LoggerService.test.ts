@@ -72,62 +72,6 @@ describe('LoggerService', () => {
     })
   })
 
-  describe('child logger', () => {
-    test('creates child logger with prefix', () => {
-      const childLogger = logger.createLogger('TestModule')
-      expect(childLogger).toBeDefined()
-    })
-
-    test('child logger trace does not throw', () => {
-      const childLogger = logger.createLogger('Test')
-      logger.setLevel('trace')
-      expect(() => childLogger.trace('trace message')).not.toThrow()
-    })
-
-    test('child logger debug does not throw', () => {
-      const childLogger = logger.createLogger('Test')
-      logger.setLevel('trace')
-      expect(() => childLogger.debug('debug message')).not.toThrow()
-    })
-
-    test('child logger info does not throw', () => {
-      const childLogger = logger.createLogger('Test')
-      expect(() => childLogger.info('info message')).not.toThrow()
-    })
-
-    test('child logger warn does not throw', () => {
-      const childLogger = logger.createLogger('Test')
-      expect(() => childLogger.warn('warn message')).not.toThrow()
-    })
-
-    test('child logger error does not throw', () => {
-      const childLogger = logger.createLogger('Test')
-      expect(() => childLogger.error('error message')).not.toThrow()
-    })
-
-    test('child logger accepts additional arguments', () => {
-      const childLogger = logger.createLogger('Module')
-      expect(() => childLogger.info('message', { detail: 'test' })).not.toThrow()
-    })
-
-    test('multiple child loggers can be created', () => {
-      const child1 = logger.createLogger('Module1')
-      const child2 = logger.createLogger('Module2')
-      const child3 = logger.createLogger('Module3')
-
-      expect(child1).toBeDefined()
-      expect(child2).toBeDefined()
-      expect(child3).toBeDefined()
-
-      // They should all work independently
-      expect(() => {
-        child1.info('from child1')
-        child2.info('from child2')
-        child3.info('from child3')
-      }).not.toThrow()
-    })
-  })
-
   describe('log level filtering', () => {
     test('respects log level settings', () => {
       // This is a behavioral test - when level is set high,
@@ -176,16 +120,6 @@ describe('LoggerService', () => {
 
     test('handles special characters in messages', () => {
       expect(() => logger.info('Special: 你好 🎉 <script>alert(1)</script>')).not.toThrow()
-    })
-
-    test('child logger handles empty prefix', () => {
-      const childLogger = logger.createLogger('')
-      expect(() => childLogger.info('message')).not.toThrow()
-    })
-
-    test('child logger handles special characters in prefix', () => {
-      const childLogger = logger.createLogger('Special:Module:🎉')
-      expect(() => childLogger.info('message')).not.toThrow()
     })
   })
 })

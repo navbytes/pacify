@@ -14,25 +14,19 @@ coverage
 .env
 .env.test
 
-# build output
-.vercel
-
 # OS-specific
 .DS_Store
 
 tmp
-
 benchmarking/compare/.results
 
 # build output
 dist
-
-tmp
-
+dist-test
+dev/*
+.vercel
 *.crx
 *.pem
-
-dev/*
 *.zip
 
 # AI generated
@@ -41,20 +35,13 @@ dev/*
 # docs
 docs/
 
+# Playwright artifacts
 playwright-report/
 test-results/
-
-# Playwright artifacts
-*.webm
-videos/
 screenshots/
-trace-*.ziptest-results/
-playwright-report/
-*.webm
 videos/
-screenshots/
+*.webm
 trace-*.zip
-dist-test
 
 # Graphify Cache
 graphify-out/cache

@@ -64,49 +64,8 @@ class LoggerService {
   error(message: string, ...args: unknown[]): void {
     this.logger.error(message, ...args)
   }
-
-  /**
-   * Create a child logger with a prefix
-   */
-  createLogger(prefix: string): ChildLogger {
-    return new ChildLogger(this, prefix)
-  }
-}
-
-/**
- * Child Logger with prefix support
- */
-class ChildLogger {
-  constructor(
-    private parent: LoggerService,
-    private prefix: string
-  ) {}
-
-  private formatMessage(message: string): string {
-    return `[${this.prefix}] ${message}`
-  }
-
-  trace(message: string, ...args: unknown[]): void {
-    this.parent.trace(this.formatMessage(message), ...args)
-  }
-
-  debug(message: string, ...args: unknown[]): void {
-    this.parent.debug(this.formatMessage(message), ...args)
-  }
-
-  info(message: string, ...args: unknown[]): void {
-    this.parent.info(this.formatMessage(message), ...args)
-  }
-
-  warn(message: string, ...args: unknown[]): void {
-    this.parent.warn(this.formatMessage(message), ...args)
-  }
-
-  error(message: string, ...args: unknown[]): void {
-    this.parent.error(this.formatMessage(message), ...args)
-  }
 }
 
 // Export singleton instance
 export const logger = new LoggerService()
-export type { ChildLogger, LoggerService }
+export type { LoggerService }
