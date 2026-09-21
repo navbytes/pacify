@@ -20,6 +20,7 @@ concurrency:
 jobs:
   release:
     name: Build & Release
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
