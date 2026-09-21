@@ -1,29 +1,64 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     branches: [main]
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
+  changes:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      relevant: ${{ steps.paths.outputs.relevant }}
+    steps:
+      - id: paths
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            echo 'relevant=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" > pr.json
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files?per_page=100" > files.json
+          python3 - <<'PYTHON'
+          import json, os, re
+          pr = json.load(open('pr.json'))
+          files = [f for page in json.load(open('files.json')) for f in page]
+          complete = 0 < len(files) == pr['changed_files'] < 3000
+          same_head = pr['head']['sha'] == os.environ['EXPECTED_HEAD']
+          docs = re.compile(r'^(docs/|README[^/]*\.md$|CHANGELOG[^/]*\.md$|LICENSE[^/]*$|\.github/AUTOMATION\.md$)')
+          paths = [path for f in files for path in (f['filename'], f.get('previous_filename', f['filename']))]
+          relevant = not (complete and same_head and all(docs.search(path) for path in paths))
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'relevant={str(relevant).lower()}\n')
+          PYTHON
+
   checks:
     name: Lint & Type Check
+    if: ((github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false)) && needs.changes.outputs.relevant == 'true'
+    needs: changes
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version-file: .bun-version
 
@@ -41,14 +76,16 @@ jobs:
 
   test:
     name: Unit Tests
+    if: ((github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false)) && needs.changes.outputs.relevant == 'true'
+    needs: changes
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version-file: .bun-version
 
@@ -63,14 +100,16 @@ jobs:
 
   build:
     name: Build & Package
+    if: ((github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false)) && needs.changes.outputs.relevant == 'true'
+    needs: changes
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version-file: .bun-version
 
@@ -129,16 +168,16 @@ jobs:
           fi
 
       - name: Upload extension artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: pacify-extension
           path: pacify-extension.zip
-          retention-days: 14
+          retention-days: 7
 
       # Unzipped build for the E2E job (and for sideloading via
       # chrome://extensions → Load unpacked).
       - name: Upload dist for E2E
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: dist
           path: dist
@@ -146,17 +185,18 @@ jobs:
 
   e2e:
     name: E2E (Playwright)
+    if: ((github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false)) && needs.changes.outputs.relevant == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: build
+    needs: [changes, build]
     env:
       CI: 'true'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version-file: .bun-version
 
@@ -181,7 +221,7 @@ jobs:
           echo "Using Chrome at: $CHROME_BIN"
 
       - name: Download built extension
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: dist
           path: dist
@@ -191,10 +231,30 @@ jobs:
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: playwright-report
           path: |
             playwright-report
             test-results
           retention-days: 7
+
+  required:
+    name: Required CI
+    if: always() && (github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false)
+    needs: ["changes", "checks", "test", "build", "e2e"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          python3 - <<'PYTHON'
+          import json, os
+          jobs = json.loads(os.environ['NEEDS'])
+          assert jobs['changes']['result'] == 'success', 'Path detection failed'
+          relevant = jobs.pop('changes')['outputs']['relevant']
+          assert relevant in ('true', 'false')
+          expected = 'success' if relevant == 'true' else 'skipped'
+          assert all(job['result'] == expected for job in jobs.values()), jobs
+          PYTHON
