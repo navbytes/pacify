@@ -42,7 +42,3 @@ screenshots/
 videos/
 *.webm
 trace-*.zip
-
-# Graphify Cache
-graphify-out/cache
-graphify-out/cost.json
